@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutGrid, Newspaper, MessageSquareText, Settings, Building2 } from "lucide-react";
+import { LayoutDashboard, Newspaper, MessageSquare, Settings, Building2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 const ITEMS = [
-  { href: "/overview", label: "Overview", icon: LayoutGrid },
+  { href: "/overview", label: "Overview", icon: LayoutDashboard },
   { href: "/company/perplexity-ai", label: "Companies", icon: Building2, match: "/company" },
   { href: "/news", label: "News Pulse", icon: Newspaper },
-  { href: "/chat", label: "Chat", icon: MessageSquareText },
+  { href: "/chat", label: "Chat", icon: MessageSquare },
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 export function Nav() {
@@ -18,7 +18,7 @@ export function Nav() {
         const active = path === href || path.startsWith(match ?? href);
         return (
           <Link key={href} href={href} aria-current={active ? "page" : undefined}
-            className={cn("flex min-h-10 items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors", active ? "bg-primary/15 text-primary-soft" : "text-muted hover:bg-surface-2 hover:text-foreground")}>
+            className={cn("flex min-h-10 items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors", active ? "bg-surface-3 text-foreground" : "text-muted hover:bg-surface-2 hover:text-foreground")}>
             <Icon className="size-4 shrink-0" aria-hidden /><span className="hidden sm:inline">{label}</span><span className="sr-only sm:hidden">{label}</span>
           </Link>
         );

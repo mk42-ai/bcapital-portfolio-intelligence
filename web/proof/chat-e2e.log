@@ -1,0 +1,100 @@
+# chat end-to-end proof — SSE excerpt (AG-UI frames emitted by POST /api/chat, translated from the OnDemand stream)
+# Deployed frontend : https://sb-2yrz211gekox.vercel.run (Vercel sandbox sbx_XnBw3bQ18gn303SzlLJW7Qv6Fs0T)
+# Upstream          : POST https://api.on-demand.io/chat/v1/sessions  →  POST https://api.on-demand.io/chat/v1/sessions/{sessionId}/query  (responseMode: stream, header apikey: <ONDEMAND_API_KEY, server-side only>)
+# Plugin            : plugin-1722260873 (Perplexity)   endpointId: predefined-claude-fable-5.1
+# Request started   : 2026-10-09T17:52:50Z  (curl -N POST /api/chat, query: "What is the latest news about Fervo Energy? Cite sources.")
+# Response headers  :
+#   HTTP/2 200 
+#   date: Fri, 09 Oct 2026 17:52:51 GMT
+#   content-type: text/event-stream; charset=utf-8
+#   cache-control: no-cache, no-transform
+#   x-ondemand-session: 6ac929f2261cbe23404834d6
+
+data: {"type":"RUN_STARTED","threadId":"e2e-proof","runId":"e0321fbe-53ad-43b1-8b4a-3d650018b736"}
+data: {"type":"CUSTOM","name":"ondemand.session","value":{"sessionId":"6ac929f2261cbe23404834d6","pluginIds":["plugin-1722260873"],"endpointId":"predefined-claude-fable-5.1"}}
+data: {"type":"TOOL_CALL_START","toolCallId":"cc4a61bd-89ae-4af7-8bb3-c7def6236692","toolCallName":"research · 1 plugin","parentMessageId":"ebe6926b-1625-4220-a4d5-77dcb09a68e9"}
+data: {"type":"TOOL_CALL_ARGS","toolCallId":"cc4a61bd-89ae-4af7-8bb3-c7def6236692","delta":"{}"}
+data: {"type":"TOOL_CALL_END","toolCallId":"cc4a61bd-89ae-4af7-8bb3-c7def6236692"}
+data: {"type":"TOOL_CALL_START","toolCallId":"1cc10319-156b-46e0-9a35-f2c99582a0ba","toolCallName":"plugin_sources","parentMessageId":"ebe6926b-1625-4220-a4d5-77dcb09a68e9"}
+data: {"type":"TOOL_CALL_ARGS","toolCallId":"1cc10319-156b-46e0-9a35-f2c99582a0ba","delta":"{}"}
+data: {"type":"TOOL_CALL_END","toolCallId":"1cc10319-156b-46e0-9a35-f2c99582a0ba"}
+data: {"type":"TOOL_CALL_RESULT","messageId":"c40a7758-bf57-4f01-a94c-a3a67b64ce58","toolCallId":"cc4a61bd-89ae-4af7-8bb3-c7def6236692","content":"done","role":"tool"}
+data: {"type":"TOOL_CALL_RESULT","messageId":"981d9509-7953-4cd9-a509-e1e6ca66f0cc","toolCallId":"1cc10319-156b-46e0-9a35-f2c99582a0ba","content":"done","role":"tool"}
+data: {"type":"TEXT_MESSAGE_START","messageId":"ebe6926b-1625-4220-a4d5-77dcb09a68e9","role":"assistant"}
+data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"ebe6926b-1625-4220-a4d5-77dcb09a68e9","delta":"Here's a"}
+data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"ebe6926b-1625-4220-a4d5-77dcb09a68e9","delta":" ro"}
+data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"ebe6926b-1625-4220-a4d5-77dcb09a68e9","delta":"undup of the most recent develop"}
+data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"ebe6926b-1625-4220-a4d5-77dcb09a68e9","delta":"ments from"}
+data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"ebe6926b-1625-4220-a4d5-77dcb09a68e9","delta":" Fervo Energy,"}
+data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"ebe6926b-1625-4220-a4d5-77dcb09a68e9","delta":" the"}
+data: … (273 further TEXT_MESSAGE_CONTENT deltas elided) …
+data: {"type":"TOOL_CALL_START","toolCallId":"47f70709-036e-4111-8221-a66e057da237","toolCallName":"research · 1 plugin","parentMessageId":"ebe6926b-1625-4220-a4d5-77dcb09a68e9"}
+data: {"type":"TOOL_CALL_ARGS","toolCallId":"47f70709-036e-4111-8221-a66e057da237","delta":"{}"}
+data: {"type":"TOOL_CALL_END","toolCallId":"47f70709-036e-4111-8221-a66e057da237"}
+data: {"type":"TOOL_CALL_RESULT","messageId":"e5713a07-a9d2-428f-9be8-3df18aa4ba29","toolCallId":"47f70709-036e-4111-8221-a66e057da237","content":"done","role":"tool"}
+data: {"type":"TEXT_MESSAGE_END","messageId":"ebe6926b-1625-4220-a4d5-77dcb09a68e9"}
+data: {"type":"CUSTOM","name":"ondemand.sources","value":{"messageId":"ebe6926b-1625-4220-a4d5-77dcb09a68e9","sources":[{"url":"https://techcrunch.com/2026/10/01/worlds-first-enhanced-geothermal-power-plant-completed-in-just-23-months/","title":"techcrunch.com","sourceName":"techcrunch.com"},{"url":"https://newstodayworld.org/breaking-news/2026/10/01/geothermal-breakthrough-fervos-cape-station-goes-live/","title":"newstodayworld.org","sourceName":"newstodayworld.org"},{"url":"https://www.renewableenergymagazine.com/geothermal/fervo-energy-declares-commercial-operation-at-cape-20261002","title":"renewableenergymagazine.com","sourceName":"renewableenergymagazine.com"},{"url":"https://fervoenergy.com/fervo-energy-achieves-first-power-at-cape-station-a-landmark-moment-for-the-future-of-enhanced-geothermal-systems/","title":"fervoenergy.com","sourceName":"fervoenergy.com"},{"url":"https://finance.yahoo.com/energy/articles/fervo-hits-first-power-cape-120500060.html","title":"finance.yahoo.com","sourceName":"finance.yahoo.com"},{"url":"https://fervoenergy.com/fervo-energy-secures-two-u-s-department-of-energy-awards-to-develop-next-generation-geothermal-in-idaho-and-nevada/","title":"fervoenergy.com","sourceName":"fervoenergy.com"},{"url":"https://fervoenergy.com/newsroom-2-2-2-2-2-2/","title":"fervoenergy.com","sourceName":"fervoenergy.com"},{"url":"https://fixthenews.com/s/fervo-s-enhanced-geothermal-plant-is-selling-power-596ce5","title":"fixthenews.com","sourceName":"fixthenews.com"},{"url":"https://www.cnbc.com/2026/09/05/fervo-energys-enhanced-geothermal-project-aims-to-power-data-center-boom.html","title":"cnbc.com","sourceName":"cnbc.com"},{"url":"https://fervoenergy.com/fervo-energy-breaks-ground-on-the-worlds-largest-next-gen-geothermal-project/","title":"fervoenergy.com","sourceName":"fervoenergy.com"}],"pluginIds":["plugin-1722260873"]}}
+data: {"type":"RUN_FINISHED","threadId":"e2e-proof","runId":"e0321fbe-53ad-43b1-8b4a-3d650018b736"}
+
+# ---- assembled assistant answer (4475 chars, 279 deltas) ----
+Here's a roundup of the most recent developments from Fervo Energy, the enhanced geothermal systems (EGS) company that went public in May 2026:
+
+## Cape Station Declares Commercial Operation Ahead of Schedule (October 1, 2026)
+
+Fervo announced it began selling electricity from its Cape Station power plant in Beaver County, Utah, to the grid on September 30 — one day ahead of its contractual date. This makes Fervo the first enhanced geothermal company to reach this commercial milestone. The first block, producing 33 megawatts of net power, is already selling electricity under a power purchase agreement. From groundbreaking to commercial operations, the first block took 23 months to complete, and Fervo is targeting an 18-month build for future blocks. "No team has ever built a project like this anywhere in the world, and we did it ahead of schedule," said CEO Tim Latimer.
+
+Sources: [TechCrunch](https://techcrunch.com/2026/10/01/worlds-first-enhanced-geothermal-power-plant-completed-in-just-23-months/), [News Today World](https://newstodayworld.org/breaking-news/2026/10/01/geothermal-breakthrough-fervos-cape-station-goes-live/), [Renewable Energy Magazine](https://www.renewableenergymagazine.com/geothermal/fervo-energy-declares-commercial-operation-at-cape-20261002)
+
+## First Power at Cape Station (September 24, 2026)
+
+A week earlier, Fervo announced Cape Station had achieved "First Power" — the first time a utility-scale greenfield EGS development synchronized to the grid and exported electricity anywhere in the world. Key details:
+
+- **Phase I** is an approximately 100 MW installation made up of three roughly 33 MW GeoBlocks. GeoBlock 1 is now operating; GeoBlocks 2 and 3 are expected to achieve initial power in early 2027.
+- **Phase II** is expected to add roughly 400 MW through eight 50-MW GeoBlocks in 2028, using Fervo's "3.0 well design" with longer laterals and larger-diameter casing.
+- The project has approximately **900 MW of fully contracted offtake** and more than **4 GW of planned capacity**.
+- Latimer called it "a gamechanger for the geothermal industry."
+
+Sources: [Fervo Energy press release](https://fervoenergy.com/fervo-energy-achieves-first-power-at-cape-station-a-landmark-moment-for-the-future-of-enhanced-geothermal-systems/), [Yahoo Finance/Zacks](https://finance.yahoo.com/energy/articles/fervo-hits-first-power-cape-120500060.html)
+
+## Two U.S. Department of Energy Awards (September 22, 2026)
+
+Fervo received two DOE awards totaling approximately $20 million to expand EGS into Idaho and Nevada. In Idaho, funding will support drilling and completing EGS wells in Elmore County in partnership with national labs, along with testing new high-temperature EGS technology. In Nevada, the grant supports an appraisal campaign at a prospect in Humboldt County. Fervo's pilot, Project Red, has been generating 3 MW to the Nevada grid since 2023.
+
+Source: [Fervo Energy press release](https://fervoenergy.com/fervo-energy-secures-two-u-s-department-of-energy-awards-to-develop-next-generation-geothermal-in-idaho-and-nevada/)
+
+## Other Recent Items
+
+- **New podcast (October 8, 2026):** Fervo launched "Ground Truth," a six-part podcast on the creation of the company. ([Fervo Newsroom](https://fervoenergy.com/newsroom-2-2-2-2-2-2/))
+- **Google partnership:** Google will buy at least 396 MW from Fervo, and the pair are pursuing up to 3 GW by 2033 — about three-quarters of current US geothermal capacity. Southern California Edison is also among the committed buyers. ([Fix The News / MIT Technology Review](https://fixthenews.com/s/fervo-s-enhanced-geothermal-plant-is-selling-power-596ce5), [TechCrunch](https://techcrunch.com/2026/10/01/worlds-first-enhanced-geothermal-power-plant-completed-in-just-23-months/))
+- **Data center angle:** Fervo's upsized May IPO raised $1.9 billion, and its phased development model is seen as appealing to power-hungry data center operators and hyperscalers. ([CNBC](https://www.cnbc.com/2026/09/05/fervo-energys-enhanced-geothermal-project-aims-to-power-data-center-boom.html), [TechCrunch](https://techcrunch.com/2026/10/01/worlds-first-enhanced-geothermal-power-plant-completed-in-just-23-months/))
+
+For background, Fervo broke ground at Cape Station on September 25, 2023, originally targeting 400 MW with first power in 2026 and full-scale production in 2028. ([Fervo Energy](https://fervoenergy.com/fervo-energy-breaks-ground-on-the-worlds-largest-next-gen-geothermal-project/))
+
+# ---- 10 distinct source URLs cited in the answer ----
+#  - https://fervoenergy.com/fervo-energy-achieves-first-power-at-cape-station-a-landmark-moment-for-the-future-of-enhanced-geothermal-systems/
+#  - https://fervoenergy.com/fervo-energy-breaks-ground-on-the-worlds-largest-next-gen-geothermal-project/
+#  - https://fervoenergy.com/fervo-energy-secures-two-u-s-department-of-energy-awards-to-develop-next-generation-geothermal-in-idaho-and-nevada/
+#  - https://fervoenergy.com/newsroom-2-2-2-2-2-2/
+#  - https://finance.yahoo.com/energy/articles/fervo-hits-first-power-cape-120500060.html
+#  - https://fixthenews.com/s/fervo-s-enhanced-geothermal-plant-is-selling-power-596ce5
+#  - https://newstodayworld.org/breaking-news/2026/10/01/geothermal-breakthrough-fervos-cape-station-goes-live/
+#  - https://techcrunch.com/2026/10/01/worlds-first-enhanced-geothermal-power-plant-completed-in-just-23-months/
+#  - https://www.cnbc.com/2026/09/05/fervo-energys-enhanced-geothermal-project-aims-to-power-data-center-boom.html
+#  - https://www.renewableenergymagazine.com/geothermal/fervo-energy-declares-commercial-operation-at-cape-20261002
+
+# ---- raw OnDemand upstream SSE (verification run, same key, same plugin) — first frames as received from api.on-demand.io ----
+# plugin plugin-1722260873 (Perplexity)  session POST → 201  query POST (stream) → 200  first token 37.5 s  total 54.2 s  ts 2026-10-09T17:27:16Z  sessionId 6ac923f4261cbe2340483477
+event:heartbeat
+data:{"sessionId":"6ac923f4261cbe2340483477","messageId":"6ac923f5261cbe2340483478","time":"2026-10-09T17:27:20Z"}
+event:thinking
+data:{"sessionId":"6ac923f4261cbe2340483477","messageId":"6ac923f5261cbe2340483478","eventIndex":1,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"The user wants recent Fervo Energy"}}
+event:thinking
+data:{"sessionId":"6ac923f4261cbe2340483477","messageId":"6ac923f5261cbe2340483478","eventIndex":2,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" news with citations, and chec"}}
+event:message
+data:{"sessionId":"6ac923f4261cbe2340483477","messageId":"…","eventType":"fulfillment","answer":"# Latest News on Fervo Energy\n\n## Cape Station Reaches Commercial Operation Ahead of Schedule (October 1, 2026)…"}
+data:[DONE]
+# plugin plugin-1741871229 (GPT Search)  session POST → 201  query POST (stream) → 200  first token 85.0 s  total 109.1 s  ts 2026-10-09T17:28:10Z  sessionId 6ac9242b261cbe234048347b
+# plugin plugin-1718116202 (LinkedIn Search)  session POST → 201  query POST (stream) → 200  first token 139.5 s  total 151.1 s  ts 2026-10-09T17:29:59Z  sessionId 6ac92498f7979c7d562adb8b
+# plugin plugin-1748003575 (Reddit Posts)  session POST → 201  query POST (stream) → 200  first token 38.4 s  total 45.2 s  ts 2026-10-09T17:32:30Z  sessionId 6ac9252f95268adc215df344
+# plugin plugin-1751872652 (X Search Agent)  session POST → 201  query POST (stream) → 200  first token 105.3 s  total 125.5 s  ts 2026-10-09T17:33:16Z  sessionId 6ac9255c95268adc215df34d
+# plugin plugin-1716429542 (US Stock Fundamental Analysis)  session POST → 201  query POST (stream) → 200  first token 35.4 s  total 40.8 s  ts 2026-10-09T17:35:21Z  sessionId 6ac925da95268adc215df356

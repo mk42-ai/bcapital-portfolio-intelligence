@@ -1,18 +1,21 @@
 {
-  "base": "https://sb-3h35jqofd2sz.vercel.run",
-  "at": "2026-10-09T15:30:42.594Z",
-  "files": {
-    "overview:desktop": "docs/screenshots/overview-desktop-1440.png",
-    "company-detail:desktop": "docs/screenshots/company-detail-desktop-1440.png",
-    "news-pulse:desktop": "docs/screenshots/news-pulse-desktop-1440.png",
-    "chat:desktop": "docs/screenshots/chat-desktop-1440.png",
-    "settings:desktop": "docs/screenshots/settings-desktop-1440.png",
-    "onboarding:desktop": "docs/screenshots/onboarding-desktop-1440.png",
-    "overview:mobile": "docs/screenshots/overview-mobile-390.png",
-    "company-detail:mobile": "docs/screenshots/company-detail-mobile-390.png",
-    "news-pulse:mobile": "docs/screenshots/news-pulse-mobile-390.png",
-    "chat:mobile": "docs/screenshots/chat-mobile-390.png",
-    "settings:mobile": "docs/screenshots/settings-mobile-390.png",
-    "onboarding:mobile": "docs/screenshots/onboarding-mobile-390.png"
-  }
+ "captured_at": "2026-10-09T18:26Z",
+ "preview": "https://sb-2yrz211gekox.vercel.run",
+ "tool": "ui-validator (headless Chromium)",
+ "note": "Full-page captures except news-pulse-desktop-1440 (viewport 1440x3200 \u2014 the full page is ~31k px tall) and chat-e2e (viewport).",
+ "files": [
+  "chat-desktop-1440.png",
+  "chat-e2e-perplexity-desktop-1440.png",
+  "chat-mobile-390.png",
+  "company-detail-desktop-1440.png",
+  "company-detail-mobile-390.png",
+  "news-pulse-desktop-1440.png",
+  "news-pulse-mobile-390.png",
+  "onboarding-desktop-1440.png",
+  "onboarding-mobile-390.png",
+  "overview-desktop-1440.png",
+  "overview-mobile-390.png",
+  "settings-desktop-1440.png",
+  "settings-mobile-390.png"
+ ]
 }

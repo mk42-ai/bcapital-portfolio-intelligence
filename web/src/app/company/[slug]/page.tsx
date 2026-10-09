@@ -33,30 +33,29 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
   return (
     <CompanyThemeScope tokens={company.brand_tokens}>
       <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted"><Link href="/overview" className="underline-offset-2 hover:underline">Overview</Link> <span aria-hidden>/</span> <span aria-current="page">{company.name}</span></nav>
-      <header className="mb-6 overflow-hidden rounded-2xl border border-border" style={{ background: "var(--co-bg)", color: "var(--co-ink)" }}>
-        <div className="h-2 w-full" style={{ background: "linear-gradient(90deg, var(--co-primary), var(--co-accent))" }} aria-hidden />
+      <header className="mb-6 rounded-lg border border-border bg-surface">
         <div className="flex flex-wrap items-start gap-5 p-6">
-          <div className="grid size-20 shrink-0 place-items-center overflow-hidden rounded-xl border p-2" style={{ background: "#ffffff", borderColor: "var(--co-primary)" }}>
-            {company.logo_url ? <Image src={company.logo_url} alt={`${company.name} logo`} width={72} height={72} className="max-h-16 w-auto object-contain" unoptimized /> : <span className="font-display text-2xl font-bold text-[#0a211a]">{company.name.slice(0, 2)}</span>}
+          <div className="grid size-20 shrink-0 place-items-center overflow-hidden rounded-lg border border-border bg-white p-2">
+            {company.logo_url ? <Image src={company.logo_url} alt={`${company.name} logo`} width={72} height={72} className="max-h-16 w-auto object-contain" unoptimized /> : <span className="font-display text-2xl font-bold text-foreground">{company.name.slice(0, 2)}</span>}
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-xs uppercase tracking-[0.18em]" style={{ color: "var(--co-primary)" }}>{company.sector} · {company.region}</p>
-            <h1 className="font-display text-3xl font-semibold sm:text-4xl" style={{ fontFamily: "var(--co-font)" }}>{company.name}</h1>
-            <p className="mt-1 text-sm opacity-90">{company.status}{company.hq ? ` · ${company.hq}` : ""}{company.employees ? ` · ${company.employees.toLocaleString()} employees` : ""}</p>
+            <p className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted"><span className="inline-block size-2.5 rounded-full border border-border" style={{ background: "var(--co-accent)" }} aria-hidden />{company.sector} · {company.region}</p>
+            <h1 className="font-display text-3xl font-semibold sm:text-4xl">{company.name}</h1>
+            <p className="mt-1 text-sm text-muted">{company.status}{company.hq ? ` · ${company.hq}` : ""}{company.employees ? ` · ${company.employees.toLocaleString()} employees` : ""}</p>
             <div className="mt-3 flex flex-wrap items-center gap-2">
-              <Badge tone={TIER_TONE[tier] ?? "muted"} className="bg-surface text-foreground">evidence · {tier}</Badge>
-              {company.is_focus && <Badge tone="primary" className="bg-surface">focus company</Badge>}
-              {company.website && <a href={company.website} target="_blank" rel="noopener noreferrer" className="chip border-current bg-transparent underline-offset-2 hover:underline">{company.website.replace(/^https?:\/\//, "")}</a>}
-              {company.linkedin_url && <a href={company.linkedin_url} target="_blank" rel="noopener noreferrer" className="chip border-current bg-transparent underline-offset-2 hover:underline">LinkedIn</a>}
+              <Badge tone={TIER_TONE[tier] ?? "muted"}>evidence · {tier}</Badge>
+              {company.is_focus && <Badge tone="primary">focus company</Badge>}
+              {company.website && <a href={company.website} target="_blank" rel="noopener noreferrer" className="chip border-border bg-surface-2 text-foreground underline-offset-2 hover:underline">{company.website.replace(/^https?:\/\//, "")}</a>}
+              {company.linkedin_url && <a href={company.linkedin_url} target="_blank" rel="noopener noreferrer" className="chip border-border bg-surface-2 text-foreground underline-offset-2 hover:underline">LinkedIn</a>}
             </div>
           </div>
         </div>
       </header>
-      <p className="mb-5 text-xs text-muted">Last updated by daily workflow <time dateTime={lastScored?.recorded_at ?? company.updated_at}>{lastScored?.recorded_at ?? company.updated_at}</time>{wf ? <> (workflow <code>{wf.id}</code> · {wf.name}, {workflows.schedule_human}, model {workflows.model})</> : <> (seed data — first scoring run lands at the next {workflows.schedule_human} cycle)</>} · source {c.source}</p>
+      <p className="mb-5 text-xs text-muted">Data source: <Badge tone={c.source === "live" ? "primary" : "muted"}>{c.source === "live" ? "live backend" : "cached snapshot"}</Badge> · Last updated by daily workflow <time dateTime={lastScored?.recorded_at ?? company.updated_at}>{lastScored?.recorded_at ?? company.updated_at}</time>{wf ? <> (workflow <code>{wf.id}</code> · {wf.name}, {workflows.schedule_human}, model {workflows.model})</> : <> (seed data — first scoring run lands at the next {workflows.schedule_human} cycle)</>} · source {c.source}</p>
       {statusChips(company).length > 0 && <div className="mb-5"><StatusChips items={statusChips(company).map((chip) => ({ chip, name: company.name, slug: null }))} /></div>}
 
       <div className="grid gap-5 lg:grid-cols-3">
-        <Card className="lg:col-span-2"><CardHeader><CardTitle>Brand palette & type</CardTitle><CardDescription>Hex values from the brand matrix with WCAG 2.2 contrast against the company background. Company page theme source: <code>{company.brand_tokens.primary ? "company tokens (AA-checked at runtime)" : "B Capital fallback"}</code>.</CardDescription></CardHeader>
+        <Card className="lg:col-span-2"><CardHeader><CardTitle>Brand palette & type</CardTitle><CardDescription>Hex values from the brand matrix with WCAG 2.2 contrast against the company background. The company primary is used only as the small accent chip above (AA-checked at runtime); the page itself stays neutral.</CardDescription></CardHeader>
           <CardContent className="space-y-4"><Swatches tokens={company.brand_tokens} />
             <div><h3 className="text-sm font-semibold">Fonts</h3>{company.brand_tokens.fonts?.length ? <ul className="mt-1 flex flex-wrap gap-2">{company.brand_tokens.fonts.map((f) => <li key={f}><Badge>{f}</Badge></li>)}</ul> : <p className="text-sm text-muted">No fonts observed.</p>}{company.brand_tokens.guideline_url && <p className="mt-2 text-sm"><a href={company.brand_tokens.guideline_url} target="_blank" rel="noopener noreferrer" className="text-primary-soft underline-offset-2 hover:underline">Official brand guidelines ↗</a></p>}</div>
           </CardContent></Card>

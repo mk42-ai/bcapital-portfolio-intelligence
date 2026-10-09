@@ -13,13 +13,13 @@ export function contrast(a: string, b: string): number {
   return +((hi + 0.05) / (lo + 0.05)).toFixed(2);
 }
 export const AA_TEXT = 4.5, AA_LARGE = 3, AA_NON_TEXT = 3;
-export function bestInk(bg: string): "#0a211a" | "#ffffff" { return contrast(bg, "#ffffff") >= contrast(bg, "#0a211a") ? "#ffffff" : "#0a211a"; }
+export function bestInk(bg: string): "#111827" | "#ffffff" { return contrast(bg, "#ffffff") >= contrast(bg, "#111827") ? "#ffffff" : "#111827"; }
 export function aaBadge(ratio: number): { label: "AAA" | "AA" | "AA large" | "Fail"; ok: boolean } {
   if (ratio >= 7) return { label: "AAA", ok: true }; if (ratio >= 4.5) return { label: "AA", ok: true }; if (ratio >= 3) return { label: "AA large", ok: true }; return { label: "Fail", ok: false };
 }
-/** Derive a safe per-company theme: company primary as accent only when it clears AA against the chosen ground; otherwise fall back to B Capital tokens. */
+/** Derive a safe per-company accent set: company colours only when they clear AA; otherwise the neutral light tokens. */
 export function companyTheme(tokens: { primary: string | null; secondary: string | null; background: string | null; text: string | null }) {
-  const fallback = { primary: "#0ac985", background: "#0a211a", text: "#ffffff", accent: "#faab3d", source: "bcapital" as const, checks: [] as { pair: string; ratio: number; ok: boolean }[] };
+  const fallback = { primary: "#111827", background: "#ffffff", text: "#111827", accent: "#1d4ed8", source: "neutral" as const, checks: [] as { pair: string; ratio: number; ok: boolean }[] };
   const bg = tokens.background && hexToRgb(tokens.background) ? tokens.background : null;
   const text = tokens.text && hexToRgb(tokens.text) ? tokens.text : bg ? bestInk(bg) : null;
   const primary = tokens.primary && hexToRgb(tokens.primary) ? tokens.primary : null;
@@ -29,5 +29,5 @@ export function companyTheme(tokens: { primary: string | null; secondary: string
     { pair: "primary on background (non-text)", ratio: contrast(primary, bg), ok: contrast(primary, bg) >= AA_NON_TEXT },
   ];
   if (checks.every((c) => c.ok)) return { primary, background: bg, text, accent: tokens.secondary && hexToRgb(tokens.secondary) ? tokens.secondary : primary, source: "company" as const, checks };
-  return { ...fallback, checks, source: "bcapital-fallback" as const };
+  return { ...fallback, checks, source: "neutral-fallback" as const };
 }

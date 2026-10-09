@@ -8,11 +8,13 @@
     "build": "next build",
     "start": "next start -H 0.0.0.0 -p 3000",
     "typecheck": "tsc --noEmit",
-    "assets": "node scripts/fetch-brand-assets.mjs",
     "test:e2e": "playwright test",
     "qa:lighthouse": "node scripts/lighthouse.mjs"
   },
   "dependencies": {
+    "@openuidev/react-headless": "^0.17.0",
+    "@openuidev/react-lang": "^0.3.2",
+    "@openuidev/react-ui": "^0.17.0",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-switch": "^1.2.5",
@@ -26,7 +28,9 @@
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "recharts": "^3.3.0",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "zod": "^4.6.5",
+    "zustand": "^4.5.7"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "../styles/tokens.css";
 
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -25,6 +23,7 @@
   --color-danger-soft: var(--danger-soft);
   --color-danger-foreground: var(--danger-foreground);
   --color-ring: var(--ring);
+  --color-border-strong: var(--border-strong);
   --font-display: var(--font-display), "Reckless Neue", Fraunces, Georgia, serif;
   --font-sans: var(--font-body), Yellix, Inter, system-ui, sans-serif;
   --radius-lg: var(--radius);
@@ -33,12 +32,11 @@
 
 @layer base {
   * { @apply border-border; }
-  html { color-scheme: dark; }
-  [data-theme="light"] { color-scheme: light; }
+  html { color-scheme: light; background: #ffffff; }
   body { @apply bg-background text-foreground font-sans antialiased; }
   h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
-  :focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; border-radius: 4px; }
-  ::selection { background: var(--primary); color: var(--primary-foreground); }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: 4px; }
+  ::selection { background: #dbeafe; color: #111827; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   }
@@ -46,7 +44,7 @@
 
 @layer utilities {
   .skeleton { @apply animate-pulse rounded-md bg-surface-3; }
-  .card { @apply rounded-xl border border-border bg-surface shadow-sm; }
+  .card { @apply rounded-lg border border-border bg-surface; }
   .chip { @apply inline-flex min-h-6 items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-medium; }
   .sr-only-focusable:focus { position: static; width: auto; height: auto; clip: auto; }
   .tap { min-width: 24px; min-height: 24px; }

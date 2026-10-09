@@ -12,7 +12,8 @@ flowchart LR
   end
   subgraph NextJS["Next.js (Vercel sandbox)"]
     RSC[Server Components<br/>ISR 120 s + snapshot fallback]
-    PXY["/api/ondemand/[...path]<br/>x-ondemand-key → apikey"]
+    CHATB["/api/chat (OpenUI bridge)<br/>OnDemand SSE → AG-UI SSE"]
+    PXY["/api/ondemand/[...path]<br/>apikey = ONDEMAND_API_KEY (server env)"]
     PP["/api/portfolio/[...path]<br/>read-only pass-through"]
   end
   subgraph OnDemand
@@ -24,7 +25,8 @@ flowchart LR
     API[GET /companies … /sentiment/portfolio /search<br/>POST /ingest (X-Ingest-Secret)]
     DB[(SQLite portfolio.sqlite<br/>136 records)]
   end
-  UI -- x-ondemand-key --> PXY --> CHAT
+  UI -- AG-UI SSE --> CHATB --> CHAT
+  UI -- optional x-ondemand-key --> PXY --> CHAT
   CHAT --> PLUG
   UI --> LS
   UI --> RSC --> API --> DB
@@ -36,8 +38,8 @@ flowchart LR
 ## 2. URLs and IDs
 | Item | Value |
 |---|---|
-| Frontend live preview | https://sb-3h35jqofd2sz.vercel.run (Vercel **sandbox** `sbx_ieWUBqqWlKIGaBuaStxrLdtBYONd`, port 3000, TTL 5 h from 2026-10-09T13:40:27Z; redeploy = `sandbox create` + `npm ci && npm run build && npm start`) |
-| Backend base URL (live fallback) | https://sb-4wdkkmzv7w2z.vercel.run — ephemeral Vercel sandbox from the backend run |
+| Frontend live preview | https://sb-2yrz211gekox.vercel.run (Vercel **sandbox** `sbx_XnBw3bQ18gn303SzlLJW7Qv6Fs0T`, port 3000; `next start` with `ONDEMAND_API_KEY` in its env; redeploy = `sandbox create` + `npm ci && npm run build && npm start`) |
+| Backend base URL (live) | https://sb-1gek6bq0m1au.vercel.run — Hono + Drizzle SQLite API in Vercel sandbox `sbx_s2v1UAKFK3gFbzPBGdyxZoZfIuAC` (`/health` 200) |
 | Backend durable target | https://serverless.on-demand.io/apps/bcap-portfolio-intel — **OnDemand serverless endpoint provisioning failed** 3× (image built OK: app `6ac8de2d1f7d82eff69ac0d9`, runs chfbs…chfbv; endpoints `initializing → failed`, `containerAppEnv` never assigned). The 7 workflows already deliver to this URL; nothing changes once it comes up. |
 | Repo | https://github.com/mk42-ai/bcapital-portfolio-intelligence (`web/` = this app) |
 | Portfolio Plugin ID | **null** — `POST /plugin/v1` returned `400 {"message":"schema is required"}` for 20 payload shapes incl. the documented one; MCP `plugin_v1_plugin_create` returned an empty body; `ai_generated_tool` timed out (Cloudflare 524) ×3. Registration body ready in `../scripts/register-plugin.ts`; UI shows "registration pending" and reads `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` / `src/data/run-meta.json` at runtime. |
@@ -61,6 +63,7 @@ flowchart LR
 | `NEXT_PUBLIC_PORTFOLIO_API_URL` | web `.env` | `https://sb-4wdkkmzv7w2z.vercel.run` (override in Settings) |
 | `PORTFOLIO_API_URL` | web `.env` (server) | same; switch to the serverless URL when provisioned |
 | `ONDEMAND_BASE_URL` | web `.env` (server) | `https://api.on-demand.io` |
+| `ONDEMAND_API_KEY` | web `.env` (server) + frontend sandbox env | OnDemand apikey used by `/api/chat` and `/api/ondemand/*` (`apikey` header). Never `NEXT_PUBLIC_`, never logged, absent from `.next/static` (grep = 0 hits). `.env` is gitignored; copy `.env.example`. |
 | `NEXT_PUBLIC_DEFAULT_MODEL` | web `.env` | `predefined-claude-fable-5.1` |
 | `NEXT_PUBLIC_DEFAULT_EXTERNAL_USER_ID` | web `.env` | `INV-001` |
 | `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` | web `.env` | empty until registered |
@@ -68,7 +71,22 @@ flowchart LR
 | `NEXT_PUBLIC_EARLIEST_TEST_UTC` | web `.env` | `2026-10-09T12:37:25Z` |
 | `NEXT_PUBLIC_SITE_URL` | web `.env` | preview origin (OG images) |
 | `INGEST_SECRET` | backend env only | 64-hex shared secret for `POST /ingest`; also in the workflow webhook (Basic auth + `?secret=`) |
-| OnDemand `apikey` | **browser localStorage only** | forwarded per request as `x-ondemand-key`; never stored server-side |
+| per-user OnDemand `apikey` (optional) | browser localStorage | forwarded as `x-ondemand-key`; overrides the server key for that browser only |
+
+## 3b. Chat on Open Intelligent UI + OnDemand wiring (2026-10-09)
+* **Open Intelligent UI**: https://github.com/thesysdev/open-intelligent-ui @ `3b39c06b954e87c394ef95fee41a7e0084f94a27`, package `openui-self-hosted` 0.1.1 (`private: true` → **not on npm**; README "Requires Node 24"). Vendored (with `ATTRIBUTION.md`): generic shell CSS + neutral `createTheme` palette into `src/components/chat/open-intelligent-ui/`. NOT copied: TravelMap/MapLibre/TravelGallery/TravelItinerary, the OpenUI Gateway `/api/chat` route, `generated/spec.json`.
+* **OpenUI packages** (MIT): `@openuidev/react-ui` 0.17.0, `@openuidev/react-headless` 0.17.0, `@openuidev/react-lang` 0.3.2. **Icons**: `lucide-react` 0.546.0 (no Radix icons needed). **Node**: built and served on Node 22 (`v22.22.2` in the sandbox) — Node 24 is only required by open-intelligent-ui's own Gateway server, which is not used.
+* **Message mapping**: `/api/chat` creates/reuses the OnDemand session (`POST /chat/v1/sessions`), streams `POST /chat/v1/sessions/{id}/query` (`responseMode:"stream"`) and re-emits AG-UI frames: `RUN_STARTED` → `TOOL_CALL_*` ("research · N plugins") for `*_thinking` / `planning_output` events → `TEXT_MESSAGE_START/CONTENT/END` for `eventType:"fulfillment"` deltas → `CUSTOM ondemand.sources` (URLs extracted from the answer) → `RUN_FINISHED`. The OnDemand `sessionId` is returned in the `x-ondemand-session` header and remembered per thread in localStorage.
+* **Persistence kept**: thread list `bcap.chat.threads.v2`, messages `bcap.chat.thread.v2.<id>`, session `bcap.chat.session.v2.<id>`; the previous `bcap.chat.threads.v1` threads are imported once.
+* **Sources**: rendered as a plain citation list (one `<a>` per URL: favicon · host · path) under each assistant message.
+* **Verified plugin matrix** (real create-session + streamed query with the production key; see `README.md` → "Verified plugin list"): kept Perplexity `plugin-1722260873` (default, 200, first token 37.5 s), GPT Search `plugin-1741871229` (default), US Stock Fundamentals `plugin-1716429542`, Reddit `plugin-1748003575`, X Search `plugin-1751872652` (opt-in); dropped LinkedIn Search `plugin-1718116202` (tool 404 inside the answer, 151 s); PitchBook `plugin-1777018662` deferred.
+* **End-to-end proof**: `proof/chat-e2e.log` (AG-UI SSE from the deployed `/api/chat`, 279 text deltas, 4 475 chars, 10 distinct source URLs; upstream OnDemand frames appended) + `.ui-proof/chat-e2e-1440x900.png` (headless-Chromium screenshot of the deployed /chat after "What is the latest news about Fervo Energy? Cite sources.").
+
+## 3c. Theme + icons (2026-10-09)
+* **Light only.** Dark theme deleted: no `#0A211A` backgrounds, no Caribbean Green/Java gradient meshes, no glows/blur/animated gradients, no `dark:` variants, no `.dark` handling, no `next-themes`/theme toggle, no `prefers-color-scheme: dark`. `<html class="light" style="color-scheme: light">` forced in `layout.tsx`; `viewport.colorScheme = "light"`.
+* Tokens: `#FFFFFF` page, `#111827` text, `#E5E7EB` borders, `#6B7280` muted, 8 px scale, 1 px borders, no shadows. Charts/treemap/heatmap/gauges on a gray scale + one accent. `brand_tokens` only on the logo/accent chip after `src/lib/color.ts` AA check.
+* **All AI-generated images removed** (`public/brand/*` PNG/WebP: chat avatar, empty states, error/offline, sector illustrations, hero, OG card, onboarding bg). Replaced with monochrome Lucide glyphs; app icon/favicon/OG = Lucide `hexagon` (`src/app/icon.svg`, `favicon.ico`, `opengraph-image.tsx` via `next/og`).
+* A global **live-backend badge** (`data-testid="backend-status"`, pings `{PORTFOLIO_API_URL}/health`, ISR 60 s) sits in the sidebar on every screen; page headers additionally show the per-query data source.
 
 ## 4. QA results (against the live preview, 2026-10-09T15:28Z)
 ### Playwright (13/13 passed)
@@ -119,7 +137,9 @@ Targets met: accessibility ≥90 (all 100), desktop performance ≥90 (98–100)
 5. **4 blank evidence screenshots** (Baichuan, Dream Labs, Meesho, Vivacta) in the brand-evidence ZIP; those pages show logo + tokens only.
 6. Licensed brand typefaces (Reckless Neue, Yellix) are not bundled; Fraunces/Inter subsets are served with the brand names first in the font stack.
 7. Mobile Lighthouse performance on the two data-heaviest pages is 72–81 (see §4); the remaining cost is HTML size (136 records + treemap SVG) and hydration of the Radix tooltip tree.
-8. Both Vercel sandboxes are ephemeral (backend TTL expired/expires; frontend 5 h). The repo + `.env` are sufficient to recreate either in minutes.
+8. Both Vercel sandboxes are ephemeral. The repo + `.env` are sufficient to recreate either in minutes (frontend: `npm ci && npm run build && npm start` with `ONDEMAND_API_KEY` exported).
+9. Chat latency is dominated by the plugin research phase (Perplexity first token ≈ 40 s, GPT Search ≈ 85 s); the UI shows a "research · N plugins" activity until the answer streams. Users who want faster answers can disable GPT Search in Settings.
+10. The `ListedSources` carousel from `@openuidev/react-ui` renders sources as non-anchor cards, so sources are rendered with our own citation list instead.
 
 ## 6. Next-step checklist
 - [ ] Re-run `serverless_endpoint_create` for app `6ac8de2d1f7d82eff69ac0d9` once OnDemand support confirms provisioning; then set `PORTFOLIO_API_URL`/`NEXT_PUBLIC_PORTFOLIO_API_URL` to `https://serverless.on-demand.io/apps/bcap-portfolio-intel`.

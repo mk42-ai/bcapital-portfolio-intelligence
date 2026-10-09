@@ -14,18 +14,14 @@ export const metadata: Metadata = {
   title: { default: "B Capital Portfolio Intelligence", template: "%s · B Capital Portfolio Intelligence" },
   description: "Portfolio overview, company brand intelligence, daily news pulse and an OnDemand-powered analyst chat for B Capital's 135 portfolio companies.",
   applicationName: "B Capital Portfolio Intelligence",
-  openGraph: { title: "B Capital Portfolio Intelligence", description: "Catalysts. Questioners. Visionaries.", images: [{ url: "/brand/og-card-1200x630.png", width: 1200, height: 630 }], type: "website" },
-  twitter: { card: "summary_large_image", images: ["/brand/og-card-1200x630.png"] },
-  icons: { icon: "/icon.png" },
+  openGraph: { title: "B Capital Portfolio Intelligence", description: "Catalysts. Questioners. Visionaries.", type: "website" },
+  twitter: { card: "summary_large_image" },
 };
-export const viewport: Viewport = { themeColor: "#0A211A", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#ffffff", colorScheme: "light", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning className={`${display.variable} ${body.variable}`}>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: `try{var s=JSON.parse(localStorage.getItem('bcap.settings.v1')||'{}');if(s.theme==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}` }} />
-      </head>
+    <html lang="en" className={`light ${display.variable} ${body.variable}`} style={{ colorScheme: "light" }}>
       <body>
         <a href="#main" className="sr-only sr-only-focusable fixed left-2 top-2 z-[100] rounded-md bg-primary px-3 py-2 text-primary-foreground">Skip to main content</a>
         <TooltipProvider delayDuration={150}>

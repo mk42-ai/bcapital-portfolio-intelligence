@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import Image from "next/image";
+import { Cpu, HeartPulse, Zap } from "lucide-react";
 import Link from "next/link";
 import { listCompanies, getPortfolio, getRuns, getAllNews } from "@/lib/api";
 import { PageHeader } from "@/components/shell/page-header";
@@ -23,7 +23,7 @@ import workflows from "@/data/workflows.json";
 
 export const metadata: Metadata = { title: "Portfolio Overview", description: "B Capital portfolio overview: 136 records, sector/region treemap, KPI heatmap, sentiment gauges, status events and flagged ownership estimates." };
 export const revalidate = 120;
-const SECTOR_ART: Record<string, string> = { Technology: "/brand/sector-technology-480.webp", Healthcare: "/brand/sector-healthcare-480.webp", "Energy & Resilience": "/brand/sector-energy-resilience-480.webp" };
+const SECTOR_ICON = { Technology: Cpu, Healthcare: HeartPulse, "Energy & Resilience": Zap } as const;
 
 export default function OverviewPage({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
   return <Suspense fallback={<OverviewSkeleton />}><OverviewBody searchParams={searchParams} /></Suspense>;
@@ -52,14 +52,8 @@ async function OverviewBody({ searchParams }: { searchParams: Promise<Record<str
   const counts = { public: all.filter((c) => statusOf(c) === "public").length, unicorn: all.filter((c) => statusOf(c) === "unicorn").length, renamed: all.filter((c) => statusOf(c) === "renamed").length };
   return (
     <>
-      <section className="relative mb-6 overflow-hidden rounded-2xl border border-border">
-        <Image src="/brand/hero-21x9-1440.webp" alt="" width={1440} height={617} priority fetchPriority="high" quality={60} sizes="(max-width: 640px) 640px, (max-width: 1400px) 100vw, 1400px" className="h-32 w-full object-cover sm:h-52" />
-        <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-background via-background/60 to-transparent p-5 sm:p-8">
-          <p className="text-xs uppercase tracking-[0.2em] text-primary-soft">B Capital · Portfolio Intelligence</p>
-          <h1 className="font-display text-3xl font-semibold sm:text-4xl">Portfolio Overview</h1>
-        </div>
-      </section>
-      <PageHeader title="" lede={`${all.length} portfolio companies + the firm record (136 spec records). Sentiment scored daily at 06:00 UTC by ${workflows.model} across ${workflows.workflows.length} Flow Builder workflows.`} source={cs.source} fetchedAt={cs.fetched_at} />
+      
+      <PageHeader title="Portfolio Overview" lede={`${all.length} portfolio companies + the firm record (136 spec records). Sentiment scored daily at 06:00 UTC by ${workflows.model} across ${workflows.workflows.length} Flow Builder workflows.`} source={cs.source} fetchedAt={cs.fetched_at} />
       <KpiTiles tiles={[
         { label: "Companies", value: String(all.length), sub: `${all.filter((c) => c.in_brand_matrix).length} in brand matrix` },
         { label: "Sectors", value: String(uniq(all.map((c) => c.sector)).length), sub: SECTORS.join(" · ") },
@@ -83,9 +77,9 @@ async function OverviewBody({ searchParams }: { searchParams: Promise<Record<str
           </CardContent></Card>
         <Card><CardHeader><CardTitle>Sentiment gauges by sector</CardTitle><CardDescription>Average workflow score, −1 … +1</CardDescription></CardHeader>
           <CardContent className="grid grid-cols-1 gap-3 sm:grid-cols-3 xl:grid-cols-1">
-            {(["Technology", "Healthcare", "Energy & Resilience"] as const).map((s) => { const r = sectorRoll(s); return (
-              <div key={s} className="flex items-center gap-3 rounded-xl border border-border bg-surface-2 p-3">
-                <Image src={SECTOR_ART[s]} alt="" width={56} height={56} className="hidden rounded-lg sm:block" />
+            {(["Technology", "Healthcare", "Energy & Resilience"] as const).map((s) => { const r = sectorRoll(s); const Icon = SECTOR_ICON[s]; return (
+              <div key={s} className="flex items-center gap-3 rounded-lg border border-border bg-surface p-3">
+                <span className="hidden size-10 shrink-0 place-items-center rounded-md border border-border bg-surface-2 text-muted sm:grid" aria-hidden><Icon className="size-5" strokeWidth={1.75} /></span>
                 <div className="flex-1"><p className="text-sm font-semibold">{s}</p><p className="text-xs text-muted">{r?.company_count ?? 0} companies · {r?.label ?? "—"} · Δ {fmtDelta(r?.delta)}</p></div>
                 <div className="w-28"><Gauge score={r?.avg_score ?? 0} label={s} size={112} /></div>
               </div>); })}

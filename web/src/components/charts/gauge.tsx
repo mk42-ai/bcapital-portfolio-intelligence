@@ -12,7 +12,7 @@ export function Gauge({ score, label, size = 150 }: { score: number; label: stri
     <svg viewBox={`0 0 ${size} ${size / 2 + 14}`} width="100%" role="img" aria-label={`${label}: sentiment ${score > 0 ? "+" : ""}${score.toFixed(2)} on a scale from −1 to +1`}>
       {arc(0, 0.4, "var(--sentiment-neg)")}{arc(0.4, 0.6, "var(--sentiment-neu)")}{arc(0.6, 1, "var(--sentiment-pos)")}
       <line x1={cx} y1={cy} x2={x} y2={y} stroke="var(--foreground)" strokeWidth={3} strokeLinecap="round" />
-      <circle cx={cx} cy={cy} r={5} fill={sentimentColor(score)} stroke="var(--foreground)" strokeWidth={2} />
+      <circle cx={cx} cy={cy} r={5} fill={sentimentColor(score)} stroke="#ffffff" strokeWidth={2} />
       <text x={cx} y={cy - 18} textAnchor="middle" fontSize={size / 7} fontWeight={700} fill="var(--foreground)" fontFamily="var(--font-display)">{score > 0 ? "+" : ""}{score.toFixed(2)}</text>
       <text x={10} y={cy + 12} fontSize={10} fill="var(--muted)">−1</text><text x={size - 10} y={cy + 12} textAnchor="end" fontSize={10} fill="var(--muted)">+1</text>
     </svg>

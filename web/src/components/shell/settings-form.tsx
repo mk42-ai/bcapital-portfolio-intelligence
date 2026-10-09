@@ -7,24 +7,22 @@ import { Field, Input, Select } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ThemeToggle } from "./theme-toggle";
 import { CompanyPicker } from "@/components/chat/company-picker";
 import { Countdown } from "@/components/chat/countdown";
 export function SettingsForm({ options }: { options: { slug: string; name: string; sector: string }[] }) {
   const [s, set] = useSettings(); const [test, setTest] = useState<{ state: "idle" | "busy" | "ok" | "err"; msg?: string }>({ state: "idle" }); const [keyErr, setKeyErr] = useState("");
   async function testKey() {
-    if (!s.apikey) { setKeyErr("Paste your OnDemand apikey first."); return; }
     setTest({ state: "busy" });
     try {
-      const r = await fetch(`/api/ondemand/chat/v1/sessions?externalUserId=${encodeURIComponent(s.externalUserId)}&limit=1`, { headers: { "x-ondemand-key": s.apikey } });
+      const r = await fetch(`/api/ondemand/chat/v1/sessions?externalUserId=${encodeURIComponent(s.externalUserId)}&limit=1`, { headers: s.apikey ? { "x-ondemand-key": s.apikey } : {} });
       setTest(r.ok ? { state: "ok", msg: `OK — key accepted (HTTP ${r.status})` } : { state: "err", msg: `HTTP ${r.status}: ${((await r.json().catch(() => ({}))) as { message?: string }).message ?? "rejected"}` });
     } catch (e) { setTest({ state: "err", msg: (e as Error).message }); }
   }
   return (
     <div className="grid gap-5 lg:grid-cols-2">
-      <Card><CardHeader><CardTitle>OnDemand connection</CardTitle><CardDescription>Key is forwarded per request as <code>x-ondemand-key</code> to <code>/api/ondemand/*</code> → <code>api.on-demand.io</code>. Not logged, not persisted server-side.</CardDescription></CardHeader>
+      <Card><CardHeader><CardTitle>OnDemand connection</CardTitle><CardDescription>The server proxy <code>/api/ondemand/*</code> authenticates to <code>api.on-demand.io</code> with <code>ONDEMAND_API_KEY</code> (server env only). A pasted key is forwarded as <code>x-ondemand-key</code> and takes precedence. Nothing is logged.</CardDescription></CardHeader>
         <CardContent className="space-y-4">
-          <Field label="OnDemand apikey" htmlFor="set-key" hint="Create one at app.on-demand.io → API Key Management (shown once)." error={keyErr}>
+          <Field label="OnDemand apikey (optional override)" htmlFor="set-key" hint="Chat already works with the server-side key. Paste your own key only if you want requests billed to your account; it stays in this browser." error={keyErr}>
             <Input id="set-key" type="password" autoComplete="off" value={s.apikey} onChange={(e) => { set({ apikey: e.target.value.trim() }); setKeyErr(""); }} aria-invalid={!!keyErr} />
           </Field>
           <div className="flex flex-wrap items-center gap-2"><Button type="button" variant="secondary" onClick={testKey} disabled={test.state === "busy"}>{test.state === "busy" ? "Testing…" : "Test connection"}</Button>{test.msg && <span role="status" className={test.state === "ok" ? "text-sm text-primary-soft" : "text-sm text-danger"}>{test.msg}</span>}</div>
@@ -40,7 +38,7 @@ export function SettingsForm({ options }: { options: { slug: string; name: strin
         <CardContent><ul className="divide-y divide-border">
           {PLUGINS.map((p) => (
             <li key={p.name} className="flex items-center justify-between gap-3 py-3">
-              <div className="min-w-0"><p className="flex flex-wrap items-center gap-2 text-sm font-medium">{p.name}{p.status === "pending" && <Badge tone="accent">registration pending</Badge>}{p.status === "deferred" && <Badge tone="muted">configuring — deferred</Badge>}</p><p className="text-xs text-muted">{p.purpose}{p.id ? ` · ${p.id}` : " · id: null"}</p>{p.status === "deferred" && <p className="text-xs text-muted">Not callable before <Countdown iso={EARLIEST_TEST_UTC} /> — and never without the owner confirming it is configured.</p>}</div>
+              <div className="min-w-0"><p className="flex flex-wrap items-center gap-2 text-sm font-medium">{p.name}{p.status === "pending" && <Badge tone="accent">registration pending</Badge>}{p.status === "deferred" && <Badge tone="muted">configuring — deferred</Badge>}{p.status === "dropped" && <Badge tone="muted">dropped — tool 404</Badge>}</p><p className="text-xs text-muted">{p.purpose}{p.id ? ` · ${p.id}` : " · id: null"}</p>{p.status === "deferred" && <p className="text-xs text-muted">Not callable before <Countdown iso={EARLIEST_TEST_UTC} /> — and never without the owner confirming it is configured.</p>}</div>
               <Switch aria-label={`Enable ${p.name}`} checked={!!p.id && !!s.plugins[p.id]} disabled={!p.id || p.status !== "active"} onCheckedChange={(v) => p.id && set({ plugins: { ...s.plugins, [p.id]: v } })} />
             </li>
           ))}
@@ -50,9 +48,8 @@ export function SettingsForm({ options }: { options: { slug: string; name: strin
           <Field label="Backend base URL" htmlFor="set-backend" hint={`Default ${DEFAULT_BACKEND} (NEXT_PUBLIC_PORTFOLIO_API_URL). Durable target once provisioned: https://serverless.on-demand.io/apps/bcap-portfolio-intel`}><Input id="set-backend" value={s.backendUrl} onChange={(e) => set({ backendUrl: e.target.value })} /></Field>
           <div><p className="mb-2 text-sm font-medium">Default chat context companies</p><CompanyPicker options={options} value={s.companies} onChange={(v) => set({ companies: v })} /></div>
         </CardContent></Card>
-      <Card><CardHeader><CardTitle>Appearance & data</CardTitle></CardHeader>
+      <Card><CardHeader><CardTitle>Local data</CardTitle></CardHeader>
         <CardContent className="space-y-4">
-          <ThemeToggle />
           <div className="flex flex-wrap gap-2"><Button variant="outline" onClick={() => { clearSettings(); location.reload(); }}>Reset all local settings</Button><Button variant="ghost" asChild><a href="/onboarding">Re-run onboarding</a></Button></div>
           <p className="text-xs text-muted">Help is always in this same place (Settings → bottom of every page). Nothing here is sent anywhere except the OnDemand proxy and the portfolio backend.</p>
         </CardContent></Card>

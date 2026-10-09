@@ -1,6 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
-import Image from "next/image";
+import { FolderOpen } from "lucide-react";
 import { X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -13,7 +13,7 @@ export function CompanyPicker({ options, value, onChange, max = 5, compact }: { 
     <div>
       <div className="flex flex-wrap gap-2" aria-live="polite" aria-label="Selected companies">
         {value.length === 0 && !compact && (
-          <div className="flex w-full items-center gap-3 rounded-lg border border-dashed border-border p-3 text-sm text-muted"><Image src="/brand/empty-picker-480.webp" alt="" width={56} height={56} className="rounded-md" /> No companies selected yet — choose up to {max}.</div>
+          <div className="flex w-full items-center gap-3 rounded-lg border border-dashed border-border p-3 text-sm text-muted"><FolderOpen className="size-5 shrink-0" aria-hidden /> No companies selected yet — choose up to {max}.</div>
         )}
         {value.map((slug) => (
           <Badge key={slug} tone="primary" className="pr-1">

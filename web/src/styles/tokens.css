@@ -1,54 +1,31 @@
-/* B Capital design tokens — every pairing below was checked for WCAG 2.2 AA (contrast values in comments, computed with the
-   WCAG relative-luminance formula). Dark theme is the brand default (Black Bean ground, white ink). */
-:root,
-[data-theme="dark"] {
-  --background: #0a211a;      /* Black Bean */
-  --foreground: #ffffff;      /* 16.86:1 on background */
-  --surface: #102e25;         /* card ground, 14.59:1 with white */
-  --surface-2: #143a2e;       /* raised / hover, 12.54:1 with white */
-  --surface-3: #1b4a3b;       /* 10.05:1 with white */
-  --border: #2a5a49;          /* non-text contrast vs surface ≥3:1 */
-  --muted: #b9c7c0;           /* secondary text, 9.63:1 on background */
-  --muted-2: #a3b5ad;         /* tertiary text, ≥4.6:1 on every dark surface incl. surface-3 */
-  --primary: #0ac985;         /* Caribbean Green, 7.79:1 on background; ink on it must be Black Bean */
-  --primary-foreground: #0a211a;
-  --primary-soft: #6fe3b4;    /* 10.7:1 — used for links / small text on dark */
-  --accent: #faab3d;          /* Yellow Orange, 8.8:1 on background */
-  --accent-foreground: #0a211a;
-  --accent-soft: #ffc56b;
-  --info: #12abcf;            /* Java, 6.22:1 */
-  --info-foreground: #0a211a;
-  --info-soft: #5cc9e6;       /* 8.79:1 */
-  --danger: #f87171;          /* 6.1:1 */
-  --danger-soft: #fca5a5;     /* text on tinted danger chips, ≥6:1 */
-  --danger-foreground: #0a211a;
-  --ring: #6fe3b4;
-  --radius: 0.75rem;
-  --chart-1: #0ac985; --chart-2: #12abcf; --chart-3: #faab3d; --chart-4: #6fe3b4; --chart-5: #f87171; --chart-6: #b9c7c0;
-  --sentiment-neg: #f87171; --sentiment-neu: #b9c7c0; --sentiment-pos: #0ac985;
-}
-[data-theme="light"] {
-  --background: #f6fbf8;
-  --foreground: #0a211a;      /* 16.12:1 */
+/* Single light theme. Neutral grays + one restrained accent. Every text pairing below is WCAG 2.2 AA:
+   #111827 on #FFFFFF 17.7:1 · #5F6B7A on #FFFFFF 5.6:1 (4.9:1 on #F3F4F6) · #374151 on #F9FAFB 9.9:1 · accent #1D4ED8 on #FFFFFF 6.7:1 (text) ·
+   #E5E7EB borders ≥3:1 non-text against #111827 content; borders themselves are decorative 1px lines. */
+:root {
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #111827;
   --surface: #ffffff;
-  --surface-2: #e9f3ee;
-  --surface-3: #d6e8df;
-  --border: #9db8ac;          /* ≥3:1 vs surface */
-  --muted: #4a5f57;           /* 6.55:1 */
-  --muted-2: #4f655c;         /* ≥5.2:1 on surface-2 */
-  --primary: #0a7a52;         /* 5.12:1 on light ground (brand green darkened for AA text) */
+  --surface-2: #f9fafb;
+  --surface-3: #f3f4f6;
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+  --muted: #5f6b7a;
+  --muted-2: #4b5563;
+  --primary: #1d4ed8;          /* single accent (links, active nav, primary button) */
   --primary-foreground: #ffffff;
-  --primary-soft: #075c3d;    /* 7.1:1 on light ground; ≥5.5:1 on 15% primary tint */
-  --accent: #b86b00;          /* 3.9:1 — large text / non-text only; body text uses foreground */
+  --primary-soft: #1e40af;     /* accent as text on white/tints, 8.6:1 */
+  --accent: #374151;           /* secondary emphasis — neutral, never a glow */
   --accent-foreground: #ffffff;
-  --accent-soft: #6f4000;     /* ≥5.5:1 on 15% accent tint */
-  --info: #0b7c96;            /* 4.63:1 */
+  --accent-soft: #374151;
+  --info: #4b5563;
   --info-foreground: #ffffff;
-  --info-soft: #085e72;       /* ≥5.5:1 on 15% info tint */
-  --danger: #b42318;
-  --danger-soft: #9f1d14;
+  --info-soft: #374151;
+  --danger: #b91c1c;           /* 6.5:1 on white; used sparingly for negative deltas/errors */
   --danger-foreground: #ffffff;
-  --ring: #0a7a52;
-  --chart-1: #0a7a52; --chart-2: #0b7c96; --chart-3: #b86b00; --chart-4: #0ac985; --chart-5: #b42318; --chart-6: #4a5f57;
-  --sentiment-neg: #b42318; --sentiment-neu: #5f746c; --sentiment-pos: #0a7a52;
+  --danger-soft: #991b1b;
+  --ring: #1d4ed8;
+  --radius: 0.5rem;
+  --chart-1: #1f2937; --chart-2: #6b7280; --chart-3: #9ca3af; --chart-4: #1d4ed8; --chart-5: #b91c1c; --chart-6: #d1d5db;
+  --sentiment-neg: #b91c1c; --sentiment-neu: #6b7280; --sentiment-pos: #1f2937;
 }

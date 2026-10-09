@@ -5,7 +5,8 @@ export const maxDuration = 300;
 
 /**
  * Server-side proxy to the OnDemand public REST API (pattern from falkoneye-ondemand-integration-architecture §7 / ONDEMAND_API_CONTRACTS).
- * The caller supplies its own key in `x-ondemand-key`; we forward it as `apikey`. Nothing is persisted, logged or cached.
+ * Auth: the server-side ONDEMAND_API_KEY (env only, never NEXT_PUBLIC_, never logged) is sent as `apikey`. A caller MAY override it
+ * per request with `x-ondemand-key` (their own key, kept in their browser). Nothing is persisted, logged or cached.
  * Allow-list: only the documented Chat API paths (sessions, query, messages) and the plugin list are proxied.
  */
 const BASE = (process.env.ONDEMAND_BASE_URL ?? "https://api.on-demand.io").replace(/\/$/, "");
@@ -15,8 +16,8 @@ const HOP = new Set(["host", "connection", "content-length", "x-ondemand-key", "
 async function proxy(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
   const { path } = await params; const rel = path.join("/");
   if (!ALLOW.some((re) => re.test(rel))) return Response.json({ message: `Path not allowed: ${rel}`, errorCode: "unauthorized" }, { status: 403 });
-  const key = req.headers.get("x-ondemand-key")?.trim();
-  if (!key) return Response.json({ message: "Missing x-ondemand-key header — add your OnDemand apikey in Settings (stored only in your browser).", errorCode: "unauthenticated" }, { status: 401 });
+  const key = req.headers.get("x-ondemand-key")?.trim() || process.env.ONDEMAND_API_KEY?.trim();
+  if (!key) return Response.json({ message: "No OnDemand key configured: set ONDEMAND_API_KEY on the server or send x-ondemand-key.", errorCode: "unauthenticated" }, { status: 401 });
   const url = `${BASE}/${rel}${req.nextUrl.search}`;
   const headers = new Headers();
   req.headers.forEach((v, k) => { if (!HOP.has(k.toLowerCase())) headers.set(k, v); });

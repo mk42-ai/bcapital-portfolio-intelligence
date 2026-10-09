@@ -7,3 +7,5 @@ out/
 test-results/
 playwright-report/
 .lighthouse/
+tsconfig.tsbuildinfo
+!proof/*.log
