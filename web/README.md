@@ -6,7 +6,7 @@ to the OnDemand Chat & Agent Tools API **only through same-origin server routes*
 authenticate with the server-side `ONDEMAND_API_KEY` (`apikey` header). **Light theme only**, **Lucide icons only** (no raster/AI imagery),
 chat UI = **Open Intelligent UI** shell on the OpenUI `AgentInterface`.
 
-Live preview (ephemeral Vercel sandbox, see HANDOFF for TTL): **https://sb-2yrz211gekox.vercel.run** — acceptance gate PASS 2026-10-09 (HANDOFF §7)
+Live preview (ephemeral Vercel sandbox, see HANDOFF for TTL): **https://sb-3umbne3uc2g2.vercel.run** (redeployed 2026-10-09T23:25Z, HANDOFF §8; acceptance gate PASS, HANDOFF §7)
 
 ## Screens
 | Route | What it shows |

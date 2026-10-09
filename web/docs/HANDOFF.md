@@ -38,8 +38,8 @@ flowchart LR
 ## 2. URLs and IDs
 | Item | Value |
 |---|---|
-| Frontend live preview | https://sb-2yrz211gekox.vercel.run (Vercel **sandbox** `sbx_XnBw3bQ18gn303SzlLJW7Qv6Fs0T`, port 3000; `next start` with `ONDEMAND_API_KEY` in its env; redeploy = `sandbox create` + `npm ci && npm run build && npm start`) |
-| Backend base URL (live) | https://sb-1gek6bq0m1au.vercel.run — Hono + Drizzle SQLite API in Vercel sandbox `sbx_s2v1UAKFK3gFbzPBGdyxZoZfIuAC` (`/health` 200) |
+| Frontend live preview | **https://sb-3umbne3uc2g2.vercel.run** (sandbox `sbx_W6xF81UAEW2qdPnN9oq1oNwR3FhW`, redeployed 2026-10-09T23:25Z — see §8; earlier: https://sb-2yrz211gekox.vercel.run `sbx_XnBw3bQ18gn303SzlLJW7Qv6Fs0T`, port 3000; `next start` with `ONDEMAND_API_KEY` in its env; redeploy = `sandbox create` + `npm ci && npm run build && npm start`) |
+| Backend base URL (live) | **https://sb-3az18qgrrd3p.vercel.run** — sandbox `sbx_Buo0S1DoSSNBxot3Psnt31AFOIzm` (redeployed 2026-10-09T23:22Z; earlier https://sb-1gek6bq0m1au.vercel.run `sbx_s2v1UAKFK3gFbzPBGdyxZoZfIuAC`) (`/health` 200) |
 | Backend durable target | https://serverless.on-demand.io/apps/bcap-portfolio-intel — **OnDemand serverless endpoint provisioning failed** 3× (image built OK: app `6ac8de2d1f7d82eff69ac0d9`, runs chfbs…chfbv; endpoints `initializing → failed`, `containerAppEnv` never assigned). The 7 workflows already deliver to this URL; nothing changes once it comes up. |
 | Repo | https://github.com/mk42-ai/bcapital-portfolio-intelligence (`web/` = this app) |
 | Portfolio Plugin ID | **null** — `POST /plugin/v1` returned `400 {"message":"schema is required"}` for 20 payload shapes incl. the documented one; MCP `plugin_v1_plugin_create` returned an empty body; `ai_generated_tool` timed out (Cloudflare 524) ×3. Registration body ready in `../scripts/register-plugin.ts`; UI shows "registration pending" and reads `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` / `src/data/run-meta.json` at runtime. |
@@ -408,3 +408,54 @@ gate-iframe-chat-390x844.png (390, 844) non-white in iframe area: 1.3%
 2026-10-09T20:52:37.534Z chat captures done (turn1-final, turn2 t+1/3/6 s)
 2026-10-09T20:54:14.311Z GATE END — matrix fully green after one fix+rerun; writing report
 ```
+
+## 8. Redeploy 2026-10-09 (sandboxes expired → fresh deploy, no code changes)
+Both earlier sandboxes answered HTTP 410 at `2026-10-09T23:19:33Z`. Redeployed from `origin/main` @ `2f1ab53` (clean tree) — **no application code changed**; only `web/.env` (git-ignored), docs and this proof file.
+
+| Item | Value |
+|---|---|
+| Frontend | **https://sb-3umbne3uc2g2.vercel.run** — sandbox `sbx_W6xF81UAEW2qdPnN9oq1oNwR3FhW`, port 3000, Node v22.22.2, `npm ci && next build && next start` |
+| BUILD_ID | `Fj6s7WsLZM6XKgVVX0aZk` |
+| Deploy live (UTC) | `2026-10-09T23:25:14Z` |
+| Backend | **https://sb-3az18qgrrd3p.vercel.run** — sandbox `sbx_Buo0S1DoSSNBxot3Psnt31AFOIzm` (root Hono + Drizzle SQLite, unchanged code, `npm ci && npm run build && npm start`); `GET /health` → 200 (`db_record_count` 136), `GET /openapi.json` → 200 (`servers[0]` = the new URL) |
+| Env | `web/.env`: `PORTFOLIO_API_URL` / `NEXT_PUBLIC_PORTFOLIO_API_URL` = backend URL above, `NEXT_PUBLIC_SITE_URL` = frontend URL above, `ONDEMAND_API_KEY` server-only (no `NEXT_PUBLIC_*` copy) |
+| Routes (`curl -sI`) | `/` 307→`/overview`; `/onboarding /overview /company/fervo-energy /news /chat /settings /brand/b-capital-logo.svg` 200; `/company/does-not-exist-xyz` 404; no `X-Frame-Options`, `CSP: frame-ancestors *` |
+| Validation (UTC) | ui-validator matrix `23:26:11Z–23:27:33Z`; chat two-turn desktop `23:29:19Z–23:32:08Z`, mobile `23:32:55Z–23:35:35Z`; captures until `23:40:19Z` |
+
+### 8.1 ui-validator matrix (fresh Chromium profile per run)
+| Route × viewport | HTTP 200 | 0 console errors | 0 page errors | Light theme (html.light, white body) | Lucide-only / no first-party PNG | B Capital logo (naturalWidth>0) | Live-backend badge | No X-Frame-Options |
+|---|---|---|---|---|---|---|---|---|
+| / (root) 1440x900 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=137x28) | PASS | PASS |
+| / (root) 390x844 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=130x28) | PASS | PASS |
+| onboarding 1440x900 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=137x28) | PASS | PASS |
+| onboarding 390x844 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=130x28) | PASS | PASS |
+| overview 1440x900 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=137x28) | PASS | PASS |
+| overview 390x844 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=130x28) | PASS | PASS |
+| company (fervo-energy) 1440x900 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=137x28) | PASS | PASS |
+| company (fervo-energy) 390x844 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=130x28) | PASS | PASS |
+| news 1440x900 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=137x28) | PASS | PASS |
+| news 390x844 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=130x28) | PASS | PASS |
+| chat 1440x900 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=137x28) | PASS | PASS |
+| chat 390x844 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=130x28) | PASS | PASS |
+| settings 1440x900 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=137x28) | PASS | PASS |
+| settings 390x844 | PASS (200) | PASS | PASS | PASS | PASS | PASS (natural=211x43 rendered=130x28) | PASS | PASS |
+
+### 8.2 Chat — two consecutive prompts, one fresh session (`proof/redeploy-chat-stream.log`)
+Turn 1 "What did Fervo Energy announce recently?" · Turn 2 "How does that compare to their previous funding round?" · pluginIds `["plugin-1722260873"]` on both turns.
+
+| | Desktop 1440×900 | Mobile 390×844 |
+|---|---|---|
+| Turn 1 | 292 chunks, first chunk +911 ms, [DONE] at +80.6 s, monotonic=True | 225 chunks, first chunk +786 ms, [DONE] at +63.3 s, monotonic=True |
+| Turn 2 | 231 chunks, first chunk +694 ms, [DONE] at +87.9 s, monotonic=True, reused turn-1 sessionId=True | 269 chunks, first chunk +996 ms, [DONE] at +96.4 s, monotonic=True, reused turn-1 sessionId=True |
+| Plugin card input (TOOL_CALL_ARGS) | `{"plugin":"Perplexity","pluginId":"plugin-1722260873","query":"What did Fervo Energy announce recently?","endpointId":"predefined-claude-fable-5.1"}` — never `{}` | same shape, never `{}` |
+| Plugin cards rendered | ['Perplexity searched | “What did Fervo Energy announce recently?” | 15 sources', 'Perplexity searched | “How does that compare to their previous funding round?” | 5 sources'] | ['Perplexity searched | “What did Fervo Energy announce recently?” | 10 sources', 'Perplexity searched | “How does that compare to their previous funding round?” | 13 sources'] |
+| Sources rendered | 15 | 15 |
+| Stop while streaming → Send at completion | True → "Send message" | True → "Send message" |
+| Context kept (turn 2 never names Fervo) | answer: "Fervo Energy: IPO vs. the Series E that preceded it  | | Series E (previous round) | IPO (most recent raise) |…" | "Fervo's May 2026 IPO dwarfed anything the company had raised privately. Here's how the two stack up:  The IPO …" |
+| Console / page errors | 0 / 0 | 0 / 0 |
+
+### 8.3 Security sweep
+`.next/static`: API-key **value** 0 files; literal `ONDEMAND_API_KEY` 1 file (`app/settings/page-*.js`, the Settings help text naming the variable — no value). `.next/server`: value 0. Served assets (37 files, 3 466 367 B) + 7 route HTML pages downloaded fresh: value 0, literal name 1 (same chunk), `NEXT_PUBLIC_ONDEMAND*` 0. `git grep` value → 0; tracked `.env` → 0.
+
+### 8.4 Screenshots (`docs/screenshots/redeploy-*.png`)
+`redeploy-{root,onboarding,overview,company,news,chat,settings}-{1440x900,390x844}.png`; chat timeline desktop `redeploy-chat-turn1-{t1s,t3s,t6s,final}`, `redeploy-chat-turn2-{t1s,t3s,t6s}`, `redeploy-chat-2turn-1440x900` (turn-2 final); mobile `redeploy-chat-m-turn1-{t1s,t3s,t6s,final}`, `redeploy-chat-m-turn2-{t1s,t3s,t6s}`, `redeploy-chat-2turn-mobile-390x844` (turn-2 final).
