@@ -165,3 +165,246 @@ Targets met: accessibility ≥90 (all 100), desktop performance ≥90 (98–100)
 - [ ] Promote the frontend from the sandbox to a permanent Vercel project (`vercel.json` not required; `web/` is the app root) and set the same `.env` values as project env vars.
 - [ ] Mobile perf: paginate the overview table server-side (first 25 rows in HTML) and move the treemap SVG behind a responsive `<picture>`/lazy island to push `/overview` above 90 on the throttled mobile profile.
 - [ ] Add the real Reckless Neue / Yellix files to `src/fonts` when licensed and swap the `localFont` sources.
+
+## 7. Acceptance Gate (independent black-box run, 2026-10-09)
+**Verdict: PASS** — gate start `2026-10-09T20:17:36Z`, first full pass `20:17–20:33Z` (one FAIL), fix deployed `20:36:55Z`, full rerun from fresh browser sessions `20:39:08–20:51:21Z` all green, gate end `2026-10-09T20:54:14.311Z`.
+Method: every check ran through the `ui-validator` skill (headless Chromium, a NEW temporary profile per run → empty cache and storage, no reuse of any earlier browser state), wrapped by a gate runner that also evaluated on every page: `<img src="/brand/…">` with `naturalWidth/naturalHeight > 0`, light theme (`html.light`, `color-scheme: light`, white body, no element ≥ 30 000 px² with a dark background, `prefers-color-scheme: dark` not applied), Lucide-only icons (`svg.lucide` present, 0 foreign icon classes / font icons), live-backend badge `data-live="1"`, `HEAD` headers (no `X-Frame-Options`, `Content-Security-Policy: frame-ancestors *`), and 0 non-2xx sub-resources; console errors, page errors and failed requests were captured on every navigation. Preview `https://sb-2yrz211gekox.vercel.run` (sandbox `sbx_XnBw3bQ18gn303SzlLJW7Qv6Fs0T`), backend `https://sb-1gek6bq0m1au.vercel.run` (from `web/.env`), commit under test `5ade7e3` → fix commit below.
+
+### 7.1 Failure found and fixed
+* **settings · backend-URL validation**: typing an invalid URL set `aria-invalid` and `aria-describedby="set-backend-error"` and correctly refused to persist, but the referenced error element was never rendered (the `Field` for `#set-backend` was missing `error={urlErr}`), so the user saw no message. Minimal fix: one prop in `src/components/shell/settings-form.tsx`. Rebuilt and restarted in the SAME sandbox (BUILD_ID `27UKCTjSNceAeot-Qn9kj`, key hits in `.next` = 0); rerun shows "Enter a valid absolute https:// URL …" and no persistence of the bad value.
+
+### 7.2 Pass/fail matrix (final rerun)
+| Screen × viewport | HTTP 200 | 0 console / page errors | Logo renders (/brand/, naturalWidth>0) | Light theme | Lucide only | Primary actions OK | Live-backend badge | Streaming ≥3 chunks / first <5 s / monotonic | Sources rendered | No `{}` card | Stop → Send | Context kept | API key absent | Backend /health 200 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| onboarding 1440x900 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS — CTA 'Enter workspace' → /overview, onboarded persisted | PASS | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+| onboarding 390x844 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS — CTA 'Enter workspace' → /overview, onboarded persisted | PASS | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+| overview 1440x900 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS — search 'fervo'→1 row; sort-score flips order (aria-sort); row → /company/nuvig | PASS | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+| overview 390x844 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS — search 'fervo'→1 row; sort-score flips order (aria-sort); row → /company/nuvig | PASS | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+| company 1440x900 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS — breadcrumb → /overview; second slug artbio; unknown slug HTTP 404 | PASS | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+| company 390x844 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS — breadcrumb → /overview; second slug artbio; unknown slug HTTP 404 | PASS | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+| news 1440x900 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS — sector 197→19; nonsense text → 0 + empty state; 196/196 links _blank+noopener | PASS | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+| news 390x844 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS — sector 197→19; nonsense text → 0 + empty state; 196/196 links _blank+noopener | PASS | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+| chat 1440x900 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS — two prompts, Stop while streaming, Send restored | PASS | PASS — 284/81 chunks, first 778/572 ms, monotonic, [DONE]×2 | PASS (13 / 9 links) | PASS (never seen) | PASS | PASS (same sessionId; answer cites Cape Station/Fervo) | PASS (0 hits) | PASS (200, 136 records) |
+| chat 390x844 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS — two prompts, Stop while streaming, Send restored | PASS | PASS — 214/106 chunks, first 821/620 ms, monotonic, [DONE]×2 | PASS (13 / 9 links) | PASS (never seen) | PASS | PASS (same sessionId; answer cites Cape Station/Fervo) | PASS (0 hits) | PASS (200, 136 records) |
+| settings 1440x900 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS (after fix) — whitespace id → message; bad URL → https message, not persisted; valid values persisted | PASS | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+| settings 390x844 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS (after fix) — whitespace id → message; bad URL → https message, not persisted; valid values persisted | PASS | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+| root 1440x900 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS — / 307→/overview→/onboarding; nav /news,/settings,/chat,/company + logo→/overview | PASS | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+| root 390x844 | PASS (200) | PASS (0/0) | PASS | PASS | PASS | PASS — / 307→/overview→/onboarding; nav /news,/settings,/chat,/company + logo→/overview | PASS | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+| iframe-harness 1440x900 | PASS (200) | PASS (0/0) | n/a (opaque cross-origin frame; checked on the direct loads) | n/a (opaque cross-origin frame; checked on the direct loads) | n/a (opaque cross-origin frame; checked on the direct loads) | PASS — iframe load event fired, cross-origin opaque frame rendered (14.5 % / 27.4 % non-white px) | n/a (opaque cross-origin frame; checked on the direct loads) | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+| iframe-harness 390x844 | PASS (200) | PASS (0/0) | n/a (opaque cross-origin frame; checked on the direct loads) | n/a (opaque cross-origin frame; checked on the direct loads) | n/a (opaque cross-origin frame; checked on the direct loads) | PASS — iframe load event fired, cross-origin opaque frame rendered (14.5 % / 27.4 % non-white px) | n/a (opaque cross-origin frame; checked on the direct loads) | n/a | n/a | n/a | n/a | n/a | PASS (0 hits) | PASS (200, 136 records) |
+
+Notes: the unknown-slug check `/company/does-not-exist-xyz` returned **HTTP 404** (curl and browser; page text "not found", 0 page errors). The only external-resource failures ever seen were third-party article thumbnails blocked by Chrome ORB on a company page (not app errors, not counted). On 390×844 the chat composer check targets the visible thread composer (`textarea.openui-agent-thread-composer__input`); OpenUI keeps a second, zero-size welcome composer in the DOM by design.
+
+### 7.3 Chat — two consecutive prompts in one fresh session (`proof/acceptance-chat-stream.log`)
+| | Desktop 1440×900 | Mobile 390×844 |
+|---|---|---|
+| Turn 1 "What did Fervo Energy announce recently?" | 284 chunks (311 data lines), first chunk +778 ms, finished +72.8 s, monotonic=True, [DONE]=True | 214 chunks (258 data lines), first chunk +821 ms, finished +82.9 s, monotonic=True, [DONE]=True |
+| Turn 2 "Summarise that in three bullet points and name the sources." | 81 chunks (111 data lines), first chunk +572 ms, finished +25.1 s, monotonic=True, [DONE]=True, reused turn-1 sessionId=True | 106 chunks (117 data lines), first chunk +620 ms, finished +24.9 s, monotonic=True, [DONE]=True, reused turn-1 sessionId=True |
+| Plugin cards | ['Perplexity searched | “What did Fervo Energy announce recently?” | 15 sources', 'Perplexity searched | “Summarise that in three bullet points and name the sources.” | 3 sources'] | ['Perplexity searched | “What did Fervo Energy announce recently?” | 15 sources', 'Perplexity searched | “Summarise that in three bullet points and name the sources.” | 3 sources'] |
+| Sources rendered | 13 links | 9 links |
+| Empty `{}` card ever shown | False | False |
+| Stop shown while streaming → Send at completion | True → "Send message" | True → "Send message" |
+| Context kept | turn-2 request carried turn-1 `sessionId`; answer: "Cape Station reached commercial operation ahead of schedule – The first GeoBlock (33 MW) hit its contractual Commercial …" | same; "Cape Station reached commercial operation ahead of schedule (Sept 30 / announced Oct 1–2, 2026): The first 33 MW GeoBloc…" |
+| Console / page errors | 0 / 0 | 0 / 0 |
+
+Response headers on `/api/chat`: `content-type: text/event-stream; charset=utf-8`, `cache-control: no-cache, no-transform`, `content-encoding: identity`, `x-ondemand-session: <sid>`. Heartbeat frames arrive every 10 s during the Perplexity research phase (≈50–75 s before the first answer token), which is why the first chunk is < 1 s while the first text delta is ≈ +54 s.
+
+### 7.4 Security
+30 served client assets (22 JS, 3 CSS, 2 woff2, 2 SVG, 1 ICO; 3 063 496 bytes) + 8 route HTML pages downloaded fresh → 0 occurrences of the API key; `git grep` → 0; no tracked `.env` (only `.env.example`, `web/.env.example`); `.gitignore` covers `.env`; the rebuilt `bcapital-portfolio-intelligence.zip` → 0 key hits, no `.env`. The literal variable NAME `ONDEMAND_API_KEY` appears once in the Settings help text (no value). Icon libraries in bundles: `lucide` only (one `iconify` string is a Splunk keyword inside a syntax-highlighter grammar, not an icon library). Backend `GET /health` → 200 (`db_record_count` 136) at 20:30:00Z.
+
+### 7.5 Screenshots (`docs/screenshots/gate-*.png`, also attached to the run)
+`gate-{root,onboarding,overview,company,news,settings,chat}-{1440x900,390x844}.png`, `gate-iframe-{overview,chat}-{1440x900,390x844}.png`, primary actions `gate-onboarding-cta`, `gate-overview-actions`, `gate-company-second`, `gate-company-back`, `gate-company-404`, `gate-news-filters`, `gate-settings-validation`, `gate-settings-reload`, `gate-root-nav`, chat timeline `gate-chat-turn1-t1s/t3s/t6s/final`, `gate-chat-turn2-t1s/t3s/t6s`, `gate-chat-2turn-1440x900` (turn-2 final, desktop), `gate-chat-2turn-mobile-390x844` (turn-2 final, mobile).
+
+### 7.6 Action log (ISO-8601 UTC)
+```
+2026-10-09T20:17:36.622Z GATE START — fresh headless Chromium per run (ui-validator: new temp profile → empty cache/storage), preview https://sb-2yrz211gekox.vercel.run, backend https://sb-1gek6bq0m1au.vercel.run (from web/.env), repo @ 5ade7e3
+2026-10-09T20:17:36.659Z START smoke 1440x900 url=https://sb-2yrz211gekox.vercel.run/overview?skip=1 label=gate-smoke
+2026-10-09T20:17:41.929Z END   smoke 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-smoke-1440x900.png']
+2026-10-09T20:18:06.947Z iframe harness served on http://127.0.0.1:8787 (origin differs from https://sb-2yrz211gekox.vercel.run → cross-origin embed)
+2026-10-09T20:20:18.507Z START onboarding 1440x900 url=https://sb-2yrz211gekox.vercel.run/onboarding label=gate-onboarding
+2026-10-09T20:20:21.890Z START overview 1440x900 url=https://sb-2yrz211gekox.vercel.run/overview?skip=1 label=gate-overview
+2026-10-09T20:20:22.573Z END   onboarding 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-onboarding-1440x900.png']
+2026-10-09T20:20:26.606Z END   overview 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-overview-1440x900.png']
+2026-10-09T20:20:27.277Z START onboarding 390x844 url=https://sb-2yrz211gekox.vercel.run/onboarding label=gate-onboarding
+2026-10-09T20:20:28.403Z START company 1440x900 url=https://sb-2yrz211gekox.vercel.run/company/fervo-energy?skip=1 label=gate-company
+2026-10-09T20:20:30.621Z START news 1440x900 url=https://sb-2yrz211gekox.vercel.run/news?skip=1 label=gate-news
+2026-10-09T20:20:31.362Z END   onboarding 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-onboarding-390x844.png']
+2026-10-09T20:20:32.139Z START overview 390x844 url=https://sb-2yrz211gekox.vercel.run/overview?skip=1 label=gate-overview
+2026-10-09T20:20:32.978Z END   company 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-company-1440x900.png']
+2026-10-09T20:20:35.153Z END   news 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-news-1440x900.png']
+2026-10-09T20:20:35.580Z START settings 1440x900 url=https://sb-2yrz211gekox.vercel.run/settings?skip=1 label=gate-settings
+2026-10-09T20:20:36.504Z END   overview 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-overview-390x844.png']
+2026-10-09T20:20:37.615Z START company 390x844 url=https://sb-2yrz211gekox.vercel.run/company/fervo-energy?skip=1 label=gate-company
+2026-10-09T20:20:39.863Z END   settings 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-settings-1440x900.png']
+2026-10-09T20:20:39.901Z START settings 390x844 url=https://sb-2yrz211gekox.vercel.run/settings?skip=1 label=gate-settings
+2026-10-09T20:20:41.191Z START news 390x844 url=https://sb-2yrz211gekox.vercel.run/news?skip=1 label=gate-news
+2026-10-09T20:20:42.095Z END   company 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-company-390x844.png']
+2026-10-09T20:20:42.153Z START onboarding 1440x900 url=https://sb-2yrz211gekox.vercel.run/onboarding label=gate-onboarding-cta
+2026-10-09T20:20:44.088Z END   settings 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-settings-390x844.png']
+2026-10-09T20:20:45.916Z END   news 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-news-390x844.png']
+2026-10-09T20:20:46.032Z subagents A1–A5 dispatched (platform cap 5 concurrent); orchestrator runs A6 (root/nav), A7 (iframe), A8 (security) and the chat gate itself
+2026-10-09T20:20:46.070Z START iframe-harness 1440x900 url=http://127.0.0.1:8787/index.html?u=https%3A%2F%2Fsb-2yrz211gekox.vercel.run%2Foverview%3Fskip%3D1 label=gate-iframe-overview-1440x900
+2026-10-09T20:20:47.714Z START company 1440x900 url=https://sb-2yrz211gekox.vercel.run/company/artbio?skip=1 label=gate-company-second
+2026-10-09T20:20:48.167Z END   onboarding 1440x900 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:20:51.712Z START overview 1440x900 url=https://sb-2yrz211gekox.vercel.run/overview?skip=1 label=gate-overview-actions
+2026-10-09T20:20:51.887Z END   company 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-company-second-1440x900.png']
+2026-10-09T20:20:51.928Z START company 1440x900 url=https://sb-2yrz211gekox.vercel.run/company/fervo-energy?skip=1 label=gate-company-back
+2026-10-09T20:20:54.656Z END   iframe-harness 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-iframe-overview-1440x900-1440x900.png']
+2026-10-09T20:20:54.698Z START iframe-harness 390x844 url=http://127.0.0.1:8787/index.html?u=https%3A%2F%2Fsb-2yrz211gekox.vercel.run%2Foverview%3Fskip%3D1 label=gate-iframe-overview-390x844
+2026-10-09T20:20:57.136Z END   company 1440x900 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:20:57.711Z START news 1440x900 url=https://sb-2yrz211gekox.vercel.run/news?skip=1 label=gate-news-filters
+2026-10-09T20:21:00.796Z END   overview 1440x900 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:21:02.342Z START settings 1440x900 url=https://sb-2yrz211gekox.vercel.run/settings?skip=1 label=gate-settings-validation
+2026-10-09T20:21:03.523Z END   iframe-harness 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-iframe-overview-390x844-390x844.png']
+2026-10-09T20:21:03.569Z START iframe-harness 1440x900 url=http://127.0.0.1:8787/index.html?u=https%3A%2F%2Fsb-2yrz211gekox.vercel.run%2Fchat%3Fskip%3D1 label=gate-iframe-chat-1440x900
+2026-10-09T20:21:05.608Z END   news 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-news-filters-1440x900.png']
+2026-10-09T20:21:08.984Z END   settings 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-settings-validation-1440x900.png']
+2026-10-09T20:21:09.026Z START settings 1440x900 url=https://sb-2yrz211gekox.vercel.run/settings?skip=1 label=gate-settings-reload
+2026-10-09T20:21:12.567Z END   iframe-harness 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-iframe-chat-1440x900-1440x900.png']
+2026-10-09T20:21:12.608Z START iframe-harness 390x844 url=http://127.0.0.1:8787/index.html?u=https%3A%2F%2Fsb-2yrz211gekox.vercel.run%2Fchat%3Fskip%3D1 label=gate-iframe-chat-390x844
+2026-10-09T20:21:13.248Z END   settings 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-settings-reload-1440x900.png']
+2026-10-09T20:21:21.595Z END   iframe-harness 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-iframe-chat-390x844-390x844.png']
+2026-10-09T20:21:26.615Z START settings 1440x900 url=https://sb-2yrz211gekox.vercel.run/settings?skip=1 label=gate-settings-validation-diag
+2026-10-09T20:21:30.095Z START news 1440x900 url=https://sb-2yrz211gekox.vercel.run/news?skip=1 label=gate-news-filters
+gate-iframe-overview-1440x900.png (1440, 900) non-white in iframe area: 14.5%
+gate-iframe-overview-390x844.png (390, 844) non-white in iframe area: 27.4%
+gate-iframe-chat-1440x900.png (1440, 900) non-white in iframe area: 3.7%
+gate-iframe-chat-390x844.png (390, 844) non-white in iframe area: 1.3%
+2026-10-09T20:21:31.886Z END   settings 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-settings-validation-diag-1440x900.png']
+2026-10-09T20:21:32.162Z START company 1440x900 url=https://sb-2yrz211gekox.vercel.run/company/fervo-energy?skip=1 label=gate-company-back
+2026-10-09T20:21:37.939Z END   news 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-news-filters-1440x900.png']
+2026-10-09T20:21:38.633Z END   company 1440x900 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:21:41.723Z A7 iframe harness: 4/4 runs PASS (load event fired, cross-origin opaque frame, rendered content 14.5%/27.4%/3.7%/1.3% non-white px), no XFO, CSP frame-ancestors *
+2026-10-09T20:21:41.755Z START chat 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat
+2026-10-09T20:21:42.563Z START settings 1440x900 url=https://sb-2yrz211gekox.vercel.run/settings?skip=1 label=gate-settings-validation-diag2
+2026-10-09T20:21:46.232Z END   chat 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-1440x900.png']
+2026-10-09T20:21:47.828Z END   settings 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-settings-validation-diag2-1440x900.png']
+2026-10-09T20:21:53.856Z START overview 1440x900 url=https://sb-2yrz211gekox.vercel.run/overview?skip=1 label=gate-overview-actions
+2026-10-09T20:21:55.697Z START settings 1440x900 url=https://sb-2yrz211gekox.vercel.run/settings?skip=1 label=gate-settings-validation-diag3
+2026-10-09T20:22:00.796Z END   settings 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-settings-validation-diag3-1440x900.png']
+2026-10-09T20:22:04.173Z END   overview 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-overview-actions-1440x900.png']
+2026-10-09T20:22:04.675Z START company 1440x900 url=https://sb-2yrz211gekox.vercel.run/company/fervo-energy?skip=1 label=gate-company-back-probe
+2026-10-09T20:22:10.945Z END   company 1440x900 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:22:23.931Z START onboarding 1440x900 url=https://sb-2yrz211gekox.vercel.run/onboarding label=gate-onboarding-cta
+2026-10-09T20:22:27.431Z START company 1440x900 url=https://sb-2yrz211gekox.vercel.run/company/fervo-energy?skip=1 label=gate-company-back-probe2
+2026-10-09T20:22:28.714Z END   onboarding 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-onboarding-cta-1440x900.png']
+2026-10-09T20:22:30.986Z END   company 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-company-back-probe2-1440x900.png']
+2026-10-09T20:22:50.422Z START company 1440x900 url=https://sb-2yrz211gekox.vercel.run/company/fervo-energy?skip=1 label=gate-company-back-probe3
+2026-10-09T20:22:53.122Z chat gate: launching two-turn instrumented run (fresh profile) + t+1/3/6 capture runs
+2026-10-09T20:22:53.185Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-2turn
+2026-10-09T20:22:54.529Z END   company 1440x900 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:22:55.186Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-turn1-t1s
+2026-10-09T20:23:00.597Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-turn1-t1s-1440x900.png']
+2026-10-09T20:23:00.672Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-turn1-t3s
+2026-10-09T20:23:02.355Z END   chat-2turn 1440x900 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:23:07.601Z END   chat-2turn 1440x900 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:23:07.675Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-turn1-t6s
+2026-10-09T20:23:08.290Z START company 1440x900 url=https://sb-2yrz211gekox.vercel.run/company/fervo-energy?skip=1 label=gate-company-back
+2026-10-09T20:23:14.306Z END   chat-2turn 1440x900 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:23:16.968Z END   company 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-company-back-1440x900.png']
+2026-10-09T20:23:27.008Z START company 1440x900 url=https://sb-2yrz211gekox.vercel.run/company/does-not-exist-xyz?skip=1 label=gate-company-404
+2026-10-09T20:23:31.512Z END   company 1440x900 ok=False http=404 console=1 pageErr=0 failedReq=0 fails=1 shots=['gate-company-404-1440x900.png']
+2026-10-09T20:24:18.891Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-turn1-t6s
+2026-10-09T20:24:29.473Z END   chat-2turn 1440x900 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:25:05.126Z note: ui_validate's DevTools socket timeout inherits the remainder of --wait-ms; long chat evals need a long quiet settle (45 s) — rerunning chat gate with that
+2026-10-09T20:25:05.190Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-2turn
+2026-10-09T20:25:06.194Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-turn1-t3s
+2026-10-09T20:25:56.155Z END   chat-2turn 1440x900 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:27:44.711Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-2turn-1440x900.png']
+2026-10-09T20:29:19.924Z chat gate PASS: 2 turns in one session, chunks 340/68, first chunk 949/716 ms, sources 13
+2026-10-09T20:29:34.808Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-2turn
+2026-10-09T20:30:00.220Z START root 1440x900 url=https://sb-2yrz211gekox.vercel.run/ label=gate-root
+2026-10-09T20:30:04.801Z END   root 1440x900 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:30:04.843Z START root 390x844 url=https://sb-2yrz211gekox.vercel.run/ label=gate-root
+2026-10-09T20:30:09.669Z END   root 390x844 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:30:38.626Z START root 1440x900 url=https://sb-2yrz211gekox.vercel.run/ label=gate-root
+2026-10-09T20:30:49.491Z END   root 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-root-1440x900.png']
+2026-10-09T20:30:49.535Z START root 390x844 url=https://sb-2yrz211gekox.vercel.run/ label=gate-root
+2026-10-09T20:31:00.417Z END   root 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-root-390x844.png']
+2026-10-09T20:31:06.328Z START root 1440x900 url=https://sb-2yrz211gekox.vercel.run/overview?skip=1 label=gate-root-nav
+2026-10-09T20:31:17.293Z END   root 1440x900 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=[]
+2026-10-09T20:31:38.706Z START root 1440x900 url=https://sb-2yrz211gekox.vercel.run/overview?skip=1 label=gate-root-nav
+2026-10-09T20:32:12.596Z END   root 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=1 fails=0 shots=['gate-root-nav-1440x900.png']
+2026-10-09T20:32:19.055Z A6 root/nav PASS: / → 307 /overview → /onboarding (fresh profile); nav /news,/settings,/chat,/company + logo→/overview all navigate; 0 console/page errors (one external Perplexity logo image blocked by ORB on the company page — third-party asset, not an app error)
+/                            HTTP/2 307  date: Fri, 09 Oct 2026 20:32:19 GMT 
+/onboarding                  HTTP/2 200  date: Fri, 09 Oct 2026 20:32:19 GMT 
+/overview                    HTTP/2 200  date: Fri, 09 Oct 2026 20:32:19 GMT 
+/company/fervo-energy        HTTP/2 200  date: Fri, 09 Oct 2026 20:32:19 GMT 
+/company/does-not-exist-xyz  HTTP/2 404  date: Fri, 09 Oct 2026 20:32:19 GMT 
+/news                        HTTP/2 200  date: Fri, 09 Oct 2026 20:32:19 GMT 
+/chat                        HTTP/2 200  date: Fri, 09 Oct 2026 20:32:19 GMT 
+/settings                    HTTP/2 200  date: Fri, 09 Oct 2026 20:32:19 GMT 
+/brand/b-capital-logo.svg    HTTP/2 200  date: Fri, 09 Oct 2026 20:32:19 GMT 
+/icon.svg                    HTTP/2 200  date: Fri, 09 Oct 2026 20:32:20 GMT 
+/opengraph-image             HTTP/2 200  date: Fri, 09 Oct 2026 20:32:20 GMT 
+2026-10-09T20:32:24.357Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-2turn-1440x900.png']
+2026-10-09T20:32:24.426Z START chat-2turn 390x844 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-2turn-mobile
+2026-10-09T20:32:44.979Z A5 settings FAIL found: backend-URL error message never rendered (Field lacked error={urlErr}; aria-describedby pointed at a missing #set-backend-error). Minimal fix applied in settings-form.tsx (one prop).
+2026-10-09T20:34:47.606Z END   chat-2turn 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-2turn-mobile-390x844.png']
+2026-10-09T20:37:07.061Z FIX DEPLOY: settings-form.tsx backend-URL error message → copying to sbx_XnBw3bQ18gn303SzlLJW7Qv6Fs0T, next build, restart (preview URL unchanged)
+2026-10-09T20:38:12.714Z FIX DEPLOY done; rerunning the gate from fresh browser sessions
+2026-10-09T20:38:27.177Z START settings 1440x900 url=https://sb-2yrz211gekox.vercel.run/settings?skip=1 label=gate-settings-validation
+2026-10-09T20:38:33.728Z END   settings 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-settings-validation-1440x900.png']
+2026-10-09T20:39:08.812Z RERUN (post-fix, BUILD_ID 27UKCTjSNceAeot-Qn9kj): chat two-turn gate desktop+mobile launched
+2026-10-09T20:39:08.875Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-2turn
+2026-10-09T20:39:30.794Z A8 security PASS: 30 client assets (3.06 MB) + 8 HTML pages → 0 key hits; git grep 0; no tracked .env; Lucide-only bundle; backend /health 200 (136 records)
+2026-10-09T20:39:30.795Z RERUN: all six screens + root + iframe × 2 viewports from fresh sessions (post-fix build)
+2026-10-09T20:39:30.828Z START root 1440x900 url=https://sb-2yrz211gekox.vercel.run/ label=gate-root
+2026-10-09T20:39:41.797Z END   root 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-root-1440x900.png']
+2026-10-09T20:39:41.838Z START root 390x844 url=https://sb-2yrz211gekox.vercel.run/ label=gate-root
+2026-10-09T20:39:52.706Z END   root 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-root-390x844.png']
+2026-10-09T20:39:52.748Z START onboarding 1440x900 url=https://sb-2yrz211gekox.vercel.run/onboarding label=gate-onboarding
+2026-10-09T20:39:56.740Z END   onboarding 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-onboarding-1440x900.png']
+2026-10-09T20:39:56.783Z START onboarding 390x844 url=https://sb-2yrz211gekox.vercel.run/onboarding label=gate-onboarding
+2026-10-09T20:40:00.966Z END   onboarding 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-onboarding-390x844.png']
+2026-10-09T20:40:01.013Z START overview 1440x900 url=https://sb-2yrz211gekox.vercel.run/overview?skip=1 label=gate-overview
+2026-10-09T20:40:05.456Z END   overview 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-overview-1440x900.png']
+2026-10-09T20:40:05.498Z START overview 390x844 url=https://sb-2yrz211gekox.vercel.run/overview?skip=1 label=gate-overview
+2026-10-09T20:40:09.952Z END   overview 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-overview-390x844.png']
+2026-10-09T20:40:09.994Z START company 1440x900 url=https://sb-2yrz211gekox.vercel.run/company/fervo-energy?skip=1 label=gate-company
+2026-10-09T20:40:14.461Z END   company 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-company-1440x900.png']
+2026-10-09T20:40:14.502Z START company 390x844 url=https://sb-2yrz211gekox.vercel.run/company/fervo-energy?skip=1 label=gate-company
+2026-10-09T20:40:18.934Z END   company 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-company-390x844.png']
+2026-10-09T20:40:18.976Z START news 1440x900 url=https://sb-2yrz211gekox.vercel.run/news?skip=1 label=gate-news
+2026-10-09T20:40:23.512Z END   news 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-news-1440x900.png']
+2026-10-09T20:40:23.554Z START news 390x844 url=https://sb-2yrz211gekox.vercel.run/news?skip=1 label=gate-news
+2026-10-09T20:40:28.474Z END   news 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-news-390x844.png']
+2026-10-09T20:40:28.516Z START settings 1440x900 url=https://sb-2yrz211gekox.vercel.run/settings?skip=1 label=gate-settings
+2026-10-09T20:40:32.752Z END   settings 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-settings-1440x900.png']
+2026-10-09T20:40:32.797Z START settings 390x844 url=https://sb-2yrz211gekox.vercel.run/settings?skip=1 label=gate-settings
+2026-10-09T20:40:36.959Z END   settings 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-settings-390x844.png']
+2026-10-09T20:40:37.001Z START chat 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat
+2026-10-09T20:40:41.515Z END   chat 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-1440x900.png']
+2026-10-09T20:40:41.557Z START chat 390x844 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat
+2026-10-09T20:40:46.010Z END   chat 390x844 ok=False http=200 console=0 pageErr=0 failedReq=0 fails=1 shots=['gate-chat-390x844.png']
+2026-10-09T20:40:57.230Z START chat 390x844 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat
+2026-10-09T20:41:01.627Z END   chat 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-390x844.png']
+2026-10-09T20:41:01.669Z START iframe-harness 1440x900 url=http://127.0.0.1:8787/index.html?u=https%3A%2F%2Fsb-2yrz211gekox.vercel.run%2Foverview%3Fskip%3D1 label=gate-iframe-overview-1440x900
+2026-10-09T20:41:10.542Z END   iframe-harness 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-iframe-overview-1440x900-1440x900.png']
+2026-10-09T20:41:10.585Z START iframe-harness 390x844 url=http://127.0.0.1:8787/index.html?u=https%3A%2F%2Fsb-2yrz211gekox.vercel.run%2Foverview%3Fskip%3D1 label=gate-iframe-overview-390x844
+2026-10-09T20:41:19.374Z END   iframe-harness 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-iframe-overview-390x844-390x844.png']
+2026-10-09T20:41:24.881Z RERUN screens: 16/16 PASS (root/onboarding/overview/company/news/settings/chat × 2, iframe × 2); mobile chat textarea check uses the visible thread composer (the hidden welcome composer is zero-size by design)
+2026-10-09T20:42:23.038Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-2turn-1440x900.png']
+2026-10-09T20:42:23.109Z START chat-2turn 390x844 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-2turn-mobile
+2026-10-09T20:43:35.149Z chat gate: final capture run (desktop + mobile) with base64-sliced export of the per-chunk record
+2026-10-09T20:43:35.214Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-2turn
+2026-10-09T20:43:48.268Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-turn1-t6s
+2026-10-09T20:43:48.268Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-turn1-t3s
+2026-10-09T20:44:38.436Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-turn1-t3s-1440x900.png']
+2026-10-09T20:44:41.544Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-turn1-t6s-1440x900.png']
+2026-10-09T20:45:04.808Z END   chat-2turn 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-2turn-mobile-390x844.png']
+2026-10-09T20:46:00.942Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-2turn-1440x900.png']
+2026-10-09T20:46:01.013Z START chat-2turn 390x844 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-2turn-mobile
+2026-10-09T20:48:36.128Z END   chat-2turn 390x844 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-2turn-mobile-390x844.png']
+2026-10-09T20:48:50.568Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-turn1-final
+2026-10-09T20:48:51.579Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-turn2-t1s
+2026-10-09T20:48:52.580Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-turn2-t3s
+2026-10-09T20:48:53.589Z START chat-2turn 1440x900 url=https://sb-2yrz211gekox.vercel.run/chat?skip=1 label=gate-chat-turn2-t6s
+2026-10-09T20:48:54.514Z chat captures launched: turn1-final, turn2 t+1s/t+3s/t+6s (desktop)
+2026-10-09T20:51:03.074Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-turn1-final-1440x900.png']
+2026-10-09T20:51:09.768Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-turn2-t6s-1440x900.png']
+2026-10-09T20:51:14.617Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-turn2-t1s-1440x900.png']
+2026-10-09T20:51:21.668Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 failedReq=0 fails=0 shots=['gate-chat-turn2-t3s-1440x900.png']
+2026-10-09T20:52:37.534Z chat captures done (turn1-final, turn2 t+1/3/6 s)
+2026-10-09T20:54:14.311Z GATE END — matrix fully green after one fix+rerun; writing report
+```
