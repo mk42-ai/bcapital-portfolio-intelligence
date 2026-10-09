@@ -1,0 +1,37 @@
+{
+  "model": "predefined-claude-fable-5.1",
+  "cron": "0 0 6 * * *",
+  "deferred_plugins": [
+    "plugin-1777018662"
+  ],
+  "workflows": [
+    {
+      "name": "bcap-focus-daily",
+      "companies": 5
+    },
+    {
+      "name": "bcap-portfolio-daily-batch-1",
+      "companies": 25
+    },
+    {
+      "name": "bcap-portfolio-daily-batch-2",
+      "companies": 25
+    },
+    {
+      "name": "bcap-portfolio-daily-batch-3",
+      "companies": 25
+    },
+    {
+      "name": "bcap-portfolio-daily-batch-4",
+      "companies": 25
+    },
+    {
+      "name": "bcap-portfolio-daily-batch-5",
+      "companies": 25
+    },
+    {
+      "name": "bcap-portfolio-daily-batch-6",
+      "companies": 6
+    }
+  ]
+}

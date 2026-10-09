@@ -1,0 +1,210 @@
+{
+  "name": "bcap-portfolio-daily-batch-1",
+  "trigger": {
+    "type": "cron",
+    "cron": {
+      "expression": "0 0 6 * * *",
+      "type": "advanced"
+    },
+    "nextNodeKeys": [
+      "research"
+    ],
+    "position": {
+      "x": 0,
+      "y": 0
+    },
+    "measured": {
+      "width": 300,
+      "height": 500
+    }
+  },
+  "nodes": [
+    {
+      "key": "research",
+      "kind": "source",
+      "type": "llm",
+      "dependencies": [],
+      "nextNodeKeys": [
+        "verify"
+      ],
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "measured": {
+        "width": 300,
+        "height": 500
+      },
+      "llm": {
+        "model": "predefined-claude-fable-5.1",
+        "plugins": [
+          {
+            "id": "plugin-1722260873"
+          },
+          {
+            "id": "plugin-1718116202"
+          },
+          {
+            "id": "plugin-1748003575"
+          },
+          {
+            "id": "plugin-1751872652"
+          }
+        ],
+        "fulfillmentPrompt": "You are the B Capital Portfolio Intelligence research agent. Use the attached agents for EVERY company listed: Perplexity (latest news with source URLs and image URLs, last 7 days), LinkedIn Search (company updates and headcount), Reddit posts+comments (community sentiment), X Search Agent (posts from the last 7 days). Output STRICT JSON only, no prose.",
+        "prompt": "Research these B Capital portfolio companies: 1AU (slug: 1au); 6sense (slug: 6sense); Accacia (slug: accacia); AIMotive (slug: aimotive); Archimetis (slug: archimetis); ARTBIO (slug: artbio); Aurora YaoCheng (slug: aurora-yaocheng); Axiom (slug: axiom); Baichuan (slug: baichuan); Bhanzu (slug: bhanzu); Branch International (slug: branch-international); Brik (slug: brik); BuildOps (slug: buildops); Cadence (slug: cadence); Judi Rx (slug: judi-rx); Carrick (slug: carrick); Carro (slug: carro); Centivo (slug: centivo); Certn (slug: certn); ChipAgents (slug: chipagents); Cloudwise (slug: cloudwise); Code Metal (slug: code-metal); CoinDCX (slug: coindcx); Collinear AI (slug: collinear-ai); CompanyCam (slug: companycam). For each company return an object {\"slug\",\"name\",\"news\":[{\"title\",\"url\",\"source\",\"published_at\",\"summary\",\"image_url\"}],\"linkedin\":{\"headcount\",\"updates\":[...]},\"reddit\":[{\"url\",\"quote\"}],\"x\":[{\"url\",\"quote\"}]}. Return {\"companies\":[...]} as pure JSON."
+      }
+    },
+    {
+      "key": "verify",
+      "kind": "intermediate",
+      "type": "llm",
+      "dependencies": [
+        {
+          "nodeKey": "research"
+        }
+      ],
+      "nextNodeKeys": [
+        "score"
+      ],
+      "position": {
+        "x": 500,
+        "y": 200
+      },
+      "measured": {
+        "width": 300,
+        "height": 500
+      },
+      "llm": {
+        "model": "predefined-claude-fable-5.1",
+        "plugins": [
+          {
+            "id": "plugin-1741871229"
+          }
+        ],
+        "fulfillmentPrompt": "You are a funding-verification analyst. Use GPT Search to verify funding, valuation, status changes (IPO, M&A, rename, shutdown) and exits for each company. PitchBook data is NOT available in this run: set pitchbook_status to \"pending\" for every company. Output STRICT JSON only.",
+        "prompt": "Verify funding/valuation/exit facts for: 1AU (slug: 1au); 6sense (slug: 6sense); Accacia (slug: accacia); AIMotive (slug: aimotive); Archimetis (slug: archimetis); ARTBIO (slug: artbio); Aurora YaoCheng (slug: aurora-yaocheng); Axiom (slug: axiom); Baichuan (slug: baichuan); Bhanzu (slug: bhanzu); Branch International (slug: branch-international); Brik (slug: brik); BuildOps (slug: buildops); Cadence (slug: cadence); Judi Rx (slug: judi-rx); Carrick (slug: carrick); Carro (slug: carro); Centivo (slug: centivo); Certn (slug: certn); ChipAgents (slug: chipagents); Cloudwise (slug: cloudwise); Code Metal (slug: code-metal); CoinDCX (slug: coindcx); Collinear AI (slug: collinear-ai); CompanyCam (slug: companycam). Research input: {{research}}. Return {\"companies\":[{\"slug\",\"funding_verification\",\"stage\",\"status\",\"employees\",\"pitchbook_status\":\"pending\",\"sources\":[\"url\"]}]} as pure JSON."
+      }
+    },
+    {
+      "key": "score",
+      "kind": "intermediate",
+      "type": "llm",
+      "dependencies": [
+        {
+          "nodeKey": "research"
+        },
+        {
+          "nodeKey": "verify"
+        }
+      ],
+      "nextNodeKeys": [
+        "deliver"
+      ],
+      "position": {
+        "x": 900,
+        "y": 200
+      },
+      "measured": {
+        "width": 300,
+        "height": 500
+      },
+      "llm": {
+        "model": "predefined-claude-fable-5.1",
+        "plugins": [],
+        "fulfillmentPrompt": "You are the sentiment scorer for B Capital Portfolio Intelligence. Score each company from -1 (very negative) to 1 (very positive) using the evidence provided; label with exactly one of: very negative, negative, neutral, positive, very positive (thresholds: <=-0.6, <=-0.2, <0.2, <0.6, else). Each evidence item must cite a real url from the inputs and a short verbatim quote. Compute the batch average, per-sector averages and note that deltas vs the previous run are computed server-side from stored history. Output STRICT JSON only — this payload is POSTed verbatim to the ingest API.",
+        "prompt": "Inputs — research: {{research}} ; verification: {{verify}}. Workflow name: bcap-portfolio-daily-batch-1. Model: predefined-claude-fable-5.1. Return exactly {\"workflow_name\":\"bcap-portfolio-daily-batch-1\",\"model\":\"predefined-claude-fable-5.1\",\"run_at\":\"<ISO-8601 UTC>\",\"companies\":[{\"slug\",\"name\",\"status\",\"stage\",\"employees\",\"pitchbook_status\":\"pending\",\"sentiment\":{\"score\":<-1..1>,\"label\":\"...\",\"evidence\":[{\"url\",\"quote\"}]},\"news\":[{\"title\",\"url\",\"source\",\"published_at\",\"summary\",\"image_url\"}]}],\"rollups\":{\"batch_avg\":<number>,\"by_sector\":{}}} as pure JSON with no markdown fences."
+      }
+    },
+    {
+      "key": "deliver",
+      "kind": "intermediate",
+      "type": "llm",
+      "dependencies": [
+        {
+          "nodeKey": "score"
+        }
+      ],
+      "nextNodeKeys": [
+        "analyzer-0"
+      ],
+      "position": {
+        "x": 1300,
+        "y": 200
+      },
+      "measured": {
+        "width": 300,
+        "height": 500
+      },
+      "llm": {
+        "model": "predefined-claude-fable-5.1",
+        "plugins": [],
+        "fulfillmentPrompt": "Pass the JSON through unchanged. Do not add commentary.",
+        "prompt": "{{score}}"
+      }
+    },
+    {
+      "key": "analyzer-0",
+      "kind": "sink",
+      "type": "o_analyzer",
+      "dependencies": [
+        {
+          "nodeKey": "deliver"
+        }
+      ],
+      "nextNodeKeys": [
+        "add-delivery"
+      ],
+      "position": {
+        "x": 1700,
+        "y": 200
+      },
+      "measured": {
+        "width": 300,
+        "height": 500
+      }
+    }
+  ],
+  "delivery": [
+    {
+      "channel": "webhook",
+      "config": {
+        "webhook": {
+          "url": "https://serverless.on-demand.io/apps/bcap-portfolio-api/ingest?secret=<INGEST_SECRET>",
+          "method": "POST",
+          "basicAuth": {
+            "username": "ingest",
+            "password": "<INGEST_SECRET>"
+          }
+        }
+      },
+      "position": {
+        "x": 2100,
+        "y": 200
+      },
+      "measured": {
+        "width": 300,
+        "height": 500
+      }
+    },
+    {
+      "channel": "email",
+      "config": {
+        "email": {
+          "addresses": [
+            "mk@airev.ae"
+          ]
+        }
+      },
+      "position": {
+        "x": 2100,
+        "y": 800
+      },
+      "measured": {
+        "width": 300,
+        "height": 500
+      }
+    }
+  ],
+  "enableMemory": true
+}

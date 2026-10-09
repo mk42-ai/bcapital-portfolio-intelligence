@@ -150,7 +150,12 @@ function timingSafeEqual(a: string, b: string): boolean {
 }
 
 app.post("/ingest", async (c) => {
-  const secret = c.req.header("x-ingest-secret") ?? c.req.header("X-Ingest-Secret") ?? "";
+  // Primary: X-Ingest-Secret header. The Flow Builder webhook-delivery schema (live docs: url, method, basicAuth — no custom
+  // headers) cannot set it, so the same secret is also accepted as HTTP Basic password (username 'ingest') or ?secret=.
+  let secret = c.req.header("x-ingest-secret") ?? "";
+  const auth = c.req.header("authorization") ?? "";
+  if (!secret && /^basic /i.test(auth)) { try { const [, pw] = Buffer.from(auth.slice(6), "base64").toString().split(/:(.*)/s); secret = pw ?? ""; } catch { /* ignore */ } }
+  if (!secret) secret = c.req.query("secret") ?? "";
   if (!config.ingestSecret) return err(c, 503, "resource_unavailable", "INGEST_SECRET is not configured on the server");
   if (!secret || !timingSafeEqual(secret, config.ingestSecret)) return err(c, 401, "unauthenticated", "Missing or invalid X-Ingest-Secret");
   const raw = await c.req.text();
