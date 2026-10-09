@@ -1,0 +1,54 @@
+/* B Capital design tokens — every pairing below was checked for WCAG 2.2 AA (contrast values in comments, computed with the
+   WCAG relative-luminance formula). Dark theme is the brand default (Black Bean ground, white ink). */
+:root,
+[data-theme="dark"] {
+  --background: #0a211a;      /* Black Bean */
+  --foreground: #ffffff;      /* 16.86:1 on background */
+  --surface: #102e25;         /* card ground, 14.59:1 with white */
+  --surface-2: #143a2e;       /* raised / hover, 12.54:1 with white */
+  --surface-3: #1b4a3b;       /* 10.05:1 with white */
+  --border: #2a5a49;          /* non-text contrast vs surface ≥3:1 */
+  --muted: #b9c7c0;           /* secondary text, 9.63:1 on background */
+  --muted-2: #a3b5ad;         /* tertiary text, ≥4.6:1 on every dark surface incl. surface-3 */
+  --primary: #0ac985;         /* Caribbean Green, 7.79:1 on background; ink on it must be Black Bean */
+  --primary-foreground: #0a211a;
+  --primary-soft: #6fe3b4;    /* 10.7:1 — used for links / small text on dark */
+  --accent: #faab3d;          /* Yellow Orange, 8.8:1 on background */
+  --accent-foreground: #0a211a;
+  --accent-soft: #ffc56b;
+  --info: #12abcf;            /* Java, 6.22:1 */
+  --info-foreground: #0a211a;
+  --info-soft: #5cc9e6;       /* 8.79:1 */
+  --danger: #f87171;          /* 6.1:1 */
+  --danger-soft: #fca5a5;     /* text on tinted danger chips, ≥6:1 */
+  --danger-foreground: #0a211a;
+  --ring: #6fe3b4;
+  --radius: 0.75rem;
+  --chart-1: #0ac985; --chart-2: #12abcf; --chart-3: #faab3d; --chart-4: #6fe3b4; --chart-5: #f87171; --chart-6: #b9c7c0;
+  --sentiment-neg: #f87171; --sentiment-neu: #b9c7c0; --sentiment-pos: #0ac985;
+}
+[data-theme="light"] {
+  --background: #f6fbf8;
+  --foreground: #0a211a;      /* 16.12:1 */
+  --surface: #ffffff;
+  --surface-2: #e9f3ee;
+  --surface-3: #d6e8df;
+  --border: #9db8ac;          /* ≥3:1 vs surface */
+  --muted: #4a5f57;           /* 6.55:1 */
+  --muted-2: #4f655c;         /* ≥5.2:1 on surface-2 */
+  --primary: #0a7a52;         /* 5.12:1 on light ground (brand green darkened for AA text) */
+  --primary-foreground: #ffffff;
+  --primary-soft: #075c3d;    /* 7.1:1 on light ground; ≥5.5:1 on 15% primary tint */
+  --accent: #b86b00;          /* 3.9:1 — large text / non-text only; body text uses foreground */
+  --accent-foreground: #ffffff;
+  --accent-soft: #6f4000;     /* ≥5.5:1 on 15% accent tint */
+  --info: #0b7c96;            /* 4.63:1 */
+  --info-foreground: #ffffff;
+  --info-soft: #085e72;       /* ≥5.5:1 on 15% info tint */
+  --danger: #b42318;
+  --danger-soft: #9f1d14;
+  --danger-foreground: #ffffff;
+  --ring: #0a7a52;
+  --chart-1: #0a7a52; --chart-2: #0b7c96; --chart-3: #b86b00; --chart-4: #0ac985; --chart-5: #b42318; --chart-6: #4a5f57;
+  --sentiment-neg: #b42318; --sentiment-neu: #5f746c; --sentiment-pos: #0a7a52;
+}

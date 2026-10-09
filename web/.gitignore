@@ -1,0 +1,9 @@
+node_modules/
+.next/
+out/
+.env
+.env.*.local
+*.log
+test-results/
+playwright-report/
+.lighthouse/

@@ -1,0 +1,84 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { getCompany, getNews, getSentiment, listCompanies } from "@/lib/api";
+import { CompanyThemeScope, Swatches } from "@/components/company/brand-theme";
+import { FundingTimeline } from "@/components/company/funding-timeline";
+import { NewsCard } from "@/components/company/news-cards";
+import { SentimentPanel } from "@/components/company/sentiment-panel";
+import { EstimateBadge } from "@/components/overview/estimate-badge";
+import { StatusChips } from "@/components/overview/status-chips";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { EmptyState } from "@/components/ui/empty-state";
+import { Button } from "@/components/ui/button";
+import { statusChips } from "@/lib/status";
+import { fmtUsd, fmtPct } from "@/lib/format";
+import workflows from "@/data/workflows.json";
+
+export const revalidate = 120;
+export async function generateStaticParams() { const cs = await listCompanies(); return cs.data.filter((c) => c.is_focus || c.slug === "b-capital" || c.slug === "judi-rx" || c.slug === "code-metal" || c.slug === "meesho").map((c) => ({ slug: c.slug })); }
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> { const { slug } = await params; const c = await getCompany(slug); if (!c.data) notFound(); return { title: `${c.data.name} — ${c.data.sector}`, description: `${c.data.name}: brand palette, fonts, sentiment timeline, funding timeline and news.` }; }
+const TIER_TONE: Record<string, "primary" | "info" | "accent" | "muted"> = { Verified: "primary", Observed: "info", "Third-party": "accent", Missing: "muted" };
+
+export default async function CompanyPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const c = await getCompany(slug); if (!c.data) notFound();
+  const company = c.data;
+  const [news, sent] = await Promise.all([getNews(company.slug), getSentiment(company.slug)]);
+  const tier = company.brand_tokens.evidence_tier ?? "Missing";
+  const wf = workflows.workflows.find((w) => w.id === sent.data?.history?.find((h) => h.workflow_id)?.workflow_id) ?? (company.is_focus ? workflows.workflows[0] : null);
+  const lastScored = sent.data?.history?.find((h) => h.model && h.model !== "seed");
+  return (
+    <CompanyThemeScope tokens={company.brand_tokens}>
+      <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted"><Link href="/overview" className="underline-offset-2 hover:underline">Overview</Link> <span aria-hidden>/</span> <span aria-current="page">{company.name}</span></nav>
+      <header className="mb-6 overflow-hidden rounded-2xl border border-border" style={{ background: "var(--co-bg)", color: "var(--co-ink)" }}>
+        <div className="h-2 w-full" style={{ background: "linear-gradient(90deg, var(--co-primary), var(--co-accent))" }} aria-hidden />
+        <div className="flex flex-wrap items-start gap-5 p-6">
+          <div className="grid size-20 shrink-0 place-items-center overflow-hidden rounded-xl border p-2" style={{ background: "#ffffff", borderColor: "var(--co-primary)" }}>
+            {company.logo_url ? <Image src={company.logo_url} alt={`${company.name} logo`} width={72} height={72} className="max-h-16 w-auto object-contain" unoptimized /> : <span className="font-display text-2xl font-bold text-[#0a211a]">{company.name.slice(0, 2)}</span>}
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="text-xs uppercase tracking-[0.18em]" style={{ color: "var(--co-primary)" }}>{company.sector} · {company.region}</p>
+            <h1 className="font-display text-3xl font-semibold sm:text-4xl" style={{ fontFamily: "var(--co-font)" }}>{company.name}</h1>
+            <p className="mt-1 text-sm opacity-90">{company.status}{company.hq ? ` · ${company.hq}` : ""}{company.employees ? ` · ${company.employees.toLocaleString()} employees` : ""}</p>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <Badge tone={TIER_TONE[tier] ?? "muted"} className="bg-surface text-foreground">evidence · {tier}</Badge>
+              {company.is_focus && <Badge tone="primary" className="bg-surface">focus company</Badge>}
+              {company.website && <a href={company.website} target="_blank" rel="noopener noreferrer" className="chip border-current bg-transparent underline-offset-2 hover:underline">{company.website.replace(/^https?:\/\//, "")}</a>}
+              {company.linkedin_url && <a href={company.linkedin_url} target="_blank" rel="noopener noreferrer" className="chip border-current bg-transparent underline-offset-2 hover:underline">LinkedIn</a>}
+            </div>
+          </div>
+        </div>
+      </header>
+      <p className="mb-5 text-xs text-muted">Last updated by daily workflow <time dateTime={lastScored?.recorded_at ?? company.updated_at}>{lastScored?.recorded_at ?? company.updated_at}</time>{wf ? <> (workflow <code>{wf.id}</code> · {wf.name}, {workflows.schedule_human}, model {workflows.model})</> : <> (seed data — first scoring run lands at the next {workflows.schedule_human} cycle)</>} · source {c.source}</p>
+      {statusChips(company).length > 0 && <div className="mb-5"><StatusChips items={statusChips(company).map((chip) => ({ chip, name: company.name, slug: null }))} /></div>}
+
+      <div className="grid gap-5 lg:grid-cols-3">
+        <Card className="lg:col-span-2"><CardHeader><CardTitle>Brand palette & type</CardTitle><CardDescription>Hex values from the brand matrix with WCAG 2.2 contrast against the company background. Company page theme source: <code>{company.brand_tokens.primary ? "company tokens (AA-checked at runtime)" : "B Capital fallback"}</code>.</CardDescription></CardHeader>
+          <CardContent className="space-y-4"><Swatches tokens={company.brand_tokens} />
+            <div><h3 className="text-sm font-semibold">Fonts</h3>{company.brand_tokens.fonts?.length ? <ul className="mt-1 flex flex-wrap gap-2">{company.brand_tokens.fonts.map((f) => <li key={f}><Badge>{f}</Badge></li>)}</ul> : <p className="text-sm text-muted">No fonts observed.</p>}{company.brand_tokens.guideline_url && <p className="mt-2 text-sm"><a href={company.brand_tokens.guideline_url} target="_blank" rel="noopener noreferrer" className="text-primary-soft underline-offset-2 hover:underline">Official brand guidelines ↗</a></p>}</div>
+          </CardContent></Card>
+        <Card><CardHeader><CardTitle>B Capital position</CardTitle><CardDescription>Role, fund and flagged estimates</CardDescription></CardHeader>
+          <CardContent className="space-y-2 text-sm">
+            <p><span className="text-muted">Role</span> · <strong>{company.b_capital_role}</strong>{company.b_capital_fund && <> · {company.b_capital_fund}</>}</p>
+            {company.b_capital_round && <p><span className="text-muted">Round</span> · {company.b_capital_round}</p>}
+            {company.stage && <p><span className="text-muted">Stage</span> · {company.stage}</p>}
+            <p className="flex flex-wrap items-center gap-2"><span className="text-muted">Est. ticket</span> <strong className="tabular-nums">{fmtUsd(company.estimated_ticket_size_usd)}</strong><span className="text-muted">Est. ownership</span> <strong className="tabular-nums">{fmtPct(company.estimated_ownership_pct)}</strong><EstimateBadge confidence={company.estimate_confidence} rationale={company.estimate_rationale} /></p>
+            <p className="text-xs text-muted">{company.estimate_rationale}</p>
+          </CardContent></Card>
+      </div>
+
+      <div className="mt-5 grid gap-5 lg:grid-cols-2">
+        <Card><CardHeader><CardTitle>Sentiment timeline</CardTitle><CardDescription>Scored by {workflows.model} from LinkedIn, Reddit, X and news evidence</CardDescription></CardHeader><CardContent>{sent.data ? <SentimentPanel s={sent.data} /> : <p className="text-sm text-muted">No sentiment yet.</p>}</CardContent></Card>
+        <Card><CardHeader><CardTitle>Funding timeline</CardTitle><CardDescription>PitchBook-style: round · date · amount · post-money · lead · B Capital participation</CardDescription></CardHeader><CardContent><FundingTimeline company={company} /></CardContent></Card>
+      </div>
+
+      <Card className="mt-5"><CardHeader><CardTitle>News ({news.data.length})</CardTitle><CardDescription>Perplexity + GPT Search results written back by the workflow, newest first, with source citations</CardDescription></CardHeader>
+        <CardContent>{news.data.length ? <div className="grid min-w-0 gap-3 md:grid-cols-2">{news.data.map((n) => <NewsCard key={n.id} n={n} />)}</div> : <EmptyState kind="news" title="No news yet for this company" body="The daily workflow (06:00 UTC) adds Perplexity news with sources and images as it finds them." action={<Button asChild variant="outline"><Link href="/news">Open News Pulse</Link></Button>} />}</CardContent></Card>
+
+      {company.sources?.length > 0 && <details className="mt-5 text-xs text-muted"><summary className="cursor-pointer">Brand-matrix sources ({company.sources.length})</summary><ul className="mt-2 space-y-1">{company.sources.map((s, i) => <li key={i} className="break-all">{s}</li>)}</ul></details>}
+    </CompanyThemeScope>
+  );
+}

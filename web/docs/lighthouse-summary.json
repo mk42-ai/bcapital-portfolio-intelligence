@@ -1,0 +1,116 @@
+{
+  "base": "https://sb-3h35jqofd2sz.vercel.run",
+  "at": "2026-10-09T15:28:13.196Z",
+  "results": {
+    "mobile:/overview": {
+      "performance": 72,
+      "accessibility": 100,
+      "best_practices": 100,
+      "seo": 100,
+      "lcp_ms": 3512,
+      "cls": 0,
+      "tbt_ms": 770,
+      "failing_seo": [],
+      "failing_a11y": []
+    },
+    "mobile:/company/perplexity-ai": {
+      "performance": 81,
+      "accessibility": 100,
+      "best_practices": 100,
+      "seo": 100,
+      "lcp_ms": 2120,
+      "cls": 0,
+      "tbt_ms": 730,
+      "failing_seo": [],
+      "failing_a11y": []
+    },
+    "mobile:/news": {
+      "performance": 96,
+      "accessibility": 100,
+      "best_practices": 100,
+      "seo": 100,
+      "lcp_ms": 2116,
+      "cls": 0,
+      "tbt_ms": 199,
+      "failing_seo": [],
+      "failing_a11y": []
+    },
+    "mobile:/chat": {
+      "performance": 92,
+      "accessibility": 100,
+      "best_practices": 100,
+      "seo": 100,
+      "lcp_ms": 2270,
+      "cls": 0,
+      "tbt_ms": 313,
+      "failing_seo": [],
+      "failing_a11y": []
+    },
+    "mobile:/settings": {
+      "performance": 94,
+      "accessibility": 100,
+      "best_practices": 100,
+      "seo": 100,
+      "lcp_ms": 2042,
+      "cls": 0,
+      "tbt_ms": 263,
+      "failing_seo": [],
+      "failing_a11y": []
+    },
+    "desktop:/overview": {
+      "performance": 98,
+      "accessibility": 100,
+      "best_practices": 100,
+      "seo": 100,
+      "lcp_ms": 720,
+      "cls": 0.042,
+      "tbt_ms": 114,
+      "failing_seo": [],
+      "failing_a11y": []
+    },
+    "desktop:/company/perplexity-ai": {
+      "performance": 100,
+      "accessibility": 100,
+      "best_practices": 100,
+      "seo": 100,
+      "lcp_ms": 456,
+      "cls": 0,
+      "tbt_ms": 0,
+      "failing_seo": [],
+      "failing_a11y": []
+    },
+    "desktop:/news": {
+      "performance": 100,
+      "accessibility": 100,
+      "best_practices": 100,
+      "seo": 100,
+      "lcp_ms": 488,
+      "cls": 0,
+      "tbt_ms": 0,
+      "failing_seo": [],
+      "failing_a11y": []
+    },
+    "desktop:/chat": {
+      "performance": 100,
+      "accessibility": 100,
+      "best_practices": 100,
+      "seo": 100,
+      "lcp_ms": 496,
+      "cls": 0,
+      "tbt_ms": 0,
+      "failing_seo": [],
+      "failing_a11y": []
+    },
+    "desktop:/settings": {
+      "performance": 100,
+      "accessibility": 100,
+      "best_practices": 100,
+      "seo": 100,
+      "lcp_ms": 456,
+      "cls": 0.015,
+      "tbt_ms": 0,
+      "failing_seo": [],
+      "failing_a11y": []
+    }
+  }
+}

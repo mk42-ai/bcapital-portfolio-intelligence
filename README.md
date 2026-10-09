@@ -54,3 +54,7 @@ INGEST_SECRET=$(openssl rand -hex 32) npm run dev
   server-side proxy that injects `apikey` from a header such as `x-ondemand-key` → never ship the key to the client.
 * `POST /ingest` is protected by the `X-Ingest-Secret` header; the secret is generated at build (`openssl rand -hex 32`)
   and stored only in the env var **`INGEST_SECRET`** (server) and the workflow HTTP step.
+
+## Frontend (`web/`)
+A Next.js 15 dashboard (overview · company detail · news pulse · OnDemand chat · settings) lives in [`web/`](web/README.md).
+Live preview: https://sb-3h35jqofd2sz.vercel.run · hand-off notes: [`web/docs/HANDOFF.md`](web/docs/HANDOFF.md).

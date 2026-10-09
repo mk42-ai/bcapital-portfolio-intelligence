@@ -1,0 +1,63 @@
+{
+ "model": "predefined-claude-fable-5.1",
+ "schedule_cron": "0 0 6 * * *",
+ "schedule_human": "06:00 UTC daily",
+ "workflows": [
+  {
+   "id": "6ac8dfbe9a17f57debac74bb",
+   "name": "bcap-focus-daily",
+   "activation_status": "active",
+   "execution_ids": [
+    "6ac8e184aeef8927baa25434"
+   ]
+  },
+  {
+   "id": "6ac8dfbe300de84fa7120c1f",
+   "name": "bcap-portfolio-daily-batch-1",
+   "activation_status": "active",
+   "execution_ids": [
+    "6ac8e1849a17f57debac74ed"
+   ]
+  },
+  {
+   "id": "6ac8dfbf9a17f57debac74c5",
+   "name": "bcap-portfolio-daily-batch-2",
+   "activation_status": "active",
+   "execution_ids": [
+    "6ac8e184aeef8927baa25439"
+   ]
+  },
+  {
+   "id": "6ac8dfbf300de84fa7120c29",
+   "name": "bcap-portfolio-daily-batch-3",
+   "activation_status": "active",
+   "execution_ids": [
+    "6ac8e1849a17f57debac74f1"
+   ]
+  },
+  {
+   "id": "6ac8dfc09a17f57debac74cf",
+   "name": "bcap-portfolio-daily-batch-4",
+   "activation_status": "active",
+   "execution_ids": [
+    "6ac8e185aeef8927baa2543d"
+   ]
+  },
+  {
+   "id": "6ac8dfc0300de84fa7120c33",
+   "name": "bcap-portfolio-daily-batch-5",
+   "activation_status": "active",
+   "execution_ids": [
+    "6ac8e1859a17f57debac74f7"
+   ]
+  },
+  {
+   "id": "6ac8dfc19a17f57debac74d9",
+   "name": "bcap-portfolio-daily-batch-6",
+   "activation_status": "active",
+   "execution_ids": [
+    "6ac8e185aeef8927baa25442"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+export const fmtUsd = (n: number | null | undefined) => n == null ? "—" : n >= 1e9 ? `$${(n / 1e9).toFixed(n % 1e9 ? 2 : 0)}B` : n >= 1e6 ? `$${(n / 1e6).toFixed(n % 1e6 ? 1 : 0)}M` : `$${n.toLocaleString()}`;
+export const fmtPct = (n: number | null | undefined, d = 1) => n == null ? "—" : `${n.toFixed(d)}%`;
+export const fmtScore = (n: number | null | undefined) => n == null ? "—" : (n > 0 ? "+" : "") + n.toFixed(2);
+export const fmtDelta = (n: number | null | undefined) => n == null ? "—" : n === 0 ? "±0.00" : (n > 0 ? "▲ +" : "▼ ") + n.toFixed(2);
+export const fmtDate = (s: string | null | undefined) => { if (!s) return "—"; const d = new Date(s); return isNaN(+d) ? s : d.toLocaleDateString("en-GB", { year: "numeric", month: "short", day: "2-digit", timeZone: "UTC" }); };
+export const fmtDateTime = (s: string | null | undefined) => { if (!s) return "—"; const d = new Date(s); return isNaN(+d) ? s : d.toISOString().replace(".000Z", "Z"); };
+export const dayKey = (s: string | null | undefined) => { if (!s) return "Undated"; const d = new Date(s); return isNaN(+d) ? "Undated" : d.toISOString().slice(0, 10); };
+export const labelFor = (s: number) => s <= -0.6 ? "very negative" : s <= -0.2 ? "negative" : s < 0.2 ? "neutral" : s < 0.6 ? "positive" : "very positive";
+export const sentimentColor = (s: number) => s <= -0.2 ? "var(--sentiment-neg)" : s < 0.2 ? "var(--sentiment-neu)" : "var(--sentiment-pos)";
+export const SECTORS = ["Technology", "Healthcare", "Energy & Resilience", "Opportunistic"] as const;
+export const titleCase = (s: string) => s.replace(/\b\w/g, (c) => c.toUpperCase());

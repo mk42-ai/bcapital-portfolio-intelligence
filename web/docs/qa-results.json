@@ -1,0 +1,249 @@
+{
+ "playwright": {
+  "passed": 13,
+  "failed": 0,
+  "total": 13,
+  "details": [
+   {
+    "project": "desktop",
+    "name": "Chat \u203a streaming round-trip with company context (real OnDemand when a key is present, mock otherwise)",
+    "status": "passed",
+    "duration_ms": 61400,
+    "chat_mode": "real OnDemand SSE round-trip",
+    "answer_excerpt": "live \u00b7 OnDemand\nmodel predefined-claude-fable-5.1\n\u00b7 plugins 2\n\u00b7 context 5 companies\nready\nYou\n\nIn one short sentence: what is Fervo Energy's current status? Cite one URL.\n\nstep 1\nplugin_sources\nPlanning / reasoning\n\nFerv",
+    "stop": "stream finished before abort landed",
+    "axe_violations": []
+   },
+   {
+    "project": "desktop",
+    "name": "Chat \u203a proxy refuses requests without x-ondemand-key and non-allow-listed paths",
+    "status": "passed",
+    "duration_ms": 590
+   },
+   {
+    "project": "desktop",
+    "name": "Company detail \u203a Perplexity page shows palette, fonts, evidence tier, timeline and workflow stamp",
+    "status": "passed",
+    "duration_ms": 2455,
+    "axe_violations": []
+   },
+   {
+    "project": "desktop",
+    "name": "Company detail \u203a unknown slug \u2192 not-found state",
+    "status": "passed",
+    "duration_ms": 795
+   },
+   {
+    "project": "desktop",
+    "name": "Company detail \u203a Judi Rx rebrand is applied",
+    "status": "passed",
+    "duration_ms": 1168
+   },
+   {
+    "project": "desktop",
+    "name": "News Pulse \u203a feed loads grouped by day and filters by company / sector / source",
+    "status": "passed",
+    "duration_ms": 3234,
+    "axe_violations": []
+   },
+   {
+    "project": "desktop",
+    "name": "Settings & onboarding \u203a onboarding shows tagline + GROWTH values and redirects first-run users",
+    "status": "passed",
+    "duration_ms": 2782,
+    "axe_violations": []
+   },
+   {
+    "project": "desktop",
+    "name": "Settings & onboarding \u203a settings persists apikey only in localStorage and lists plugin states",
+    "status": "passed",
+    "duration_ms": 1915,
+    "axe_violations": []
+   },
+   {
+    "project": "desktop",
+    "name": "mobile: every screen renders without horizontal overflow and nav works",
+    "status": "passed",
+    "duration_ms": 2599
+   },
+   {
+    "project": "mobile",
+    "name": "mobile: every screen renders without horizontal overflow and nav works",
+    "status": "passed",
+    "duration_ms": 3160
+   },
+   {
+    "project": "desktop",
+    "name": "Portfolio Overview \u203a renders KPI tiles, treemap, heatmap, gauges and 136-record table",
+    "status": "passed",
+    "duration_ms": 2390
+   },
+   {
+    "project": "desktop",
+    "name": "Portfolio Overview \u203a filters by sector via URL and saved filters persist",
+    "status": "passed",
+    "duration_ms": 1752
+   },
+   {
+    "project": "desktop",
+    "name": "Portfolio Overview \u203a axe: no serious/critical violations",
+    "status": "passed",
+    "duration_ms": 4296,
+    "axe_violations": []
+   }
+  ]
+ },
+ "axe": {
+  "serious": 0,
+  "critical": 0,
+  "moderate": 0,
+  "minor": 0,
+  "per_page": {
+   "/chat": {
+    "serious": 0,
+    "critical": 0,
+    "moderate": 0,
+    "minor": 0,
+    "rules": []
+   },
+   "/company/perplexity-ai": {
+    "serious": 0,
+    "critical": 0,
+    "moderate": 0,
+    "minor": 0,
+    "rules": []
+   },
+   "/news": {
+    "serious": 0,
+    "critical": 0,
+    "moderate": 0,
+    "minor": 0,
+    "rules": []
+   },
+   "/onboarding": {
+    "serious": 0,
+    "critical": 0,
+    "moderate": 0,
+    "minor": 0,
+    "rules": []
+   },
+   "/settings": {
+    "serious": 0,
+    "critical": 0,
+    "moderate": 0,
+    "minor": 0,
+    "rules": []
+   },
+   "/overview": {
+    "serious": 0,
+    "critical": 0,
+    "moderate": 0,
+    "minor": 0,
+    "rules": []
+   }
+  },
+  "tags": [
+   "wcag2a",
+   "wcag2aa",
+   "wcag21aa",
+   "wcag22aa"
+  ],
+  "tool": "@axe-core/playwright 4.10 (axe-core 4.13)"
+ },
+ "lighthouse": {
+  "base": "https://sb-3h35jqofd2sz.vercel.run",
+  "at": "2026-10-09T15:28:13.196Z",
+  "per_page": {
+   "mobile:/overview": {
+    "performance": 72,
+    "accessibility": 100,
+    "best_practices": 100,
+    "seo": 100,
+    "lcp_ms": 3512,
+    "cls": 0,
+    "tbt_ms": 770
+   },
+   "mobile:/company/perplexity-ai": {
+    "performance": 81,
+    "accessibility": 100,
+    "best_practices": 100,
+    "seo": 100,
+    "lcp_ms": 2120,
+    "cls": 0,
+    "tbt_ms": 730
+   },
+   "mobile:/news": {
+    "performance": 96,
+    "accessibility": 100,
+    "best_practices": 100,
+    "seo": 100,
+    "lcp_ms": 2116,
+    "cls": 0,
+    "tbt_ms": 199
+   },
+   "mobile:/chat": {
+    "performance": 92,
+    "accessibility": 100,
+    "best_practices": 100,
+    "seo": 100,
+    "lcp_ms": 2270,
+    "cls": 0,
+    "tbt_ms": 313
+   },
+   "mobile:/settings": {
+    "performance": 94,
+    "accessibility": 100,
+    "best_practices": 100,
+    "seo": 100,
+    "lcp_ms": 2042,
+    "cls": 0,
+    "tbt_ms": 263
+   },
+   "desktop:/overview": {
+    "performance": 98,
+    "accessibility": 100,
+    "best_practices": 100,
+    "seo": 100,
+    "lcp_ms": 720,
+    "cls": 0.042,
+    "tbt_ms": 114
+   },
+   "desktop:/company/perplexity-ai": {
+    "performance": 100,
+    "accessibility": 100,
+    "best_practices": 100,
+    "seo": 100,
+    "lcp_ms": 456,
+    "cls": 0,
+    "tbt_ms": 0
+   },
+   "desktop:/news": {
+    "performance": 100,
+    "accessibility": 100,
+    "best_practices": 100,
+    "seo": 100,
+    "lcp_ms": 488,
+    "cls": 0,
+    "tbt_ms": 0
+   },
+   "desktop:/chat": {
+    "performance": 100,
+    "accessibility": 100,
+    "best_practices": 100,
+    "seo": 100,
+    "lcp_ms": 496,
+    "cls": 0,
+    "tbt_ms": 0
+   },
+   "desktop:/settings": {
+    "performance": 100,
+    "accessibility": 100,
+    "best_practices": 100,
+    "seo": 100,
+    "lcp_ms": 456,
+    "cls": 0.015,
+    "tbt_ms": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,2 @@
+import { Skeleton, CardSkeleton } from "@/components/ui/skeleton";
+export default function Loading() { return <div role="status" aria-busy="true" aria-label="Loading overview"><Skeleton className="mb-6 h-40 w-full rounded-2xl" /><div className="mb-6 grid grid-cols-2 gap-3 md:grid-cols-6">{Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-20" />)}</div><div className="grid gap-5 xl:grid-cols-3"><Skeleton className="h-[480px] xl:col-span-2" /><CardSkeleton lines={6} /></div></div>; }
