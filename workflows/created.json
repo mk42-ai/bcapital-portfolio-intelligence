@@ -6,7 +6,19 @@
     "created_at": "2026-10-09T12:36:14Z",
     "activate_status": 200,
     "activation_status": "active",
-    "activated_at": "2026-10-09T12:36:14Z"
+    "activated_at": "2026-10-09T12:36:14Z",
+    "execution_ids": [
+      "6ac8e184aeef8927baa25434"
+    ],
+    "execute_status": 200,
+    "executed_at": "2026-10-09T12:43:48Z",
+    "log_excerpt": "[research] triggering next task execution | [research] node task executed successfully in 441232 milliseconds | [verify] all dependencies satisfied, proceeding to task execution",
+    "execution_status": "executing",
+    "ended_at_ms": 0,
+    "log_lines": 5,
+    "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
+    "retargeted_at": "2026-10-09T13:00:47Z",
+    "retarget_status": 200
   },
   {
     "name": "bcap-portfolio-daily-batch-1",
@@ -15,7 +27,19 @@
     "created_at": "2026-10-09T12:36:14Z",
     "activate_status": 200,
     "activation_status": "active",
-    "activated_at": "2026-10-09T12:36:15Z"
+    "activated_at": "2026-10-09T12:36:15Z",
+    "execution_ids": [
+      "6ac8e1849a17f57debac74ed"
+    ],
+    "execute_status": 200,
+    "executed_at": "2026-10-09T12:43:48Z",
+    "log_excerpt": "[wf] starting workflow execution | [research] all dependencies satisfied, proceeding to task execution",
+    "execution_status": "executing",
+    "ended_at_ms": 0,
+    "log_lines": 2,
+    "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
+    "retargeted_at": "2026-10-09T13:00:47Z",
+    "retarget_status": 200
   },
   {
     "name": "bcap-portfolio-daily-batch-2",
@@ -24,7 +48,19 @@
     "created_at": "2026-10-09T12:36:15Z",
     "activate_status": 200,
     "activation_status": "active",
-    "activated_at": "2026-10-09T12:36:15Z"
+    "activated_at": "2026-10-09T12:36:15Z",
+    "execution_ids": [
+      "6ac8e184aeef8927baa25439"
+    ],
+    "execute_status": 200,
+    "executed_at": "2026-10-09T12:43:48Z",
+    "log_excerpt": "[wf] starting workflow execution | [research] all dependencies satisfied, proceeding to task execution",
+    "execution_status": "executing",
+    "ended_at_ms": 0,
+    "log_lines": 2,
+    "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
+    "retargeted_at": "2026-10-09T13:00:48Z",
+    "retarget_status": 200
   },
   {
     "name": "bcap-portfolio-daily-batch-3",
@@ -33,7 +69,19 @@
     "created_at": "2026-10-09T12:36:16Z",
     "activate_status": 200,
     "activation_status": "active",
-    "activated_at": "2026-10-09T12:36:16Z"
+    "activated_at": "2026-10-09T12:36:16Z",
+    "execution_ids": [
+      "6ac8e1849a17f57debac74f1"
+    ],
+    "execute_status": 200,
+    "executed_at": "2026-10-09T12:43:48Z",
+    "log_excerpt": "[wf] starting workflow execution | [research] all dependencies satisfied, proceeding to task execution",
+    "execution_status": "executing",
+    "ended_at_ms": 0,
+    "log_lines": 2,
+    "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
+    "retargeted_at": "2026-10-09T13:00:48Z",
+    "retarget_status": 200
   },
   {
     "name": "bcap-portfolio-daily-batch-4",
@@ -42,7 +90,19 @@
     "created_at": "2026-10-09T12:36:16Z",
     "activate_status": 200,
     "activation_status": "active",
-    "activated_at": "2026-10-09T12:36:16Z"
+    "activated_at": "2026-10-09T12:36:16Z",
+    "execution_ids": [
+      "6ac8e185aeef8927baa2543d"
+    ],
+    "execute_status": 200,
+    "executed_at": "2026-10-09T12:43:49Z",
+    "log_excerpt": "[wf] starting workflow execution | [research] all dependencies satisfied, proceeding to task execution",
+    "execution_status": "executing",
+    "ended_at_ms": 0,
+    "log_lines": 2,
+    "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
+    "retargeted_at": "2026-10-09T13:00:48Z",
+    "retarget_status": 200
   },
   {
     "name": "bcap-portfolio-daily-batch-5",
@@ -51,7 +111,19 @@
     "created_at": "2026-10-09T12:36:17Z",
     "activate_status": 200,
     "activation_status": "active",
-    "activated_at": "2026-10-09T12:36:17Z"
+    "activated_at": "2026-10-09T12:36:17Z",
+    "execution_ids": [
+      "6ac8e1859a17f57debac74f7"
+    ],
+    "execute_status": 200,
+    "executed_at": "2026-10-09T12:43:49Z",
+    "log_excerpt": "[wf] starting workflow execution | [research] all dependencies satisfied, proceeding to task execution",
+    "execution_status": "executing",
+    "ended_at_ms": 0,
+    "log_lines": 2,
+    "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
+    "retargeted_at": "2026-10-09T13:00:49Z",
+    "retarget_status": 200
   },
   {
     "name": "bcap-portfolio-daily-batch-6",
@@ -60,6 +132,18 @@
     "created_at": "2026-10-09T12:36:17Z",
     "activate_status": 200,
     "activation_status": "active",
-    "activated_at": "2026-10-09T12:36:17Z"
+    "activated_at": "2026-10-09T12:36:17Z",
+    "execution_ids": [
+      "6ac8e185aeef8927baa25442"
+    ],
+    "execute_status": 200,
+    "executed_at": "2026-10-09T12:43:49Z",
+    "log_excerpt": "[research] triggering next task execution | [research] node task executed successfully in 246425 milliseconds | [verify] all dependencies satisfied, proceeding to task execution",
+    "execution_status": "executing",
+    "ended_at_ms": 0,
+    "log_lines": 5,
+    "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
+    "retargeted_at": "2026-10-09T13:00:49Z",
+    "retarget_status": 200
   }
 ]

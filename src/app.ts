@@ -9,11 +9,24 @@ import { buildOpenApi } from "./openapi.js";
 import { labelFor, clampScore, normaliseEvidence, rollup } from "./sentiment.js";
 
 type Vars = { requestId: string };
-export const app = new Hono<{ Variables: Vars }>().basePath(config.basePath || "/");
+const inner = new Hono<{ Variables: Vars }>();
+/** Public app: strips an optional /apps/<endpoint-name> reverse-proxy prefix (OnDemand serverless gateway) or the
+ *  configured BASE_PATH, then delegates to the route table — so every route works with and without the prefix. */
+export const app = new Hono<{ Variables: Vars }>();
+app.all("*", async (c) => {
+  const u = new URL(c.req.raw.url);
+  let p = u.pathname;
+  if (config.basePath && p.startsWith(config.basePath)) p = p.slice(config.basePath.length) || "/";
+  const m = p.match(/^\/apps\/[^/]+(\/.*)?$/);
+  if (m) p = m[1] || "/";
+  if (p === u.pathname) return inner.fetch(c.req.raw);
+  const rewritten = new Request(new URL(p + u.search, u.origin).toString(), c.req.raw);
+  return inner.fetch(rewritten);
+});
 
-app.use("*", cors());
-if (process.env.NODE_ENV !== "test") app.use("*", logger());
-app.use("*", async (c, next) => {
+inner.use("*", cors());
+if (process.env.NODE_ENV !== "test") inner.use("*", logger());
+inner.use("*", async (c, next) => {
   c.set("requestId", crypto.randomUUID());
   c.header("X-Request-Id", c.get("requestId"));
   c.header("X-Timestamp-Utc", nowIso());
@@ -41,18 +54,18 @@ function serverUrl(c: any): string {
 }
 
 // ---------- meta ----------
-app.get("/", (c) => c.json({ name: "B Capital Portfolio Intelligence API", docs: `${serverUrl(c)}/openapi.json`, health: `${serverUrl(c)}/health` }));
-app.get("/health", async (c) => {
+inner.get("/", (c) => c.json({ name: "B Capital Portfolio Intelligence API", docs: `${serverUrl(c)}/openapi.json`, health: `${serverUrl(c)}/health` }));
+inner.get("/health", async (c) => {
   const { db } = await getDb();
   const total = db.get<{ n: number }>(sql`select count(*) as n from companies`)!.n;
   const spec = db.get<{ n: number }>(sql`select count(*) as n from companies where in_brand_matrix = 1 or slug = 'b-capital'`)!.n;
   const lastRun = db.select().from(schema.ingestRuns).orderBy(desc(schema.ingestRuns.receivedAt)).limit(1).get();
   return c.json({ status: "ok", db_record_count: spec, db_record_count_total: total, last_ingest: lastRun ? { id: lastRun.id, source: lastRun.source, received_at: lastRun.receivedAt, status: lastRun.status } : null, model: config.ondemandDefaultModel, deferred_plugins: config.deferredPlugins, earliest_test_utc: config.earliestTestUtc || null, version: config.version, timestamp: nowIso() });
 });
-app.get("/openapi.json", (c) => c.json(buildOpenApi(serverUrl(c))));
+inner.get("/openapi.json", (c) => c.json(buildOpenApi(serverUrl(c))));
 
 // ---------- companies ----------
-app.get("/companies", async (c) => {
+inner.get("/companies", async (c) => {
   const { db } = await getDb();
   const { sector, region, status, role, focus, sort = "name" } = c.req.query();
   const page = Math.max(1, parseInt(c.req.query("page") ?? "1") || 1);
@@ -82,13 +95,13 @@ async function findCompany(slugOrName: string) {
   );
 }
 
-app.get("/companies/:slug", async (c) => {
+inner.get("/companies/:slug", async (c) => {
   const row = await findCompany(c.req.param("slug"));
   if (!row) return err(c, 404, "not_found", `No company with slug '${c.req.param("slug")}'`);
   return c.json({ data: toApi(row), timestamp: nowIso() });
 });
 
-app.get("/companies/:slug/news", async (c) => {
+inner.get("/companies/:slug/news", async (c) => {
   const row = await findCompany(c.req.param("slug"));
   if (!row) return err(c, 404, "not_found", `No company with slug '${c.req.param("slug")}'`);
   const { db } = await getDb();
@@ -100,7 +113,7 @@ app.get("/companies/:slug/news", async (c) => {
   return c.json({ company: row.slug, name: row.name, data: items.map((n) => ({ id: n.id, title: n.title, url: n.url, source: n.source, kind: n.kind, published_at: n.publishedAt, summary: n.summary, image_url: n.imageUrl, sentiment_score: n.sentimentScore, ingest_run_id: n.ingestRunId })), timestamp: nowIso() });
 });
 
-app.get("/companies/:slug/sentiment", async (c) => {
+inner.get("/companies/:slug/sentiment", async (c) => {
   const row = await findCompany(c.req.param("slug"));
   if (!row) return err(c, 404, "not_found", `No company with slug '${c.req.param("slug")}'`);
   const { db } = await getDb();
@@ -111,7 +124,7 @@ app.get("/companies/:slug/sentiment", async (c) => {
 });
 
 // ---------- portfolio sentiment ----------
-app.get("/sentiment/portfolio", async (c) => {
+inner.get("/sentiment/portfolio", async (c) => {
   const { db } = await getDb();
   const latestAt = db.get<{ t: string | null }>(sql`select max(computed_at) as t from sector_rollups`)?.t;
   const rows = latestAt ? db.select().from(schema.sectorRollups).where(eq(schema.sectorRollups.computedAt, latestAt)).all() : [];
@@ -124,7 +137,7 @@ app.get("/sentiment/portfolio", async (c) => {
 });
 
 // ---------- search ----------
-app.get("/search", async (c) => {
+inner.get("/search", async (c) => {
   const q = (c.req.query("q") ?? "").trim();
   if (q.length < 2) return err(c, 400, "invalid_request", "q must be at least 2 characters");
   const { db } = await getDb();
@@ -149,7 +162,7 @@ function timingSafeEqual(a: string, b: string): boolean {
   return ab.length === bb.length && crypto.timingSafeEqual(ab, bb);
 }
 
-app.post("/ingest", async (c) => {
+inner.post("/ingest", async (c) => {
   // Primary: X-Ingest-Secret header. The Flow Builder webhook-delivery schema (live docs: url, method, basicAuth — no custom
   // headers) cannot set it, so the same secret is also accepted as HTTP Basic password (username 'ingest') or ?secret=.
   let secret = c.req.header("x-ingest-secret") ?? "";
@@ -230,11 +243,11 @@ app.post("/ingest", async (c) => {
   return c.json({ ingest_run_id: runId, companies_touched: touched, news_upserted: newsUp, sentiment_rows: sentRows, unmatched, rollups_recomputed: rollups, status, received_at: now, finished_at: nowIso() });
 });
 
-app.get("/ingest/runs", async (c) => {
+inner.get("/ingest/runs", async (c) => {
   const { db } = await getDb();
   const rows = db.select().from(schema.ingestRuns).orderBy(desc(schema.ingestRuns.receivedAt)).limit(50).all();
   return c.json({ data: rows.map(({ rawSample, ...r }) => r), timestamp: nowIso() });
 });
 
-app.notFound((c) => err(c, 404, "not_found", `Route not found: ${c.req.method} ${new URL(c.req.url).pathname}`));
-app.onError((e, c) => { console.error(e); return err(c, 500, "server_error", e.message); });
+inner.notFound((c) => err(c, 404, "not_found", `Route not found: ${c.req.method} ${new URL(c.req.url).pathname}`));
+inner.onError((e, c) => { console.error(e); return err(c, 500, "server_error", e.message); });
