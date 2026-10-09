@@ -32,7 +32,8 @@ export function CompanyPicker({ options, value, onChange, max = 5, compact }: { 
           </ul>
         )}
       </div>
-      <p className="mt-1 text-xs text-muted">{value.length}/{max} selected · Enter adds the first match</p>
+      <p className="mt-1 text-xs text-muted" data-testid="company-picker-count">{value.length}/{max} selected · Enter adds the first match</p>
+      {value.length >= max && <p role="status" data-testid="company-picker-max" className="mt-1 text-xs text-danger">Maximum of {max} companies reached — remove one to add another.</p>}
     </div>
   );
 }

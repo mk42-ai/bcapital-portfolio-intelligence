@@ -9,7 +9,8 @@
     "start": "next start -H 0.0.0.0 -p 3000",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
-    "qa:lighthouse": "node scripts/lighthouse.mjs"
+    "qa:lighthouse": "node scripts/lighthouse.mjs",
+    "test:e2e:live": "BASE_URL=https://sb-2yrz211gekox.vercel.run playwright test"
   },
   "dependencies": {
     "@openuidev/react-headless": "^0.17.0",

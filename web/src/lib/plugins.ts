@@ -8,7 +8,7 @@ export const PLUGINS: PluginDef[] = [
   { id: PORTFOLIO_PLUGIN_ID, name: "Portfolio Plugin", purpose: "This dashboard's own API (companies, news, sentiment, search)", status: PORTFOLIO_PLUGIN_ID ? "active" : "pending", defaultOn: !!PORTFOLIO_PLUGIN_ID },
   // Verified with a real create-session + streamed query on 2026-10-09 (see docs/HANDOFF.md → Plugin test matrix). Order = send order.
   { id: "plugin-1722260873", name: "Perplexity", purpose: "Latest news with sources (verified: 200, first token 37.5 s)", status: "active", defaultOn: true },
-  { id: "plugin-1741871229", name: "GPT Search", purpose: "Funding / valuation / exit verification (verified: 200, 85 s)", status: "active", defaultOn: true },
+  { id: "plugin-1741871229", name: "GPT Search", purpose: "Funding / valuation / exit verification (verified: 200, 85 s) — opt-in", status: "active", defaultOn: false },
   { id: "plugin-1716429542", name: "US Stock Fundamentals", purpose: "Live quotes for public holdings e.g. FRVO (verified: 200, 35 s)", status: "active", defaultOn: false },
   { id: "plugin-1748003575", name: "Reddit", purpose: "Posts + comments, community sentiment (verified: 200, 38 s)", status: "active", defaultOn: false },
   { id: "plugin-1751872652", name: "X Search", purpose: "Posts from the last 7 days (verified: 200, 105 s)", status: "active", defaultOn: false },

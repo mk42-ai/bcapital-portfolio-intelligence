@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Hexagon } from "lucide-react";
+import { BrandLogo } from "@/components/brand/logo";
 import { Nav } from "./nav";
 import { OfflineBanner } from "./offline-banner";
 import { OnboardingGate } from "./onboarding-gate";
@@ -9,12 +9,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-dvh flex-col lg:flex-row">
       <aside className="sticky top-0 z-40 flex w-full items-center justify-between gap-3 border-b border-border bg-background px-4 py-2 lg:h-dvh lg:w-64 lg:flex-col lg:items-stretch lg:justify-start lg:border-b-0 lg:border-r lg:px-4 lg:py-6">
-        <Link href="/overview" className="flex items-center gap-3 rounded-lg px-1 py-1">
-          <span className="grid size-9 place-items-center rounded-md border border-border bg-surface-2 text-foreground" aria-hidden><Hexagon className="size-5" strokeWidth={2} /></span>
-          <span className="hidden flex-col leading-tight sm:flex">
-            <span className="font-display text-base font-semibold">B Capital</span>
-            <span className="text-[11px] uppercase tracking-[0.14em] text-muted">Portfolio Intelligence</span>
-          </span><span className="sr-only">Home</span>
+        <Link href="/overview" className="flex flex-col items-start gap-1 rounded-lg px-1 py-1">
+          <BrandLogo height={28} />
+          <span className="hidden text-[11px] uppercase tracking-[0.14em] text-muted sm:block">Portfolio Intelligence</span><span className="sr-only">Home</span>
         </Link>
         <Nav />
         <div className="flex items-center lg:mt-auto lg:block lg:px-1"><BackendStatus /></div>

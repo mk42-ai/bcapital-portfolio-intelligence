@@ -12,8 +12,10 @@ const nextConfig: NextConfig = {
   async headers() {
     // No X-Frame-Options: the platform shows the preview inside an iframe on another origin; SAMEORIGIN made that iframe render blank
     // even though every route answered HTTP 200. Click-jacking exposure is acceptable for a read-only dashboard whose only secret
-    // lives in the user's own localStorage.
+    // lives in the user's own localStorage. The CSP below is frame-ancestors ONLY (explicitly allow any embedding origin) — no other
+    // directives, so Next's inline bootstrap scripts are unaffected.
     return [{ source: "/(.*)", headers: [
+      { key: "Content-Security-Policy", value: "frame-ancestors *;" },
       { key: "X-Content-Type-Options", value: "nosniff" }, { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
       { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
     ] }];

@@ -16,7 +16,7 @@ Live preview (ephemeral Vercel sandbox, see HANDOFF for TTL): **https://sb-2yrz2
 | `/company/[slug]` | Themed with the company's own `brand_tokens` (AA-checked at runtime, B Capital fallback): logo, palette swatches with WCAG ratios, fonts, evidence-tier badge, B Capital position, sentiment timeline + evidence, PitchBook-style funding timeline with "B Capital participated" markers, news cards with image + source chips, "Last updated by daily workflow … (workflow id, 06:00 UTC)" stamp |
 | `/news` | News Pulse grouped by day; filters by company / sector / source plugin / sentiment / text; Δ vs previous run rail; empty-state asset |
 | `/chat` | **Open Intelligent UI** chat (OpenUI `AgentInterface` from `@openuidev/react-ui`) → `POST /api/chat` (AG-UI SSE) → OnDemand `POST /chat/v1/sessions` + `POST /chat/v1/sessions/{id}/query` (`responseMode: "stream"`, Perplexity `plugin-1722260873` first). Streamed markdown answer, research/tool activity, a **citation list** (one anchor per source URL, favicon + host + path) under every assistant message, conversation starters, thread list + messages + OnDemand `sessionId` persisted in localStorage (`bcap.chat.threads.v2`, `bcap.chat.thread.v2.<id>`, `bcap.chat.session.v2.<id>`; v1 threads imported once). Deep link `/chat?q=…` sends a question on load. |
-| `/settings` | optional per-user apikey override (localStorage only, "Test connection"), externalUserId, model endpointId (default `predefined-claude-fable-5.1`), verified-plugin toggles (Perplexity + GPT Search on by default; US Stock Fundamentals / Reddit / X opt-in; LinkedIn dropped; Portfolio Plugin = registration pending; PitchBook `plugin-1777018662` = deferred with countdown), backend base URL, reset |
+| `/settings` | optional per-user apikey override (localStorage only, "Test connection"), externalUserId, model endpointId (default `predefined-claude-fable-5.1`), verified-plugin toggles (Perplexity on by default — exactly one plugin per request; GPT Search / US Stock Fundamentals / Reddit / X opt-in; LinkedIn dropped; Portfolio Plugin = registration pending; PitchBook `plugin-1777018662` = deferred with countdown), backend base URL, reset |
 
 ## Architecture
 ```
@@ -40,7 +40,7 @@ npm run dev            # http://localhost:3000
 npm run build && npm start
 npm run typecheck
 npm run assets         # re-download brand manifest (needs valid SAS URLs)
-BASE_URL=https://… CHROME_PATH=/usr/bin/chromium npm run test:e2e     # Playwright + axe (desktop 1440 + mobile 390)
+BASE_URL=https://… CHROME_PATH=/usr/bin/chromium npm run test:e2e     # Playwright suite in web/e2e (8 specs: screens, chat streaming, mobile 390, axe)
 BASE_URL=https://… CHROME_PATH=/usr/bin/chromium npm run qa:lighthouse  # Lighthouse mobile + desktop → .lighthouse/summary.json
 BASE_URL=https://… node scripts/screenshots.mjs                        # full-page screenshots → docs/screenshots
 ```
@@ -74,7 +74,7 @@ A user may still paste their own key in Settings; it is kept in `localStorage` (
 | Plugin ID | Name | Session | Query | First token | Total | Timestamp (UTC) | Decision |
 |---|---|---|---|---|---|---|---|
 | `plugin-1722260873` | Perplexity | 201 | 200 | 37.5 s | 54.2 s | 2026-10-09T17:27:16Z | **kept, default on** |
-| `plugin-1741871229` | GPT Search | 201 | 200 | 85.0 s | 109.1 s | 2026-10-09T17:28:10Z | kept, default on |
+| `plugin-1741871229` | GPT Search | 201 | 200 | 85.0 s | 109.1 s | 2026-10-09T17:28:10Z | kept, **opt-in** (sending two plugins per request stalled the run) |
 | `plugin-1716429542` | US Stock Fundamental Analysis | 201 | 200 | 35.4 s | 40.8 s | 2026-10-09T17:35:21Z | kept, opt-in |
 | `plugin-1748003575` | Reddit Posts | 201 | 200 | 38.4 s | 45.2 s | 2026-10-09T17:32:30Z | kept, opt-in |
 | `plugin-1751872652` | X Search Agent | 201 | 200 | 105.3 s | 125.5 s | 2026-10-09T17:33:16Z | kept, opt-in (slow) |

@@ -1,0 +1,290 @@
+# Verdict: 285 frames, first frame +1.01 s, 9 heartbeats (every 10 s), first answer delta +76.9 s (Perplexity research phase upstream), 265 text deltas, TOOL_CALL_RESULT + CUSTOM ondemand.sources (12 real citations from OnDemand plugin_sources) + RUN_FINISHED + data: [DONE] at +93.7 s; timestamps monotonic; total 37 158 B; API key absent (grep = 0).
+# Response headers: content-type: text/event-stream; charset=utf-8;cache-control: no-cache, no-transform;content-encoding: identity;x-content-type-options: nosniff; x-accel-buffering: no (set by the route; the sandbox edge strips it)
+# chat-stream proof — POST https://sb-2yrz211gekox.vercel.run/api/chat  query='What did Fervo Energy announce recently?'  pluginIds=[plugin-1722260873]  started 2026-10-09T19:42:14.475Z
+# columns: iso-utc  +ms-since-start  bytes  event-type  preview (key never present; session ids redacted)
+2026-10-09T19:42:15.494Z +  1012ms   101B RUN_STARTED            data: {"type":"RUN_STARTED","threadId":"proof-stream","runId":"b94c088f-23ec-439f-9d01-0a0fcbdc1b29"}
+2026-10-09T19:42:15.504Z +  1021ms   175B CUSTOM/ondemand.session data: {"type":"CUSTOM","name":"ondemand.session","value":{"sessionId":"<sid>","pluginIds":["plugin-1722260873"],"endpointId":"predefined-claude-fable-
+2026-10-09T19:42:15.513Z +  1031ms   169B TOOL_CALL_START        data: {"type":"TOOL_CALL_START","toolCallId":"4b941753-2260-44c0-ab7f-836832d63dc0","toolCallName":"Perplexity","parentMessageId":"66fe0910-7c05-44ac-
+2026-10-09T19:42:15.522Z +  1040ms   258B TOOL_CALL_ARGS         data: {"type":"TOOL_CALL_ARGS","toolCallId":"4b941753-2260-44c0-ab7f-836832d63dc0","delta":"{\"plugin\":\"Perplexity\",\"pluginId\":\"plugin-172226087
+2026-10-09T19:42:15.531Z +  1049ms    82B TOOL_CALL_END          data: {"type":"TOOL_CALL_END","toolCallId":"4b941753-2260-44c0-ab7f-836832d63dc0"}
+2026-10-09T19:42:25.491Z + 11008ms   135B CUSTOM/ondemand.heartbeat data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-09T19:42:25.682Z","elapsedMs":10928,"sinceLastFrameMs":10001}}
+2026-10-09T19:42:35.493Z + 21010ms   135B CUSTOM/ondemand.heartbeat data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-09T19:42:35.683Z","elapsedMs":20929,"sinceLastFrameMs":20002}}
+2026-10-09T19:42:45.492Z + 31010ms   135B CUSTOM/ondemand.heartbeat data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-09T19:42:45.684Z","elapsedMs":30930,"sinceLastFrameMs":30003}}
+2026-10-09T19:42:55.493Z + 41010ms   134B CUSTOM/ondemand.heartbeat data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-09T19:42:55.684Z","elapsedMs":40930,"sinceLastFrameMs":9567}}
+2026-10-09T19:43:05.493Z + 51010ms   135B CUSTOM/ondemand.heartbeat data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-09T19:43:05.684Z","elapsedMs":50930,"sinceLastFrameMs":19567}}
+2026-10-09T19:43:15.496Z + 61012ms   134B CUSTOM/ondemand.heartbeat data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-09T19:43:15.686Z","elapsedMs":60932,"sinceLastFrameMs":2166}}
+2026-10-09T19:43:25.495Z + 71012ms   135B CUSTOM/ondemand.heartbeat data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-09T19:43:25.686Z","elapsedMs":70932,"sinceLastFrameMs":12166}}
+2026-10-09T19:43:31.356Z + 76873ms   105B TEXT_MESSAGE_START     data: {"type":"TEXT_MESSAGE_START","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","role":"assistant"}
+2026-10-09T19:43:31.366Z + 76883ms   104B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"Fervo"}
+2026-10-09T19:43:31.375Z + 76893ms   108B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Energy ("}
+2026-10-09T19:43:31.384Z + 76902ms   109B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"Nasdaq: FR"}
+2026-10-09T19:43:31.393Z + 76911ms   103B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"VO),"}
+2026-10-09T19:43:31.403Z + 76920ms   123B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" the Houston-based next-"}
+2026-10-09T19:43:31.412Z + 76930ms   128B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"generation geothermal company"}
+2026-10-09T19:43:31.421Z + 76939ms   126B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":", has had a string of major"}
+2026-10-09T19:43:31.430Z + 76948ms   131B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" announcements over the past cou"}
+2026-10-09T19:43:31.439Z + 76957ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ple of months. Here's a"}
+2026-10-09T19:43:31.448Z + 76966ms   108B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" rundown,"}
+2026-10-09T19:43:31.457Z + 76975ms   125B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" most recent first:\n\n**1"}
+2026-10-09T19:43:31.466Z + 76984ms   103B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":". \""}
+2026-10-09T19:43:31.476Z + 76993ms   117B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"Ground Truth\" pod"}
+2026-10-09T19:43:31.486Z + 77003ms   108B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"cast laun"}
+2026-10-09T19:43:31.495Z + 77013ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ch (October 8, 2"}
+2026-10-09T19:43:31.503Z + 77022ms   112B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"026)**\nFervo"}
+2026-10-09T19:43:31.512Z + 77030ms   124B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" launched a six-part podc"}
+2026-10-09T19:43:31.521Z + 77039ms   106B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ast tel"}
+2026-10-09T19:43:31.530Z + 77048ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ling the company"}
+2026-10-09T19:43:31.539Z + 77057ms   101B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"'s"}
+2026-10-09T19:43:31.548Z + 77066ms   108B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" story—"}
+2026-10-09T19:43:31.556Z + 77075ms   128B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"from a Stanford class project"}
+2026-10-09T19:43:31.565Z + 77083ms   114B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" to a $2.2 bill"}
+2026-10-09T19:43:31.575Z + 77092ms   111B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ion Nasdaq I"}
+2026-10-09T19:43:31.584Z + 77102ms   111B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"PO—through"}
+2026-10-09T19:43:31.594Z + 77112ms   110B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" the people"}
+2026-10-09T19:43:31.602Z + 77121ms   105B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" who l"}
+2026-10-09T19:43:31.612Z + 77129ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ived it. Episode One is"}
+2026-10-09T19:43:31.620Z + 77138ms   128B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" available now.\nhttps://ferv"}
+2026-10-09T19:43:31.629Z + 77147ms   114B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"oenergy.com/new"}
+2026-10-09T19:43:31.638Z + 77156ms   109B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"sroom-2-2-"}
+2026-10-09T19:43:31.647Z + 77165ms   111B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"2-2-2/\n\n**"}
+2026-10-09T19:43:31.662Z + 77180ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"2. Commercial operation"}
+2026-10-09T19:43:31.720Z + 77238ms   104B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" decl"}
+2026-10-09T19:43:31.785Z + 77303ms   120B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ared at Cape Station,"}
+2026-10-09T19:43:31.846Z + 77364ms   119B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" ahead of schedule ("}
+2026-10-09T19:43:31.908Z + 77425ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"October 1, 2026)"}
+2026-10-09T19:43:31.973Z + 77490ms   128B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"**\nThis is the headline news"}
+2026-10-09T19:43:32.039Z + 77554ms   120B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":". Fervo's first power"}
+2026-10-09T19:43:32.095Z + 77613ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" plant at Cape Station"}
+2026-10-09T19:43:32.159Z + 77677ms   117B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" in Beaver County,"}
+2026-10-09T19:43:32.225Z + 77742ms   105B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Utah,"}
+2026-10-09T19:43:32.287Z + 77805ms   131B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" reached commercial operation on"}
+2026-10-09T19:43:32.345Z + 77862ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" September 30—"}
+2026-10-09T19:43:32.407Z + 77924ms   134B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"one day before its contractual comm"}
+2026-10-09T19:43:32.471Z + 77989ms   132B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ercial operation date—making it"}
+2026-10-09T19:43:32.532Z + 78050ms   124B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" the first greenfield enh"}
+2026-10-09T19:43:32.602Z + 78120ms   120B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"anced geothermal syst"}
+2026-10-09T19:43:32.657Z + 78175ms   123B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ems (EGS) development in"}
+2026-10-09T19:43:32.719Z + 78237ms   129B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" the world to achieve contract"}
+2026-10-09T19:43:32.787Z + 78303ms   125B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ual commercial operations."}
+2026-10-09T19:43:32.844Z + 78361ms   127B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Key details:\n- The first G"}
+2026-10-09T19:43:32.907Z + 78424ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"eoBlock achieved"}
+2026-10-09T19:43:32.968Z + 78486ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" 33 MW of net power"}
+2026-10-09T19:43:33.033Z + 78549ms   130B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" production, meeting the thresh"}
+2026-10-09T19:43:33.097Z + 78615ms   130B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"old under its power purchase ag"}
+2026-10-09T19:43:33.158Z + 78676ms   107B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"reement,"}
+2026-10-09T19:43:33.221Z + 78738ms   106B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" and is"}
+2026-10-09T19:43:33.281Z + 78798ms   123B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" now generating revenue."}
+2026-10-09T19:43:33.352Z + 78869ms   134B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"\n- The facility was built and comm"}
+2026-10-09T19:43:33.408Z + 78925ms   119B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"issioned in just 23 "}
+2026-10-09T19:43:33.476Z + 78993ms   120B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"months; Fervo is targ"}
+2026-10-09T19:43:33.532Z + 79049ms   124B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"eting an 18-month constru"}
+2026-10-09T19:43:33.604Z + 79121ms   127B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ction timeline for future Ge"}
+2026-10-09T19:43:33.657Z + 79175ms   110B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"oBlocks.\n-"}
+2026-10-09T19:43:33.721Z + 79239ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" The remaining two Geo"}
+2026-10-09T19:43:33.791Z + 79307ms   108B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"Blocks in"}
+2026-10-09T19:43:33.845Z + 79362ms   110B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Phase I (~"}
+2026-10-09T19:43:33.908Z + 79426ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"100 MW total) are being"}
+2026-10-09T19:43:33.969Z + 79486ms   120B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" commissioned and are"}
+2026-10-09T19:43:34.044Z + 79561ms   129B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" expected to reach contractual"}
+2026-10-09T19:43:34.095Z + 79612ms   132B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" commercial operation by January "}
+2026-10-09T19:43:34.157Z + 79675ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"1, 2027. An addit"}
+2026-10-09T19:43:34.220Z + 79737ms   120B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ional 400 MW is under"}
+2026-10-09T19:43:34.282Z + 79799ms   113B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" construction,"}
+2026-10-09T19:43:34.345Z + 79862ms   134B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" with commercial operation expected"}
+2026-10-09T19:43:34.414Z + 79931ms   111B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" in 2028.\n-"}
+2026-10-09T19:43:34.470Z + 79987ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Fervo has signed over "}
+2026-10-09T19:43:34.532Z + 80049ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"1 GW of binding P"}
+2026-10-09T19:43:34.596Z + 80113ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"PAs across its portfol"}
+2026-10-09T19:43:34.657Z + 80174ms   109B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"io.\n- CEO"}
+2026-10-09T19:43:34.720Z + 80237ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Tim Latimer called"}
+2026-10-09T19:43:34.782Z + 80299ms   110B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" it \"a tur"}
+2026-10-09T19:43:34.845Z + 80362ms   130B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ning point for the entire energ"}
+2026-10-09T19:43:34.907Z + 80424ms   124B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"y industry,\" noting \"No"}
+2026-10-09T19:43:34.974Z + 80491ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" team has ever built a"}
+2026-10-09T19:43:35.034Z + 80551ms   120B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" project like this an"}
+2026-10-09T19:43:35.095Z + 80613ms   123B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ywhere in the world, and"}
+2026-10-09T19:43:35.158Z + 80675ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" we did it ahead of sch"}
+2026-10-09T19:43:35.222Z + 80739ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"edule.\"\nhttps://ferv"}
+2026-10-09T19:43:35.283Z + 80801ms   112B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"oenergy.com/f"}
+2026-10-09T19:43:35.345Z + 80862ms   119B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ervo-energy-declares"}
+2026-10-09T19:43:35.407Z + 80925ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"-commercial-operation-"}
+2026-10-09T19:43:35.470Z + 80987ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"at-cape-station-"}
+2026-10-09T19:43:35.548Z + 81066ms   132B CUSTOM/ondemand.heartbeat data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-09T19:43:35.686Z","elapsedMs":80932,"sinceLastFrameMs":24}}
+2026-10-09T19:43:35.558Z + 81075ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ahead-of-schedule"}
+2026-10-09T19:43:35.595Z + 81112ms   117B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"-leading-the-race-"}
+2026-10-09T19:43:35.657Z + 81175ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"for-next-generation-ge"}
+2026-10-09T19:43:35.720Z + 81238ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"othermal-energy/"}
+2026-10-09T19:43:35.792Z + 81310ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"\n\n**3. First Power at"}
+2026-10-09T19:43:35.845Z + 81363ms   126B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Cape Station (September 24"}
+2026-10-09T19:43:35.917Z + 81434ms   108B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":", 2026)**"}
+2026-10-09T19:43:35.969Z + 81487ms   123B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"\nJust six days earlier,"}
+2026-10-09T19:43:36.034Z + 81551ms   125B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Cape Station synchronized"}
+2026-10-09T19:43:36.095Z + 81613ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" to the grid and began"}
+2026-10-09T19:43:36.164Z + 81681ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" exporting elect"}
+2026-10-09T19:43:36.221Z + 81738ms   127B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ricity—the first time a ut"}
+2026-10-09T19:43:36.283Z + 81801ms   126B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ility-scale EGS development"}
+2026-10-09T19:43:36.347Z + 81864ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" had reached that"}
+2026-10-09T19:43:36.408Z + 81926ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" milestone anywhere in"}
+2026-10-09T19:43:36.479Z + 81996ms   114B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" the world, and"}
+2026-10-09T19:43:36.531Z + 82049ms   104B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" just"}
+2026-10-09T19:43:36.599Z + 82116ms   134B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" over four months after the company"}
+2026-10-09T19:43:36.658Z + 82175ms   113B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"'s May 2026 IP"}
+2026-10-09T19:43:36.722Z + 82239ms   107B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"O. South"}
+2026-10-09T19:43:36.783Z + 82300ms   132B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ern California Edison is the prim"}
+2026-10-09T19:43:36.846Z + 82364ms   117B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ary customer. Cape"}
+2026-10-09T19:43:36.907Z + 82424ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Station is designed as"}
+2026-10-09T19:43:36.974Z + 82491ms   109B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" a multi-g"}
+2026-10-09T19:43:37.036Z + 82552ms   126B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"igawatt development with ro"}
+2026-10-09T19:43:37.099Z + 82616ms   113B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ughly 900 MW f"}
+2026-10-09T19:43:37.159Z + 82676ms   129B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ully contracted and more than "}
+2026-10-09T19:43:37.220Z + 82737ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"4 GW of planned cap"}
+2026-10-09T19:43:37.283Z + 82800ms   123B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"acity. Latimer described"}
+2026-10-09T19:43:37.348Z + 82865ms   113B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" it as \"a gam"}
+2026-10-09T19:43:37.412Z + 82930ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"echanger for the ge"}
+2026-10-09T19:43:37.471Z + 82989ms   126B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"othermal industry.\"\nhttps"}
+2026-10-09T19:43:37.533Z + 83051ms   119B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"://www.globenewswire"}
+2026-10-09T19:43:37.598Z + 83116ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":".com/news-release/2"}
+2026-10-09T19:43:37.657Z + 83175ms   113B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"026/09/24/3368"}
+2026-10-09T19:43:37.720Z + 83238ms   112B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"115/0/en/ferv"}
+2026-10-09T19:43:37.785Z + 83303ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"o-energy-achieves"}
+2026-10-09T19:43:37.846Z + 83364ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"-first-power-at-c"}
+2026-10-09T19:43:37.908Z + 83425ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ape-station-a-landm"}
+2026-10-09T19:43:37.976Z + 83493ms   117B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ark-moment-for-the"}
+2026-10-09T19:43:38.038Z + 83554ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"-future-of-enhan"}
+2026-10-09T19:43:38.101Z + 83614ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ced-geothermal-syst"}
+2026-10-09T19:43:38.163Z + 83681ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ems.html\nhttps://fort"}
+2026-10-09T19:43:38.222Z + 83738ms   114B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"une.com/2026/09"}
+2026-10-09T19:43:38.284Z + 83801ms   113B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"/24/fervo-next"}
+2026-10-09T19:43:38.345Z + 83862ms   114B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"-gen-geothermal"}
+2026-10-09T19:43:38.407Z + 83925ms   113B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"-power-grid-ai"}
+2026-10-09T19:43:38.471Z + 83988ms   113B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"-boom/\n\n**4."}
+2026-10-09T19:43:38.538Z + 84053ms   119B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Two U.S. Department"}
+2026-10-09T19:43:38.598Z + 84116ms   127B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" of Energy awards (September"}
+2026-10-09T19:43:38.662Z + 84177ms   111B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" 22, 2026)**"}
+2026-10-09T19:43:38.726Z + 84238ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"\nFervo received appro"}
+2026-10-09T19:43:38.789Z + 84302ms   124B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ximately $20 million in D"}
+2026-10-09T19:43:38.847Z + 84363ms   104B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"OE gr"}
+2026-10-09T19:43:38.908Z + 84425ms   110B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ants to exp"}
+2026-10-09T19:43:38.992Z + 84507ms   111B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"and EGS into"}
+2026-10-09T19:43:39.038Z + 84553ms   113B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Idaho and Nev"}
+2026-10-09T19:43:39.110Z + 84626ms   106B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ada:\n-"}
+2026-10-09T19:43:39.159Z + 84676ms   119B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Idaho: drilling and"}
+2026-10-09T19:43:39.229Z + 84746ms   123B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" completing EGS wells in"}
+2026-10-09T19:43:39.303Z + 84818ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Elmore County in"}
+2026-10-09T19:43:39.346Z + 84862ms   134B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" partnership with multiple national"}
+2026-10-09T19:43:39.410Z + 84926ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" labs, plus test"}
+2026-10-09T19:43:39.473Z + 84990ms   125B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ing new high-temperature E"}
+2026-10-09T19:43:39.535Z + 85052ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"GS technology.\n-"}
+2026-10-09T19:43:39.597Z + 85114ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Nevada: a targeted"}
+2026-10-09T19:43:39.658Z + 85175ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" appraisal campaign at"}
+2026-10-09T19:43:39.722Z + 85239ms   110B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" a high-pri"}
+2026-10-09T19:43:39.785Z + 85303ms   107B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ority pr"}
+2026-10-09T19:43:39.847Z + 85364ms   117B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ospect in Humboldt"}
+2026-10-09T19:43:39.912Z + 85430ms   107B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" County."}
+2026-10-09T19:43:39.972Z + 85490ms   101B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" ("}
+2026-10-09T19:43:40.040Z + 85556ms   108B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"Fervo's p"}
+2026-10-09T19:43:40.097Z + 85615ms   104B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ilot,"}
+2026-10-09T19:43:40.158Z + 85675ms   111B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Project Red"}
+2026-10-09T19:43:40.220Z + 85738ms   108B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":", has sup"}
+2026-10-09T19:43:40.285Z + 85803ms   112B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"plied 3 MW to"}
+2026-10-09T19:43:40.346Z + 85863ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" the Nevada grid since"}
+2026-10-09T19:43:40.408Z + 85925ms   110B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" 2023.)\nCT"}
+2026-10-09T19:43:40.471Z + 85988ms   111B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"O Jack Norbe"}
+2026-10-09T19:43:40.545Z + 86063ms   106B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ck said"}
+2026-10-09T19:43:40.598Z + 86115ms   106B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" the aw"}
+2026-10-09T19:43:40.657Z + 86174ms   108B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ards sign"}
+2026-10-09T19:43:40.720Z + 86238ms   106B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"al that"}
+2026-10-09T19:43:40.786Z + 86303ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" \"expanding geothermal"}
+2026-10-09T19:43:40.847Z + 86365ms   134B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" energy to new states is a national"}
+2026-10-09T19:43:40.913Z + 86430ms   125B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" priority.\"\nhttps://ferv"}
+2026-10-09T19:43:40.972Z + 86490ms   112B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"oenergy.com/f"}
+2026-10-09T19:43:41.036Z + 86552ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ervo-energy-secures"}
+2026-10-09T19:43:41.097Z + 86614ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"-two-u-s-department"}
+2026-10-09T19:43:41.159Z + 86676ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"-of-energy-awards"}
+2026-10-09T19:43:41.223Z + 86741ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"-to-develop-next-"}
+2026-10-09T19:43:41.283Z + 86801ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"generation-geothermal-"}
+2026-10-09T19:43:41.346Z + 86863ms   112B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"in-idaho-and-"}
+2026-10-09T19:43:41.407Z + 86925ms   114B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"nevada/\n\n**5."}
+2026-10-09T19:43:41.470Z + 86988ms   110B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" 396 MW PPA"}
+2026-10-09T19:43:41.532Z + 87050ms   125B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" with Google (September 1,"}
+2026-10-09T19:43:41.596Z + 87113ms   110B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" 2026)**\nF"}
+2026-10-09T19:43:41.658Z + 87175ms   114B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ervo signed the"}
+2026-10-09T19:43:41.727Z + 87243ms   124B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" world's largest enhanced"}
+2026-10-09T19:43:41.782Z + 87299ms   117B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" geothermal PPA to"}
+2026-10-09T19:43:41.847Z + 87365ms   117B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" date—a 15-year,"}
+2026-10-09T19:43:41.909Z + 87426ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" 396 MW deal with"}
+2026-10-09T19:43:41.972Z + 87489ms   126B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Google, which plans to use"}
+2026-10-09T19:43:42.034Z + 87551ms   109B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" the power"}
+2026-10-09T19:43:42.097Z + 87614ms   134B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" as a \"foundational building block"}
+2026-10-09T19:43:42.160Z + 87677ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"\" for a potential data"}
+2026-10-09T19:43:42.223Z + 87740ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" center in Utah. Google"}
+2026-10-09T19:43:42.283Z + 87800ms   126B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" has an option to expand by"}
+2026-10-09T19:43:42.346Z + 87863ms   102B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" ro"}
+2026-10-09T19:43:42.411Z + 87928ms   112B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ughly 600 MW,"}
+2026-10-09T19:43:42.474Z + 87990ms   105B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" for n"}
+2026-10-09T19:43:42.535Z + 88052ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"early 1 GW total"}
+2026-10-09T19:43:42.596Z + 88113ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":", by June 2030. The"}
+2026-10-09T19:43:42.662Z + 88179ms   126B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" contracted capacity is exp"}
+2026-10-09T19:43:42.729Z + 88247ms   111B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ected online"}
+2026-10-09T19:43:42.792Z + 88308ms   119B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" in 2028. William Bl"}
+2026-10-09T19:43:42.851Z + 88367ms   120B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"air noted the deal bo"}
+2026-10-09T19:43:42.916Z + 88430ms   103B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"osts"}
+2026-10-09T19:43:42.980Z + 88488ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Fervo's contracted rev"}
+2026-10-09T19:43:43.047Z + 88558ms   117B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"enue by about 65%."}
+2026-10-09T19:43:43.157Z + 88673ms   119B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"\nhttps://www.utilit"}
+2026-10-09T19:43:43.169Z + 88685ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ydive.com/news/anal"}
+2026-10-09T19:43:43.226Z + 88740ms   113B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ysts-say-fervo"}
+2026-10-09T19:43:43.286Z + 88803ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"-google-geothermal-"}
+2026-10-09T19:43:43.360Z + 88876ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"deal-underscores-ba"}
+2026-10-09T19:43:43.412Z + 88927ms   118B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"seload-power-scarci"}
+2026-10-09T19:43:43.484Z + 88998ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"/829419/\n\n**6."}
+2026-10-09T19:43:43.535Z + 89052ms   109B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Second qu"}
+2026-10-09T19:43:43.597Z + 89114ms   119B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"arter 2026 results ("}
+2026-10-09T19:43:43.660Z + 89177ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"August 12, 2026)"}
+2026-10-09T19:43:43.730Z + 89247ms   115B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"**\nFervo raised"}
+2026-10-09T19:43:43.789Z + 89303ms   136B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" its long-term development target to "}
+2026-10-09T19:43:43.845Z + 89362ms   104B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"1.1 G"}
+2026-10-09T19:43:43.907Z + 89425ms   109B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"W by 2030 "}
+2026-10-09T19:43:43.969Z + 89487ms   102B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"(up"}
+2026-10-09T19:43:44.033Z + 89550ms   117B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" 100 MW), reported"}
+2026-10-09T19:43:44.096Z + 89613ms   126B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" mechanical completion on G"}
+2026-10-09T19:43:44.164Z + 89681ms   109B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"eoBlocks 1"}
+2026-10-09T19:43:44.220Z + 89738ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" and 2, and set a"}
+2026-10-09T19:43:44.283Z + 89801ms   107B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" company"}
+2026-10-09T19:43:44.348Z + 89865ms   124B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" drilling record with the"}
+2026-10-09T19:43:44.435Z + 89952ms   110B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Sawtooth 7"}
+2026-10-09T19:43:44.470Z + 89988ms   119B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" well, reaching near"}
+2026-10-09T19:43:44.533Z + 90050ms   113B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ly 19,500 feet"}
+2026-10-09T19:43:44.596Z + 90114ms   120B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" in a 460°F resource"}
+2026-10-09T19:43:44.659Z + 90176ms   117B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":".\nhttps://fervoen"}
+2026-10-09T19:43:44.720Z + 90238ms   113B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ergy.com/fervo"}
+2026-10-09T19:43:44.784Z + 90301ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"-energy-reports-second"}
+2026-10-09T19:43:44.846Z + 90363ms   113B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"-quarter-2026-"}
+2026-10-09T19:43:44.908Z + 90425ms   126B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"results/\n\n**Background:**"}
+2026-10-09T19:43:44.972Z + 90489ms   124B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Fervo went public in May"}
+2026-10-09T19:43:45.035Z + 90552ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" 2026 with an ups"}
+2026-10-09T19:43:45.097Z + 90614ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ized $2.2 billion"}
+2026-10-09T19:43:45.158Z + 90675ms   117B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" IPO—the biggest"}
+2026-10-09T19:43:45.223Z + 90739ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" clean-energy IPO"}
+2026-10-09T19:43:45.286Z + 90804ms   125B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" ever—and its market cap"}
+2026-10-09T19:43:45.519Z + 91036ms   119B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" quickly surpassed $"}
+2026-10-09T19:43:45.528Z + 91046ms   121B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"10 billion, though the"}
+2026-10-09T19:43:45.538Z + 91055ms   114B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" stock has stru"}
+2026-10-09T19:43:45.547Z + 91065ms   132B CUSTOM/ondemand.heartbeat data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-09T19:43:45.686Z","elapsedMs":90932,"sinceLastFrameMs":22}}
+2026-10-09T19:43:45.556Z + 91074ms   111B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ggled since,"}
+2026-10-09T19:43:45.601Z + 91119ms   104B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" down"}
+2026-10-09T19:43:45.659Z + 91177ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" roughly 49% from"}
+2026-10-09T19:43:45.720Z + 91238ms   116B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" initial highs as"}
+2026-10-09T19:43:45.783Z + 91301ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" of early September. In"}
+2026-10-09T19:43:45.848Z + 91365ms   114B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" March 2026, it"}
+2026-10-09T19:43:45.908Z + 91425ms   104B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" clos"}
+2026-10-09T19:43:45.971Z + 91488ms   122B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"ed $421 million in non-"}
+2026-10-09T19:43:46.037Z + 91553ms   129B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"recourse project financing for"}
+2026-10-09T19:43:46.097Z + 91614ms   120B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":" Cape Station Phase I"}
+2026-10-09T19:43:46.108Z + 91626ms   100B TEXT_MESSAGE_CONTENT   data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","delta":"."}
+2026-10-09T19:43:48.170Z + 93688ms   238B TOOL_CALL_RESULT       data: {"type":"TOOL_CALL_RESULT","messageId":"f4ccfe44-1e42-4838-a9f3-51bc329661ba","toolCallId":"4b941753-2260-44c0-ab7f-836832d63dc0","role":"tool",
+2026-10-09T19:43:48.179Z + 93697ms    84B TEXT_MESSAGE_END       data: {"type":"TEXT_MESSAGE_END","messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4"}
+2026-10-09T19:43:48.192Z + 93710ms  3604B CUSTOM/ondemand.sources data: {"type":"CUSTOM","name":"ondemand.sources","value":{"messageId":"66fe0910-7c05-44ac-be58-304b1bc2faa4","sources":[{"url":"https://fortune.com/20
+2026-10-09T19:43:48.201Z + 93719ms   102B RUN_FINISHED           data: {"type":"RUN_FINISHED","threadId":"proof-stream","runId":"b94c088f-23ec-439f-9d01-0a0fcbdc1b29"}
+2026-10-09T19:43:48.212Z + 93728ms    12B DONE                   data: [DONE]
+# finished 2026-10-09T19:43:48.214Z

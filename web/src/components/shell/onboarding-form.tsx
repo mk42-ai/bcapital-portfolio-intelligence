@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Hexagon } from "lucide-react";
+import { BrandLogo } from "@/components/brand/logo";
 import { useRouter } from "next/navigation";
 import { useSettings } from "@/lib/settings";
 import { DEFAULT_FOCUS } from "@/lib/plugins";
@@ -19,7 +19,7 @@ export function OnboardingForm({ options }: { options: { slug: string; name: str
     <section className="mx-auto max-w-6xl">
       <div className="grid gap-8 py-6 lg:grid-cols-[1.1fr_1fr] lg:py-12">
         <div>
-          <p className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted"><Hexagon className="size-4" aria-hidden /> Welcome to Portfolio Intelligence</p>
+          <div className="flex flex-wrap items-center gap-3"><BrandLogo height={32} /><p className="text-xs uppercase tracking-[0.2em] text-muted">Welcome to Portfolio Intelligence</p></div>
           <h1 className="mt-3 font-display text-4xl font-semibold leading-[1.05] sm:text-5xl">We empower entrepreneurs to think bigger. Scale faster. Grow global.</h1>
           <p className="mt-4 max-w-xl text-base text-muted">Catalysts. Questioners. Visionaries. — one workspace for 135 portfolio companies: brand systems, daily news pulse, sentiment scored by Fable 5.1, and an analyst chat grounded in the portfolio database.</p>
           <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3" aria-label="GROWTH values">

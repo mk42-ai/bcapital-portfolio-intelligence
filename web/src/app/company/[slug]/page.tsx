@@ -19,7 +19,10 @@ import workflows from "@/data/workflows.json";
 
 export const revalidate = 120;
 export async function generateStaticParams() { const cs = await listCompanies(); return cs.data.filter((c) => c.is_focus || c.slug === "b-capital" || c.slug === "judi-rx" || c.slug === "code-metal" || c.slug === "meesho").map((c) => ({ slug: c.slug })); }
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> { const { slug } = await params; const c = await getCompany(slug); if (!c.data) notFound(); return { title: `${c.data.name} — ${c.data.sector}`, description: `${c.data.name}: brand palette, fonts, sentiment timeline, funding timeline and news.` }; }
+// Do NOT call notFound() here: a notFound() thrown from generateMetadata on an ISR route is handled outside the segment boundary, which
+// made unknown slugs answer HTTP 200 with the root not-found body on the deployed build. The page component below throws notFound()
+// itself, so the segment-level not-found.tsx renders with a real 404 status; metadata just falls back to a noindex title.
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> { const { slug } = await params; const c = await getCompany(slug); if (!c.data) return { title: "Company not found", robots: { index: false, follow: false } }; return { title: `${c.data.name} — ${c.data.sector}`, description: `${c.data.name}: brand palette, fonts, sentiment timeline, funding timeline and news.` }; }
 const TIER_TONE: Record<string, "primary" | "info" | "accent" | "muted"> = { Verified: "primary", Observed: "info", "Third-party": "accent", Missing: "muted" };
 
 export default async function CompanyPage({ params }: { params: Promise<{ slug: string }> }) {

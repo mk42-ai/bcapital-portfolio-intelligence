@@ -4,9 +4,9 @@ import "./response-theme.css";
 import "./shell.css";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { AgentInterface, fetchLLM, agUIAdapter, useThread, useThreadList, MarkDownRenderer, getFaviconUrl, type AssistantMessageComponent } from "@openuidev/react-ui";
-import type { Message } from "@openuidev/react-headless";
-import { Bot, ExternalLink, ShieldCheck } from "lucide-react";
+import { AgentInterface, fetchLLM, agUIAdapter, useThread, useThreadList, MarkDownRenderer, getFaviconUrl, type AssistantMessageComponent, type ToolCallTimelineComponent } from "@openuidev/react-ui";
+import type { Message, UserMessage } from "@openuidev/react-headless";
+import { AlertCircle, Bot, Check, ExternalLink, Loader2, RotateCcw, Search, ShieldCheck } from "lucide-react";
 import { responseTheme } from "./response-theme";
 import { localThreadStorage, saveMessages, sessionFor, rememberSession } from "./local-storage";
 import { useSettings } from "@/lib/settings";
@@ -60,6 +60,66 @@ const AssistantMessage: AssistantMessageComponent = ({ message, isStreaming }) =
   );
 };
 
+/**
+ * Plugin activity timeline (replaces OpenUI's default "Working · Running the N plugins tool" card).
+ * A card is shown ONLY once the bridge has sent the plugin's real input (TOOL_CALL_ARGS → activity.input.query) — never an empty `{}`.
+ */
+type PluginInput = { plugin?: string; pluginId?: string; query?: string };
+const PluginTimeline: ToolCallTimelineComponent = ({ activities, steps, isLast, awaitingResponse }) => {
+  const isRunning = useThread((s) => s.isRunning);
+  const cards = activities.filter((a) => { const i = (a.input ?? {}) as PluginInput; return typeof i.query === "string" && i.query.trim().length > 0; });
+  // While the turn is live, OpenUI routes the streaming answer text through the timeline `steps` (not AssistantMessage) — render it
+  // progressively here so every delta is visible as it arrives; once the run finishes AssistantMessage takes over (with the sources list).
+  const liveText = isLast && isRunning ? steps.filter((st): st is Extract<typeof st, { type: "text" }> => st.type === "text").map((st) => st.text).join("\n\n") : "";
+  if (cards.length === 0 && !liveText) {
+    if (!(isLast && isRunning && awaitingResponse)) return null;
+    return <p className="oiu-activity oiu-activity--pending" role="status"><Loader2 className="size-3.5 oiu-spin" aria-hidden /> Working — contacting OnDemand…</p>;
+  }
+  return (<>
+    {cards.length > 0 && <ol className="oiu-activity-list" aria-label="Plugin activity">
+      {cards.map((a) => {
+        const i = a.input as PluginInput; const name = i.plugin || a.toolName || "plugin";
+        const running = isLast && isRunning && (a.status === "streaming" || a.status === "executing");
+        const failed = a.isError === true;
+        let detail = "";
+        if (a.status === "complete" && typeof a.result === "string") { try { const r = JSON.parse(a.result) as { sources?: number; chars?: number; message?: string }; detail = r.message ? r.message : r.sources != null ? `${r.sources} source${r.sources === 1 ? "" : "s"}` : ""; } catch { /* raw result */ } }
+        return (
+          <li key={a.id} className={`oiu-activity ${failed ? "oiu-activity--error" : running ? "oiu-activity--running" : "oiu-activity--done"}`} data-testid="plugin-activity" data-plugin={i.pluginId ?? ""}>
+            <span className="oiu-activity__icon" aria-hidden>{failed ? <AlertCircle className="size-3.5" /> : running ? <Loader2 className="size-3.5 oiu-spin" /> : <Check className="size-3.5" />}</span>
+            <span className="oiu-activity__text">
+              <span className="oiu-activity__name"><Search className="size-3 oiu-activity__plugin-icon" aria-hidden />{running ? `Searching with ${name}` : failed ? `${name} failed` : `${name} searched`}</span>
+              <span className="oiu-activity__query">“{i.query!.slice(0, 160)}{i.query!.length > 160 ? "…" : ""}”</span>
+              {detail && <span className="oiu-activity__detail">{detail}</span>}
+            </span>
+          </li>
+        );
+      })}
+    </ol>}
+    {liveText && (
+      <div className="oiu-assistant oiu-assistant--streaming" aria-live="polite" aria-busy="true" data-testid="assistant-streaming">
+        <div className="oiu-assistant__avatar" aria-hidden><Bot className="size-4" strokeWidth={2} /></div>
+        <div className="oiu-assistant__body"><MarkDownRenderer variant="clear" textMarkdown={liveText} /></div>
+      </div>
+    )}
+  </>);
+};
+
+/** Visible, retryable error state (OpenUI sets threadError when the bridge emits RUN_ERROR or the request fails). */
+function ErrorBanner() {
+  const threadError = useThread((s) => s.threadError); const isRunning = useThread((s) => s.isRunning);
+  const messages = useThread((s) => s.messages); const processMessage = useThread((s) => s.processMessage);
+  if (!threadError || isRunning) return null;
+  const lastUser = [...messages].reverse().find((m) => m.role === "user") as UserMessage | undefined;
+  const retry = () => { if (lastUser) void processMessage({ role: "user", content: lastUser.content }); };
+  return (
+    <div className="oiu-error" role="alert" data-testid="chat-error">
+      <AlertCircle className="size-4 shrink-0" aria-hidden />
+      <span className="oiu-error__text"><strong>The answer could not be completed.</strong> {threadError.message}</span>
+      {lastUser && <button type="button" className="oiu-error__retry" onClick={retry}><RotateCcw className="size-3.5" aria-hidden /> Retry</button>}
+    </div>
+  );
+}
+
 /** Persists streamed messages + remembers the OnDemand sessionId per thread (read back from the bridge's x-ondemand-session header). */
 function Persistence({ sessionRef }: { sessionRef: React.MutableRefObject<Record<string, string>> }) {
   const messages = useThread((s) => s.messages); const selected = useThreadList((s) => s.selectedThreadId);
@@ -103,9 +163,10 @@ export function ChatShell({ companies }: { companies: CoCtx[] }) {
   }), [s.apikey, s.model, s.externalUserId, activePlugins.join(","), systemContext]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div className="chat-shell" data-testid="chat-shell">
-      <AgentInterface llm={llm} storage={storage} agentName="Portfolio analyst" theme={{ mode: "light", lightTheme: responseTheme }} starters={starters} starterVariant="short" components={{ AssistantMessage }} scrollVariant="always">
+      <AgentInterface llm={llm} storage={storage} agentName="Portfolio analyst" theme={{ mode: "light", lightTheme: responseTheme }} starters={starters} starterVariant="short" components={{ AssistantMessage, ToolCallTimeline: PluginTimeline }} scrollVariant="always">
         <AgentInterface.Welcome title="Ask the portfolio" />
         <Persistence sessionRef={sessionRef} />
+        <ErrorBanner />
         <Suspense fallback={null}><AutoAsk /></Suspense>
       </AgentInterface>
       <p className="oiu-footer"><ShieldCheck className="size-3.5" aria-hidden /> Streams via OnDemand (model <code>{s.model}</code>; plugins: {activePlugins.length ? PLUGINS.filter((p) => p.id && activePlugins.includes(p.id)).map((p) => p.name).join(", ") : "none"}) through the server proxy — the API key never leaves the server.</p>

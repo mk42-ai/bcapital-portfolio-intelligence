@@ -88,6 +88,22 @@ flowchart LR
 * **All AI-generated images removed** (`public/brand/*` PNG/WebP: chat avatar, empty states, error/offline, sector illustrations, hero, OG card, onboarding bg). Replaced with monochrome Lucide glyphs; app icon/favicon/OG = Lucide `hexagon` (`src/app/icon.svg`, `favicon.ico`, `opengraph-image.tsx` via `next/og`).
 * A global **live-backend badge** (`data-testid="backend-status"`, pings `{PORTFOLIO_API_URL}/health`, ISR 60 s) sits in the sidebar on every screen; page headers additionally show the per-query data source.
 
+## 3d. Streaming fix, logo, E2E, audits (2026-10-09 evening)
+**User-reported bug**: chat stuck on "Working · Running the research · 2 plugins tool" with an empty `{}` card, stop button never cleared.
+Root causes and fixes:
+1. **Two plugins per request** (Perplexity + GPT Search) made the OnDemand run stall → `DEFAULT_PLUGIN_IDS = ["plugin-1722260873"]` (Perplexity only) in `src/lib/ondemand/config.ts`; GPT Search is now opt-in (`defaultOn:false`).
+2. **Empty tool card**: the bridge emitted `TOOL_CALL_ARGS "{}"` → it now sends the plugin's real input `{"plugin":"Perplexity","pluginId":…,"query":…}` and the UI (`PluginTimeline` in `chat-shell.tsx`, a custom `ToolCallTimeline`) only renders a card once the input is present ("Searching with Perplexity · “<query>”" → "Perplexity searched · N sources").
+3. **No heartbeat / deadline**: `/api/chat` now emits `CUSTOM ondemand.heartbeat` every 10 s, enforces a 90 s first-byte and 240 s total deadline (→ visible `RUN_ERROR`), propagates `req.signal` to both upstream fetches, maps upstream errors to `RUN_ERROR`, always ends with `data: [DONE]` and closes. Headers: `text/event-stream; charset=utf-8`, `cache-control: no-cache, no-transform`, `connection: keep-alive`, `x-accel-buffering: no`, `content-encoding: identity`, `x-ondemand-session`.
+4. **Answer only appeared at the end**: OpenUI's `InterleavedTurn` routes the live answer into the timeline `steps` while tools are on the turn; `PluginTimeline` now renders those steps progressively (verified: 63 DOM growth events, first activity 1.2 s).
+5. **Real citations**: OnDemand emits `eventType:"plugin_sources"` frames (`sources.items[{title,url,domain}]`) — the bridge now forwards those as `CUSTOM ondemand.sources` (URL extraction from the markdown is the fallback).
+6. **Visible error state**: `ErrorBanner` (role=alert) with Retry reads `threadError`; the composer's Stop button reverts to Send on completion/error/abort (verified).
+Proof: `proof/chat-stream.log` (285 frames, first +1.0 s, 9 heartbeats, first delta +76.9 s, `[DONE]` +93.7 s, monotonic), `docs/screenshots/chat-t1s|t3s|t6s|final-1440x900.png`, `e2e/chat.spec.ts`.
+
+**Logo**: official `https://b.capital/wp-content/uploads/2023/08/logo-1.svg` (unaltered, sha256 in `docs/BRAND_ASSETS.md`) → `public/brand/b-capital-logo.svg`, `<BrandLogo/>` in the shell header, onboarding and settings (`img[data-testid=brand-logo]`, naturalWidth 211×43, ratio preserved).
+**Other fixes**: overview table search + column sort (`[data-testid=table-search]`, `sort-<key>`); settings validation (externalUserId required, backend URL must be https); company picker max-5 message; unknown company slug → real HTTP 404 via `src/middleware.ts`; stale "Smoke test ping" removed from `src/data/snapshot.json`; `Content-Security-Policy: frame-ancestors *` + no `X-Frame-Options` (embeddable).
+**Committed E2E suite**: `web/e2e/*.spec.ts` (8 files, 24 tests: onboarding, overview, company, news, settings, chat streaming, mobile 390×844, axe WCAG 2.0/2.1 A+AA) — `npm run test:e2e` (`BASE_URL`, `CHROME_PATH=/usr/bin/chromium`); 24/24 passed against the preview on 2026-10-09T20:0xZ. Backend contract test: `node node_modules/tsx/dist/cli.mjs scripts/contract-test.ts <backend>` (9/9), see `docs/BACKEND_VERIFICATION.md`.
+**Known limits**: Perplexity's research phase upstream takes 40–80 s before the first answer token (the UI shows the plugin card + heartbeats meanwhile); some inline text links on mobile are < 24 px tall (nav targets are ≥ 40 px).
+
 ## 4. QA results (against the live preview, 2026-10-09T15:28Z)
 ### Playwright (13/13 passed)
 | Project | Test | Status | Duration |

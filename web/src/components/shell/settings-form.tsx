@@ -9,8 +9,18 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CompanyPicker } from "@/components/chat/company-picker";
 import { Countdown } from "@/components/chat/countdown";
+import { BrandLogo } from "@/components/brand/logo";
 export function SettingsForm({ options }: { options: { slug: string; name: string; sector: string }[] }) {
   const [s, set] = useSettings(); const [test, setTest] = useState<{ state: "idle" | "busy" | "ok" | "err"; msg?: string }>({ state: "idle" }); const [keyErr, setKeyErr] = useState("");
+  const [userErr, setUserErr] = useState(""); const [urlErr, setUrlErr] = useState("");
+  /** externalUserId must be non-empty (whitespace-only rejected); the value is still echoed in the input so the user can fix it, but only valid values are persisted. */
+  function onUser(v: string) { const t = v.trim(); if (!t) { setUserErr("externalUserId is required — enter a non-empty id (used to group your chat sessions)."); return; } setUserErr(""); set({ externalUserId: t }); }
+  /** Backend URL must be an absolute https:// URL (http://localhost allowed for local dev); invalid values are shown but not persisted. */
+  function onBackend(v: string) {
+    const t = v.trim(); let ok = false; try { const u = new URL(t); ok = u.protocol === "https:" || (u.protocol === "http:" && /^(localhost|127\.0\.0\.1)$/.test(u.hostname)); } catch { ok = false; }
+    if (!ok) { setUrlErr("Enter a valid absolute https:// URL (e.g. https://sb-1gek6bq0m1au.vercel.run). http:// is only allowed for localhost."); return; }
+    setUrlErr(""); set({ backendUrl: t.replace(/\/+$/, "") });
+  }
   async function testKey() {
     setTest({ state: "busy" });
     try {
@@ -20,13 +30,14 @@ export function SettingsForm({ options }: { options: { slug: string; name: strin
   }
   return (
     <div className="grid gap-5 lg:grid-cols-2">
+      <div className="flex flex-wrap items-center gap-3 lg:col-span-2"><BrandLogo height={28} /><p className="text-xs uppercase tracking-[0.14em] text-muted">Portfolio Intelligence · Workspace settings</p></div>
       <Card><CardHeader><CardTitle>OnDemand connection</CardTitle><CardDescription>The server proxy <code>/api/ondemand/*</code> authenticates to <code>api.on-demand.io</code> with <code>ONDEMAND_API_KEY</code> (server env only). A pasted key is forwarded as <code>x-ondemand-key</code> and takes precedence. Nothing is logged.</CardDescription></CardHeader>
         <CardContent className="space-y-4">
           <Field label="OnDemand apikey (optional override)" htmlFor="set-key" hint="Chat already works with the server-side key. Paste your own key only if you want requests billed to your account; it stays in this browser." error={keyErr}>
             <Input id="set-key" type="password" autoComplete="off" value={s.apikey} onChange={(e) => { set({ apikey: e.target.value.trim() }); setKeyErr(""); }} aria-invalid={!!keyErr} />
           </Field>
           <div className="flex flex-wrap items-center gap-2"><Button type="button" variant="secondary" onClick={testKey} disabled={test.state === "busy"}>{test.state === "busy" ? "Testing…" : "Test connection"}</Button>{test.msg && <span role="status" className={test.state === "ok" ? "text-sm text-primary-soft" : "text-sm text-danger"}>{test.msg}</span>}</div>
-          <Field label="externalUserId" htmlFor="set-user" hint="Groups your chat sessions on OnDemand."><Input id="set-user" value={s.externalUserId} onChange={(e) => set({ externalUserId: e.target.value })} /></Field>
+          <Field label="externalUserId" htmlFor="set-user" hint="Groups your chat sessions on OnDemand." error={userErr}><Input id="set-user" defaultValue={s.externalUserId} onChange={(e) => onUser(e.target.value)} onBlur={(e) => { if (!e.target.value.trim()) { e.target.value = s.externalUserId; setUserErr(""); } }} aria-invalid={!!userErr} aria-describedby={userErr ? "set-user-error" : "set-user-hint"} /></Field>
           <Field label="Model endpointId" htmlFor="set-model" hint={`Default ${DEFAULT_MODEL} (Fable 5.1) — the same model used by the daily workflows.`}>
             <Select id="set-model" value={MODEL_OPTIONS.includes(s.model) ? s.model : "custom"} onChange={(e) => { if (e.target.value !== "custom") set({ model: e.target.value }); }}>
               {MODEL_OPTIONS.map((m) => <option key={m} value={m}>{m}{m === DEFAULT_MODEL ? " (Fable 5.1, default)" : ""}</option>)}<option value="custom">custom…</option>
@@ -45,7 +56,7 @@ export function SettingsForm({ options }: { options: { slug: string; name: strin
         </ul></CardContent></Card>
       <Card><CardHeader><CardTitle>Portfolio backend</CardTitle><CardDescription>Read API for companies, news and sentiment. Server pages use <code>PORTFOLIO_API_URL</code>; this override applies to client fetches.</CardDescription></CardHeader>
         <CardContent className="space-y-4">
-          <Field label="Backend base URL" htmlFor="set-backend" hint={`Default ${DEFAULT_BACKEND} (NEXT_PUBLIC_PORTFOLIO_API_URL). Durable target once provisioned: https://serverless.on-demand.io/apps/bcap-portfolio-intel`}><Input id="set-backend" value={s.backendUrl} onChange={(e) => set({ backendUrl: e.target.value })} /></Field>
+          <Field label="Backend base URL" htmlFor="set-backend" hint={`Default ${DEFAULT_BACKEND} (NEXT_PUBLIC_PORTFOLIO_API_URL). Durable target once provisioned: https://serverless.on-demand.io/apps/bcap-portfolio-intel`}><Input id="set-backend" defaultValue={s.backendUrl} onChange={(e) => onBackend(e.target.value)} aria-invalid={!!urlErr} aria-describedby={urlErr ? "set-backend-error" : "set-backend-hint"} inputMode="url" /></Field>
           <div><p className="mb-2 text-sm font-medium">Default chat context companies</p><CompanyPicker options={options} value={s.companies} onChange={(v) => set({ companies: v })} /></div>
         </CardContent></Card>
       <Card><CardHeader><CardTitle>Local data</CardTitle></CardHeader>

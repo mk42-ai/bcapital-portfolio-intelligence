@@ -235,3 +235,29 @@
 /* Mobile thread-drawer scrim: never a large dark surface — fully removed when collapsed, a light neutral veil when open. */
 .chat-shell .openui-agent-sidebar-container__overlay--collapsed { display: none; }
 .chat-shell .openui-agent-sidebar-container__overlay { background: rgba(243, 244, 246, 0.85); }
+
+/* Plugin activity (custom ToolCallTimeline): plugin name + its real input; never an empty {} card. */
+.oiu-activity-list { margin: 0 0 10px; padding: 0; list-style: none; display: grid; gap: 6px; }
+.oiu-activity { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border: 1px solid #e5e7eb; border-radius: 8px; background: #ffffff; font-size: 12px; line-height: 1.4; color: #374151; }
+.oiu-activity--pending { margin: 0 0 10px; align-items: center; color: #6b7280; }
+.oiu-activity--running { border-color: #d1d5db; }
+.oiu-activity--error { border-color: #fca5a5; color: #991b1b; }
+.oiu-activity__icon { display: inline-flex; margin-top: 1px; color: #6b7280; }
+.oiu-activity--done .oiu-activity__icon { color: #15803d; }
+.oiu-activity__text { display: grid; gap: 2px; min-width: 0; }
+.oiu-activity__name { display: inline-flex; align-items: center; gap: 5px; font-weight: 600; color: #111827; }
+.oiu-activity--error .oiu-activity__name { color: #991b1b; }
+.oiu-activity__plugin-icon { color: #6b7280; }
+.oiu-activity__query { color: #4b5563; overflow-wrap: anywhere; }
+.oiu-activity__detail { color: #6b7280; }
+.oiu-spin { animation: oiu-spin 1s linear infinite; }
+@keyframes oiu-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .oiu-spin { animation: none; } }
+/* Error banner with retry (light, neutral, AA: #991b1b on #fef2f2 = 7.4:1) */
+.oiu-error { display: flex; align-items: center; gap: 10px; margin: 8px 16px; padding: 10px 12px; border: 1px solid #fecaca; border-radius: 8px; background: #fef2f2; color: #991b1b; font-size: 13px; }
+.oiu-error__text { flex: 1 1 auto; min-width: 0; }
+.oiu-error__retry { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 4px 10px; border: 1px solid #991b1b; border-radius: 6px; background: #ffffff; color: #991b1b; font-size: 12px; font-weight: 600; cursor: pointer; }
+.oiu-error__retry:hover { background: #fee2e2; }
+.oiu-error__retry:focus-visible { outline: 2px solid #111827; outline-offset: 1px; }
+/* Hide OpenUI's own tool-call card/timeline chrome in case it is rendered next to ours */
+.chat-shell .openui-tool-call-timeline:empty { display: none; }
