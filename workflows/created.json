@@ -12,13 +12,15 @@
     ],
     "execute_status": 200,
     "executed_at": "2026-10-09T12:43:48Z",
-    "log_excerpt": "[research] triggering next task execution | [research] node task executed successfully in 441232 milliseconds | [verify] all dependencies satisfied, proceeding to task execution",
-    "execution_status": "executing",
-    "ended_at_ms": 0,
-    "log_lines": 5,
+    "log_excerpt": "[analyzer-0] node task executed successfully in 36 milliseconds | [wf] workflow execution outputs retrieved | [wf] delivery execution failed",
+    "execution_status": "failed",
+    "ended_at_ms": 1791550812992,
+    "log_lines": 18,
     "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
     "retargeted_at": "2026-10-09T13:00:47Z",
-    "retarget_status": 200
+    "retarget_status": 200,
+    "schedule": "0 0 6 * * * (06:00 UTC daily)",
+    "model": "predefined-claude-fable-5.1"
   },
   {
     "name": "bcap-portfolio-daily-batch-1",
@@ -33,13 +35,15 @@
     ],
     "execute_status": 200,
     "executed_at": "2026-10-09T12:43:48Z",
-    "log_excerpt": "[wf] starting workflow execution | [research] all dependencies satisfied, proceeding to task execution",
+    "log_excerpt": "[research] triggering next task execution | [research] node task executed successfully in 729759 milliseconds | [verify] all dependencies satisfied, proceeding to task execution",
     "execution_status": "executing",
-    "ended_at_ms": 0,
-    "log_lines": 2,
+    "ended_at_ms": null,
+    "log_lines": 5,
     "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
     "retargeted_at": "2026-10-09T13:00:47Z",
-    "retarget_status": 200
+    "retarget_status": 200,
+    "schedule": "0 0 6 * * * (06:00 UTC daily)",
+    "model": "predefined-claude-fable-5.1"
   },
   {
     "name": "bcap-portfolio-daily-batch-2",
@@ -54,13 +58,15 @@
     ],
     "execute_status": 200,
     "executed_at": "2026-10-09T12:43:48Z",
-    "log_excerpt": "[wf] starting workflow execution | [research] all dependencies satisfied, proceeding to task execution",
+    "log_excerpt": "[research] triggering next task execution | [research] node task executed successfully in 966523 milliseconds | [verify] all dependencies satisfied, proceeding to task execution",
     "execution_status": "executing",
-    "ended_at_ms": 0,
-    "log_lines": 2,
+    "ended_at_ms": null,
+    "log_lines": 5,
     "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
     "retargeted_at": "2026-10-09T13:00:48Z",
-    "retarget_status": 200
+    "retarget_status": 200,
+    "schedule": "0 0 6 * * * (06:00 UTC daily)",
+    "model": "predefined-claude-fable-5.1"
   },
   {
     "name": "bcap-portfolio-daily-batch-3",
@@ -75,13 +81,15 @@
     ],
     "execute_status": 200,
     "executed_at": "2026-10-09T12:43:48Z",
-    "log_excerpt": "[wf] starting workflow execution | [research] all dependencies satisfied, proceeding to task execution",
+    "log_excerpt": "[research] triggering next task execution | [research] node task executed successfully in 922767 milliseconds | [verify] all dependencies satisfied, proceeding to task execution",
     "execution_status": "executing",
-    "ended_at_ms": 0,
-    "log_lines": 2,
+    "ended_at_ms": null,
+    "log_lines": 5,
     "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
     "retargeted_at": "2026-10-09T13:00:48Z",
-    "retarget_status": 200
+    "retarget_status": 200,
+    "schedule": "0 0 6 * * * (06:00 UTC daily)",
+    "model": "predefined-claude-fable-5.1"
   },
   {
     "name": "bcap-portfolio-daily-batch-4",
@@ -96,13 +104,15 @@
     ],
     "execute_status": 200,
     "executed_at": "2026-10-09T12:43:49Z",
-    "log_excerpt": "[wf] starting workflow execution | [research] all dependencies satisfied, proceeding to task execution",
+    "log_excerpt": "[research] triggering next task execution | [research] node task executed successfully in 811739 milliseconds | [verify] all dependencies satisfied, proceeding to task execution",
     "execution_status": "executing",
-    "ended_at_ms": 0,
-    "log_lines": 2,
+    "ended_at_ms": null,
+    "log_lines": 5,
     "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
     "retargeted_at": "2026-10-09T13:00:48Z",
-    "retarget_status": 200
+    "retarget_status": 200,
+    "schedule": "0 0 6 * * * (06:00 UTC daily)",
+    "model": "predefined-claude-fable-5.1"
   },
   {
     "name": "bcap-portfolio-daily-batch-5",
@@ -119,11 +129,13 @@
     "executed_at": "2026-10-09T12:43:49Z",
     "log_excerpt": "[wf] starting workflow execution | [research] all dependencies satisfied, proceeding to task execution",
     "execution_status": "executing",
-    "ended_at_ms": 0,
+    "ended_at_ms": null,
     "log_lines": 2,
     "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
     "retargeted_at": "2026-10-09T13:00:49Z",
-    "retarget_status": 200
+    "retarget_status": 200,
+    "schedule": "0 0 6 * * * (06:00 UTC daily)",
+    "model": "predefined-claude-fable-5.1"
   },
   {
     "name": "bcap-portfolio-daily-batch-6",
@@ -138,12 +150,14 @@
     ],
     "execute_status": 200,
     "executed_at": "2026-10-09T12:43:49Z",
-    "log_excerpt": "[research] triggering next task execution | [research] node task executed successfully in 246425 milliseconds | [verify] all dependencies satisfied, proceeding to task execution",
-    "execution_status": "executing",
-    "ended_at_ms": 0,
-    "log_lines": 5,
+    "log_excerpt": "[analyzer-0] node task executed successfully in 29 milliseconds | [wf] workflow execution outputs retrieved | [wf] delivery execution failed",
+    "execution_status": "failed",
+    "ended_at_ms": 1791550571251,
+    "log_lines": 18,
     "webhook_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
     "retargeted_at": "2026-10-09T13:00:49Z",
-    "retarget_status": 200
+    "retarget_status": 200,
+    "schedule": "0 0 6 * * * (06:00 UTC daily)",
+    "model": "predefined-claude-fable-5.1"
   }
 ]
