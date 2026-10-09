@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1791548646687,
+      "tag": "0000_whole_human_torch",
+      "breakpoints": true
+    }
+  ]
+}

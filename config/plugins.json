@@ -1,0 +1,15 @@
+{
+  "_comment": "OnDemand plugin wiring for the B Capital Portfolio Intelligence workflows. DEFERRED plugins are never invoked, never registered in a workflow node and never tested before earliest_test_utc.",
+  "run_start_utc": "2026-10-09T12:07:25Z",
+  "earliest_test_utc": "2026-10-09T12:37:25Z",
+  "llm_model_endpoint_id": "predefined-claude-fable-5.1",
+  "plugins": [
+    { "id": "plugin-1722260873", "name": "Perplexity", "purpose": "latest news with sources and images", "status": "ACTIVE", "used_in": ["bcap-focus-daily", "bcap-portfolio-daily-batch-*"] },
+    { "id": "plugin-1718116202", "name": "LinkedIn Search", "purpose": "company updates / headcount", "status": "ACTIVE", "used_in": ["bcap-focus-daily", "bcap-portfolio-daily-batch-*"] },
+    { "id": "plugin-1748003575", "name": "Reddit posts + comments", "purpose": "community sentiment", "status": "ACTIVE", "used_in": ["bcap-focus-daily", "bcap-portfolio-daily-batch-*"] },
+    { "id": "plugin-1751872652", "name": "X Search Agent", "purpose": "last 7 days of X posts", "status": "ACTIVE", "used_in": ["bcap-focus-daily", "bcap-portfolio-daily-batch-*"] },
+    { "id": "plugin-1741871229", "name": "GPT Search", "purpose": "funding / valuation / exit verification", "status": "ACTIVE", "used_in": ["bcap-focus-daily", "bcap-portfolio-daily-batch-*"] },
+    { "id": "plugin-1777018662", "name": "Pitchbook Investor Finder", "purpose": "PitchBook data (investor finder — not a company-lookup tool)", "status": "DEFERRED", "owner_action": "owner will configure later", "pitchbook_status": "pending", "do_not_test_before_utc": "2026-10-09T12:37:25Z", "used_in": [] }
+  ],
+  "portfolio_plugin": { "name": "Portfolio Plugin", "id": null, "note": "filled in by scripts/register-plugin.ts after deployment" }
+}
