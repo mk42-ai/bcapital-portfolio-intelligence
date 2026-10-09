@@ -7,10 +7,15 @@ const nextConfig: NextConfig = {
   // Always emit metadata in <head> (no streamed/hoisted <title>/<meta>): our metadata is static per route, so blocking costs nothing,
   // and crawlers / Lighthouse read <meta name="description"> without running JS.
   htmlLimitedBots: /./,
+  // Root → /overview as a real HTTP redirect (no client-side redirect() hop, which raised React #310 during the double navigation).
+  async redirects() { return [{ source: "/", destination: "/overview", permanent: false }]; },
   async headers() {
+    // No X-Frame-Options: the platform shows the preview inside an iframe on another origin; SAMEORIGIN made that iframe render blank
+    // even though every route answered HTTP 200. Click-jacking exposure is acceptable for a read-only dashboard whose only secret
+    // lives in the user's own localStorage.
     return [{ source: "/(.*)", headers: [
       { key: "X-Content-Type-Options", value: "nosniff" }, { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-      { key: "X-Frame-Options", value: "SAMEORIGIN" }, { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+      { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
     ] }];
   },
 };
