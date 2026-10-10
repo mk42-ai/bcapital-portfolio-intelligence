@@ -3,21 +3,20 @@
  *   tsx workflows/build.ts plan            → writes workflows/*.json only (no API calls)
  *   tsx workflows/build.ts create          → POST /workflow + POST /activate for each, writes workflows/created.json
  *   tsx workflows/build.ts execute         → POST /execute each created workflow once (seeding run)
- * Env: ON_DEMAND_API_KEY (never printed), ON_DEMAND_BASE_URL, SERVERLESS_BASE_URL, INGEST_SECRET, MODEL (default predefined-claude-fable-5.1),
+ * Env: ON_DEMAND_API_KEY (never printed), ON_DEMAND_BASE_URL, SERVERLESS_BASE_URL, INGEST_SECRET, MODEL (default predefined-deepseek-flash = DeepSeek Flash v4.1, endpoint_name deepseek-v4.1-flash),
  *      NOTIFY_EMAIL (delivery address for the run summary e-mail).
  * Contract source: live docs slug post_workflow (CreateWorkflowRequest: name, trigger{type:cron,cron{expression 6-field}}, nodes[], delivery[]).
  */
 import fs from "node:fs";
 import path from "node:path";
 
-const MODEL = process.env.MODEL ?? "predefined-claude-fable-5.1";
+const MODEL = process.env.MODEL ?? "predefined-deepseek-flash"; // DeepSeek Flash v4.1 (endpoint_name deepseek-v4.1-flash)
 const CRON = "0 0 6 * * *"; // 06:00 UTC daily — 6-field robfig/cron (seconds first)
 const BASE = (process.env.ON_DEMAND_BASE_URL ?? "https://api.on-demand.io").replace(/\/$/, "");
 const SERVERLESS = (process.env.SERVERLESS_BASE_URL ?? "https://serverless.on-demand.io/apps/bcap-portfolio-api").replace(/\/$/, "");
 const SECRET = process.env.INGEST_SECRET ?? "<INGEST_SECRET>";
 const EMAIL = process.env.NOTIFY_EMAIL ?? "mk@airev.ae";
-const PLUGINS = { perplexity: "plugin-1722260873", linkedin: "plugin-1718116202", reddit: "plugin-1748003575", x: "plugin-1751872652", gpt: "plugin-1741871229" };
-const DEFERRED = ["plugin-1777018662"]; // PitchBook — status pending; NEVER wired into a node
+const PLUGINS = { perplexity: "plugin-1722260873" }; // Perplexity is the ONLY plugin wired into any node (all others removed 2026-10-10)
 const FOCUS = ["Perplexity AI", "Apptronik", "Fervo Energy", "Flutterwave", "WRITER"];
 
 const seed = JSON.parse(fs.readFileSync(path.resolve("data/seed.json"), "utf8"));
@@ -35,12 +34,12 @@ function workflow(name: string, cs: { name: string; slug: string }[]) {
   const companies = list(cs);
   const nodes: any[] = [
     { key: "research", kind: "source", type: "llm", dependencies: [], nextNodeKeys: ["verify"], ...pos(0),
-      llm: { model: MODEL, plugins: [{ id: PLUGINS.perplexity }, { id: PLUGINS.linkedin }, { id: PLUGINS.reddit }, { id: PLUGINS.x }],
-        fulfillmentPrompt: "You are the B Capital Portfolio Intelligence research agent. Use the attached agents for EVERY company listed: Perplexity (latest news with source URLs and image URLs, last 7 days), LinkedIn Search (company updates and headcount), Reddit posts+comments (community sentiment), X Search Agent (posts from the last 7 days). Output STRICT JSON only, no prose.",
+      llm: { model: MODEL, plugins: [{ id: PLUGINS.perplexity }],
+        fulfillmentPrompt: "You are the B Capital Portfolio Intelligence research agent. Use the attached Perplexity agent for EVERY company listed: latest news with source URLs and image URLs (last 7 days), company updates / headcount signals and community sentiment as far as Perplexity surfaces them. Output STRICT JSON only, no prose.",
         prompt: `Research these B Capital portfolio companies: ${companies}. For each company return an object {\"slug\",\"name\",\"news\":[{\"title\",\"url\",\"source\",\"published_at\",\"summary\",\"image_url\"}],\"linkedin\":{\"headcount\",\"updates\":[...]},\"reddit\":[{\"url\",\"quote\"}],\"x\":[{\"url\",\"quote\"}]}. Return {\"companies\":[...]} as pure JSON.` } },
     { key: "verify", kind: "intermediate", type: "llm", dependencies: [{ nodeKey: "research" }], nextNodeKeys: ["score"], ...pos(1),
-      llm: { model: MODEL, plugins: [{ id: PLUGINS.gpt }],
-        fulfillmentPrompt: "You are a funding-verification analyst. Use GPT Search to verify funding, valuation, status changes (IPO, M&A, rename, shutdown) and exits for each company. PitchBook data is NOT available in this run: set pitchbook_status to \"pending\" for every company. Output STRICT JSON only.",
+      llm: { model: MODEL, plugins: [{ id: PLUGINS.perplexity }],
+        fulfillmentPrompt: "You are a funding-verification analyst. Use Perplexity to verify funding, valuation, status changes (IPO, M&A, rename, shutdown) and exits for each company. PitchBook data is NOT available in this run: set pitchbook_status to \"pending\" for every company. Output STRICT JSON only.",
         prompt: `Verify funding/valuation/exit facts for: ${companies}. Research input: {{research}}. Return {\"companies\":[{\"slug\",\"funding_verification\",\"stage\",\"status\",\"employees\",\"pitchbook_status\":\"pending\",\"sources\":[\"url\"]}]} as pure JSON.` } },
     { key: "score", kind: "intermediate", type: "llm", dependencies: [{ nodeKey: "research" }, { nodeKey: "verify" }], nextNodeKeys: ["deliver"], ...pos(2),
       llm: { model: MODEL, plugins: [],
@@ -70,7 +69,7 @@ function workflow(name: string, cs: { name: string; slug: string }[]) {
 const plans = [workflow("bcap-focus-daily", focus), ...batches.map((b, i) => workflow(`bcap-portfolio-daily-batch-${i + 1}`, b))];
 fs.mkdirSync("workflows/bodies", { recursive: true });
 for (const p of plans) fs.writeFileSync(`workflows/bodies/${p.name}.json`, JSON.stringify(p, null, 2).replaceAll(SECRET, "<INGEST_SECRET>"));
-fs.writeFileSync("workflows/plan.json", JSON.stringify({ model: MODEL, cron: CRON, deferred_plugins: DEFERRED, workflows: plans.map((p) => ({ name: p.name, companies: p.nodes[0].llm.prompt.match(/slug: ([a-z0-9-]+)/g)!.length })) }, null, 2));
+fs.writeFileSync("workflows/plan.json", JSON.stringify({ model: MODEL, cron: CRON, plugins: [PLUGINS.perplexity], workflows: plans.map((p) => ({ name: p.name, companies: p.nodes[0].llm.prompt.match(/slug: ([a-z0-9-]+)/g)!.length })) }, null, 2));
 
 const mode = process.argv[2] ?? "plan";
 if (mode === "plan") { console.log(JSON.stringify({ planned: plans.map((p) => p.name), batches: batches.map((b) => b.length), focus: focus.map((f) => f.slug) })); process.exit(0); }

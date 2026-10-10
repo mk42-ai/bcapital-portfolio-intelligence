@@ -50,3 +50,9 @@ export function localThreadStorage(): ChatStorage {
 }
 /** Persist the live thread's messages (called from a store subscriber so every streamed update is saved). */
 export const saveMessages = (threadId: string, messages: Message[]) => write(MSG(threadId), messages);
+
+/** Per-answer provenance (model · reasoning mode · plugin · first-token ms · metrics · thinking trace · typed error), keyed like sources. */
+export type StoredMeta = { model: string; modelId: string; reasoningMode: string; pluginId: string; firstTokenMs: number | null; firstStatusMs: number | null; chunks: number; metrics: Record<string, number> | null; thinking: string; error: { code: string; message: string } | null; at: string };
+const META = (h: string) => `bcap.chat.meta.v2.${h}`;
+export const rememberMeta = (key: string, meta: StoredMeta) => write(META(key), meta);
+export const metaFor = (key: string) => read<StoredMeta | null>(META(key), null);

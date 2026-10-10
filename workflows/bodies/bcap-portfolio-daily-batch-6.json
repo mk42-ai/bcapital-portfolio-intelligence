@@ -36,22 +36,13 @@
         "height": 500
       },
       "llm": {
-        "model": "predefined-claude-fable-5.1",
+        "model": "predefined-deepseek-flash",
         "plugins": [
           {
             "id": "plugin-1722260873"
-          },
-          {
-            "id": "plugin-1718116202"
-          },
-          {
-            "id": "plugin-1748003575"
-          },
-          {
-            "id": "plugin-1751872652"
           }
         ],
-        "fulfillmentPrompt": "You are the B Capital Portfolio Intelligence research agent. Use the attached agents for EVERY company listed: Perplexity (latest news with source URLs and image URLs, last 7 days), LinkedIn Search (company updates and headcount), Reddit posts+comments (community sentiment), X Search Agent (posts from the last 7 days). Output STRICT JSON only, no prose.",
+        "fulfillmentPrompt": "You are the B Capital Portfolio Intelligence research agent. Use the attached Perplexity agent for EVERY company listed: latest news with source URLs and image URLs (last 7 days), company updates / headcount signals and community sentiment as far as Perplexity surfaces them. Output STRICT JSON only, no prose.",
         "prompt": "Research these B Capital portfolio companies: Volastra (slug: volastra); When (slug: when); Wildfire (slug: wildfire); Xingyun (slug: xingyun); Yalo (slug: yalo); Zaihui (slug: zaihui). For each company return an object {\"slug\",\"name\",\"news\":[{\"title\",\"url\",\"source\",\"published_at\",\"summary\",\"image_url\"}],\"linkedin\":{\"headcount\",\"updates\":[...]},\"reddit\":[{\"url\",\"quote\"}],\"x\":[{\"url\",\"quote\"}]}. Return {\"companies\":[...]} as pure JSON."
       }
     },
@@ -76,13 +67,13 @@
         "height": 500
       },
       "llm": {
-        "model": "predefined-claude-fable-5.1",
+        "model": "predefined-deepseek-flash",
         "plugins": [
           {
-            "id": "plugin-1741871229"
+            "id": "plugin-1722260873"
           }
         ],
-        "fulfillmentPrompt": "You are a funding-verification analyst. Use GPT Search to verify funding, valuation, status changes (IPO, M&A, rename, shutdown) and exits for each company. PitchBook data is NOT available in this run: set pitchbook_status to \"pending\" for every company. Output STRICT JSON only.",
+        "fulfillmentPrompt": "You are a funding-verification analyst. Use Perplexity to verify funding, valuation, status changes (IPO, M&A, rename, shutdown) and exits for each company. PitchBook data is NOT available in this run: set pitchbook_status to \"pending\" for every company. Output STRICT JSON only.",
         "prompt": "Verify funding/valuation/exit facts for: Volastra (slug: volastra); When (slug: when); Wildfire (slug: wildfire); Xingyun (slug: xingyun); Yalo (slug: yalo); Zaihui (slug: zaihui). Research input: {{research}}. Return {\"companies\":[{\"slug\",\"funding_verification\",\"stage\",\"status\",\"employees\",\"pitchbook_status\":\"pending\",\"sources\":[\"url\"]}]} as pure JSON."
       }
     },
@@ -110,10 +101,10 @@
         "height": 500
       },
       "llm": {
-        "model": "predefined-claude-fable-5.1",
+        "model": "predefined-deepseek-flash",
         "plugins": [],
         "fulfillmentPrompt": "You are the sentiment scorer for B Capital Portfolio Intelligence. Score each company from -1 (very negative) to 1 (very positive) using the evidence provided; label with exactly one of: very negative, negative, neutral, positive, very positive (thresholds: <=-0.6, <=-0.2, <0.2, <0.6, else). Each evidence item must cite a real url from the inputs and a short verbatim quote. Compute the batch average, per-sector averages and note that deltas vs the previous run are computed server-side from stored history. Output STRICT JSON only — this payload is POSTed verbatim to the ingest API.",
-        "prompt": "Inputs — research: {{research}} ; verification: {{verify}}. Workflow name: bcap-portfolio-daily-batch-6. Model: predefined-claude-fable-5.1. Return exactly {\"workflow_name\":\"bcap-portfolio-daily-batch-6\",\"model\":\"predefined-claude-fable-5.1\",\"run_at\":\"<ISO-8601 UTC>\",\"companies\":[{\"slug\",\"name\",\"status\",\"stage\",\"employees\",\"pitchbook_status\":\"pending\",\"sentiment\":{\"score\":<-1..1>,\"label\":\"...\",\"evidence\":[{\"url\",\"quote\"}]},\"news\":[{\"title\",\"url\",\"source\",\"published_at\",\"summary\",\"image_url\"}]}],\"rollups\":{\"batch_avg\":<number>,\"by_sector\":{}}} as pure JSON with no markdown fences."
+        "prompt": "Inputs — research: {{research}} ; verification: {{verify}}. Workflow name: bcap-portfolio-daily-batch-6. Model: predefined-deepseek-flash. Return exactly {\"workflow_name\":\"bcap-portfolio-daily-batch-6\",\"model\":\"predefined-deepseek-flash\",\"run_at\":\"<ISO-8601 UTC>\",\"companies\":[{\"slug\",\"name\",\"status\",\"stage\",\"employees\",\"pitchbook_status\":\"pending\",\"sentiment\":{\"score\":<-1..1>,\"label\":\"...\",\"evidence\":[{\"url\",\"quote\"}]},\"news\":[{\"title\",\"url\",\"source\",\"published_at\",\"summary\",\"image_url\"}]}],\"rollups\":{\"batch_avg\":<number>,\"by_sector\":{}}} as pure JSON with no markdown fences."
       }
     },
     {
@@ -137,7 +128,7 @@
         "height": 500
       },
       "llm": {
-        "model": "predefined-claude-fable-5.1",
+        "model": "predefined-deepseek-flash",
         "plugins": [],
         "fulfillmentPrompt": "Pass the JSON through unchanged. Do not add commentary.",
         "prompt": "{{score}}"

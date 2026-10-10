@@ -68,7 +68,7 @@ export const sentimentHistory = sqliteTable(
     label: text("label").notNull(),
     evidence: text("evidence", { mode: "json" }).$type<Evidence[]>().notNull(),
     delta: real("delta"), // vs previous row for the same company
-    model: text("model"), // e.g. predefined-claude-fable-5.1
+    model: text("model"), // e.g. predefined-deepseek-flash
     workflowId: text("workflow_id"),
     executionId: text("execution_id"),
     ingestRunId: text("ingest_run_id"),

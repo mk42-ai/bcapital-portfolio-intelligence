@@ -11,7 +11,7 @@ export default async function NewsPage() {
   const companies = cs.data.filter((c) => c.b_capital_role !== "firm").map((c) => ({ slug: c.slug, name: c.name, sector: c.sector, score: c.sentiment.score, delta: c.sentiment.delta ?? null }));
   return (
     <>
-      <PageHeader title="News Pulse" lede="Daily feed written back by the 06:00 UTC workflows (Perplexity · GPT Search · LinkedIn · Reddit · X), grouped by day, with each company's sentiment delta vs the previous run." source={news.source} fetchedAt={news.fetched_at} />
+      <PageHeader title="News Pulse" lede="Daily feed written back by the 06:00 UTC workflows (Perplexity), grouped by day, with each company's sentiment delta vs the previous run." source={news.source} fetchedAt={news.fetched_at} />
       <Suspense fallback={<Skeleton className="h-64 w-full" />}><NewsFeed items={news.data} companies={companies} /></Suspense>
     </>
   );

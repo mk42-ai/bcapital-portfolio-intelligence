@@ -6,7 +6,9 @@ to the OnDemand Chat & Agent Tools API **only through same-origin server routes*
 authenticate with the server-side `ONDEMAND_API_KEY` (`apikey` header). **Light theme only**, **Lucide icons only** (no raster/AI imagery),
 chat UI = **Open Intelligent UI** shell on the OpenUI `AgentInterface`.
 
-Live preview (ephemeral Vercel sandbox, see HANDOFF for TTL): https://sb-1z9qy0mx48sk.vercel.run (live-data release, HANDOFF §9) (previous build: https://sb-3umbne3uc2g2.vercel.run, HANDOFF §8)
+Live preview (ephemeral Vercel sandbox, see HANDOFF for TTL): https://sb-1z9qy0mx48sk.vercel.run (DeepSeek Flash v4.1 · Perplexity-only release, HANDOFF §10; backend https://sb-7d0g7nrod31w.vercel.run)
+
+**Fixed OnDemand configuration (2026-10-10, no fallback chain anywhere):** model `predefined-deepseek-flash` (**DeepSeek Flash v4.1**, endpoint_name `deepseek-v4.1-flash`) · `reasoningMode: "medium"` · `responseMode: "stream"` · `pluginIds: ["plugin-1722260873"]` (**Perplexity — the only plugin**, on the session and on every query). When Perplexity fails upstream the chat shows a red error card and the refresh pipeline records the error verbatim — no other plugin or model is ever substituted.
 
 ## Screens
 | Route | What it shows |
@@ -16,7 +18,7 @@ Live preview (ephemeral Vercel sandbox, see HANDOFF for TTL): https://sb-1z9qy0m
 | `/company/[slug]` | Themed with the company's own `brand_tokens` (AA-checked at runtime, B Capital fallback): logo, palette swatches with WCAG ratios, fonts, evidence-tier badge, B Capital position, sentiment timeline + evidence, PitchBook-style funding timeline with "B Capital participated" markers, news cards with image + source chips, "Last updated by daily workflow … (workflow id, 06:00 UTC)" stamp |
 | `/news` | News Pulse grouped by day; filters by company / sector / source plugin / sentiment / text; Δ vs previous run rail; empty-state asset |
 | `/chat` | **Open Intelligent UI** chat (OpenUI `AgentInterface` from `@openuidev/react-ui`) → `POST /api/chat` (AG-UI SSE) → OnDemand `POST /chat/v1/sessions` + `POST /chat/v1/sessions/{id}/query` (`responseMode: "stream"`, Perplexity `plugin-1722260873` first). Streamed markdown answer, research/tool activity, a **citation list** (one anchor per source URL, favicon + host + path) under every assistant message, conversation starters, thread list + messages + OnDemand `sessionId` persisted in localStorage (`bcap.chat.threads.v2`, `bcap.chat.thread.v2.<id>`, `bcap.chat.session.v2.<id>`; v1 threads imported once). Deep link `/chat?q=…` sends a question on load. |
-| `/settings` | optional per-user apikey override (localStorage only, "Test connection"), externalUserId, model endpointId (default `predefined-claude-fable-5.1`), verified-plugin toggles (Perplexity on by default — exactly one plugin per request; GPT Search / US Stock Fundamentals / Reddit / X opt-in; LinkedIn dropped; Portfolio Plugin = registration pending; PitchBook `plugin-1777018662` = deferred with countdown), backend base URL, reset |
+| `/settings` | optional per-user apikey override (localStorage only, "Test connection"), externalUserId, backend URL, default context companies; model (DeepSeek Flash v4.1 · medium) and plugin (Perplexity `plugin-1722260873`) are shown read-only — fixed product-wide |
 
 ## Architecture
 ```
@@ -24,7 +26,7 @@ browser ──(AG-UI SSE)──► Next.js /api/chat (OpenUI bridge) ──(apik
 browser ──(optional x-ondemand-key)──► Next.js /api/ondemand/[...path] ──(apikey)──► https://api.on-demand.io  (sessions · query SSE · messages · plugin list)
 browser ────────────────────► Next.js server components ───────────────► portfolio backend (PORTFOLIO_API_URL) → SQLite  (ISR 120 s, snapshot fallback)
 browser ────────────────────► Next.js /api/portfolio/[...path] (read-only pass-through, /ingest and /refresh blocked)
-OnDemand Flow Builder (7 cron workflows, 06:00 UTC, Fable 5.1) ──► POST {backend}/ingest  (X-Ingest-Secret)
+OnDemand Flow Builder (7 cron workflows, 06:00 UTC, DeepSeek Flash v4.1 + Perplexity only) ──► POST {backend}/ingest  (X-Ingest-Secret)
 backend scheduler (REFRESH_CRON_MINUTES, default 60) / POST {backend}/refresh (X-Ingest-Secret) ──(apikey)──► OnDemand Chat API + Perplexity plugin-1722260873 ──► news_items (image_url, published_at)
 ```
 * Server Components by default; `"use client"` only for filters, news feed, chat, settings, pickers, tooltips.
@@ -57,10 +59,8 @@ News cards, the News Pulse and the chat context read `news_items` rows that the 
 | Variable | Default | Purpose |
 |---|---|---|
 | `NEXT_PUBLIC_PORTFOLIO_API_URL` | https://sb-7d0g7nrod31w.vercel.run | Backend shown/overridable in Settings (previous: `https://sb-3az18qgrrd3p.vercel.run`) |
-| `NEXT_PUBLIC_DEFAULT_MODEL` | `predefined-claude-fable-5.1` | Chat endpointId (Fable 5.1) |
 | `NEXT_PUBLIC_DEFAULT_EXTERNAL_USER_ID` | `INV-001` | OnDemand externalUserId |
 | `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` | *(empty)* | Portfolio Plugin id — **no public registration endpoint exists** (HANDOFF §9.6); leave empty, context is injected server-side |
-| `NEXT_PUBLIC_PITCHBOOK_PLUGIN_ID` | `plugin-1777018662` | Labelled "PitchBook"; deferred |
 | `NEXT_PUBLIC_EARLIEST_TEST_UTC` | `2026-10-09T12:37:25Z` | Countdown for the deferred plugin |
 | `NEXT_PUBLIC_SITE_URL` | preview URL | `metadataBase` for OG images |
 | `ONDEMAND_BASE_URL` | `https://api.on-demand.io` | Upstream for `/api/chat` and `/api/ondemand/*` (server) |
@@ -88,12 +88,7 @@ Security scheme: `apikey` (`in: header`, `name: apikey`). Errors: `4XX`/`5XX` �
 | Plugin ID | Name | Session | Query | First token | Total | Timestamp (UTC) | Decision |
 |---|---|---|---|---|---|---|---|
 | `plugin-1722260873` | Perplexity | 201 | 200 | 37.5 s | 54.2 s | 2026-10-09T17:27:16Z | **kept, default on** |
-| `plugin-1741871229` | GPT Search | 201 | 200 | 85.0 s | 109.1 s | 2026-10-09T17:28:10Z | kept, **opt-in** (sending two plugins per request stalled the run) |
-| `plugin-1716429542` | US Stock Fundamental Analysis | 201 | 200 | 35.4 s | 40.8 s | 2026-10-09T17:35:21Z | kept, opt-in |
-| `plugin-1748003575` | Reddit Posts | 201 | 200 | 38.4 s | 45.2 s | 2026-10-09T17:32:30Z | kept, opt-in |
-| `plugin-1751872652` | X Search Agent | 201 | 200 | 105.3 s | 125.5 s | 2026-10-09T17:33:16Z | kept, opt-in (slow) |
-| `plugin-1718116202` | LinkedIn Search | 201 | 200 | 139.5 s | 151.1 s | 2026-10-09T17:29:59Z | **dropped** — tool returned 404 inside the answer |
-| `plugin-1777018662` | PitchBook Investor Finder | — | — | — | — | — | deferred (never sent) |
+| _(other plugins)_ | GPT Search, US Stock Fundamentals, Reddit, X Search, LinkedIn, PitchBook | — | — | — | — | 2026-10-09 | **removed on 2026-10-10** — the product sends exactly one plugin (Perplexity); their ids no longer appear in code or config |
 
 ## Chat UI provenance
 * **Open Intelligent UI** — https://github.com/thesysdev/open-intelligent-ui @ `3b39c06b954e87c394ef95fee41a7e0084f94a27` (package `openui-self-hosted` 0.1.1, `private: true`, **not on npm**, README: "Requires Node 24"). Only its generic shell CSS and the neutral `createTheme` palette were vendored into `src/components/chat/open-intelligent-ui/` (see `ATTRIBUTION.md`); the travel demo components, MapLibre and the OpenUI Gateway route were not copied.
@@ -101,3 +96,26 @@ Security scheme: `apikey` (`in: header`, `name: apikey`). Errors: `4XX`/`5XX` �
 * Node: the app builds and runs on **Node 22** (sandbox `v22.22.2`, local `v22.23.3`) — the Node 24 requirement applies to open-intelligent-ui's own Gateway server, which is not used here.
 
 See `docs/HANDOFF.md` for IDs, QA results, limitations and next steps.
+
+## `/api/chat` SSE event schema (AG-UI frames, one `data: {json}\n\n` per upstream event, terminal `data: [DONE]`)
+| Frame | When | Payload |
+|---|---|---|
+| `RUN_STARTED` | synchronously on request receipt (first visible event < 400 ms) | `{threadId, runId}` |
+| `CUSTOM ondemand.status` | every phase change | `{phase: connecting · creating-session · querying · streaming · planning · researching · answering · done, elapsedMs, …}` |
+| `CUSTOM ondemand.session` | session known | `{sessionId, created, viaHeader, endpointId, reasoningMode, pluginIds}` — the client persists it per thread and sends it back as `context.sessionId` (turn 2 reuses the session) |
+| `TOOL_CALL_START / ARGS / END` | first upstream planning/step frame | `toolCallName "Perplexity"`, args `{plugin, pluginId, query, endpointId, reasoningMode}` → card **"Searching with Perplexity"** (Loader2) |
+| `CUSTOM ondemand.thinking` | every `planning_thinking` / `planning_output` / `step_thinking` / `step_output` / `fulfillment_thinking` delta | `{kind, delta}` → collapsible **Thinking trace** |
+| `CUSTOM ondemand.sources` | every `plugin_sources` frame (partial) and once at the end | `{sources[{url,title,sourceName,imageUrl?}], pluginId, partial}` → card **"Perplexity searched · N sources"** (Check) + clickable list with Google favicons |
+| `TOOL_CALL_RESULT` | plugin done or failed | `{status: ok · error, plugin, sources, message?}`; on failure also `isError: true, error` → card **"Perplexity failed"** (AlertTriangle, red) |
+| `TEXT_MESSAGE_START / CONTENT / END` | answer deltas (`fulfillment.answer`) flushed per upstream event | progressive markdown |
+| `CUSTOM ondemand.metrics` | `metricsLog` | `{publicMetrics{inputTokens,outputTokens,totalTokens,ragTimeSec,fulfillmentTimeSec,totalTimeSec}, firstTokenMs}` → tokens on the answer badge |
+| `CUSTOM ondemand.error` | HTTP error, `[ERROR]:` frame, `eventType:"error"`, or the plugin-failure pattern (`Not enough credits` / `"error":"Internal server error"` / `tool returned an error`) in any delta | `{code, message, raw}` → red error banner with "show raw frame" |
+| `RUN_FINISHED` / `RUN_ERROR` | end | — |
+
+Per-answer badge: `DeepSeek Flash v4.1 · medium · plugin-1722260873 · first token N ms` (N measured client-side from send to the first `TEXT_MESSAGE_CONTENT`). Audit: every turn appends `{request (apikey redacted), first 10 raw upstream events, timings}` to `web/proof/chat-payload-audit.json` (`ONDEMAND_PAYLOAD_AUDIT=0` disables).
+
+## Logos & images
+Every logo/thumbnail `<img>` goes through `LogoImg` / `CompanyLogo` / `NewsThumb` with an `onError` + `naturalWidth === 0` fallback to a serif-initial monogram tile (never an AI-generated asset). `perplexity-ai` uses the locally hosted official mark `public/brand/logos/perplexity.svg` (downloaded unaltered from `https://www.perplexity.ai/favicon.svg`). `npm run logo:audit` → `proof/logo-audit.json` (2026-10-10: 137 backend logo URLs → 136 ok · 1 fixed (local asset) · 0 fallback); the browser-side `naturalWidth>0` check runs in `e2e/qa-routes.spec.ts`.
+
+## GROWTH values (onboarding)
+`src/components/shell/growth-values.tsx`: six `<button aria-expanded aria-controls>` tiles (Generosity · Resilience · Open-mindedness · Will · Teamwork · Humility); hover/focus lift (−2 px + shadow) with a serif-initial tile accent; click / Enter / Space expands an inline description (`grid-template-rows 0fr→1fr` + opacity); Arrow/Home/End move focus; `prefers-reduced-motion` disables transforms and transitions. Lucide `ChevronDown` indicator.

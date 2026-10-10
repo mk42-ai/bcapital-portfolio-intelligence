@@ -7,7 +7,7 @@ import { DEFAULT_FOCUS } from "@/lib/plugins";
 import { Button } from "@/components/ui/button";
 import { Input, Field } from "@/components/ui/input";
 import { CompanyPicker } from "@/components/chat/company-picker";
-const GROWTH = [["G", "Generosity"], ["R", "Resilience"], ["O", "Open-mindedness"], ["W", "Will"], ["T", "Teamwork"], ["H", "Humility"]];
+import { GrowthValues } from "@/components/shell/growth-values";
 export function OnboardingForm({ options }: { options: { slug: string; name: string; sector: string; logo_url?: string | null }[] }) {
   const [s, set] = useSettings(); const router = useRouter();
   const [key, setKey] = useState(s.apikey); const [picked, setPicked] = useState<string[]>(s.companies?.length ? s.companies : DEFAULT_FOCUS); const [err, setErr] = useState("");
@@ -22,9 +22,7 @@ export function OnboardingForm({ options }: { options: { slug: string; name: str
           <div className="flex flex-wrap items-center gap-3"><BrandLogo height={32} /><p className="text-xs uppercase tracking-[0.2em] text-muted">Welcome to Portfolio Intelligence</p></div>
           <h1 className="mt-3 font-display text-4xl font-semibold leading-[1.05] sm:text-5xl">We empower entrepreneurs to think bigger. Scale faster. Grow global.</h1>
           <p className="mt-4 max-w-xl text-base text-muted">Catalysts. Questioners. Visionaries. — one workspace for 135 portfolio companies: brand systems, daily news pulse, sentiment scored by Fable 5.1, and an analyst chat grounded in the portfolio database.</p>
-          <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3" aria-label="GROWTH values">
-            {GROWTH.map(([l, v]) => <li key={v} className="card flex items-center gap-3 px-3 py-2.5"><span className="grid size-8 place-items-center rounded-md border border-border bg-surface-2 font-display text-base font-bold text-foreground">{l}</span><span className="text-sm font-medium">{v}</span></li>)}
-          </ul>
+          <GrowthValues />
         </div>
         <form className="card space-y-5 p-6" onSubmit={(e) => { e.preventDefault(); finish(); }} aria-labelledby="ob-title">
           <h2 id="ob-title" className="font-display text-2xl font-semibold">Set up your workspace</h2>

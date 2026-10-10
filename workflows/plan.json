@@ -1,8 +1,8 @@
 {
-  "model": "predefined-claude-fable-5.1",
+  "model": "predefined-deepseek-flash",
   "cron": "0 0 6 * * *",
-  "deferred_plugins": [
-    "plugin-1777018662"
+  "plugins": [
+    "plugin-1722260873"
   ],
   "workflows": [
     {

@@ -1,0 +1,200 @@
+{
+  "desktop": {
+    "turn1": {
+      "question": "What is the latest news about Fervo Energy? Cite sources.",
+      "firstStatusMs": 26,
+      "firstTokenMs": 7979,
+      "headersMs": 24.299999952316284,
+      "totalMs": 12094,
+      "chunks": 179,
+      "dataLines": 202,
+      "frameTypes": [
+        "RUN_STARTED",
+        "CUSTOM",
+        "TOOL_CALL_START",
+        "TOOL_CALL_ARGS",
+        "TOOL_CALL_END",
+        "TOOL_CALL_RESULT",
+        "TEXT_MESSAGE_START",
+        "TEXT_MESSAGE_CONTENT",
+        "TEXT_MESSAGE_END",
+        "RUN_FINISHED"
+      ],
+      "cardTransitions": [
+        "searching",
+        "failed"
+      ],
+      "pendingPhases": [
+        "connecting",
+        "planning",
+        "researching"
+      ],
+      "sources": 3,
+      "sourcesTotalOnPage": 3,
+      "errorCode": "plugin_error",
+      "errorText": "Perplexity returned an upstream error — no other plugin was substituted. Perplexity (plugin-1722260873) returned an upstream error: \"Internal server error — Not enough credits\" (the OnDemand account's",
+      "badgeText": "DeepSeek Flash v4.1\n·\nmedium\n·\nplugin-1722260873\n·\nfirst token 7,979 ms\n·\n5,842 tokens",
+      "badgeFirstTokenMs": "7979",
+      "pendingFirstStatusMs": null,
+      "sessionId": "6ac9b9f4f7979c7d562ae403",
+      "answerLength": 2888,
+      "answerExcerpt": "Thinking trace\n3,921 chars\n latest news about Fervo Energy with citations. I have portfolio data with three headlines. The Perplexity plugin failed (\"Not enough credits\"), so I should inform about the",
+      "submitLabelBefore": "Send message",
+      "submitLabelDuringStream": "Cancel message",
+      "submitLabelAfter": "Send message",
+      "stopToSendOk": true,
+      "midstreamToolcardAtMs": 1723,
+      "streamDone": true,
+      "streamError": null
+    },
+    "turn2": {
+      "question": "Summarise that in one sentence.",
+      "firstStatusMs": 26,
+      "firstTokenMs": 4522,
+      "headersMs": 25.09999990463257,
+      "totalMs": 7043,
+      "chunks": 58,
+      "dataLines": 76,
+      "frameTypes": [
+        "RUN_STARTED",
+        "CUSTOM",
+        "TOOL_CALL_START",
+        "TOOL_CALL_ARGS",
+        "TOOL_CALL_END",
+        "TEXT_MESSAGE_START",
+        "TEXT_MESSAGE_CONTENT",
+        "TOOL_CALL_RESULT",
+        "TEXT_MESSAGE_END",
+        "RUN_FINISHED"
+      ],
+      "cardTransitions": [
+        "searching",
+        "failed"
+      ],
+      "pendingPhases": [
+        "connecting",
+        "planning",
+        "researching"
+      ],
+      "sources": 0,
+      "sourcesTotalOnPage": 3,
+      "errorCode": null,
+      "errorText": null,
+      "badgeText": "DeepSeek Flash v4.1\n·\nmedium\n·\nplugin-1722260873\n·\nfirst token 4,522 ms\n·\n5,865 tokens",
+      "badgeFirstTokenMs": "4522",
+      "pendingFirstStatusMs": null,
+      "sessionId": "6ac9b9f4f7979c7d562ae403",
+      "answerLength": 988,
+      "answerExcerpt": "Thinking trace\n1,347 chars\ntion. No plugin needed. So plan_required{\"title\": \"I'll condense my earlier Fervo Energy news answer into a single sentence.\", \"objective\": \"\", \"plan_required\": false, \"plan",
+      "submitLabelBefore": "Send message",
+      "submitLabelDuringStream": "Cancel message",
+      "submitLabelAfter": "Send message",
+      "stopToSendOk": true,
+      "midstreamToolcardAtMs": 1489,
+      "streamDone": true,
+      "streamError": null
+    },
+    "sessionReused": true,
+    "pageErrors": [],
+    "generatedAt": "2026-10-10T04:07:36.597Z"
+  },
+  "mobile": {
+    "turn1": {
+      "question": "What is the latest news about Fervo Energy? Cite sources.",
+      "firstStatusMs": 31,
+      "firstTokenMs": 11346,
+      "headersMs": 29.100000143051147,
+      "totalMs": 15097,
+      "chunks": 215,
+      "dataLines": 248,
+      "frameTypes": [
+        "RUN_STARTED",
+        "CUSTOM",
+        "TOOL_CALL_START",
+        "TOOL_CALL_ARGS",
+        "TOOL_CALL_END",
+        "TOOL_CALL_RESULT",
+        "TEXT_MESSAGE_START",
+        "TEXT_MESSAGE_CONTENT",
+        "TEXT_MESSAGE_END",
+        "RUN_FINISHED"
+      ],
+      "cardTransitions": [
+        "searching",
+        "failed"
+      ],
+      "pendingPhases": [
+        "connecting",
+        "planning",
+        "researching"
+      ],
+      "sources": 2,
+      "sourcesTotalOnPage": 2,
+      "errorCode": "plugin_error",
+      "errorText": "Perplexity returned an upstream error — no other plugin was substituted. Perplexity (plugin-1722260873) returned an upstream error: \"Internal server error — Not enough credits\" (the OnDemand account's",
+      "badgeText": "DeepSeek Flash v4.1\n·\nmedium\n·\nplugin-1722260873\n·\nfirst token 11,346 ms\n·\n6,815 tokens",
+      "badgeFirstTokenMs": "11346",
+      "pendingFirstStatusMs": null,
+      "sessionId": "6ac9b9f3f7979c7d562ae402",
+      "answerLength": 2429,
+      "answerExcerpt": "Thinking trace\n5,781 chars\nrameters_hydrated\": true, \"dependencies\": [], \"identifier\": \"llm_know dependencies [].ledge\"}]}The user asks about latest news about Fervo Energy. The plugin (Perplexity) fa",
+      "submitLabelBefore": "Send message",
+      "submitLabelDuringStream": "Cancel message",
+      "submitLabelAfter": "Send message",
+      "stopToSendOk": true,
+      "midstreamToolcardAtMs": 1834,
+      "streamDone": true,
+      "streamError": null
+    },
+    "turn2": {
+      "question": "Summarise that in one sentence.",
+      "firstStatusMs": 33,
+      "firstTokenMs": 3601,
+      "headersMs": 29.700000047683716,
+      "totalMs": 6194,
+      "chunks": 39,
+      "dataLines": 55,
+      "frameTypes": [
+        "RUN_STARTED",
+        "CUSTOM",
+        "TOOL_CALL_START",
+        "TOOL_CALL_ARGS",
+        "TOOL_CALL_END",
+        "TEXT_MESSAGE_START",
+        "TEXT_MESSAGE_CONTENT",
+        "TOOL_CALL_RESULT",
+        "TEXT_MESSAGE_END",
+        "RUN_FINISHED"
+      ],
+      "cardTransitions": [
+        "searching",
+        "failed"
+      ],
+      "pendingPhases": [
+        "connecting",
+        "planning",
+        "researching"
+      ],
+      "sources": 0,
+      "sourcesTotalOnPage": 2,
+      "errorCode": null,
+      "errorText": null,
+      "badgeText": "DeepSeek Flash v4.1\n·\nmedium\n·\nplugin-1722260873\n·\nfirst token 3,601 ms\n·\n6,871 tokens",
+      "badgeFirstTokenMs": "3601",
+      "pendingFirstStatusMs": null,
+      "sessionId": "6ac9b9f3f7979c7d562ae402",
+      "answerLength": 906,
+      "answerExcerpt": "Thinking trace\n736 chars\nEnergy answer into a single sentence.\", \"objective\": \"\", \"plan_required\": false, \"plan_skip_reason\": \"This is a conversational request to shorten my prior response into one se",
+      "submitLabelBefore": "Send message",
+      "submitLabelDuringStream": "Cancel message",
+      "submitLabelAfter": "Send message",
+      "stopToSendOk": true,
+      "midstreamToolcardAtMs": 1819,
+      "streamDone": true,
+      "streamError": null
+    },
+    "sessionReused": true,
+    "pageErrors": [],
+    "generatedAt": "2026-10-10T04:07:38.123Z"
+  }
+}

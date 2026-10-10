@@ -1,0 +1,1254 @@
+{
+  "generatedAt": "2026-10-10T03:33:00.133Z",
+  "backend": "https://sb-7d0g7nrod31w.vercel.run",
+  "browserCheck": "pending",
+  "localLogos": {
+    "perplexity-ai": "/brand/logos/perplexity.svg"
+  },
+  "total": 137,
+  "ok": 136,
+  "fixed": 1,
+  "fallback": 0,
+  "rows": [
+    {
+      "slug": "1au",
+      "name": "1AU",
+      "logo_url": "https://cdn.prod.website-files.com/695f249d0e06dc7993695bde/696752d24bcb6ea0e8104335_1au.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2219,
+      "result": "ok"
+    },
+    {
+      "slug": "6sense",
+      "name": "6sense",
+      "logo_url": "https://b.capital/wp-content/uploads/2022/07/6sense-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1097,
+      "result": "ok"
+    },
+    {
+      "slug": "aimotive",
+      "name": "AIMotive",
+      "logo_url": "https://aimotive.com/image/layout_set_logo?img_id=184457",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 4868,
+      "result": "ok"
+    },
+    {
+      "slug": "artbio",
+      "name": "ARTBIO",
+      "logo_url": "https://artbio.com/static/partner-logo-alphagen-fbab084edf516a3fb53a6b69d49e53ca.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 19842,
+      "result": "ok"
+    },
+    {
+      "slug": "accacia",
+      "name": "Accacia",
+      "logo_url": "https://cdn.prod.website-files.com/67289d9b0c73de42a29a431d/67e276c41602eafb2bc6868e_Accacia%20Logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 5669,
+      "result": "ok"
+    },
+    {
+      "slug": "apptronik",
+      "name": "Apptronik",
+      "logo_url": "https://cdn.prod.website-files.com/6a0dd86942776facbc2f6ba4/6a32d000ae9712d1f8ed76c3_Apptronik-Logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 3257,
+      "result": "ok"
+    },
+    {
+      "slug": "archimetis",
+      "name": "Archimetis",
+      "logo_url": "https://www.google.com/s2/favicons?domain=archimetis.ai&sz=128",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 846,
+      "result": "ok",
+      "finalUrl": "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://archimetis.ai&size=128"
+    },
+    {
+      "slug": "aurora-yaocheng",
+      "name": "Aurora YaoCheng",
+      "logo_url": "https://www.yaocheng.cn/assets/web/images/logo2025-2.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 9843,
+      "result": "ok"
+    },
+    {
+      "slug": "axiom",
+      "name": "Axiom",
+      "logo_url": "https://axiommath.ai/logo/logoshort.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 3265,
+      "result": "ok"
+    },
+    {
+      "slug": "b-capital",
+      "name": "B Capital",
+      "logo_url": "https://b.capital/wp-content/uploads/2023/10/BCapital_Logo_XL.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 3557,
+      "result": "ok"
+    },
+    {
+      "slug": "baichuan",
+      "name": "Baichuan",
+      "logo_url": "https://b.capital/wp-content/uploads/2025/04/baichuan-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1504,
+      "result": "ok"
+    },
+    {
+      "slug": "bhanzu",
+      "name": "Bhanzu",
+      "logo_url": "https://bhanzu.com/_next/static/media/bhanzu_logo_black_md.f927c484.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1108,
+      "result": "ok"
+    },
+    {
+      "slug": "branch-international",
+      "name": "Branch International",
+      "logo_url": "https://d2c5ectx2y1vm9.cloudfront.net/assets/branch_logo_navy-7e548f86d075abfb2faf4d2097d5349d1da404030f5825a01f6e24d36cc60c46.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 3060,
+      "result": "ok"
+    },
+    {
+      "slug": "brik",
+      "name": "Brik",
+      "logo_url": "https://b.capital/wp-content/uploads/2023/10/brik-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 804,
+      "result": "ok"
+    },
+    {
+      "slug": "buildops",
+      "name": "BuildOps",
+      "logo_url": "https://cdn.prod.website-files.com/69ca5a8696b428c0fbc088cf/6a0e0627ca4f707caf443392_Helm.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 6177,
+      "result": "ok"
+    },
+    {
+      "slug": "cadence",
+      "name": "Cadence",
+      "logo_url": "https://www.google.com/s2/favicons?domain=cadence.care&sz=128",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1809,
+      "result": "ok",
+      "finalUrl": "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://cadence.care&size=128"
+    },
+    {
+      "slug": "carrick",
+      "name": "Carrick",
+      "logo_url": "https://d1io3yog0oux5.cloudfront.net/_5366194bb9d1e2e81a133cd09d9fc511/carricktherapeutics/files/theme/images/logo-sm.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 14341,
+      "result": "ok"
+    },
+    {
+      "slug": "carro",
+      "name": "Carro",
+      "logo_url": "https://b.capital/wp-content/uploads/2021/06/carro_logo_v2-svg.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 3003,
+      "result": "ok"
+    },
+    {
+      "slug": "centivo",
+      "name": "Centivo",
+      "logo_url": "https://centivo.com/wp-content/themes/studio-simpatico/svgs/logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 7160,
+      "result": "ok"
+    },
+    {
+      "slug": "certn",
+      "name": "Certn",
+      "logo_url": "https://certn.co/wp-content/uploads/2026/04/OpenGraph-2.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 55743,
+      "result": "ok"
+    },
+    {
+      "slug": "chipagents",
+      "name": "ChipAgents",
+      "logo_url": "https://chipagents.ai/redesign/assets/logo-dark-text.avif",
+      "status": 200,
+      "contentType": "image/avif",
+      "bytes": 36484,
+      "result": "ok"
+    },
+    {
+      "slug": "cloudwise",
+      "name": "Cloudwise",
+      "logo_url": "https://cloudwise.com/frontStatic/cn/image/header/logo-header4.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 24334,
+      "result": "ok"
+    },
+    {
+      "slug": "code-metal",
+      "name": "Code Metal",
+      "logo_url": "https://www.codemetal.ai/codemetal_logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 4462,
+      "result": "ok"
+    },
+    {
+      "slug": "coindcx",
+      "name": "CoinDCX",
+      "logo_url": "https://b.capital/wp-content/uploads/2025/04/coindcx-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1003,
+      "result": "ok"
+    },
+    {
+      "slug": "collinear-ai",
+      "name": "Collinear AI",
+      "logo_url": "https://www.collinear.ai/assets/images/og-card.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 110214,
+      "result": "ok",
+      "finalUrl": "https://collinear.ai/assets/images/og-card.jpg"
+    },
+    {
+      "slug": "companycam",
+      "name": "CompanyCam",
+      "logo_url": "https://companycam.imgix.net/images/CompanyCam-SEO.jpg?auto=format&amp;crop=focalpoint&amp;domain=companycam.imgix.net&amp;fit=crop&amp;fp-x=0.5&amp;fp-y=0.5&amp;h=630&amp;ixlib=php-3.3.1&amp;q=82&amp;w=1200",
+      "status": 200,
+      "contentType": "image/avif",
+      "bytes": 40210,
+      "result": "ok"
+    },
+    {
+      "slug": "curbwaste",
+      "name": "Curbwaste",
+      "logo_url": "https://cdn.prod.website-files.com/64a711ad4800f51470aab34c/6818791bdb96a62c0e8301a1_64a71d5a9edfe3959ede8398_logo-dark.svg.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 9874,
+      "result": "ok"
+    },
+    {
+      "slug": "dailyhunt",
+      "name": "DailyHunt",
+      "logo_url": "https://dailyhunt.in/images/logo_desktop.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 6819,
+      "result": "ok"
+    },
+    {
+      "slug": "deferred",
+      "name": "Deferred",
+      "logo_url": "https://cdn.prod.website-files.com/65c5a49004003b67856c2139/670f48e9c448950cd87c1bac_Logo.avif",
+      "status": 200,
+      "contentType": "image/avif",
+      "bytes": 5915,
+      "result": "ok"
+    },
+    {
+      "slug": "dream-labs",
+      "name": "Dream Labs",
+      "logo_url": "https://dreamlabs.ai/logos/nvidia.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 680,
+      "result": "ok"
+    },
+    {
+      "slug": "eeroq",
+      "name": "EeroQ",
+      "logo_url": "https://www.eeroq.com/wp-content/uploads/2026/06/large_Nature_Physics_logo.avif",
+      "status": 200,
+      "contentType": "image/avif",
+      "bytes": 14622,
+      "result": "ok"
+    },
+    {
+      "slug": "eureka-robotics",
+      "name": "Eureka Robotics",
+      "logo_url": "https://cdn.prod.website-files.com/6878c535e55b75b7bfa4aa52/68c1188e63cc3f24371bc312_Eureka_site_logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 8202,
+      "result": "ok"
+    },
+    {
+      "slug": "evenup",
+      "name": "EvenUp",
+      "logo_url": "https://www.evenuplaw.com/wp-content/uploads/evenup_logo_white.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2665,
+      "result": "ok"
+    },
+    {
+      "slug": "evidation-health",
+      "name": "Evidation Health",
+      "logo_url": "https://cdn.prod.website-files.com/61faadbd3ec7085e2c97a896/62e855384e5d222397000301_Logo_for_email_sig.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 50397,
+      "result": "ok"
+    },
+    {
+      "slug": "evommune",
+      "name": "Evommune",
+      "logo_url": "https://www.evommune.com//wp-content/uploads/2023/12/Evommune-Logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 11662,
+      "result": "ok"
+    },
+    {
+      "slug": "extend",
+      "name": "Extend",
+      "logo_url": "https://cdn.prod.website-files.com/607837a92aca1bb50efd05a0/607837b270d69139361ec841_amex.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 36313,
+      "result": "ok"
+    },
+    {
+      "slug": "falconx",
+      "name": "FalconX",
+      "logo_url": "https://cdn.prod.website-files.com/651c447abe93254c6451b1b3/6555443ed247940a60323128_FalconX_OpenGraph%20(1).png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 335964,
+      "result": "ok"
+    },
+    {
+      "slug": "fervo-energy",
+      "name": "Fervo Energy",
+      "logo_url": "https://fervoenergy.com/wp-content/uploads/2022/08/Fervo-logo-primary-768x166.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 58084,
+      "result": "ok"
+    },
+    {
+      "slug": "figment",
+      "name": "Figment",
+      "logo_url": "https://www.figment.io/wp-content/uploads/2025/12/figment-logo-colour-white.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 8955,
+      "result": "ok"
+    },
+    {
+      "slug": "floor-nfts",
+      "name": "Floor NFTs",
+      "logo_url": "https://rally.xyz/images/rally_logo.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 3078,
+      "result": "ok"
+    },
+    {
+      "slug": "flourish-health",
+      "name": "Flourish Health",
+      "logo_url": "https://cdn.prod.website-files.com/695bd918f5b3c00c810a2a13/695f8b67b05ae3aba433e307_1748f785cb29a159520e101b0945cffd_logo-header.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 20550,
+      "result": "ok"
+    },
+    {
+      "slug": "flowgpt",
+      "name": "FlowGPT",
+      "logo_url": "https://b.capital/wp-content/uploads/2026/09/flowgpt-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 2316,
+      "result": "ok"
+    },
+    {
+      "slug": "flutterwave",
+      "name": "Flutterwave",
+      "logo_url": "https://www.google.com/s2/favicons?domain=flutterwave.com&sz=128",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 3349,
+      "result": "ok",
+      "finalUrl": "https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://flutterwave.com&size=128"
+    },
+    {
+      "slug": "forest",
+      "name": "Forest",
+      "logo_url": "https://www.forest-pkg.com/ForestPKG_Logo.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 57572,
+      "result": "ok"
+    },
+    {
+      "slug": "fountain",
+      "name": "Fountain",
+      "logo_url": "https://www.fountain.com/wp-content/uploads/2026/04/fountain-og-banner.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 78315,
+      "result": "ok"
+    },
+    {
+      "slug": "gable",
+      "name": "Gable",
+      "logo_url": "https://cdn.prod.website-files.com/67a9ed637eb6a97351cbd214/67a9ed637eb6a97351cbd2bf_SOC-Certification.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 3287,
+      "result": "ok"
+    },
+    {
+      "slug": "goodfire",
+      "name": "Goodfire",
+      "logo_url": "https://cdn.prod.website-files.com/67b4608695ee3b31a669d3a9/67b8517988d0bb6505289e1f_logo%20mark.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 1873,
+      "result": "ok"
+    },
+    {
+      "slug": "goose",
+      "name": "Goose",
+      "logo_url": "https://cdn.prod.website-files.com/63500ca8793a8b2e35302335/677fd153f27550a506e8fc39_b248eea12a516c0b0f5fb97530fd281f_goose-og-image.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 234952,
+      "result": "ok"
+    },
+    {
+      "slug": "grace-investment-machine",
+      "name": "Grace Investment Machine",
+      "logo_url": "https://b.capital/wp-content/uploads/2026/09/graceinvestmentmachine-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 2596,
+      "result": "ok"
+    },
+    {
+      "slug": "graymatter-robotics",
+      "name": "GrayMatter Robotics",
+      "logo_url": "https://gmr-cdn.b-cdn.net/logos/GMR_logo_white%20text_orange%20logo_horizontal.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 10661,
+      "result": "ok"
+    },
+    {
+      "slug": "grit",
+      "name": "Grit",
+      "logo_url": "https://b.capital/wp-content/uploads/2025/04/grit-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1676,
+      "result": "ok"
+    },
+    {
+      "slug": "gushwork",
+      "name": "Gushwork",
+      "logo_url": "https://cdn.prod.website-files.com/65c292289fb0ea1ff3a84bd3/6806e7e7689386e8bc8d1cac_logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 7276,
+      "result": "ok"
+    },
+    {
+      "slug": "havocai",
+      "name": "HavocAI",
+      "logo_url": "https://cdn.sanity.io/images/oifvdcku/production/d66db4465721e809c5628205a4b286495a1f8589-1200x630.png?w=1200&amp;h=630&amp;fit=crop",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 43414,
+      "result": "ok"
+    },
+    {
+      "slug": "heylibby",
+      "name": "HeyLibby",
+      "logo_url": "https://cdn.prod.website-files.com/6902641c88a4d7eb5861c09a/69050c40ed6b17d693624c69_39bac98648bc72002691bfc765733c86_Replify%20formerly%20heyLibby%20logo%20svg.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 8830,
+      "result": "ok"
+    },
+    {
+      "slug": "hifibio",
+      "name": "HifiBio",
+      "logo_url": "https://hifibio.com/wp-content/uploads/2024/06/hifibio-logo.png",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 11970,
+      "result": "ok"
+    },
+    {
+      "slug": "hotspot-therapeutics",
+      "name": "HotSpot Therapeutics",
+      "logo_url": "https://b.capital/wp-content/uploads/2021/11/Hotspot-Logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 2029,
+      "result": "ok"
+    },
+    {
+      "slug": "hypersonix",
+      "name": "Hypersonix",
+      "logo_url": "https://hypersonix.ai/hubfs/Hypersonix_February_2024/images/logo-dark-v1.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 4928,
+      "result": "ok"
+    },
+    {
+      "slug": "icertis",
+      "name": "Icertis",
+      "logo_url": "https://www.icertis.com/static/images/icertis-logo-new.svg?v=1",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 7375,
+      "result": "ok"
+    },
+    {
+      "slug": "infrahub",
+      "name": "InfraHub",
+      "logo_url": "https://www.infrahub.com/media/ihlogo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 5424,
+      "result": "ok"
+    },
+    {
+      "slug": "innovaccer",
+      "name": "Innovaccer",
+      "logo_url": "https://cdn.prod.website-files.com/670e4ade75003c7364a3944d/69aea95986351ab53056a0e0_Meta%20image%20(2).png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 3031856,
+      "result": "ok"
+    },
+    {
+      "slug": "insilico-medicine",
+      "name": "Insilico Medicine",
+      "logo_url": "https://insilico.com/images/tild3434-3764-4435-a362-313361396437__insilico_chip_with_i.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 749544,
+      "result": "ok"
+    },
+    {
+      "slug": "inspace",
+      "name": "Inspace",
+      "logo_url": "https://cdn.prod.website-files.com/630c002bd7b19401e328ce14/630c1ac497b68772d3a3028b_Inspace%20Logo%20Website%20Colour.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 6337,
+      "result": "ok"
+    },
+    {
+      "slug": "iru",
+      "name": "Iru",
+      "logo_url": "https://www.iru.com/hs-fs/hubfs/raw_assets/public/IruAurelia/images/iru-logo.png?width=80&amp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 1952,
+      "result": "ok"
+    },
+    {
+      "slug": "isaac-health",
+      "name": "Isaac Health",
+      "logo_url": "https://isaac.health/wp-content/uploads/2025/12/Isaac-Health-Open-Graph.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 155895,
+      "result": "ok"
+    },
+    {
+      "slug": "jetzero",
+      "name": "JetZero",
+      "logo_url": "https://www.jetzero.aero/hubfs/Media-center/Brand%20Assets/JZ-wordmk-fire-night.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 3038,
+      "result": "ok"
+    },
+    {
+      "slug": "judi-rx",
+      "name": "Judi Rx",
+      "logo_url": "https://cdn.prod.website-files.com/689c6d04eb7c3dec35bc6b3d/693c457c9b275b8b25ffe2cd_JudiHealth-Logo-White.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 9183,
+      "result": "ok"
+    },
+    {
+      "slug": "karman-industries",
+      "name": "Karman Industries",
+      "logo_url": "https://cdn.prod.website-files.com/67ed5bde153bfdd509f62a3c/682dbd104e84833418a09343_Karman-logo-svg.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2404,
+      "result": "ok"
+    },
+    {
+      "slug": "khatabook",
+      "name": "Khatabook",
+      "logo_url": "https://khatabook-assets.s3.amazonaws.com/static/images/index/logo.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 2578,
+      "result": "ok"
+    },
+    {
+      "slug": "knox",
+      "name": "Knox",
+      "logo_url": "https://cdn.prod.website-files.com/69b05551d9c917b2b1c62353/69b49d645f434562b64b2394_ato-logos.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 46124,
+      "result": "ok"
+    },
+    {
+      "slug": "kopi-kenangan",
+      "name": "Kopi Kenangan",
+      "logo_url": "https://images.squarespace-cdn.com/content/v1/5fa1095912d2fc6dfc63ac9c/16a01780-2021-4d5a-ba44-00bed1e15992/Kopi+Kenangan+Logo.png",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 8768,
+      "result": "ok"
+    },
+    {
+      "slug": "labelbox",
+      "name": "Labelbox",
+      "logo_url": "https://labelbox.com/static/images/logo-v4.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 4535,
+      "result": "ok"
+    },
+    {
+      "slug": "labviva",
+      "name": "Labviva",
+      "logo_url": "https://cdn.prod.website-files.com/670d5c617b0328a16367285f/67927a3183ae306343d4ddaa_labviva-logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 8530,
+      "result": "ok"
+    },
+    {
+      "slug": "lambda",
+      "name": "Lambda",
+      "logo_url": "https://lambda.ai/hubfs/lambda_logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 4141,
+      "result": "ok"
+    },
+    {
+      "slug": "levelten",
+      "name": "LevelTen",
+      "logo_url": "https://cdn.prod.website-files.com/5f9c624f18a34099c088258c/619c1c1c775fd3b1b06ee794_LTE_Logo_-light-2color.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 5259,
+      "result": "ok"
+    },
+    {
+      "slug": "linkmore",
+      "name": "LinKMORE",
+      "logo_url": "https://b.capital/wp-content/uploads/2022/02/linkmore-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1237,
+      "result": "ok"
+    },
+    {
+      "slug": "lively",
+      "name": "Lively",
+      "logo_url": "https://images.ctfassets.net/4vd63898uzk5/5ARh9etD7LO4A1q2S8voGn/6c85b73963680fa83ce37825fa0b8a04/logo-lively.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2709,
+      "result": "ok"
+    },
+    {
+      "slug": "lumara-health",
+      "name": "Lumara Health",
+      "logo_url": "https://www.lumara.health/logo/svg/Color%20logo%20-%20no%20background.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 10268,
+      "result": "ok"
+    },
+    {
+      "slug": "lunar-energy",
+      "name": "Lunar Energy",
+      "logo_url": "https://cdn.prod.website-files.com/638a71ec77d1c7c6ae8a03c0/638dbd86c52f541157523b22_62fcca6f36cc0bf20dbd6a4c_favicon-256.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 4926,
+      "result": "ok"
+    },
+    {
+      "slug": "macrolux",
+      "name": "MacroLux",
+      "logo_url": "https://ueeshop.ly200-cdn.com/u_file/UPAY/UPAY424/2305/04/photo/logo-2f36.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 620652,
+      "result": "ok"
+    },
+    {
+      "slug": "meditrust",
+      "name": "MediTrust",
+      "logo_url": "https://b.capital/wp-content/uploads/2023/02/meditrust-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1945,
+      "result": "ok"
+    },
+    {
+      "slug": "meesho",
+      "name": "Meesho",
+      "logo_url": "https://b.capital/wp-content/uploads/2021/09/Meesho-2.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1077,
+      "result": "ok"
+    },
+    {
+      "slug": "miotech",
+      "name": "Miotech",
+      "logo_url": "https://www.miotech.com/figma/miotech-logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 4414,
+      "result": "ok"
+    },
+    {
+      "slug": "mswipe",
+      "name": "Mswipe",
+      "logo_url": "https://mapi.mswipe.com/media-files-storage/dc6877c81ad45f0133be68dc2a901cf6-Wisepos%20neo2%20logo%20hero%20banner%20(1)%20(1).svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 10454,
+      "result": "ok"
+    },
+    {
+      "slug": "nalu",
+      "name": "Nalu",
+      "logo_url": "https://www.nalumed.com/content/dam/bsc/us/nmd/pain/nalu/site/Logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 17599,
+      "result": "ok"
+    },
+    {
+      "slug": "nektar-ai",
+      "name": "Nektar.AI",
+      "logo_url": "https://nektar.ai/wp-content/uploads/2025/01/Nektar-Logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 6546,
+      "result": "ok"
+    },
+    {
+      "slug": "nest-genomics",
+      "name": "Nest Genomics",
+      "logo_url": "https://www.nestgenomics.com/logo.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 442566,
+      "result": "ok"
+    },
+    {
+      "slug": "neushen-therapeutics",
+      "name": "Neushen Therapeutics",
+      "logo_url": "https://b.capital/wp-content/uploads/2026/09/neushentherapeutics-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 3311,
+      "result": "ok"
+    },
+    {
+      "slug": "ninja-van",
+      "name": "Ninja Van",
+      "logo_url": "https://b.capital/wp-content/uploads/2021/06/Ninja-Van-Gray-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1003,
+      "result": "ok"
+    },
+    {
+      "slug": "numerion-labs",
+      "name": "Numerion Labs",
+      "logo_url": "https://numerionlabs.ai/wp-content/uploads/2025/11/numerion-labs-logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 5409,
+      "result": "ok"
+    },
+    {
+      "slug": "nuvig",
+      "name": "Nuvig",
+      "logo_url": "https://b.capital/wp-content/uploads/2025/04/nuvig-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1184,
+      "result": "ok"
+    },
+    {
+      "slug": "odeko",
+      "name": "Odeko",
+      "logo_url": "https://b.capital/wp-content/uploads/2023/03/odeko-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1247,
+      "result": "ok"
+    },
+    {
+      "slug": "omnidian",
+      "name": "Omnidian",
+      "logo_url": "https://www.omnidian.com/wp-content/uploads/2023/12/logo3x.png",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 2278,
+      "result": "ok"
+    },
+    {
+      "slug": "oro-labs",
+      "name": "Oro Labs",
+      "logo_url": "https://43928631.fs1.hubspotusercontent-na1.net/hubfs/43928631/ORO%20Brand/Mediakit%202026/SVGs/ORO-Primary-Logo-2026.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2283,
+      "result": "ok"
+    },
+    {
+      "slug": "overstory",
+      "name": "Overstory",
+      "logo_url": "https://images.squarespace-cdn.com/content/v1/6065a3e68fb0fa053417527f/bfb419bf-b2b9-47cf-bdb8-d89998d95e72/Overstory+Full.png",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 9848,
+      "result": "ok"
+    },
+    {
+      "slug": "payfazz",
+      "name": "PAYFAZZ",
+      "logo_url": "https://fazz.com/wp-content/uploads/2025/12/logo-fazz-animate-1.gif",
+      "status": 200,
+      "contentType": "image/gif",
+      "bytes": 581378,
+      "result": "ok"
+    },
+    {
+      "slug": "palebluedot",
+      "name": "PaleBlueDot",
+      "logo_url": "https://www.palebluedot.ai/figma/pbd-home/logo.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 230732,
+      "result": "ok"
+    },
+    {
+      "slug": "pendo",
+      "name": "Pendo",
+      "logo_url": "https://cdn.builder.io/api/v1/image/assets%2F6a96e08774184353b3aa88032e406411%2F86eee99a5216400488ead3c69bb50a65",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 65472,
+      "result": "ok"
+    },
+    {
+      "slug": "percent",
+      "name": "Percent",
+      "logo_url": "https://cdn.prod.website-files.com/6324b40873100ea30a7d313c/682f3b0fbdd2e7b75e970d9d_Percent-Social-Share.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 233730,
+      "result": "ok"
+    },
+    {
+      "slug": "perimeter-81",
+      "name": "Perimeter 81",
+      "logo_url": "https://sase.checkpoint.com/wp-content/uploads/2025/07/BG-for-planet.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 466978,
+      "result": "ok"
+    },
+    {
+      "slug": "perplexity-ai",
+      "name": "Perplexity AI",
+      "logo_url": "https://www.google.com/s2/favicons?domain=perplexity.ai&sz=128",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1558,
+      "result": "fixed",
+      "localAsset": "/brand/logos/perplexity.svg",
+      "finalUrl": "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://perplexity.ai&size=128"
+    },
+    {
+      "slug": "phenom-people",
+      "name": "Phenom People",
+      "logo_url": "https://images.ctfassets.net/0d3i1kfsuaq3/62p83cDOitH0AQ0Hx0Zkna/417d7f1500c30149103bc7410e6cb00f/Pheom_Applied_AI.jpg?q=70",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "bytes": 133727,
+      "result": "ok"
+    },
+    {
+      "slug": "picnichealth",
+      "name": "PicnicHealth",
+      "logo_url": "https://cdn.prod.website-files.com/69c177cf6b09e84d2a18ab84/69e15bc71a470dc19215b014_picnichealth%20logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 4739,
+      "result": "ok"
+    },
+    {
+      "slug": "poolside",
+      "name": "Poolside",
+      "logo_url": "https://poolside.ai/og/og-home.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 50331,
+      "result": "ok"
+    },
+    {
+      "slug": "positive-development",
+      "name": "Positive Development",
+      "logo_url": "https://cdn.prod.website-files.com/672d41852ac4f83e48f35806/672d41852ac4f83e48f35812_Positive-Development-Logo-Main.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 9825,
+      "result": "ok"
+    },
+    {
+      "slug": "precision-neuro",
+      "name": "Precision Neuro",
+      "logo_url": "https://cdn.sanity.io/images/883wn8od/production/40d85d024a02d0ae311959dd37e24f819feb87a6-1152x336.svg?fm=webp&amp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 9834,
+      "result": "ok"
+    },
+    {
+      "slug": "profoundbio",
+      "name": "ProfoundBio",
+      "logo_url": "https://b.capital/wp-content/uploads/2023/02/profoundbio-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1104,
+      "result": "ok"
+    },
+    {
+      "slug": "rapyd",
+      "name": "Rapyd",
+      "logo_url": "https://www.rapyd.net/wp-content/uploads/2022/07/rapyd-logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 1609,
+      "result": "ok"
+    },
+    {
+      "slug": "reflection",
+      "name": "Reflection",
+      "logo_url": "https://b.capital/wp-content/uploads/2026/06/reflection-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 926,
+      "result": "ok"
+    },
+    {
+      "slug": "remote",
+      "name": "Remote",
+      "logo_url": "https://eu-images.contentstack.com/v3/assets/bltbf56d62bc360c2d8/bltf96b51f746c487eb/6a160b4e0a91f760e077207a/logo_anthropic.svg?branch=production",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2419,
+      "result": "ok"
+    },
+    {
+      "slug": "rona-therapeutics",
+      "name": "Rona Therapeutics",
+      "logo_url": "https://www.ronatherapeutics.com/templates/dist/images/logo.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 7839,
+      "result": "ok"
+    },
+    {
+      "slug": "seltz",
+      "name": "Seltz",
+      "logo_url": "https://b.capital/wp-content/uploads/2026/09/seltz-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 4023,
+      "result": "ok"
+    },
+    {
+      "slug": "sharpa",
+      "name": "Sharpa",
+      "logo_url": "https://b.capital/wp-content/uploads/2026/09/sharpa-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 2621,
+      "result": "ok"
+    },
+    {
+      "slug": "shipday",
+      "name": "Shipday",
+      "logo_url": "https://cdn.prod.website-files.com/62428b049409c6b74b6b6636/65f48b763da99591f7eb8414_Shipday%20logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 4889,
+      "result": "ok"
+    },
+    {
+      "slug": "sift-healthcare",
+      "name": "Sift Healthcare",
+      "logo_url": "https://www.sifthealthcare.com/wp-content/uploads/2026/01/sifthealthcare-logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 6069,
+      "result": "ok"
+    },
+    {
+      "slug": "silvercloud-health",
+      "name": "SilverCloud Health",
+      "logo_url": "https://silvercloud.amwell.com/contentassets/06f181985daf4675aad0bfe1bcada5fb/300x60px_schxamwell-logo_web_white.png",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 1598,
+      "result": "ok"
+    },
+    {
+      "slug": "solar-square",
+      "name": "Solar Square",
+      "logo_url": "https://cdn.solarsquare.in/blog/wp-content/uploads/2025/11/05101757/logo.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "bytes": 2796,
+      "result": "ok"
+    },
+    {
+      "slug": "solve-therapeutics",
+      "name": "Solve Therapeutics",
+      "logo_url": "https://www.google.com/s2/favicons?domain=solvetx.com&sz=128",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 2591,
+      "result": "ok",
+      "finalUrl": "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://solvetx.com&size=128"
+    },
+    {
+      "slug": "sonilo",
+      "name": "Sonilo",
+      "logo_url": "https://sonilo.com/homepage/logos/logo_white.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 7974,
+      "result": "ok"
+    },
+    {
+      "slug": "spectrumedics",
+      "name": "Spectrumedics",
+      "logo_url": "https://b.capital/wp-content/uploads/2025/04/spectrumedics-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1134,
+      "result": "ok"
+    },
+    {
+      "slug": "star-catcher",
+      "name": "Star Catcher",
+      "logo_url": "https://framerusercontent.com/assets/JEmaW9yb1FV1iyRjSwOpfauLzw.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 817961,
+      "result": "ok"
+    },
+    {
+      "slug": "starburst-data",
+      "name": "Starburst Data",
+      "logo_url": "https://www.starburst.io/wp-content/uploads/2026/09/brand-starburst-feature-image.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 417677,
+      "result": "ok"
+    },
+    {
+      "slug": "sugarfit",
+      "name": "Sugarfit",
+      "logo_url": "https://b.capital/wp-content/uploads/2024/02/sugarfit-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1600,
+      "result": "ok"
+    },
+    {
+      "slug": "synapticure",
+      "name": "Synapticure",
+      "logo_url": "https://cdn.prod.website-files.com/615f376480c21d051b7cb882/68b8d863eafb4ff1bae77f5a_c4e99316dabfa75e24c9e8cbf5cbd958_synapticure-logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 12181,
+      "result": "ok"
+    },
+    {
+      "slug": "trm-labs",
+      "name": "TRM Labs",
+      "logo_url": "https://cdn.prod.website-files.com/6082dc5b67056233213587a4/69fc5ef74a282c155894f1b4_TRM-Insights_Social_1200x628.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 54887,
+      "result": "ok"
+    },
+    {
+      "slug": "tacta",
+      "name": "Tacta",
+      "logo_url": "https://cdn.prod.website-files.com/6a45a9994d98f3a059e8ac0c/6a514bfdd715577e5b7c7e57_Tacta_Logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 9122,
+      "result": "ok"
+    },
+    {
+      "slug": "tinyhealth",
+      "name": "TinyHealth",
+      "logo_url": "https://cdn.prod.website-files.com/665edd5e2ca30b7e29e82a83/67fe6ed2c564a04824210a73_home-og-image.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 183284,
+      "result": "ok"
+    },
+    {
+      "slug": "turbine",
+      "name": "Turbine",
+      "logo_url": "https://www.turbine.co/_astro/turbine-logo.BhsqKANB.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2411,
+      "result": "ok"
+    },
+    {
+      "slug": "turno",
+      "name": "Turno",
+      "logo_url": "https://cdn.prod.website-files.com/69f0584be4d9dcdc9451abc0/69f4bf143fe661ac60782c12_Turno%20Logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 4176,
+      "result": "ok"
+    },
+    {
+      "slug": "unblocked-brands",
+      "name": "Unblocked Brands",
+      "logo_url": "https://www.unblockedbrands.com/unblocked-brands-cyan-nav-logo.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 63201,
+      "result": "ok"
+    },
+    {
+      "slug": "vivacta",
+      "name": "Vivacta",
+      "logo_url": "https://b.capital/wp-content/uploads/2026/09/vivacta-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 4184,
+      "result": "ok"
+    },
+    {
+      "slug": "volastra",
+      "name": "Volastra",
+      "logo_url": "https://www.volastratx.com/wp-content/themes/volastra/assets/img/logo.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 10052,
+      "result": "ok"
+    },
+    {
+      "slug": "writer",
+      "name": "WRITER",
+      "logo_url": "https://writer.com/downloads/Writer_wordmark_dark.x_svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2173,
+      "result": "ok"
+    },
+    {
+      "slug": "when",
+      "name": "When",
+      "logo_url": "https://framerusercontent.com/images/AhijEYBaPKw7JmEzhrh7UHGcF4.svg?width=178&amp",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 1117,
+      "result": "ok"
+    },
+    {
+      "slug": "wildfire",
+      "name": "Wildfire",
+      "logo_url": "https://www.wildfire-corp.com/hubfs/homepage_2026_assets/logos.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 4244,
+      "result": "ok"
+    },
+    {
+      "slug": "xingyun",
+      "name": "Xingyun",
+      "logo_url": "https://b.capital/wp-content/uploads/2021/06/Xinguyn-Logo-v3.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 1657,
+      "result": "ok"
+    },
+    {
+      "slug": "yalo",
+      "name": "Yalo",
+      "logo_url": "https://cdn.prod.website-files.com/6864212f89b49a1b6c4568db/6864ded3363f8aff1d64389c_Logo-white.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "bytes": 2513,
+      "result": "ok"
+    },
+    {
+      "slug": "zaihui",
+      "name": "Zaihui",
+      "logo_url": "https://b.capital/wp-content/uploads/2023/02/zaihui-logo-v1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 850,
+      "result": "ok"
+    }
+  ]
+}

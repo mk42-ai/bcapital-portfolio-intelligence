@@ -1,6 +1,6 @@
 "use client";
 import { useSyncExternalStore } from "react";
-import { DEFAULT_EXTERNAL_USER_ID, DEFAULT_FOCUS, DEFAULT_MODEL, PLUGINS } from "./plugins";
+import { DEFAULT_EXTERNAL_USER_ID, DEFAULT_FOCUS, MODEL_ID, PLUGINS } from "./plugins";
 
 /** User settings live ONLY in browser localStorage. The OnDemand apikey is held server-side (ONDEMAND_API_KEY); an optional
  *  per-user key may still be pasted here and is forwarded as `x-ondemand-key` to /api/ondemand/*, overriding the server key. */
@@ -11,7 +11,7 @@ export type Settings = {
 const KEY = "bcap.settings.v1";
 export const DEFAULT_BACKEND = process.env.NEXT_PUBLIC_PORTFOLIO_API_URL || "https://sb-4wdkkmzv7w2z.vercel.run";
 const defaults: Settings = {
-  apikey: "", externalUserId: DEFAULT_EXTERNAL_USER_ID, model: DEFAULT_MODEL,
+  apikey: "", externalUserId: DEFAULT_EXTERNAL_USER_ID, model: MODEL_ID,
   plugins: Object.fromEntries(PLUGINS.filter((p) => p.id).map((p) => [p.id as string, p.defaultOn])),
   backendUrl: DEFAULT_BACKEND, companies: DEFAULT_FOCUS, onboarded: false,
 };
@@ -20,7 +20,8 @@ const listeners = new Set<() => void>();
 function read(): Settings {
   if (cache) return cache;
   if (typeof window === "undefined") return defaults;
-  try { const raw = window.localStorage.getItem(KEY); cache = raw ? { ...defaults, ...JSON.parse(raw), plugins: { ...defaults.plugins, ...(JSON.parse(raw).plugins ?? {}) } } : defaults; } catch { cache = defaults; }
+  // `model` and `plugins` are fixed product-wide (DeepSeek Flash v4.1 · Perplexity only) — stored values from earlier builds are ignored.
+  try { const raw = window.localStorage.getItem(KEY); cache = raw ? { ...defaults, ...JSON.parse(raw), model: MODEL_ID, plugins: defaults.plugins } : defaults; } catch { cache = defaults; }
   return cache!;
 }
 export function getSettings(): Settings { return read(); }

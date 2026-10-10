@@ -1,0 +1,615 @@
+[
+  {
+    "at": "2026-10-10T03:40:08.892Z",
+    "threadId": "smoke-1",
+    "runId": "fc75a51c-a695-4e08-a1fc-adbbca264f6c",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873"
+    ],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "smoke-diag",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "contextMetadata": []
+      },
+      "response": {
+        "status": 201,
+        "id": "6ac9b399261cbe2340483c59",
+        "message": "Chat session created successfully",
+        "elapsedMs": 463
+      }
+    },
+    "sessionId": "6ac9b399261cbe2340483c59",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6ac9b399261cbe2340483c59/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext 77 chars> What is the latest news about Fervo Energy? Cite sources.",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "reasoningMode": "medium"
+      }
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 1196
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 2678,
+      "firstTokenMs": 21806,
+      "totalMs": 24994,
+      "upstreamFrames": 441,
+      "answerChars": 1512,
+      "sources": 0,
+      "pluginError": "Perplexity (plugin-1722260873) failed upstream: \"identifier me create the plugin call.\": \"rest_api\"}]}We need answer. Need note plugin failed? Provided response is perplex",
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 2678,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b399261cbe2340483c59\",\"messageId\":\"6ac9b39a95268adc215dfab7\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants latest news about\"}}"
+      },
+      {
+        "ms": 2689,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b399261cbe2340483c59\",\"messageId\":\"6ac9b39a95268adc215dfab7\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" Fervo Energy with sources. This\"}}"
+      },
+      {
+        "ms": 2729,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b399261cbe2340483c59\",\"messageId\":\"6ac9b39a95268adc215dfab7\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" is a search task. Available plugins\"}}"
+      },
+      {
+        "ms": 2756,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b399261cbe2340483c59\",\"messageId\":\"6ac9b39a95268adc215dfab7\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" mentioned: perplexity (manually\"}}"
+      },
+      {
+        "ms": 2782,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b399261cbe2340483c59\",\"messageId\":\"6ac9b39a95268adc215dfab7\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" selected). Let me produce a plan\"}}"
+      },
+      {
+        "ms": 2812,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b399261cbe2340483c59\",\"messageId\":\"6ac9b39a95268adc215dfab7\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\".\\n\\nI need to use perplexity as\"}}"
+      },
+      {
+        "ms": 2836,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b399261cbe2340483c59\",\"messageId\":\"6ac9b39a95268adc215dfab7\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" the plugin. Single step likely\"}}"
+      },
+      {
+        "ms": 2877,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b399261cbe2340483c59\",\"messageId\":\"6ac9b39a95268adc215dfab7\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\".\\n\\nLet me create a plan with one\"}}"
+      },
+      {
+        "ms": 2891,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b399261cbe2340483c59\",\"messageId\":\"6ac9b39a95268adc215dfab7\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" step using perplexity to fetch\"}}"
+      },
+      {
+        "ms": 2939,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b399261cbe2340483c59\",\"messageId\":\"6ac9b39a95268adc215dfab7\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" latest news with citations.\\n\\n\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-10T03:41:28.258Z",
+    "threadId": "smoke-2",
+    "runId": "318d0de2-a1b5-4134-8bf2-fa40bd3420c8",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873"
+    ],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "smoke-diag",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "contextMetadata": []
+      },
+      "response": {
+        "status": 201,
+        "id": "6ac9b3e8261cbe2340483c61",
+        "message": "Chat session created successfully",
+        "elapsedMs": 443
+      }
+    },
+    "sessionId": "6ac9b3e8261cbe2340483c61",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6ac9b3e8261cbe2340483c61/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "In one sentence, what does Fervo Energy do? Cite one source.",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "reasoningMode": "medium"
+      }
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 1239
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 2310,
+      "firstTokenMs": 12708,
+      "totalMs": 14870,
+      "upstreamFrames": 209,
+      "answerChars": 265,
+      "sources": 0,
+      "pluginError": "Perplexity (plugin-1722260873) returned an upstream error: \"Internal server error — Not enough credits\" (the OnDemand account's Perplexity credits are exhausted). No other plugin was substituted.",
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 2310,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b3e8261cbe2340483c61\",\"messageId\":\"6ac9b3e995268adc215dfab9\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user asks a simple factual\"}}"
+      },
+      {
+        "ms": 2312,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b3e8261cbe2340483c61\",\"messageId\":\"6ac9b3e995268adc215dfab9\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" question: \\\"In one sentence, what\"}}"
+      },
+      {
+        "ms": 2313,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b3e8261cbe2340483c61\",\"messageId\":\"6ac9b3e995268adc215dfab9\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" does Fervo Energy do? Cite one\"}}"
+      },
+      {
+        "ms": 2338,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b3e8261cbe2340483c61\",\"messageId\":\"6ac9b3e995268adc215dfab9\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" source.\\\" This requires a web search\"}}"
+      },
+      {
+        "ms": 2448,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b3e8261cbe2340483c61\",\"messageId\":\"6ac9b3e995268adc215dfab9\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" plugin (perplexity is manually\"}}"
+      },
+      {
+        "ms": 2449,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b3e8261cbe2340483c61\",\"messageId\":\"6ac9b3e995268adc215dfab9\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" selected). So plan_required true\"}}"
+      },
+      {
+        "ms": 2451,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b3e8261cbe2340483c61\",\"messageId\":\"6ac9b3e995268adc215dfab9\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\", with a single step using perplex\"}}"
+      },
+      {
+        "ms": 2471,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b3e8261cbe2340483c61\",\"messageId\":\"6ac9b3e995268adc215dfab9\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ity.\\n\\nBut the rule says \\\"\\u003e1 steps\"}}"
+      },
+      {
+        "ms": 2530,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b3e8261cbe2340483c61\",\"messageId\":\"6ac9b3e995268adc215dfab9\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"\\\" for plan. Hmm, \\\"produce a concise\"}}"
+      },
+      {
+        "ms": 2530,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b3e8261cbe2340483c61\",\"messageId\":\"6ac9b3e995268adc215dfab9\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" multi-step plan (\\u003e1 steps)\\\". But\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-10T03:43:23.025Z",
+    "threadId": "70939271-7cea-4841-9ebb-68878697c61c",
+    "runId": "d5dbeeca-b9b7-4a54-a8d6-0b24adcc0eb4",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873"
+    ],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "contextMetadata": [
+          {
+            "key": "company:apptronik",
+            "valueChars": 877
+          },
+          {
+            "key": "company:fervo-energy",
+            "valueChars": 1668
+          },
+          {
+            "key": "company:flutterwave",
+            "valueChars": 1698
+          },
+          {
+            "key": "company:perplexity-ai",
+            "valueChars": 1533
+          },
+          {
+            "key": "company:writer",
+            "valueChars": 834
+          }
+        ]
+      },
+      "response": {
+        "status": 201,
+        "id": "6ac9b45b261cbe2340483c62",
+        "message": "Chat session created successfully",
+        "elapsedMs": 447
+      }
+    },
+    "sessionId": "6ac9b45b261cbe2340483c62",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6ac9b45b261cbe2340483c62/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext 6012 chars> In one sentence, what does Fervo Energy do? Cite one source.",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "reasoningMode": "medium"
+      }
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 1236
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 2666,
+      "firstTokenMs": 8549,
+      "totalMs": 11164,
+      "upstreamFrames": 151,
+      "answerChars": 704,
+      "sources": 0,
+      "pluginError": "Perplexity (plugin-1722260873) returned an upstream error: \"Internal server error — Not enough credits\" (the OnDemand account's Perplexity credits are exhausted). No other plugin was substituted.",
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 2666,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b45b261cbe2340483c62\",\"messageId\":\"6ac9b45cf7979c7d562ae387\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user asks: \\\"In one sentence\"}}"
+      },
+      {
+        "ms": 2667,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b45b261cbe2340483c62\",\"messageId\":\"6ac9b45cf7979c7d562ae387\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\", what does Fervo Energy do? Cite\"}}"
+      },
+      {
+        "ms": 2676,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b45b261cbe2340483c62\",\"messageId\":\"6ac9b45cf7979c7d562ae387\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" one source.\\\" The portfolio data\"}}"
+      },
+      {
+        "ms": 2702,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b45b261cbe2340483c62\",\"messageId\":\"6ac9b45cf7979c7d562ae387\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" says external facts should be\"}}"
+      },
+      {
+        "ms": 2728,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b45b261cbe2340483c62\",\"messageId\":\"6ac9b45cf7979c7d562ae387\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" answered via Perplexity web search\"}}"
+      },
+      {
+        "ms": 2758,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b45b261cbe2340483c62\",\"messageId\":\"6ac9b45cf7979c7d562ae387\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\". But do we need a plugin? The\"}}"
+      },
+      {
+        "ms": 2771,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b45b261cbe2340483c62\",\"messageId\":\"6ac9b45cf7979c7d562ae387\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" question is asking about Ferv\"}}"
+      },
+      {
+        "ms": 2783,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b45b261cbe2340483c62\",\"messageId\":\"6ac9b45cf7979c7d562ae387\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"o Energy — external facts about\"}}"
+      },
+      {
+        "ms": 2813,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b45b261cbe2340483c62\",\"messageId\":\"6ac9b45cf7979c7d562ae387\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" what the company does. Per the\"}}"
+      },
+      {
+        "ms": 2860,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b45b261cbe2340483c62\",\"messageId\":\"6ac9b45cf7979c7d562ae387\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" instructions, always run Perplex\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-10T03:43:51.378Z",
+    "threadId": "3548e25e-c410-44b5-a62a-ab8b4448fe99",
+    "runId": "8fecb42e-e265-4d14-ba06-516a92745545",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873"
+    ],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "contextMetadata": [
+          {
+            "key": "company:apptronik",
+            "valueChars": 877
+          },
+          {
+            "key": "company:fervo-energy",
+            "valueChars": 1668
+          },
+          {
+            "key": "company:flutterwave",
+            "valueChars": 1698
+          },
+          {
+            "key": "company:perplexity-ai",
+            "valueChars": 1533
+          },
+          {
+            "key": "company:writer",
+            "valueChars": 834
+          }
+        ]
+      },
+      "response": {
+        "status": 201,
+        "id": "6ac9b477f7979c7d562ae38b",
+        "message": "Chat session created successfully",
+        "elapsedMs": 273
+      }
+    },
+    "sessionId": "6ac9b477f7979c7d562ae38b",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6ac9b477f7979c7d562ae38b/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext 6012 chars> In one sentence, what does Fervo Energy do? Cite one source.",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "reasoningMode": "medium"
+      }
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 861
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 2455,
+      "firstTokenMs": 8616,
+      "totalMs": 10923,
+      "upstreamFrames": 150,
+      "answerChars": 414,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 2455,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b477f7979c7d562ae38b\",\"messageId\":\"6ac9b478261cbe2340483c64\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user asks a single question\"}}"
+      },
+      {
+        "ms": 2457,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b477f7979c7d562ae38b\",\"messageId\":\"6ac9b478261cbe2340483c64\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\": \\\"In one sentence, what does F\"}}"
+      },
+      {
+        "ms": 2473,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b477f7979c7d562ae38b\",\"messageId\":\"6ac9b478261cbe2340483c64\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ervo Energy do? Cite one source\"}}"
+      },
+      {
+        "ms": 2499,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b477f7979c7d562ae38b\",\"messageId\":\"6ac9b478261cbe2340483c64\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\".\\\" This requires web search (Per\"}}"
+      },
+      {
+        "ms": 2542,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b477f7979c7d562ae38b\",\"messageId\":\"6ac9b478261cbe2340483c64\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"plexity) since it's an external\"}}"
+      },
+      {
+        "ms": 2560,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b477f7979c7d562ae38b\",\"messageId\":\"6ac9b478261cbe2340483c64\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" fact. So plan_required: true,\"}}"
+      },
+      {
+        "ms": 2666,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b477f7979c7d562ae38b\",\"messageId\":\"6ac9b478261cbe2340483c64\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" one step using perplexity.\\n\\nLet\"}}"
+      },
+      {
+        "ms": 2669,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b477f7979c7d562ae38b\",\"messageId\":\"6ac9b478261cbe2340483c64\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" me produce a plan with one step\"}}"
+      },
+      {
+        "ms": 2680,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b477f7979c7d562ae38b\",\"messageId\":\"6ac9b478261cbe2340483c64\",\"eventIndex\":9,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"{\\\"title\\\": \\\"I'll look up what F\"}}"
+      },
+      {
+        "ms": 2707,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b477f7979c7d562ae38b\",\"messageId\":\"6ac9b478261cbe2340483c64\",\"eventIndex\":10,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"ervo Energy does and give you a\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-10T03:44:47.551Z",
+    "threadId": "79be2d9b-743f-42d7-a736-c27f3c15bbf2",
+    "runId": "4c929879-44a8-4054-bb59-f95407a0c3cb",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873"
+    ],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "contextMetadata": [
+          {
+            "key": "company:apptronik",
+            "valueChars": 877
+          },
+          {
+            "key": "company:fervo-energy",
+            "valueChars": 1668
+          },
+          {
+            "key": "company:flutterwave",
+            "valueChars": 1698
+          },
+          {
+            "key": "company:perplexity-ai",
+            "valueChars": 1533
+          },
+          {
+            "key": "company:writer",
+            "valueChars": 834
+          }
+        ]
+      },
+      "response": {
+        "status": 201,
+        "id": "6ac9b4af95268adc215dfac9",
+        "message": "Chat session created successfully",
+        "elapsedMs": 325
+      }
+    },
+    "sessionId": "6ac9b4af95268adc215dfac9",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6ac9b4af95268adc215dfac9/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext 6012 chars> In one sentence, what does Fervo Energy do? Cite one source.",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "reasoningMode": "medium"
+      }
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 1137
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 2711,
+      "firstTokenMs": 7469,
+      "totalMs": 10048,
+      "upstreamFrames": 106,
+      "answerChars": 605,
+      "sources": 0,
+      "pluginError": "Perplexity (plugin-1722260873) returned an upstream error: \"Internal server error — Not enough credits\" (the OnDemand account's Perplexity credits are exhausted). No other plugin was substituted.",
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 2711,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b4af95268adc215dfac9\",\"messageId\":\"6ac9b4b0f7979c7d562ae38c\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants a one-sentence answer\"}}"
+      },
+      {
+        "ms": 2712,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b4af95268adc215dfac9\",\"messageId\":\"6ac9b4b0f7979c7d562ae38c\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" about what Fervo Energy does,\"}}"
+      },
+      {
+        "ms": 2884,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b4af95268adc215dfac9\",\"messageId\":\"6ac9b4b0f7979c7d562ae38c\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" with one source citation. This\"}}"
+      },
+      {
+        "ms": 2886,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b4af95268adc215dfac9\",\"messageId\":\"6ac9b4b0f7979c7d562ae38c\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" requires a web search (Perplex\"}}"
+      },
+      {
+        "ms": 2890,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b4af95268adc215dfac9\",\"messageId\":\"6ac9b4b0f7979c7d562ae38c\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ity). Let me build the plan.\\n\\n\"}}"
+      },
+      {
+        "ms": 2891,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b4af95268adc215dfac9\",\"messageId\":\"6ac9b4b0f7979c7d562ae38c\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The instruction says external facts\"}}"
+      },
+      {
+        "ms": 2891,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b4af95268adc215dfac9\",\"messageId\":\"6ac9b4b0f7979c7d562ae38c\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" should use Perplexity web search\"}}"
+      },
+      {
+        "ms": 2894,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b4af95268adc215dfac9\",\"messageId\":\"6ac9b4b0f7979c7d562ae38c\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\". What Fervo Energy does is an\"}}"
+      },
+      {
+        "ms": 2897,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b4af95268adc215dfac9\",\"messageId\":\"6ac9b4b0f7979c7d562ae38c\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" external fact. So plan_required\"}}"
+      },
+      {
+        "ms": 3018,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b4af95268adc215dfac9\",\"messageId\":\"6ac9b4b0f7979c7d562ae38c\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\": true with a Perplexity search\"}}"
+      }
+    ]
+  }
+]

@@ -18,7 +18,7 @@ export function CompanyPicker({ options, value, onChange, max = 5, compact }: { 
         )}
         {value.map((slug) => (
           <Badge key={slug} tone="primary" className="gap-1.5 pr-1" data-testid="company-chip">
-            <CompanyLogo name={byslug[slug]?.name ?? slug} src={byslug[slug]?.logo_url} size={16} />
+            <CompanyLogo name={byslug[slug]?.name ?? slug} src={byslug[slug]?.logo_url} slug={slug} size={16} />
             {byslug[slug]?.name ?? slug}
             <button type="button" onClick={() => onChange(value.filter((v) => v !== slug))} className="tap ml-1 grid size-6 place-items-center rounded-full hover:bg-primary/25" aria-label={`Remove ${byslug[slug]?.name ?? slug}`}><X className="size-3.5" aria-hidden /></button>
           </Badge>
@@ -30,7 +30,7 @@ export function CompanyPicker({ options, value, onChange, max = 5, compact }: { 
           onKeyDown={(e) => { if (e.key === "Enter" && hits[0]) { e.preventDefault(); add(hits[0].slug); } if (e.key === "Escape") setQ(""); }} />
         {hits.length > 0 && (
           <ul id="company-search-list" role="listbox" className="absolute z-30 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-border bg-surface p-1 shadow-xl">
-            {hits.map((h) => <li key={h.slug} role="option" aria-selected={value.includes(h.slug)}><button type="button" onClick={() => add(h.slug)} className="flex min-h-9 w-full items-center justify-between rounded-md px-2 text-left text-sm hover:bg-surface-2 focus-visible:bg-surface-2"><span className="inline-flex items-center gap-2"><CompanyLogo name={h.name} src={h.logo_url} size={16} />{h.name}</span><span className="text-xs text-muted">{h.sector}</span></button></li>)}
+            {hits.map((h) => <li key={h.slug} role="option" aria-selected={value.includes(h.slug)}><button type="button" onClick={() => add(h.slug)} className="flex min-h-9 w-full items-center justify-between rounded-md px-2 text-left text-sm hover:bg-surface-2 focus-visible:bg-surface-2"><span className="inline-flex items-center gap-2"><CompanyLogo name={h.name} src={h.logo_url} slug={h.slug} size={16} />{h.name}</span><span className="text-xs text-muted">{h.sector}</span></button></li>)}
           </ul>
         )}
       </div>

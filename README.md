@@ -2,8 +2,8 @@
 
 Full backend for the **B Capital Portfolio Intelligence** product: a TypeScript API (Hono) over a Drizzle-ORM SQLite
 database seeded from the 135-company brand matrix (+ the B Capital firm record = **136 records**), fed every day at
-06:00 UTC by **OnDemand Flow Builder** workflows that call OnDemand plugins (Perplexity, LinkedIn, Reddit, X, GPT Search),
-score sentiment with `predefined-claude-fable-5.1`, and write back through `POST /ingest`. Since the **live-data release (2026-10-09)**
+06:00 UTC by **OnDemand Flow Builder** workflows that call the OnDemand Perplexity plugin (`plugin-1722260873`, the only plugin wired anywhere),
+score sentiment with `predefined-deepseek-flash` (DeepSeek Flash v4.1, endpoint_name deepseek-v4.1-flash), and write back through `POST /ingest`. Since the **live-data release (2026-10-09)**
 the API also refreshes news itself: `POST /refresh` / an hourly in-process scheduler stream one Perplexity query per company through the
 OnDemand Chat API and persist article images and published dates (see [`web/docs/REFRESH_PIPELINE.md`](web/docs/REFRESH_PIPELINE.md)).
 
@@ -40,7 +40,7 @@ OnDemand Chat API and persist article images and published dates (see [`web/docs
 | `scripts/apply-logos.ts` | Idempotently UPDATEs `companies.logo_url` from `proof/logo-resolution.json` (`DB_PATH` selects the DB; firm record untouched) |
 | `proof/` | `refresh-run.json` (recorded `/refresh` run), `logo-resolution.json`, `image-coverage.json` (136/136 logos), `health-probe.log` |
 | `workflows/` | Flow Builder workflow bodies + the script that creates/activates/executes them |
-| `config/plugins.json` | Plugin wiring; `plugin-1777018662` is **DEFERRED** |
+| `config/plugins.json` | Plugin wiring; Perplexity is the only ACTIVE plugin (others `removed` 2026-10-10) |
 | `docs/ONDEMAND_SURFACE.md` | Live-documented OnDemand API surface used by this project |
 | `docs/DEPLOYMENT_NOTES.md` | Deployment record, platform decision and smoke-test results |
 | `web/docs/REFRESH_PIPELINE.md` | How `/refresh` works: auth, schedule, data model, failure handling, manual runs |
@@ -77,10 +77,11 @@ runs rf-2026-10-10T002013Z-0682e7 (23 companies, 91 items), rf-2026-10-10T004411
 | `INGEST_SECRET` | *(generate: `openssl rand -hex 32`)* | guards `POST /ingest` **and** `POST /refresh` |
 | `ONDEMAND_API_KEY` | *(secret, server only)* | `apikey` header for `/refresh` and the scheduler; never logged, never committed — redact as `<redacted>` in any proof |
 | `ONDEMAND_BASE_URL` | `https://api.on-demand.io` | upstream for the refresh pipeline |
-| `ONDEMAND_DEFAULT_MODEL` | `predefined-claude-fable-5.1` | `endpointId` used by refresh queries |
-| `ONDEMAND_NEWS_PLUGIN_ID` | `plugin-1722260873` | Perplexity plugin used for news |
+| `ONDEMAND_DEFAULT_MODEL` | `predefined-deepseek-flash` | `endpointId` used by refresh queries — DeepSeek Flash v4.1 (endpoint_name deepseek-v4.1-flash) |
+| `ONDEMAND_REASONING_MODE` | `medium` | `reasoningMode` sent with every refresh query |
+| `ONDEMAND_NEWS_PLUGIN_ID` / `ONDEMAND_NEWS_PLUGIN_IDS` | `plugin-1722260873` | Perplexity — the only plugin used for news (no fallback plugins) |
 | `REFRESH_CRON_MINUTES` | `60` | in-process scheduler interval; `0` disables (also disabled when `ONDEMAND_API_KEY` is absent). Run only one instance with it enabled |
-| `DEFERRED_PLUGINS`, `EARLIEST_TEST_UTC` | `plugin-1777018662`, `` | deferred PitchBook plugin |
+| `EARLIEST_TEST_UTC` | `` | legacy; PitchBook plugin removed 2026-10-10 |
 
 ## Data notes
 * **136 spec records** = 135 Brand_Matrix rows + B Capital. One extra record (`flutterwave`, `in_brand_matrix=false`)

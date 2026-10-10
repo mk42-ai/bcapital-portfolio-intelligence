@@ -1,0 +1,77 @@
+/* GROWTH values — interactive, accessible disclosure tiles. Light theme only; tokens from src/styles/tokens.css. */
+
+.growth-item {
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  will-change: transform;
+}
+.growth-item:hover,
+.growth-item:has(.growth-btn:focus-visible) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px -8px rgba(15, 23, 42, 0.25);
+}
+
+.growth-btn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+.growth-btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Letter tile: subtle accent on hover / focus / open. */
+.growth-tile {
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+.growth-btn:hover .growth-tile,
+.growth-btn:focus-visible .growth-tile,
+.growth-btn[aria-expanded="true"] .growth-tile {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  transform: scale(1.04);
+}
+
+/* Chevron rotates 180° when expanded. */
+.growth-chevron {
+  transition: transform 200ms ease;
+}
+.growth-btn[aria-expanded="true"] .growth-chevron {
+  transform: rotate(180deg);
+}
+
+/* Panel: CSS grid-row trick so height animates without measuring. No `hidden` attribute (it would kill the transition). */
+.growth-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 240ms ease, opacity 200ms ease;
+}
+.growth-panel[data-state="open"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.growth-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .growth-item,
+  .growth-tile,
+  .growth-chevron,
+  .growth-panel {
+    transition: none;
+  }
+  .growth-item:hover,
+  .growth-item:has(.growth-btn:focus-visible),
+  .growth-btn:hover .growth-tile,
+  .growth-btn:focus-visible .growth-tile,
+  .growth-btn[aria-expanded="true"] .growth-tile {
+    transform: none;
+  }
+  /* Keep the rotated chevron as a static state indicator (no motion, just orientation). */
+}

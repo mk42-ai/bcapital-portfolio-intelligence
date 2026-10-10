@@ -1,0 +1,1110 @@
+# OnDemand streaming probe | startUtc=2026-10-10T03:13:43.438936+00:00 | endpointId=predefined-deepseek-flash | reasoningMode=medium | pluginIds=['plugin-1722260873'] | query='What is the latest news about Fervo Energy? Cite sources.'
+# createSession POST /chat/v1/sessions -> HTTP 201 in 510ms
+# createSession response headers: {"Date": "Sat, 10 Oct 2026 03:13:43 GMT", "Content-Type": "application/json; charset=utf-8", "Content-Length": "560", "Connection": "close", "CF-Ray": "a4827366ef3250a3-IAD", "CF-Cache-Status": "DYNAMIC", "Server": "cloudflare", "Strict-Transport-Security": "max-age=31536000; includeSubDomains", "access-control-expose-headers": "X-Trace-ID", "content-security-policy": "default-src 'none'; frame-ancestors 'none'", "referrer-policy": "no-referrer", "x-content-type-options": "nosniff", "x-trace-id": "eccec69e943b2075bbdae2df75e2bc41", "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=YKDE%2B85wFWX9IZJYZd37PPkCSZvMfc0RgcxKIwBVglj7k18pGfmNdHM5afozrD3dp7KuQESPPAaadZMsMy64YwBV8Oro9SONIT8vFoPcSvg%2FQgx5cxJbgCqq4jO2MP%2F69gGL\"}]}", "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}", "alt-svc": "h3=\":443\"; ma=86400"}
+# createSession body: {"message":"Chat session created successfully","data":{"id":"6ac9ad67261cbe2340483c48","companyId":"6692b763e851d28a036ab30e","externalUserId":"probe-diag","agentIds":["agent-1722260873"],"pluginIds":["plugin-1722260873"],"contextMetadata":[],"title":"","status":"draft","createdBy":"6692b763e851d28a036ab30f","createdAt":"2026-10-10T03:13:43.930443627Z","updatedAt":"2026-10-10T03:13:43.930443627Z","liveSettings":{"enabled":false,"mode":"on-events","groundRules":"","destinations":{"email":{"enabled":false},"slack":{"enabled":false}}},"isProcessing":false}}
+# streamQuery POST /chat/v1/sessions/6ac9ad67261cbe2340483c48/query body: {"query": "What is the latest news about Fervo Energy? Cite sources.", "endpointId": "predefined-deepseek-flash", "responseMode": "stream", "pluginIds": ["plugin-1722260873"], "reasoningMode": "medium"}
+[+495ms] # streamQuery -> HTTP 200
+[+495ms] # response headers: {"Date": "Sat, 10 Oct 2026 03:13:44 GMT", "Content-Type": "text/event-stream; charset=utf-8", "Transfer-Encoding": "chunked", "Connection": "close", "CF-Ray": "a4827369de4015e4-IAD", "CF-Cache-Status": "DYNAMIC", "Cache-Control": "no-cache, no-transform", "Server": "cloudflare", "Strict-Transport-Security": "max-age=31536000; includeSubDomains", "access-control-expose-headers": "X-Trace-ID", "content-security-policy": "default-src 'none'; frame-ancestors 'none'", "referrer-policy": "no-referrer", "x-content-type-options": "nosniff", "x-trace-id": "4df84ac7f2ba79d5fd450c6039747a19", "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=9tmDCNXRX0o6qQXHRwwwT%2B3kddmr0%2FsXcx2PkgI9lUAHADtioAbibjUNna2g0IMcEYqri7DnWX7HibBARO%2BcvfXIsR3XuYJsf30lGg172Ko0yyOt19V1VcraeHekj90IMDIN\"}]}", "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}", "alt-svc": "h3=\":443\"; ma=86400"}
+[+1501ms] event: thinking
+[+1501ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":1,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"The user wants the latest news"}}
+[+1527ms] event: thinking
+[+1527ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":2,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" about Fervo Energy with sources"}}
+[+1566ms] event: thinking
+[+1566ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":3,"eventType":"planning_thinking","status":"processing","thinking":{"delta":". I should use perplexity plugin"}}
+[+1594ms] event: thinking
+[+1594ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":4,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" since it's manually selected and"}}
+[+1652ms] event: thinking
+[+1652ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":5,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" relevant. This is a research/news"}}
+[+1716ms] event: thinking
+[+1716ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":6,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" task.\n\nSimple plan: one step to"}}
+[+1743ms] event: thinking
+[+1743ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":7,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" gather the latest news about F"}}
+[+1771ms] event: thinking
+[+1771ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":8,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"ervo Energy from perplexity, with"}}
+[+1811ms] event: thinking
+[+1811ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":9,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" citations.\n\nShould it be one step"}}
+[+1844ms] event: thinking
+[+1844ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":10,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" or more? The request is just news"}}
+[+1867ms] event: thinking
+[+1867ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":11,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" with citations. One step using"}}
+[+1892ms] event: thinking
+[+1892ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":12,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" perplexity suffices. Maybe add"}}
+[+1931ms] event: thinking
+[+1931ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":13,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" a step to compile? No summarizing"}}
+[+1964ms] event: thinking
+[+1964ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":14,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"/analysis steps. Just one step"}}
+[+2015ms] event: thinking
+[+2015ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":15,"eventType":"planning_output","status":"processing","output":{"delta":"{\n  \"title\": \"I'll find the latest"}}
+[+2030ms] event: thinking
+[+2030ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":16,"eventType":"planning_output","status":"processing","output":{"delta":" news about Fervo Energy and cite"}}
+[+2056ms] event: thinking
+[+2056ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":17,"eventType":"planning_output","status":"processing","output":{"delta":" the sources.\",\n  \"objective\":"}}
+[+2084ms] event: thinking
+[+2084ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":18,"eventType":"planning_output","status":"processing","output":{"delta":" \"Retrieve the most recent news"}}
+[+2111ms] event: thinking
+[+2111ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":19,"eventType":"planning_output","status":"processing","output":{"delta":" about Fervo Energy with cited"}}
+[+2138ms] event: thinking
+[+2138ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":20,"eventType":"planning_output","status":"processing","output":{"delta":" sources.\",\n  \"plan_required\":"}}
+[+2163ms] event: thinking
+[+2163ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":21,"eventType":"planning_output","status":"processing","output":{"delta":" true,\n  \"plan_skip_reason\": \"\",\n"}}
+[+2179ms] event: thinking
+[+2179ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":22,"eventType":"planning_output","status":"processing","output":{"delta":"  \"steps\": [\n    {\n      \"title"}}
+[+2204ms] event: thinking
+[+2205ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":23,"eventType":"planning_output","status":"processing","output":{"delta":"\": \"Gathering latest Fervo news"}}
+[+2246ms] event: thinking
+[+2246ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":24,"eventType":"planning_output","status":"processing","output":{"delta":"\",\n      \"user_query\": \"What is"}}
+[+2262ms] event: thinking
+[+2262ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":25,"eventType":"planning_output","status":"processing","output":{"delta":" the latest news about Fervo Energy"}}
+[+2286ms] event: thinking
+[+2286ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":26,"eventType":"planning_output","status":"processing","output":{"delta":"? Provide recent developments and"}}
+[+2345ms] event: thinking
+[+2345ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":27,"eventType":"planning_output","status":"processing","output":{"delta":" cite all sources with their URLs"}}
+[+2355ms] event: thinking
+[+2355ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":28,"eventType":"planning_output","status":"processing","output":{"delta":".\",\n      \"assistant_query\": \"\",\n"}}
+[+2383ms] event: thinking
+[+2383ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":29,"eventType":"planning_output","status":"processing","output":{"delta":"      \"depends\": [],\n      \"plugins"}}
+[+2413ms] event: thinking
+[+2413ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":30,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"."}}
+[+2414ms] event: thinking
+[+2414ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":31,"eventType":"planning_output","status":"processing","output":{"delta":"\": [\"perplexity\"]\n    }\n  ]\n}"}}
+[+2416ms] event: thinking
+[+2416ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":32,"eventType":"planning_thinking","status":"processing","thinking":{"delta":""}}
+[+2417ms] event: thinking
+[+2417ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":33,"eventType":"planning_output","status":"processing","output":{"delta":""}}
+[+3528ms] event: heartbeat
+[+3528ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","time":"2026-10-10T03:13:47Z"}
+[+4132ms] event: thinking
+[+4132ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":34,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"We need to respond in JSON only"}}
+[+4151ms] event: thinking
+[+4151ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":35,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":", per schema. The current query"}}
+[+4179ms] event: thinking
+[+4179ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":36,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":": latest news about Fervo Energy"}}
+[+4207ms] event: thinking
+[+4207ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":37,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":", recent developments, cite sources"}}
+[+4233ms] event: thinking
+[+4233ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":38,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" with URLs. We have plugins: perplex"}}
+[+4271ms] event: thinking
+[+4271ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":39,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"ity (search internet), llm_know"}}
+[+4315ms] event: thinking
+[+4315ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":40,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"ledge (fallback). We need to select"}}
+[+4366ms] event: thinking
+[+4366ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":41,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" plugins and place at least one"}}
+[+4381ms] event: thinking
+[+4381ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":42,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" in current with dependencies."}}
+[+4434ms] event: thinking
+[+4434ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":43,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" The task is to gather latest news"}}
+[+4462ms] event: thinking
+[+4462ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":44,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":", so perplexity is appropriate"}}
+[+4516ms] event: thinking
+[+4516ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":45,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":". We need to construct the API"}}
+[+4518ms] event: thinking
+[+4518ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":46,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" request parameters for perplex"}}
+[+4556ms] event: thinking
+[+4556ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":47,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"ity. The schema for perplexity"}}
+[+4609ms] event: thinking
+[+4609ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":48,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":": message (string) - the search"}}
+[+4623ms] event: thinking
+[+4623ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":49,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" query. Maximum 2048 characters"}}
+[+4651ms] event: thinking
+[+4652ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":50,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":". We should provide a query like"}}
+[+4664ms] event: thinking
+[+4664ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":51,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" \"latest news about Fervo Energy"}}
+[+4691ms] event: thinking
+[+4691ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":52,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" recent developments\" and ensure"}}
+[+4752ms] event: thinking
+[+4752ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":53,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" we ask for sources and images"}}
+[+4785ms] event: thinking
+[+4785ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":54,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"? It says \"along with images and"}}
+[+4813ms] event: thinking
+[+4813ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":55,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" sources\". We can include that"}}
+[+4844ms] event: thinking
+[+4844ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":56,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":". But the response format expects"}}
+[+4870ms] event: thinking
+[+4870ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":57,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" api_request_parameters as an object"}}
+[+4908ms] event: thinking
+[+4908ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":58,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":". So we'll set message to something"}}
+[+4938ms] event: thinking
+[+4938ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":59,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" like: \"Latest news about Ferv"}}
+[+4962ms] event: thinking
+[+4962ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":60,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"o Energy, recent developments,"}}
+[+5002ms] event: thinking
+[+5002ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":61,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" with sources and URLs.\" That should"}}
+[+5029ms] event: thinking
+[+5029ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":62,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" be fine.\n\nWe need a title: describing"}}
+[+5100ms] event: thinking
+[+5100ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":63,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" the prompt sent in current plugin"}}
+[+5122ms] event: thinking
+[+5122ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":64,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" step, 3-4 plain words starting"}}
+[+5151ms] event: thinking
+[+5151ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":65,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" with an action verb ending in"}}
+[+5177ms] event: thinking
+[+5177ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":66,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" \"ing\". e.g., \"Gathering Fervo"}}
+[+5208ms] event: thinking
+[+5208ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":67,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" Energy news\". So title: \"Gathering"}}
+[+5238ms] event: thinking
+[+5238ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":68,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" latest Fervo news\".\n\nNow plugins"}}
+[+5272ms] event: thinking
+[+5272ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":69,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" array: one plugin: perplexity"}}
+[+5324ms] event: thinking
+[+5324ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":70,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":". pluginId: \"plugin-1722260873"}}
+[+5326ms] event: thinking
+[+5326ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":71,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"\", name: \"perplexity\", description"}}
+[+5366ms] event: thinking
+[+5366ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":72,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":": \"This endpoint allows querying"}}
+[+5402ms] event: thinking
+[+5402ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":73,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" and returns relevant sources and"}}
+[+5417ms] event: thinking
+[+5417ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":74,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" images, ensuring that both content"}}
+[+5448ms] event: thinking
+[+5449ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":75,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" and image URLs are included in"}}
+[+5474ms] event: thinking
+[+5474ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":76,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" the response.\", api_request_parameters"}}
+[+5501ms] event: thinking
+[+5501ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":77,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":": {\"message\": \"Latest news about"}}
+[+5514ms] event: thinking
+[+5514ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":78,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" Fervo Energy, recent developments"}}
+[+5543ms] event: thinking
+[+5543ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":79,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":", with sources and URLs.\"}, all"}}
+[+5567ms] event: thinking
+[+5567ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":80,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"_parameters_hydrated: true, dependencies"}}
+[+5582ms] event: thinking
+[+5582ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":81,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":": [], identifier: \"rest_api\".\n\n"}}
+[+5613ms] event: thinking
+[+5613ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":82,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"Check: The pluginId must be exact"}}
+[+5635ms] event: thinking
+[+5635ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":83,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":": \"plugin-1722260873\". identifier"}}
+[+5677ms] event: thinking
+[+5678ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":84,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":": \"rest_api\". Description as given"}}
+[+5703ms] event: thinking
+[+5703ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":85,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":". All parameters hydrated: true"}}
+[+5734ms] event: thinking
+[+5734ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":86,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" because we provided message. D"}}
+[+5757ms] event: thinking
+[+5757ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":87,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"ependencies empty.\n\nDo we need"}}
+[+5818ms] event: thinking
+[+5818ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":88,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" to use llm_knowledge? No, because"}}
+[+5840ms] event: thinking
+[+5840ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":89,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" perplexity is suitable. The rule"}}
+[+5908ms] event: thinking
+[+5908ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":90,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":": \"use this if none of the plugins"}}
+[+5910ms] event: thinking
+[+5910ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":91,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" are suitable for the questions"}}
+[+5945ms] event: thinking
+[+5946ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":92,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" asked\". Perplexity is suitable"}}
+[+5985ms] event: thinking
+[+5985ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":93,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":".\n\nThus output JSON.\n\nEnsure no"}}
+[+6012ms] event: thinking
+[+6012ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":94,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" extra text. So final answer should"}}
+[+6046ms] event: thinking
+[+6046ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":95,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" be a JSON object. We'll format"}}
+[+6081ms] event: thinking
+[+6081ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":96,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":"{\n  \"title\": \"Gathering latest"}}
+[+6112ms] event: thinking
+[+6112ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":97,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" Fervo news\",\n  \"plugins\": [\n   "}}
+[+6133ms] event: thinking
+[+6133ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":98,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" {\n      \"pluginId\": \"plugin-172"}}
+[+6151ms] event: thinking
+[+6151ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":99,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":"2260873\",\n      \"name\": \"perplex"}}
+[+6199ms] event: thinking
+[+6199ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":100,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":"ity\",\n      \"description\": \"This"}}
+[+6202ms] event: thinking
+[+6202ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":101,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" endpoint allows querying and returns"}}
+[+6206ms] event: thinking
+[+6206ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":102,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" relevant sources and images, ensuring"}}
+[+6234ms] event: thinking
+[+6234ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":103,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" that both content and image URLs"}}
+[+6243ms] event: thinking
+[+6243ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":104,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" are included in the response.\",\n"}}
+[+6262ms] event: thinking
+[+6262ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":105,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":"      \"api_request_parameters\":"}}
+[+6269ms] event: thinking
+[+6269ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":106,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" {\n        \"message\": \"Latest news"}}
+[+6299ms] event: thinking
+[+6299ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":107,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" about Fervo Energy, recent developments"}}
+[+6331ms] event: thinking
+[+6331ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":108,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":", with sources and URLs.\"\n     "}}
+[+6338ms] event: thinking
+[+6338ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":109,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" },\n      \"all_parameters_hydrated"}}
+[+6364ms] event: thinking
+[+6364ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":110,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":"\": true,\n      \"dependencies\":"}}
+[+6378ms] event: thinking
+[+6378ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":111,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" [],\n      \"identifier\": \"rest"}}
+[+6392ms] event: thinking
+[+6392ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":112,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" nicely."}}
+[+6394ms] event: thinking
+[+6394ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":113,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":"_api\"\n    }\n  ]\n}"}}
+[+6398ms] event: thinking
+[+6398ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":114,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":""}}
+[+6398ms] event: thinking
+[+6398ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":115,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":""}}
+[+6530ms] event: heartbeat
+[+6530ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","time":"2026-10-10T03:13:50Z"}
+[+8219ms] event: thinking
+[+8219ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":116,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"We need answer user asks latest"}}
+[+8337ms] event: thinking
+[+8337ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":117,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" news about Fervo Energy, cite"}}
+[+8338ms] event: thinking
+[+8338ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":118,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" sources. We have plugin response"}}
+[+8342ms] event: thinking
+[+8342ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":119,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":": perplexity error \"Internal server"}}
+[+8346ms] event: thinking
+[+8346ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":120,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" error\",\"message\":\"Not enough credits"}}
+[+8352ms] event: thinking
+[+8352ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":121,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"\",\"sourcesWithContent\":[]}. So"}}
+[+8360ms] event: thinking
+[+8360ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":122,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" plugin failed. Need inform user"}}
+[+8462ms] event: thinking
+[+8462ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":123,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". But also we should give answer"}}
+[+8462ms] event: thinking
+[+8462ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":124,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" from own knowledge. Must not mention"}}
+[+8462ms] event: thinking
+[+8462ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":125,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" context/plugin responses? Actually"}}
+[+8472ms] event: thinking
+[+8472ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":126,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" instructions: If plugin failed"}}
+[+8493ms] event: thinking
+[+8493ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":127,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" or insufficient info, inform user"}}
+[+8533ms] event: thinking
+[+8533ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":128,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". If significant plugin failures"}}
+[+8573ms] event: thinking
+[+8573ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":129,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"/API failures, inform clearly."}}
+[+8601ms] event: thinking
+[+8601ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":130,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" When answering after such failures"}}
+[+8629ms] event: thinking
+[+8629ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":131,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", explicitly mention providing"}}
+[+8632ms] event: thinking
+[+8632ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":132,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" answer based on own knowledge"}}
+[+8641ms] event: thinking
+[+8641ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":133,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" and not from real-time plugin"}}
+[+8669ms] event: thinking
+[+8669ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":134,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" data or API responses. Do not"}}
+[+8710ms] event: thinking
+[+8711ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":135,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" mention word context. Do not mention"}}
+[+8763ms] event: thinking
+[+8764ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":136,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" \"previous chat history\", \"context"}}
+[+8791ms] event: thinking
+[+8791ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":137,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"\", or \"plugin responses\". So can"}}
+[+8818ms] event: thinking
+[+8818ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":138,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" say \"I attempted to retrieve the"}}
+[+8876ms] event: thinking
+[+8876ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":139,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" latest news via a search tool"}}
+[+8880ms] event: thinking
+[+8880ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":140,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", but the request failed due to"}}
+[+8915ms] event: thinking
+[+8915ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":141,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" an API error (not enough credits"}}
+[+8940ms] event: thinking
+[+8940ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":142,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"), so I can't provide real-time"}}
+[+8988ms] event: thinking
+[+8988ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":143,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" news right now. Here's what I"}}
+[+8996ms] event: thinking
+[+8996ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":144,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" know from my training data...\""}}
+[+9047ms] event: thinking
+[+9047ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":145,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Need cite sources? We can't provide"}}
+[+9071ms] event: thinking
+[+9071ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":146,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" real URLs unless from plugin responses"}}
+[+9118ms] event: thinking
+[+9118ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":147,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"? Instruction: If plugin response"}}
+[+9144ms] event: thinking
+[+9144ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":148,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" contains URL or placeholder, use"}}
+[+9180ms] event: thinking
+[+9180ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":149,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" exactly. It didn't. Do not generate"}}
+[+9232ms] event: thinking
+[+9232ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":150,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"/make up URLs. So we should not"}}
+[+9234ms] event: thinking
+[+9234ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":151,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" fabricate URLs. But user asked"}}
+[+9262ms] event: thinking
+[+9262ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":152,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" cite sources. We can cite general"}}
+[+9293ms] event: thinking
+[+9293ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":153,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" sources from knowledge? This may"}}
+[+9308ms] event: thinking
+[+9308ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":154,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" conflict with \"Do not generate"}}
+[+9333ms] event: thinking
+[+9333ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":155,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", create, or make up any URLs on"}}
+[+9356ms] event: thinking
+[+9356ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":156,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" your own. Only include URLs/place"}}
+[+9382ms] event: thinking
+[+9382ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":157,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"holders explicitly provided.\" So"}}
+[+9427ms] event: thinking
+[+9427ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":158,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" can't provide URLs. Could name"}}
+[+9456ms] event: thinking
+[+9456ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":159,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" sources without URLs? \"According"}}
+[+9493ms] event: thinking
+[+9493ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":160,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" to Fervo Energy's official press"}}
+[+9524ms] event: thinking
+[+9524ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":161,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" releases, Reuters, Bloomberg,"}}
+[+9527ms] event: heartbeat
+[+9527ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","time":"2026-10-10T03:13:53Z"}
+[+9551ms] event: thinking
+[+9551ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":162,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" etc.\" But that may be considered"}}
+[+9673ms] event: thinking
+[+9673ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":163,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" citing sources without URLs. The"}}
+[+9675ms] event: thinking
+[+9675ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":164,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" instruction says only include"}}
+[+9679ms] event: thinking
+[+9679ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":165,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" URLs/placeholders explicitly provided"}}
+[+9684ms] event: thinking
+[+9684ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":166,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". It doesn't forbid naming sources"}}
+[+9709ms] event: thinking
+[+9710ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":167,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" but likely okay? But \"cite sources"}}
+[+9761ms] event: thinking
+[+9761ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":168,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"\" maybe require links. Since no"}}
+[+9779ms] event: thinking
+[+9779ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":169,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" URLs provided, we should state"}}
+[+9806ms] event: thinking
+[+9806ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":170,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" unable to provide source links"}}
+[+9840ms] event: thinking
+[+9840ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":171,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" due to failed search, but can"}}
+[+9885ms] event: thinking
+[+9885ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":172,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" mention known developments from"}}
+[+9929ms] event: thinking
+[+9929ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":173,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" training data. Need be accurate"}}
+[+9954ms] event: thinking
+[+9954ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":174,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" as of knowledge cutoff 2024-06"}}
+[+9988ms] event: thinking
+[+9988ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":175,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"? My cutoff 2024-06? Actually current"}}
+[+10034ms] event: thinking
+[+10034ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":176,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" date 2026-04-07, knowledge cutoff"}}
+[+10070ms] event: thinking
+[+10070ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":177,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 2024-06. Latest news from training"}}
+[+10119ms] event: thinking
+[+10119ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":178,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":": Fervo Energy is a geothermal"}}
+[+10165ms] event: thinking
+[+10165ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":179,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" company. Known news: In 2023,"}}
+[+10179ms] event: thinking
+[+10179ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":180,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Fervo Energy announced successful"}}
+[+10249ms] event: thinking
+[+10249ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":181,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 30-day well test at Project Red"}}
+[+10339ms] event: thinking
+[+10339ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":182,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" in Nevada, with 3.5 MW production"}}
+[+10382ms] event: thinking
+[+10382ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":183,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", used for Google data center."}}
+[+10406ms] event: thinking
+[+10406ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":184,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" In 2024, Fervo Energy announced"}}
+[+10440ms] event: thinking
+[+10440ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":185,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" drilling results, partnership"}}
+[+10483ms] event: thinking
+[+10483ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":186,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" with California Resources Corporation"}}
+[+10515ms] event: thinking
+[+10515ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":187,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"? Let's recall.\n\nFervo Energy news"}}
+[+10544ms] event: thinking
+[+10544ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":188,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":":\n- July 2023: Fervo Energy announced"}}
+[+10783ms] event: thinking
+[+10783ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":189,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" first-ever commercial enhanced"}}
+[+10787ms] event: thinking
+[+10787ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":190,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" geothermal system (EGS) project"}}
+[+10790ms] event: thinking
+[+10790ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":191,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", Project Red, in northern Nevada"}}
+[+10792ms] event: thinking
+[+10792ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":192,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", achieved 3.5 MW at high flow"}}
+[+10796ms] event: thinking
+[+10796ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":193,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" rates. Google announced partnership"}}
+[+10836ms] event: thinking
+[+10836ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":194,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" to power data centers in Nevada"}}
+[+10871ms] event: thinking
+[+10871ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":195,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":".\n- September 2023: Fervo Energy"}}
+[+10981ms] event: thinking
+[+10981ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":196,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" and Google announced enhanced"}}
+[+10982ms] event: thinking
+[+10982ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":197,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" geothermal project operational"}}
+[+10984ms] event: thinking
+[+10984ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":198,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", providing carbon-free energy"}}
+[+11049ms] event: thinking
+[+11049ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":199,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" to Nevada grid.\n- 2024: Fervo"}}
+[+11051ms] event: thinking
+[+11051ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":200,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Energy raised $244 million in"}}
+[+11098ms] event: thinking
+[+11098ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":201,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Series D funding? Let's check"}}
+[+11137ms] event: thinking
+[+11137ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":202,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" memory. In February 2024, Ferv"}}
+[+11163ms] event: thinking
+[+11163ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":203,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"o Energy raised $244 million in"}}
+[+11202ms] event: thinking
+[+11202ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":204,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Series D funding led by Capric"}}
+[+11242ms] event: thinking
+[+11242ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":205,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"orn Investment Group's Technology"}}
+[+11339ms] event: thinking
+[+11339ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":206,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Impact Fund. Also in 2024, Ferv"}}
+[+11367ms] event: thinking
+[+11367ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":207,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"o Energy announced new drilling"}}
+[+11457ms] event: thinking
+[+11457ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":208,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" record: drilled 8,000 feet in"}}
+[+11493ms] event: thinking
+[+11493ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":209,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 14 days? Or \"Fervo Energy breaks"}}
+[+11727ms] event: thinking
+[+11727ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":210,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" drilling record with 70% cost"}}
+[+11731ms] event: thinking
+[+11731ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":211,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" reduction\"? Let's recall.\n- In"}}
+[+11732ms] event: thinking
+[+11732ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":212,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" February 2024, Fervo Energy announced"}}
+[+11738ms] event: thinking
+[+11738ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":213,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" it had completed the fastest geothermal"}}
+[+11740ms] event: thinking
+[+11740ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":214,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" well drilling in history, drilling"}}
+[+11762ms] event: thinking
+[+11762ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":215,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" a well in 14 days at its Cape"}}
+[+11797ms] event: thinking
+[+11797ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":216,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Station project in Utah. They"}}
+[+11877ms] event: thinking
+[+11877ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":217,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" said it was a 70% reduction in"}}
+[+11891ms] event: thinking
+[+11891ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":218,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" drilling time compared to Project"}}
+[+11947ms] event: thinking
+[+11947ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":219,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Red. \n- In March 2024, Fervo Energy"}}
+[+11983ms] event: thinking
+[+11983ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":220,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" announced it had secured $244"}}
+[+12058ms] event: thinking
+[+12058ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":221,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" million in Series D funding. \n"}}
+[+12067ms] event: thinking
+[+12067ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":222,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"- In April 2024, Fervo Energy announced"}}
+[+12113ms] event: thinking
+[+12113ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":223,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" partnership with Clean Air Task"}}
+[+12153ms] event: thinking
+[+12153ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":224,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Force? Not sure.\n- In June 202"}}
+[+12167ms] event: thinking
+[+12167ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":225,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"4, Fervo Energy announced results"}}
+[+12195ms] event: thinking
+[+12195ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":226,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" from its Cape Station project"}}
+[+12248ms] event: thinking
+[+12248ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":227,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"? Actually Cape Station is a 400"}}
+[+12303ms] event: thinking
+[+12303ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":228,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" MW project in Beaver County, Utah"}}
+[+12315ms] event: thinking
+[+12315ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":229,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". In 2024, they started drilling"}}
+[+12358ms] event: thinking
+[+12358ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":230,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". \n- In August 2024, Fervo Energy"}}
+[+12396ms] event: thinking
+[+12396ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":231,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" announced it had begun drilling"}}
+[+12434ms] event: thinking
+[+12434ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":232,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" at Cape Station and had raised"}}
+[+12494ms] event: thinking
+[+12494ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":233,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" $244M. \n- In September 2024, F"}}
+[+12528ms] event: heartbeat
+[+12528ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","time":"2026-10-10T03:13:56Z"}
+[+12535ms] event: thinking
+[+12535ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":234,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"ervo Energy announced a 15-year"}}
+[+12549ms] event: thinking
+[+12549ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":235,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" power purchase agreement with"}}
+[+12576ms] event: thinking
+[+12576ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":236,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Southern California Edison for"}}
+[+12617ms] event: thinking
+[+12617ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":237,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 320 MW from Cape Station. That"}}
+[+12662ms] event: thinking
+[+12662ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":238,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" was big news. Let me recall: In"}}
+[+12683ms] event: thinking
+[+12684ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":239,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" September 2024, Fervo Energy and"}}
+[+12712ms] event: thinking
+[+12712ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":240,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Southern California Edison announced"}}
+[+12752ms] event: thinking
+[+12752ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":241,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" a 15-year PPA for 320 MW of geothermal"}}
+[+12793ms] event: thinking
+[+12793ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":242,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" energy from Cape Station. This"}}
+[+12822ms] event: thinking
+[+12822ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":243,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" was described as the world's largest"}}
+[+12847ms] event: thinking
+[+12847ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":244,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" geothermal PPA. \n- In October"}}
+[+12897ms] event: thinking
+[+12897ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":245,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 2024, Fervo Energy announced it"}}
+[+12946ms] event: thinking
+[+12946ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":246,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" had raised $244 million? Actually"}}
+[+13003ms] event: thinking
+[+13003ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":247,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" that was earlier.\n- In November"}}
+[+13006ms] event: thinking
+[+13006ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":248,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 2024, Fervo Energy announced a"}}
+[+13024ms] event: thinking
+[+13024ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":249,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" partnership with Google? \n- In"}}
+[+13063ms] event: thinking
+[+13063ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":250,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" December 2024, Fervo Energy announced"}}
+[+13162ms] event: thinking
+[+13162ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":251,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" a $255 million financing? \n- In"}}
+[+13166ms] event: thinking
+[+13166ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":252,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 2025, Fervo Energy announced a"}}
+[+13204ms] event: thinking
+[+13204ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":253,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" $1 billion funding round? I'm"}}
+[+13225ms] event: thinking
+[+13225ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":254,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" not sure. My cutoff is 2024-06"}}
+[+13265ms] event: thinking
+[+13265ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":255,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", so I can't know 2025-2026. But"}}
+[+13302ms] event: thinking
+[+13302ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":256,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" current date 2026, so \"latest"}}
+[+13333ms] event: thinking
+[+13333ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":257,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" news\" would be beyond my knowledge"}}
+[+13345ms] event: thinking
+[+13345ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":258,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". I should be transparent: real"}}
+[+13418ms] event: thinking
+[+13418ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":259,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"-time search failed, and my knowledge"}}
+[+13438ms] event: thinking
+[+13438ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":260,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" is only up to June 2024. So I"}}
+[+13455ms] event: thinking
+[+13455ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":261,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" can't provide latest news. But"}}
+[+13479ms] event: thinking
+[+13479ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":262,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" I can provide recent developments"}}
+[+13506ms] event: thinking
+[+13506ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":263,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" as of my last update. However"}}
+[+13548ms] event: thinking
+[+13548ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":264,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" user asked \"latest news\" and cite"}}
+[+13588ms] event: thinking
+[+13588ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":265,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" sources. I should say I can't"}}
+[+13614ms] event: thinking
+[+13614ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":266,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" retrieve latest due to tool failure"}}
+[+13642ms] event: thinking
+[+13642ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":267,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", and my training data only goes"}}
+[+13681ms] event: thinking
+[+13681ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":268,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" to June 2024. Then give a summary"}}
+[+13728ms] event: thinking
+[+13728ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":269,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" of known Fervo Energy news up"}}
+[+13766ms] event: thinking
+[+13767ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":270,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" to mid-2024, with source names"}}
+[+13802ms] event: thinking
+[+13802ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":271,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" but no URLs because I can't generate"}}
+[+13833ms] event: thinking
+[+13833ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":272,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" them. But is that okay? The instruction"}}
+[+13862ms] event: thinking
+[+13862ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":273,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" says don't generate URLs. So I"}}
+[+13898ms] event: thinking
+[+13898ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":274,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" can name sources: \"Fervo Energy"}}
+[+13912ms] event: thinking
+[+13912ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":275,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" press releases, Reuters, Bloomberg"}}
+[+14002ms] event: thinking
+[+14002ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":276,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", Canary Media, etc.\" That might"}}
+[+14004ms] event: thinking
+[+14004ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":277,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" satisfy citing sources without"}}
+[+14025ms] event: thinking
+[+14025ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":278,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" links. But \"cite sources\" usually"}}
+[+14056ms] event: thinking
+[+14056ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":279,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" means links. I can say \"I can"}}
+[+14080ms] event: thinking
+[+14080ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":280,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"'t provide direct links because"}}
+[+14100ms] event: thinking
+[+14100ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":281,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" the search tool failed, but these"}}
+[+14141ms] event: thinking
+[+14141ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":282,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" developments were reported by"}}
+[+14168ms] event: thinking
+[+14168ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":283,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Fervo Energy, Reuters, and Can"}}
+[+14198ms] event: thinking
+[+14198ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":284,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"ary Media.\" That's acceptable.\n\n"}}
+[+14221ms] event: thinking
+[+14221ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":285,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"But the instruction: \"If a plugin"}}
+[+14251ms] event: thinking
+[+14251ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":286,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" response contains a URL or URL"}}
+[+14327ms] event: thinking
+[+14327ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":287,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" placeholder like {{GOOSE_URL_"}}
+[+14331ms] event: thinking
+[+14331ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":288,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"...}}, use that URL/placeholder"}}
+[+14332ms] event: thinking
+[+14332ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":289,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" exactly as provided without any"}}
+[+14337ms] event: thinking
+[+14337ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":290,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" modification. Do not generate"}}
+[+14354ms] event: thinking
+[+14354ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":291,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", create, or make up any URLs on"}}
+[+14385ms] event: thinking
+[+14385ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":292,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" your own. Only include URLs/place"}}
+[+14402ms] event: thinking
+[+14403ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":293,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"holders that are explicitly provided"}}
+[+14410ms] event: thinking
+[+14411ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":294,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" in the plugin responses.\" So no"}}
+[+14451ms] event: thinking
+[+14451ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":295,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" URLs. So I will not include any"}}
+[+14463ms] event: thinking
+[+14463ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":296,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" URL. I will mention source names"}}
+[+14490ms] event: thinking
+[+14490ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":297,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":".\n\nNeed answer concise. Should"}}
+[+14520ms] event: thinking
+[+14520ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":298,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" mention plugin failure: \"The search"}}
+[+14577ms] event: thinking
+[+14577ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":299,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" tool returned an error: 'Not enough"}}
+[+14599ms] event: thinking
+[+14599ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":300,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" credits' (internal server error"}}
+[+14640ms] event: thinking
+[+14640ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":301,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"), so I couldn't fetch real-time"}}
+[+14672ms] event: thinking
+[+14672ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":302,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" news.\" Then \"Based on my knowledge"}}
+[+14707ms] event: thinking
+[+14707ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":303,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" (cutoff June 2024), here are recent"}}
+[+14750ms] event: thinking
+[+14750ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":304,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Fervo Energy developments...\""}}
+[+14801ms] event: thinking
+[+14802ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":305,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Then list with sources by name"}}
+[+14829ms] event: thinking
+[+14829ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":306,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". Then note that for latest after"}}
+[+14876ms] event: thinking
+[+14876ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":307,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" June 2024, need successful real"}}
+[+14898ms] event: thinking
+[+14898ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":308,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"-time search.\n\nBut instruction"}}
+[+14956ms] event: thinking
+[+14956ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":309,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":": \"Do not mention the word `context"}}
+[+14991ms] event: thinking
+[+14991ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":310,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"` while answering.\" Fine. \"Do not"}}
+[+15036ms] event: thinking
+[+15036ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":311,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" mention the word `plugin responses"}}
+[+15074ms] event: thinking
+[+15074ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":312,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"`.\" So say \"search tool\" or \"API"}}
+[+15113ms] event: thinking
+[+15113ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":313,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"\". Also \"When answering after such"}}
+[+15127ms] event: thinking
+[+15127ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":314,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" failures, explicitly mention that"}}
+[+15146ms] event: thinking
+[+15146ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":315,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" you are providing an answer based"}}
+[+15154ms] event: thinking
+[+15154ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":316,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" on your own knowledge and not"}}
+[+15171ms] event: thinking
+[+15171ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":317,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" from real-time plugin data or"}}
+[+15199ms] event: thinking
+[+15199ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":318,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" API responses.\" So say \"This is"}}
+[+15211ms] event: thinking
+[+15211ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":319,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" from my own knowledge, not from"}}
+[+15238ms] event: thinking
+[+15238ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":320,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" real-time API data.\"\n\nPotential"}}
+[+15261ms] event: thinking
+[+15261ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":321,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" issue: user asked \"What is the"}}
+[+15294ms] event: thinking
+[+15294ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":322,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" latest news about Fervo Energy"}}
+[+15322ms] event: thinking
+[+15323ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":323,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"? Cite sources.\" If I say I can"}}
+[+15349ms] event: thinking
+[+15349ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":324,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"'t provide latest due to failure"}}
+[+15383ms] event: thinking
+[+15383ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":325,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", but I can give older news. That"}}
+[+15411ms] event: thinking
+[+15411ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":326,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" is fine.\n\nLet's structure:\n- A"}}
+[+15446ms] event: thinking
+[+15446ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":327,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"cknowledge failure: \"I tried to"}}
+[+15456ms] event: thinking
+[+15456ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":328,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" retrieve the latest news, but"}}
+[+15527ms] event: heartbeat
+[+15527ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","time":"2026-10-10T03:13:59Z"}
+[+15542ms] event: thinking
+[+15542ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":329,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" the search API failed with 'Not"}}
+[+15542ms] event: thinking
+[+15542ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":330,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" enough credits' (internal server"}}
+[+15547ms] event: thinking
+[+15547ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":331,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" error), so I don't have real-time"}}
+[+15574ms] event: thinking
+[+15574ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":332,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" results. The following is from"}}
+[+15721ms] event: thinking
+[+15721ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":333,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" my training data (up to June "}}
+[+15724ms] event: thinking
+[+15724ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":334,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"2024) and is not real-time.\"\n-"}}
+[+15730ms] event: thinking
+[+15730ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":335,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Then bullet list:\n  - Project"}}
+[+15760ms] event: thinking
+[+15760ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":336,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Red milestone: In July 2023, F"}}
+[+15826ms] event: thinking
+[+15826ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":337,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"ervo announced its Project Red"}}
+[+15836ms] event: thinking
+[+15836ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":338,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" EGS pilot in Nevada successfully"}}
+[+16016ms] event: thinking
+[+16016ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":339,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" produced 3.5 MW of geothermal"}}
+[+16018ms] event: thinking
+[+16018ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":340,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" power, with a 30-day well test"}}
+[+16021ms] event: thinking
+[+16021ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":341,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". Google partnered to use the clean"}}
+[+16037ms] event: thinking
+[+16037ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":342,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" power for its Nevada data centers"}}
+[+16085ms] event: thinking
+[+16085ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":343,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". (Sources: Fervo Energy, Google"}}
+[+16117ms] event: thinking
+[+16117ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":344,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", Reuters)\n  - Cape Station drilling"}}
+[+16150ms] event: thinking
+[+16150ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":345,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" record: In February 2024, Ferv"}}
+[+16175ms] event: thinking
+[+16175ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":346,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"o said it drilled a geothermal"}}
+[+16203ms] event: thinking
+[+16203ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":347,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" well at Cape Station in Utah in"}}
+[+16246ms] event: thinking
+[+16246ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":348,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 14 days, a 70% reduction compared"}}
+[+16288ms] event: thinking
+[+16288ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":349,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" to Project Red. (Sources: Ferv"}}
+[+16320ms] event: thinking
+[+16320ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":350,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"o Energy, Canary Media)\n  - Series"}}
+[+16365ms] event: thinking
+[+16365ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":351,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" D funding: In February/March "}}
+[+16388ms] event: thinking
+[+16388ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":352,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"2024, Fervo raised $244 million"}}
+[+16402ms] event: thinking
+[+16402ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":353,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" in Series D funding led by Cap"}}
+[+16417ms] event: thinking
+[+16417ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":354,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"ricorn Investment Group's Technology"}}
+[+16463ms] event: thinking
+[+16463ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":355,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Impact Fund. (Sources: Fervo Energy"}}
+[+16463ms] event: thinking
+[+16463ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":356,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", Bloomberg, Reuters)\n  - Southern"}}
+[+16498ms] event: thinking
+[+16498ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":357,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" California Edison PPA: In September"}}
+[+16526ms] event: thinking
+[+16526ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":358,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 2024, Fervo and SCE announced"}}
+[+16554ms] event: thinking
+[+16554ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":359,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" a 15-year PPA for 320 MW from"}}
+[+16595ms] event: thinking
+[+16595ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":360,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Cape Station. (This is after my"}}
+[+16647ms] event: thinking
+[+16647ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":361,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" cutoff? Wait my cutoff is 202"}}
+[+16725ms] event: thinking
+[+16726ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":362,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"4-06, so September 2024 is after"}}
+[+16726ms] event: thinking
+[+16726ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":363,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" cutoff. I cannot know this if"}}
+[+16739ms] event: thinking
+[+16739ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":364,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" cutoff is 2024-06. But I might"}}
+[+16783ms] event: thinking
+[+16783ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":365,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" have knowledge if my actual cutoff"}}
+[+16796ms] event: thinking
+[+16796ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":366,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" is later? The system says current"}}
+[+16834ms] event: thinking
+[+16834ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":367,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" date 2026-04-07, knowledge cutoff"}}
+[+16861ms] event: thinking
+[+16861ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":368,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 2024-06. So I shouldn't include"}}
+[+16915ms] event: thinking
+[+16915ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":369,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" September 2024. I need stick to"}}
+[+16953ms] event: thinking
+[+16953ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":370,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" before June 2024. So only up to"}}
+[+17031ms] event: thinking
+[+17031ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":371,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" June 2024. So Series D funding"}}
+[+17033ms] event: thinking
+[+17033ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":372,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" (Feb 2024) and drilling record"}}
+[+17049ms] event: thinking
+[+17049ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":373,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" (Feb 2024) are within. Project"}}
+[+17101ms] event: thinking
+[+17101ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":374,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Red 2023. Also in April 2024,"}}
+[+17129ms] event: thinking
+[+17129ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":375,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Fervo announced a partnership"}}
+[+17175ms] event: thinking
+[+17175ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":376,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" with California Resources Corporation"}}
+[+17212ms] event: thinking
+[+17212ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":377,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"? Let me recall. In April 2024"}}
+[+17316ms] event: thinking
+[+17316ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":378,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", Fervo Energy and California Resources"}}
+[+17316ms] event: thinking
+[+17316ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":379,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Corporation announced a joint"}}
+[+17319ms] event: thinking
+[+17319ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":380,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" venture to develop geothermal"}}
+[+17324ms] event: thinking
+[+17324ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":381,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" energy in California? Actually"}}
+[+17345ms] event: thinking
+[+17345ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":382,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" CRC and Fervo announced a partnership"}}
+[+17412ms] event: thinking
+[+17412ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":383,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" to develop up to 1 GW? Not sure"}}
+[+17452ms] event: thinking
+[+17452ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":384,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". I think in April 2024, Fervo"}}
+[+17470ms] event: thinking
+[+17470ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":385,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Energy announced a partnership"}}
+[+17510ms] event: thinking
+[+17510ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":386,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" with Clean Air Task Force? No"}}
+[+17545ms] event: thinking
+[+17545ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":387,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":".\n  - In May 2024, Fervo Energy"}}
+[+17579ms] event: thinking
+[+17579ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":388,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" announced it had been selected"}}
+[+17646ms] event: thinking
+[+17646ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":389,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" for a $25 million grant from the"}}
+[+17668ms] event: thinking
+[+17668ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":390,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Department of Energy? Not sure"}}
+[+17696ms] event: thinking
+[+17696ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":391,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":".\n  - In June 2024, Fervo Energy"}}
+[+17733ms] event: thinking
+[+17733ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":392,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" announced it had raised $244 million"}}
+[+17775ms] event: thinking
+[+17775ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":393,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"? No.\n  - Actually, I recall in"}}
+[+17817ms] event: thinking
+[+17817ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":394,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" February 2024, Fervo raised $"}}
+[+17843ms] event: thinking
+[+17843ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":395,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"244M Series D. In March 2024, F"}}
+[+17913ms] event: thinking
+[+17913ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":396,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"ervo announced a 15-year PPA with"}}
+[+17936ms] event: thinking
+[+17936ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":397,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Southern California Edison? Let"}}
+[+17978ms] event: thinking
+[+17979ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":398,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" me check: I think the SCE PPA"}}
+[+17991ms] event: thinking
+[+17991ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":399,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" was announced in September 202"}}
+[+18030ms] event: thinking
+[+18030ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":400,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"4. So after cutoff. So not included"}}
+[+18058ms] event: thinking
+[+18058ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":401,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":".\n  - In April 2024, Fervo Energy"}}
+[+18085ms] event: thinking
+[+18085ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":402,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" announced a partnership with Mer"}}
+[+18154ms] event: thinking
+[+18154ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":403,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"curia Energy? Not sure.\n  - In"}}
+[+18181ms] event: thinking
+[+18182ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":404,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" May 2024, Fervo Energy announced"}}
+[+18235ms] event: thinking
+[+18235ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":405,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" a new record: drilled 8,000 feet"}}
+[+18310ms] event: thinking
+[+18310ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":406,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" in 14 days? That was Feb.\n  -"}}
+[+18333ms] event: thinking
+[+18334ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":407,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" In June 2024, Fervo Energy announced"}}
+[+18444ms] event: thinking
+[+18444ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":408,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" a $100 million grant from DOE"}}
+[+18446ms] event: thinking
+[+18446ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":409,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"? Actually DOE announced $60 million"}}
+[+18459ms] event: thinking
+[+18460ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":410,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" for geothermal? Not sure.\n- So"}}
+[+18497ms] event: thinking
+[+18497ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":411,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" I can provide only up to June"}}
+[+18528ms] event: heartbeat
+[+18528ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","time":"2026-10-10T03:14:02Z"}
+[+18536ms] event: thinking
+[+18536ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":412,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 2024. But user asked latest news"}}
+[+18754ms] event: thinking
+[+18754ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":413,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"; I should say \"As of my last update"}}
+[+18963ms] event: thinking
+[+18963ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":414,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" in June 2024, the most recent"}}
+[+18966ms] event: thinking
+[+18966ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":415,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" notable news included...\" Then"}}
+[+18974ms] event: thinking
+[+18974ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":416,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" list.\n\nBut the instruction says"}}
+[+18974ms] event: thinking
+[+18974ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":417,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" \"If the answer and its relevant"}}
+[+18978ms] event: thinking
+[+18978ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":418,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" context can be derived from the"}}
+[+18979ms] event: thinking
+[+18979ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":419,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" chat history or plugin responses"}}
+[+18985ms] event: thinking
+[+18985ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":420,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", provide the answer from that"}}
+[+18985ms] event: thinking
+[+18985ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":421,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" information; otherwise, answer"}}
+[+18986ms] event: thinking
+[+18986ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":422,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" from your knowledge.\" The plugin"}}
+[+18993ms] event: thinking
+[+18993ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":423,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" response is error. So answer from"}}
+[+18995ms] event: thinking
+[+18995ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":424,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" knowledge. But also \"When context"}}
+[+18998ms] event: thinking
+[+18998ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":425,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" is available, thoroughly reference"}}
+[+19003ms] event: thinking
+[+19003ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":426,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" and elaborate on the provided"}}
+[+19005ms] event: thinking
+[+19005ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":427,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" information in your answer strictly"}}
+[+19007ms] event: thinking
+[+19007ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":428,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" using the provided context. Don"}}
+[+19010ms] event: thinking
+[+19010ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":429,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"'t add anything on your own.\" Here"}}
+[+19127ms] event: thinking
+[+19127ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":430,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" context is error, so we can't"}}
+[+19128ms] event: thinking
+[+19128ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":431,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" elaborate. So we answer from knowledge"}}
+[+19132ms] event: thinking
+[+19132ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":432,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". But we must not add anything"}}
+[+19135ms] event: thinking
+[+19135ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":433,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" on our own? That instruction applies"}}
+[+19138ms] event: thinking
+[+19138ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":434,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" when context available. Here context"}}
+[+19159ms] event: thinking
+[+19159ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":435,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" is just error. So we can answer"}}
+[+19161ms] event: thinking
+[+19161ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":436,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" from knowledge.\n\nAlso \"Do not"}}
+[+19199ms] event: thinking
+[+19200ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":437,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" use the words 'previous chat history"}}
+[+19205ms] event: thinking
+[+19205ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":438,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"', 'context', or 'plugin responses"}}
+[+19246ms] event: thinking
+[+19246ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":439,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"' in your response.\" So avoid those"}}
+[+19318ms] event: thinking
+[+19318ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":440,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" words.\n\nI need cite sources. I"}}
+[+19321ms] event: thinking
+[+19321ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":441,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" can say \"Sources: Fervo Energy"}}
+[+19336ms] event: thinking
+[+19336ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":442,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" press releases, Reuters, Bloomberg"}}
+[+19379ms] event: thinking
+[+19379ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":443,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", Canary Media\" without URLs. That"}}
+[+19412ms] event: thinking
+[+19412ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":444,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"'s acceptable.\n\nBut maybe I can"}}
+[+19445ms] event: thinking
+[+19445ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":445,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" include URLs from memory? No,"}}
+[+19460ms] event: thinking
+[+19460ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":446,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" instruction says do not generate"}}
+[+19486ms] event: thinking
+[+19486ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":447,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" URLs. So no URLs.\n\nLet's craft"}}
+[+19546ms] event: thinking
+[+19546ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":448,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" final answer:\n\n\"I tried to fetch"}}
+[+19567ms] event: thinking
+[+19567ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":449,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" the latest news, but the search"}}
+[+19603ms] event: thinking
+[+19603ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":450,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" API returned an internal server"}}
+[+19640ms] event: thinking
+[+19640ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":451,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" error: 'Not enough credits.' So"}}
+[+19659ms] event: thinking
+[+19659ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":452,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" I can't provide real-time results"}}
+[+19708ms] event: thinking
+[+19708ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":453,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" right now. The following is based"}}
+[+19753ms] event: thinking
+[+19753ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":454,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" on my own knowledge (updated through"}}
+[+19782ms] event: thinking
+[+19782ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":455,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" June 2024), not live API data"}}
+[+19808ms] event: thinking
+[+19808ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":456,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":".\n\nRecent Fervo Energy developments"}}
+[+19852ms] event: thinking
+[+19852ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":457,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" as of mid-2024:\n- Project Red"}}
+[+19891ms] event: thinking
+[+19891ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":458,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" (July 2023): Fervo announced its"}}
+[+19917ms] event: thinking
+[+19917ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":459,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" enhanced geothermal system pilot"}}
+[+19943ms] event: thinking
+[+19943ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":460,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" in Nevada successfully produced"}}
+[+19994ms] event: thinking
+[+19994ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":461,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 3.5 MW during a 30-day well test"}}
+[+20035ms] event: thinking
+[+20035ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":462,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". Google signed on to use the carbon"}}
+[+20062ms] event: thinking
+[+20062ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":463,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"-free power for its Nevada data"}}
+[+20089ms] event: thinking
+[+20089ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":464,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" centers. (Sources: Fervo Energy"}}
+[+20115ms] event: thinking
+[+20115ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":465,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", Google, Reuters)\n- Cape Station"}}
+[+20143ms] event: thinking
+[+20143ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":466,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" drilling record (February 202"}}
+[+20170ms] event: thinking
+[+20170ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":467,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"4): Fervo said it drilled a geothermal"}}
+[+20203ms] event: thinking
+[+20203ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":468,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" well at its Cape Station project"}}
+[+20276ms] event: thinking
+[+20276ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":469,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" in Utah in 14 days, a 70% reduction"}}
+[+20280ms] event: thinking
+[+20280ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":470,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" in drilling time compared to Project"}}
+[+20309ms] event: thinking
+[+20309ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":471,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Red. (Sources: Fervo Energy, Can"}}
+[+20336ms] event: thinking
+[+20336ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":472,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"ary Media)\n- $244M Series D (February"}}
+[+20365ms] event: thinking
+[+20365ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":473,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"/March 2024): Fervo raised $244"}}
+[+20389ms] event: thinking
+[+20390ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":474,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" million in Series D funding led"}}
+[+20417ms] event: thinking
+[+20417ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":475,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" by Capricorn Investment Group"}}
+[+20442ms] event: thinking
+[+20442ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":476,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"'s Technology Impact Fund, with"}}
+[+20469ms] event: thinking
+[+20469ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":477,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" participation from others. (Sources"}}
+[+20485ms] event: thinking
+[+20485ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":478,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":": Fervo Energy, Bloomberg, Reuters"}}
+[+20525ms] event: thinking
+[+20525ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":479,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":")\n\nFor news after June 2024, I"}}
+[+20550ms] event: thinking
+[+20550ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":480,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"'d need a working real-time search"}}
+[+20599ms] event: thinking
+[+20599ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":481,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", which is currently unavailable"}}
+[+20636ms] event: thinking
+[+20636ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":482,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" due to the API error. I can't"}}
+[+20644ms] event: thinking
+[+20644ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":483,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" provide direct source links because"}}
+[+20669ms] event: thinking
+[+20670ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":484,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" the search tool didn't return"}}
+[+20725ms] event: thinking
+[+20725ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":485,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" any.\"\n\nThis is good. But user"}}
+[+20768ms] event: thinking
+[+20768ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":486,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" asked \"latest news\" and cite sources"}}
+[+20780ms] event: thinking
+[+20780ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":487,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". I should maybe mention that these"}}
+[+20834ms] event: thinking
+[+20834ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":488,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" are not latest if current date"}}
+[+20865ms] event: thinking
+[+20865ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":489,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" is 2026. But I can't know. So"}}
+[+21215ms] event: thinking
+[+21215ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":490,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" I'll say \"As of my last update"}}
+[+21222ms] event: thinking
+[+21222ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":491,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" in June 2024, here were the most"}}
+[+21224ms] event: thinking
+[+21224ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":492,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" recent notable items.\" That's"}}
+[+21226ms] event: thinking
+[+21226ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":493,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" transparent.\n\nShould I mention"}}
+[+21230ms] event: thinking
+[+21230ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":494,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" that the search tool failed? Yes"}}
+[+21232ms] event: thinking
+[+21232ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":495,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":".\n\nWill this violate \"Do not repeat"}}
+[+21234ms] event: thinking
+[+21234ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":496,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" the same input query in the output"}}
+[+21237ms] event: thinking
+[+21237ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":497,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"\"? I'm not repeating the query"}}
+[+21239ms] event: thinking
+[+21239ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":498,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":". Good.\n\nNo URLs. Good.\n\nFinal"}}
+[+21288ms] event: thinking
+[+21288ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":499,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" answer with desired oververbosity"}}
+[+21292ms] event: message
+[+21292ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": "I tried to fetch the latest news", "status": "processing", "eventIndex":500, "eventType": "fulfillment"}
+[+21316ms] event: message
+[+21317ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": ", but the search API returned an", "status": "processing", "eventIndex":501, "eventType": "fulfillment"}
+[+21345ms] event: message
+[+21345ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " internal server error: **\u201cNot", "status": "processing", "eventIndex":502, "eventType": "fulfillment"}
+[+21356ms] event: message
+[+21356ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " enough credits.\u201d** So I can\u2019t", "status": "processing", "eventIndex":503, "eventType": "fulfillment"}
+[+21371ms] event: message
+[+21371ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " provide real-time results right", "status": "processing", "eventIndex":504, "eventType": "fulfillment"}
+[+21395ms] event: message
+[+21395ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " now. The following is based on", "status": "processing", "eventIndex":505, "eventType": "fulfillment"}
+[+21422ms] event: message
+[+21422ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " my own knowledge (updated through", "status": "processing", "eventIndex":506, "eventType": "fulfillment"}
+[+21527ms] event: heartbeat
+[+21527ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","time":"2026-10-10T03:14:05Z"}
+[+21563ms] event: message
+[+21563ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " **June 2024**), not live API data", "status": "processing", "eventIndex":507, "eventType": "fulfillment"}
+[+21567ms] event: message
+[+21567ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": ".\n\n**Recent Fervo Energy developments", "status": "processing", "eventIndex":508, "eventType": "fulfillment"}
+[+21571ms] event: message
+[+21571ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " as of mid-2024:**\n\n- **Project", "status": "processing", "eventIndex":509, "eventType": "fulfillment"}
+[+21573ms] event: message
+[+21574ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " Red milestone (July 2023):** F", "status": "processing", "eventIndex":510, "eventType": "fulfillment"}
+[+21586ms] event: message
+[+21586ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": "ervo announced its enhanced geothermal", "status": "processing", "eventIndex":511, "eventType": "fulfillment"}
+[+21617ms] event: message
+[+21617ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " system (EGS) pilot in Nevada successfully", "status": "processing", "eventIndex":512, "eventType": "fulfillment"}
+[+21653ms] event: message
+[+21653ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " produced **3.5 MW** during a ", "status": "processing", "eventIndex":513, "eventType": "fulfillment"}
+[+21684ms] event: message
+[+21685ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": "30-day well test. Google partnered", "status": "processing", "eventIndex":514, "eventType": "fulfillment"}
+[+21708ms] event: message
+[+21708ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " to use the carbon-free power for", "status": "processing", "eventIndex":515, "eventType": "fulfillment"}
+[+21745ms] event: message
+[+21745ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " its Nevada data centers.  \n  *", "status": "processing", "eventIndex":516, "eventType": "fulfillment"}
+[+21749ms] event: message
+[+21749ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": "Sources: Fervo Energy, Google,", "status": "processing", "eventIndex":517, "eventType": "fulfillment"}
+[+21780ms] event: message
+[+21780ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " Reuters*\n\n- **Cape Station drilling", "status": "processing", "eventIndex":518, "eventType": "fulfillment"}
+[+21800ms] event: message
+[+21800ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " record (February 2024):** Ferv", "status": "processing", "eventIndex":519, "eventType": "fulfillment"}
+[+21814ms] event: message
+[+21814ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": "o said it drilled a geothermal", "status": "processing", "eventIndex":520, "eventType": "fulfillment"}
+[+21949ms] event: message
+[+21949ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " well at its Cape Station project", "status": "processing", "eventIndex":521, "eventType": "fulfillment"}
+[+21952ms] event: message
+[+21952ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " in Utah in **14 days**, a **70", "status": "processing", "eventIndex":522, "eventType": "fulfillment"}
+[+21953ms] event: message
+[+21953ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": "% reduction** in drilling time", "status": "processing", "eventIndex":523, "eventType": "fulfillment"}
+[+21960ms] event: message
+[+21961ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " compared to Project Red.  \n  *", "status": "processing", "eventIndex":524, "eventType": "fulfillment"}
+[+21963ms] event: message
+[+21963ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": "Sources: Fervo Energy, Canary Media", "status": "processing", "eventIndex":525, "eventType": "fulfillment"}
+[+21970ms] event: message
+[+21970ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": "*\n\n- **$244M Series D funding (", "status": "processing", "eventIndex":526, "eventType": "fulfillment"}
+[+21974ms] event: message
+[+21974ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": "February/March 2024):** Fervo raised", "status": "processing", "eventIndex":527, "eventType": "fulfillment"}
+[+21989ms] event: message
+[+21989ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " **$244 million** in Series D funding", "status": "processing", "eventIndex":528, "eventType": "fulfillment"}
+[+22005ms] event: message
+[+22005ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " led by Capricorn Investment Group", "status": "processing", "eventIndex":529, "eventType": "fulfillment"}
+[+22034ms] event: message
+[+22034ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": "\u2019s Technology Impact Fund, with", "status": "processing", "eventIndex":530, "eventType": "fulfillment"}
+[+22049ms] event: message
+[+22049ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " additional participation from", "status": "processing", "eventIndex":531, "eventType": "fulfillment"}
+[+22076ms] event: message
+[+22076ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " other investors.  \n  *Sources", "status": "processing", "eventIndex":532, "eventType": "fulfillment"}
+[+22089ms] event: message
+[+22089ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": ": Fervo Energy, Bloomberg, Reuters", "status": "processing", "eventIndex":533, "eventType": "fulfillment"}
+[+22115ms] event: message
+[+22115ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": "*\n\nFor news after June 2024, I", "status": "processing", "eventIndex":534, "eventType": "fulfillment"}
+[+22139ms] event: message
+[+22139ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": "\u2019d need a working real-time search", "status": "processing", "eventIndex":535, "eventType": "fulfillment"}
+[+22152ms] event: message
+[+22152ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": ", which is currently unavailable", "status": "processing", "eventIndex":536, "eventType": "fulfillment"}
+[+22165ms] event: message
+[+22165ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " due to the API error. I can\u2019t", "status": "processing", "eventIndex":537, "eventType": "fulfillment"}
+[+22191ms] event: message
+[+22191ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " provide direct source links because", "status": "processing", "eventIndex":538, "eventType": "fulfillment"}
+[+22204ms] event: message
+[+22204ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " the search tool didn\u2019t return", "status": "processing", "eventIndex":539, "eventType": "fulfillment"}
+[+22233ms] event: thinking
+[+22233ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":540,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 5. Keep concise."}}
+[+22238ms] event: thinking
+[+22238ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":541,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":""}}
+[+22239ms] event: message
+[+22239ms] data: {"sessionId": "6ac9ad67261cbe2340483c48", "messageId": "6ac9ad6895268adc215dfaa4", "answer": " any.", "status": "processing", "eventIndex":542, "eventType": "fulfillment"}
+[+22252ms] event: message
+[+22252ms] data: {"sessionId":"6ac9ad67261cbe2340483c48","messageId":"6ac9ad6895268adc215dfaa4","eventIndex":543,"eventType":"metricsLog","status":"processing","publicMetrics":{"inputTokens":1018,"outputTokens":3247,"totalTokens":4265,"ragTimeSec":6.77,"fulfillmentTimeSec":14.95,"totalTimeSec":21.72}}
+[+24261ms] event: message
+[+24261ms] data: [DONE]
+[+24261ms] # SUMMARY {"sessionId": "6ac9ad67261cbe2340483c48", "httpStatusCreateSession": 201, "httpStatusStream": 200, "ttfStatusMs": 1501, "ttfTokenMs": 21292, "chunks": 551, "sources": 0, "pluginRan": false, "errorRaw": "{\"sessionId\":\"6ac9ad67261cbe2340483c48\",\"messageId\":\"6ac9ad6895268adc215dfaa4\",\"eventIndex\":119,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\": perplexity error \\\"Internal server\"}}\n{\"sessionId\":\"6ac9ad67261cbe2340483c48\",\"messageId\":\"6ac9ad6895268adc215dfaa4\",\"eventIndex\":120,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" error\\\",\\\"message\\\":\\\"Not enough credits\"}}\n{\"sessionId\":\"6ac9ad67261cbe2340483c48\",\"messageId\":\"6ac9ad6895268adc215dfaa4\",\"eventIndex\":141,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" an API error (not enough credits\"}}\n{\"sessionId\":\"6ac9ad67261cbe2340483c48\",\"messageId\":\"6ac9ad6895268adc215dfaa4\",\"eventIndex\":299,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" tool returned an error: 'Not enough\"}}\n{\"sessionId\":\"6ac9ad67261cbe2340483c48\",\"messageId\":\"6ac9ad6895268adc215dfaa4\",\"eventIndex\":300,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" credits' (internal server error\"}}\n{\"sessionId\":\"6ac9ad67261cbe2340483c48\",\"messageId\":\"6ac9ad6895268adc215dfaa4\",\"eventIndex\":331,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" error), so I don't have real-time\"}}\n{\"sessionId\":\"6ac9ad67261cbe2340483c48\",\"messageId\":\"6ac9ad6895268adc215dfaa4\",\"eventIndex\":423,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" response is error. So answer from\"}}\n{\"sessionId\":\"6ac9ad67261cbe2340483c48\",\"messageId\":\"6ac9ad6895268adc215dfaa4\",\"eventIndex\":430,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" context is error, so we can't\"}}\n{\"sessionId\":\"6ac9ad67261cbe2340483c48\",\"messageId\":\"6ac9ad6895268adc215dfaa4\",\"eventIndex\":435,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" is just error. So we can answer\"}}\n{\"sessionId\":\"6ac9ad67261cbe2340483c48\",\"messageId\":\"6ac9ad6895268adc215dfaa4\",\"eventIndex\":451,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" error: 'Not enough credits.' So\"}}\n{\"sessionId\":\"6ac9ad67261cbe2340483c48\",\"messageId\":\"6ac9ad6895268adc215dfaa4\",\"eventIndex\":482,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" due to the API error. I can't\"}}\nANSWER TEXT: I tried to fetch the latest news, but the search API returned an internal server error: **\u201cNot enough credits.", "eventTypeCounts": {"planning_thinking": 16, "planning_output": 17, "heartbeat": 7, "step_thinking": 64, "step_output": 18, "fulfillment_thinking": 386, "fulfillment": 41, "metricsLog": 1}, "elapsedMs": 24261, "answerChars": 1309, "pluginSeen": true, "done": true}

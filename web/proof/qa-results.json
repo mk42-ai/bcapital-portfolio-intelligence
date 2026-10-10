@@ -1,0 +1,921 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/node_modules/@playwright/test/cli.js",
+      "test",
+      "e2e/qa-routes.spec.ts",
+      "e2e/qa-chat-timing.spec.ts",
+      "--project=desktop",
+      "--reporter=list,json"
+    ],
+    "configFile": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/playwright.config.ts",
+    "rootDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": [
+          "/mobile\\.spec\\.ts/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/mobile\\.spec\\.ts/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "desktop",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "snapshotDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": {},
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 240000,
+        "use": {
+          "baseURL": "https://sb-1z9qy0mx48sk.vercel.run",
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox",
+              "--disable-dev-shm-usage"
+            ]
+          },
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "desktop"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "qa-chat-timing.spec.ts",
+      "file": "qa-chat-timing.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "QA chat timing @ desktop",
+          "file": "qa-chat-timing.spec.ts",
+          "line": 209,
+          "column": 8,
+          "specs": [
+            {
+              "title": "two turns in one thread: timings, tool card, session reuse",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 540000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 23270,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[qa-chat desktop] {\"t1\":{\"fs\":26,\"ft\":7979,\"chunks\":179,\"card\":[\"searching\",\"failed\"],\"src\":3,\"err\":\"plugin_error\",\"sid\":\"6ac9b9f4f7979c7d562ae403\"},\"t2\":{\"fs\":26,\"ft\":4522,\"chunks\":58,\"card\":[\"searching\",\"failed\"],\"src\":0,\"err\":null,\"sid\":\"6ac9b9f4f7979c7d562ae403\"},\"sessionReused\":true}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:07:12.943Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6c6546608d9a419477a4-ed1d520d031211539cb2",
+              "file": "qa-chat-timing.spec.ts",
+              "line": 211,
+              "column": 9
+            }
+          ]
+        },
+        {
+          "title": "QA chat timing @ mobile",
+          "file": "qa-chat-timing.spec.ts",
+          "line": 209,
+          "column": 8,
+          "specs": [
+            {
+              "title": "two turns in one thread: timings, tool card, session reuse",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 540000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 24750,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[qa-chat mobile] {\"t1\":{\"fs\":31,\"ft\":11346,\"chunks\":215,\"card\":[\"searching\",\"failed\"],\"src\":2,\"err\":\"plugin_error\",\"sid\":\"6ac9b9f3f7979c7d562ae402\"},\"t2\":{\"fs\":33,\"ft\":3601,\"chunks\":39,\"card\":[\"searching\",\"failed\"],\"src\":0,\"err\":null,\"sid\":\"6ac9b9f3f7979c7d562ae402\"},\"sessionReused\":true}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:07:12.952Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6c6546608d9a419477a4-596fc98b103b16533109",
+              "file": "qa-chat-timing.spec.ts",
+              "line": 211,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "qa-routes.spec.ts",
+      "file": "qa-routes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "QA routes @ desktop 1440x900",
+          "file": "qa-routes.spec.ts",
+          "line": 53,
+          "column": 8,
+          "specs": [
+            {
+              "title": "/onboarding",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2544,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:07:36.710Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-077b6eedc259b5c70f91",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/overview",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 6127,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:07:38.186Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-62c1d833a5beb0337b1a",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/company/fervo-energy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3212,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:07:39.272Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-93f8330ae88d76f1a5da",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/company/perplexity-ai",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4636,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:07:42.499Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-0cb91a085519039789b3",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/news",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 30331,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:07:44.325Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-007cf098fbf0a60eb5d6",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/settings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2662,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:07:47.149Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-adc280592ffc016eab3b",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/chat",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3547,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:07:49.824Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-47e95d6db648a981c68c",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/company/does-not-exist",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2354,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:07:53.390Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-3c3ee29dab543be4d817",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/onboarding with reduced motion: growth value expands",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1533,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:07:55.763Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-d53b98b1bc33d74c1518",
+              "file": "qa-routes.spec.ts",
+              "line": 128,
+              "column": 5
+            }
+          ]
+        },
+        {
+          "title": "QA routes @ mobile 390x844",
+          "file": "qa-routes.spec.ts",
+          "line": 53,
+          "column": 8,
+          "specs": [
+            {
+              "title": "/onboarding",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2534,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:07:57.317Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-aa69fd9dac0782a18ada",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/overview",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6142,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:07:59.870Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-cf9f1229cdb77deb6111",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/company/fervo-energy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2731,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:08:06.033Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-c035c51a6262ac61f5ae",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/company/perplexity-ai",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4717,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:08:08.780Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-4a04a31b95ecf8c10f71",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/news",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 31084,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:08:13.511Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-eccd675b5a2c82a5d5ce",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/settings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2521,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:08:14.677Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-a8d8c44a1025e0a0c00f",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/chat",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2223,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:08:17.217Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-ddc8011c9006eed8d80f",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/company/does-not-exist",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2296,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:08:19.459Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-20d5aa04cb5bdc7f69a3",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/onboarding with reduced motion: growth value expands",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1875,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:08:21.770Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-0c659475a8a082afe8a9",
+              "file": "qa-routes.spec.ts",
+              "line": 128,
+              "column": 5
+            }
+          ]
+        },
+        {
+          "title": "Logo audit (browser) @ desktop",
+          "file": "qa-routes.spec.ts",
+          "line": 145,
+          "column": 6,
+          "specs": [
+            {
+              "title": "collect every company-logo / logo-img on /overview (paging ≤60 s)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 4645,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T04:08:23.662Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-0f64d2f0321900d84bf7",
+              "file": "qa-routes.spec.ts",
+              "line": 147,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-10T04:07:12.478Z",
+    "duration": 92322.95999999999,
+    "expected": 21,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

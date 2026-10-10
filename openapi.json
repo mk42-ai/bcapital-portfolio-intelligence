@@ -3,7 +3,7 @@
   "info": {
     "title": "B Capital Portfolio Intelligence API",
     "version": "1.0.0",
-    "description": "Read API over 136 B Capital portfolio records (135 portfolio companies + the firm) with brand tokens, flagged ownership estimates, news and OnDemand-workflow-scored sentiment (model predefined-claude-fable-5.1). Write-back is a single POST /ingest protected by X-Ingest-Secret.",
+    "description": "Read API over 136 B Capital portfolio records (135 portfolio companies + the firm) with brand tokens, flagged ownership estimates, news and OnDemand-workflow-scored sentiment (model predefined-deepseek-flash — DeepSeek Flash v4.1). Write-back is a single POST /ingest protected by X-Ingest-Secret.",
     "contact": {
       "name": "B Capital Portfolio Intelligence"
     },
@@ -13,7 +13,7 @@
   },
   "servers": [
     {
-      "url": "https://sb-1gek6bq0m1au.vercel.run",
+      "url": "https://serverless.on-demand.io/apps/bcap-portfolio-api",
       "description": "Deployed API"
     }
   ],
@@ -64,12 +64,6 @@
                     },
                     "version": {
                       "type": "string"
-                    },
-                    "deferred_plugins": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
                     }
                   }
                 }

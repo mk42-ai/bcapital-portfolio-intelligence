@@ -1,0 +1,218 @@
+[
+  {
+    "route": "/onboarding",
+    "viewport": 1440,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": [],
+    "growth": {
+      "expanded": true,
+      "panelText": "We give first: time, introductions, candour — because founders' wins compound."
+    }
+  },
+  {
+    "route": "/company/fervo-energy",
+    "viewport": 1440,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": []
+  },
+  {
+    "route": "/overview",
+    "viewport": 1440,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": [],
+    "companyLogos": {
+      "total": 25,
+      "ok": 25,
+      "fallbacks": 0
+    }
+  },
+  {
+    "route": "/company/perplexity-ai",
+    "viewport": 1440,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": [],
+    "heroLogo": {
+      "src": "https://sb-1z9qy0mx48sk.vercel.run/brand/logos/perplexity.svg",
+      "nw": 360
+    }
+  },
+  {
+    "route": "/settings",
+    "viewport": 1440,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": []
+  },
+  {
+    "route": "/chat",
+    "viewport": 1440,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": []
+  },
+  {
+    "route": "/company/does-not-exist",
+    "viewport": 1440,
+    "reducedMotion": false,
+    "status": 404,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": [],
+    "notFoundUi": true
+  },
+  {
+    "route": "/onboarding",
+    "viewport": 1440,
+    "reducedMotion": true,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "errors": []
+  },
+  {
+    "route": "/onboarding",
+    "viewport": 390,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": [],
+    "growth": {
+      "expanded": true,
+      "panelText": "We give first: time, introductions, candour — because founders' wins compound."
+    }
+  },
+  {
+    "route": "/overview",
+    "viewport": 390,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": [],
+    "companyLogos": {
+      "total": 25,
+      "ok": 25,
+      "fallbacks": 0
+    }
+  },
+  {
+    "route": "/company/fervo-energy",
+    "viewport": 390,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": []
+  },
+  {
+    "route": "/company/perplexity-ai",
+    "viewport": 390,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": [],
+    "heroLogo": {
+      "src": "https://sb-1z9qy0mx48sk.vercel.run/brand/logos/perplexity.svg",
+      "nw": 360
+    }
+  },
+  {
+    "route": "/news",
+    "viewport": 1440,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 2,
+    "errors": [],
+    "newsImages": {
+      "total": 325,
+      "ok": 325,
+      "placeholders": 0
+    }
+  },
+  {
+    "route": "/settings",
+    "viewport": 390,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": []
+  },
+  {
+    "route": "/chat",
+    "viewport": 390,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": []
+  },
+  {
+    "route": "/company/does-not-exist",
+    "viewport": 390,
+    "reducedMotion": false,
+    "status": 404,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": [],
+    "notFoundUi": true
+  },
+  {
+    "route": "/onboarding",
+    "viewport": 390,
+    "reducedMotion": true,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "errors": []
+  },
+  {
+    "route": "/news",
+    "viewport": 390,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 2,
+    "errors": [],
+    "newsImages": {
+      "total": 325,
+      "ok": 325,
+      "placeholders": 0
+    }
+  }
+]

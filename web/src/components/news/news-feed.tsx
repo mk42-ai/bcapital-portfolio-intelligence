@@ -10,11 +10,13 @@ import { Badge } from "@/components/ui/badge";
 import { dayKey, fmtDelta, fmtScore } from "@/lib/format";
 type Item = NewsItem & { company_slug: string; company_name: string; company_logo?: string | null; sector: string; sentiment_score: number | null; sentiment_delta: number | null };
 type Co = { slug: string; name: string; sector: string; score: number; delta: number | null };
-const SOURCE_PLUGINS = [["all", "All sources"], ["perplexity", "Perplexity (news)"], ["gpt", "GPT Search (verification)"], ["linkedin", "LinkedIn"], ["reddit", "Reddit"], ["x", "X"], ["status", "Status changes"], ["seed", "Seed / intelligence JSON"]] as const;
+/** Source buckets: live refresh writes Perplexity only (2026-10-10); "legacy" groups rows ingested by the earlier multi-plugin workflows so history stays filterable. */
+const SOURCE_PLUGINS = [["all", "All sources"], ["perplexity", "Perplexity"], ["legacy", "Legacy workflow sources"], ["status", "Status changes"], ["seed", "Seed / intelligence JSON"]] as const;
 function sourcePlugin(n: Item): string {
   const s = `${n.source ?? ""} ${n.url ?? ""}`.toLowerCase();
-  if (n.kind === "status_change") return "status"; if (s.includes("linkedin")) return "linkedin"; if (s.includes("reddit")) return "reddit"; if (/(^|\W)(x\.com|twitter)/.test(s)) return "x";
-  if (n.source === "intelligence_json" || (n.id ?? "").startsWith("seed-")) return "seed"; if (s.includes("utm_source=openai")) return "gpt"; return "perplexity";
+  if (n.kind === "status_change") return "status";
+  if (n.source === "intelligence_json" || (n.id ?? "").startsWith("seed-")) return "seed";
+  if (s.includes("linkedin") || s.includes("reddit") || /(^|\W)(x\.com|twitter)/.test(s) || s.includes("utm_source=openai")) return "legacy"; return "perplexity";
 }
 const sentBucket = (s: number | null) => s == null ? "unknown" : s <= -0.2 ? "negative" : s < 0.2 ? "neutral" : "positive";
 export function NewsFeed({ items, companies }: { items: Item[]; companies: Co[] }) {

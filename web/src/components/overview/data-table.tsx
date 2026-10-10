@@ -26,7 +26,7 @@ export function DataTable({ rows, caption, sort, onSort }: { rows: TableRow[]; c
         <tbody>
           {rows.map((c) => (
             <tr key={c.slug} className="border-t border-border hover:bg-surface-2">
-              <th scope="row" className="px-3 py-2 font-medium"><span className="inline-flex items-center gap-2"><CompanyLogo name={c.name} src={c.logo_url} size={20} /><Link href={`/company/${c.slug}`} className="underline-offset-2 hover:underline">{c.name}</Link></span>{c.is_focus && <Badge tone="primary" className="ml-2">focus</Badge>}</th>
+              <th scope="row" className="px-3 py-2 font-medium"><span className="inline-flex items-center gap-2"><CompanyLogo name={c.name} src={c.logo_url} slug={c.slug} size={20} /><Link href={`/company/${c.slug}`} className="underline-offset-2 hover:underline">{c.name}</Link></span>{c.is_focus && <Badge tone="primary" className="ml-2">focus</Badge>}</th>
               <td className="px-3 py-2">{c.sector}</td><td className="px-3 py-2">{c.region}</td><td className="px-3 py-2">{c.b_capital_role}</td>
               <td className="px-3 py-2 text-right tabular-nums">{fmtScore(c.score)}</td><td className="px-3 py-2 text-right tabular-nums">{fmtDelta(c.delta)}</td><td className="px-3 py-2 text-right tabular-nums">{c.newsCount}</td>
               <td className="px-3 py-2 text-right tabular-nums">{fmtUsd(c.estimated_ticket_size_usd)}</td><td className="px-3 py-2 text-right tabular-nums">{fmtPct(c.estimated_ownership_pct)}</td>

@@ -14,13 +14,13 @@ documents (`ONDEMAND_API_CONTRACTS.md`, `ondemand-runtime-skill-and-api-surface-
 * **Credential rule (carried over from the prior pattern):** the apikey lives only in the server environment variable `ON_DEMAND_API_KEY`; it is read once at boot, never logged, never returned by any route and never shipped to a browser. Browser/third-party callers hit *our* proxy and present their own tenant key in **`x-ondemand-key`**; the proxy validates/maps it and injects `apikey` on the outbound call. This repo's own API needs no apikey at all — its only write path is `POST /ingest` guarded by `X-Ingest-Secret` (env `INGEST_SECRET`).
 
 ## 1. Fable 5.1 endpointId — resolved from the live endpoint list
-`GET /config/v1/public/endpoints` (MCP `config_v1_public_get_endpoints`, 2026-10-09T12:10Z, 92 endpoints) contains **exactly one** Fable 5.1 entry:
+`GET /config/v1/public/endpoints` (MCP `config_v1_public_get_endpoints`, 2026-10-09T12:10Z, 92 endpoints) contains the model used by this project (switched 2026-10-10 from the previous Claude Fable 5.1 default, which is no longer referenced anywhere):
 
 | endpoint_id | endpoint_name | model_id |
 |---|---|---|
-| **`predefined-claude-fable-5.1`** | `claude-fable-5-1` | `anthropic/claude-fable-5-1` |
+| **`predefined-deepseek-flash`** | `deepseek-v4.1-flash` | DeepSeek Flash v4.1 |
 
-Neighbours (do not substitute): `predefined-claude-fable-5` (Fable 5.0), `predefined-claude-sonnet-5.5`, `predefined-claude-opus-5.5`. The prior default `predefined-gpt-5.6-luna` is still present in the list but is **not** used anywhere in this project — every Flow Builder LLM node sets `model: "predefined-claude-fable-5.1"`.
+Do not substitute neighbours. Every Flow Builder LLM node and every refresh query sets `predefined-deepseek-flash`; the refresh query body is `{ query, endpointId: "predefined-deepseek-flash", responseMode: "stream", pluginIds: ["plugin-1722260873"], reasoningMode: "medium", modelConfigs: { temperature: 0.1 } }` with headers `apikey`, `content-type: application/json`, `accept: text/event-stream` and a browser-like `user-agent`.
 
 ## 2. Service / slug index (live categories, 2026-10-09)
 
@@ -172,14 +172,14 @@ const json = await res.json();
 ```bash
 curl -sS -X POST 'https://api.on-demand.io/chat/v1/sessions/<SESSION_ID>/query' \
   -H 'apikey: <YOUR_API_KEY>' -H 'Content-Type: application/json' \
-  -d '{"query": "Summarise this week's sentiment for Fervo Energy", "endpointId": "predefined-claude-fable-5.1", "responseMode": "stream", "pluginIds": ["<portfolio-plugin-id>"], "fulfillmentOnly": false}'
+  -d '{"query": "Summarise this week's sentiment for Fervo Energy", "endpointId": "predefined-deepseek-flash", "responseMode": "stream", "pluginIds": ["plugin-1722260873"], "reasoningMode": "medium", "fulfillmentOnly": false}'
 ```
 **Node (fetch)**
 ```js
 const res = await fetch("https://api.on-demand.io/chat/v1/sessions/<SESSION_ID>/query", {
   method: "POST",
   headers: { apikey: process.env.ON_DEMAND_API_KEY, "Content-Type": "application/json" },
-  body: JSON.stringify({"query": "Summarise this week's sentiment for Fervo Energy", "endpointId": "predefined-claude-fable-5.1", "responseMode": "stream", "pluginIds": ["<portfolio-plugin-id>"]}),
+  body: JSON.stringify({"query": "Summarise this week's sentiment for Fervo Energy", "endpointId": "predefined-deepseek-flash", "responseMode": "stream", "pluginIds": ["plugin-1722260873"], "reasoningMode": "medium"}),
 });
 const json = await res.json();
 ```
@@ -189,7 +189,7 @@ const json = await res.json();
 const res = await fetch(`https://api.on-demand.io/chat/v1/sessions/${sessionId}/query`, {
   method: "POST",
   headers: { apikey: process.env.ON_DEMAND_API_KEY, "Content-Type": "application/json", Accept: "text/event-stream" },
-  body: JSON.stringify({ query, endpointId: "predefined-claude-fable-5.1", responseMode: "stream", pluginIds }),
+  body: JSON.stringify({ query, endpointId: "predefined-deepseek-flash", responseMode: "stream", pluginIds: ["plugin-1722260873"], reasoningMode: "medium", modelConfigs: { temperature: 0.1 } }),
 });
 const reader = res.body.getReader(); const dec = new TextDecoder(); let buf = "";
 for (;;) {
@@ -583,7 +583,7 @@ Component schemas (verbatim from the live spec): `CronConfig.expression` = *"CRO
 ```bash
 curl -sS -X POST 'https://api.on-demand.io/automation/api/workflow/' \
   -H 'apikey: <YOUR_API_KEY>' -H 'Content-Type: application/json' \
-  -d '{"name": "bcap-focus-daily", "trigger": {"type": "cron", "cron": {"expression": "0 0 6 * * *", "type": "advanced"}, "nextNodeKeys": ["research"], "position": {"x": 0, "y": 0}, "measured": {"width": 300, "height": 500}}, "nodes": [{"key": "research", "kind": "source", "type": "llm", "dependencies": [], "nextNodeKeys": ["analyzer-0"], "llm": {"model": "predefined-claude-fable-5.1", "prompt": "\u2026", "fulfillmentPrompt": "\u2026", "plugins": [{"id": "plugin-1722260873"}]}, "position": {"x": 100, "y": 200}, "measured": {"width": 300, "height": 500}}, {"key": "analyzer-0", "kind": "sink", "type": "o_analyzer", "dependencies": [{"nodeKey": "research"}], "nextNodeKeys": ["add-delivery"], "position": {"x": 500, "y": 200}, "measured": {"width": 300, "height": 500}}], "delivery": [{"channel": "webhook", "config": {"webhook": {"url": "https://serverless.on-demand.io/apps/bcap-portfolio-api/ingest", "method": "POST", "basicAuth": {"username": "ingest", "password": "<INGEST_SECRET>"}}}, "position": {"x": 900, "y": 200}, "measured": {"width": 300, "height": 500}}], "enableMemory": true}'
+  -d '{"name": "bcap-focus-daily", "trigger": {"type": "cron", "cron": {"expression": "0 0 6 * * *", "type": "advanced"}, "nextNodeKeys": ["research"], "position": {"x": 0, "y": 0}, "measured": {"width": 300, "height": 500}}, "nodes": [{"key": "research", "kind": "source", "type": "llm", "dependencies": [], "nextNodeKeys": ["analyzer-0"], "llm": {"model": "predefined-deepseek-flash", "prompt": "\u2026", "fulfillmentPrompt": "\u2026", "plugins": [{"id": "plugin-1722260873"}]}, "position": {"x": 100, "y": 200}, "measured": {"width": 300, "height": 500}}, {"key": "analyzer-0", "kind": "sink", "type": "o_analyzer", "dependencies": [{"nodeKey": "research"}], "nextNodeKeys": ["add-delivery"], "position": {"x": 500, "y": 200}, "measured": {"width": 300, "height": 500}}], "delivery": [{"channel": "webhook", "config": {"webhook": {"url": "https://serverless.on-demand.io/apps/bcap-portfolio-api/ingest", "method": "POST", "basicAuth": {"username": "ingest", "password": "<INGEST_SECRET>"}}}, "position": {"x": 900, "y": 200}, "measured": {"width": 300, "height": 500}}], "enableMemory": true}'
 ```
 **Node (fetch)**
 ```js
@@ -907,7 +907,7 @@ The serverless family is **absent from the public docs index** (0 of 40 slugs); 
 | 6 | `serverless_endpoint_update` | env vars re-sent as `{name,value}` (the create call's `{key,value}` form was stored with empty names — **undocumented shape, use `name`**) | *"Serverless endpoint updated successfully!"* | 12:31:26Z |
 | 7 | `serverless_endpoint_trigger_deploy` | endpoint id | **400 Bad Request** while status is `initializing` (the platform auto-deploys on create; re-deploy is only valid once an image is attached) | 12:31:30Z |
 
-Public URL convention (observed on the 16 pre-existing endpoints): `https://serverless.on-demand.io/apps/<endpointName>`. Env vars confirmed stored: `PORT, PUBLIC_BASE_URL, INGEST_SECRET, ONDEMAND_DEFAULT_MODEL, DEFERRED_PLUGINS, EARLIEST_TEST_UTC, APP_VERSION`.
+Public URL convention (observed on the 16 pre-existing endpoints): `https://serverless.on-demand.io/apps/<endpointName>`. Env vars confirmed stored: `PORT, PUBLIC_BASE_URL, INGEST_SECRET, ONDEMAND_DEFAULT_MODEL, ONDEMAND_REASONING_MODE, EARLIEST_TEST_UTC, APP_VERSION (DEFERRED_PLUGINS dropped 2026-10-10)`.
 
 ```bash
 curl -sS 'https://api.on-demand.io/config/v1/public/serverless/endpoint' -H 'apikey: <YOUR_API_KEY>'   # list endpoints + status

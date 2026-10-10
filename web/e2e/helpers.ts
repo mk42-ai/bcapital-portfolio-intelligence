@@ -16,7 +16,7 @@ export async function primeSettings(page: Page, extra: Record<string, unknown> =
         onboarded: true,
         apikey: key,
         externalUserId: "INV-001",
-        model: "predefined-claude-fable-5.1",
+        model: "predefined-deepseek-flash",
         theme: "light",
         companies: COMPANIES,
         ...extra,

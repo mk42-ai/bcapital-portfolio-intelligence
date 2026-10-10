@@ -1,5 +1,6 @@
 /**
- * Live news refresh through the OnDemand Chat API (Perplexity plugin) — no Flow Builder round-trip.
+ * Live news refresh through the OnDemand Chat API (Perplexity plugin only, model DeepSeek Flash v4.1 = predefined-deepseek-flash,
+ * endpoint_name deepseek-v4.1-flash) — no Flow Builder round-trip, no fallback plugins/models.
  *
  * Per company: create a chat session → stream a query → collect `plugin_sources` items (title/url/domain/imageUrl)
  * and the fulfillment answer text → match published dates from the answer → backfill og:image for items without an
@@ -12,11 +13,16 @@
 import crypto from "node:crypto";
 import { sql, eq, asc, desc } from "drizzle-orm";
 import { getDb, persist, nowIso, schema } from "./db/client.js";
-import { config } from "./config.js";
+import { config, ONDEMAND_REASONING_MODE, ONDEMAND_USER_AGENT } from "./config.js";
 
 export const ONDEMAND_BASE = process.env.ONDEMAND_BASE_URL ?? "https://api.on-demand.io";
 export const NEWS_PLUGIN_ID = process.env.ONDEMAND_NEWS_PLUGIN_ID ?? "plugin-1722260873"; // Perplexity
-export const NEWS_PLUGIN_IDS = (process.env.ONDEMAND_NEWS_PLUGIN_IDS ?? `${NEWS_PLUGIN_ID},plugin-1741871229`).split(",").map((x) => x.trim()).filter(Boolean); // Perplexity first, GPT Search fallback (Perplexity credits ran out 2026-10-10T01:03Z)
+/** Plugins attached to every refresh session/query. Perplexity (plugin-1722260873) is the ONLY plugin used — no other plugin ids are wired
+ *  anywhere in this pipeline (GPT Search / LinkedIn / Reddit / X / PitchBook removed 2026-10-10). ONDEMAND_NEWS_PLUGIN_IDS may override. */
+export const NEWS_PLUGIN_IDS = (process.env.ONDEMAND_NEWS_PLUGIN_IDS ?? NEWS_PLUGIN_ID).split(",").map((x) => x.trim()).filter(Boolean);
+/** Upstream plugin failure signatures surfaced inside the stream (thinking/step/answer deltas) — recorded verbatim per company, never stored as news. */
+const UPSTREAM_ERROR_RE = /not enough credits|"error"\s*:\s*"internal server error"|tool returned an error/i;
+const ONDEMAND_HEADERS = () => ({ apikey: apiKey(), "content-type": "application/json", "user-agent": ONDEMAND_USER_AGENT });
 const STREAM_TIMEOUT_MS = 120_000;
 const OG_TIMEOUT_MS = 6_000;
 const OG_MAX_BYTES = 200 * 1024;
@@ -54,7 +60,7 @@ function apiKey(): string {
 async function createSession(): Promise<string> {
   const res = await fetch(`${ONDEMAND_BASE}/chat/v1/sessions`, {
     method: "POST",
-    headers: { apikey: apiKey(), "content-type": "application/json" },
+    headers: ONDEMAND_HEADERS(),
     body: JSON.stringify({ externalUserId: "refresh-bot", pluginIds: NEWS_PLUGIN_IDS, contextMetadata: [{ key: "purpose", value: "portfolio-news-refresh" }] }),
   });
   if (!res.ok) throw new Error(`session create failed: HTTP ${res.status}`);
@@ -64,17 +70,18 @@ async function createSession(): Promise<string> {
   return String(id);
 }
 
-/** Streams the query and returns the collected plugin sources + the concatenated answer. */
-async function streamQuery(sessionId: string, query: string): Promise<{ sources: SourceItem[]; answer: string }> {
+/** Streams the query and returns the collected plugin sources + the concatenated answer (+ the first upstream plugin error, if any). */
+async function streamQuery(sessionId: string, query: string): Promise<{ sources: SourceItem[]; answer: string; pluginError: string | null }> {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), STREAM_TIMEOUT_MS);
   const sources: SourceItem[] = [];
   let answer = "";
+  let pluginError: string | null = null;
   try {
     const res = await fetch(`${ONDEMAND_BASE}/chat/v1/sessions/${sessionId}/query`, {
       method: "POST",
-      headers: { apikey: apiKey(), "content-type": "application/json", accept: "text/event-stream" },
-      body: JSON.stringify({ query, endpointId: process.env.ONDEMAND_DEFAULT_MODEL || config.ondemandDefaultModel || "predefined-claude-fable-5.1", responseMode: "stream", pluginIds: NEWS_PLUGIN_IDS, modelConfigs: { temperature: 0.1 } }),
+      headers: { ...ONDEMAND_HEADERS(), accept: "text/event-stream" },
+      body: JSON.stringify({ query, endpointId: config.ondemandDefaultModel, responseMode: "stream", pluginIds: NEWS_PLUGIN_IDS, reasoningMode: ONDEMAND_REASONING_MODE, modelConfigs: { temperature: 0.1 } }),
       signal: ctrl.signal,
     });
     if (!res.ok || !res.body) throw new Error(`query failed: HTTP ${res.status}`);
@@ -86,6 +93,11 @@ async function streamQuery(sessionId: string, query: string): Promise<{ sources:
       const payload = line.slice(5).trim();
       if (!payload || payload === "[DONE]") return;
       let f: any; try { f = JSON.parse(payload); } catch { return; }
+      if (!pluginError && /^(fulfillment_thinking|step_output|fulfillment)$/.test(String(f?.eventType ?? ""))) {
+        const txt = typeof f?.answer === "string" ? f.answer : typeof f?.message === "string" ? f.message : typeof f?.output === "string" ? f.output : typeof f?.content === "string" ? f.content : JSON.stringify(f);
+        const m = txt.match(UPSTREAM_ERROR_RE);
+        if (m) { const i = Math.max(0, m.index! - 60); pluginError = txt.slice(i, i + 200).replace(/\s+/g, " ").trim(); }
+      }
       if (f?.eventType === "plugin_sources" && Array.isArray(f?.sources?.items)) {
         for (const it of f.sources.items) if (it?.url && it?.title) sources.push({ title: String(it.title), url: String(it.url), domain: it.domain ? String(it.domain) : undefined, imageUrl: it.imageUrl ? String(it.imageUrl) : undefined });
       } else if (f?.eventType === "fulfillment" && typeof f?.answer === "string") {
@@ -103,9 +115,10 @@ async function streamQuery(sessionId: string, query: string): Promise<{ sources:
   } finally {
     clearTimeout(timer);
   }
-  // Fallback for plugins that return no `plugin_sources` frames (e.g. GPT Search, or Perplexity when its credits are exhausted and the
-  // model answers from another source): mine "**Title** … URL: https://…" style items out of the answer text. Images are back-filled
-  // from og:image later; the date extractor works on the same answer text.
+  // Upstream plugin failure (credits exhausted, tool 500 …): the answer prose is NOT news — report it and let the caller record the error.
+  if (pluginError) return { sources: [], answer, pluginError };
+  // Zero `plugin_sources` frames but a normal answer: mine "**Title** … URL: https://…" style items out of the answer text. Images are
+  // back-filled from og:image later; the date extractor works on the same answer text.
   if (sources.length === 0 && answer) {
     const seen = new Set<string>();
     for (const m of answer.matchAll(/https?:\/\/[^\s)\]>"'`]+/g)) {
@@ -122,7 +135,7 @@ async function streamQuery(sessionId: string, query: string): Promise<{ sources:
       if (sources.length >= 8) break;
     }
   }
-  return { sources, answer };
+  return { sources, answer, pluginError };
 }
 
 const MONTHS: Record<string, string> = { jan: "01", feb: "02", mar: "03", apr: "04", may: "05", jun: "06", jul: "07", aug: "08", sep: "09", sept: "09", oct: "10", nov: "11", dec: "12" };
@@ -264,7 +277,8 @@ async function doRefresh(opts: RefreshOptions): Promise<RefreshResult> {
       const sid = await createSession();
       rep.session_id = sid;
       const query = `Latest news about ${row.name} (${row.website ?? "no website on file"}) from the last 60 days. List up to 6 items, newest first, each as: title — source — published date (YYYY-MM-DD) — URL.`;
-      const { sources, answer } = await streamQuery(sid, query);
+      const { sources, answer, pluginError } = await streamQuery(sid, query);
+      if (pluginError) throw new Error(`upstream plugin error: ${pluginError}`);
       // Dedupe by URL, keep order of first appearance, cap at 12 per company.
       const seen = new Set<string>();
       const uniq = sources.filter((s) => { const k = s.url.replace(/\/$/, ""); if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 12);
@@ -305,7 +319,7 @@ async function doRefresh(opts: RefreshOptions): Promise<RefreshResult> {
   const touched = perCompany.filter((r) => !r.error).length;
   const finishedAt = nowIso();
   const status: RefreshResult["status"] = touched === 0 && targets.length ? "error" : errors.length ? "partial" : "ok";
-  db.insert(schema.ingestRuns).values({ id: runId, source: "refresh", workflowId: null, workflowName: "ondemand-refresh", executionId: null, model: process.env.ONDEMAND_DEFAULT_MODEL || config.ondemandDefaultModel, companiesTouched: touched, newsUpserted: items.length, sentimentRows: 0, status, errors, rawSample: JSON.stringify({ plugins: NEWS_PLUGIN_IDS, slugs: targets.map((t) => t.slug), concurrency }).slice(0, 4096), receivedAt: startedAt, finishedAt }).run();
+  db.insert(schema.ingestRuns).values({ id: runId, source: "refresh", workflowId: null, workflowName: "ondemand-refresh", executionId: null, model: config.ondemandDefaultModel, companiesTouched: touched, newsUpserted: items.length, sentimentRows: 0, status, errors, rawSample: JSON.stringify({ plugins: NEWS_PLUGIN_IDS, reasoning_mode: ONDEMAND_REASONING_MODE, plugin_errors: perCompany.filter((r) => r.error?.startsWith("upstream plugin error")).length, slugs: targets.map((t) => t.slug), concurrency }).slice(0, 4096), receivedAt: startedAt, finishedAt }).run();
   persist();
   const result: RefreshResult = { ingest_run_id: runId, status, companies_touched: touched, news_upserted: items.length, with_images: items.filter((i) => i.image_url).length, dated: items.filter((i) => i.published_at).length, errors, companies: perCompany, items, started_at: startedAt, finished_at: finishedAt };
   lastResult = result;

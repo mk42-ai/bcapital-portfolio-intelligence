@@ -2,10 +2,14 @@
   "run_start_utc": "2026-10-09T12:07:25Z",
   "earliest_test_utc": "2026-10-09T12:37:25Z",
   "portfolio_plugin_id": null,
-  "portfolio_plugin_status": "registration pending — POST /plugin/v1 returned 400 'schema is required'; ai_generated_tool 524",
-  "pitchbook_plugin_id": "plugin-1777018662",
-  "deferred_plugins": ["plugin-1777018662"],
+  "portfolio_plugin_status": "registration pending \u2014 POST /plugin/v1 returned 400 'schema is required'; ai_generated_tool 524",
+  "deferred_plugins": [],
   "backend_base_url": "https://sb-4wdkkmzv7w2z.vercel.run",
   "backend_durable_target": "https://serverless.on-demand.io/apps/bcap-portfolio-intel",
-  "model_endpoint_id": "predefined-claude-fable-5.1"
+  "model_endpoint_id": "predefined-deepseek-flash",
+  "model_label": "DeepSeek Flash v4.1",
+  "reasoning_mode": "medium",
+  "plugin_ids": [
+    "plugin-1722260873"
+  ]
 }

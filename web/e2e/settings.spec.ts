@@ -1,16 +1,23 @@
 import { test, expect, SETTINGS_KEY } from "./helpers";
 
 test.describe("Settings", () => {
-  test("shows user, backend and model inputs; PitchBook is deferred", async ({ page }) => {
+  test("shows user and backend inputs; model and plugin are fixed (DeepSeek Flash v4.1 · Perplexity only)", async ({ page }) => {
     await page.goto("/settings");
     await expect(page.locator("#set-user")).toBeVisible();
     await expect(page.locator("#set-user")).toHaveValue("INV-001");
     await expect(page.locator("#set-backend")).toBeVisible();
-    const model = page.locator("select#set-model");
+    const model = page.getByTestId("fixed-model");
     await expect(model).toBeVisible();
-    expect(await model.locator("option").count()).toBeGreaterThan(0);
-    const pitchbook = page.getByRole("switch", { name: /pitchbook/i });
-    await expect(pitchbook).toBeDisabled();
+    await expect(model).toContainText("DeepSeek Flash v4.1");
+    await expect(model).toContainText("predefined-deepseek-flash");
+    await expect(model).toContainText("medium");
+    await expect(page.locator("select#set-model")).toHaveCount(0);
+    const list = page.getByTestId("plugin-list");
+    await expect(list).toContainText("plugin-1722260873");
+    await expect(list).not.toContainText(/GPT Search|LinkedIn|Reddit|PitchBook|X Search/);
+    const pplx = page.getByRole("switch", { name: /perplexity/i });
+    await expect(pplx).toBeDisabled();
+    await expect(pplx).toHaveAttribute("aria-checked", "true");
   });
 
   test("editing the user id persists to localStorage", async ({ page }) => {

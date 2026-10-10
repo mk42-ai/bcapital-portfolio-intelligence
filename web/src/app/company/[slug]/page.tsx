@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCompany, getNews, getSentiment, listCompanies } from "@/lib/api";
@@ -13,6 +12,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Button } from "@/components/ui/button";
+import { LogoImg } from "@/components/ui/logo-img";
+import { resolveLogo } from "@/lib/local-logos";
 import { statusChips } from "@/lib/status";
 import { fmtUsd, fmtPct } from "@/lib/format";
 import workflows from "@/data/workflows.json";
@@ -39,7 +40,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
       <header className="mb-6 rounded-lg border border-border bg-surface">
         <div className="flex flex-wrap items-start gap-5 p-6">
           <div className="grid size-20 shrink-0 place-items-center overflow-hidden rounded-lg border border-border bg-white p-2">
-            {company.logo_url && /^https?:\/\//.test(company.logo_url) ? <Image src={company.logo_url} alt={`${company.name} logo`} width={72} height={72} className="max-h-16 w-auto object-contain" unoptimized /> : <span className="font-display text-2xl font-bold text-foreground">{company.name.slice(0, 2)}</span>}
+            <LogoImg src={resolveLogo({ slug: company.slug, name: company.name, logoUrl: company.logo_url })} name={company.name} alt={`${company.name} logo`} size={64} eager imgClassName="max-h-16" className="text-2xl" />
           </div>
           <div className="min-w-0 flex-1">
             <p className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted"><span className="inline-block size-2.5 rounded-full border border-border" style={{ background: "var(--co-accent)" }} aria-hidden />{company.sector} · {company.region}</p>
@@ -77,8 +78,8 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
         <Card><CardHeader><CardTitle>Funding timeline</CardTitle><CardDescription>PitchBook-style: round · date · amount · post-money · lead · B Capital participation</CardDescription></CardHeader><CardContent><FundingTimeline company={company} /></CardContent></Card>
       </div>
 
-      <Card className="mt-5"><CardHeader><CardTitle>News ({news.data.length})</CardTitle><CardDescription>Perplexity + GPT Search results written back by the workflow, newest first, with source citations</CardDescription></CardHeader>
-        <CardContent>{news.data.length ? <div className="grid min-w-0 gap-3 md:grid-cols-2">{news.data.map((n, i) => <NewsCard key={n.id} n={n} companyLogo={company.logo_url} eager={i < 6} />)}</div> : <EmptyState kind="news" title="No news yet for this company" body="The daily workflow (06:00 UTC) adds Perplexity news with sources and images as it finds them." action={<Button asChild variant="outline"><Link href="/news">Open News Pulse</Link></Button>} />}</CardContent></Card>
+      <Card className="mt-5"><CardHeader><CardTitle>News ({news.data.length})</CardTitle><CardDescription>Perplexity results written back by the workflow, newest first, with source citations</CardDescription></CardHeader>
+        <CardContent>{news.data.length ? <div className="grid min-w-0 gap-3 md:grid-cols-2">{news.data.map((n, i) => <NewsCard key={n.id} n={n} companyName={company.name} companySlug={company.slug} companyLogo={company.logo_url} eager={i < 6} />)}</div> : <EmptyState kind="news" title="No news yet for this company" body="The daily workflow (06:00 UTC) adds Perplexity news with sources and images as it finds them." action={<Button asChild variant="outline"><Link href="/news">Open News Pulse</Link></Button>} />}</CardContent></Card>
 
       {company.sources?.length > 0 && <details className="mt-5 text-xs text-muted"><summary className="cursor-pointer">Brand-matrix sources ({company.sources.length})</summary><ul className="mt-2 space-y-1">{company.sources.map((s, i) => <li key={i} className="break-all">{s}</li>)}</ul></details>}
     </CompanyThemeScope>

@@ -1,5 +1,7 @@
 # Backend verification — S8 (health, API contract, OnDemand/Perplexity SSE smoke test)
 
+> **Model/plugin switch 2026-10-10:** the refresh pipeline and all Flow Builder LLM nodes now use `predefined-deepseek-flash` — DeepSeek Flash v4.1 (endpoint_name `deepseek-v4.1-flash`) — with `reasoningMode: "medium"`, and Perplexity (`plugin-1722260873`) is the **only** plugin wired anywhere. Previously used Claude Fable 5.1 plus the GPT Search / LinkedIn / Reddit / X / PitchBook plugins — all removed on 2026-10-10. Every call to api.on-demand.io sends a browser-like `user-agent` (Cloudflare 1010 bans the default UA).
+
 All timestamps UTC. Run window: **2026-10-09T19:21:20Z → 2026-10-09T19:24:10Z** (end timestamp of the last network call; document written immediately after).
 
 | Item | Target | Result |
@@ -9,7 +11,7 @@ All timestamps UTC. Run window: **2026-10-09T19:21:20Z → 2026-10-09T19:24:10Z*
 | News total | Σ `GET /companies/<slug>/news?limit=200` | **197 items** (user expected 182 — measured value is higher, see §2) |
 | Ingest runs | `GET /ingest/runs` | workflow batches present, latest `ing-2026-10-09T163236Z-eb08d5` |
 | Contract test | `scripts/contract-test.ts` vs `openapi.json` | **9 passed / 0 failed** |
-| OnDemand stream | plugin `plugin-1722260873` (Perplexity), endpoint `predefined-claude-fable-5.1` | 1158 log lines, 386 SSE frames, `data:[DONE]` received after **74.1 s** |
+| OnDemand stream | plugin `plugin-1722260873` (Perplexity), endpoint = the then-default model (see note above) | 1158 log lines, 386 SSE frames, `data:[DONE]` received after **74.1 s** |
 
 ---
 
@@ -19,7 +21,7 @@ All timestamps UTC. Run window: **2026-10-09T19:21:20Z → 2026-10-09T19:24:10Z*
 $ curl -s -w '\n%{http_code}' https://sb-1gek6bq0m1au.vercel.run/health
 {"status":"ok","db_record_count":136,"db_record_count_total":137,
  "last_ingest":{"id":"ing-2026-10-09T163236Z-eb08d5","source":"workflow","received_at":"2026-10-09T16:32:36Z","status":"ok"},
- "model":"predefined-claude-fable-5.1","deferred_plugins":["plugin-1777018662"],
+ "model":"<then-default model>","deferred_plugins":["<then-deferred plugin>"],
  "earliest_test_utc":"2026-10-09T12:37:25Z","version":"1.0.0","timestamp":"2026-10-09T19:21:20Z"}
 200
 ```
@@ -65,7 +67,7 @@ Key read from `web/.env` (`ONDEMAND_API_KEY`), used only inside curl headers; **
 | Step | UTC |
 |---|---|
 | `POST /chat/v1/sessions` (externalUserId INV-001, pluginIds [plugin-1722260873]) | 19:22:53.688Z → session created 19:22:54.136Z (`agentIds:["agent-1722260873"]`, `status:"draft"`) |
-| `POST /chat/v1/sessions/<sid>/query` sent (query "What did Fervo Energy announce recently?", endpointId `predefined-claude-fable-5.1`, responseMode `stream`) | 19:22:54.195Z |
+| `POST /chat/v1/sessions/<sid>/query` sent (query "What did Fervo Energy announce recently?", endpointId = then-default model, responseMode `stream`) | 19:22:54.195Z |
 | First SSE frame (`event:heartbeat`) | 19:22:59.185Z (+5.0 s) |
 | First `planning_thinking` | 19:22:59.364Z |
 | First `plugin_sources` (Perplexity results, stepId 1) | 19:23:26.499Z |

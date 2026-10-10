@@ -3,7 +3,7 @@ import { listCompanies } from "@/lib/api";
 import { PageHeader } from "@/components/shell/page-header";
 import { ChatShell } from "@/components/chat/open-intelligent-ui/chat-shell";
 import { ChatSidebar } from "@/components/chat/chat-sidebar";
-export const metadata: Metadata = { title: "Chat", description: "Analyst chat over the B Capital portfolio, streamed from OnDemand (Fable 5.1 + Perplexity) through the server proxy." };
+export const metadata: Metadata = { title: "Chat", description: "Analyst chat over the B Capital portfolio, streamed from OnDemand (DeepSeek Flash v4.1 · reasoning medium · Perplexity) through the server proxy." };
 export const revalidate = 120;
 export default async function ChatPage() {
   const cs = await listCompanies();

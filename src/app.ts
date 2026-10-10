@@ -61,7 +61,7 @@ inner.get("/health", async (c) => {
   const total = db.get<{ n: number }>(sql`select count(*) as n from companies`)!.n;
   const spec = db.get<{ n: number }>(sql`select count(*) as n from companies where in_brand_matrix = 1 or slug = 'b-capital'`)!.n;
   const lastRun = db.select().from(schema.ingestRuns).orderBy(desc(schema.ingestRuns.receivedAt)).limit(1).get();
-  return c.json({ status: "ok", db_record_count: spec, db_record_count_total: total, last_ingest: lastRun ? { id: lastRun.id, source: lastRun.source, received_at: lastRun.receivedAt, status: lastRun.status } : null, model: config.ondemandDefaultModel, deferred_plugins: config.deferredPlugins, earliest_test_utc: config.earliestTestUtc || null, version: config.version, timestamp: nowIso() });
+  return c.json({ status: "ok", db_record_count: spec, db_record_count_total: total, last_ingest: lastRun ? { id: lastRun.id, source: lastRun.source, received_at: lastRun.receivedAt, status: lastRun.status } : null, model: config.ondemandDefaultModel, earliest_test_utc: config.earliestTestUtc || null, version: config.version, timestamp: nowIso() });
 });
 inner.get("/openapi.json", (c) => c.json(buildOpenApi(serverUrl(c))));
 
@@ -276,7 +276,7 @@ inner.get("/refresh/status", async (c) => {
   const withImages = db.get<{ n: number }>(sql`select count(*) as n from news_items where image_url is not null and image_url != ''`)!.n;
   const total = db.get<{ n: number }>(sql`select count(*) as n from news_items`)!.n;
   const refreshMinutes = Number(process.env.REFRESH_CRON_MINUTES ?? 60);
-  return c.json({ running: state.running, last_run: last ? { id: last.id, status: last.status, companies_touched: last.companiesTouched, news_upserted: last.newsUpserted, errors: last.errors, started_at: last.receivedAt, finished_at: last.finishedAt, model: last.model } : null, last_result: state.last ? { ingest_run_id: state.last.ingest_run_id, with_images: state.last.with_images, dated: state.last.dated, companies: state.last.companies.map(({ session_id, ...x }) => x) } : null, scheduler: { enabled: refreshMinutes > 0, interval_minutes: refreshMinutes > 0 ? refreshMinutes : null, batch_limit: 40, next_scheduled_at: state.next_scheduled_at }, news_items_total: total, news_items_with_images: withImages, timestamp: nowIso() });
+  return c.json({ running: state.running, last_run: last ? { id: last.id, status: last.status, companies_touched: last.companiesTouched, news_upserted: last.newsUpserted, errors: last.errors, plugin_errors: (last.errors ?? []).filter((e) => /upstream plugin error/i.test(String(e))).length, started_at: last.receivedAt, finished_at: last.finishedAt, model: last.model } : null, last_result: state.last ? { ingest_run_id: state.last.ingest_run_id, with_images: state.last.with_images, dated: state.last.dated, companies: state.last.companies.map(({ session_id, ...x }) => x) } : null, scheduler: { enabled: refreshMinutes > 0, interval_minutes: refreshMinutes > 0 ? refreshMinutes : null, batch_limit: 40, next_scheduled_at: state.next_scheduled_at }, news_items_total: total, news_items_with_images: withImages, timestamp: nowIso() });
 });
 
 inner.notFound((c) => err(c, 404, "not_found", `Route not found: ${c.req.method} ${new URL(c.req.url).pathname}`));

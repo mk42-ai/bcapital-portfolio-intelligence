@@ -1,0 +1,139 @@
+{
+  "generatedAt": "2026-10-10T04:08:28.249Z",
+  "route": "/overview",
+  "pagesVisited": 1,
+  "total": 25,
+  "ok": 25,
+  "broken": [],
+  "fallbacks": {
+    "companyLogoFallback": 0,
+    "logoMonogram": 0
+  },
+  "images": [
+    {
+      "src": "https://cdn.prod.website-files.com/695f249d0e06dc7993695bde/696752d24bcb6ea0e8104335_1au.svg",
+      "naturalWidth": 162,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://b.capital/wp-content/uploads/2022/07/6sense-logo-v1.png",
+      "naturalWidth": 164,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://cdn.prod.website-files.com/67289d9b0c73de42a29a431d/67e276c41602eafb2bc6868e_Accacia%20Logo.svg",
+      "naturalWidth": 136,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://aimotive.com/image/layout_set_logo?img_id=184457",
+      "naturalWidth": 365,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://cdn.prod.website-files.com/6a0dd86942776facbc2f6ba4/6a32d000ae9712d1f8ed76c3_Apptronik-Logo.svg",
+      "naturalWidth": 300,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://www.google.com/s2/favicons?domain=archimetis.ai&sz=128",
+      "naturalWidth": 128,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://artbio.com/static/partner-logo-alphagen-fbab084edf516a3fb53a6b69d49e53ca.webp",
+      "naturalWidth": 500,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://www.yaocheng.cn/assets/web/images/logo2025-2.png",
+      "naturalWidth": 266,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://axiommath.ai/logo/logoshort.svg",
+      "naturalWidth": 548,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://b.capital/wp-content/uploads/2025/04/baichuan-logo-v1.png",
+      "naturalWidth": 164,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://bhanzu.com/_next/static/media/bhanzu_logo_black_md.f927c484.png",
+      "naturalWidth": 120,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://d2c5ectx2y1vm9.cloudfront.net/assets/branch_logo_navy-7e548f86d075abfb2faf4d2097d5349d1da404030f5825a01f6e24d36cc60c46.svg",
+      "naturalWidth": 100,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://b.capital/wp-content/uploads/2023/10/brik-logo-v1.png",
+      "naturalWidth": 164,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://cdn.prod.website-files.com/69ca5a8696b428c0fbc088cf/6a0e0627ca4f707caf443392_Helm.svg",
+      "naturalWidth": 157,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://www.google.com/s2/favicons?domain=cadence.care&sz=128",
+      "naturalWidth": 128,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://d1io3yog0oux5.cloudfront.net/_5366194bb9d1e2e81a133cd09d9fc511/carricktherapeutics/files/theme/images/logo-sm.svg",
+      "naturalWidth": 918,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://b.capital/wp-content/uploads/2021/06/carro_logo_v2-svg.svg",
+      "naturalWidth": 382,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://centivo.com/wp-content/themes/studio-simpatico/svgs/logo.svg",
+      "naturalWidth": 209,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://certn.co/wp-content/uploads/2026/04/OpenGraph-2.jpg",
+      "naturalWidth": 1200,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://chipagents.ai/redesign/assets/logo-dark-text.avif",
+      "naturalWidth": 1200,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://cloudwise.com/frontStatic/cn/image/header/logo-header4.svg",
+      "naturalWidth": 108,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://www.codemetal.ai/codemetal_logo.svg",
+      "naturalWidth": 171,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://b.capital/wp-content/uploads/2025/04/coindcx-logo-v1.png",
+      "naturalWidth": 164,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://www.collinear.ai/assets/images/og-card.jpg",
+      "naturalWidth": 1200,
+      "testid": "company-logo"
+    },
+    {
+      "src": "https://companycam.imgix.net/images/CompanyCam-SEO.jpg?auto=format&amp;crop=focalpoint&amp;domain=companycam.imgix.net&amp;fit=crop&amp;fp-x=0.5&amp;fp-y=0.5&amp;h=630&amp;ixlib=php-3.3.1&amp;q=82&amp;w=1200",
+      "naturalWidth": 7680,
+      "testid": "company-logo"
+    }
+  ]
+}
