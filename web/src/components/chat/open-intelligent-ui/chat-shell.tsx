@@ -20,6 +20,8 @@ import { getSelectedPluginIds, usePluginSelection } from "@/lib/plugin-selection
 import { pluginName as catalogueName, PLUGIN_CATALOGUE } from "@/lib/plugin-catalogue";
 import { PluginFavicon, preloadPluginFavicons } from "@/components/ui/plugin-favicon";
 import { fmtScore } from "@/lib/format";
+import { ContextChipsBar } from "./context-chips-bar";
+import { chipsBlock, clearContextChips, getContextChips, PITCHBOOK_PLUGIN_ID } from "./context-chips";
 
 export type CoCtx = { slug: string; name: string; sector: string; status: string; stage: string | null; sentiment: { score: number; label: string; delta?: number | null; updated_at?: string | null; basis?: string | null }; news_count?: number; latest_news: { title: string; url: string | null; published_at: string | null; source?: string | null }[]; estimated_ticket_size_usd: number | null; estimated_ownership_pct: number | null; b_capital_role: string };
 type Source = StoredSource;
@@ -630,15 +632,22 @@ export function ChatShell({ companies, fetchedAt }: { companies: CoCtx[]; fetche
     headers: s.apikey ? { "x-ondemand-key": s.apikey } : {},
     fetch: async (input, init) => {
       // inject the per-thread OnDemand session, the EXPLICIT plugin selection and the portfolio context; capture the session id from the response
-      const body = JSON.parse(String(init?.body ?? "{}")) as { threadId?: string; context?: Record<string, unknown> };
+      const body = JSON.parse(String(init?.body ?? "{}")) as { threadId?: string; context?: Record<string, unknown>; messages?: { role?: string; content?: unknown }[] };
       const tid = body.threadId ?? ""; let sid = sessionRef.current[tid] ?? (tid ? sessionFor(tid) : null);
-      const pluginIds = getSelectedPluginIds();
+      // PitchBook context chips: prepend a compact `Context:` block to THIS turn's user text and add the Investor Finder plugin for this turn only.
+      // The thread is untouched (no new thread, the stored message stays as typed); the chips are consumed once the request is on the wire.
+      const chips = getContextChips();
+      if (chips.length && Array.isArray(body.messages)) {
+        const last = [...body.messages].reverse().find((m) => m?.role === "user");
+        if (last) { const txt = typeof last.content === "string" ? last.content : Array.isArray(last.content) ? last.content.map((p) => (p && typeof p === "object" && "text" in p ? String((p as { text: unknown }).text) : "")).join("") : ""; last.content = `${chipsBlock(chips)}\n\n${txt}`; }
+      }
+      const pluginIds = [...new Set([...getSelectedPluginIds(), ...(chips.length ? [PITCHBOOK_PLUGIN_ID] : [])])];
       // First turn of a new thread: consume the pre-warmed session when its plugin set matches the explicit selection (same ids, same order).
       if (!sid && prewarm.current && prewarm.current.pluginIds.join(",") === pluginIds.join(",")) { sid = prewarm.current.sessionId; prewarm.current = null; if (tid) { sessionRef.current[tid] = sid; rememberSession(tid, sid); } }
       body.context = { ...(body.context ?? {}), sessionId: sid ?? undefined, externalUserId: s.externalUserId, pluginIds, systemContext, sessionContext: ctxCompanies.map((c) => ({ key: `company:${c.slug}`, value: JSON.stringify({ name: c.name, sector: c.sector, status: c.status, sentiment: c.sentiment, news: c.latest_news.slice(0, 3) }).slice(0, 1800) })) };
       setStream({ ...IDLE, phase: "connecting", detail: PHASE_LABEL.connecting, startedAt: Date.now(), sessionId: sid ?? null, lastThreadId: tid, pluginIds, version: streamState.version }, true);
       let res: Response;
-      try { res = await fetch(input, { ...init, body: JSON.stringify(body) }); } catch (e) { setStream({ phase: "idle", detail: "", error: { code: "fetch_failed", message: (e as Error).message } }, true); throw e; }
+      try { res = await fetch(input, { ...init, body: JSON.stringify(body) }); if (chips.length) clearContextChips(); } catch (e) { setStream({ phase: "idle", detail: "", error: { code: "fetch_failed", message: (e as Error).message } }, true); throw e; }
       const remember = (got: string) => { if (tid) { sessionRef.current[tid] = got; rememberSession(tid, got); } };
       const got = res.headers.get("x-ondemand-session"); if (got) remember(got);
       if (!res.ok || !res.body) { setStream({ phase: "idle", detail: "", error: { code: `http_${res.status}`, message: `Chat endpoint answered HTTP ${res.status}` } }, true); return res; }
@@ -655,6 +664,7 @@ export function ChatShell({ companies, fetchedAt }: { companies: CoCtx[]; fetche
         <PendingRow />
         <ScrollAnchor />
         <ErrorBanner />
+        <ContextChipsBar />
         <Suspense fallback={null}><AutoAsk /></Suspense>
       </AgentInterface>
       <p className="oiu-footer" data-testid="chat-footer" data-model-id={MODEL_ID} data-reasoning={REASONING_MODE}><ShieldCheck className="size-3.5" aria-hidden /> Answers stream from {MODEL_LABEL} with <span data-testid="footer-plugins">{pluginLabel}</span> — sources are cited inline.</p>

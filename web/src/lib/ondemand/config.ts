@@ -28,6 +28,12 @@ export const PLUGIN_IDS: readonly string[] = [PLUGIN_ID];
 import catalogue from "@/data/plugin-catalogue.json";
 export const PLUGIN_CATALOGUE_IDS = new Set<string>((catalogue.plugins as { id: string }[]).map((p) => p.id));
 export const PLUGIN_NAMES: Record<string, string> = Object.fromEntries((catalogue.plugins as { id: string; name: string }[]).map((p) => [p.id, p.name]));
+/** PitchBook Investor Finder (plugin-1777018662, no credentials needed): sent ONLY on turns that carry a PitchBook context chip — allow-listed here
+ *  so `resolvePluginIds` keeps it; it is not part of the curated toggle list. */
+export const PITCHBOOK_PLUGIN_ID = "plugin-1777018662";
+export const PITCHBOOK_PLUGIN_NAME = "Pitchbook Investor Finder";
+PLUGIN_CATALOGUE_IDS.add(PITCHBOOK_PLUGIN_ID);
+PLUGIN_NAMES[PITCHBOOK_PLUGIN_ID] ??= PITCHBOOK_PLUGIN_NAME;
 /** Resolve the plugin list for one request: pinned Perplexity first, then every requested id that exists in the catalogue, in request order. */
 export const resolvePluginIds = (requested: unknown): { pluginIds: string[]; dropped: string[] } => {
   const req = Array.isArray(requested) ? requested.map(String) : [];

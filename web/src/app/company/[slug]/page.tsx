@@ -7,6 +7,7 @@ import { FundingTimeline } from "@/components/company/funding-timeline";
 import { NewsCard } from "@/components/company/news-cards";
 import { SentimentPanel } from "@/components/company/sentiment-panel";
 import { SignalPanel } from "@/components/company/signal-panel";
+import { PitchbookPanel } from "@/components/company/pitchbook-panel";
 import { SignalMini } from "@/components/charts/signal-bullet";
 import { EstimateBadge } from "@/components/overview/estimate-badge";
 import { StatusChips } from "@/components/overview/status-chips";
@@ -77,6 +78,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
 
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
         <Card><CardHeader><CardTitle>Signal Score &amp; sentiment timeline</CardTitle><CardDescription>Evidence-weighted Signal Score (0–100, z within portfolio + sector) above the daily {workflows.model} sentiment from LinkedIn, Reddit, X and news evidence</CardDescription></CardHeader><CardContent className="space-y-5">{sig.data ? <SignalPanel s={sig.data.data} bands={sig.data.bands} name={company.name} /> : <p className="text-sm text-muted">Signal Score unavailable (backend offline — no snapshot yet).</p>}{sent.data ? <div className="border-t border-border pt-4"><SentimentPanel s={sent.data} /></div> : <p className="text-sm text-muted">No sentiment yet.</p>}</CardContent></Card>
+        <Card data-testid="pitchbook-card"><CardHeader><CardTitle>PitchBook</CardTitle><CardDescription>Investor matches from the PitchBook Investor Finder plugin</CardDescription></CardHeader><CardContent><PitchbookPanel company={company} /></CardContent></Card>
         <Card><CardHeader><CardTitle>Funding timeline</CardTitle><CardDescription>PitchBook-style: round · date · amount · post-money · lead · B Capital participation</CardDescription></CardHeader><CardContent><FundingTimeline company={company} /></CardContent></Card>
       </div>
 
