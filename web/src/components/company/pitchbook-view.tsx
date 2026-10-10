@@ -1,11 +1,11 @@
 "use client";
 import { useCallback, useEffect, useState, type KeyboardEvent, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { ExternalLink, Info, Landmark, Loader2, MessageSquarePlus, Play } from "lucide-react";
+import { ExternalLink, Info, Landmark, Loader2, MessageSquarePlus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { fmtUsd } from "@/lib/format";
-import type { PbAvailability, PbInvestor, PbSectionKey, PbSourced, PitchbookRecord, PitchbookResponse, PitchbookRunResponse } from "@/lib/types";
+import type { PbAvailability, PbInvestor, PbSectionKey, PbSourced, PitchbookRecord, PitchbookResponse } from "@/lib/types";
 import { addContextChip, chipId, domainOf, setChipTransfer, PITCHBOOK_PLUGIN_ID, PITCHBOOK_PLUGIN_NAME, type ContextChip } from "@/components/chat/open-intelligent-ui/context-chips";
 
 /**
@@ -15,7 +15,9 @@ import { addContextChip, chipId, domainOf, setChipTransfer, PITCHBOOK_PLUGIN_ID,
  */
 export type PbStatus = "ok" | "offline" | "loading";
 export type PbProfileFact = { field: string; value: string; source: string | null; fetched_at: string | null };
-export type PitchbookViewProps = { slug: string; name: string; res: PitchbookResponse | null; status: PbStatus; variant: "page" | "rail"; profile?: { overview?: PbProfileFact[]; last_round?: PbProfileFact[] } };
+/** `source`: where `res` came from — "server" = rendered from server-provided data (no client fetch), "client" = fetched after mount. Exposed as `data-source` on `pb-view`. */
+export type PbSource = "server" | "client";
+export type PitchbookViewProps = { slug: string; name: string; res: PitchbookResponse | null; status: PbStatus; variant: "page" | "rail"; source?: PbSource; profile?: { overview?: PbProfileFact[]; last_round?: PbProfileFact[] } };
 
 const SECTIONS: { key: PbSectionKey; label: string }[] = [
   { key: "overview", label: "Overview" }, { key: "last_round", label: "Last round" }, { key: "valuation_history", label: "Valuation history" },
@@ -150,28 +152,6 @@ function Investors({ company, rec, onAsk, compact }: { company: string; rec: Pit
 /* ---------- honest states ---------- */
 const Unavailable = ({ text = UNAVAILABLE_COPY }: { text?: string }) => <p className="text-xs text-muted" data-testid="pb-unavailable">{text}</p>;
 
-function RunNow({ slug, size = "sm" }: { slug: string; size?: "sm" | "xs" }) {
-  const [state, setState] = useState<{ phase: "idle" | "running" | "done" | "error"; text?: string }>({ phase: "idle" });
-  const run = async () => {
-    setState({ phase: "running" });
-    try {
-      const r = await fetch("/api/pitchbook/run", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ slug }) });
-      const j = (await r.json().catch(() => ({}))) as PitchbookRunResponse;
-      if (!r.ok) { setState({ phase: "error", text: j.code === "no_ingest_secret" ? "Run now needs INGEST_SECRET on the server" : j.message ?? j.code ?? `HTTP ${r.status}` }); return; }
-      setState({ phase: "done", text: j.execution_id ? `execution ${j.execution_id}${j.status ? ` · ${j.status}` : ""}` : j.job_id ? `local job ${j.job_id}` : j.status ?? "queued" });
-    } catch (e) { setState({ phase: "error", text: (e as Error).message }); }
-  };
-  return (
-    <span className="inline-flex flex-wrap items-center gap-2">
-      <button type="button" onClick={run} disabled={state.phase === "running"} data-testid="pb-run-now"
-        className={cn("inline-flex items-center gap-1 rounded-md border border-border bg-surface font-medium hover:bg-[var(--brand-green-soft)] hover:text-[var(--brand-green-ink)] disabled:opacity-60", size === "xs" ? "h-6 px-1.5 text-[11px]" : "h-7 px-2 text-xs")}>
-        {state.phase === "running" ? <Loader2 className="size-3 oiu-spin" aria-hidden /> : <Play className="size-3" aria-hidden />} Run now
-      </button>
-      {state.text && <span className={cn("font-mono text-[11px]", state.phase === "error" ? "text-danger" : "text-muted")} data-testid="pb-run-result" data-state={state.phase}>{state.text}</span>}
-    </span>
-  );
-}
-
 function EmptyPb({ slug, name, nextRun, onAsk, compact }: { slug: string; name: string; nextRun: string; onAsk: (c: ContextChip) => void; compact?: boolean }) {
   const chip: ContextChip = { id: chipId(slug, "question", "investors"), company: name, field: "question", value: `Which investors in PitchBook match ${name}'s stage, sector and geography?`, source: null, fetched_at: null, plugin_id: PITCHBOOK_PLUGIN_ID };
   return (
@@ -181,7 +161,7 @@ function EmptyPb({ slug, name, nextRun, onAsk, compact }: { slug: string; name: 
       <div className="min-w-0 space-y-1.5">
         <p className="text-sm font-medium">No PitchBook data yet · next pull {nextRun}</p>
         <p className="text-xs text-muted">The weekly pull asks the {PITCHBOOK_PLUGIN_NAME} plugin for investor matches; it does not provide company financials.</p>
-        <div className="flex flex-wrap items-center gap-2"><RunNow slug={slug} />
+        <div className="flex flex-wrap items-center gap-2">
           <button type="button" onClick={() => onAsk(chip)} data-testid="pb-ask-investors" className="inline-flex h-7 items-center gap-1 rounded-md border border-border bg-surface px-2 text-xs font-medium hover:bg-[var(--brand-green-soft)] hover:text-[var(--brand-green-ink)]"><MessageSquarePlus className="size-3.5" aria-hidden /> Ask about investors</button></div>
       </div>
     </div>
@@ -189,7 +169,7 @@ function EmptyPb({ slug, name, nextRun, onAsk, compact }: { slug: string; name: 
 }
 
 /* ---------- main view ---------- */
-export function PitchbookView({ slug, name, res, status, variant, profile }: PitchbookViewProps) {
+export function PitchbookView({ slug, name, res, status, variant, source = "server", profile }: PitchbookViewProps) {
   const compact = variant === "rail"; const onAsk = useAsk(variant);
   const [now, setNow] = useState(0); useEffect(() => { setNow(Date.now()); }, [res]);
   if (status === "loading") return <p className="text-xs text-muted" data-testid="pb-loading"><Loader2 className="mr-1 inline size-3 oiu-spin" aria-hidden /> Loading PitchBook…</p>;
@@ -214,14 +194,13 @@ export function PitchbookView({ slug, name, res, status, variant, profile }: Pit
     );
   };
   return (
-    <div className={cn("space-y-3", compact && "space-y-2")} data-testid="pb-view" data-enriched={res.enriched ? "true" : "false"}>
+    <div className={cn("space-y-3", compact && "space-y-2")} data-testid="pb-view" data-source={source} data-enriched={res.enriched ? "true" : "false"}>
       <header className="flex flex-wrap items-center justify-between gap-2">
         <p className="flex min-w-0 items-center gap-1.5 text-xs text-muted" data-testid="pb-header">
           <Landmark className="size-3.5 shrink-0" aria-hidden /><span className="font-medium text-foreground">{PITCHBOOK_PLUGIN_NAME}</span>
           <span className={cn("inline-block size-1.5 rounded-full", DOT[fr])} aria-hidden title={`fetched ${fetched ?? "—"}`} />
           <span className="truncate">Updated {now ? relTime(fetched, now) : fetched ? fetched.slice(0, 10) : "—"} · next pull {nextRun}</span>
         </p>
-        <RunNow slug={slug} size={compact ? "xs" : "sm"} />
       </header>
       {SECTIONS.filter((s) => !compact || s.key === "investors" || s.key === "overview" || s.key === "last_round").map((s) => (
         <section key={s.key} data-testid={`pb-section-${s.key}`} data-availability={availabilityOf(rec, s.key) ?? "UNKNOWN"} aria-label={s.label}>
