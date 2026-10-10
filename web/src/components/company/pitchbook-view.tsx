@@ -1,12 +1,16 @@
 "use client";
 import { useCallback, useEffect, useState, type KeyboardEvent, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { ExternalLink, Info, Landmark, Loader2, MessageSquarePlus } from "lucide-react";
+import { ExternalLink, Info, Loader2, MessageSquarePlus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { fmtUsd } from "@/lib/format";
 import type { PbAvailability, PbInvestor, PbSectionKey, PbSourced, PitchbookRecord, PitchbookResponse } from "@/lib/types";
-import { addContextChip, chipId, domainOf, setChipTransfer, PITCHBOOK_PLUGIN_ID, PITCHBOOK_PLUGIN_NAME, type ContextChip } from "@/components/chat/open-intelligent-ui/context-chips";
+import { ASSET } from "@/lib/assets";
+import { SyncedBadge } from "@/components/company/synced-badge";
+import { FieldEmptyState } from "@/components/company/pb-empty-state";
+import { setComposerDraft } from "@/components/chat/open-intelligent-ui/ui-store";
+import { addContextChip, askDraft, chipId, domainOf, setChipTransfer, PITCHBOOK_PLUGIN_ID, PITCHBOOK_PLUGIN_NAME, type ContextChip } from "@/components/chat/open-intelligent-ui/context-chips";
 
 /**
  * Shared PitchBook body (company page card + chat rail). Ground truth baked into the copy: the only PitchBook plugin on the account is
@@ -67,7 +71,9 @@ const factsFromList = (prefix: string, list: PbSourced[] | null | undefined) => 
 
 function useAsk(variant: "page" | "rail") {
   const router = useRouter();
-  return useCallback((chip: ContextChip) => { addContextChip(chip); if (variant === "page") router.push("/chat?skip=1"); }, [router, variant]);
+  // Ask-in-chat never creates a thread: the chip is queued for the next message AND the EXISTING composer gets a draft (ui-store `draft`).
+  // Company page → navigate to the open chat (/chat?skip=1); chat rail → same injection, no navigation.
+  return useCallback((chip: ContextChip) => { addContextChip(chip); setComposerDraft(askDraft(chip)); if (variant === "page") router.push("/chat?skip=1"); }, [router, variant]);
 }
 const toChip = (company: string, f: Pick<Fact, "field" | "value" | "source" | "fetched" | "plugin">): ContextChip => ({ id: chipId(company, f.field, f.value), company, field: f.field, value: f.value, source: f.source, fetched_at: f.fetched, plugin_id: f.plugin ?? PITCHBOOK_PLUGIN_ID });
 
@@ -157,7 +163,7 @@ function EmptyPb({ slug, name, nextRun, onAsk, compact }: { slug: string; name: 
   return (
     <div className={cn("flex items-center gap-3 rounded-md border border-dashed border-border bg-surface-2/60 p-3", compact && "flex-col text-center")} data-testid="pb-empty" role="status">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/fallbacks/ledger-empty.webp" width={96} height={96} alt="" decoding="async" loading="lazy" className="size-24 shrink-0 object-contain" />
+      <img src={ASSET.financialEmpty} width={64} height={64} alt="" decoding="async" loading="lazy" className="size-16 shrink-0 object-contain" />
       <div className="min-w-0 space-y-1.5">
         <p className="text-sm font-medium">No PitchBook data yet · next pull {nextRun}</p>
         <p className="text-xs text-muted">The weekly pull asks the {PITCHBOOK_PLUGIN_NAME} plugin for investor matches; it does not provide company financials.</p>
@@ -171,13 +177,12 @@ function EmptyPb({ slug, name, nextRun, onAsk, compact }: { slug: string; name: 
 /* ---------- main view ---------- */
 export function PitchbookView({ slug, name, res, status, variant, source = "server", profile }: PitchbookViewProps) {
   const compact = variant === "rail"; const onAsk = useAsk(variant);
-  const [now, setNow] = useState(0); useEffect(() => { setNow(Date.now()); }, [res]);
   if (status === "loading") return <p className="text-xs text-muted" data-testid="pb-loading"><Loader2 className="mr-1 inline size-3 oiu-spin" aria-hidden /> Loading PitchBook…</p>;
   if (status === "offline" || !res) return <p className="text-xs text-muted" data-testid="pb-offline" role="status">PitchBook panel offline — the portfolio backend did not answer <code>/pitchbook/{slug}</code>.</p>;
   if (res.state === "NEEDS_CREDENTIALS") return <p className="text-xs text-danger" data-testid="pb-needs-creds" role="status">PitchBook plugin needs credentials: {(res.fields ?? []).join(", ") || "unspecified"}</p>;
   const nextRun = nextPull(res.next_run_utc); const rec = res.data;
   if (!rec) return <EmptyPb slug={slug} name={res.name ?? name} nextRun={nextRun} onAsk={onAsk} compact={compact} />;
-  const company = res.name ?? name; const fetched = rec.provenance?.fetched_at ?? null; const fr = freshness(fetched, now || undefined);
+  const company = res.name ?? name; const fetched = rec.provenance?.fetched_at ?? null;
   const section = (key: PbSectionKey): ReactNode => {
     const av = availabilityOf(rec, key);
     const fallback = key === "overview" ? profile?.overview : key === "last_round" ? profile?.last_round : undefined;
@@ -188,19 +193,16 @@ export function PitchbookView({ slug, name, res, status, variant, source = "serv
     if (facts.length) return <div className="flex flex-wrap gap-1.5">{facts.map((f, i) => <FactChip key={`${f.field}-${i}`} company={company} f={f} onAsk={onAsk} compact={compact} />)}</div>;
     return (
       <div className="space-y-1.5">
-        <Unavailable text={av && av !== "NOT_AVAILABLE_FROM_PLUGIN" ? `No ${key.replace(/_/g, " ")} in this pull (${String(av).toLowerCase()}).` : UNAVAILABLE_COPY} />
+        <FieldEmptyState field={key} compact={compact} note={av && av !== "NOT_AVAILABLE_FROM_PLUGIN" ? `No ${humanField(key)} in this pull (${String(av).toLowerCase()}).` : undefined} />
         {fallback && fallback.length > 0 && <div className="flex flex-wrap gap-1.5" data-testid="pb-profile-fallback"><span className="self-center text-[10px] uppercase tracking-wide text-muted">portfolio profile</span>{fallback.map((p, i) => <FactChip key={`${p.field}-${i}`} company={company} f={{ ...p, published: null, fetched: p.fetched_at, plugin: null, availability: "PROFILE" }} onAsk={onAsk} compact={compact} />)}</div>}
       </div>
     );
   };
   return (
-    <div className={cn("space-y-3", compact && "space-y-2")} data-testid="pb-view" data-source={source} data-enriched={res.enriched ? "true" : "false"}>
-      <header className="flex flex-wrap items-center justify-between gap-2">
-        <p className="flex min-w-0 items-center gap-1.5 text-xs text-muted" data-testid="pb-header">
-          <Landmark className="size-3.5 shrink-0" aria-hidden /><span className="font-medium text-foreground">{PITCHBOOK_PLUGIN_NAME}</span>
-          <span className={cn("inline-block size-1.5 rounded-full", DOT[fr])} aria-hidden title={`fetched ${fetched ?? "—"}`} />
-          <span className="truncate">Updated {now ? relTime(fetched, now) : fetched ? fetched.slice(0, 10) : "—"} · next pull {nextRun}</span>
-        </p>
+    <div className={cn("space-y-3", compact && "space-y-2")} data-testid="pb-view" data-source={source} data-company={company} data-enriched={res.enriched ? "true" : "false"}>
+      <header className="flex flex-wrap items-center justify-between gap-2" data-testid="pb-header" title={`${PITCHBOOK_PLUGIN_NAME} · next pull ${nextRun}`}>
+        <SyncedBadge syncedAt={fetched} compact={compact} />
+        <span className="truncate text-[11px] text-muted" data-testid="pb-plugin-name">{PITCHBOOK_PLUGIN_NAME}</span>
       </header>
       {SECTIONS.filter((s) => !compact || s.key === "investors" || s.key === "overview" || s.key === "last_round").map((s) => (
         <section key={s.key} data-testid={`pb-section-${s.key}`} data-availability={availabilityOf(rec, s.key) ?? "UNKNOWN"} aria-label={s.label}>
@@ -208,7 +210,11 @@ export function PitchbookView({ slug, name, res, status, variant, source = "serv
           {section(s.key)}
         </section>
       ))}
-      {compact && <p className="text-[10px] text-muted">Valuation history · financials · comparables: {UNAVAILABLE_COPY.toLowerCase()}.</p>}
+      {compact && (
+        <div className="space-y-1" data-testid="pb-rail-unavailable">
+          {(["valuation_history", "financials", "comparables"] as PbSectionKey[]).map((k) => <FieldEmptyState key={k} field={k} compact />)}
+        </div>
+      )}
     </div>
   );
 }

@@ -51,6 +51,8 @@ export function chipLine(c: ContextChip): string {
   return `Context: ${c.company} · ${c.field}: ${c.value}${prov ? ` (${prov})` : ""}`;
 }
 export const chipsBlock = (chips: ContextChip[]) => chips.map(chipLine).join("\n");
+/** Composer draft for an ask-in-chat click — injected into the EXISTING composer via ui-store `setComposerDraft` (never a new thread). */
+export const askDraft = (c: Pick<ContextChip, "company" | "field" | "value">) => `About ${c.company}: ${c.field} = ${c.value} — what should I know?`;
 
 /** Drag payload (HTML5 DnD). `setChipTransfer` is called from onDragStart; `readChipTransfer` from the document-level drop listener. */
 export function setChipTransfer(dt: DataTransfer, chip: ContextChip) {
