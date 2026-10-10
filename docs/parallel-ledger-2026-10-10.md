@@ -1,6 +1,6 @@
 # Parallel work ledger — 2026-10-10
 
-Generated `2026-10-10T18:12:24.156Z` at commit `813f6ca` by `web/scripts/ledger.mjs` from the orchestrator's agent reports.
+Generated `2026-10-10T18:18:00Z` at commit `3141bc7` (preview https://sb-2bqmt98kq4ql.vercel.run, build `RFFhzyG47ppFPGvNhpKVa`) by `web/scripts/ledger.mjs` from the orchestrator's agent reports.
 30 agents, one worktree each (`/tmp/wt-NN`, branch `wt/NN`, branched from `d6479aa`). Summary: pass: 22 · partial: 8.
 
 Columns: **files** = files touched (explicit paths), **tests** = tests added/run with results, **result** = pass | partial | fail (+why), **start/end** = UTC, **commit** = sha on `wt/NN`.

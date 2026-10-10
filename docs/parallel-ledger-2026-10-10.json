@@ -1,16 +1,16 @@
 {
   "date": "2026-10-10",
-  "generated_at": "2026-10-10T18:12:24.156Z",
-  "commit": "813f6ca",
-  "source": "../../../../../reports.json",
-  "merged_sha": "813f6ca",
+  "generated_at": "2026-10-10T18:18:00Z",
+  "commit": "3141bc7",
+  "source": "orchestrator agent reports",
+  "merged_sha": "3141bc7",
   "build_id": "RFFhzyG47ppFPGvNhpKVa",
   "preview_url": "https://sb-2bqmt98kq4ql.vercel.run",
   "agents": 30,
   "reports": [
     {
       "agent": 1,
-      "scope": "Asset pipeline (download/transparent/WebP+PNG 256/512 → /public/assets), manifest, retire /fallbacks",
+      "scope": "Asset pipeline (download/transparent/WebP+PNG 256/512 \u2192 /public/assets), manifest, retire /fallbacks",
       "files": "web/scripts/assets-pipeline.py, web/public/assets/**, web/src/lib/assets.ts, web/docs/ASSETS.md, web/e2e/assets.spec.ts",
       "tests": "tsc 0, assets-pipeline --verify (24 PNGs, 0 halo), e2e/assets.spec.ts (7 pass on new build)",
       "result": "pass",
@@ -21,7 +21,7 @@
     },
     {
       "agent": 2,
-      "scope": "/api/img news fallback → news-card asset",
+      "scope": "/api/img news fallback \u2192 news-card asset",
       "files": "web/src/app/api/img/route.ts, web/src/lib/img-proxy.ts, web/src/components/company/news-thumb.tsx, web/e2e/images.spec.ts",
       "tests": "tsc 0, e2e/images.spec.ts (pass on new build)",
       "result": "pass",
@@ -32,9 +32,9 @@
     },
     {
       "agent": 3,
-      "scope": "Company logo avatars → company-logo asset",
+      "scope": "Company logo avatars \u2192 company-logo asset",
       "files": "web/src/components/ui/company-logo.tsx, web/src/components/ui/logo-img.tsx, web/e2e/companies.spec.ts",
-      "tests": "tsc 0, companies logos ×3 pass",
+      "tests": "tsc 0, companies logos \u00d73 pass",
       "result": "pass",
       "start": "2026-10-10T17:11:17Z",
       "end": "2026-10-10T17:12:14Z",
@@ -109,7 +109,7 @@
     },
     {
       "agent": 10,
-      "scope": "Sources list → compact publisher-first chip row above the answer (+N overflow)",
+      "scope": "Sources list \u2192 compact publisher-first chip row above the answer (+N overflow)",
       "files": "web/src/components/chat/open-intelligent-ui/source-chips.tsx, web/src/components/chat/open-intelligent-ui/source-chips.css, web/src/components/chat/open-intelligent-ui/messages.tsx, web/e2e/source-chips.spec.ts",
       "tests": "tsc 0, e2e/source-chips.spec.ts pass",
       "result": "partial",
@@ -149,7 +149,7 @@
       "start": "2026-10-10T17:11:50Z",
       "end": "2026-10-10T17:14:30Z",
       "commit": "d97d539",
-      "notes": "card written; e2e spec not written by the agent (action cap) — covered by proof-screens interactive-card + session-resume specs"
+      "notes": "card written; e2e spec not written by the agent (action cap) \u2014 covered by proof-screens interactive-card + session-resume specs"
     },
     {
       "agent": 14,
@@ -164,9 +164,9 @@
     },
     {
       "agent": 15,
-      "scope": "Voice plugin parity: pluginIds + sessionId through STT → query → TTS",
+      "scope": "Voice plugin parity: pluginIds + sessionId through STT \u2192 query \u2192 TTS",
       "files": "web/src/components/chat/voice/voice-dock.tsx, web/src/components/chat/voice/tts-queue.ts, web/src/app/api/voice/tts/route.ts, web/src/app/api/voice/stt/route.ts, web/docs/VOICE_PARITY.md",
-      "tests": "tsc 0, voice.spec ×4 pass",
+      "tests": "tsc 0, voice.spec \u00d74 pass",
       "result": "pass",
       "start": "2026-10-10T17:11:54Z",
       "end": "2026-10-10T17:14:05Z",
@@ -186,7 +186,7 @@
     },
     {
       "agent": 17,
-      "scope": "Playwright record→analyse→fix loop, before/after timeline artifacts under docs/proof/",
+      "scope": "Playwright record\u2192analyse\u2192fix loop, before/after timeline artifacts under docs/proof/",
       "files": "web/scripts/ux-loop.sh, web/tests/e2e/run-ux.spec.ts, web/tests/e2e/compare.mjs, docs/proof/before/**, docs/proof/after/**, docs/proof/compare.md, docs/proof/README.md",
       "tests": "BEFORE pass recorded (score 7.3), AFTER pass recorded by orchestrator (score 7.5)",
       "result": "pass",
@@ -241,7 +241,7 @@
     },
     {
       "agent": 22,
-      "scope": "Conversation column full width/height, ≤800 px centred, windowed/bounded thread",
+      "scope": "Conversation column full width/height, \u2264800 px centred, windowed/bounded thread",
       "files": "web/src/components/chat/canvas/canvas.css, web/src/components/chat/open-intelligent-ui/thread-window.tsx, web/src/components/chat/open-intelligent-ui/chat-shell.tsx, web/e2e/thread-layout.spec.ts",
       "tests": "tsc 0, e2e/thread-layout.spec.ts 2 pass",
       "result": "partial",
@@ -252,7 +252,7 @@
     },
     {
       "agent": 23,
-      "scope": "One-row composer (Attach · textarea · mic · send), draft injection, floating jump-to-latest",
+      "scope": "One-row composer (Attach \u00b7 textarea \u00b7 mic \u00b7 send), draft injection, floating jump-to-latest",
       "files": "web/src/components/chat/open-intelligent-ui/composer.tsx, web/src/components/chat/open-intelligent-ui/composer.css, web/src/components/chat/open-intelligent-ui/scroll-anchor.tsx, web/src/components/chat/open-intelligent-ui/shell.css, web/src/components/chat/open-intelligent-ui/chat-shell.tsx, web/e2e/composer.spec.ts",
       "tests": "tsc 0, e2e/composer.spec.ts 3 pass",
       "result": "partial",
@@ -263,7 +263,7 @@
     },
     {
       "agent": 24,
-      "scope": "Inspector slide-over drawer ≤360 px, ONE details reveal, plan rendered once",
+      "scope": "Inspector slide-over drawer \u2264360 px, ONE details reveal, plan rendered once",
       "files": "web/src/components/chat/canvas/inspector-drawer.tsx, web/src/components/chat/canvas/inspector.css, web/src/components/chat/run-rail.tsx, web/src/components/chat/chat-sidebar.tsx (deleted), web/src/components/chat/open-intelligent-ui/run-cards.tsx, web/e2e/inspector.spec.ts, web/e2e/pitchbook.spec.ts",
       "tests": "tsc 0, e2e/inspector.spec.ts 3 pass",
       "result": "pass",
@@ -298,7 +298,7 @@
       "agent": 27,
       "scope": "PitchBook zero-network-on-first-paint + drawer initial-content tests",
       "files": "web/e2e/pitchbook-nofetch.spec.ts, web/e2e/fixtures/network-log.ts, web/docs/PITCHBOOK_RENDER.md",
-      "tests": "tsc 0, e2e/pitchbook-nofetch.spec.ts 4 pass (desktop + 390×844)",
+      "tests": "tsc 0, e2e/pitchbook-nofetch.spec.ts 4 pass (desktop + 390\u00d7844)",
       "result": "partial",
       "start": "2026-10-10T17:12:38Z",
       "end": "2026-10-10T17:16:20Z",
@@ -307,9 +307,9 @@
     },
     {
       "agent": 28,
-      "scope": "Brand audit — #0AC985 only, zero blue, responsive",
+      "scope": "Brand audit \u2014 #0AC985 only, zero blue, responsive",
       "files": "web/scripts/brand-audit.mjs, web/e2e/brand.spec.ts, web/docs/BRAND_AUDIT.md",
-      "tests": "brand-audit.mjs: 0 blues after merge, e2e/brand.spec.ts 12 pass (6 routes × 2 viewports)",
+      "tests": "brand-audit.mjs: 0 blues after merge, e2e/brand.spec.ts 12 pass (6 routes \u00d7 2 viewports)",
       "result": "pass",
       "start": "2026-10-10T17:12:42Z",
       "end": "2026-10-10T17:17:50Z",
