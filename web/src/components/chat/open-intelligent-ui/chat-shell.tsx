@@ -20,6 +20,7 @@ import { getSelectedPluginIds, usePluginSelection } from "@/lib/plugin-selection
 import { pluginName as catalogueName, PLUGIN_CATALOGUE } from "@/lib/plugin-catalogue";
 import { PluginFavicon, preloadPluginFavicons } from "@/components/ui/plugin-favicon";
 import { fmtScore } from "@/lib/format";
+import { AttachmentBar, SentChips, attachmentsStore, useAttachments } from "./attachments";
 
 export type CoCtx = { slug: string; name: string; sector: string; status: string; stage: string | null; sentiment: { score: number; label: string; delta?: number | null; updated_at?: string | null; basis?: string | null }; news_count?: number; latest_news: { title: string; url: string | null; published_at: string | null; source?: string | null }[]; estimated_ticket_size_usd: number | null; estimated_ownership_pct: number | null; b_capital_role: string };
 type Source = StoredSource;
@@ -79,6 +80,9 @@ export const useStreamState = () => useSyncExternalStore(subscribe, getStream, (
 /** Narrow subscription: re-render only when the selected value changes (previous assistant messages must not re-render per token). */
 export function useStreamSelector<T>(sel: (s: StreamState) => T): T { return useSyncExternalStore(subscribe, () => sel(streamState), () => sel(IDLE)); }
 export const getStreamPhase = () => streamState.phase;
+let currentThreadId: string | null = null; // selected thread (kept by <Persistence>) so uploads before the first turn still find the thread's session
+/** The OnDemand session of the given thread (in-memory ref first, then localStorage), or the live stream's session — used by attachment uploads. */
+export const getCurrentSessionId = (ref: Record<string, string>, tid: string | null): string | null => (tid && (ref[tid] ?? sessionFor(tid))) || streamState.sessionId || null;
 const PHASE_LABEL: Record<string, string> = {
   connecting: "Connecting to OnDemand…", "creating-session": "Creating OnDemand session…", querying: `Submitting to ${MODEL_LABEL}…`,
   streaming: `${MODEL_LABEL} is planning…`, planning: `${MODEL_LABEL} is planning…`, researching: `Searching with ${PLUGIN_NAME}…`, answering: "Writing the answer…", "awaiting-input": "Waiting for your input…", done: "Done",
@@ -388,6 +392,19 @@ const AssistantMessage: AssistantMessageComponent = memo(function AssistantMessa
  * While the turn is live this component also renders the plan stepper, step-summary checkpoints, the thinking trace, the live markdown with inline
  * citation chips and the reserved Sources rail — OpenUI routes the streaming text through the timeline `steps` until the run finishes.
  */
+/** User bubble = OpenUI's default markup + the attachment chips sent with that message (attachmentsStore.sentFor(message.id)). */
+const UserBubble: React.ComponentType<{ message: UserMessage }> = memo(function UserBubble({ message }) {
+  useAttachments(); // re-render when the sent map changes (markSent / hydrate)
+  const sent = attachmentsStore.sentFor(message.id) ?? [];
+  const c = message.content as unknown;
+  const text = typeof c === "string" ? c.replace(/<context>[\s\S]*?<\/context>/g, "").replace(/<\/?content>/g, "").trim() : Array.isArray(c) ? (c as { type?: string; text?: string }[]).filter((p) => p?.type === "text" && typeof p.text === "string").map((p) => p.text).join("\n") : "";
+  return (
+    <div className="openui-agent-thread-message-user oiu-user-msg" data-testid="user-message" data-attachments={sent.length}>
+      <div className="openui-agent-thread-message-user__content">{text}</div>
+      {sent.length > 0 && <SentChips items={sent} />}
+    </div>
+  );
+});
 type PluginInput = { plugin?: string; pluginId?: string; query?: string; stepId?: string; endpointLabel?: string; reasoningMode?: string };
 const PluginTimeline: ToolCallTimelineComponent = ({ activities, steps, isLast, awaitingResponse }) => {
   const isRunning = useThread((s) => s.isRunning);
@@ -558,6 +575,7 @@ function Persistence({ sessionRef }: { sessionRef: React.MutableRefObject<Record
   const messages = useThread((s) => s.messages); const selected = useThreadList((s) => s.selectedThreadId);
   useEffect(() => { if (selected && messages.length) saveMessages(selected, messages); }, [messages, selected]);
   useEffect(() => { if (selected && sessionRef.current[selected]) rememberSession(selected, sessionRef.current[selected]); }, [selected, messages, sessionRef]);
+  useEffect(() => { currentThreadId = selected ?? null; if (selected) attachmentsStore.hydrate(selected); }, [selected]);
   return null;
 }
 
@@ -616,6 +634,8 @@ export function ChatShell({ companies, fetchedAt }: { companies: CoCtx[]; fetche
   // Pre-warm: create the OnDemand session for the first turn on page load (TTFT work) — the first /api/chat call reuses it via context.sessionId.
   const prewarm = useRef<{ sessionId: string; pluginIds: string[] } | null>(null);
   const [prewarmState, setPrewarmState] = useState<"idle" | "ready" | "failed">("idle");
+  // Attachments upload with the current thread's OnDemand session so the media is bound to the same session the query runs in.
+  useEffect(() => { attachmentsStore.setSessionGetter(() => ({ sessionId: getCurrentSessionId(sessionRef.current, currentThreadId) ?? prewarm.current?.sessionId ?? null, externalUserId: s.externalUserId, apikey: s.apikey || undefined })); }, [s.externalUserId, s.apikey]);
   useEffect(() => {
     const ids = getSelectedPluginIds(); const ctl = new AbortController();
     fetch(`${CHAT_API_URL}/prewarm?externalUserId=${encodeURIComponent(s.externalUserId)}&pluginIds=${encodeURIComponent(ids.join(","))}`, { signal: ctl.signal, headers: s.apikey ? { "x-ondemand-key": s.apikey } : {} })
@@ -630,18 +650,21 @@ export function ChatShell({ companies, fetchedAt }: { companies: CoCtx[]; fetche
     headers: s.apikey ? { "x-ondemand-key": s.apikey } : {},
     fetch: async (input, init) => {
       // inject the per-thread OnDemand session, the EXPLICIT plugin selection and the portfolio context; capture the session id from the response
-      const body = JSON.parse(String(init?.body ?? "{}")) as { threadId?: string; context?: Record<string, unknown> };
+      const body = JSON.parse(String(init?.body ?? "{}")) as { threadId?: string; messages?: { id?: string; role?: string }[]; context?: Record<string, unknown> };
       const tid = body.threadId ?? ""; let sid = sessionRef.current[tid] ?? (tid ? sessionFor(tid) : null);
+      const attachments = attachmentsStore.ready().map((a) => ({ mediaId: a.mediaId!, name: a.name, kind: a.kind, extractedChars: a.extractedChars ?? 0 }));
+      const lastUserId = [...(body.messages ?? [])].reverse().find((m) => m?.role === "user")?.id ?? "";
       const pluginIds = getSelectedPluginIds();
       // First turn of a new thread: consume the pre-warmed session when its plugin set matches the explicit selection (same ids, same order).
       if (!sid && prewarm.current && prewarm.current.pluginIds.join(",") === pluginIds.join(",")) { sid = prewarm.current.sessionId; prewarm.current = null; if (tid) { sessionRef.current[tid] = sid; rememberSession(tid, sid); } }
-      body.context = { ...(body.context ?? {}), sessionId: sid ?? undefined, externalUserId: s.externalUserId, pluginIds, systemContext, sessionContext: ctxCompanies.map((c) => ({ key: `company:${c.slug}`, value: JSON.stringify({ name: c.name, sector: c.sector, status: c.status, sentiment: c.sentiment, news: c.latest_news.slice(0, 3) }).slice(0, 1800) })) };
+      body.context = { ...(body.context ?? {}), sessionId: sid ?? undefined, externalUserId: s.externalUserId, pluginIds, systemContext, ...(attachments.length ? { attachments } : {}), sessionContext: ctxCompanies.map((c) => ({ key: `company:${c.slug}`, value: JSON.stringify({ name: c.name, sector: c.sector, status: c.status, sentiment: c.sentiment, news: c.latest_news.slice(0, 3) }).slice(0, 1800) })) };
       setStream({ ...IDLE, phase: "connecting", detail: PHASE_LABEL.connecting, startedAt: Date.now(), sessionId: sid ?? null, lastThreadId: tid, pluginIds, version: streamState.version }, true);
       let res: Response;
       try { res = await fetch(input, { ...init, body: JSON.stringify(body) }); } catch (e) { setStream({ phase: "idle", detail: "", error: { code: "fetch_failed", message: (e as Error).message } }, true); throw e; }
       const remember = (got: string) => { if (tid) { sessionRef.current[tid] = got; rememberSession(tid, got); } };
       const got = res.headers.get("x-ondemand-session"); if (got) remember(got);
       if (!res.ok || !res.body) { setStream({ phase: "idle", detail: "", error: { code: `http_${res.status}`, message: `Chat endpoint answered HTTP ${res.status}` } }, true); return res; }
+      if (attachments.length) attachmentsStore.markSent(lastUserId || `${tid}:${Date.now()}`, tid); // sent → chips move under the user bubble, bar clears
       void teeStream(res.clone(), tid, remember);
       return res;
     },
@@ -649,10 +672,11 @@ export function ChatShell({ companies, fetchedAt }: { companies: CoCtx[]; fetche
   const pluginLabel = selectedPlugins.map((id) => catalogueName(id)).join(", ");
   return (
     <div className="chat-shell" data-testid="chat-shell" data-prewarm={prewarmState}>
-      <AgentInterface llm={llm} storage={storage} agentName="Portfolio analyst" theme={{ mode: "light", lightTheme: responseTheme }} starters={starters} starterVariant="short" components={{ AssistantMessage, ToolCallTimeline: PluginTimeline }} scrollVariant="always">
+      <AgentInterface llm={llm} storage={storage} agentName="Portfolio analyst" theme={{ mode: "light", lightTheme: responseTheme }} starters={starters} starterVariant="short" components={{ AssistantMessage, UserMessage: UserBubble, ToolCallTimeline: PluginTimeline }} scrollVariant="always">
         <AgentInterface.Welcome><ChatWelcome companies={ctxCompanies} /></AgentInterface.Welcome>
         <Persistence sessionRef={sessionRef} />
         <PendingRow />
+        <AttachmentBar />
         <ScrollAnchor />
         <ErrorBanner />
         <Suspense fallback={null}><AutoAsk /></Suspense>

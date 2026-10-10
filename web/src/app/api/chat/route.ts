@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { getText as attachmentText } from "@/lib/media/store";
 import {
   ONDEMAND_BASE_URL, serverApiKey, ENDPOINT_ID, ENDPOINT_LABEL, REASONING_MODE, RESPONSE_MODE, PLUGIN_ID, PLUGIN_NAME, PLUGIN_IDS,
   DEFAULT_EXTERNAL_USER_ID, UPSTREAM_USER_AGENT, CHAT_FIRST_BYTE_MS, CHAT_TOTAL_MS, CHAT_HEARTBEAT_MS, CHAT_SESSION_HEADER_WAIT_MS, PAYLOAD_AUDIT, PLUGIN_ERROR_RE,
@@ -45,7 +46,9 @@ export const maxDuration = 300;
  * Audit: PAYLOAD_AUDIT (default on) appends {request (key redacted), first 10 raw upstream events, timings} per turn to <cwd>/proof/chat-payload-audit.json.
  */
 type InMsg = { role?: string; content?: unknown };
-type Ctx = { sessionId?: string; externalUserId?: string; systemContext?: string; sessionContext?: { key: string; value: string }[]; pluginIds?: string[] };
+type Ctx = { sessionId?: string; externalUserId?: string; systemContext?: string; sessionContext?: { key: string; value: string }[]; pluginIds?: string[]; attachments?: { mediaId: string; name?: string; kind?: string; extractedChars?: number }[] };
+/** Per-attachment grounding cap (chars of extracted text prepended to the query). */
+const ATTACHMENT_TEXT_CHARS = 12_000;
 const enc = new TextEncoder();
 const frame = (obj: unknown) => enc.encode(`data: ${JSON.stringify(obj)}\n\n`);
 const DONE = enc.encode("data: [DONE]\n\n");
@@ -88,6 +91,13 @@ export async function POST(req: NextRequest) {
   const lastUser = [...msgs].reverse().find((m) => m?.role === "user");
   const query = textOf(lastUser?.content).trim();
   if (!query) return jsonError("no user message", 400);
+  // Attachments (chat uploads): the browser sends context.attachments[{mediaId,…}] after POST /api/media; the extracted text lives server-side
+  // (globalThis media store, 2 h TTL) and is prepended to the query — the documented Submit Query body has no media field (docs/ONDEMAND_CONTRACTS.md).
+  const attachmentsIn = Array.isArray(ctx.attachments) ? ctx.attachments.filter((a) => a && typeof a.mediaId === "string" && /^[A-Za-z0-9_-]{6,64}$/.test(a.mediaId)).slice(0, 6) : [];
+  const attachments = attachmentsIn.map((a) => { const t = attachmentText(a.mediaId); return { mediaId: a.mediaId, name: String(t?.name ?? a.name ?? "attachment").slice(0, 180), kind: String(t?.kind ?? a.kind ?? "document"), extractedChars: t?.text.length ?? 0, known: !!t, text: t?.text.slice(0, ATTACHMENT_TEXT_CHARS) ?? "" }; });
+  const attachmentPrefix = attachments.length
+    ? `${attachments.map((a) => `Attached document "${a.name}" (OnDemand media ${a.mediaId}):\n${a.text || "(no text could be extracted from this file; it was uploaded to this OnDemand session as media " + a.mediaId + ")"}`).join("\n\n---\n\n")}\n\nAnswer from the attached document when it is relevant and cite it as ${attachments.map((a) => `[attachment: ${a.name}]`).join(" / ")}.\n\n`
+    : "";
   // Explicit plugin list: pinned Perplexity + exactly the ids the user toggled on (catalogue allow-list). Nothing is ever substituted.
   const { pluginIds, dropped: droppedPluginIds } = resolvePluginIds(ctx.pluginIds ?? PLUGIN_IDS);
   const externalUserId = typeof ctx.externalUserId === "string" && ctx.externalUserId ? ctx.externalUserId.slice(0, 64) : DEFAULT_EXTERNAL_USER_ID;
@@ -328,12 +338,13 @@ export async function POST(req: NextRequest) {
         audit.sessionId = sessionId; audit.sessionCreated = sessionCreated;
         // 2. query — stream
         status("querying", { sessionId });
-        custom(CE.request, { method: "POST", proxy: "/api/chat", upstream: `POST ${ONDEMAND_BASE_URL.replace(/^https?:\/\//, "")}/chat/v1/sessions/{id}/query`, body: { endpointId: ENDPOINT_ID, endpointLabel: ENDPOINT_LABEL, reasoningMode: REASONING_MODE, responseMode: RESPONSE_MODE, pluginIds, queryChars: query.length, systemContextChars: isFirstTurn && ctx.systemContext ? String(ctx.systemContext).length : 0 }, sessionId, sessionCreated });
-        const prefix = isFirstTurn && ctx.systemContext ? `${String(ctx.systemContext).slice(0, 6000)}\n\nQuestion: ` : "";
+        custom(CE.request, { method: "POST", proxy: "/api/chat", upstream: `POST ${ONDEMAND_BASE_URL.replace(/^https?:\/\//, "")}/chat/v1/sessions/{id}/query`, body: { endpointId: ENDPOINT_ID, endpointLabel: ENDPOINT_LABEL, reasoningMode: REASONING_MODE, responseMode: RESPONSE_MODE, pluginIds, queryChars: query.length, systemContextChars: isFirstTurn && ctx.systemContext ? String(ctx.systemContext).length : 0, attachments: attachments.map((a) => ({ mediaId: a.mediaId, name: a.name, chars: a.text.length })) }, sessionId, sessionCreated });
+        if (attachments.length) custom(CE.attachments, { items: attachments.map((a) => ({ mediaId: a.mediaId, name: a.name, kind: a.kind, extractedChars: a.extractedChars, grounded: a.known })) });
+        const prefix = `${attachmentPrefix}${isFirstTurn && ctx.systemContext ? `${String(ctx.systemContext).slice(0, 6000)}\n\nQuestion: ` : attachmentPrefix ? "Question: " : ""}`;
         const qBody = { query: prefix + query, endpointId: ENDPOINT_ID, responseMode: RESPONSE_MODE, pluginIds, reasoningMode: REASONING_MODE };
         const qUrl = `${ONDEMAND_BASE_URL}/chat/v1/sessions/${sessionId}/query`;
         const qHeaders = { ...H, accept: "text/event-stream" };
-        audit.query = { url: qUrl, headers: redactHeaders(qHeaders), body: { ...qBody, query: `${prefix ? `<systemContext ${prefix.length} chars> ` : ""}${query.slice(0, 300)}` } };
+        audit.query = { url: qUrl, headers: redactHeaders(qHeaders), body: { ...qBody, query: `${prefix ? `<systemContext+attachments ${prefix.length} chars> ` : ""}${query.slice(0, 300)}` }, attachments: attachments.map((a) => ({ mediaId: a.mediaId, name: a.name, chars: a.text.length })) };
         const up = await fetch(qUrl, { method: "POST", headers: qHeaders, body: JSON.stringify(qBody), signal: ac.signal, cache: "no-store" });
         audit.queryResponse = { status: up.status, contentType: up.headers.get("content-type"), elapsedMs: Date.now() - t0 };
         if (!up.ok || !up.body) {
