@@ -96,7 +96,7 @@ async function imgStates(page: Page, selector: string, cap = 120): Promise<ImgSt
   }, cap);
 }
 
-const isFallbackTile = (s: ImgState) => s.src.includes("/fallbacks/");
+const isFallbackTile = (s: ImgState) => s.src.includes("/assets/news-card") || s.src.includes("/fallbacks/");
 
 test.describe("Image pipeline (proxy + fallback chain)", () => {
   test("News Pulse: first-page thumbnails decode (naturalWidth>0)", async ({ page }, testInfo) => {
@@ -194,13 +194,38 @@ test.describe("Image pipeline (proxy + fallback chain)", () => {
     expect(mixed.status(), "http → 400 mixed content").toBe(400);
     expect((await mixed.text()).toLowerCase()).toContain("mixed content");
 
-    const html = await request.get(`/api/img?u=${encodeURIComponent("https://example.com/")}`, { timeout: 30_000 });
-    expect(html.status(), "html page → 204").toBe(204);
+    // Non-image upstream: with fb=0 (what the client fallback chains request) the proxy answers 204 so onError advances.
+    const html = await request.get(`/api/img?u=${encodeURIComponent("https://example.com/")}&fb=0`, { timeout: 30_000 });
+    expect(html.status(), "html page + fb=0 → 204").toBe(204);
     expect((await html.body()).byteLength, "204 has no body").toBe(0);
 
     const missing = await request.get("/api/img");
     expect(missing.status(), "missing u → 400").toBe(400);
     const loopback = await request.get(`/api/img?u=${encodeURIComponent("https://127.0.0.1/x.png")}`);
     expect(loopback.status(), "loopback host → 400").toBe(400);
+  });
+
+  test("/api/img fallback: unreachable upstream → news-card asset (200 image/webp or 302 to /assets/news-card-*.webp)", async ({ request }) => {
+    const res = await request.get(`/api/img?u=${encodeURIComponent("https://invalid.invalid/x.png")}`, { timeout: 30_000, maxRedirects: 0 });
+    expect([200, 302], "fallback status").toContain(res.status());
+    if (res.status() === 200) {
+      expect(res.headers()["content-type"] ?? "", "fallback content-type image/webp").toBe("image/webp");
+      expect(res.headers()["cache-control"] ?? "", "fallback long cache").toContain("max-age=86400");
+      expect(res.headers()["x-img-source"], "x-img-source fallback").toBe("fallback");
+      const body = await res.body();
+      expect(body.byteLength, "non-empty webp body").toBeGreaterThan(100);
+      expect(body.subarray(0, 4).toString("ascii"), "RIFF header").toBe("RIFF");
+      expect(body.subarray(8, 12).toString("ascii"), "WEBP fourcc").toBe("WEBP");
+    } else {
+      expect(res.headers()["location"] ?? "", "302 → news-card asset").toMatch(/\/assets\/news-card-(256|512)\.webp$/);
+    }
+    // ≥320 px renders get the 512 variant.
+    const big = await request.get(`/api/img?u=${encodeURIComponent("https://invalid.invalid/x.png")}&w=400`, { timeout: 30_000, maxRedirects: 0 });
+    expect([200, 302]).toContain(big.status());
+    expect(big.headers()["x-img-fallback"] ?? big.headers()["location"] ?? "", "w=400 → 512 asset").toContain("news-card-512.webp");
+    // The asset the proxy points at is itself served.
+    const asset = await request.get("/assets/news-card-256.webp");
+    expect(asset.status()).toBe(200);
+    expect(asset.headers()["content-type"] ?? "").toBe("image/webp");
   });
 });
