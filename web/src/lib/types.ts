@@ -36,3 +36,26 @@ export type SignalsResponse = {
   portfolio: { n: number; mean: number; p25: number; p75: number; computed_at: string | null; method: string };
   sectors: Record<string, { n: number; mean: number; p25: number; p75: number }>;
 };
+/** PitchBook panel — GET {backend}/pitchbook/{slug}. The only PitchBook plugin on the account is plugin-1777018662 "Pitchbook Investor Finder"
+ *  (investor search only); every section but `investors` is expected to carry availability NOT_AVAILABLE_FROM_PLUGIN. Fields are tolerated missing. */
+export type PbSourced<T = unknown> = { value: T; source_url: string | null; published_date: string | null; fetched_at: string | null; plugin_id: string | null };
+export type PbInvestor = {
+  name: string; website?: string | null; location?: string | null; year_founded?: number | null; status?: string | null; type?: string | null;
+  aum_musd?: number | null; dry_powder_musd?: number | null; team_size?: number | null; investment_range?: string | null;
+  deal_types?: string[]; industries?: string[]; verticals?: string[]; geographies?: string[]; preferences?: string[];
+};
+export type PbAvailability = "AVAILABLE" | "NOT_AVAILABLE_FROM_PLUGIN" | "PENDING" | (string & {});
+export type PbSectionKey = "overview" | "last_round" | "valuation_history" | "investors" | "financials" | "comparables";
+export type PitchbookRecord = {
+  slug: string; overview?: PbSourced | null; last_round?: PbSourced | null; valuation_history?: PbSourced[];
+  investors?: { matched?: PbInvestor[]; brief?: string | null; total_reported?: number | null } | null;
+  financials?: PbSourced | null; comparables?: PbSourced[];
+  provenance?: { plugin_id?: string | null; session_id?: string | null; fetched_at?: string | null; source?: string | null } | null;
+  availability?: Partial<Record<PbSectionKey, PbAvailability>> | null;
+};
+export type PitchbookResponse = {
+  company: string; name?: string; data: PitchbookRecord | null; enriched?: boolean; next_run_utc?: string | null;
+  /** Not expected from the Investor Finder plugin (no credentials needed) — rendered honestly if the backend ever sends it. */
+  state?: "NEEDS_CREDENTIALS" | string; fields?: string[];
+};
+export type PitchbookRunResponse = { execution_id?: string; status?: string; fallback?: "local"; job_id?: string; code?: string; message?: string };

@@ -1,6 +1,6 @@
 import "server-only";
 import snapshot from "@/data/snapshot.json";
-import type { Company, CompanySentiment, NewsItem, PortfolioSentiment, IngestRun, SignalScore, SignalBands, SignalsResponse } from "./types";
+import type { Company, CompanySentiment, NewsItem, PortfolioSentiment, IngestRun, SignalScore, SignalBands, SignalsResponse, PitchbookResponse } from "./types";
 
 /** Server-side data access. Live backend first (ISR 120 s); the committed snapshot (fetched 2026-10-09T13:14Z) is the offline fallback so
  *  every page still renders with 136 records if the ephemeral sandbox backend is down. The `source` is surfaced in the UI. */
@@ -63,4 +63,9 @@ export async function getAllNews(): Promise<Sourced<(NewsItem & { company_slug: 
     }
   }
   return { data: [...items.values()].sort((a, b) => (b.published_at ?? "").localeCompare(a.published_at ?? "")), source: cs.source, fetched_at: cs.fetched_at };
+}
+/** PitchBook record for one company (backend `/pitchbook/{slug}`, built by the PitchBook team). No snapshot exists: the offline fallback is
+ *  `null` (source 'snapshot'), which the panel renders as its honest "offline" state — never a blank card, never a credentials message. */
+export async function getPitchbook(slug: string): Promise<Sourced<PitchbookResponse | null>> {
+  return get<PitchbookResponse | null>(`/pitchbook/${encodeURIComponent(slug)}`, () => null);
 }
