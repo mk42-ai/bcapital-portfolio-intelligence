@@ -25,7 +25,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
         <footer className="border-t border-border px-4 py-4 text-xs text-muted sm:px-6 lg:px-8">
           <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-2">
             <span>© 2026 B Capital · We empower entrepreneurs to think bigger. Scale faster. Grow global.</span>
-            <span>Data: portfolio backend + OnDemand Flow Builder (06:00 UTC daily) · <Link href="/settings" className="underline underline-offset-2">Help & settings</Link></span>
+            <span>Data: portfolio backend + OnDemand Flow Builder (06:00 UTC daily) · <Link href="/settings" className="underline underline-offset-2">Help & settings</Link> · <Link href="/docs/interactive-ui" className="underline underline-offset-2" data-testid="footer-docs-link">Why the chat is interactive</Link></span>
           </div>
         </footer>
       </div>
