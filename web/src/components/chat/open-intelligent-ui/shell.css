@@ -1,29 +1,14 @@
 /* Vendored from thesysdev/open-intelligent-ui (src/app/shell.css @ 3b39c06) — presentation only. */
 /* Colors that have a theme token use it (see src/lib/response-theme.ts); the remaining greys are shell-only. */
-.chat-shell {
-  width: 100%;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  overflow: hidden;
-}
+.chat-shell { width: 100%; height: 100%; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+/* The OpenUI thread sidebar ("Portfolio analyst" column) is deleted: threads live in the global nav rail (Agent 21). */
+.chat-shell .openui-agent-sidebar-container, .chat-shell .openui-agent-sidebar-container__overlay, .chat-shell .openui-agent-mobile-header { display: none !important; }
 
 /* Bounded thread: the container owns the height, the scroll area scrolls internally and the composer stays pinned — the page never grows with the thread. */
-.chat-shell .openui-agent-container {
-  width: 100%;
-  height: calc(100dvh - 190px);
-  min-height: 480px;
-}
-@media (max-width: 640px) {
-  .chat-shell .openui-agent-container {
-    height: calc(100dvh - 150px);
-    min-height: 0;
-  }
-}
-/* Empty thread: the compact welcome block sizes the shell — no blank canvas below it. */
-.chat-shell .openui-agent-container:has(.oiu-welcome) {
-  height: auto;
-  min-height: 0;
-}
+.chat-shell .openui-agent-container { width: 100%; height: 100%; min-height: 0; flex: 1 1 auto; }
+/* Messages centred, ~800 px max (Agent 22). */
+.chat-shell .openui-agent-thread-messages { max-width: 800px; }
+.chat-shell .openui-agent-composer-slot { max-width: 832px; margin: 0 auto; width: 100%; }
 /* Mobile empty state: the welcome composer sits inside the container (no extra composer slot), so the block stays ~one screen tall. */
 @media (max-width: 640px) {
   .chat-shell .openui-agent-container:has(.oiu-welcome) .openui-agent-welcome-screen { padding-bottom: 4px; gap: 10px; }
