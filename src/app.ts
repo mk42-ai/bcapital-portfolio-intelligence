@@ -7,6 +7,7 @@ import { getDb, persist, nowIso, schema } from "./db/client.js";
 import { config } from "./config.js";
 import { buildOpenApi } from "./openapi.js";
 import { labelFor, clampScore, normaliseEvidence, rollup } from "./sentiment.js";
+import { refreshCompanies, lastRefreshRun, getRefreshState } from "./refresh.js";
 
 type Vars = { requestId: string };
 const inner = new Hono<{ Variables: Vars }>();
@@ -110,7 +111,7 @@ inner.get("/companies/:slug/news", async (c) => {
   const conds = [eq(schema.newsItems.companySlug, row.slug)];
   if (kind) conds.push(eq(schema.newsItems.kind, kind));
   const items = db.select().from(schema.newsItems).where(and(...conds)).orderBy(desc(schema.newsItems.publishedAt), desc(schema.newsItems.createdAt)).limit(limit).all();
-  return c.json({ company: row.slug, name: row.name, data: items.map((n) => ({ id: n.id, title: n.title, url: n.url, source: n.source, kind: n.kind, published_at: n.publishedAt, summary: n.summary, image_url: n.imageUrl, sentiment_score: n.sentimentScore, ingest_run_id: n.ingestRunId })), timestamp: nowIso() });
+  return c.json({ company: row.slug, name: row.name, data: items.map((n) => ({ id: n.id, title: n.title, url: n.url, source: n.source, kind: n.kind, published_at: n.publishedAt, summary: n.summary, image_url: n.imageUrl, sentiment_score: n.sentimentScore, ingest_run_id: n.ingestRunId, fetched_at: n.createdAt })), timestamp: nowIso() });
 });
 
 inner.get("/companies/:slug/sentiment", async (c) => {
@@ -162,15 +163,21 @@ function timingSafeEqual(a: string, b: string): boolean {
   return ab.length === bb.length && crypto.timingSafeEqual(ab, bb);
 }
 
-inner.post("/ingest", async (c) => {
-  // Primary: X-Ingest-Secret header. The Flow Builder webhook-delivery schema (live docs: url, method, basicAuth — no custom
-  // headers) cannot set it, so the same secret is also accepted as HTTP Basic password (username 'ingest') or ?secret=.
+/** Shared write-auth for /ingest and /refresh. Primary: X-Ingest-Secret header. The Flow Builder webhook-delivery schema
+ *  (live docs: url, method, basicAuth — no custom headers) cannot set it, so the same secret is also accepted as HTTP Basic
+ *  password (username 'ingest') or ?secret=. Returns an error Response or null when authorised. */
+function requireIngestSecret(c: any): Response | null {
   let secret = c.req.header("x-ingest-secret") ?? "";
   const auth = c.req.header("authorization") ?? "";
   if (!secret && /^basic /i.test(auth)) { try { const [, pw] = Buffer.from(auth.slice(6), "base64").toString().split(/:(.*)/s); secret = pw ?? ""; } catch { /* ignore */ } }
   if (!secret) secret = c.req.query("secret") ?? "";
   if (!config.ingestSecret) return err(c, 503, "resource_unavailable", "INGEST_SECRET is not configured on the server");
   if (!secret || !timingSafeEqual(secret, config.ingestSecret)) return err(c, 401, "unauthenticated", "Missing or invalid X-Ingest-Secret");
+  return null;
+}
+
+inner.post("/ingest", async (c) => {
+  const denied = requireIngestSecret(c); if (denied) return denied;
   const raw = await c.req.text();
   let body: any = extractJson(raw);
   // Flow Builder webhook delivery wraps the result; unwrap common envelopes.
@@ -247,6 +254,29 @@ inner.get("/ingest/runs", async (c) => {
   const { db } = await getDb();
   const rows = db.select().from(schema.ingestRuns).orderBy(desc(schema.ingestRuns.receivedAt)).limit(50).all();
   return c.json({ data: rows.map(({ rawSample, ...r }) => r), timestamp: nowIso() });
+});
+
+// ---------- refresh (live Perplexity news via OnDemand Chat API) ----------
+inner.post("/refresh", async (c) => {
+  const denied = requireIngestSecret(c); if (denied) return denied;
+  if (!process.env.ONDEMAND_API_KEY) return err(c, 503, "resource_unavailable", "ONDEMAND_API_KEY is not configured on the server");
+  let body: any = {};
+  try { const raw = await c.req.text(); body = raw.trim() ? JSON.parse(raw) : {}; } catch { return err(c, 400, "invalid_request", "Body must be JSON: {slugs?: string[], limit?: number}"); }
+  const slugs = Array.isArray(body?.slugs) ? body.slugs.map((s: unknown) => String(s)) : undefined;
+  const limit = Number.isFinite(Number(body?.limit)) && body.limit !== null && body.limit !== undefined && body.limit !== "" ? Number(body.limit) : undefined;
+  const concurrency = Number.isFinite(Number(body?.concurrency)) && body.concurrency ? Number(body.concurrency) : undefined;
+  const r = await refreshCompanies({ slugs, limit, concurrency });
+  return c.json({ ingest_run_id: r.ingest_run_id, status: r.status, companies_touched: r.companies_touched, news_upserted: r.news_upserted, with_images: r.with_images, dated: r.dated, errors: r.errors, companies: r.companies, items: r.items, started_at: r.started_at, finished_at: r.finished_at });
+});
+
+inner.get("/refresh/status", async (c) => {
+  const state = getRefreshState();
+  const last = await lastRefreshRun();
+  const { db } = await getDb();
+  const withImages = db.get<{ n: number }>(sql`select count(*) as n from news_items where image_url is not null and image_url != ''`)!.n;
+  const total = db.get<{ n: number }>(sql`select count(*) as n from news_items`)!.n;
+  const refreshMinutes = Number(process.env.REFRESH_CRON_MINUTES ?? 60);
+  return c.json({ running: state.running, last_run: last ? { id: last.id, status: last.status, companies_touched: last.companiesTouched, news_upserted: last.newsUpserted, errors: last.errors, started_at: last.receivedAt, finished_at: last.finishedAt, model: last.model } : null, last_result: state.last ? { ingest_run_id: state.last.ingest_run_id, with_images: state.last.with_images, dated: state.last.dated, companies: state.last.companies.map(({ session_id, ...x }) => x) } : null, scheduler: { enabled: refreshMinutes > 0, interval_minutes: refreshMinutes > 0 ? refreshMinutes : null, batch_limit: 40, next_scheduled_at: state.next_scheduled_at }, news_items_total: total, news_items_with_images: withImages, timestamp: nowIso() });
 });
 
 inner.notFound((c) => err(c, 404, "not_found", `Route not found: ${c.req.method} ${new URL(c.req.url).pathname}`));

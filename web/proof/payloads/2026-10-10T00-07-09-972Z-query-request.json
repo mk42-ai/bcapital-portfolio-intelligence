@@ -1,0 +1,42 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.on-demand.io/chat/v1/sessions/<sid>/query",
+    "headers": {
+      "apikey": "<redacted>",
+      "content-type": "application/json",
+      "accept": "text/event-stream"
+    },
+    "body": {
+      "query": "What did Fervo Energy announce recently?",
+      "endpointId": "predefined-claude-fable-5.1",
+      "responseMode": "stream",
+      "pluginIds": [
+        "plugin-1722260873"
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "access-control-expose-headers": "X-Trace-ID",
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cache-control": "no-cache, no-transform",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "a48162235883ff56-IAD",
+      "connection": "keep-alive",
+      "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+      "content-type": "text/event-stream; charset=utf-8",
+      "date": "Sat, 10 Oct 2026 00:07:11 GMT",
+      "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "referrer-policy": "no-referrer",
+      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=rI4q0QiT7nk7N1TsMMOHpFJbtURYFwWQs9Sw09cEG5S%2BzFaq2GYMPg03etZs2Nf1mPpWF0szKk3H%2FLS%2BVlOZBzr%2BB23z%2FlDPDbF0Teh%2BxOVOsT2Sk8%2F%2BObua%2BAtlkS%2Fiu1fg\"}]}",
+      "server": "cloudflare",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "transfer-encoding": "chunked",
+      "x-content-type-options": "nosniff",
+      "x-trace-id": "82b0272690af159da191d827b68d14c8"
+    }
+  },
+  "elapsedMs": 1233
+}

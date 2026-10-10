@@ -1,0 +1,28 @@
+{
+ "probed_at": "2026-10-10T00:05:18Z",
+ "companies": 137,
+ "with_logo_url": 136,
+ "latest_news_items": 15,
+ "news_with_image": 0,
+ "news_published_oct_2026": 2,
+ "newest_published_at": "2026-10-01",
+ "last_ingest_run": "seed-2026-10-09T12:24:23Z",
+ "health": {
+  "status": "ok",
+  "db_record_count": 136,
+  "db_record_count_total": 137,
+  "last_ingest": {
+   "id": "seed-2026-10-09T12:24:23Z",
+   "source": "seed",
+   "received_at": "2026-10-09T12:24:23Z",
+   "status": "ok"
+  },
+  "model": "predefined-claude-fable-5.1",
+  "deferred_plugins": [
+   "plugin-1777018662"
+  ],
+  "earliest_test_utc": "2026-10-09T12:37:25Z",
+  "version": "1.0.0",
+  "timestamp": "2026-10-10T00:05:18Z"
+ }
+}

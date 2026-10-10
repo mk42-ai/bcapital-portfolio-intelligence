@@ -1,0 +1,1335 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/node_modules/@playwright/test/cli.js",
+      "test",
+      "--reporter=list,json"
+    ],
+    "configFile": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/playwright.config.ts",
+    "rootDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": [
+          "/mobile\\.spec\\.ts/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/mobile\\.spec\\.ts/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "desktop",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "snapshotDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": {},
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 240000,
+        "use": {
+          "baseURL": "https://sb-3umbne3uc2g2.vercel.run",
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox",
+              "--disable-dev-shm-usage"
+            ]
+          },
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "desktop"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "mobile",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "snapshotDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 240000,
+        "use": {
+          "baseURL": "https://sb-3umbne3uc2g2.vercel.run",
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox",
+              "--disable-dev-shm-usage"
+            ]
+          },
+          "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Mobile Safari/537.36",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "screen": {
+            "width": 412,
+            "height": 915
+          },
+          "deviceScaleFactor": 2.625,
+          "isMobile": true,
+          "hasTouch": true,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "mobile"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "a11y.spec.ts",
+      "file": "a11y.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Accessibility (axe, WCAG 2.0/2.1 A+AA)",
+          "file": "a11y.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "onboarding: no serious/critical violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [
+                    {
+                      "type": "axe",
+                      "description": "[]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2451,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:22:49.761Z",
+                      "annotations": [
+                        {
+                          "type": "axe",
+                          "description": "[]"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-416dc7e1f8af6bf77f07",
+              "file": "a11y.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "overview: no serious/critical violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [
+                    {
+                      "type": "axe",
+                      "description": "[]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 4922,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:22:49.763Z",
+                      "annotations": [
+                        {
+                          "type": "axe",
+                          "description": "[]"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-e0832c92454dc056c764",
+              "file": "a11y.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "company: no serious/critical violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [
+                    {
+                      "type": "axe",
+                      "description": "[]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2397,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:22:52.688Z",
+                      "annotations": [
+                        {
+                          "type": "axe",
+                          "description": "[]"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-fbcc085acb112fecc40f",
+              "file": "a11y.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "news: no serious/critical violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [
+                    {
+                      "type": "axe",
+                      "description": "[]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3420,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:22:55.102Z",
+                      "annotations": [
+                        {
+                          "type": "axe",
+                          "description": "[]"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-3759162ac35a4fe6581a",
+              "file": "a11y.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "settings: no serious/critical violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [
+                    {
+                      "type": "axe",
+                      "description": "[]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2278,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:22:55.157Z",
+                      "annotations": [
+                        {
+                          "type": "axe",
+                          "description": "[]"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-1997be9fc068e3d4b155",
+              "file": "a11y.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "chat: no serious/critical violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [
+                    {
+                      "type": "axe",
+                      "description": "[]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2813,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:22:57.450Z",
+                      "annotations": [
+                        {
+                          "type": "axe",
+                          "description": "[]"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-7752aa95745f276454ea",
+              "file": "a11y.spec.ts",
+              "line": 6,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "chat.spec.ts",
+      "file": "chat.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Analyst chat — streaming",
+          "file": "chat.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "answer streams incrementally via SSE with plugin activity and sources",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [
+                    {
+                      "type": "answer-excerpt",
+                      "description": "Fervo Energy (Nasdaq: FRVO) has had a run of major announcements over the past several months, with the most recent centered on its flagship Cape Station geothermal project in Beaver County, Utah.\n\nCommercial Operation at Cape Station (October 1, 2026)\n\nFervo declared commercial operation at Cape St"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 85022,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[chat-stream] firstActivityAt=846ms growth=61 events: +65427ms:252 +65688ms:344 +65950ms:436 +66211ms:512 +66472ms:567 +66734ms:610 +66994ms:707 +67254ms:829 +67515ms:897 +67776ms:975 +68039ms:1084 +68302ms:1168 +68562ms:1209 +68826ms:1290 +69088ms:1344 +69354ms:1435 +69616ms:1478 +69877ms:1527 +70137ms:1602 +70396ms:1677 +70657ms:1745 +70922ms:1844 +71183ms:1900 +71443ms:1981 +71704ms:2065 +71970ms:2149 +72237ms:2243 +72499ms:2320 +72762ms:2384 +73024ms:2454 +73289ms:2543 +73551ms:2615 +73811ms:2679 +74070ms:2737 +74330ms:2805 +74590ms:2873 +74854ms:2936 +75119ms:3010 +75378ms:3065 +75638ms:3135 +75899ms:3215 +76160ms:3282 +76426ms:3339 +76687ms:3433 +76949ms:3496 +77211ms:3581 +77470ms:3623 +77745ms:3688 +78011ms:3746 +78271ms:3802 +78541ms:3939 +78807ms:3995 +79068ms:4059 +79329ms:4128 +79589ms:4201 +79851ms:4266 +80111ms:4328 +80370ms:4382 +80633ms:4424 +80897ms:4440 +83001ms:5341\n"
+                        },
+                        {
+                          "text": "[chat-stream] net: headersAt=799ms chunks=259 first=800ms last=82717ms done=true err=null\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:22:58.550Z",
+                      "annotations": [
+                        {
+                          "type": "answer-excerpt",
+                          "description": "Fervo Energy (Nasdaq: FRVO) has had a run of major announcements over the past several months, with the most recent centered on its flagship Cape Station geothermal project in Beaver County, Utah.\n\nCommercial Operation at Cape Station (October 1, 2026)\n\nFervo declared commercial operation at Cape St"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "stream-growth-log.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJxdWVzdGlvbiI6ICJXaGF0IGRpZCBGZXJ2byBFbmVyZ3kgYW5ub3VuY2UgcmVjZW50bHk/IiwKICAiZmlyc3RBY3Rpdml0eUF0IjogODQ2LAogICJncm93dGgiOiBbCiAgICB7CiAgICAgICJ0IjogNjU0MjcsCiAgICAgICJsZW4iOiAyNTIsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDY1Njg4LAogICAgICAibGVuIjogMzQ0LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA2NTk1MCwKICAgICAgImxlbiI6IDQzNiwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjYyMTEsCiAgICAgICJsZW4iOiA1MTIsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDY2NDcyLAogICAgICAibGVuIjogNTY3LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA2NjczNCwKICAgICAgImxlbiI6IDYxMCwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjY5OTQsCiAgICAgICJsZW4iOiA3MDcsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDY3MjU0LAogICAgICAibGVuIjogODI5LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA2NzUxNSwKICAgICAgImxlbiI6IDg5NywKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjc3NzYsCiAgICAgICJsZW4iOiA5NzUsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDY4MDM5LAogICAgICAibGVuIjogMTA4NCwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjgzMDIsCiAgICAgICJsZW4iOiAxMTY4LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA2ODU2MiwKICAgICAgImxlbiI6IDEyMDksCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDY4ODI2LAogICAgICAibGVuIjogMTI5MCwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjkwODgsCiAgICAgICJsZW4iOiAxMzQ0LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA2OTM1NCwKICAgICAgImxlbiI6IDE0MzUsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDY5NjE2LAogICAgICAibGVuIjogMTQ3OCwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjk4NzcsCiAgICAgICJsZW4iOiAxNTI3LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA3MDEzNywKICAgICAgImxlbiI6IDE2MDIsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDcwMzk2LAogICAgICAibGVuIjogMTY3NywKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzA2NTcsCiAgICAgICJsZW4iOiAxNzQ1LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA3MDkyMiwKICAgICAgImxlbiI6IDE4NDQsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDcxMTgzLAogICAgICAibGVuIjogMTkwMCwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzE0NDMsCiAgICAgICJsZW4iOiAxOTgxLAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA3MTcwNCwKICAgICAgImxlbiI6IDIwNjUsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDcxOTcwLAogICAgICAibGVuIjogMjE0OSwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzIyMzcsCiAgICAgICJsZW4iOiAyMjQzLAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA3MjQ5OSwKICAgICAgImxlbiI6IDIzMjAsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDcyNzYyLAogICAgICAibGVuIjogMjM4NCwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzMwMjQsCiAgICAgICJsZW4iOiAyNDU0LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA3MzI4OSwKICAgICAgImxlbiI6IDI1NDMsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDczNTUxLAogICAgICAibGVuIjogMjYxNSwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzM4MTEsCiAgICAgICJsZW4iOiAyNjc5LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NDA3MCwKICAgICAgImxlbiI6IDI3MzcsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDc0MzMwLAogICAgICAibGVuIjogMjgwNSwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzQ1OTAsCiAgICAgICJsZW4iOiAyODczLAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NDg1NCwKICAgICAgImxlbiI6IDI5MzYsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDc1MTE5LAogICAgICAibGVuIjogMzAxMCwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzUzNzgsCiAgICAgICJsZW4iOiAzMDY1LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NTYzOCwKICAgICAgImxlbiI6IDMxMzUsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDc1ODk5LAogICAgICAibGVuIjogMzIxNSwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzYxNjAsCiAgICAgICJsZW4iOiAzMjgyLAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NjQyNiwKICAgICAgImxlbiI6IDMzMzksCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDc2Njg3LAogICAgICAibGVuIjogMzQzMywKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzY5NDksCiAgICAgICJsZW4iOiAzNDk2LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NzIxMSwKICAgICAgImxlbiI6IDM1ODEsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDc3NDcwLAogICAgICAibGVuIjogMzYyMywKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzc3NDUsCiAgICAgICJsZW4iOiAzNjg4LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA3ODAxMSwKICAgICAgImxlbiI6IDM3NDYsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDc4MjcxLAogICAgICAibGVuIjogMzgwMiwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzg1NDEsCiAgICAgICJsZW4iOiAzOTM5LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA3ODgwNywKICAgICAgImxlbiI6IDM5OTUsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDc5MDY4LAogICAgICAibGVuIjogNDA1OSwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzkzMjksCiAgICAgICJsZW4iOiA0MTI4LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA3OTU4OSwKICAgICAgImxlbiI6IDQyMDEsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDc5ODUxLAogICAgICAibGVuIjogNDI2NiwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogODAxMTEsCiAgICAgICJsZW4iOiA0MzI4LAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA4MDM3MCwKICAgICAgImxlbiI6IDQzODIsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9LAogICAgewogICAgICAidCI6IDgwNjMzLAogICAgICAibGVuIjogNDQyNCwKICAgICAgInBsdWdpbiI6IHRydWUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogODA4OTcsCiAgICAgICJsZW4iOiA0NDQwLAogICAgICAicGx1Z2luIjogdHJ1ZQogICAgfSwKICAgIHsKICAgICAgInQiOiA4MzAwMSwKICAgICAgImxlbiI6IDUzNDEsCiAgICAgICJwbHVnaW4iOiB0cnVlCiAgICB9CiAgXQp9"
+                        },
+                        {
+                          "name": "stream-chunks.json",
+                          "contentType": "application/json",
+                          "body": "ewogICJtZXRhIjogewogICAgImZldGNoQXQiOiAxNTg3LjUsCiAgICAiaGVhZGVyc0F0IjogNzk4Ljc5OTk5OTk1MjMxNjMsCiAgICAiZG9uZSI6IHRydWUsCiAgICAiZXJyb3IiOiBudWxsCiAgfSwKICAiY2h1bmtzIjogWwogICAgewogICAgICAidCI6IDc5OS45MDAwMDAwOTUzNjc0LAogICAgICAiYnl0ZXMiOiA4MTkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogMTA3OTkuMjk5OTk5OTUyMzE2LAogICAgICAiYnl0ZXMiOiAxMzcKICAgIH0sCiAgICB7CiAgICAgICJ0IjogMjA4MDEuMjk5OTk5OTUyMzE2LAogICAgICAiYnl0ZXMiOiAxMzcKICAgIH0sCiAgICB7CiAgICAgICJ0IjogMzA3OTkuNDAwMDAwMDk1MzY3LAogICAgICAiYnl0ZXMiOiAxMzcKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNDA3OTkuNzk5OTk5OTUyMzE2LAogICAgICAiYnl0ZXMiOiAxMzYKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNTA4MDEuMDk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEzNgogICAgfSwKICAgIHsKICAgICAgInQiOiA2MDc5OS41OTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTM3CiAgICB9LAogICAgewogICAgICAidCI6IDY1MjQ1LjIwMDAwMDA0NzY4NCwKICAgICAgImJ5dGVzIjogMzMyCiAgICB9LAogICAgewogICAgICAidCI6IDY1MjYwLjU5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMjg0CiAgICB9LAogICAgewogICAgICAidCI6IDY1MjY5LjQwMDAwMDA5NTM3LAogICAgICAiYnl0ZXMiOiAyMzQKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjUzMTguMjk5OTk5OTUyMzE2LAogICAgICAiYnl0ZXMiOiAxMjQKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjUzODEuMDk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEwNwogICAgfSwKICAgIHsKICAgICAgInQiOiA2NTQ0My41OTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTIyCiAgICB9LAogICAgewogICAgICAidCI6IDY1NTAzLjU5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMjAKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjU1NjYuMDk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEyMwogICAgfSwKICAgIHsKICAgICAgInQiOiA2NTYyOC43OTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTMxCiAgICB9LAogICAgewogICAgICAidCI6IDY1NjkzLjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMjEKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjU3NTQuNzAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDExOQogICAgfSwKICAgIHsKICAgICAgInQiOiA2NTgxNy4yOTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTI2CiAgICB9LAogICAgewogICAgICAidCI6IDY1ODgwLjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMzAKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjU5NDEuOTAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDEyNwogICAgfSwKICAgIHsKICAgICAgInQiOiA2NjAwNS43OTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTE4CiAgICB9LAogICAgewogICAgICAidCI6IDY2MDY2LjUsCiAgICAgICJieXRlcyI6IDEwNAogICAgfSwKICAgIHsKICAgICAgInQiOiA2NjEyOC40MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTMzCiAgICB9LAogICAgewogICAgICAidCI6IDY2MTkyLjU5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMDYKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjYyNTUuMjAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDEyMwogICAgfSwKICAgIHsKICAgICAgInQiOiA2NjMxNi43OTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTMzCiAgICB9LAogICAgewogICAgICAidCI6IDY2NDQxLjU5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMDkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjY1MTUuMjAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDEyMQogICAgfSwKICAgIHsKICAgICAgInQiOiA2NjU3Mi41OTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTE2CiAgICB9LAogICAgewogICAgICAidCI6IDY2NjMyLAogICAgICAiYnl0ZXMiOiAxMDQKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjY3MzIuNzAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDExOAogICAgfSwKICAgIHsKICAgICAgInQiOiA2Njc1OC4wOTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTMyCiAgICB9LAogICAgewogICAgICAidCI6IDY2ODI2LjA5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMzkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjY4ODksCiAgICAgICJieXRlcyI6IDExOQogICAgfSwKICAgIHsKICAgICAgInQiOiA2Njk3MC4yMDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTI3CiAgICB9LAogICAgewogICAgICAidCI6IDY3MDE3LjUsCiAgICAgICJieXRlcyI6IDEyNwogICAgfSwKICAgIHsKICAgICAgInQiOiA2NzA5NCwKICAgICAgImJ5dGVzIjogMTM0CiAgICB9LAogICAgewogICAgICAidCI6IDY3MTMxLAogICAgICAiYnl0ZXMiOiAxMjkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjcxOTIuMjAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDExMgogICAgfSwKICAgIHsKICAgICAgInQiOiA2NzI1Ni43MDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTIxCiAgICB9LAogICAgewogICAgICAidCI6IDY3MzE2LjkwMDAwMDA5NTM3LAogICAgICAiYnl0ZXMiOiAxMDkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjczNzksCiAgICAgICJieXRlcyI6IDEzMwogICAgfSwKICAgIHsKICAgICAgInQiOiA2NzQ0MiwKICAgICAgImJ5dGVzIjogMTEyCiAgICB9LAogICAgewogICAgICAidCI6IDY3NTA1LjcwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMTgKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjc1NjkuOTAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDEyMQogICAgfSwKICAgIHsKICAgICAgInQiOiA2NzYyOS4wOTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTIzCiAgICB9LAogICAgewogICAgICAidCI6IDY3NjkyLAogICAgICAiYnl0ZXMiOiAxMjQKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjc3NTMuNzk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDExNwogICAgfSwKICAgIHsKICAgICAgInQiOiA2NzgxOC4yMDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTE4CiAgICB9LAogICAgewogICAgICAidCI6IDY3ODgxLjQwMDAwMDA5NTM3LAogICAgICAiYnl0ZXMiOiAxMjEKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjc5NDMuNDAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDEzMAogICAgfSwKICAgIHsKICAgICAgInQiOiA2ODAwNS4yOTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTMxCiAgICB9LAogICAgewogICAgICAidCI6IDY4MDY5LjQwMDAwMDA5NTM3LAogICAgICAiYnl0ZXMiOiAxMjYKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjgxMzAuNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEyMAogICAgfSwKICAgIHsKICAgICAgInQiOiA2ODE5Mi43MDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTIzCiAgICB9LAogICAgewogICAgICAidCI6IDY4MjU1LjQwMDAwMDA5NTM3LAogICAgICAiYnl0ZXMiOiAxMjIKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjgzMTcuMDk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDExMgogICAgfSwKICAgIHsKICAgICAgInQiOiA2ODM4MC43OTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTIxCiAgICB9LAogICAgewogICAgICAidCI6IDY4NDQ1LjU5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMDYKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjg1MDMuNzk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDEwNgogICAgfSwKICAgIHsKICAgICAgInQiOiA2ODU2Ny4yMDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTI3CiAgICB9LAogICAgewogICAgICAidCI6IDY4NjMzLjA5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMjQKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjg2OTIuNzk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDExMwogICAgfSwKICAgIHsKICAgICAgInQiOiA2ODc1Ni41OTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTI1CiAgICB9LAogICAgewogICAgICAidCI6IDY4ODE5LjA5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMjAKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjg4NzkuMjk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDExMgogICAgfSwKICAgIHsKICAgICAgInQiOiA2ODk0MywKICAgICAgImJ5dGVzIjogMTEzCiAgICB9LAogICAgewogICAgICAidCI6IDY5MDA4LjA5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMTYKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjkwNjguNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEyMQogICAgfSwKICAgIHsKICAgICAgInQiOiA2OTEzMi41OTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTA4CiAgICB9LAogICAgewogICAgICAidCI6IDY5MTk2LjU5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMzMKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjkyNTguMjAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDEyMwogICAgfSwKICAgIHsKICAgICAgInQiOiA2OTMxNy40MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTEyCiAgICB9LAogICAgewogICAgICAidCI6IDY5Mzc4Ljc5OTk5OTk1MjMyLAogICAgICAiYnl0ZXMiOiAxMDkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjk0NDIuNDAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDEwOQogICAgfSwKICAgIHsKICAgICAgInQiOiA2OTUwNC41LAogICAgICAiYnl0ZXMiOiAxMjIKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjk1NjYuNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEwNwogICAgfSwKICAgIHsKICAgICAgInQiOiA2OTYyOS43OTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTE5CiAgICB9LAogICAgewogICAgICAidCI6IDY5Njk0LjQwMDAwMDA5NTM3LAogICAgICAiYnl0ZXMiOiAxMDUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjk3NTQuNzAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDExMgogICAgfSwKICAgIHsKICAgICAgInQiOiA2OTgxNy40MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTE5CiAgICB9LAogICAgewogICAgICAidCI6IDY5ODgwLAogICAgICAiYnl0ZXMiOiAxMjEKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNjk5NDUuMjk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDExNwogICAgfSwKICAgIHsKICAgICAgInQiOiA3MDAwMy43MDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTIyCiAgICB9LAogICAgewogICAgICAidCI6IDcwMDY3LjI5OTk5OTk1MjMyLAogICAgICAiYnl0ZXMiOiAxMTkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzAxMzAuMDk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDExOAogICAgfSwKICAgIHsKICAgICAgInQiOiA3MDE5NC4yOTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTE5CiAgICB9LAogICAgewogICAgICAidCI6IDcwMjU1LAogICAgICAiYnl0ZXMiOiAxMTkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzAzMTguNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEyMwogICAgfSwKICAgIHsKICAgICAgInQiOiA3MDM3OS45MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTI2CiAgICB9LAogICAgewogICAgICAidCI6IDcwNDQ1Ljc5OTk5OTk1MjMyLAogICAgICAiYnl0ZXMiOiAxMTUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzA1MDYsCiAgICAgICJieXRlcyI6IDExNAogICAgfSwKICAgIHsKICAgICAgInQiOiA3MDU2OC41OTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTE3CiAgICB9LAogICAgewogICAgICAidCI6IDcwNjI5LjI5OTk5OTk1MjMyLAogICAgICAiYnl0ZXMiOiAxMjAKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzA2OTMuNzAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDEyMgogICAgfSwKICAgIHsKICAgICAgInQiOiA3MDc1NS40MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTI4CiAgICB9LAogICAgewogICAgICAidCI6IDcwNzk5Ljc5OTk5OTk1MjMyLAogICAgICAiYnl0ZXMiOiAxMzQKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzA4MTcuOTAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDEyNgogICAgfSwKICAgIHsKICAgICAgInQiOiA3MDg4MCwKICAgICAgImJ5dGVzIjogMTEzCiAgICB9LAogICAgewogICAgICAidCI6IDcwOTQxLjU5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMTAKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzEwMDUuMjAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDExOQogICAgfSwKICAgIHsKICAgICAgInQiOiA3MTA2OC40MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTA0CiAgICB9LAogICAgewogICAgICAidCI6IDcxMTMxLjQwMDAwMDA5NTM3LAogICAgICAiYnl0ZXMiOiAxMjcKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzExOTMuNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEzNAogICAgfSwKICAgIHsKICAgICAgInQiOiA3MTI1NS4yMDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTE4CiAgICB9LAogICAgewogICAgICAidCI6IDcxMzE4LjcwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMzAKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzEzODAuMjAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDEwNQogICAgfSwKICAgIHsKICAgICAgInQiOiA3MTQ0My45MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTI2CiAgICB9LAogICAgewogICAgICAidCI6IDcxNTA0LjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMTYKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzE1NjkuNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEyMwogICAgfSwKICAgIHsKICAgICAgInQiOiA3MTYzMS4yOTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTI1CiAgICB9LAogICAgewogICAgICAidCI6IDcxNzAxLAogICAgICAiYnl0ZXMiOiAxMzQKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzE3NTQuNzAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDExOAogICAgfSwKICAgIHsKICAgICAgInQiOiA3MTgxOC4wOTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTEyCiAgICB9LAogICAgewogICAgICAidCI6IDcxODgwLjcwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMjcKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzE5NDMuNzAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDExNAogICAgfSwKICAgIHsKICAgICAgInQiOiA3MjAwNC4wOTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTI5CiAgICB9LAogICAgewogICAgICAidCI6IDcyMDY5LjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMjEKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzIxMjkuMjAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDEyMgogICAgfSwKICAgIHsKICAgICAgInQiOiA3MjE5Mi41LAogICAgICAiYnl0ZXMiOiAxMTcKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzIyNTUuNDAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDEyNQogICAgfSwKICAgIHsKICAgICAgInQiOiA3MjMyMC4yMDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTA4CiAgICB9LAogICAgewogICAgICAidCI6IDcyMzkxLjUsCiAgICAgICJieXRlcyI6IDEyMwogICAgfSwKICAgIHsKICAgICAgInQiOiA3MjQ0NS43MDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTI4CiAgICB9LAogICAgewogICAgICAidCI6IDcyNTA0LjUsCiAgICAgICJieXRlcyI6IDExOAogICAgfSwKICAgIHsKICAgICAgInQiOiA3MjU2OC45MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTE5CiAgICB9LAogICAgewogICAgICAidCI6IDcyNjM1LjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMTUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzI2OTYuNzk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDEyMAogICAgfSwKICAgIHsKICAgICAgInQiOiA3Mjc1NS41LAogICAgICAiYnl0ZXMiOiAxMjEKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzI4MjEsCiAgICAgICJieXRlcyI6IDEyMwogICAgfSwKICAgIHsKICAgICAgInQiOiA3Mjg4MC43MDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTE2CiAgICB9LAogICAgewogICAgICAidCI6IDcyOTQyLjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMTcKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzMwMDQuNSwKICAgICAgImJ5dGVzIjogMTIxCiAgICB9LAogICAgewogICAgICAidCI6IDczMDY3Ljc5OTk5OTk1MjMyLAogICAgICAiYnl0ZXMiOiAxMTcKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzMxMzEuMDk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEyMAogICAgfSwKICAgIHsKICAgICAgInQiOiA3MzE5My4wOTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTE4CiAgICB9LAogICAgewogICAgICAidCI6IDczMjU1LjA5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMTgKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzMzMTguNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEyMwogICAgfSwKICAgIHsKICAgICAgInQiOiA3MzM4MSwKICAgICAgImJ5dGVzIjogMTE1CiAgICB9LAogICAgewogICAgICAidCI6IDczNDQzLAogICAgICAiYnl0ZXMiOiAxMjEKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzM1MDQuNSwKICAgICAgImJ5dGVzIjogMTE3CiAgICB9LAogICAgewogICAgICAidCI6IDczNTY3LjU5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMTkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzM2MzQsCiAgICAgICJieXRlcyI6IDExOAogICAgfSwKICAgIHsKICAgICAgInQiOiA3MzY5My41OTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTE4CiAgICB9LAogICAgewogICAgICAidCI6IDczNzU5LjA5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMjAKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzM4MTgsCiAgICAgICJieXRlcyI6IDEyMQogICAgfSwKICAgIHsKICAgICAgInQiOiA3Mzg4MC43MDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTA2CiAgICB9LAogICAgewogICAgICAidCI6IDczOTQ3LjcwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMjIKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzQwMDQuMjk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDExNgogICAgfSwKICAgIHsKICAgICAgInQiOiA3NDA2OS45MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTE5CiAgICB9LAogICAgewogICAgICAidCI6IDc0MTMyLjU5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMTcKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzQxOTMuNzk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDEyNAogICAgfSwKICAgIHsKICAgICAgInQiOiA3NDI2MC41LAogICAgICAiYnl0ZXMiOiAxMTkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzQzMTkuNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDExOQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NDM4MC41LAogICAgICAiYnl0ZXMiOiAxMjEKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzQ0NDIuNSwKICAgICAgImJ5dGVzIjogMTIzCiAgICB9LAogICAgewogICAgICAidCI6IDc0NTA0LjA5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMTIKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzQ1NzEuNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDExMwogICAgfSwKICAgIHsKICAgICAgInQiOiA3NDYzMC45MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTE3CiAgICB9LAogICAgewogICAgICAidCI6IDc0NjkzLjcwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMDgKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzQ3NjMuNDAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDExNQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NDgyMC4yOTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTE4CiAgICB9LAogICAgewogICAgICAidCI6IDc0ODgxLjUsCiAgICAgICJieXRlcyI6IDExOAogICAgfSwKICAgIHsKICAgICAgInQiOiA3NDk0NC41LAogICAgICAiYnl0ZXMiOiAxMjIKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzUwMDUuOTAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDExOAogICAgfSwKICAgIHsKICAgICAgInQiOiA3NTA2OC41LAogICAgICAiYnl0ZXMiOiAxMjAKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzUxMzAuOTAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDEyMAogICAgfSwKICAgIHsKICAgICAgInQiOiA3NTE5NS43MDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTMyCiAgICB9LAogICAgewogICAgICAidCI6IDc1MjU2LjI5OTk5OTk1MjMyLAogICAgICAiYnl0ZXMiOiAxMDQKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzUzMTguNDAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDExMAogICAgfSwKICAgIHsKICAgICAgInQiOiA3NTM4MS43OTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTI5CiAgICB9LAogICAgewogICAgICAidCI6IDc1NDQyLjUsCiAgICAgICJieXRlcyI6IDExMQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NTUwNS41OTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTE0CiAgICB9LAogICAgewogICAgICAidCI6IDc1NTY5LjI5OTk5OTk1MjMyLAogICAgICAiYnl0ZXMiOiAxMjAKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzU2MzEuMjAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDExOQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NTY5My45MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTE3CiAgICB9LAogICAgewogICAgICAidCI6IDc1NzU2LjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMjkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzU4MTcuNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEyMQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NTg4MiwKICAgICAgImJ5dGVzIjogMTIxCiAgICB9LAogICAgewogICAgICAidCI6IDc1OTQ2LjA5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMTYKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzYwMDgsCiAgICAgICJieXRlcyI6IDExMQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NjA3MC4wOTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTIzCiAgICB9LAogICAgewogICAgICAidCI6IDc2MTMxLjU5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMTUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzYxOTQuNDAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDExMQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NjI2NCwKICAgICAgImJ5dGVzIjogMTE3CiAgICB9LAogICAgewogICAgICAidCI6IDc2MzE4LjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMTMKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzYzODAuMjk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDExMQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NjQ0NC41OTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTI3CiAgICB9LAogICAgewogICAgICAidCI6IDc2NTA0Ljc5OTk5OTk1MjMyLAogICAgICAiYnl0ZXMiOiAxMjgKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzY1NjguNzk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDEzNAogICAgfSwKICAgIHsKICAgICAgInQiOiA3NjYzMS43MDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTE2CiAgICB9LAogICAgewogICAgICAidCI6IDc2NjkyLjcwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMTkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzY3NTYuMDk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDExNgogICAgfSwKICAgIHsKICAgICAgInQiOiA3NjgxOC41LAogICAgICAiYnl0ZXMiOiAxMjUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzY4ODAuNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDExMgogICAgfSwKICAgIHsKICAgICAgInQiOiA3Njk0NC43OTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTI0CiAgICB9LAogICAgewogICAgICAidCI6IDc3MDA2LAogICAgICAiYnl0ZXMiOiAxMjQKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzcwNjguNDAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDExOQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NzEzMi4yMDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTI2CiAgICB9LAogICAgewogICAgICAidCI6IDc3MTkzLjA5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMDcKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzcyNTUuNDAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDExNQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NzMyMC45MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTIyCiAgICB9LAogICAgewogICAgICAidCI6IDc3MzgwLjU5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMDIKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzc0NDQuMjk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDEyNAogICAgfSwKICAgIHsKICAgICAgInQiOiA3NzUwNS41LAogICAgICAiYnl0ZXMiOiAxMTIKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzc1NjkuNzk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDEwNwogICAgfSwKICAgIHsKICAgICAgInQiOiA3NzYzMSwKICAgICAgImJ5dGVzIjogMTA1CiAgICB9LAogICAgewogICAgICAidCI6IDc3Njk0LjI5OTk5OTk1MjMyLAogICAgICAiYnl0ZXMiOiAxMjcKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzc3NTUuOTAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDExOQogICAgfSwKICAgIHsKICAgICAgInQiOiA3NzgxOC40MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTE0CiAgICB9LAogICAgewogICAgICAidCI6IDc3ODgyLjUsCiAgICAgICJieXRlcyI6IDExNgogICAgfSwKICAgIHsKICAgICAgInQiOiA3Nzk1MS43MDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTE3CiAgICB9LAogICAgewogICAgICAidCI6IDc4MDA2LjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMjgKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzgwNzAuNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEyMgogICAgfSwKICAgIHsKICAgICAgInQiOiA3ODEzMS40MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTA0CiAgICB9LAogICAgewogICAgICAidCI6IDc4MTk0LjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMDkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzgyNTYuNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEyNAogICAgfSwKICAgIHsKICAgICAgInQiOiA3ODMxNy41LAogICAgICAiYnl0ZXMiOiAxMzQKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzgzODEuOTAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDEyMQogICAgfSwKICAgIHsKICAgICAgInQiOiA3ODQ0My43MDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTM0CiAgICB9LAogICAgewogICAgICAidCI6IDc4NTA4LjI5OTk5OTk1MjMyLAogICAgICAiYnl0ZXMiOiAxMjkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzg1NjguMjAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDExMwogICAgfSwKICAgIHsKICAgICAgInQiOiA3ODYzMS4wOTk5OTk5MDQ2MywKICAgICAgImJ5dGVzIjogMTIzCiAgICB9LAogICAgewogICAgICAidCI6IDc4Njk0LjQwMDAwMDA5NTM3LAogICAgICAiYnl0ZXMiOiAxMTMKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzg3NTcuNzk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDExMwogICAgfSwKICAgIHsKICAgICAgInQiOiA3ODgyMC43OTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTEzCiAgICB9LAogICAgewogICAgICAidCI6IDc4ODg0LjcwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMTkKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzg5NDUuNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDEyMwogICAgfSwKICAgIHsKICAgICAgInQiOiA3OTAxNS4yOTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTEzCiAgICB9LAogICAgewogICAgICAidCI6IDc5MDcwLjA5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMjQKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzkxMzEuNzAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDExNwogICAgfSwKICAgIHsKICAgICAgInQiOiA3OTE5NiwKICAgICAgImJ5dGVzIjogMTIzCiAgICB9LAogICAgewogICAgICAidCI6IDc5MjU2Ljc5OTk5OTk1MjMyLAogICAgICAiYnl0ZXMiOiAxMTQKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzkzMTguMjAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDExNAogICAgfSwKICAgIHsKICAgICAgInQiOiA3OTM4MC43OTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTIwCiAgICB9LAogICAgewogICAgICAidCI6IDc5NDQzLjcwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMjMKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzk1MDUuMjk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDEyMAogICAgfSwKICAgIHsKICAgICAgInQiOiA3OTU2OS4yMDAwMDAwNDc2OCwKICAgICAgImJ5dGVzIjogMTI0CiAgICB9LAogICAgewogICAgICAidCI6IDc5NjMwLjA5OTk5OTkwNDYzLAogICAgICAiYnl0ZXMiOiAxMTAKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzk2OTYuNTk5OTk5OTA0NjMsCiAgICAgICJieXRlcyI6IDExMAogICAgfSwKICAgIHsKICAgICAgInQiOiA3OTc1NS43OTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTI1CiAgICB9LAogICAgewogICAgICAidCI6IDc5ODQxLjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMTIKICAgIH0sCiAgICB7CiAgICAgICJ0IjogNzk4ODIuNSwKICAgICAgImJ5dGVzIjogMTMxCiAgICB9LAogICAgewogICAgICAidCI6IDc5OTQ4LjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMTAKICAgIH0sCiAgICB7CiAgICAgICJ0IjogODAwMDguMjAwMDAwMDQ3NjgsCiAgICAgICJieXRlcyI6IDEwNAogICAgfSwKICAgIHsKICAgICAgInQiOiA4MDA2OC40MDAwMDAwOTUzNywKICAgICAgImJ5dGVzIjogMTE4CiAgICB9LAogICAgewogICAgICAidCI6IDgwMTMxLjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMjYKICAgIH0sCiAgICB7CiAgICAgICJ0IjogODAxOTkuMjk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDEyMgogICAgfSwKICAgIHsKICAgICAgInQiOiA4MDI1OC41LAogICAgICAiYnl0ZXMiOiAxMDYKICAgIH0sCiAgICB7CiAgICAgICJ0IjogODAzMjIuNDAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDEwNAogICAgfSwKICAgIHsKICAgICAgInQiOiA4MDM4NC41LAogICAgICAiYnl0ZXMiOiAxMDcKICAgIH0sCiAgICB7CiAgICAgICJ0IjogODA0NDkuMjk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDEwNQogICAgfSwKICAgIHsKICAgICAgInQiOiA4MDUwOSwKICAgICAgImJ5dGVzIjogMTE0CiAgICB9LAogICAgewogICAgICAidCI6IDgwNTY5LjIwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMjAKICAgIH0sCiAgICB7CiAgICAgICJ0IjogODA2MzQuMjk5OTk5OTUyMzIsCiAgICAgICJieXRlcyI6IDExNgogICAgfSwKICAgIHsKICAgICAgInQiOiA4MDY4Ni4yOTk5OTk5NTIzMiwKICAgICAgImJ5dGVzIjogMTAyCiAgICB9LAogICAgewogICAgICAidCI6IDgwODAwLjcwMDAwMDA0NzY4LAogICAgICAiYnl0ZXMiOiAxMzUKICAgIH0sCiAgICB7CiAgICAgICJ0IjogODI3MTcuNDAwMDAwMDk1MzcsCiAgICAgICJieXRlcyI6IDQyNTgKICAgIH0KICBdLAogICJmcmFtZVR5cGVzIjogWwogICAgIlJVTl9TVEFSVEVEIiwKICAgICJDVVNUT00iLAogICAgIlRPT0xfQ0FMTF9TVEFSVCIsCiAgICAiVE9PTF9DQUxMX0FSR1MiLAogICAgIlRPT0xfQ0FMTF9FTkQiLAogICAgIkNVU1RPTSIsCiAgICAiQ1VTVE9NIiwKICAgICJDVVNUT00iLAogICAgIkNVU1RPTSIsCiAgICAiQ1VTVE9NIiwKICAgICJDVVNUT00iLAogICAgIlRFWFRfTUVTU0FHRV9TVEFSVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiQ1VTVE9NIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJURVhUX01FU1NBR0VfQ09OVEVOVCIsCiAgICAiVEVYVF9NRVNTQUdFX0NPTlRFTlQiLAogICAgIlRFWFRfTUVTU0FHRV9DT05URU5UIiwKICAgICJDVVNUT00iLAogICAgIlRPT0xfQ0FMTF9SRVNVTFQiLAogICAgIlRFWFRfTUVTU0FHRV9FTkQiLAogICAgIkNVU1RPTSIsCiAgICAiUlVOX0ZJTklTSEVEIgogIF0KfQ=="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6dac514d5d837ca37b9e-d9767317ad9f38386509",
+              "file": "chat.spec.ts",
+              "line": 11,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "company.spec.ts",
+      "file": "company.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Company page",
+          "file": "company.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "renders Fervo Energy with breadcrumb back to overview",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2007,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:00.281Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7a6d1e85e48433261853-e27e49dfafc18576e5e7",
+              "file": "company.spec.ts",
+              "line": 4,
+              "column": 7
+            },
+            {
+              "title": "unknown slug shows a not-found state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1042,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:02.303Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7a6d1e85e48433261853-d85e748ce4d39e28720b",
+              "file": "company.spec.ts",
+              "line": 14,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "images.spec.ts",
+      "file": "images.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Images render (naturalWidth > 0)",
+          "file": "images.spec.ts",
+          "line": 23,
+          "column": 6,
+          "specs": [
+            {
+              "title": "overview: B Capital logo and (when present) company logos",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [
+                    {
+                      "type": "soft-skip",
+                      "description": "no img[data-testid=\"company-logo\"] on /overview (deployed build predates SA2 logos) — company-logo assertion skipped"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1690,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[images] SOFT-SKIP: no img[data-testid=\"company-logo\"] on /overview in this build\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:03.365Z",
+                      "annotations": [
+                        {
+                          "type": "soft-skip",
+                          "description": "no img[data-testid=\"company-logo\"] on /overview (deployed build predates SA2 logos) — company-logo assertion skipped"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "382f756c414be060b8fd-82b9945aa253891ac68a",
+              "file": "images.spec.ts",
+              "line": 24,
+              "column": 7
+            },
+            {
+              "title": "company page: Fervo logo and news-card images",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [
+                    {
+                      "type": "soft-skip",
+                      "description": "no <article> images on /company/fervo-energy (placeholders=0) — no image_url in data, news-image assertion skipped"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1529,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[images] SOFT-SKIP: no news-card <img> (placeholders=0)\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:05.070Z",
+                      "annotations": [
+                        {
+                          "type": "soft-skip",
+                          "description": "no <article> images on /company/fervo-energy (placeholders=0) — no image_url in data, news-image assertion skipped"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "382f756c414be060b8fd-b7dd9eed84b756b586a9",
+              "file": "images.spec.ts",
+              "line": 47,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "news.spec.ts",
+      "file": "news.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "News Pulse",
+          "file": "news.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "renders cards with external source links",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1342,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:06.614Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8524236c51b2d678c46e-c449abad14db914723a4",
+              "file": "news.spec.ts",
+              "line": 4,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "onboarding.spec.ts",
+      "file": "onboarding.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Onboarding",
+          "file": "onboarding.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "renders the company picker with a live count",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 656,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:07.978Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fe534f0825407f213faa-4ad4414f66e7b8675134",
+              "file": "onboarding.spec.ts",
+              "line": 4,
+              "column": 7
+            },
+            {
+              "title": "backend status badge shows live data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 684,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:08.651Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fe534f0825407f213faa-c417f3a4ed38fb799844",
+              "file": "onboarding.spec.ts",
+              "line": 14,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "overview.spec.ts",
+      "file": "overview.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Portfolio Overview",
+          "file": "overview.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "live badge, treemap tiles and paginated table render",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1589,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:09.356Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6e2f4ad74dab265ac116-fcea5ee39002228302d7",
+              "file": "overview.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "search filters rows and show-all expands to 136",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1963,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:10.961Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6e2f4ad74dab265ac116-81465989e6b5b6998ef1",
+              "file": "overview.spec.ts",
+              "line": 18,
+              "column": 7
+            },
+            {
+              "title": "sort by score toggles row order",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1796,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:12.939Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6e2f4ad74dab265ac116-d095565b24306f676b07",
+              "file": "overview.spec.ts",
+              "line": 31,
+              "column": 7
+            },
+            {
+              "title": "row links navigate to the company page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1944,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:14.752Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6e2f4ad74dab265ac116-c61e8c62f633c9c71a2b",
+              "file": "overview.spec.ts",
+              "line": 41,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "settings.spec.ts",
+      "file": "settings.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Settings",
+          "file": "settings.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "shows user, backend and model inputs; PitchBook is deferred",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1284,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:16.713Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d877ffdf71ec720167ae-4ce3d3273ed44af4f6a9",
+              "file": "settings.spec.ts",
+              "line": 4,
+              "column": 7
+            },
+            {
+              "title": "editing the user id persists to localStorage",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1377,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:18.009Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d877ffdf71ec720167ae-75f7206edc7a6667c580",
+              "file": "settings.spec.ts",
+              "line": 16,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "mobile.spec.ts",
+      "file": "mobile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Mobile layout (Pixel 7, 390x844)",
+          "file": "mobile.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "onboarding: no horizontal overflow, nav visible, no page errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile",
+                  "projectName": "mobile",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1510,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:19.992Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e79c838550b25e92508e-a7f09a51699435258133",
+              "file": "mobile.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "overview: no horizontal overflow, nav visible, no page errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile",
+                  "projectName": "mobile",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1721,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:22.010Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e79c838550b25e92508e-4e87ebed0bc7634752be",
+              "file": "mobile.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "company: no horizontal overflow, nav visible, no page errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile",
+                  "projectName": "mobile",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1593,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:23.749Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e79c838550b25e92508e-fb3bb1c4f3d60ec8aec8",
+              "file": "mobile.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "news: no horizontal overflow, nav visible, no page errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile",
+                  "projectName": "mobile",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1494,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:25.359Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e79c838550b25e92508e-66e97f513e64649e357f",
+              "file": "mobile.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "settings: no horizontal overflow, nav visible, no page errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile",
+                  "projectName": "mobile",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1482,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:26.869Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e79c838550b25e92508e-632ce3e7907e34b29204",
+              "file": "mobile.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "chat: no horizontal overflow, nav visible, no page errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile",
+                  "projectName": "mobile",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1776,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T00:23:28.364Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e79c838550b25e92508e-30a0575d1169b99bf8ef",
+              "file": "mobile.spec.ts",
+              "line": 6,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-10T00:22:49.207Z",
+    "duration": 94599.149,
+    "expected": 26,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

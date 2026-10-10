@@ -1,0 +1,33 @@
+2026-10-10T00:05:18Z SA1–SA6 dispatched (5 concurrent cap); orchestrator runs SA10 health probes + baseline meanwhile
+2026-10-10T00:18:36Z SA2 done: 136/136 logos verified (110 existing, 20 og:image, 6 favicon); CompanyLogo on table/picker/sidebar; news-cards placeholder
+2026-10-10T00:19:08Z applying 136 verified logos to data/portfolio.sqlite (SA2 output) via scripts/apply-logos.ts
+2026-10-10T00:19:37Z backend sandbox create (new code: /refresh + scheduler)
+2026-10-10T00:20:01Z https://sb-7d0g7nrod31w.vercel.run/health -> 200
+2026-10-10T00:20:01Z https://sb-7d0g7nrod31w.vercel.run/openapi.json -> 200
+2026-10-10T00:20:01Z https://sb-7d0g7nrod31w.vercel.run/refresh/status -> 200
+2026-10-10T00:20:13Z POST https://sb-7d0g7nrod31w.vercel.run/refresh limit=24 (live Perplexity ingestion on the deployed backend)
+2026-10-10T00:20:26Z frontend sandbox create
+2026-10-10T00:22:09Z frontend npm ci + next build on sbx_oOywjD31caJiBj9dOse18UGc5Mx5
+2026-10-10T00:23:34Z frontend live at https://sb-1z9qy0mx48sk.vercel.run BUILD_ID 9LGLYPIdzgO9vdHyTVTrc
+2026-10-10T00:44:04Z overview logos: 25/25 loaded once scrolled into view (lazy-loading; 0 broken, 0 fallbacks); company page news images 10/16 loaded on desktop (rest lazy/offscreen)
+2026-10-10T00:44:11Z POST /refresh limit=40 (second batch) on https://sb-7d0g7nrod31w.vercel.run
+2026-10-10T00:44:19Z note: the first live POST /refresh (limit 24) finished server-side at 00:27:25Z (run rf-2026-10-10T002013Z-0682e7, 24 companies) but the sandbox edge closed the idle HTTP response before the body — /refresh/status + /ingest/runs are the source of truth
+2026-10-10T00:44:29Z SA8: e2e 26/26 vs old preview; contract 9/10 (refresh/status drift) — re-running both against the NEW deployment
+2026-10-10T00:44:36Z playwright full suite vs new preview started
+2026-10-10T00:45:34Z two-turn chat gate on NEW preview launched (desktop then mobile) + t+1/3/6 captures
+2026-10-10T00:46:35Z SA9 (orchestrator): 42 assets 0 key hits; git grep 0; backend ingest/refresh 401 without secret
+2026-10-10T00:48:23Z Playwright vs new preview: 25/26 then images.spec fixed (lazy scroll) → 2/2; chat spec: headersAt 358 ms, 136 chunks, first 360 ms, 32 growth events
+2026-10-10T00:57:47Z desktop two-turn: streaming OK (first byte 208/27 ms, 114/151 chunks, [DONE], same session) but turn-2 answer leaned on the portfolio feed instead of Perplexity → prompt hardened (external facts → always web search) + plugin_sources imageUrl forwarded; redeploying frontend
+2026-10-10T00:58:59Z frontend rebuilt BUILD_ID Gi-RUxGTfImlD5j9OGIth; chat two-turn gate desktop+mobile relaunched
+2026-10-10T01:03:45Z UPSTREAM INCIDENT: OnDemand Perplexity plugin-1722260873 now returns 'Internal server error: Not enough credits' (verified with a direct sync query to api.on-demand.io, no app in the loop) — worked at 00:14Z and 00:46Z; account plugin credits exhausted
+2026-10-10T01:10:25Z mitigation: GPT Search plugin-1741871229 and X Search plugin-1751872652 verified OK (sync + stream, URLs in answer, no plugin_sources frames); making the default plugin set [Perplexity, GPT Search] with Perplexity first — the bridge already handles URL-in-text sources
+2026-10-10T01:11:13Z redeploying backend code (refresh fallback: GPT Search as 2nd plugin + answer-text source mining) — DB on the sandbox is kept (it holds the live refresh results)
+2026-10-10T01:11:48Z backend restarted (dist/server.js, DB preserved: 192 news/177 images); smoke-testing /refresh with the fallback plugins on 2 slugs
+2026-10-10T01:13:34Z fallback refresh works (writer 6/6 imgs, apptronik 5 → filtered placeholder titles); will redeploy backend code with final frontend
+2026-10-10T01:14:15Z backend restarted with final code; DB 202 news / 184 with images; scheduler armed
+2026-10-10T01:15:28Z frontend rebuilt with default plugins [Perplexity, GPT Search]
+2026-10-10T01:15:38Z FINAL chat two-turn gate (desktop+mobile) + t+1/3/6/final captures on BUILD_ID ne3IjzknBabuqW0dckt3W
+2026-10-10T01:22:29Z FINAL chat gate PASS desktop (first byte 430/33 ms, 424/403 chunks, TTFT 68.5/87.2 s, [DONE], same session, 23 sources) and mobile (191/28 ms, 172/325 chunks, 17 sources); Perplexity credits exhausted upstream — GPT Search fallback delivers fresh cited answers
+2026-10-10T01:22:47Z final deploy of fetched_at exposure (backend app.ts/refresh.ts/schema + news-cards) to both sandboxes
+2026-10-10T01:53:40Z backend restart with plausibleDate fix (DB preserved)
+2026-10-10T01:54:06Z backend restarted OK (plausibleDate guard live; 1 future-dated item nulled: aurora-yaocheng 2026-11-18); scheduler re-armed

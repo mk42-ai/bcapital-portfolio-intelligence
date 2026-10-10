@@ -1,0 +1,54 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.on-demand.io/chat/v1/sessions",
+    "headers": {
+      "apikey": "<redacted>",
+      "content-type": "application/json"
+    },
+    "body": {
+      "externalUserId": "INV-001",
+      "pluginIds": [
+        "plugin-1722260873"
+      ]
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "message": "Chat session created successfully",
+      "data": {
+        "id": "<sid>",
+        "companyId": "6692b763e851d28a036ab30e",
+        "externalUserId": "INV-001",
+        "agentIds": [
+          "agent-1722260873"
+        ],
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "contextMetadata": [],
+        "title": "",
+        "status": "draft",
+        "createdBy": "6692b763e851d28a036ab30f",
+        "createdAt": "2026-10-10T00:09:47.27671411Z",
+        "updatedAt": "2026-10-10T00:09:47.27671411Z",
+        "liveSettings": {
+          "enabled": false,
+          "mode": "on-events",
+          "groundRules": "",
+          "destinations": {
+            "email": {
+              "enabled": false
+            },
+            "slack": {
+              "enabled": false
+            }
+          }
+        },
+        "isProcessing": false
+      }
+    }
+  },
+  "elapsedMs": 192
+}

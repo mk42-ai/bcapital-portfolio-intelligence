@@ -1,0 +1,109 @@
+# /api/chat SSE bridge — TTFT probe (SA3) — next dev 127.0.0.1:3303, ONDEMAND_PAYLOAD_DUMP=1, route pre-warmed with a 400 request so compile time is excluded
+# sessionIds redacted (<sid>/<sid2>); API key never present. Timestamps = ms since curl start, stamped by a 'while read line' loop.
+
+## TURN 1 (new session, header fast-path hit: session created in 581 ms < 1.5 s → x-ondemand-session header set) — 2026-10-10T00:07:09Z .. 2026-10-10T00:07:57Z
+  first byte: +621ms   RUN_STARTED: +621ms   ondemand.session: +641ms   TOOL_CALL_ARGS: +653ms   TTFT(first TEXT_MESSAGE_CONTENT): +33126ms   RUN_FINISHED: +47986ms   [DONE]: +47989ms   AG-UI frames: 255   TEXT_MESSAGE_CONTENT frames: 237   heartbeats: 4   exit=0 total=47992ms
+  NOTE: first byte is 621 ms here because the 1.5 s header fast-path (kept per spec for header-only clients) awaits the session create (581 ms upstream) BEFORE returning the stream. With a known sessionId (turn 2) or when the fast-path is skipped (turn 3) first byte is 26–37 ms.
+### headers
+HTTP/1.1 200 OK
+cache-control: no-cache, no-transform
+connection: keep-alive
+content-encoding: identity
+content-type: text/event-stream; charset=utf-8
+x-accel-buffering: no
+x-ondemand-session: <sid>
+Transfer-Encoding: chunked
+
+### frames (TEXT_MESSAGE_CONTENT deltas after the first 3 elided)
++621ms data: {"type":"RUN_STARTED","threadId":"audit","runId":"e8f7dd9c-f9a4-4dce-882c-2c6243611042"}
++630ms data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"connecting","elapsedMs":583,"pluginIds":["plugin-1722260873"],"droppedPluginIds":[],"endpointId":"predefined-claude-fable-5.1","sessionKnown":true}}
++641ms data: {"type":"CUSTOM","name":"ondemand.session","value":{"sessionId":"<sid>","pluginIds":["plugin-1722260873"],"endpointId":"predefined-claude-fable-5.1","created":true,"viaHeader":true}}
++644ms data: {"type":"TOOL_CALL_START","toolCallId":"025718e4-ea65-4da4-835e-0348724280dc","toolCallName":"Perplexity","parentMessageId":"d43468ec-d68d-4bb0-af3e-0d838ba7ba71"}
++653ms data: {"type":"TOOL_CALL_ARGS","toolCallId":"025718e4-ea65-4da4-835e-0348724280dc","delta":"{\"plugin\":\"Perplexity\",\"pluginId\":\"plugin-1722260873\",\"query\":\"What did Fervo Energy announce recently?\",\"endpointId\":\"predefined-claude-fable-5.1\"}"}
++658ms data: {"type":"TOOL_CALL_END","toolCallId":"025718e4-ea65-4da4-835e-0348724280dc"}
++664ms data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"querying","elapsedMs":584,"sessionId":"<sid>"}}
++1265ms data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"streaming","elapsedMs":1233}}
++10615ms data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T00:07:20.556Z","elapsedMs":10581,"sinceLastFrameMs":10000}}
++20614ms data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T00:07:30.555Z","elapsedMs":20580,"sinceLastFrameMs":19999}}
++30615ms data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T00:07:40.556Z","elapsedMs":30581,"sinceLastFrameMs":8544}}
++33124ms data: {"type":"TEXT_MESSAGE_START","messageId":"d43468ec-d68d-4bb0-af3e-0d838ba7ba71","role":"assistant"}
++33126ms data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"d43468ec-d68d-4bb0-af3e-0d838ba7ba71","delta":"Fervo Energy"}
++33133ms data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"d43468ec-d68d-4bb0-af3e-0d838ba7ba71","delta":" has had"}
++33136ms data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"d43468ec-d68d-4bb0-af3e-0d838ba7ba71","delta":" a bus"}
++40615ms data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T00:07:50.556Z","elapsedMs":40581,"sinceLastFrameMs":36}}
++47975ms data: {"type":"TOOL_CALL_RESULT","messageId":"cb539de5-8d72-4843-b47d-ece4233226a5","toolCallId":"025718e4-ea65-4da4-835e-0348724280dc","role":"tool","content":"{\"status\":\"ok\",\"plugin\":\"Perplexity\",\"sources\":10,\"chars\":3988}"}
++47978ms data: {"type":"TEXT_MESSAGE_END","messageId":"d43468ec-d68d-4bb0-af3e-0d838ba7ba71"}
++47983ms data: {"type":"CUSTOM","name":"ondemand.sources","value":{"messageId":"d43468ec-d68d-4bb0-af3e-0d838ba7ba71","sources":[{"url":"https://carboncredits.com/fervo-energys-421m-breakthrough-and-the-rise-of-geothermal-power-for-clean-electricity/","title":"Fervo Energy’s $421M Breakthrough and The Rise of Geothermal Power for Clean Electricity","sourceName":"carboncredits.com"},{"url":"https
++47986ms data: {"type":"RUN_FINISHED","threadId":"audit","runId":"e8f7dd9c-f9a4-4dce-882c-2c6243611042"}
++47989ms data: [DONE]
+exit=0 total=47992ms
+
+## TURN 2 (multi-turn: context.sessionId=<sid> from turn 1 → NO session-create; payload dump stamp 00-08-14 has only query-request + upstream-frames, sessionCreatedThisRequest:false) — 2026-10-10T00:08:14Z .. 2026-10-10T00:08:31Z
+  first byte: +37ms   RUN_STARTED: +37ms   ondemand.session: +42ms   TOOL_CALL_ARGS: +48ms   TTFT(first TEXT_MESSAGE_CONTENT): +14685ms   RUN_FINISHED: +16731ms   [DONE]: +16734ms   AG-UI frames: 36   TEXT_MESSAGE_CONTENT frames: 21   heartbeats: 1   exit=0 total=16737ms
+### frames
++37ms data: {"type":"RUN_STARTED","threadId":"audit","runId":"ed4e9ff0-acf5-4581-b535-77b92bada5e8"}
++39ms data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"connecting","elapsedMs":1,"pluginIds":["plugin-1722260873"],"droppedPluginIds":[],"endpointId":"predefined-claude-fable-5.1","sessionKnown":true}}
++42ms data: {"type":"CUSTOM","name":"ondemand.session","value":{"sessionId":"<sid>","pluginIds":["plugin-1722260873"],"endpointId":"predefined-claude-fable-5.1","created":false,"viaHeader":true}}
++45ms data: {"type":"TOOL_CALL_START","toolCallId":"2e6bbbe2-f268-47aa-acbd-dfc3cd2b1e5a","toolCallName":"Perplexity","parentMessageId":"68b3aca3-3784-4eec-b53b-d68762ef988d"}
++48ms data: {"type":"TOOL_CALL_ARGS","toolCallId":"2e6bbbe2-f268-47aa-acbd-dfc3cd2b1e5a","delta":"{\"plugin\":\"Perplexity\",\"pluginId\":\"plugin-1722260873\",\"query\":\"In one sentence, which of those is most relevant to an investor?\",\"endpointId\":\"predefined-claude-fable-5.1\"}"}
++50ms data: {"type":"TOOL_CALL_END","toolCallId":"2e6bbbe2-f268-47aa-acbd-dfc3cd2b1e5a"}
++53ms data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"querying","elapsedMs":1,"sessionId":"<sid>"}}
++792ms data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"streaming","elapsedMs":759}}
++10032ms data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T00:08:24.824Z","elapsedMs":10000,"sinceLastFrameMs":9999}}
++14683ms data: {"type":"TEXT_MESSAGE_START","messageId":"68b3aca3-3784-4eec-b53b-d68762ef988d","role":"assistant"}
++14685ms data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"68b3aca3-3784-4eec-b53b-d68762ef988d","delta":"The"}
++14688ms data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"68b3aca3-3784-4eec-b53b-d68762ef988d","delta":" most invest"}
++14690ms data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"68b3aca3-3784-4eec-b53b-d68762ef988d","delta":"or-relevant item is the"}
++16724ms data: {"type":"TOOL_CALL_RESULT","messageId":"3732c9b7-49d6-4ee4-a99b-dfb3a0f1467c","toolCallId":"2e6bbbe2-f268-47aa-acbd-dfc3cd2b1e5a","role":"tool","content":"{\"status\":\"ok\",\"plugin\":\"Perplexity\",\"sources\":0,\"chars\":330}"}
++16726ms data: {"type":"TEXT_MESSAGE_END","messageId":"68b3aca3-3784-4eec-b53b-d68762ef988d"}
++16729ms data: {"type":"CUSTOM","name":"ondemand.sources","value":{"messageId":"68b3aca3-3784-4eec-b53b-d68762ef988d","sources":[],"pluginIds":["plugin-1722260873"]}}
++16731ms data: {"type":"RUN_FINISHED","threadId":"audit","runId":"ed4e9ff0-acf5-4581-b535-77b92bada5e8"}
++16734ms data: [DONE]
+exit=0 total=16737ms
+
+## TURN 3 (ONDEMAND_SESSION_HEADER_WAIT_MS=1 to force the in-stream session-create path; client sent [deferred PitchBook, Perplexity, bogus id]) — 2026-10-10T00:09:47Z .. 2026-10-10T00:11:06Z
+  first byte: +26ms   RUN_STARTED: +26ms   ondemand.session: +215ms   TOOL_CALL_ARGS: +221ms   TTFT(first TEXT_MESSAGE_CONTENT): +63980ms   RUN_FINISHED: +79273ms   [DONE]: +79276ms   AG-UI frames: 246   TEXT_MESSAGE_CONTENT frames: 224   heartbeats: 7   exit=0 total=79279ms
+### headers (no x-ondemand-session — sessionId delivered via CUSTOM ondemand.session at +215ms)
+HTTP/1.1 200 OK
+cache-control: no-cache, no-transform
+connection: keep-alive
+content-encoding: identity
+content-type: text/event-stream; charset=utf-8
+x-accel-buffering: no
+Transfer-Encoding: chunked
+
+### frames
++26ms data: {"type":"RUN_STARTED","threadId":"audit-slowpath","runId":"f7d34321-847f-4d31-a0bc-ad82bb916f2c"}
++29ms data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"connecting","elapsedMs":3,"pluginIds":["plugin-1722260873"],"droppedPluginIds":["plugin-1777018662","plugin-bogus"],"endpointId":"predefined-claude-fable-5.1","sessionKnown":false}}
++32ms data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"creating-session","elapsedMs":3}}
++215ms data: {"type":"CUSTOM","name":"ondemand.session","value":{"sessionId":"<sid2>","pluginIds":["plugin-1722260873"],"endpointId":"predefined-claude-fable-5.1","created":true,"viaHeader":false}}
++218ms data: {"type":"TOOL_CALL_START","toolCallId":"b6d66fb7-66cd-4b0a-878b-3f1d94243a83","toolCallName":"Perplexity","parentMessageId":"cc3fe17a-a5e5-421d-8827-a8c2dee61d8f"}
++221ms data: {"type":"TOOL_CALL_ARGS","toolCallId":"b6d66fb7-66cd-4b0a-878b-3f1d94243a83","delta":"{\"plugin\":\"Perplexity\",\"pluginId\":\"plugin-1722260873\",\"query\":\"What did Fervo Energy announce recently?\",\"endpointId\":\"predefined-claude-fable-5.1\"}"}
++224ms data: {"type":"TOOL_CALL_END","toolCallId":"b6d66fb7-66cd-4b0a-878b-3f1d94243a83"}
++227ms data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"querying","elapsedMs":192,"sessionId":"<sid2>"}}
++776ms data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"streaming","elapsedMs":753}}
++10025ms data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T00:09:57.112Z","elapsedMs":10003,"sinceLastFrameMs":9812}}
++20026ms data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T00:10:07.113Z","elapsedMs":20004,"sinceLastFrameMs":19813}}
++30025ms data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T00:10:17.112Z","elapsedMs":30003,"sinceLastFrameMs":1256}}
++40025ms data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T00:10:27.112Z","elapsedMs":40003,"sinceLastFrameMs":11256}}
++50025ms data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T00:10:37.113Z","elapsedMs":50004,"sinceLastFrameMs":2977}}
++60025ms data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T00:10:47.113Z","elapsedMs":60004,"sinceLastFrameMs":12977}}
++63977ms data: {"type":"TEXT_MESSAGE_START","messageId":"cc3fe17a-a5e5-421d-8827-a8c2dee61d8f","role":"assistant"}
++63980ms data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"cc3fe17a-a5e5-421d-8827-a8c2dee61d8f","delta":"Fervo"}
++63983ms data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"cc3fe17a-a5e5-421d-8827-a8c2dee61d8f","delta":" Energy has had"}
++63985ms data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"cc3fe17a-a5e5-421d-8827-a8c2dee61d8f","delta":" a bus"}
++70025ms data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T00:10:57.113Z","elapsedMs":70004,"sinceLastFrameMs":43}}
++79262ms data: {"type":"TOOL_CALL_RESULT","messageId":"c1eb357c-f5b6-4e53-905f-f74ca4abdd66","toolCallId":"b6d66fb7-66cd-4b0a-878b-3f1d94243a83","role":"tool","content":"{\"status\":\"ok\",\"plugin\":\"Perplexity\",\"sources\":15,\"chars\":3827}"}
++79264ms data: {"type":"TEXT_MESSAGE_END","messageId":"cc3fe17a-a5e5-421d-8827-a8c2dee61d8f"}
++79270ms data: {"type":"CUSTOM","name":"ondemand.sources","value":{"messageId":"cc3fe17a-a5e5-421d-8827-a8c2dee61d8f","sources":[{"url":"https://fortune.com/2026/09/24/fervo-next-gen-geothermal-power-grid-ai-boom/","title":"Fervo brings the first, next-gen geothermal power to the grid to satiate the AI boom | Fortune","sourceName":"fortune.com"},{"url":"https://fervoenergy.com/fervo-energy-secures
++79273ms data: {"type":"RUN_FINISHED","threadId":"audit-slowpath","runId":"f7d34321-847f-4d31-a0bc-ad82bb916f2c"}
++79276ms data: [DONE]
+exit=0 total=79279ms
+
+## ERROR PATH (x-ondemand-key: invalid → RUN_ERROR inside the 200 stream, not a JSON 5xx)
+HTTP/1.1 200 OK
++45ms data: {"type":"RUN_STARTED","threadId":"audit-err","runId":"02044310-64af-4d3b-8a6f-89cc9bab40c3"}
++49ms data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"connecting","elapsedMs":13,"pluginIds":["plugin-1722260873"],"droppedPluginIds":[],"endpointId":"predefined-claude-fable-5.1","sessionKnown":false}}
++52ms data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"creating-session","elapsedMs":13}}
++220ms data: {"type":"RUN_ERROR","message":"OnDemand create session failed (401): Invalid API Key","code":"502"}
++223ms data: [DONE]

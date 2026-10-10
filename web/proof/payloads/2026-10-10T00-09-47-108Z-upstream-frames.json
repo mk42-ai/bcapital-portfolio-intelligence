@@ -1,0 +1,110 @@
+{
+  "sessionCreatedThisRequest": true,
+  "totalUpstreamFrames": 422,
+  "first20": [
+    {
+      "ms": 3806,
+      "raw": "event:heartbeat\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"time\":\"2026-10-10T00:09:50Z\"}"
+    },
+    {
+      "ms": 3864,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"Since perplexity is the only available\"}}"
+    },
+    {
+      "ms": 3991,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" plugin here, I'll use it to search for Ferv\"}}"
+    },
+    {
+      "ms": 4054,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"o Energy's recent announcements.\"}}"
+    },
+    {
+      "ms": 6808,
+      "raw": "event:heartbeat\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"time\":\"2026-10-10T00:09:53Z\"}"
+    },
+    {
+      "ms": 9213,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":4,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"```json\\n{\\n  \\\"title\\\": \\\"I'll search the\"}}"
+    },
+    {
+      "ms": 9236,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":5,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" latest news and official announcements from\"}}"
+    },
+    {
+      "ms": 9487,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":6,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" Fervo Energy.\\\\nI'll gather sources\"}}"
+    },
+    {
+      "ms": 9610,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":7,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\", dates and images so you get a ver\"}}"
+    },
+    {
+      "ms": 9738,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":8,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"ified, up-to-date picture.\\\",\\n  \\\"objective\"}}"
+    },
+    {
+      "ms": 9806,
+      "raw": "event:heartbeat\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"time\":\"2026-10-10T00:09:56Z\"}"
+    },
+    {
+      "ms": 9925,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":9,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"\\\": \\\"Find out what Fervo Energy has announ\"}}"
+    },
+    {
+      "ms": 10051,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":10,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"ced recently (as of 2026-10-10), with\"}}"
+    },
+    {
+      "ms": 10238,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":11,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" sources and supporting images\"}}"
+    },
+    {
+      "ms": 10362,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":12,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\".\\\",\\n  \\\"plan_required\\\": true,\\n  \\\"pl\"}}"
+    },
+    {
+      "ms": 10486,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":13,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"an_skip_reason\\\": \\\"\\\",\\n  \\\"steps\\\":\"}}"
+    },
+    {
+      "ms": 10612,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":14,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" [\\n    {\\n      \\\"title\\\": \\\"Searching recent announ\"}}"
+    },
+    {
+      "ms": 10737,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":15,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"cements\\\",\\n      \\\"user_query\\\": \\\"Search for the most\"}}"
+    },
+    {
+      "ms": 10863,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":16,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" recent official announcements and\"}}"
+    },
+    {
+      "ms": 10989,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":17,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" press releases from Fervo Energy (geothermal\"}}"
+    }
+  ],
+  "last5": [
+    {
+      "ms": 77212,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":393,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" the query.\\n\\n\"}}"
+    },
+    {
+      "ms": 77212,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":394,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"\"}}"
+    },
+    {
+      "ms": 77227,
+      "raw": "event:message\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"eventIndex\":395,\"eventType\":\"metricsLog\",\"status\":\"processing\",\"publicMetrics\":{\"inputTokens\":14142,\"outputTokens\":2711,\"totalTokens\":16853,\"ragTimeSec\":46.76,\"fulfillmentTimeSec\":29.65,\"totalTimeSec\":76.41}}"
+    },
+    {
+      "ms": 78809,
+      "raw": "event:heartbeat\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac9824b95268adc215df6f5\",\"time\":\"2026-10-10T00:11:05Z\"}"
+    },
+    {
+      "ms": 79239,
+      "raw": "event:message\ndata:[DONE]"
+    }
+  ],
+  "translatedChars": 3827,
+  "elapsedMs": 79240
+}

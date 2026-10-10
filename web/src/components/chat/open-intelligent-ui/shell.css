@@ -261,3 +261,15 @@
 .oiu-error__retry:focus-visible { outline: 2px solid #111827; outline-offset: 1px; }
 /* Hide OpenUI's own tool-call card/timeline chrome in case it is rendered next to ours */
 .chat-shell .openui-tool-call-timeline:empty { display: none; }
+
+/* SA4 — live phase row (portaled into OpenUI's bottom loader slot) + source thumbnails */
+.chat-shell .openui-agent-thread-message-loading .openui-dot-matrix-loader { display: none; }
+.chat-shell .openui-agent-thread-message-loading { min-height: 0; }
+.oiu-activity--pending .oiu-activity__phase { font-weight: 600; color: #111827; }
+.oiu-activity__elapsed { color: #6b7280; font-variant-numeric: tabular-nums; }
+.oiu-activity__elapsed::before { content: "·"; margin: 0 6px; color: #9ca3af; }
+.oiu-sources__thumb { width: 40px; height: 40px; border-radius: 6px; object-fit: cover; flex: none; background: #f3f4f6; border: 1px solid #e5e7eb; }
+.oiu-sources__text { display: grid; gap: 1px; min-width: 0; flex: 1 1 auto; }
+.oiu-sources__name { font-weight: 600; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.oiu-sources__meta { display: flex; align-items: center; gap: 5px; min-width: 0; color: #6b7280; font-size: 11px; }
+.oiu-sources__meta .oiu-sources__host { font-weight: 500; color: #4b5563; }

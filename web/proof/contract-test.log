@@ -1,0 +1,13 @@
+PASS  GET /health  [HTTP 200]
+PASS  GET /openapi.json  [HTTP 200]
+PASS  GET /companies  [HTTP 200]
+PASS  GET /companies/{slug}  [HTTP 200]
+PASS  GET /companies/{slug} (unknown slug → 404)  [HTTP 404]
+PASS  GET /companies/{slug}/news  [HTTP 200]
+PASS  GET /companies/{slug}/sentiment  [HTTP 200]
+PASS  GET /sentiment/portfolio  [HTTP 200]
+PASS  GET /search  [HTTP 200]
+PASS  GET /refresh/status  [HTTP 200]
+
+10 passed, 0 failed (10 cases) against https://sb-7d0g7nrod31w.vercel.run
+{"passed":10,"failed":0,"cases":[{"name":"GET /health","ok":true,"status":200},{"name":"GET /openapi.json","ok":true,"status":200},{"name":"GET /companies","ok":true,"status":200},{"name":"GET /companies/{slug}","ok":true,"status":200},{"name":"GET /companies/{slug} (unknown slug → 404)","ok":true,"status":404},{"name":"GET /companies/{slug}/news","ok":true,"status":200},{"name":"GET /companies/{slug}/sentiment","ok":true,"status":200},{"name":"GET /sentiment/portfolio","ok":true,"status":200},{"name":"GET /search","ok":true,"status":200},{"name":"GET /refresh/status","ok":true,"status":200}]}

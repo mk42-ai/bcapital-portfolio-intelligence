@@ -459,3 +459,116 @@ Turn 1 "What did Fervo Energy announce recently?" · Turn 2 "How does that compa
 
 ### 8.4 Screenshots (`docs/screenshots/redeploy-*.png`)
 `redeploy-{root,onboarding,overview,company,news,chat,settings}-{1440x900,390x844}.png`; chat timeline desktop `redeploy-chat-turn1-{t1s,t3s,t6s,final}`, `redeploy-chat-turn2-{t1s,t3s,t6s}`, `redeploy-chat-2turn-1440x900` (turn-2 final); mobile `redeploy-chat-m-turn1-{t1s,t3s,t6s,final}`, `redeploy-chat-m-turn2-{t1s,t3s,t6s}`, `redeploy-chat-2turn-mobile-390x844` (turn-2 final).
+
+## 9. Live data release 2026-10-09
+Scope of this release: live news refresh from Perplexity (backend `POST /refresh` + hourly scheduler), verified real company logos, a
+faster/transparent chat stream (`RUN_STARTED` + `ondemand.status` within 300 ms, session created inside the stream, elapsed counter and source
+thumbnails in the UI), portfolio context in every chat query, and the OnDemand surface re-documented from the live docs. Earlier sections (§1–§8)
+remain the record of the previous deploys; everything below supersedes them where they overlap.
+
+### 9.1 Deployment record
+| Item | Value |
+|---|---|
+| Commit deployed | (see git log — commit created after this doc edit; recorded in the run output) (previous: `bdb67f3`) |
+| Frontend | https://sb-1z9qy0mx48sk.vercel.run — sandbox `sbx_oOywjD31caJiBj9dOse18UGc5Mx5`, port 3000, Node v22.22.2 (previous §8: https://sb-3umbne3uc2g2.vercel.run) |
+| BUILD_ID | `rRd37mq9eO_2tR08PUzUo` |
+| Backend | https://sb-7d0g7nrod31w.vercel.run — sandbox `sbx_lySC76aPta6XVEteU0Q5AsBUJfnS` (`/health` 200, `/openapi.json` 200, `/refresh/status` 200) (previous §8: https://sb-3az18qgrrd3p.vercel.run — `/health` 200, 137 rows incl. `b-capital`) |
+| Backend env added | `ONDEMAND_API_KEY` (server-only, needed by `/refresh` + scheduler), `ONDEMAND_BASE_URL`, `REFRESH_CRON_MINUTES` (default 60; `0` disables), existing `INGEST_SECRET` now also guards `/refresh` |
+| Frontend env | unchanged names (`web/.env.example`); `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` stays **empty** (see 9.6) |
+| Deploy live (UTC) | 2026-10-10T01:25:09Z |
+| First scheduled refresh tick | runs rf-2026-10-10T002013Z-0682e7 (23 companies, 91 items), rf-2026-10-10T004411Z-8edb67 (40 companies), rf-2026-10-10T011148Z-a5a309 (2 companies, 11 items, 8 images); DB 202 news items / 184 with image_url; scheduler enabled, 60 min, batch 40, next 2026-10-10T02:24:27Z |
+
+### 9.2 What changed (by area)
+| Area | Files | Change |
+|---|---|---|
+| Backend refresh | `src/refresh.ts` (new), `src/app.ts`, `src/server.ts`, `src/openapi.ts`, `openapi.json`, `scripts/refresh.ts` (new) | `POST /refresh` (X-Ingest-Secret; body `{slugs?, limit?, concurrency?}`) pulls Perplexity `plugin-1722260873` news per company via the Chat API stream, persists `news_items.image_url` (from `plugin_sources.items[].imageUrl`, else `og:image`) and `published_at`, writes one `ingest_runs` row with `source:"refresh"`; `GET /refresh/status`; in-process scheduler every `REFRESH_CRON_MINUTES` (40 stalest companies per tick). Full write-up: [`REFRESH_PIPELINE.md`](REFRESH_PIPELINE.md). |
+| Logos | `scripts/resolve-logos.ts`, `scripts/apply-logos.ts` (new), `data/portfolio.sqlite`, `web/src/components/brand/*`, overview table / picker / sidebar / news cards | clearbit → og:image → Google favicon, each candidate HTTP-verified (200, `image/*`, >500 B); `proof/logo-resolution.json` + `proof/image-coverage.json`; `<CompanyLogo/>` with Lucide fallback. |
+| Chat bridge | `web/src/app/api/chat/route.ts` | `RUN_STARTED` + `CUSTOM ondemand.status {phase:"connecting"}` are written before any upstream call; the OnDemand session is created **inside** the stream and announced as `CUSTOM ondemand.session {sessionId, created, viaHeader}` (a ≤1.5 s header fast-path still sets `x-ondemand-session` for header-only clients; `ONDEMAND_SESSION_HEADER_WAIT_MS` tunes it); `ondemand.status` phases `connecting → creating-session → querying → streaming`; `ondemand.heartbeat` every 10 s of silence; unknown/deferred plugin ids are dropped and reported in `droppedPluginIds`; `ONDEMAND_PAYLOAD_DUMP=1` writes redacted request/frame dumps to `web/proof/payloads/`. |
+| Chat client | `web/src/components/chat/open-intelligent-ui/chat-shell.tsx`, `local-storage.ts`, `shell.css`, `chat-sidebar.tsx`, `company-picker.tsx` | reads `ondemand.session` / `ondemand.status`, shows the phase + an elapsed-seconds counter during the Perplexity research phase (first token is typically 30–70 s upstream — see 9.4), renders source thumbnails from `plugin_sources` image URLs, company logos in picker/sidebar. |
+| Portfolio context | `web/src/app/chat/page.tsx`, `chat-shell.tsx` | live backend data (companies/news/sentiment) is fetched server-side and injected as system context into every query because no portfolio plugin could be registered (9.6); sample in `web/proof/chat-systemcontext-sample.txt`. |
+| Settings / plugins | `web/src/lib/plugins.ts`, `web/src/lib/ondemand/config.ts`, `settings-form.tsx` | Portfolio Plugin row shows the registration outcome; plugin list unchanged otherwise. |
+| Docs | `docs/ONDEMAND_SURFACE.md`, `README.md`, `web/README.md`, this file, `web/docs/REFRESH_PIPELINE.md` | OnDemand endpoints re-documented from the live docs; stream taxonomy from a recorded run (9.5). |
+
+### 9.3 Recorded results (from the proof files produced during this release)
+| Check | Result | Proof |
+|---|---|---|
+| `POST /refresh` 5 focus companies (local backend, DB copy, 2026-10-10T00:11–00:13Z) | status `ok`, run `rf-2026-10-10T001147Z-965915`, `companies_touched` 5, `news_upserted` **54**, `with_images` **54 (100 %)**, `dated` **43 (80 %)**, `errors` []; per company 56–115 s wall time at concurrency 3 | `proof/refresh-run.json` |
+| Logo coverage (2026-10-10T00:06:55Z) | **136 / 136** companies with a verified logo — `existing` 110, `og` 20, `favicon` 6, `missing` [] | `proof/image-coverage.json`, `proof/logo-resolution.json` |
+| `/api/chat` TTFT probe (next dev 127.0.0.1:3303, route pre-warmed, 2026-10-10T00:07–00:11Z) | Turn 1 (new session, header fast-path): first byte / `RUN_STARTED` **+621 ms** (includes a 581 ms session create), `ondemand.session` +641 ms, first `TEXT_MESSAGE_CONTENT` **+33.1 s**, `RUN_FINISHED` +48.0 s, 255 AG-UI frames, 4 heartbeats. Turn 2 (known sessionId, no create): first byte **+37 ms**, `ondemand.session` +42 ms, TTFT +14.7 s, done +16.7 s. Turn 3 (forced in-stream create, client sent deferred PitchBook + bogus id): first byte **+26 ms**, `creating-session` +32 ms, `ondemand.session` +215 ms (`viaHeader:false`), `droppedPluginIds` `["plugin-1777018662","plugin-bogus"]`, TTFT +64.0 s, done +79.3 s | `web/proof/ttft-probe.log`, `web/proof/payloads/` |
+| Deployed-preview TTFT — FINAL gate on BUILD_ID `rRd37mq9eO_2tR08PUzUo` (fresh Chromium, two turns, one session) | **desktop 1440x900**: turn 1 response headers +331 ms / first SSE chunk + `RUN_STARTED` + `ondemand.status` + `TOOL_CALL_ARGS` **+333 ms** / first answer token (TTFT) +79.4 s / `[DONE]` +95.3 s (235 chunks, 253 data lines, monotonic); turn 2 (same session, no create) status event **+49 ms** / TTFT +135.4 s / `[DONE]` +161.9 s (417 chunks). **mobile 390x844**: turn 1 status event **+330 ms** / TTFT +75.6 s / done +88.2 s (183 chunks); turn 2 **+32 ms** / +120.0 s / +144.2 s (377 chunks). 19 / 15 source links rendered, plugin card shows the real query (never `{}`), Stop→Send reset, 0 console / page errors. First-token latency is upstream (Perplexity credits exhausted → GPT Search fallback + Fable fulfilment, see 9.8); the UI shows the status card + elapsed counter from +0.3 s | `web/proof/final-chat-stream.log`, `docs/screenshots/live-chat-2turn-*.png`, `live-chat-midstream-t6s-1440x900.png` |
+| Functional matrix | all checks PASS, 0 defects (SA7) | `web/proof/functional-matrix.md` |
+| E2E + contract tests | Playwright 26/26 (desktop 20 + mobile 6) vs the new preview; contract-test 10/10 vs the new backend | 2026-10-10T01:25:09Z |
+| Security sweep | 0 in .next/static, 0 in .next/server, 0 in git grep, 0 in 42 served assets (literal variable NAME once in the Settings help text) | `web/proof/security-sweep.md` |
+| Image coverage on the deployed backend | 184 / 202 (91 %) | — |
+
+### 9.4 OnDemand Chat API — as documented in the live public docs (fetched 2026-10-09, OpenAPI 3.0.3, server `https://api.on-demand.io`)
+Security scheme for all three: `apikey` — `type: apiKey, in: header, name: apikey`. Error bodies: `4XX`/`5XX` → `{ errorCode, message }`.
+
+**Create Chat Session** — `POST /chat/v1/sessions` (`operationId createChatSession`)
+| Body field | Required | Type | Notes (verbatim intent from the docs) |
+|---|---|---|---|
+| `externalUserId` | **yes** | string | identifier of the external user (your system's id; any unique string) — used for filtering sessions and auditing |
+| `pluginIds` | no | string[] (max 20) | plugins for the whole session unless overridden per `/query`; may be empty |
+
+Response `200` → `{ message, data: ChatSession }`, `ChatSession = { id, companyId, externalUserId, pluginIds[], title (auto-generated after the first query), createdBy, createdAt, updatedAt }`. The app reads `data.id`.
+(`contextMetadata: [{key, value}]` is accepted by the live service — `/api/chat` sends the portfolio system context through it and `/refresh` tags its sessions `purpose=portfolio-news-refresh` — but it is **not** in the published request schema; treat it as optional/undocumented.)
+
+**Submit Query** — `POST /chat/v1/sessions/{sessionId}/query` (`operationId submitQuery`; path param `sessionId` required)
+| Body field | Required | Type | Notes |
+|---|---|---|---|
+| `query` | **yes** | string | the question |
+| `endpointId` | **yes** | string | fulfillment model (predefined / BYOI / BYOM); app default `predefined-claude-fable-5.1` |
+| `responseMode` | **yes** | `"sync" \| "stream" \| "webhook"` | app uses `stream` for chat and for `/refresh` |
+| `pluginIds` | no | string[] (max 20) | replaces the session's list for this query; if unset at both levels RAG is bypassed |
+| `fulfillmentOnly` | no | boolean (default false) | skips RAG/plugins even if `pluginIds` is set |
+| `modelConfigs` | no | object | `fulfillmentPrompt`, `stopSequences` (≤4), `temperature` (0–2, default 0.7), `topP` (0–1, default 1), `presencePenalty`, `frequencyPenalty` |
+
+Response `200` (sync mode) → `{ message, data: { sessionId, messageId, answer, status: "processing" \| "completed" \| "failed" } }`. In `stream` mode the body is `text/event-stream`; **the frame format is not in the docs** — see 9.5.
+
+**Get Chat Messages** — `GET /chat/v1/sessions/{sessionId}/messages` (`operationId getChatMessages`)
+Query params: `externalUserId`, `sort` (`asc|desc`, default `desc`), `cursor` (= previous `pagination.next`), `limit` (1–50, default 10).
+Response `200` → `{ message, data: ChatMessage[], pagination: { next } }`, `ChatMessage = { id, sessionId, companyId, externalUserId, pluginIds[], endpointId, responseMode, status, type, media, query, answer, createdBy, createdAt, updatedAt }`.
+
+Not in the docs we fetched but used read-only by `/api/ondemand/*`: `GET /chat/v1/sessions?externalUserId&limit` (session list). No public endpoint exists for plugin/tool registration (9.6).
+
+### 9.5 Observed stream taxonomy (`/tmp/sa/probe-stream.log`, one real Perplexity run, 2026-10-09T23:58Z, query "5 most recent Fervo Energy news items", 65.2 s end-to-end)
+SSE frames are `event:<name>\ndata:<json>\n\n`; every `data` object carries `sessionId`, `messageId`, and (except heartbeats) `eventIndex` + `status:"processing"`. Counts from the recorded run:
+
+| `event:` | `eventType` in `data` | Count | Payload | First seen |
+|---|---|---|---|---|
+| `heartbeat` | — (`{sessionId, messageId, time}`) | 21 | keep-alive, ~every 3 s while idle | +3.8 s |
+| `thinking` | `planning_thinking` | 13 | `thinking.delta` — planner reasoning text | +4.0 s |
+| `thinking` | `planning_output` | 33 | `output.delta` — planner JSON (```json {"title": …}```) | +7.4 s |
+| `thinking` | `step_output` | 29 | `output.delta` + `stepId` — per-step JSON (`{"title":"Searching Fervo Energy news", …}`) | +12.5 s |
+| `thinking` | `step_thinking` | 1 | `thinking.delta` + `stepId` (empty delta observed) | +16.1 s |
+| `message` | `plugin_sources` | 1 | `stepId`, `stepTitle`, `sources: { agentId:"agent-1722260873", pluginId:"plugin-1722260873", pluginName:"Perplexity", operationId:"perplexity", items:[{title,url,domain,imageUrl}] }` | +24.5 s |
+| `thinking` | `fulfillment_thinking` | 75 | `thinking.delta` — fulfillment-model reasoning | +28.0 s |
+| `message` | `fulfillment` | 228 | `answer` token delta (note: this frame's JSON has spaces after colons, the others do not) | **+50.8 s** |
+| `message` | `metricsLog` | 1 | `publicMetrics: { inputTokens 9302, outputTokens 3525, totalTokens 12827, ragTimeSec 23.85, fulfillmentTimeSec 38.54, totalTimeSec 62.39 }` | +63.2 s |
+| `message` | — | 1 | terminal `data:[DONE]` | +65.2 s |
+
+Consequences baked into the code: `/refresh` reads only `plugin_sources` (items + `imageUrl`) and `fulfillment` (answer text, for dates); the chat bridge maps `plugin_sources` → `ondemand.sources` / thumbnails, `fulfillment` → `TEXT_MESSAGE_CONTENT`, `*_thinking`/`*_output` → tool activity, and keeps the client informed with its own heartbeat + elapsed counter because the **first answer token arrives 30–70 s after the query** (Perplexity research + Fable fulfillment) — upstream latency, not a bridge defect.
+
+### 9.6 Portfolio plugin registration — outcome
+`web/proof/plugin-registration.log` (2026-10-10T00:05–00:11Z): the 40 documented public endpoints (Chat / Media / Workflow / Projects / MQTT / Agents Flow Builder) contain **no plugin/tool-creation endpoint**; `ondemandmcp__plugin_v1_plugin_create` returned empty output twice (identifiers `rest`, `rest_api`); `public_v1_plugin_ai_generated_tool_create` failed with HTTP 524 and then `"auto-save: create plugin: invalid agent category"`. **No portfolio plugin id exists**; `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` stays unset and the Settings row says so. Instead, live backend context is injected into every chat query server-side (`web/src/app/chat/page.tsx` → `chat-shell.tsx` systemContext).
+portfolio_plugin_id: none — systemContext injection (no public endpoint; MCP create empty/524/'invalid agent category')
+
+### 9.7 Operating notes / limitations
+* `POST /refresh` is synchronous and slow by design (≈1–2 min per company ÷ concurrency); call it with `slugs` for targeted refreshes and let the scheduler handle the sweep. Run at most one backend instance with `REFRESH_CRON_MINUTES > 0`.
+* Refresh never sets `sentiment_score`/`summary`; those still come from the 06:00 UTC workflows (`/ingest`).
+* `published_at` recovery is best-effort (80 % in the proof run); undated items sort last.
+* Logo URLs are third-party (clearbit / company sites / Google favicon) and are re-verifiable with `scripts/resolve-logos.ts`; the SQLite snapshot ships with the verified set.
+* Secrets: `ONDEMAND_API_KEY` is server-only on **both** apps now (backend for `/refresh`, Next.js for `/api/chat`); never `NEXT_PUBLIC_`, never in proof files (all dumps redact to `<redacted>` / `<sid>`).
+
+### 9.8 Upstream incident during final validation (2026-10-10T01:03Z) and mitigation
+A direct `responseMode:"sync"` query to `POST /chat/v1/sessions/{id}/query` with `pluginIds:["plugin-1722260873"]` (no app in the loop) returned an answer containing `the search tool returned an error ("Internal server error: Not enough credits") on all three attempts` — the account's **Perplexity plugin credits are exhausted** (it worked at 00:14Z and 00:46Z). GPT Search `plugin-1741871229` and X Search `plugin-1751872652` were verified working with the same key at 01:06Z. Mitigation shipped in this release: the chat default plugin set is now `[plugin-1722260873, plugin-1741871229]` (Perplexity first, GPT Search as the live-news fallback; override with `ONDEMAND_DEFAULT_PLUGIN_IDS`), the refresh pipeline sends the same pair (`ONDEMAND_NEWS_PLUGIN_IDS`) and mines sources from the answer text when no `plugin_sources` frames arrive, and the chat system prompt instructs the model to use web search for every external fact. Effect, measured on the final two-turn gate: fresh, cited answers on both turns ("…a secondary web search completed successfully…"), 23/17 source links rendered. Once Perplexity credits are topped up, `plugin_sources` frames (with `imageUrl`) resume automatically — no code change needed.
+
+### 9.9 Final verification pass (2026-10-10T01:39Z–01:54Z, orchestrator)
+| Check | Result | Proof |
+|---|---|---|
+| Deployed tree == working tree | frontend `src/**` + `package.json` + `next.config.*` md5-identical on `sbx_oOywjD31caJiBj9dOse18UGc5Mx5`; backend `src/**` identical on `sbx_lySC76aPta6XVEteU0Q5AsBUJfnS` (only `openapi.json` differs by the `servers[0]` URL, which is generated per host) | this doc |
+| ui-validator matrix (fresh profile per run, std checks: B Capital SVG, light theme, Lucide-only, live badge, headers, 0 non-2xx resources) | onboarding, overview, company (`/company/fervo-energy`), news, settings — PASS at 1440x900 **and** 390x844; `/company/unknown-xyz` → HTTP 404 + not-found copy; overview logos **25/25 `naturalWidth>0`** on the visible page; company page news images **10/16** loaded (rest lazy/off-screen); news page first-fold images 8/12 (viewport capture) | `docs/screenshots/live-*.png`, `/tmp/gate/results.jsonl` (run log) |
+| `fetched <ISO>` badge | page header renders `fetched <ISO>` from a request made at render time (`Sourced.fetched_at = new Date().toISOString()` on a live 200); each news card renders `fetched 2026-10-10 00:13Z`-style badges from `news_items.fetched_at` written by the refresh run | screenshots `live-company-1440x900.png`, `live-news-1440x900.png` |
+| Health probes | `https://sb-7d0g7nrod31w.vercel.run/health` 200 · `/openapi.json` 200 · `/refresh/status` 200 (2026-10-10T01:42:07Z, again 01:54:00Z after the restart below); legacy `sb-3az18qgrrd3p` `/health` 200; `sb-1gek6bq0m1au` `/health` **410** (expired) | `web/proof/health-probe.log` |
+| Backend data (live API, 2026-10-10T01:45Z) | 137 rows / **137 with `logo_url`** (136 companies + firm); **202 news items, 184 with `image_url` (91 %)**, all 202 with `fetched_at` on 2026-10-09/10; newest `published_at` 2026-10-08 after the fix below | — |
+| Fix shipped in this pass | one refreshed item carried a **future** `published_at` (2026-11-18, an event listing) and sorted as the newest news. `src/refresh.ts` now passes every recovered date through `plausibleDate()` (reject > today+1 d or > 3 y old); the live DB row was nulled and the backend restarted at 01:53:56Z with the DB preserved (`/health` 200, scheduler re-armed, next tick 02:53:56Z); `npm test` 11/11 | `web/proof/action-log-orchestrator.log` |

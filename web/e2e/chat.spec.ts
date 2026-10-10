@@ -10,6 +10,40 @@ test.describe("Analyst chat — streaming", () => {
 
   test("answer streams incrementally via SSE with plugin activity and sources", async ({ page }, testInfo) => {
     test.setTimeout(MAX_MS + 60_000);
+    // Network-level probe: wrap window.fetch for /api/chat BEFORE the app boots. The response is cloned and the clone's body
+    // is read chunk-by-chunk, recording performance.now() (relative to the fetch call) + the chunk text into window.__chunks.
+    // Playwright's page.route cannot observe a streaming body incrementally, hence the in-page wrapper.
+    await page.addInitScript(() => {
+      const w = window as unknown as { __chunks: { t: number; bytes: number; text: string }[]; __chunkMeta: { fetchAt: number; headersAt: number | null; done: boolean; error: string | null } };
+      w.__chunks = [];
+      w.__chunkMeta = { fetchAt: 0, headersAt: null, done: false, error: null };
+      const orig = window.fetch.bind(window);
+      window.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
+        const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+        if (!url.includes("/api/chat")) return orig(input, init);
+        const t0 = performance.now();
+        w.__chunkMeta.fetchAt = t0;
+        const res = await orig(input, init);
+        w.__chunkMeta.headersAt = performance.now() - t0;
+        if (res.body) {
+          const reader = res.clone().body!.getReader();
+          const dec = new TextDecoder();
+          (async () => {
+            try {
+              for (;;) {
+                const { value, done } = await reader.read();
+                if (done) break;
+                w.__chunks.push({ t: performance.now() - t0, bytes: value.byteLength, text: dec.decode(value, { stream: true }) });
+              }
+              w.__chunkMeta.done = true;
+            } catch (e) {
+              w.__chunkMeta.error = String(e);
+            }
+          })();
+        }
+        return res;
+      };
+    });
     await page.goto("/chat?skip=1");
     const textarea = page.locator("textarea").first();
     await expect(textarea).toBeVisible();
@@ -77,6 +111,27 @@ test.describe("Analyst chat — streaming", () => {
       expect(growth[i].t, `growth[${i}].t > growth[${i - 1}].t`).toBeGreaterThan(growth[i - 1].t);
       expect(growth[i].len).toBeGreaterThan(growth[i - 1].len);
     }
+
+    // 3b. network level: per-chunk timestamps recorded by the injected fetch wrapper
+    const net = await page.evaluate(() => {
+      const w = window as unknown as { __chunks: { t: number; bytes: number; text: string }[]; __chunkMeta: { fetchAt: number; headersAt: number | null; done: boolean; error: string | null } };
+      return { meta: w.__chunkMeta, chunks: w.__chunks.map((c) => ({ t: c.t, bytes: c.bytes })), text: w.__chunks.map((c) => c.text).join("") };
+    });
+    console.log(`[chat-stream] net: headersAt=${net.meta.headersAt?.toFixed(0)}ms chunks=${net.chunks.length} first=${net.chunks[0]?.t.toFixed(0)}ms last=${net.chunks.at(-1)?.t.toFixed(0)}ms done=${net.meta.done} err=${net.meta.error}`);
+    await testInfo.attach("stream-chunks.json", {
+      body: JSON.stringify({ meta: net.meta, chunks: net.chunks, frameTypes: [...net.text.matchAll(/"type":"([A-Z_]+)"/g)].map((m) => m[1]) }, null, 2),
+      contentType: "application/json",
+    });
+    expect(net.meta.error, "fetch wrapper read error").toBeNull();
+    expect(net.chunks.length, "network chunks received").toBeGreaterThanOrEqual(3);
+    expect(net.chunks[0].t, "first network chunk < 5000 ms after fetch()").toBeLessThan(5_000);
+    for (let i = 1; i < net.chunks.length; i++) {
+      expect(net.chunks[i].t, `chunk[${i}].t > chunk[${i - 1}].t`).toBeGreaterThan(net.chunks[i - 1].t);
+    }
+    const toolArgsFrame = net.text.split("\n").find((l) => l.includes('"type":"TOOL_CALL_ARGS"')) ?? "";
+    expect(toolArgsFrame, "TOOL_CALL_ARGS frame present").not.toBe("");
+    // the delta is a JSON string embedded in JSON, so the inner quotes are escaped on the wire
+    expect(toolArgsFrame.replace(/\\"/g, '"'), 'TOOL_CALL_ARGS carries "query":"What did Fervo').toContain('"query":"What did Fervo');
 
     // 4. plugin activity card surfaced the tool call
     await expect(plugin.first()).toBeAttached();

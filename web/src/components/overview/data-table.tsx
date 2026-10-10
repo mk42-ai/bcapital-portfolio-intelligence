@@ -3,8 +3,9 @@ import type { Company } from "@/lib/types";
 import { fmtUsd, fmtPct, fmtScore, fmtDelta } from "@/lib/format";
 import { Badge } from "@/components/ui/badge";
 import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
+import { CompanyLogo } from "@/components/ui/company-logo";
 /** Keyboard-accessible tabular alternative to the treemap/heatmap (WCAG 1.1.1 / 2.1.1). */
-export type TableRow = Pick<Company, "slug" | "name" | "sector" | "region" | "b_capital_role" | "estimated_ticket_size_usd" | "estimated_ownership_pct" | "estimate_confidence" | "estimate_rationale" | "is_focus"> & { score: number; delta: number | null; newsCount: number };
+export type TableRow = Pick<Company, "slug" | "name" | "sector" | "region" | "b_capital_role" | "estimated_ticket_size_usd" | "estimated_ownership_pct" | "estimate_confidence" | "estimate_rationale" | "is_focus"> & { logo_url?: string | null; score: number; delta: number | null; newsCount: number };
 export type SortKey = "name" | "sector" | "region" | "b_capital_role" | "score" | "delta" | "newsCount" | "estimated_ticket_size_usd" | "estimated_ownership_pct" | "estimate_confidence";
 export type SortState = { key: SortKey; dir: "asc" | "desc" };
 const COLS: { key: SortKey; label: string; right?: boolean }[] = [
@@ -25,7 +26,7 @@ export function DataTable({ rows, caption, sort, onSort }: { rows: TableRow[]; c
         <tbody>
           {rows.map((c) => (
             <tr key={c.slug} className="border-t border-border hover:bg-surface-2">
-              <th scope="row" className="px-3 py-2 font-medium"><Link href={`/company/${c.slug}`} className="underline-offset-2 hover:underline">{c.name}</Link>{c.is_focus && <Badge tone="primary" className="ml-2">focus</Badge>}</th>
+              <th scope="row" className="px-3 py-2 font-medium"><span className="inline-flex items-center gap-2"><CompanyLogo name={c.name} src={c.logo_url} size={20} /><Link href={`/company/${c.slug}`} className="underline-offset-2 hover:underline">{c.name}</Link></span>{c.is_focus && <Badge tone="primary" className="ml-2">focus</Badge>}</th>
               <td className="px-3 py-2">{c.sector}</td><td className="px-3 py-2">{c.region}</td><td className="px-3 py-2">{c.b_capital_role}</td>
               <td className="px-3 py-2 text-right tabular-nums">{fmtScore(c.score)}</td><td className="px-3 py-2 text-right tabular-nums">{fmtDelta(c.delta)}</td><td className="px-3 py-2 text-right tabular-nums">{c.newsCount}</td>
               <td className="px-3 py-2 text-right tabular-nums">{fmtUsd(c.estimated_ticket_size_usd)}</td><td className="px-3 py-2 text-right tabular-nums">{fmtPct(c.estimated_ownership_pct)}</td>

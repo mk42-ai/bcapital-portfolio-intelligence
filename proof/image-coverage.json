@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-10-10T00:06:55Z",
+  "companies_total": 136,
+  "with_logo": 136,
+  "by_source": {
+    "existing": 110,
+    "favicon": 6,
+    "og": 20
+  },
+  "missing": []
+}
