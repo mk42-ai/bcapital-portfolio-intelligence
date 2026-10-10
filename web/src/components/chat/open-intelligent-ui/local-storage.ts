@@ -52,7 +52,7 @@ export function localThreadStorage(): ChatStorage {
 export const saveMessages = (threadId: string, messages: Message[]) => write(MSG(threadId), messages);
 
 /** Per-answer provenance (model · reasoning mode · plugin · first-token ms · metrics · thinking trace · typed error), keyed like sources. */
-export type StoredMeta = { model: string; modelId: string; reasoningMode: string; pluginId: string; firstTokenMs: number | null; firstStatusMs: number | null; chunks: number; metrics: Record<string, number> | null; thinking: string; error: { code: string; message: string } | null; at: string };
+export type StoredMeta = { model: string; modelId: string; reasoningMode: string; pluginId: string; pluginIds?: string[]; firstTokenMs: number | null; firstStatusMs: number | null; firstCitationMs?: number | null; totalMs?: number | null; chunks: number; metrics: Record<string, number> | null; thinking: string; error: { code: string; message: string } | null; at: string; summaries?: { index: number; text: string; doneAt: string | null }[]; plan?: { objective: string | null; steps: { id: string; title: string; query?: string; plugins?: string[]; state: "pending" | "running" | "done" | "failed" }[] } | null };
 const META = (h: string) => `bcap.chat.meta.v2.${h}`;
 export const rememberMeta = (key: string, meta: StoredMeta) => write(META(key), meta);
 export const metaFor = (key: string) => read<StoredMeta | null>(META(key), null);
