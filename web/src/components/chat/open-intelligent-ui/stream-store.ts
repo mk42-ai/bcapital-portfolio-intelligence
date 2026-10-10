@@ -27,7 +27,7 @@ export type PlanStep = { id: string; title: string; query?: string; plugins?: st
 export type StepSummary = { index: number; stepId: string; state: "pending" | "done"; text: string; optimistic: boolean; startedAt: number; doneAt?: string };
 export type Prompt =
   | { kind: "clarification"; queries: { question: string; options?: string[] }[] }
-  | { kind: "awaiting_input"; prompt: string; options: string[] }
+  | { kind: "awaiting_input"; prompt: string; options: string[]; inputType?: string; allowCustom?: boolean }
   | { kind: "require_creds"; pluginId: string | null; service: string | null; fields: { key: string; label?: string; type?: string }[] }
   | { kind: "awaiting_browser_action"; action: string | null; message: string | null; url: string | null };
 export type StreamState = {
@@ -137,7 +137,7 @@ export async function teeStream(res: Response, threadId: string, onSession: (sid
             break;
           }
           case CE.clarification: setStream({ prompt: { kind: "clarification", queries: (v.queries as { question: string; options?: string[] }[]) ?? [] }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
-          case CE.awaitingInput: setStream({ prompt: { kind: "awaiting_input", prompt: String(v.prompt ?? ""), options: Array.isArray(v.options) ? v.options.map(String) : [] }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
+          case CE.awaitingInput: setStream({ prompt: { kind: "awaiting_input", prompt: String(v.prompt ?? ""), options: Array.isArray(v.options) ? v.options.map(String) : [], ...(typeof v.inputType === "string" ? { inputType: v.inputType } : {}), ...(typeof v.allowCustom === "boolean" ? { allowCustom: v.allowCustom } : {}) }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
           case CE.requireCreds: setStream({ prompt: { kind: "require_creds", pluginId: (v.pluginId as string) ?? null, service: (v.service as string) ?? null, fields: (v.fields as { key: string; label?: string; type?: string }[]) ?? [] }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
           case CE.awaitingBrowserAction: setStream({ prompt: { kind: "awaiting_browser_action", action: (v.action as string) ?? null, message: (v.message as string) ?? null, url: (v.url as string) ?? null }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
           case CE.filler: setStream({ filler: !!v.on, fillerTick: v.on ? Number(v.tick ?? 0) : 0 }, true); break;

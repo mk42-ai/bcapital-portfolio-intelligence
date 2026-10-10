@@ -31,4 +31,4 @@ export const newsFallbackAsset = (w?: number): string => (w && w >= 320 ? asset(
 
 /** Final-state fallback tiles. Only for the empty state — never instead of a real image. */
 export const FALLBACK_NEWS_TILE: string = ASSET.newsCard;
-export const FALLBACK_LOGO_TILE = "/fallbacks/logo-tile.webp";
+export const FALLBACK_LOGO_TILE = ASSET.companyLogo;

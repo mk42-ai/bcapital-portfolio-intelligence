@@ -21,8 +21,8 @@ test.describe("PitchBook panel", () => {
     const unavailable = card.getByTestId("pb-unavailable");
     if (await unavailable.count()) await expect(unavailable.first()).toContainText("Not available from the PitchBook Investor Finder plugin");
     const view = card.getByTestId("pb-view");
-    if (await view.count()) { await expect(card.getByTestId("pb-header")).toContainText("Pitchbook Investor Finder"); await expect(card.getByTestId("pb-run-now")).toBeVisible(); }
-    if (await card.getByTestId("pb-empty").count()) { await expect(card.getByTestId("pb-empty")).toContainText("No PitchBook data yet"); await expect(card.getByTestId("pb-run-now")).toBeVisible(); }
+    if (await view.count()) { await expect(card.getByTestId("pb-header")).toContainText("Pitchbook Investor Finder"); await expect(card.getByTestId("pb-run-now")).toHaveCount(0); }
+    if (await card.getByTestId("pb-empty").count()) { await expect(card.getByTestId("pb-empty")).toContainText("No PitchBook data yet"); await expect(card.getByTestId("pb-run-now")).toHaveCount(0); }
   });
 
   test("'Ask in chat' lands on /chat with a context chip above the composer (no new thread)", async ({ page }) => {

@@ -86,7 +86,7 @@ ${txt}`; }
   void selectedPlugins; void catalogueName; void MODEL_ID; void MODEL_LABEL; void REASONING_MODE;
   return (
     <div className="chat-shell" data-testid="chat-shell" data-prewarm={prewarmState} data-model-id={MODEL_ID} data-reasoning={REASONING_MODE}>
-      <AgentInterface llm={llm} storage={storage} agentName="Portfolio analyst" theme={{ mode: "light", lightTheme: responseTheme }} starters={starters} starterVariant="short" components={{ AssistantMessage, UserMessage: UserBubble, ToolCallTimeline: PluginTimeline }} scrollVariant="always">
+      <AgentInterface llm={llm} storage={storage} agentName="Analyst" theme={{ mode: "light", lightTheme: responseTheme }} starters={starters} starterVariant="short" components={{ AssistantMessage, UserMessage: UserBubble, ToolCallTimeline: PluginTimeline }} scrollVariant="always">
         {/* Mode C sidebar with no children: OpenUI's "Portfolio analyst" thread column is DELETED — threads live in the global nav rail. */}
         <AgentInterface.Sidebar>{null}</AgentInterface.Sidebar>
         <AgentInterface.Welcome><ChatWelcome companies={ctxCompanies} /></AgentInterface.Welcome>

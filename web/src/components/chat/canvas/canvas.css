@@ -12,10 +12,3 @@
 .chat-canvas .openui-agent-thread-scroll-area { overscroll-behavior: contain; }
 /* Windowed (older) messages: skip layout/paint until scrolled near (bounded thread). */
 .chat-canvas [data-windowed="true"] { content-visibility: auto; contain-intrinsic-size: auto 240px; }
-.chat-inspector { position: absolute; top: 0; right: 0; bottom: 0; width: min(360px, 100%); transform: translateX(100%); transition: transform 160ms ease; border-left: 1px solid #e5e7eb; background: #fff; display: flex; flex-direction: column; z-index: 30; }
-.chat-inspector[data-open="true"] { transform: none; box-shadow: -8px 0 24px -16px rgb(0 0 0 / 25%); }
-.chat-inspector__head { display: flex; align-items: center; justify-content: space-between; height: 48px; padding: 0 16px; border-bottom: 1px solid #e5e7eb; }
-.chat-inspector__title { font-size: 13px; font-weight: 600; }
-.chat-inspector__close { display: inline-grid; place-items: center; width: 28px; height: 28px; border: 0; border-radius: 6px; background: transparent; color: #4b5563; cursor: pointer; }
-.chat-inspector__body { flex: 1 1 auto; min-height: 0; overflow: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
-@media (prefers-reduced-motion: reduce) { .chat-inspector { transition: none; } }
