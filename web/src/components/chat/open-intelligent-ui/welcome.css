@@ -1,0 +1,37 @@
+/* Empty-thread canvas (Agent 7). Specificity is intentionally higher than the legacy `.oiu-welcome*` rules in shell.css. */
+.oiu-welcome.bc-welcome {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px; width: 100%; max-width: 640px; margin: 0 auto; padding: 0 16px; text-align: center;
+}
+.oiu-welcome.bc-welcome .bc-welcome__art { display: block; width: 160px; height: 160px; object-fit: contain; margin: 0 auto; user-select: none; pointer-events: none; }
+.oiu-welcome.bc-welcome .oiu-welcome__title {
+  margin: 0; font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif); font-size: 16px; line-height: 24px; font-weight: 600; letter-spacing: -0.1px; color: #111827; white-space: nowrap;
+}
+.oiu-welcome.bc-welcome .oiu-welcome__chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.oiu-welcome.bc-welcome .oiu-welcome__chip {
+  display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px; border: 1px solid #e5e7eb; border-radius: 9999px; background: #ffffff; font-size: 12px; line-height: 1; color: #374151;
+}
+.oiu-welcome.bc-welcome .oiu-welcome__dot { width: 6px; height: 6px; border-radius: 9999px; background: var(--brand-green, #0AC985); }
+.oiu-welcome.bc-welcome .oiu-welcome__chip-score { font-variant-numeric: tabular-nums; color: #6b7280; }
+.oiu-welcome.bc-welcome .oiu-welcome__starters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: 100%; margin-top: 8px; }
+.oiu-welcome.bc-welcome .oiu-welcome__starter {
+  display: flex; align-items: flex-start; gap: 8px; min-height: 72px; padding: 12px; border: 1px solid #e5e7eb; border-radius: 12px; background: #ffffff;
+  text-align: left; font-size: 12px; line-height: 16px; color: #374151; cursor: pointer; transition: border-color 150ms ease, background-color 150ms ease;
+}
+.oiu-welcome.bc-welcome .bc-welcome__icon { flex: none; width: 14px; height: 14px; margin-top: 1px; color: var(--brand-green-ink, #047857); }
+.oiu-welcome.bc-welcome .bc-welcome__starter-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.oiu-welcome.bc-welcome .oiu-welcome__starter strong { display: block; font-weight: 600; color: #111827; }
+.oiu-welcome.bc-welcome .oiu-welcome__starter-prompt { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: #6b7280; }
+.oiu-welcome.bc-welcome .oiu-welcome__starter:not(:disabled):hover, .oiu-welcome.bc-welcome .oiu-welcome__starter:focus-visible { border-color: var(--brand-green, #0AC985); background: var(--brand-green-soft, #E6FAF3); outline: none; }
+.oiu-welcome.bc-welcome .oiu-welcome__starter:disabled { opacity: 0.6; cursor: default; }
+/* Centre the whole empty state in the full-height thread; the library's welcome screen is already a flex column. */
+.chat-shell .openui-agent-container:has(.bc-welcome) .openui-agent-welcome-screen { justify-content: center; align-items: center; height: 100%; }
+.chat-shell .openui-agent-container:has(.bc-welcome) .openui-agent-welcome-screen__content,
+.chat-shell .openui-agent-container:has(.bc-welcome) .openui-agent-welcome-screen__header { align-items: center; text-align: center; }
+@media (max-width: 640px) {
+  .oiu-welcome.bc-welcome { gap: 12px; }
+  .oiu-welcome.bc-welcome .bc-welcome__art { width: 120px; height: 120px; }
+  .oiu-welcome.bc-welcome .oiu-welcome__starters { grid-template-columns: 1fr; }
+  .oiu-welcome.bc-welcome .oiu-welcome__starter { min-height: 0; }
+  .oiu-welcome.bc-welcome .oiu-welcome__starter-prompt { display: none; }
+}
