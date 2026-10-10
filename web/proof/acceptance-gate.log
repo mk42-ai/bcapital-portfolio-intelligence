@@ -96,3 +96,1110 @@ SECURITY: assets=35 bytes=3465245; key VALUE hits assets=0 html=0; literal ONDEM
 2026-10-10T01:56:52.202Z END   fixprobe 1440x900 ok=False http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=201 foreign=0 font-icons=0 emoji=0", "images": "{\\\"rendered\\\":12,\\\"total\\\":197,\\\"pct\\\":6,\\\"placeholders\\\":0,\\\"broken\\\""} fails=[] shots=[]
 LOOP 1 RESULTS (fresh profiles): routes 16/16 PASS on HTTP/console/page-errors/light/Lucide/logo/badge/no-XFO; iframe 2/2 PASS; security 0 key hits.
 LOOP 1 DEFECTS: (D1) news-card images: company page 0/4 cards with a decoded image (all 'no image' placeholders), /news 0 decoded in the initial viewport (85/197 have an image_url, all lazy and below the fold; 112 have none) → <95% coverage. (D2) chat first status event 996/1007 ms turn 1, 523/718 ms turn 2 (>300 ms): the bridge awaited the OnDemand session-create + query fetch BEFORE returning the Response, so no byte reached the browser until upstream answered. (D3) TTFT 56–79 s (OnDemand Perplexity research phase precedes the first fulfillment token) — not fixable client-side; (D4) Portfolio Plugin still 'registration pending' (POST /plugin/v1 → 400 'schema is required'); (D5) mobile turn 2 answer notes the Perplexity tool returned "Not enough credits" (upstream account quota) — answer still streamed from stored portfolio data.
+2026-10-10T02:01:06.197Z commit 314b10c; REDEPLOY to the SAME sandbox sbx_W6xF81UAEW2qdPnN9oq1oNwR3FhW (preview URL unchanged)
+2026-10-10T02:02:53.785Z LOOP 2 RERUN START (post-fix build eUdXLxv3NGo7WS8S6xCwn) — chat two-turn gate desktop+mobile + captures launched; route matrix follows
+2026-10-10T02:02:53.848Z START chat-2turn 1440x900 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:02:55.852Z START chat-2turn 1440x900 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:02:56.857Z START chat-2turn 1440x900 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:02:57.867Z START chat-2turn 1440x900 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:03:15.344Z START root 1440x900 https://sb-3umbne3uc2g2.vercel.run/
+2026-10-10T02:03:25.969Z END   root 1440x900 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=10 foreign=0 font-icons=0 emoji=0", "badge": "badge live (no fetched stamp on this page)", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":"} fails=[] shots=['gate-root-1440x900.png']
+2026-10-10T02:03:26.011Z START root 390x844 https://sb-3umbne3uc2g2.vercel.run/
+2026-10-10T02:03:36.881Z END   root 390x844 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=10 foreign=0 font-icons=0 emoji=0", "badge": "badge live (no fetched stamp on this page)", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":"} fails=[] shots=['gate-root-390x844.png']
+2026-10-10T02:03:36.923Z START onboarding 1440x900 https://sb-3umbne3uc2g2.vercel.run/onboarding
+2026-10-10T02:03:40.931Z END   onboarding 1440x900 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=10 foreign=0 font-icons=0 emoji=0", "badge": "badge live (no fetched stamp on this page)", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":"} fails=[] shots=['gate-onboarding-1440x900.png']
+2026-10-10T02:03:40.973Z START onboarding 390x844 https://sb-3umbne3uc2g2.vercel.run/onboarding
+2026-10-10T02:03:43.806Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-turn1-t1s-1440x900.png']
+2026-10-10T02:03:45.022Z END   onboarding 390x844 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=10 foreign=0 font-icons=0 emoji=0", "badge": "badge live (no fetched stamp on this page)", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":"} fails=[] shots=['gate-onboarding-390x844.png']
+2026-10-10T02:03:45.069Z START overview 1440x900 https://sb-3umbne3uc2g2.vercel.run/overview?skip=1
+2026-10-10T02:03:46.949Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-turn1-t3s-1440x900.png']
+2026-10-10T02:03:49.527Z END   overview 1440x900 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=26 foreign=0 font-icons=0 emoji=0", "badge": "badge live fetched 2026-10-10T02:03:45Z age=4s", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":"} fails=[] shots=['gate-overview-1440x900.png']
+2026-10-10T02:03:49.570Z START overview 390x844 https://sb-3umbne3uc2g2.vercel.run/overview?skip=1
+2026-10-10T02:03:50.918Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-turn1-t6s-1440x900.png']
+2026-10-10T02:03:54.162Z END   overview 390x844 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=26 foreign=0 font-icons=0 emoji=0", "badge": "badge live fetched 2026-10-10T02:03:50Z age=3s", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":"} fails=[] shots=['gate-overview-390x844.png']
+2026-10-10T02:03:54.205Z START company 1440x900 https://sb-3umbne3uc2g2.vercel.run/company/fervo-energy?skip=1
+2026-10-10T02:04:02.200Z END   company 1440x900 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=13 foreign=0 font-icons=0 emoji=0", "badge": "badge live (no fetched stamp on this page)", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":7,\\\"total\\\":8,\\\"pct\\\":88,\\\"placeholders\\\":0,\\\"broken\\\":1"} fails=[] shots=['gate-company-1440x900.png']
+2026-10-10T02:04:02.242Z START company 390x844 https://sb-3umbne3uc2g2.vercel.run/company/fervo-energy?skip=1
+2026-10-10T02:04:10.195Z END   company 390x844 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=13 foreign=0 font-icons=0 emoji=0", "badge": "badge live (no fetched stamp on this page)", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":7,\\\"total\\\":8,\\\"pct\\\":88,\\\"placeholders\\\":0,\\\"broken\\\":1"} fails=[] shots=['gate-company-390x844.png']
+2026-10-10T02:04:10.237Z START news 1440x900 https://sb-3umbne3uc2g2.vercel.run/news?skip=1
+2026-10-10T02:04:20.162Z END   news 1440x900 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=201 foreign=0 font-icons=0 emoji=0", "badge": "badge live fetched 2026-10-10T02:03:27Z age=53s", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":12,\\\"total\\\":197,\\\"pct\\\":6,\\\"placeholders\\\":0,\\\"broken\\\""} fails=[] shots=['gate-news-1440x900.png']
+2026-10-10T02:04:20.204Z START news 390x844 https://sb-3umbne3uc2g2.vercel.run/news?skip=1
+2026-10-10T02:04:31.116Z END   news 390x844 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=201 foreign=0 font-icons=0 emoji=0", "badge": "badge live fetched 2026-10-10T02:03:27Z age=63s", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":8,\\\"total\\\":197,\\\"pct\\\":4,\\\"placeholders\\\":0,\\\"broken\\\":"} fails=[] shots=['gate-news-390x844.png']
+2026-10-10T02:04:31.159Z START settings 1440x900 https://sb-3umbne3uc2g2.vercel.run/settings?skip=1
+2026-10-10T02:04:35.374Z END   settings 1440x900 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=10 foreign=0 font-icons=0 emoji=0", "badge": "badge live (no fetched stamp on this page)", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":"} fails=[] shots=['gate-settings-1440x900.png']
+2026-10-10T02:04:35.417Z START settings 390x844 https://sb-3umbne3uc2g2.vercel.run/settings?skip=1
+2026-10-10T02:04:39.679Z END   settings 390x844 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=10 foreign=0 font-icons=0 emoji=0", "badge": "badge live (no fetched stamp on this page)", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":"} fails=[] shots=['gate-settings-390x844.png']
+2026-10-10T02:04:39.722Z START chat 1440x900 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:04:44.091Z END   chat 1440x900 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=17 foreign=0 font-icons=0 emoji=0", "badge": "badge live fetched 2026-10-10T02:04:32Z age=12s", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":"} fails=[] shots=['gate-chat-1440x900.png']
+2026-10-10T02:04:44.133Z START chat 390x844 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:04:48.638Z END   chat 390x844 ok=False http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=17 foreign=0 font-icons=0 emoji=0", "badge": "badge live fetched 2026-10-10T02:04:32Z age=16s", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":"} fails=['expect-selector:zero-size'] shots=['gate-chat-390x844.png']
+2026-10-10T02:05:10.503Z START chat 390x844 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:05:14.916Z END   chat 390x844 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=17 foreign=0 font-icons=0 emoji=0", "badge": "badge live fetched 2026-10-10T02:04:32Z age=42s", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":"} fails=[] shots=['gate-chat-390x844.png']
+2026-10-10T02:05:14.958Z START company-images 1440x900 https://sb-3umbne3uc2g2.vercel.run/company/fervo-energy?skip=1
+2026-10-10T02:05:34.881Z END   company-images 1440x900 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=13 foreign=0 font-icons=0 emoji=0", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":7,\\\"total\\\":8,\\\"pct\\\":88,\\\"placeholders\\\":0,\\\"broken\\\":1"} fails=[] shots=['gate-company-images-1440x900.png']
+2026-10-10T02:05:34.922Z START news-images 1440x900 https://sb-3umbne3uc2g2.vercel.run/news?skip=1
+2026-10-10T02:05:55.587Z END   news-images 1440x900 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=201 foreign=0 font-icons=0 emoji=0", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":14,\\\"total\\\":197,\\\"pct\\\":7,\\\"placeholders\\\":0,\\\"broken\\\""} fails=[] shots=['gate-news-images-1440x900.png']
+2026-10-10T02:05:55.629Z START company-images 390x844 https://sb-3umbne3uc2g2.vercel.run/company/fervo-energy?skip=1
+2026-10-10T02:06:15.506Z END   company-images 390x844 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=13 foreign=0 font-icons=0 emoji=0", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":7,\\\"total\\\":8,\\\"pct\\\":88,\\\"placeholders\\\":0,\\\"broken\\\":1"} fails=[] shots=['gate-company-images-390x844.png']
+2026-10-10T02:06:15.548Z START news-images 390x844 https://sb-3umbne3uc2g2.vercel.run/news?skip=1
+2026-10-10T02:06:33.004Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-2turn-1440x900.png']
+2026-10-10T02:06:33.078Z START chat-2turn 390x844 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:06:36.217Z END   news-images 390x844 ok=True http=200 console=0 pageErr=0 std={"logo": "logo /brand/b-capital-logo.svg natural=211x43", "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=201 foreign=0 font-icons=0 emoji=0", "headers": "HEAD 200 no-XFO csp=frame-ancestors *;", "images": "{\\\"rendered\\\":8,\\\"total\\\":197,\\\"pct\\\":4,\\\"placeholders\\\":0,\\\"broken\\\":"} fails=[] shots=['gate-news-images-390x844.png']
+2026-10-10T02:06:48.063Z START company-404 1440x900 https://sb-3umbne3uc2g2.vercel.run/company/does-not-exist-xyz?skip=1
+2026-10-10T02:06:52.786Z END   company-404 1440x900 ok=False http=404 console=1 pageErr=0 std={"light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no", "lucide": "lucide svgs=6 foreign=0 font-icons=0 emoji=0", "headers": "HEAD 404 no-XFO csp=frame-ancestors *;"} fails=['http-status:404'] shots=['gate-company-404-1440x900.png']
+2026-10-10T02:06:53.218Z START iframe-harness 1440x900 http://127.0.0.1:8788/index.html?u=https%3A%2F%2Fsb-3umbne3uc2g2.vercel.run%2Foverview%3Fskip%3D1
+2026-10-10T02:07:01.794Z END   iframe-harness 1440x900 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-iframe-overview-1440x900.png']
+2026-10-10T02:07:01.836Z START iframe-harness 390x844 http://127.0.0.1:8788/index.html?u=https%3A%2F%2Fsb-3umbne3uc2g2.vercel.run%2Foverview%3Fskip%3D1
+2026-10-10T02:07:10.608Z END   iframe-harness 390x844 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-iframe-overview-390x844.png']
+2026-10-10T02:10:06.880Z LOOP 2 desktop chat: firstStatus 27/31 ms, chunks 232/236, sources 13 (13/13 favicons decoded), [DONE] both turns, Stop→Send ok; TTFT 83.6/56.5 s (upstream research phase); 'sameSession' flagged false only because the probe compared against the x-ondemand-session HEADER which the first turn no longer sends (id now arrives in the ondemand.session frame) — turn 2 request DID carry a sessionId and the server echoed the same id; probe updated to read the frame, rerunning for clean evidence
+2026-10-10T02:10:29.789Z END   chat-2turn 390x844 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-2turn-mobile-390x844.png']
+2026-10-10T02:12:20.294Z START chat-2turn 1440x900 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:12:21.309Z START chat-2turn 390x844 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:12:22.304Z START chat-2turn 1440x900 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:12:23.308Z START chat-2turn 1440x900 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:12:24.315Z START chat-2turn 1440x900 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:12:25.313Z START chat-2turn 1440x900 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:12:26.245Z LOOP 2b: chat two-turn rerun (desktop+mobile, session-id probe fixed) + desktop turn1-final/turn2 captures launched
+2026-10-10T02:14:43.402Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-turn2-t3s-1440x900.png']
+2026-10-10T02:14:53.075Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-turn2-t1s-1440x900.png']
+2026-10-10T02:14:59.435Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-turn1-final-1440x900.png']
+2026-10-10T02:15:05.909Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-turn2-t6s-1440x900.png']
+2026-10-10T02:15:40.858Z END   chat-2turn 1440x900 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-2turn-1440x900.png']
+2026-10-10T02:16:02.540Z END   chat-2turn 390x844 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-2turn-mobile-390x844.png']
+2026-10-10T02:16:04.655Z START chat-2turn 390x844 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:16:05.667Z START chat-2turn 390x844 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:16:06.677Z START chat-2turn 390x844 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:16:07.674Z START chat-2turn 390x844 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:16:52.670Z END   chat-2turn 390x844 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-m-turn1-t1s-390x844.png']
+2026-10-10T02:16:55.721Z END   chat-2turn 390x844 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-m-turn1-t3s-390x844.png']
+2026-10-10T02:16:59.655Z END   chat-2turn 390x844 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-m-turn1-t6s-390x844.png']
+2026-10-10T02:18:55.288Z END   chat-2turn 390x844 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-m-turn1-final-390x844.png']
+2026-10-10T02:19:47.668Z START chat-2turn 390x844 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:19:48.677Z START chat-2turn 390x844 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+2026-10-10T02:19:49.684Z START chat-2turn 390x844 https://sb-3umbne3uc2g2.vercel.run/chat?skip=1
+
+=== LOOP 2 CHAT GATE (post-fix, fresh profiles) — per-chunk SSE record ===
+## DESKTOP 1440x900 verdict="GATE FAIL: ttft {\"chunks\":[162,210],\"firstStatus\":[58,32],\"ttft\":[69950,57025],\"sources\":7,\"fav\":\"7/7\"}" console=0 page=0 screenshot=['gate-chat-2turn-1440x900.png']
+### turn 1 submitted 2026-10-10T02:13:07.085Z HTTP 200 headers-at=+57ms first-status=+58ms ttft=+69950ms chunks=162 data-lines=216 bytes=25987 [DONE]=True total=+81228ms monotonic=True max-gap=10001ms session=…483abb session-reused=None
+    request body: {"threadId": "f306b27f-18cd-4cbf-be53-4199c159949a", "messages": 1, "lastUser": "Which of my context companies moved most since the last sentiment run, and why?", "context": {"sessionId": null, "pluginIds": ["plugin-1722260873"], "endpointId": "predefined-claude-fable-5.1", "externalUserId": "INV-001", "systemContextChars": 4127}}
+    TOOL_CALL_ARGS: {"plugin":"Perplexity","pluginId":"plugin-1722260873","query":"Which of my context companies moved most since the last sentiment run, and why?","endpointId":"predefined-claude-fable-5.1"}
+    event types: {"RUN_STARTED": 1, "CUSTOM": 11, "TOOL_CALL_START": 1, "TOOL_CALL_ARGS": 1, "TOOL_CALL_END": 1, "TEXT_MESSAGE_START": 1, "TEXT_MESSAGE_CONTENT": 196, "TOOL_CALL_RESULT": 1, "TEXT_MESSAGE_END": 1, "RUN_FINISHED": 1}
+      +58:799:5  +921:177:1  +10056:137:1  +20055:137:1  +30056:137:1  +40055:137:1  +50056:137:1  +60056:137:1  +69950:2579:23  +69962:1259:11  +69972:1271:11  +69974:466:4
+      +69978:125:1  +70020:114:1  +70056:134:1  +70085:126:1  +70146:119:1  +70209:109:1  +70270:116:1  +70335:115:1  +70396:118:1  +70463:102:1  +70540:118:1  +70582:113:1
+      +70644:111:1  +70711:109:1  +70772:106:1  +70833:104:1  +70897:104:1  +70958:104:1  +71020:104:1  +71083:104:1  +71149:115:1  +71207:120:1  +71269:116:1  +71334:119:1
+      +71395:109:1  +71460:103:1  +71522:106:1  +71583:119:1  +71645:102:1  +71709:116:1  +71769:113:1  +71832:117:1  +71894:103:1  +71957:116:1  +72022:117:1  +72082:117:1
+      +72147:121:1  +72208:113:1  +72270:117:1  +72335:114:1  +72395:116:1  +72459:113:1  +72524:126:1  +72583:112:1  +72646:114:1  +72707:122:1  +72770:117:1  +72831:112:1
+      +72894:120:1  +72960:104:1  +73020:108:1  +73083:114:1  +73210:215:2  +73271:120:1  +73336:114:1  +73394:112:1  +73474:118:1  +73521:133:1  +73583:120:1  +73644:129:1
+      +73710:121:1  +73771:135:1  +73833:112:1  +73896:117:1  +73959:127:1  +74022:118:1  +74084:122:1  +74145:118:1  +74209:118:1  +74270:115:1  +74335:124:1  +74395:104:1
+      +74461:120:1  +74521:117:1  +74583:121:1  +74645:116:1  +74708:114:1  +74777:103:1  +74843:128:1  +74896:121:1  +74965:113:1  +75024:127:1  +75082:117:1  +75146:125:1
+      +75210:111:1  +75271:126:1  +75333:115:1  +75399:110:1  +75458:118:1  +75520:120:1  +75583:112:1  +75646:117:1  +75712:111:1  +75770:120:1  +75833:106:1  +75906:105:1
+      +75959:114:1  +76021:127:1  +76084:104:1  +76145:113:1  +76207:123:1  +76271:114:1  +76332:113:1  +76399:103:1  +76460:123:1  +76521:108:1  +76584:109:1  +76648:105:1
+      +76708:112:1  +76770:117:1  +76832:119:1  +76896:113:1  +76958:121:1  +77022:123:1  +77084:117:1  +77146:118:1  +77207:113:1  +77270:115:1  +77335:107:1  +77398:109:1
+      +77460:117:1  +77522:124:1  +77583:113:1  +77646:108:1  +77707:113:1  +77770:118:1  +77833:107:1  +77896:117:1  +77965:109:1  +78031:116:1  +78082:113:1  +78146:102:1
+      +78208:107:1  +78271:126:1  +78332:118:1  +78395:106:1  +78457:106:1  +78520:128:1  +78583:116:1  +78645:127:1  +78707:126:1  +78770:110:1  +78833:102:1  +78896:115:1
+      +78959:125:1  +79022:128:1  +79083:118:1  +79146:133:1  +80056:135:1  +81228:1300:5
+### turn 2 submitted 2026-10-10T02:14:28.659Z HTTP 200 headers-at=+31ms first-status=+32ms ttft=+57025ms chunks=210 data-lines=232 bytes=27940 [DONE]=True total=+71134ms monotonic=True max-gap=10001ms session=…483abb session-reused=True
+    request body: {"threadId": "f306b27f-18cd-4cbf-be53-4199c159949a", "messages": 5, "lastUser": "Tell me more about Fervo Energy and the Cape Station first-power milestone \u2014 what changed since 2026-09-24 and how does it affect the sentiment score?", "context": {"sessionId": "<sid>", "pluginIds": ["plugin-1722260873"], "endpointId": "predefined-claude-fable-5.1", "externalUserId": "INV-001", "systemContextCha
+    TOOL_CALL_ARGS: {"plugin":"Perplexity","pluginId":"plugin-1722260873","query":"Tell me more about Fervo Energy and the Cape Station first-power milestone — what changed since 2026-09-24 and how does it affect the sentiment score?","endpointId":"predefined-claude-fable-5.1"}
+    event types: {"RUN_STARTED": 1, "CUSTOM": 10, "TOOL_CALL_START": 1, "TOOL_CALL_ARGS": 1, "TOOL_CALL_END": 1, "TEXT_MESSAGE_START": 1, "TEXT_MESSAGE_CONTENT": 213, "TOOL_CALL_RESULT": 1, "TEXT_MESSAGE_END": 1, "RUN_FINISHED": 1}
+      +32:866:5  +659:177:1  +10033:137:1  +20029:137:1  +30030:137:1  +40031:137:1  +50030:137:1  +57025:344:3  +57029:223:2  +57031:465:4  +57034:367:3  +57043:357:3
+      +57043:474:4  +57046:232:2  +57107:107:1  +57170:133:1  +57233:116:1  +57297:107:1  +57359:119:1  +57420:116:1  +57483:122:1  +57555:108:1  +57609:133:1  +57680:125:1
+      +57733:132:1  +57797:124:1  +57858:121:1  +57922:113:1  +57990:115:1  +58058:118:1  +58111:119:1  +58174:120:1  +58236:119:1  +58300:115:1  +58361:117:1  +58422:114:1
+      +58487:125:1  +58550:109:1  +58615:109:1  +58675:126:1  +58738:124:1  +58798:102:1  +58862:116:1  +58923:119:1  +58986:124:1  +59049:117:1  +59116:117:1  +59183:121:1
+      +59240:123:1  +59300:117:1  +59367:114:1  +59427:116:1  +59487:119:1  +59550:114:1  +59613:123:1  +59677:117:1  +59744:127:1  +59806:119:1  +59866:136:1  +59927:123:1
+      +59990:117:1  +60031:134:1  +60053:116:1  +60116:109:1  +60178:102:1  +60247:111:1  +60305:116:1  +60363:111:1  +60428:111:1  +60490:109:1  +60551:104:1  +60612:104:1
+      +60677:104:1  +60754:104:1  +60803:104:1  +60861:105:1  +60926:126:1  +60984:108:1  +61048:114:1  +61110:104:1  +61174:110:1  +61235:124:1  +61303:111:1  +61361:116:1
+      +61426:117:1  +61486:113:1  +61550:118:1  +61614:112:1  +61673:122:1  +61739:103:1  +61798:122:1  +61861:112:1  +61926:120:1  +61987:119:1  +62050:104:1  +62111:134:1
+      +62173:113:1  +62238:107:1  +62299:115:1  +62374:119:1  +62424:113:1  +62487:117:1  +62549:118:1  +62615:108:1  +62675:123:1  +62743:113:1  +62799:113:1  +62861:109:1
+      +62927:107:1  +62986:107:1  +63048:108:1  +63111:107:1  +63172:107:1  +63234:109:1  +63300:110:1  +63361:124:1  +63423:109:1  +63489:114:1  +63552:103:1  +63609:116:1
+      +63673:122:1  +63735:111:1  +63797:106:1  +63860:104:1  +63924:115:1  +63991:119:1  +64050:130:1  +64112:114:1  +64173:121:1  +64237:114:1  +64297:111:1  +64360:118:1
+      +64424:131:1  +64492:114:1  +64548:109:1  +64609:108:1  +64672:109:1  +64738:118:1  +64797:114:1  +64860:109:1  +64929:105:1  +64982:107:1  +65048:124:1  +65123:117:1
+      +65172:125:1  +65233:117:1  +65296:106:1  +65359:119:1  +65422:110:1  +65485:120:1  +65550:116:1  +65617:114:1  +65671:108:1  +65734:107:1  +65797:118:1  +65859:108:1
+      +65922:114:1  +65984:109:1  +66051:118:1  +66108:122:1  +66172:111:1  +66236:103:1  +66296:112:1  +66358:106:1  +66445:115:1  +66484:104:1  +66545:103:1  +66611:119:1
+      +66670:109:1  +66734:126:1  +66795:116:1  +66858:123:1  +66932:108:1  +66982:120:1  +67045:119:1  +67107:121:1  +67169:128:1  +67240:120:1  +67295:120:1  +67360:104:1
+      +67422:124:1  +67486:127:1  +67574:114:1  +67619:115:1  +67670:116:1  +67733:112:1  +67795:119:1  +67857:106:1  +67931:113:1  +67984:116:1  +68045:108:1  +68108:114:1
+      +68169:117:1  +68235:113:1  +68295:113:1  +68360:117:1  +68420:128:1  +68483:130:1  +68545:124:1  +68609:111:1  +68672:121:1  +68741:132:1  +68795:102:1  +68857:127:1
+      +68920:125:1  +68982:120:1  +69045:124:1  +69096:102:1  +70032:135:1  +71134:1228:5
+    t1+1s     2026-10-10T02:13:08.094Z button=Cancel message  assistant-chars=    0 sources= 0 favicons=0/0 empty-{}=False cards=['Searching with Perplexity | “Which of my context companies moved most since the last sentiment run, and why?”']
+    t1+3s     2026-10-10T02:13:10.095Z button=Cancel message  assistant-chars=    0 sources= 0 favicons=0/0 empty-{}=False cards=['Searching with Perplexity | “Which of my context companies moved most since the last sentiment run, and why?”']
+    t1+6s     2026-10-10T02:13:13.096Z button=Cancel message  assistant-chars=    0 sources= 0 favicons=0/0 empty-{}=False cards=['Searching with Perplexity | “Which of my context companies moved most since the last sentiment run, and why?”']
+    t1-final  2026-10-10T02:14:28.656Z button=Send message    assistant-chars= 3065 sources= 4 favicons=4/4 empty-{}=False cards=['Perplexity searched | “Which of my context companies moved most since the last sentiment run, and why?” | 4 sources']
+    t2+1s     2026-10-10T02:14:29.670Z button=Cancel message  assistant-chars= 3065 sources= 4 favicons=4/4 empty-{}=False cards=['Perplexity searched | “Which of my context companies moved most since the last sentiment run, and why?” | 4 sources', 'Searching with Perplexity | “Tell me more about Fervo Energy and the Cape Station first-power milestone — what changed since 2026-09-24 and ']
+    t2+3s     2026-10-10T02:14:31.671Z button=Cancel message  assistant-chars= 3065 sources= 4 favicons=4/4 empty-{}=False cards=['Perplexity searched | “Which of my context companies moved most since the last sentiment run, and why?” | 4 sources', 'Searching with Perplexity | “Tell me more about Fervo Energy and the Cape Station first-power milestone — what changed since 2026-09-24 and ']
+    t2+6s     2026-10-10T02:14:34.673Z button=Cancel message  assistant-chars= 3065 sources= 4 favicons=4/4 empty-{}=False cards=['Perplexity searched | “Which of my context companies moved most since the last sentiment run, and why?” | 4 sources', 'Searching with Perplexity | “Tell me more about Fervo Energy and the Cape Station first-power milestone — what changed since 2026-09-24 and ']
+    t2-final  2026-10-10T02:15:40.232Z button=Send message    assistant-chars= 3314 sources= 7 favicons=7/7 empty-{}=False cards=['Perplexity searched | “Which of my context companies moved most since the last sentiment run, and why?” | 4 sources', 'Perplexity searched | “Tell me more about Fervo Energy and the Cape Station first-power milestone — what changed since 2026-09-24 and how do']
+    cards(final)=['Perplexity searched | “Which of my context companies moved most since the last sentiment run, and why?” | 4 sources', 'Perplexity searched | “Tell me more about Fervo Energy and the Cape Station first-power milestone — what changed since 2026-09-24 and how does it affect the sentiment score?” | 3 sources']
+    sources(final)=7 favicons decoded=7/7 stopSeen=True finalBtn=Send message emptyBracesEver=False errorBanner=False keyLeakInDOM=False
+    answer turn 1: Perplexity AI moved the most since the last sentiment run, with a +0.50 swing — the largest of the five by a wide margin. It climbed from roughly –0.35 into neutral territory (now +0.15). The rest of the group moved far less:  | Company | Current score | Change since last run | |---|---|---| | Perplexity AI | +0.15 (neutral) | +0.50 | | WRITER | +0.40 (positive) | +0.30 | | Fervo Energy | +0.80 (v
+    answer turn 2: Fervo Energy — Cape Station milestone update  What changed since 2026-09-24  2026-09-30 — First GeoBlock at Cape Station reached commercial operation. The initial 33 MW block came online one day ahead of schedule. This is the event behind the "first-power" headline; in Fervo's own announcement it's framed as a declaration of commercial operation rather than just first power. 2026-10-01 — TechCrunc
+## MOBILE 390x844 verdict="GATE FAIL: ttft {\"chunks\":[231,263],\"firstStatus\":[30,27],\"ttft\":[81341,59241],\"sources\":9,\"fav\":\"9/9\"}" console=0 page=0 screenshot=['gate-chat-2turn-mobile-390x844.png']
+### turn 1 submitted 2026-10-10T02:13:07.746Z HTTP 200 headers-at=+28ms first-status=+30ms ttft=+81341ms chunks=231 data-lines=265 bytes=31738 [DONE]=True total=+96723ms monotonic=True max-gap=10001ms session=…483abc session-reused=None
+    request body: {"threadId": "4535f527-c57a-46de-9a77-892a0b9006f2", "messages": 1, "lastUser": "Which of my context companies moved most since the last sentiment run, and why?", "context": {"sessionId": null, "pluginIds": ["plugin-1722260873"], "endpointId": "predefined-claude-fable-5.1", "externalUserId": "INV-001", "systemContextChars": 4127}}
+    TOOL_CALL_ARGS: {"plugin":"Perplexity","pluginId":"plugin-1722260873","query":"Which of my context companies moved most since the last sentiment run, and why?","endpointId":"predefined-claude-fable-5.1"}
+    event types: {"RUN_STARTED": 1, "CUSTOM": 12, "TOOL_CALL_START": 1, "TOOL_CALL_ARGS": 1, "TOOL_CALL_END": 1, "TEXT_MESSAGE_START": 1, "TEXT_MESSAGE_CONTENT": 244, "TOOL_CALL_RESULT": 1, "TEXT_MESSAGE_END": 1, "RUN_FINISHED": 1}
+      +30:799:5  +620:177:1  +10024:137:1  +20023:137:1  +30024:137:1  +40024:137:1  +50023:137:1  +60024:137:1  +70024:137:1  +80024:137:1  +81341:442:4  +81351:1107:10
+      +81352:366:3  +81361:1115:10  +81362:231:2  +81364:228:2  +81366:111:1  +81368:239:2  +81385:111:1  +81450:120:1  +81513:116:1  +81576:111:1  +81640:121:1  +81699:122:1
+      +81760:116:1  +81833:123:1  +81889:117:1  +81949:112:1  +82013:107:1  +82073:119:1  +82135:113:1  +82199:119:1  +82260:110:1  +82324:120:1  +82389:107:1  +82449:129:1
+      +82510:105:1  +82576:110:1  +82639:121:1  +82697:104:1  +82760:107:1  +82823:106:1  +82887:120:1  +82947:115:1  +83010:115:1  +83072:106:1  +83136:110:1  +83198:122:1
+      +83267:102:1  +83323:122:1  +83385:115:1  +83448:114:1  +83518:117:1  +83574:116:1  +83636:105:1  +83698:111:1  +83761:104:1  +83823:104:1  +83887:104:1  +83949:104:1
+      +84012:104:1  +84076:104:1  +84137:120:1  +84198:121:1  +84264:115:1  +84323:119:1  +84384:102:1  +84447:103:1  +84514:108:1  +84572:119:1  +84635:102:1  +84697:116:1
+      +84761:113:1  +84826:123:1  +84885:114:1  +84950:105:1  +85013:116:1  +85073:112:1  +85140:121:1  +85197:122:1  +85285:115:1  +85326:118:1  +85394:133:1  +85448:120:1
+      +85510:129:1  +85573:114:1  +85634:105:1  +85708:114:1  +85765:132:1  +85828:117:1  +85887:104:1  +85953:124:1  +86012:104:1  +86073:115:1  +86137:126:1  +86199:120:1
+      +86261:111:1  +86325:112:1  +86385:126:1  +86461:113:1  +86514:103:1  +86573:134:1  +86635:102:1  +86721:130:1  +86763:106:1  +86827:130:1  +86887:110:1  +86947:106:1
+      +87014:112:1  +87074:112:1  +87135:120:1  +87198:108:1  +87260:117:1  +87323:114:1  +87385:110:1  +87448:118:1  +87510:104:1  +87573:126:1  +87637:108:1  +87697:120:1
+      +87760:117:1  +87824:114:1  +87887:119:1  +87947:120:1  +88010:120:1  +88072:116:1  +88137:113:1  +88197:121:1  +88260:105:1  +88322:111:1  +88398:115:1  +88449:112:1
+      +88510:121:1  +88576:115:1  +88636:127:1  +88699:115:1  +88760:125:1  +88823:118:1  +88888:122:1  +88947:123:1  +89015:118:1  +89073:108:1  +89137:119:1  +89198:116:1
+      +89260:109:1  +89327:110:1  +89385:116:1  +89448:116:1  +89513:105:1  +89576:111:1  +89636:114:1  +89699:112:1  +89763:105:1  +89837:126:1  +89885:110:1  +89946:116:1
+      +90011:109:1  +90026:134:1  +90072:104:1  +90136:113:1  +90199:127:1  +90260:117:1  +90323:117:1  +90386:115:1  +90448:110:1  +90510:116:1  +90576:102:1  +90637:121:1
+      +90698:123:1  +90761:117:1  +90822:118:1  +90884:104:1  +90947:120:1  +91010:119:1  +91075:118:1  +91137:121:1  +91203:112:1  +91262:104:1  +91322:105:1  +91387:113:1
+      +91451:118:1  +91527:107:1  +91573:120:1  +91634:118:1  +91699:115:1  +91761:102:1  +91822:102:1  +91888:118:1  +91955:109:1  +92011:117:1  +92072:105:1  +92140:123:1
+      +92199:116:1  +92265:114:1  +92324:117:1  +92385:118:1  +92450:104:1  +92511:111:1  +92577:109:1  +92636:104:1  +92701:104:1  +92762:104:1  +92822:104:1  +92887:104:1
+      +92947:102:1  +93010:113:1  +93072:114:1  +93141:102:1  +93197:111:1  +93260:124:1  +93321:106:1  +93447:132:1  +93511:128:1  +93572:111:1  +93635:106:1  +93697:117:1
+      +93761:107:1  +93886:126:1  +93946:105:1  +94011:113:1  +94072:126:1  +94134:119:1  +94197:107:1  +94266:119:1  +94326:107:1  +94384:113:1  +94449:112:1  +94509:117:1
+      +94573:126:1  +94634:129:1  +96720:1600:5
+### turn 2 submitted 2026-10-10T02:14:44.831Z HTTP 200 headers-at=+26ms first-status=+27ms ttft=+59241ms chunks=263 data-lines=288 bytes=34247 [DONE]=True total=+76674ms monotonic=True max-gap=10003ms session=…483abc session-reused=True
+    request body: {"threadId": "4535f527-c57a-46de-9a77-892a0b9006f2", "messages": 5, "lastUser": "Tell me more about Fervo Energy and the Cape Station first-power milestone \u2014 what changed since 2026-09-24 and how does it affect the sentiment score?", "context": {"sessionId": "<sid>", "pluginIds": ["plugin-1722260873"], "endpointId": "predefined-claude-fable-5.1", "externalUserId": "INV-001", "systemContextCha
+    TOOL_CALL_ARGS: {"plugin":"Perplexity","pluginId":"plugin-1722260873","query":"Tell me more about Fervo Energy and the Cape Station first-power milestone — what changed since 2026-09-24 and how does it affect the sentiment score?","endpointId":"predefined-claude-fable-5.1"}
+    event types: {"RUN_STARTED": 1, "CUSTOM": 10, "TOOL_CALL_START": 1, "TOOL_CALL_ARGS": 1, "TOOL_CALL_END": 1, "TEXT_MESSAGE_START": 1, "TEXT_MESSAGE_CONTENT": 269, "TOOL_CALL_RESULT": 1, "TEXT_MESSAGE_END": 1, "RUN_FINISHED": 1}
+      +27:866:5  +352:177:1  +10025:137:1  +20026:137:1  +30029:137:1  +40027:137:1  +50027:137:1  +59241:332:3  +59244:553:5  +59247:467:4  +59253:601:5  +59255:234:2
+      +59258:367:3  +59261:240:2  +59271:120:1  +59333:115:1  +59397:117:1  +59466:118:1  +59520:123:1  +59589:119:1  +59645:115:1  +59708:115:1  +59778:114:1  +59833:112:1
+      +59897:114:1  +59961:128:1  +60021:112:1  +60028:133:1  +60084:125:1  +60145:116:1  +60209:117:1  +60273:122:1  +60333:119:1  +60396:118:1  +60458:121:1  +60520:121:1
+      +60584:123:1  +60647:116:1  +60708:116:1  +60775:106:1  +60859:119:1  +60897:115:1  +60958:118:1  +61028:115:1  +61085:118:1  +61147:103:1  +61210:125:1  +61271:115:1
+      +61338:118:1  +61398:115:1  +61461:118:1  +61523:121:1  +61585:121:1  +61651:109:1  +61711:118:1  +61783:126:1  +61836:130:1  +61899:112:1  +61958:108:1  +62021:128:1
+      +62085:122:1  +62147:104:1  +62210:104:1  +62272:117:1  +62333:116:1  +62397:109:1  +62479:122:1  +62523:111:1  +62584:107:1  +62646:114:1  +62709:123:1  +62771:112:1
+      +62835:120:1  +62897:126:1  +62960:116:1  +63026:123:1  +63085:120:1  +63148:129:1  +63211:121:1  +63282:106:1  +63354:108:1  +63396:103:1  +63464:121:1  +63523:104:1
+      +63585:109:1  +63647:110:1  +63710:109:1  +63774:125:1  +63834:107:1  +63899:104:1  +63959:105:1  +64026:118:1  +64090:112:1  +64150:117:1  +64210:123:1  +64272:116:1
+      +64337:124:1  +64399:120:1  +64460:118:1  +64523:105:1  +64593:117:1  +64649:109:1  +64712:127:1  +64770:103:1  +64834:116:1  +64903:110:1  +64958:103:1  +65021:136:1
+      +65088:114:1  +65146:122:1  +65209:113:1  +65278:112:1  +65352:115:1  +65400:106:1  +65468:106:1  +65525:107:1  +65585:122:1  +65646:121:1  +65708:110:1  +65771:103:1
+      +65835:110:1  +65899:113:1  +65958:108:1  +66021:114:1  +66083:107:1  +66146:114:1  +66208:115:1  +66271:119:1  +66333:115:1  +66399:118:1  +66458:111:1  +66521:120:1
+      +66584:125:1  +66645:109:1  +66710:117:1  +66773:117:1  +66849:120:1  +66895:111:1  +66961:114:1  +67022:124:1  +67100:104:1  +67149:109:1  +67209:108:1  +67278:120:1
+      +67338:116:1  +67399:103:1  +67469:130:1  +67521:118:1  +67585:104:1  +67645:119:1  +67709:112:1  +67774:106:1  +67836:110:1  +67896:103:1  +67961:106:1  +68021:114:1
+      +68082:119:1  +68147:126:1  +68211:112:1  +68333:111:1  +68395:118:1  +68458:104:1  +68521:105:1  +68584:118:1  +68646:122:1  +68709:105:1  +68777:106:1  +68833:105:1
+      +68894:105:1  +68959:113:1  +69020:103:1  +69082:117:1  +69149:112:1  +69209:116:1  +69270:106:1  +69340:109:1  +69395:116:1  +69459:104:1  +69521:124:1  +69584:116:1
+      +69646:109:1  +69721:124:1  +69770:108:1  +69833:114:1  +69895:112:1  +69959:126:1  +70022:120:1  +70028:133:1  +70082:109:1  +70146:121:1  +70210:106:1  +70274:114:1
+      +70335:121:1  +70395:114:1  +70460:110:1  +70519:110:1  +70582:116:1  +70644:111:1  +70708:110:1  +70771:118:1  +70833:125:1  +70894:112:1  +70972:116:1  +71019:114:1
+      +71084:116:1  +71145:112:1  +71209:118:1  +71270:125:1  +71335:103:1  +71395:116:1  +71479:115:1  +71559:106:1  +71592:113:1  +71663:110:1  +71706:103:1  +71770:112:1
+      +71834:111:1  +71895:113:1  +71958:119:1  +72019:114:1  +72083:114:1  +72152:113:1  +72209:116:1  +72268:110:1  +72330:112:1  +72394:112:1  +72457:104:1  +72524:124:1
+      +72582:105:1  +72643:115:1  +72708:113:1  +72769:117:1  +72832:117:1  +72897:109:1  +72957:123:1  +73021:113:1  +73082:124:1  +73144:128:1  +73207:123:1  +73270:128:1
+      +73332:116:1  +73395:126:1  +73457:123:1  +73519:107:1  +73584:114:1  +73647:116:1  +73709:118:1  +73769:119:1  +73830:122:1  +73896:103:1  +73958:107:1  +74023:115:1
+      +74084:124:1  +74147:112:1  +74208:127:1  +74271:117:1  +74333:117:1  +74394:114:1  +74456:129:1  +74522:105:1  +74580:105:1  +74632:108:1  +76674:1228:5
+    t1+1s     2026-10-10T02:13:08.754Z button=Cancel message  assistant-chars=    0 sources= 0 favicons=0/0 empty-{}=False cards=['Searching with Perplexity | “Which of my context companies moved most since the last sentiment run, and why?”']
+    t1+3s     2026-10-10T02:13:10.755Z button=Cancel message  assistant-chars=    0 sources= 0 favicons=0/0 empty-{}=False cards=['Searching with Perplexity | “Which of my context companies moved most since the last sentiment run, and why?”']
+    t1+6s     2026-10-10T02:13:13.756Z button=Cancel message  assistant-chars=    0 sources= 0 favicons=0/0 empty-{}=False cards=['Searching with Perplexity | “Which of my context companies moved most since the last sentiment run, and why?”']
+    t1-final  2026-10-10T02:14:44.828Z button=Send message    assistant-chars= 3729 sources= 6 favicons=6/6 empty-{}=False cards=['Perplexity searched | “Which of my context companies moved most since the last sentiment run, and why?” | 6 sources']
+    t2+1s     2026-10-10T02:14:45.840Z button=Cancel message  assistant-chars= 3729 sources= 6 favicons=6/6 empty-{}=False cards=['Perplexity searched | “Which of my context companies moved most since the last sentiment run, and why?” | 6 sources', 'Searching with Perplexity | “Tell me more about Fervo Energy and the Cape Station first-power milestone — what changed since 2026-09-24 and ']
+    t2+3s     2026-10-10T02:14:47.841Z button=Cancel message  assistant-chars= 3729 sources= 6 favicons=6/6 empty-{}=False cards=['Perplexity searched | “Which of my context companies moved most since the last sentiment run, and why?” | 6 sources', 'Searching with Perplexity | “Tell me more about Fervo Energy and the Cape Station first-power milestone — what changed since 2026-09-24 and ']
+    t2+6s     2026-10-10T02:14:50.842Z button=Cancel message  assistant-chars= 3729 sources= 6 favicons=6/6 empty-{}=False cards=['Perplexity searched | “Which of my context companies moved most since the last sentiment run, and why?” | 6 sources', 'Searching with Perplexity | “Tell me more about Fervo Energy and the Cape Station first-power milestone — what changed since 2026-09-24 and ']
+    t2-final  2026-10-10T02:16:01.909Z button=Send message    assistant-chars= 3966 sources= 9 favicons=9/9 empty-{}=False cards=['Perplexity searched | “Which of my context companies moved most since the last sentiment run, and why?” | 6 sources', 'Perplexity searched | “Tell me more about Fervo Energy and the Cape Station first-power milestone — what changed since 2026-09-24 and how do']
+    cards(final)=['Perplexity searched | “Which of my context companies moved most since the last sentiment run, and why?” | 6 sources', 'Perplexity searched | “Tell me more about Fervo Energy and the Cape Station first-power milestone — what changed since 2026-09-24 and how does it affect the sentiment score?” | 3 sources']
+    sources(final)=9 favicons decoded=9/9 stopSeen=True finalBtn=Send message emptyBracesEver=False errorBanner=False keyLeakInDOM=False
+    answer turn 1: Biggest mover: Perplexity AI (+0.50) — the largest swing of the five, and the only one that crossed a sentiment band.  Sentiment delta ranking  | Company | Current score | Change | Label | |---|---|---|---| | Perplexity AI | +0.15 | +0.50 | neutral (up from negative) | | WRITER | +0.40 | +0.30 | positive | | Fervo Energy | +0.80 | +0.20 | very positive | | Apptronik | +0.45 | +0.15 | positive | | 
+    answer turn 2: Fervo Energy (Nasdaq: FRVO) — Cape Station update  What changed since 2026-09-24 (timeline)  | Date | Event | |---|---| | 2026-09-30 | First Cape Station GeoBlock (33 MW) reached commercial operation — one day ahead of schedule | | 2026-10-01 | TechCrunch coverage: "World's first enhanced geothermal power plant completed in just 23 months" (https://techcrunch.com/2026/10/01/worlds-first-enhanced-g
+2026-10-10T02:22:09.244Z END   chat-2turn 390x844 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-m-turn2-t6s-390x844.png']
+2026-10-10T02:22:32.848Z END   chat-2turn 390x844 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-m-turn2-t1s-390x844.png']
+2026-10-10T02:22:33.422Z END   chat-2turn 390x844 ok=True http=200 console=0 pageErr=0 std={} fails=[] shots=['gate-chat-m-turn2-t3s-390x844.png']
+
+=== FINAL REPORT (JSON) ===
+{
+ "gate_started_at": "2026-10-10T01:37:02Z",
+ "gate_finished_at": "2026-10-10T02:22:42Z",
+ "loops_run": 2,
+ "final_preview_url": "https://sb-3umbne3uc2g2.vercel.run",
+ "backend_url": "https://sb-3az18qgrrd3p.vercel.run",
+ "final_commit": "314b10c (fix) + docs commit below",
+ "build_id_after_fix": "eUdXLxv3NGo7WS8S6xCwn",
+ "backend_checks": {
+  "health": {
+   "status": 200,
+   "latency_ms": 99,
+   "body_excerpt": "{\"status\":\"ok\",\"db_record_count\":136,\"db_record_count_total\":137,\"last_ingest\":{\"id\":\"ing-2026-10-10T014006Z-fc4a9e\",\"source\":\"workflow\",\"received_at\":\"2026-10-10T01:40:06Z\",\"status\":\"ok\"},\"model\":\"predefined-claude-fable-5.1\",\"deferred_plugins\":[\"plugin-1777018662\"],\"version\":\"1.0.0\"}"
+  },
+  "openapi": {
+   "status": 200,
+   "latency_ms": 78,
+   "body_excerpt": "openapi 3.1.0 'B Capital Portfolio Intelligence API' servers[0]=https://sb-3az18qgrrd3p.vercel.run paths=/health /openapi.json /companies /companies/{slug} /companies/{slug}/news /companies/{slug}/sentiment /sentiment/portfolio /search POST /ingest"
+  },
+  "refresh": {
+   "status": "n/a \u2014 the API exposes no /refresh route (GET /refresh \u2192 404); documented refresh = workflows/replay.ts \u2192 POST /ingest (X-Ingest-Secret)",
+   "replay": {
+    "executions": 7,
+    "status": [
+     200,
+     200,
+     200,
+     200,
+     200,
+     200,
+     200
+    ],
+    "latency_ms": [
+     162,
+     106,
+     83,
+     88,
+     100,
+     121,
+     36
+    ],
+    "at": "2026-10-10T01:40:03Z..01:40:06Z",
+    "effect": "news 15 \u2192 197 (85 with image_url), 2 items dated 2026-10-09, /health last_ingest ing-2026-10-10T014006Z-fc4a9e",
+    "frontend_badge_after": "fetched 2026-10-10T01:47:02Z (age 4 s) on /overview"
+   }
+  }
+ },
+ "pass_fail_matrix": {
+  "/ 1440x900": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": "n/a (no company/news cards on this route)",
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": "n/a",
+   "portfolio_plugin_registered_and_enabled": "n/a",
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=10 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live (no fetched stamp on this page)",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":0}"
+    },
+    "extra": [],
+    "screenshot": [
+     "gate-root-1440x900.png"
+    ],
+    "ts": "2026-10-10T02:03:15.343Z"
+   }
+  },
+  "/ 390x844": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": "n/a (no company/news cards on this route)",
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": "n/a",
+   "portfolio_plugin_registered_and_enabled": "n/a",
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=10 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live (no fetched stamp on this page)",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":0}"
+    },
+    "extra": [],
+    "screenshot": [
+     "gate-root-390x844.png"
+    ],
+    "ts": "2026-10-10T02:03:26.011Z"
+   }
+  },
+  "/onboarding 1440x900": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": "n/a (no company/news cards on this route)",
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": "n/a",
+   "portfolio_plugin_registered_and_enabled": "n/a",
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=10 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live (no fetched stamp on this page)",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":0}"
+    },
+    "extra": [],
+    "screenshot": [
+     "gate-onboarding-1440x900.png"
+    ],
+    "ts": "2026-10-10T02:03:36.923Z"
+   }
+  },
+  "/onboarding 390x844": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": "n/a (no company/news cards on this route)",
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": "n/a",
+   "portfolio_plugin_registered_and_enabled": "n/a",
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=10 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live (no fetched stamp on this page)",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":0}"
+    },
+    "extra": [],
+    "screenshot": [
+     "gate-onboarding-390x844.png"
+    ],
+    "ts": "2026-10-10T02:03:40.972Z"
+   }
+  },
+  "/overview 1440x900": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": "n/a (no company/news cards on this route)",
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": true,
+   "portfolio_plugin_registered_and_enabled": "n/a",
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=26 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live fetched 2026-10-10T02:03:45Z age=4s",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":0}"
+    },
+    "extra": [
+     "\"1 x 2026-10-09; tiles=136\""
+    ],
+    "screenshot": [
+     "gate-overview-1440x900.png"
+    ],
+    "ts": "2026-10-10T02:03:45.069Z"
+   }
+  },
+  "/overview 390x844": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": "n/a (no company/news cards on this route)",
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": true,
+   "portfolio_plugin_registered_and_enabled": "n/a",
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=26 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live fetched 2026-10-10T02:03:50Z age=3s",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":0}"
+    },
+    "extra": [
+     "\"1 x 2026-10-09; tiles=136\""
+    ],
+    "screenshot": [
+     "gate-overview-390x844.png"
+    ],
+    "ts": "2026-10-10T02:03:49.569Z"
+   }
+  },
+  "/company/fervo-energy 1440x900": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": {
+    "pass": true,
+    "cards": 7,
+    "visible": 7,
+    "visibleDecoded": 7,
+    "visiblePending": 0,
+    "visiblePct": 100,
+    "placeholders": 0,
+    "note": "probe scrolls the first card into view and waits 6 s so lazy thumbs decode; kinds = company-logo / favicon / article",
+    "screenshot": "gate-company-images-1440x900.png"
+   },
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": "n/a",
+   "portfolio_plugin_registered_and_enabled": "n/a",
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=13 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live (no fetched stamp on this page)",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":7,\\\"total\\\":8,\\\"pct\\\":88,\\\"placeholders\\\":0,\\\"broken\\\":1}"
+    },
+    "extra": [
+     "\"{\\\"cards\\\":7,\\\"decoded\\\":6,\\\"placeholders\\\":0,\\\"visible\\\":0,\\\"visibleDecoded\\\":0,\\\"visiblePct\\\":100}\""
+    ],
+    "screenshot": [
+     "gate-company-1440x900.png"
+    ],
+    "ts": "2026-10-10T02:03:54.204Z"
+   }
+  },
+  "/company/fervo-energy 390x844": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": {
+    "pass": true,
+    "cards": 7,
+    "visible": 5,
+    "visibleDecoded": 5,
+    "visiblePending": 0,
+    "visiblePct": 100,
+    "placeholders": 0,
+    "note": "probe scrolls the first card into view and waits 6 s so lazy thumbs decode; kinds = company-logo / favicon / article",
+    "screenshot": "gate-company-images-390x844.png"
+   },
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": "n/a",
+   "portfolio_plugin_registered_and_enabled": "n/a",
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=13 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live (no fetched stamp on this page)",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":7,\\\"total\\\":8,\\\"pct\\\":88,\\\"placeholders\\\":0,\\\"broken\\\":1}"
+    },
+    "extra": [
+     "\"{\\\"cards\\\":7,\\\"decoded\\\":6,\\\"placeholders\\\":0,\\\"visible\\\":0,\\\"visibleDecoded\\\":0,\\\"visiblePct\\\":100}\""
+    ],
+    "screenshot": [
+     "gate-company-390x844.png"
+    ],
+    "ts": "2026-10-10T02:04:02.242Z"
+   }
+  },
+  "/company/<unknown-slug> 1440x900": {
+   "http_200": {
+    "expected_404": true,
+    "status": 404
+   },
+   "zero_console_errors": {
+    "value": true,
+    "note": "only Chrome's own 'Failed to load resource: 404' for the intentional 404 document"
+   },
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": "n/a",
+   "visible_card_images_ge_95pct": "n/a (no company/news cards on this route)",
+   "live_badge_fresh_le_10min": "n/a",
+   "news_dated_2026_10_09_present": "n/a",
+   "portfolio_plugin_registered_and_enabled": "n/a",
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=6 foreign=0 font-icons=0 emoji=0",
+     "headers": "HEAD 404 no-XFO csp=frame-ancestors *;"
+    },
+    "extra": [],
+    "screenshot": [
+     "gate-company-404-1440x900.png"
+    ],
+    "ts": "2026-10-10T02:06:48.063Z"
+   }
+  },
+  "/company/<unknown-slug> 390x844": {
+   "note": "single run at 1440x900; HTTP 404 is viewport-independent (curl HTTP/2 404)"
+  },
+  "/news 1440x900": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": {
+    "pass": true,
+    "cards": 197,
+    "visible": 6,
+    "visibleDecoded": 6,
+    "visiblePending": 0,
+    "visiblePct": 100,
+    "placeholders": 0,
+    "note": "probe scrolls the first card into view and waits 6 s so lazy thumbs decode; kinds = company-logo / favicon / article",
+    "screenshot": "gate-news-images-1440x900.png"
+   },
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": true,
+   "portfolio_plugin_registered_and_enabled": "n/a",
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=201 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live fetched 2026-10-10T02:03:27Z age=53s",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":12,\\\"total\\\":197,\\\"pct\\\":6,\\\"placeholders\\\":0,\\\"broken\\\":185}"
+    },
+    "extra": [
+     "\"{\\\"cards\\\":197,\\\"decoded\\\":12,\\\"placeholders\\\":0,\\\"visible\\\":4,\\\"visibleDecoded\\\":4,\\\"visiblePct\\\":100}\"",
+     "\"{\\\"d0910\\\":1,\\\"status\\\":\\\"197 of 197 items\\\"}\""
+    ],
+    "screenshot": [
+     "gate-news-1440x900.png"
+    ],
+    "ts": "2026-10-10T02:04:10.237Z"
+   }
+  },
+  "/news 390x844": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": {
+    "pass": true,
+    "cards": 197,
+    "visible": 4,
+    "visibleDecoded": 4,
+    "visiblePending": 0,
+    "visiblePct": 100,
+    "placeholders": 0,
+    "note": "probe scrolls the first card into view and waits 6 s so lazy thumbs decode; kinds = company-logo / favicon / article",
+    "screenshot": "gate-news-images-390x844.png"
+   },
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": true,
+   "portfolio_plugin_registered_and_enabled": "n/a",
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=201 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live fetched 2026-10-10T02:03:27Z age=63s",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":8,\\\"total\\\":197,\\\"pct\\\":4,\\\"placeholders\\\":0,\\\"broken\\\":189}"
+    },
+    "extra": [
+     "\"{\\\"cards\\\":197,\\\"decoded\\\":8,\\\"placeholders\\\":0,\\\"visible\\\":0,\\\"visibleDecoded\\\":0,\\\"visiblePct\\\":100}\"",
+     "\"{\\\"d0910\\\":1,\\\"status\\\":\\\"197 of 197 items\\\"}\""
+    ],
+    "screenshot": [
+     "gate-news-390x844.png"
+    ],
+    "ts": "2026-10-10T02:04:20.204Z"
+   }
+  },
+  "/chat 1440x900": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": "n/a (no company/news cards on this route)",
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": "n/a",
+   "portfolio_plugin_registered_and_enabled": false,
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=17 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live fetched 2026-10-10T02:04:32Z age=12s",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":0}"
+    },
+    "extra": [
+     "\"{\\\"pending\\\":true}\""
+    ],
+    "screenshot": [
+     "gate-chat-1440x900.png"
+    ],
+    "ts": "2026-10-10T02:04:39.721Z"
+   },
+   "chat_two_turn": {
+    "first_status_ms": [
+     58,
+     32
+    ],
+    "first_status_lt_300ms": true,
+    "ttft_ms": [
+     69950,
+     57025
+    ],
+    "ttft_lt_1500ms": false,
+    "chunk_count": [
+     162,
+     210
+    ],
+    "monotonic": true,
+    "done_received": [
+     true,
+     true
+    ],
+    "session_reused": true,
+    "plugin_card_query_ok": true,
+    "sources_with_images": "7/7",
+    "stop_to_send_reset": true
+   }
+  },
+  "/chat 390x844": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": "n/a (no company/news cards on this route)",
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": "n/a",
+   "portfolio_plugin_registered_and_enabled": false,
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=17 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live fetched 2026-10-10T02:04:32Z age=42s",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":0}"
+    },
+    "extra": [
+     "\"visible composer: openui-agent-thread-composer__input\""
+    ],
+    "screenshot": [
+     "gate-chat-390x844.png"
+    ],
+    "ts": "2026-10-10T02:05:10.503Z"
+   },
+   "chat_two_turn": {
+    "first_status_ms": [
+     30,
+     27
+    ],
+    "first_status_lt_300ms": true,
+    "ttft_ms": [
+     81341,
+     59241
+    ],
+    "ttft_lt_1500ms": false,
+    "chunk_count": [
+     231,
+     263
+    ],
+    "monotonic": true,
+    "done_received": [
+     true,
+     true
+    ],
+    "session_reused": true,
+    "plugin_card_query_ok": true,
+    "sources_with_images": "9/9",
+    "stop_to_send_reset": true
+   }
+  },
+  "/settings 1440x900": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": "n/a (no company/news cards on this route)",
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": "n/a",
+   "portfolio_plugin_registered_and_enabled": false,
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=10 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live (no fetched stamp on this page)",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":0}"
+    },
+    "extra": [
+     "\"{\\\"pending\\\":true,\\\"toggleDisabled\\\":true}\""
+    ],
+    "screenshot": [
+     "gate-settings-1440x900.png"
+    ],
+    "ts": "2026-10-10T02:04:31.159Z"
+   }
+  },
+  "/settings 390x844": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": true,
+   "lucide_only": true,
+   "brand_logo_naturalWidth_gt_0": true,
+   "visible_card_images_ge_95pct": "n/a (no company/news cards on this route)",
+   "live_badge_fresh_le_10min": true,
+   "news_dated_2026_10_09_present": "n/a",
+   "portfolio_plugin_registered_and_enabled": false,
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {
+     "logo": "logo /brand/b-capital-logo.svg natural=211x43",
+     "light": "light body=rgb(255, 255, 255) lum=255 html.light color-scheme=light no-dark-class",
+     "lucide": "lucide svgs=10 foreign=0 font-icons=0 emoji=0",
+     "badge": "badge live (no fetched stamp on this page)",
+     "headers": "HEAD 200 no-XFO csp=frame-ancestors *;",
+     "images": "{\\\"rendered\\\":0,\\\"total\\\":0,\\\"pct\\\":100,\\\"placeholders\\\":0,\\\"broken\\\":0}"
+    },
+    "extra": [
+     "\"{\\\"pending\\\":true,\\\"toggleDisabled\\\":true}\""
+    ],
+    "screenshot": [
+     "gate-settings-390x844.png"
+    ],
+    "ts": "2026-10-10T02:04:35.417Z"
+   }
+  },
+  "iframe harness (cross-origin embed of /overview) 1440x900": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": "n/a (opaque cross-origin frame; verified on direct loads)",
+   "lucide_only": "n/a",
+   "brand_logo_naturalWidth_gt_0": "n/a",
+   "visible_card_images_ge_95pct": "n/a (no company/news cards on this route)",
+   "live_badge_fresh_le_10min": "n/a",
+   "news_dated_2026_10_09_present": "n/a",
+   "portfolio_plugin_registered_and_enabled": "n/a",
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {},
+    "extra": [
+     "\"{\\\"loaded\\\":true,\\\"loadMs\\\":275,\\\"frame\\\":\\\"1440x717\\\"}\""
+    ],
+    "screenshot": [
+     "gate-iframe-overview-1440x900.png"
+    ],
+    "ts": "2026-10-10T02:06:53.217Z"
+   }
+  },
+  "iframe harness (cross-origin embed of /overview) 390x844": {
+   "http_200": true,
+   "zero_console_errors": true,
+   "zero_page_errors": true,
+   "light_theme_only": "n/a (opaque cross-origin frame; verified on direct loads)",
+   "lucide_only": "n/a",
+   "brand_logo_naturalWidth_gt_0": "n/a",
+   "visible_card_images_ge_95pct": "n/a (no company/news cards on this route)",
+   "live_badge_fresh_le_10min": "n/a",
+   "news_dated_2026_10_09_present": "n/a",
+   "portfolio_plugin_registered_and_enabled": "n/a",
+   "no_x_frame_options": true,
+   "evidence": {
+    "std": {},
+    "extra": [
+     "\"{\\\"loaded\\\":true,\\\"loadMs\\\":527,\\\"frame\\\":\\\"500x661\\\"}\""
+    ],
+    "screenshot": [
+     "gate-iframe-overview-390x844.png"
+    ],
+    "ts": "2026-10-10T02:07:01.835Z"
+   }
+  }
+ },
+ "image_coverage": {
+  "/company/fervo-energy 1440x900": {
+   "pass": true,
+   "cards": 7,
+   "visible": 7,
+   "visibleDecoded": 7,
+   "visiblePending": 0,
+   "visiblePct": 100,
+   "placeholders": 0,
+   "note": "probe scrolls the first card into view and waits 6 s so lazy thumbs decode; kinds = company-logo / favicon / article",
+   "screenshot": "gate-company-images-1440x900.png"
+  },
+  "/company/fervo-energy 390x844": {
+   "pass": true,
+   "cards": 7,
+   "visible": 5,
+   "visibleDecoded": 5,
+   "visiblePending": 0,
+   "visiblePct": 100,
+   "placeholders": 0,
+   "note": "probe scrolls the first card into view and waits 6 s so lazy thumbs decode; kinds = company-logo / favicon / article",
+   "screenshot": "gate-company-images-390x844.png"
+  },
+  "/news 1440x900": {
+   "pass": true,
+   "cards": 197,
+   "visible": 6,
+   "visibleDecoded": 6,
+   "visiblePending": 0,
+   "visiblePct": 100,
+   "placeholders": 0,
+   "note": "probe scrolls the first card into view and waits 6 s so lazy thumbs decode; kinds = company-logo / favicon / article",
+   "screenshot": "gate-news-images-1440x900.png"
+  },
+  "/news 390x844": {
+   "pass": true,
+   "cards": 197,
+   "visible": 4,
+   "visibleDecoded": 4,
+   "visiblePending": 0,
+   "visiblePct": 100,
+   "placeholders": 0,
+   "note": "probe scrolls the first card into view and waits 6 s so lazy thumbs decode; kinds = company-logo / favicon / article",
+   "screenshot": "gate-news-images-390x844.png"
+  },
+  "/overview": "n/a \u2014 table + SVG treemap, 0 <img> cards (brand logo only)",
+  "note": "loop-1 baseline: company page 0/4 cards with an image (all 'no image' placeholders), /news 0 decoded in viewport, 112/197 placeholders"
+ },
+ "chat_metrics": {
+  "1440x900": {
+   "turn1": {
+    "first_status_ms": 58,
+    "ttft_ms": 69950,
+    "chunk_count": 162,
+    "total_duration_ms": 81228,
+    "bytes": 25987,
+    "session_id": "\u2026483abb",
+    "session_reused": null,
+    "done_received": true,
+    "monotonic": true,
+    "plugin_card_query_ok": true,
+    "request_body_logged": {
+     "threadId": "f306b27f-18cd-4cbf-be53-4199c159949a",
+     "messages": 1,
+     "lastUser": "Which of my context companies moved most since the last sentiment run, and why?",
+     "context": {
+      "sessionId": null,
+      "pluginIds": [
+       "plugin-1722260873"
+      ],
+      "endpointId": "predefined-claude-fable-5.1",
+      "externalUserId": "INV-001",
+      "systemContextChars": 4127
+     }
+    },
+    "submitted_at": "2026-10-10T02:13:07.085Z"
+   },
+   "turn2": {
+    "first_status_ms": 32,
+    "ttft_ms": 57025,
+    "chunk_count": 210,
+    "total_duration_ms": 71134,
+    "bytes": 27940,
+    "session_id": "\u2026483abb",
+    "session_reused": true,
+    "done_received": true,
+    "monotonic": true,
+    "plugin_card_query_ok": true,
+    "request_body_logged": {
+     "threadId": "f306b27f-18cd-4cbf-be53-4199c159949a",
+     "messages": 5,
+     "lastUser": "Tell me more about Fervo Energy and the Cape Station first-power milestone \u2014 what changed since 2026-09-24 and how does it affect the sentiment score?",
+     "context": {
+      "sessionId": "<sid>",
+      "pluginIds": [
+       "plugin-1722260873"
+      ],
+      "endpointId": "predefined-claude-fable-5.1",
+      "externalUserId": "INV-001",
+      "systemContextChars": 4127
+     }
+    },
+    "submitted_at": "2026-10-10T02:14:28.659Z"
+   },
+   "sources_with_images": "7/7",
+   "stop_to_send_reset": true,
+   "empty_card_ever": false
+  },
+  "390x844": {
+   "turn1": {
+    "first_status_ms": 30,
+    "ttft_ms": 81341,
+    "chunk_count": 231,
+    "total_duration_ms": 96723,
+    "bytes": 31738,
+    "session_id": "\u2026483abc",
+    "session_reused": null,
+    "done_received": true,
+    "monotonic": true,
+    "plugin_card_query_ok": true,
+    "request_body_logged": {
+     "threadId": "4535f527-c57a-46de-9a77-892a0b9006f2",
+     "messages": 1,
+     "lastUser": "Which of my context companies moved most since the last sentiment run, and why?",
+     "context": {
+      "sessionId": null,
+      "pluginIds": [
+       "plugin-1722260873"
+      ],
+      "endpointId": "predefined-claude-fable-5.1",
+      "externalUserId": "INV-001",
+      "systemContextChars": 4127
+     }
+    },
+    "submitted_at": "2026-10-10T02:13:07.746Z"
+   },
+   "turn2": {
+    "first_status_ms": 27,
+    "ttft_ms": 59241,
+    "chunk_count": 263,
+    "total_duration_ms": 76674,
+    "bytes": 34247,
+    "session_id": "\u2026483abc",
+    "session_reused": true,
+    "done_received": true,
+    "monotonic": true,
+    "plugin_card_query_ok": true,
+    "request_body_logged": {
+     "threadId": "4535f527-c57a-46de-9a77-892a0b9006f2",
+     "messages": 5,
+     "lastUser": "Tell me more about Fervo Energy and the Cape Station first-power milestone \u2014 what changed since 2026-09-24 and how does it affect the sentiment score?",
+     "context": {
+      "sessionId": "<sid>",
+      "pluginIds": [
+       "plugin-1722260873"
+      ],
+      "endpointId": "predefined-claude-fable-5.1",
+      "externalUserId": "INV-001",
+      "systemContextChars": 4127
+     }
+    },
+    "submitted_at": "2026-10-10T02:14:44.831Z"
+   },
+   "sources_with_images": "9/9",
+   "stop_to_send_reset": true,
+   "empty_card_ever": false
+  }
+ },
+ "defects_found_and_fixed": [
+  {
+   "id": "D1",
+   "description": "News/company cards showed 'no image' placeholders; 0% visible-card image coverage on /company/fervo-energy, 0% above the fold on /news",
+   "root_cause": "NewsCard rendered a placeholder whenever image_url was null (112/197 backend items) and all thumbs were loading=lazy; 8 backend logo_url values are free-text notes ('inline SVG in header') not URLs",
+   "files": [
+    "web/src/components/company/news-thumb.tsx (new)",
+    "web/src/components/company/news-cards.tsx",
+    "web/src/components/news/news-feed.tsx",
+    "web/src/lib/api.ts",
+    "web/src/app/company/[slug]/page.tsx"
+   ],
+   "commit_hash": "314b10c",
+   "verified_at": "2026-10-10T02:05:14Z..02:06:15Z (100% visible cards decoded on both routes/viewports, 0 placeholders)"
+  },
+  {
+   "id": "D2",
+   "description": "First SSE status event \u22481 s after send (996/1007 ms turn 1, 523/718 ms turn 2) \u2014 above the 300 ms gate",
+   "root_cause": "/api/chat awaited the OnDemand session-create and query fetches BEFORE returning the Response, so no byte reached the browser until upstream answered",
+   "files": [
+    "web/src/app/api/chat/route.ts",
+    "web/src/components/chat/open-intelligent-ui/chat-shell.tsx"
+   ],
+   "commit_hash": "314b10c",
+   "verified_at": "2026-10-10T02:13:07Z (first status 58/32 ms desktop, 30/27 ms mobile)"
+  }
+ ],
+ "remaining_failures": [
+  {
+   "id": "D3",
+   "assertion": "TTFT < 1.5 s",
+   "observed": "first answer token at +69.9/+57.0 s (desktop) and +81.3/+59.2 s (mobile)",
+   "why": "OnDemand runs the Perplexity research phase (planning/step_output/plugin_sources frames) for 50\u201380 s before emitting the first fulfillment token; the bridge forwards the first frame in <60 ms and heartbeats every 10 s, so the gap is entirely upstream model/plugin latency and cannot be closed client-side without dropping the plugin",
+   "status": "FAIL (not fixable in this codebase)"
+  },
+  {
+   "id": "D4",
+   "assertion": "Portfolio Plugin registered (non-null id, toggle enabled)",
+   "observed": "'registration pending', id: null, toggle disabled on /chat and /settings",
+   "why": "POST https://api.on-demand.io/plugin/v1 with the documented contract (action.schema = JSON-stringified OpenAPI 3.0.3) \u2192 400 {\"message\":\"schema is required\"}; MCP plugin_v1_plugin_create returned an empty body and no plugin appears in suggest_plugins; ai_generated_tool_create \u2192 Cloudflare 524 origin timeout (2026-10-10T01:45:04Z). Same platform-side block as on 2026-10-09",
+   "status": "FAIL (blocked by OnDemand plugin registration API)"
+  }
+ ],
+ "security_sweep": {
+  "served_assets": 35,
+  "bytes": 3465245,
+  "api_key_value_hits": {
+   "assets": 0,
+   "html_pages": 0,
+   "next_static": 0,
+   "next_server": 0,
+   "dom_after_chat": 0
+  },
+  "literal_ONDEMAND_API_KEY_hits": {
+   "assets": 1,
+   "note": "Settings help text names the env var; no value"
+  },
+  "screenshots_contain_key": false,
+  "browser_request_urls_or_headers_with_key": "none \u2014 browser only calls same-origin /api/chat; the key is attached server-side"
+ },
+ "screenshot_files": [
+  "gate-chat-1440x900.png",
+  "gate-chat-2turn-1440x900.png",
+  "gate-chat-2turn-mobile-390x844.png",
+  "gate-chat-390x844.png",
+  "gate-chat-m-turn1-final-390x844.png",
+  "gate-chat-m-turn1-t1s-390x844.png",
+  "gate-chat-m-turn1-t3s-390x844.png",
+  "gate-chat-m-turn1-t6s-390x844.png",
+  "gate-chat-m-turn2-t1s-390x844.png",
+  "gate-chat-m-turn2-t3s-390x844.png",
+  "gate-chat-m-turn2-t6s-390x844.png",
+  "gate-chat-turn1-final-1440x900.png",
+  "gate-chat-turn1-t1s-1440x900.png",
+  "gate-chat-turn1-t3s-1440x900.png",
+  "gate-chat-turn1-t6s-1440x900.png",
+  "gate-chat-turn2-t1s-1440x900.png",
+  "gate-chat-turn2-t3s-1440x900.png",
+  "gate-chat-turn2-t6s-1440x900.png",
+  "gate-company-1440x900.png",
+  "gate-company-390x844.png",
+  "gate-company-404-1440x900.png",
+  "gate-company-images-1440x900.png",
+  "gate-company-images-390x844.png",
+  "gate-iframe-overview-1440x900.png",
+  "gate-iframe-overview-390x844.png",
+  "gate-news-1440x900.png",
+  "gate-news-390x844.png",
+  "gate-news-images-1440x900.png",
+  "gate-news-images-390x844.png",
+  "gate-onboarding-1440x900.png",
+  "gate-onboarding-390x844.png",
+  "gate-overview-1440x900.png",
+  "gate-overview-390x844.png",
+  "gate-root-1440x900.png",
+  "gate-root-390x844.png",
+  "gate-settings-1440x900.png",
+  "gate-settings-390x844.png"
+ ],
+ "overall_status": "FAIL",
+ "overall_note": "All HTTP/console/page-error/theme/icon/logo/badge/iframe/404/image-coverage/streaming assertions PASS after one fix loop; two assertions remain red for external reasons: TTFT (OnDemand Perplexity research latency) and Portfolio Plugin registration (OnDemand plugin API rejects the documented payload)."
+}
