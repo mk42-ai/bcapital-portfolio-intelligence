@@ -197,12 +197,12 @@ const CitedMarkdown = memo(function CitedMarkdown({ text, known, streaming, onCi
   return <div className="oiu-md" data-testid="answer-markdown"><ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>{md}</ReactMarkdown>{streaming && <span className="oiu-caret" aria-hidden />}</div>;
 });
 
-function SourceList({ sources, compact, live }: { sources: Source[]; compact?: boolean; live?: boolean }) {
+function SourceList({ sources, compact, live, streamingNow }: { sources: Source[]; compact?: boolean; live?: boolean; streamingNow?: boolean }) {
   // Reserved space: the rail always renders (min-height) during a live run so chips appearing never shift the answer below.
   if (!sources.length && !live) return null;
   return (
     <nav className={`oiu-sources${compact ? " oiu-sources--compact" : ""}${live ? " oiu-sources--live" : ""}`} aria-label="Sources" data-testid="sources-rail" data-count={sources.length}>
-      <p className="oiu-sources__title">Sources ({sources.length}){live && !sources.length ? " · waiting for the first citation…" : ""}</p>
+      <p className="oiu-sources__title">Sources ({sources.length}){live && !sources.length ? (streamingNow ? " · waiting for the first citation…" : " · the plugin returned no citations for this answer") : ""}</p>
       <ol className="oiu-sources__list">
         {sources.map((src, i) => (
           <li key={src.url} className="oiu-sources__item oiu-sources__item--in" style={{ animationDelay: `${Math.min(i, 8) * 30}ms` }}>
@@ -354,7 +354,7 @@ const AssistantMessage: AssistantMessageComponent = ({ message, isStreaming }) =
         )}
         {/* Same block order as the live streaming block (badge → sources → text) so the live→final swap at stream end moves nothing. */}
         {!isStreaming && <AnswerBadge meta={meta} />}
-        {!isStreaming && <SourceList sources={rail} live={rail.length === 0 && !meta?.error ? false : undefined} />}
+        {!isStreaming && <SourceList sources={rail} live={meta != null} />}
         <CitedMarkdown text={content || (isStreaming ? "…" : "")} known={meta?.error ? [] : known} streaming={!!isStreaming} onCites={setCites} />
       </div>
     </div>
@@ -414,7 +414,7 @@ const PluginTimeline: ToolCallTimelineComponent = ({ activities, steps, isLast, 
         <div className="oiu-assistant__body">
           {/* Rail + live badge sit ABOVE the growing text so streaming never pushes a layout box that is already painted (CLS ≈ 0). */}
           <AnswerBadge meta={{ pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, totalMs: null, metrics: null }} live />
-          <SourceList sources={railSources} live />
+          <SourceList sources={railSources} live streamingNow />
           <CitedMarkdown text={liveText} known={st.error?.code === "plugin_error" ? [] : st.sources} streaming onCites={setLiveCites} />
         </div>
       </div>

@@ -278,6 +278,8 @@
 .oiu-badge { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin: 10px 0 0; font-size: 11px; color: #5f6b7a; min-height: 18px; }
 .oiu-assistant--streaming .oiu-badge, .oiu-assistant .oiu-badge:first-child { margin: 0 0 8px; }
 .oiu-sources:not(.oiu-sources--live) { margin: 0 0 10px; border-top: 0; border-bottom: 1px solid #e5e7eb; padding: 0 0 8px; }
+/* Badge reserves two lines on narrow screens so the live→final content change never reflows the text below it. */
+@media (max-width: 600px) { .oiu-badge { min-height: 36px; } }
 .oiu-badge code { font-size: 10.5px; background: #f3f4f6; padding: 1px 4px; border-radius: 4px; color: #374151; }
 .oiu-badge__sep { color: #9ca3af; }
 .oiu-thinking { margin: 0 0 10px; border: 1px solid #e5e7eb; border-radius: 8px; background: #fafafa; font-size: 12px; color: #4b5563; }
