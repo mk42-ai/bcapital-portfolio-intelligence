@@ -55,7 +55,7 @@ async function installWrapper(page: Page) {
     const orig = window.fetch.bind(window);
     window.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
       const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
-      if (!url.includes("/api/chat")) return orig(input, init);
+      if (!/\/api\/chat(\?|$)/.test(url)) return orig(input, init); // the pre-warm GET (/api/chat/prewarm) is not a turn
       const rec: Rec = { fetchAt: performance.now(), headersAt: null, done: false, error: null, chunks: [] };
       w.__turns.push(rec);
       const t0 = rec.fetchAt;

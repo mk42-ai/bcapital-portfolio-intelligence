@@ -15,7 +15,7 @@ export function RunRail() {
   const live = st.phase !== "idle";
   const plugins = st.pluginIds.length ? st.pluginIds : [];
   return (
-    <Card className="p-4" data-testid="run-rail">
+    <Card className="p-4 lg:min-h-[300px]" data-testid="run-rail">
       <h2 className="mb-2 text-sm font-semibold">This run</h2>
       <p className="text-xs text-muted" data-testid="run-model" data-model-id={MODEL_ID}><span className="font-medium text-foreground">{MODEL_LABEL}</span> · reasoning {REASONING_MODE}</p>
       {plugins.length > 0 && (
@@ -39,6 +39,7 @@ export function RunRail() {
           <ul className="mt-1 space-y-0.5 text-muted">{st.agentLog.slice(-12).map((a, i) => <li key={i}><code>{a.subtype}</code> · {(a.at / 1000).toFixed(1)} s</li>)}</ul>
         </details>
       )}
+      {st.integrity && (st.integrity.dupes > 0 || st.integrity.gaps > 0) && <p className="mt-2 text-[10px] text-muted" data-testid="rail-integrity">stream integrity: {st.integrity.dupes} duplicate frame{st.integrity.dupes === 1 ? "" : "s"} dropped · {st.integrity.gaps} gap{st.integrity.gaps === 1 ? "" : "s"}</p>}
       {st.metrics && (
         <p className="mt-3 text-[11px] text-muted" data-testid="rail-metrics">{st.metrics.totalTokens?.toLocaleString()} tokens · first event {st.firstStatusMs ?? "—"} ms · first token {st.firstTokenMs?.toLocaleString() ?? "—"} ms</p>
       )}

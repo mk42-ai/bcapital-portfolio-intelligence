@@ -20,7 +20,7 @@ test.describe("Analyst chat — streaming", () => {
       const orig = window.fetch.bind(window);
       window.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
         const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
-        if (!url.includes("/api/chat")) return orig(input, init);
+        if (!/\/api\/chat(\?|$)/.test(url)) return orig(input, init); // the pre-warm GET (/api/chat/prewarm) is not a turn
         const t0 = performance.now();
         w.__chunkMeta.fetchAt = t0;
         const res = await orig(input, init);

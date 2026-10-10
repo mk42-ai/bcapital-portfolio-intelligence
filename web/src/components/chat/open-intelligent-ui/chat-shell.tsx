@@ -52,34 +52,39 @@ type StreamState = {
   phase: StreamPhase; detail: string; startedAt: number; sessionId: string | null; version: number;
   firstStatusMs: number | null; firstTokenMs: number | null; firstCitationMs: number | null; chunks: number; thinking: string; thinkingKinds: string[]; error: StreamError;
   sources: Source[]; metrics: Record<string, number> | null; lastThreadId: string | null;
-  pluginIds: string[]; suggested: { id: string; name: string; logoUrl?: string }[]; plan: { objective: string | null; steps: PlanStep[] } | null;
-  summaries: StepSummary[]; prompt: Prompt | null; filler: boolean; fillerTick: number; text: string; answerDone: boolean;
+  pluginIds: string[]; suggested: { id: string; name: string; logoUrl?: string }[]; plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null;
+  summaries: StepSummary[]; prompt: Prompt | null; filler: boolean; fillerTick: number; text: string; answerDone: boolean; integrity: { dupes: number; gaps: number; frames: number } | null;
   request: Record<string, unknown> | null; agentLog: { subtype: string; at: number }[]; stepRaw: Record<string, string>;
 };
-const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, request: null, agentLog: [], stepRaw: {} };
+const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {} };
 let streamState: StreamState = IDLE;
 let pending: Partial<StreamState> | null = null; let rafId = 0;
 const liveSources = new Map<string, Source[]>();
 const liveMeta = new Map<string, StoredMeta>();
 const listeners = new Set<() => void>();
 const flush = () => { rafId = 0; if (!pending) return; const p = pending; pending = null; streamState = { ...streamState, ...p, version: streamState.version + 1 }; listeners.forEach((l) => l()); };
+const FLUSH_MS = () => (typeof matchMedia !== "undefined" && matchMedia("(max-width: 640px)").matches ? 140 : 80);
+let flushTimer: ReturnType<typeof setTimeout> | 0 = 0;
 const setStream = (patch: Partial<StreamState>, immediate = false) => {
   pending = { ...(pending ?? {}), ...patch };
-  if (immediate || typeof requestAnimationFrame === "undefined") { if (rafId && typeof cancelAnimationFrame !== "undefined") cancelAnimationFrame(rafId); flush(); return; }
-  if (!rafId) rafId = requestAnimationFrame(flush);
+  if (immediate || typeof requestAnimationFrame === "undefined") { if (rafId && typeof cancelAnimationFrame !== "undefined") cancelAnimationFrame(rafId); if (flushTimer) { clearTimeout(flushTimer); flushTimer = 0; } rafId = 0; flush(); return; }
+  // Time-boxed coalescing: a burst of deltas costs ONE commit per 80 ms (140 ms on narrow viewports) instead of one per animation frame.
+  if (!flushTimer && !rafId) flushTimer = setTimeout(() => { flushTimer = 0; rafId = requestAnimationFrame(flush); }, FLUSH_MS());
 };
 /** Reads the latest value including not-yet-flushed patches (for tee-side accumulation). */
 const peek = (): StreamState => ({ ...streamState, ...(pending ?? {}) });
 const subscribe = (l: () => void) => { listeners.add(l); return () => { listeners.delete(l); }; };
 const getStream = () => streamState;
 export const useStreamState = () => useSyncExternalStore(subscribe, getStream, () => IDLE);
+/** Narrow subscription: re-render only when the selected value changes (previous assistant messages must not re-render per token). */
+export function useStreamSelector<T>(sel: (s: StreamState) => T): T { return useSyncExternalStore(subscribe, () => sel(streamState), () => sel(IDLE)); }
 export const getStreamPhase = () => streamState.phase;
 const PHASE_LABEL: Record<string, string> = {
   connecting: "Connecting to OnDemand…", "creating-session": "Creating OnDemand session…", querying: `Submitting to ${MODEL_LABEL}…`,
   streaming: `${MODEL_LABEL} is planning…`, planning: `${MODEL_LABEL} is planning…`, researching: `Searching with ${PLUGIN_NAME}…`, answering: "Writing the answer…", "awaiting-input": "Waiting for your input…", done: "Done",
 };
 
-type AgUiFrame = { type?: string; name?: string; value?: Record<string, unknown>; delta?: string; toolCallName?: string; message?: string; code?: string };
+type AgUiFrame = { seq?: number; type?: string; name?: string; value?: Record<string, unknown>; delta?: string; toolCallName?: string; message?: string; code?: string };
 /** Reads the cloned SSE body line-by-line (data: …) and updates the live store + localStorage; never throws into the UI path. */
 async function teeStream(res: Response, threadId: string, onSession: (sid: string) => void) {
   const body = res.body; if (!body) return;
@@ -91,10 +96,13 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
     liveMeta.set(key, meta); rememberMeta(key, meta);
     if (st.sources.length) { liveSources.set(key, st.sources); rememberSources(key, st.sources); }
   };
+  const seen = new Set<number>(); let lastSeq = 0; let dupes = 0; let gapsSeen = 0;
   const handle = (line: string) => {
     if (!line.startsWith("data:")) return; const data = line.slice(5).trim(); if (!data) return;
-    if (data === "[DONE]") { finalize(); setStream({ phase: "idle", detail: "", answerDone: true }, true); return; }
-    let f: AgUiFrame; try { f = JSON.parse(data) as AgUiFrame; } catch { return; }
+    if (data === "[DONE]") { finalize(); setStream({ phase: "idle", detail: "", answerDone: true, integrity: { dupes, gaps: gapsSeen, frames: lastSeq } }, true); return; }
+    let f: AgUiFrame; try { f = JSON.parse(data) as AgUiFrame; } catch { return; } // a partial frame never parses: the line splitter only hands over complete lines, the tail stays in `buf`
+    // Idempotent frames: the bridge stamps every frame with `seq`; a replayed/duplicated frame is dropped, a gap is counted (surfaced in the rail).
+    if (typeof f.seq === "number") { if (seen.has(f.seq)) { dupes++; return; } if (lastSeq && f.seq > lastSeq + 1) gapsSeen += f.seq - lastSeq - 1; seen.add(f.seq); lastSeq = Math.max(lastSeq, f.seq); }
     const now = Date.now(); const st = peek();
     switch (f.type) {
       case "RUN_STARTED": setStream({ firstStatusMs: st.firstStatusMs ?? now - t0, ...(st.phase === "idle" ? { phase: "connecting", detail: PHASE_LABEL.connecting } : {}) }, true); break;
@@ -117,7 +125,7 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
           case CE.metrics: if (v.publicMetrics && typeof v.publicMetrics === "object") setStream({ metrics: v.publicMetrics as Record<string, number> }); break;
           case CE.error: setStream({ error: { code: String(v.code ?? "error"), message: String(v.message ?? "Upstream error"), raw: typeof v.raw === "string" ? v.raw : undefined } }, true); break;
           case CE.plugins: if (Array.isArray(v.plugins) && v.plugins.length) setStream({ suggested: (v.plugins as { id: string; name: string; logoUrl?: string }[]) }); break;
-          case CE.plan: { const steps = Array.isArray(v.steps) ? (v.steps as Omit<PlanStep, "state">[]).map((s, i) => ({ ...s, id: String(s.id ?? i + 1), state: "pending" as const })) : []; setStream({ plan: { objective: typeof v.objective === "string" ? v.objective : null, steps }, ...(typeof v.objective === "string" && v.objective ? { detail: v.objective } : {}) }); break; }
+          case CE.plan: { const steps = Array.isArray(v.steps) ? (v.steps as Omit<PlanStep, "state">[]).map((s, i) => ({ ...s, id: String(s.id ?? i + 1), state: "pending" as const })) : []; if (v.provisional && st.plan && !st.plan.provisional) break; setStream({ plan: { objective: typeof v.objective === "string" ? v.objective : null, steps, provisional: !!v.provisional }, ...(typeof v.objective === "string" && v.objective ? { detail: v.objective } : {}) }); break; }
           case CE.step: {
             const phase = String(v.phase); const stepId = String(v.stepId ?? ""); const index = Number(v.index ?? 0);
             const next: PlanStep["state"] = phase === "start" ? "running" : phase === "failed" ? "failed" : "done";
@@ -188,7 +196,10 @@ function useThrottled<T>(value: T, ms: number): T {
   return v;
 }
 const CitedMarkdown = memo(function CitedMarkdown({ text, known, streaming, onCites }: { text: string; known: Source[]; streaming: boolean; onCites?: (c: Cite[]) => void }) {
-  const throttled = useThrottled(text, streaming ? 90 : 0);
+  // Adaptive markdown cadence: a 15 KB answer with GFM tables costs ~60–200 ms to re-parse; parse less often as the text grows (and on narrow viewports).
+  const narrow = typeof matchMedia !== "undefined" && matchMedia("(max-width: 640px)").matches;
+  const cadence = !streaming ? 0 : text.length > 9000 ? (narrow ? 600 : 400) : text.length > 4000 ? (narrow ? 400 : 250) : narrow ? 220 : 120;
+  const throttled = useThrottled(text, cadence);
   const { md, cites } = useMemo(() => extractCitations(throttled, known, streaming), [throttled, known, streaming]);
   useEffect(() => { onCites?.(cites); }, [cites, onCites]);
   const components = useMemo(() => ({
@@ -246,8 +257,9 @@ function AnswerBadge({ meta, live }: { meta: Partial<StoredMeta> | null; live?: 
 function ThinkingTrace({ text, kinds, live }: { text: string; kinds?: string[]; live?: boolean }) {
   const [open, setOpen] = useState(false);
   const id = useMemo(() => `oiu-think-${Math.random().toString(36).slice(2, 8)}`, []);
+  const lines = useMemo(() => text.split("\n"), [text]);
   if (!text.trim()) return null;
-  const lines = text.split("\n"); const shown = open ? lines.slice(-400) : lines.slice(-40);
+  const shown = open ? lines.slice(-400) : lines.slice(-40);
   return (
     <div className={`oiu-thinking${open ? " oiu-thinking--open" : ""}`} data-testid="thinking-trace" data-lines={lines.length}>
       <button type="button" className="oiu-thinking__toggle" aria-expanded={open} aria-controls={id} onClick={() => setOpen((o) => !o)}>
@@ -258,15 +270,15 @@ function ThinkingTrace({ text, kinds, live }: { text: string; kinds?: string[]; 
   );
 }
 /** Plan stepper (plan_created / step start / done / failed). */
-function PlanStepper({ plan, reserve }: { plan: { objective: string | null; steps: PlanStep[] } | null; reserve?: boolean }) {
+function PlanStepper({ plan, reserve }: { plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null; reserve?: boolean }) {
   if (!plan || (!plan.objective && !plan.steps.length)) {
     // Reserved slot while the planner is still streaming its JSON: same box (border + min-height) the real stepper will occupy, so the
     // plan arriving does not push the plugin cards / thinking trace / working band down (the 0.10 CLS spike at plan_created on mobile).
     return reserve ? <section className="oiu-plan oiu-plan--reserved" data-testid="plan-stepper" data-state="pending" aria-label="Execution plan"><p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />Planning…</p><div className="oiu-shimmer oiu-shimmer--plan" aria-hidden><span /><span /></div></section> : null;
   }
   return (
-    <section className="oiu-plan" data-testid="plan-stepper" aria-label="Execution plan">
-      <p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />{plan.objective || "Execution plan"}</p>
+    <section className="oiu-plan" data-testid="plan-stepper" data-state={plan.provisional ? "provisional" : "ready"} aria-label="Execution plan">
+      <p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />{plan.objective || "Execution plan"}{plan.provisional && <span className="oiu-plan__prov" title="Steps are still streaming in">drafting…</span>}</p>
       {plan.steps.length > 0 && <ol className="oiu-plan__steps">{plan.steps.map((s, i) => (
         <li key={s.id} className={`oiu-plan__step oiu-plan__step--${s.state}`} data-testid="plan-step" data-state={s.state}>
           <span className="oiu-plan__icon" aria-hidden>{s.state === "done" ? <CheckCircle2 className="size-3.5" /> : s.state === "failed" ? <XCircle className="size-3.5" /> : s.state === "running" ? <Loader2 className="size-3.5 oiu-spin" /> : <Circle className="size-3.5" />}</span>
@@ -338,12 +350,13 @@ function PromptCard({ prompt, sessionId, onAnswer }: { prompt: Prompt; sessionId
   );
 }
 
-const AssistantMessage: AssistantMessageComponent = ({ message, isStreaming }) => {
+const AssistantMessage: AssistantMessageComponent = memo(function AssistantMessage({ message, isStreaming }) {
   const content = typeof message.content === "string" ? message.content : "";
-  const { version } = useStreamState();
+  // Only the run boundary matters here (meta/sources are written at finalize) — not every streamed delta.
+  const settled = useStreamSelector((x) => (x.phase === "idle" ? 1 : 0) + (x.answerDone ? 2 : 0));
   const key = sourcesKey(content);
-  const meta = useMemo(() => (isStreaming ? null : liveMeta.get(key) ?? metaFor(key)), [key, isStreaming, version]); // eslint-disable-line react-hooks/exhaustive-deps
-  const known = useMemo(() => (isStreaming ? [] : liveSources.get(key) ?? sourcesFor(key) ?? []), [key, isStreaming, version]); // eslint-disable-line react-hooks/exhaustive-deps
+  const meta = useMemo(() => (isStreaming ? null : liveMeta.get(key) ?? metaFor(key)), [key, isStreaming, settled]); // eslint-disable-line react-hooks/exhaustive-deps
+  const known = useMemo(() => (isStreaming ? [] : liveSources.get(key) ?? sourcesFor(key) ?? []), [key, isStreaming, settled]); // eslint-disable-line react-hooks/exhaustive-deps
   const [cites, setCites] = useState<Cite[]>([]);
   // After a plugin failure the model's prose is not research: only real plugin citations (none) are listed — never URLs mined from a disclaimer.
   const rail = meta?.error ? known : cites;
@@ -367,7 +380,7 @@ const AssistantMessage: AssistantMessageComponent = ({ message, isStreaming }) =
       </div>
     </div>
   );
-};
+});
 
 /**
  * Plugin activity timeline (replaces OpenUI's default "Working · Running the N plugins tool" card).
@@ -385,10 +398,11 @@ const PluginTimeline: ToolCallTimelineComponent = ({ activities, steps, isLast, 
   const liveText = isLast && isRunning ? steps.filter((s): s is Extract<typeof s, { type: "text" }> => s.type === "text").map((s) => s.text).join("\n\n") : "";
   const live = isLast && isRunning;
   useEffect(() => { if (!live) setLiveCites([]); }, [live]);
-  if (cards.length === 0 && !liveText && !(live && (st.plan || st.summaries.length || st.prompt))) { void awaitingResponse; return null; }
+  if (cards.length === 0 && !liveText && !live) { void awaitingResponse; return null; }
   const railSources = live ? (st.error?.code === "plugin_error" ? [] : liveCites.length ? liveCites : st.sources) : [];
+  const thinkingTail = useThrottled(st.thinking.length > 4000 ? st.thinking.slice(-4000) : st.thinking, 250);
   return (<>
-    {live && <PlanStepper plan={st.plan} reserve />}
+    {live && cards.length === 0 && <ol className="oiu-activity-list oiu-activity-list--reserved" aria-label="Plugin activity" data-testid="activity-reserved"><li className="oiu-activity oiu-activity--placeholder" aria-hidden><span className="oiu-shimmer oiu-shimmer--row"><span /><span /></span></li></ol>}
     {cards.length > 0 && <ol className="oiu-activity-list" aria-label="Plugin activity">
       {cards.map((a) => {
         const i = a.input as PluginInput; const pid = i.pluginId ?? PLUGIN_ID; const name = i.plugin || a.toolName || catalogueName(pid);
@@ -412,8 +426,9 @@ const PluginTimeline: ToolCallTimelineComponent = ({ activities, steps, isLast, 
         );
       })}
     </ol>}
+    {live && <PlanStepper plan={st.plan} reserve />}
     {live && st.summaries.map((s) => <StepSummaryCard key={s.index} s={s} live />)}
-    {live && st.thinking && <ThinkingTrace text={st.thinking} kinds={st.thinkingKinds} live />}
+    {live && (st.thinking ? <ThinkingTrace text={thinkingTail} kinds={st.thinkingKinds} live /> : <div className="oiu-thinking oiu-thinking--reserved" data-testid="thinking-reserved" aria-hidden><span className="oiu-thinking__head"><Brain className="size-3.5" aria-hidden /> {LABEL.thinking}</span></div>)}
     {live && st.prompt && <PromptCard prompt={st.prompt} sessionId={st.sessionId} onAnswer={(text) => { setStream({ prompt: null }, true); void processMessage({ role: "user", content: text }); }} />}
     {live && !liveText && <WorkingBand on={st.filler} tick={st.fillerTick} phase={st.detail} />}
     {(liveText || (live && st.phase === "answering")) && (
@@ -510,12 +525,24 @@ function ErrorBanner() {
   const messages = useThread((s) => s.messages); const processMessage = useThread((s) => s.processMessage);
   const st = useStreamState();
   const [showRaw, setShowRaw] = useState(false);
-  if (isRunning || (!threadError && !st.error)) return null;
+  // Rendered INSIDE the thread list (portal) as the last message row: as a direct child of OpenUI's flex container it became a full-height
+  // sibling panel that covered the composer after a failed run and intercepted the next click (found by the step-5 recorder).
+  const [host, setHost] = useState<HTMLElement | null>(null);
+  const show = !isRunning && !!(threadError || st.error);
+  useEffect(() => {
+    if (!show) { setHost(null); return; }
+    const find = () => document.querySelector<HTMLElement>(".chat-shell .openui-agent-thread-messages");
+    const h = find(); if (h) setHost(h);
+    const mo = new MutationObserver(() => { const x = find(); if (x) setHost((prev) => (prev === x ? prev : x)); });
+    mo.observe(document.body, { childList: true, subtree: true });
+    return () => mo.disconnect();
+  }, [show]);
+  if (!show || !host) return null;
   const lastUser = [...messages].reverse().find((m) => m.role === "user") as UserMessage | undefined;
   const retry = () => { if (lastUser) void processMessage({ role: "user", content: lastUser.content }); };
   const code = st.error?.code ?? "run_error";
   const message = st.error?.message ?? threadError?.message ?? "The run failed";
-  return (
+  return createPortal(
     <div className="oiu-error" role="alert" data-testid="chat-error" data-error-code={code}>
       <AlertTriangle className="size-4 shrink-0" aria-hidden />
       <span className="oiu-error__text">
@@ -523,8 +550,7 @@ function ErrorBanner() {
         {st.error?.raw && <> <button type="button" className="oiu-error__raw-toggle" aria-expanded={showRaw} onClick={() => setShowRaw((v) => !v)}>{showRaw ? "hide raw frame" : "show raw frame"}</button>{showRaw && <pre className="oiu-error__raw" data-testid="chat-error-raw">{st.error.raw}</pre>}</>}
       </span>
       {lastUser && <button type="button" className="oiu-error__retry" onClick={retry}><RotateCcw className="size-3.5" aria-hidden /> Retry</button>}
-    </div>
-  );
+    </div>, host);
 }
 
 /** Persists streamed messages + remembers the OnDemand sessionId per thread (from the x-ondemand-session header / ondemand.session frame). */
@@ -587,6 +613,16 @@ export function ChatShell({ companies, fetchedAt }: { companies: CoCtx[]; fetche
   const [storage] = useState(() => localThreadStorage());
   const ctxCompanies = companies.filter((c) => s.companies.includes(c.slug));
   useEffect(() => { preloadPluginFavicons(PLUGIN_CATALOGUE.map((p) => p.id)); }, []);
+  // Pre-warm: create the OnDemand session for the first turn on page load (TTFT work) — the first /api/chat call reuses it via context.sessionId.
+  const prewarm = useRef<{ sessionId: string; pluginIds: string[] } | null>(null);
+  const [prewarmState, setPrewarmState] = useState<"idle" | "ready" | "failed">("idle");
+  useEffect(() => {
+    const ids = getSelectedPluginIds(); const ctl = new AbortController();
+    fetch(`${CHAT_API_URL}/prewarm?externalUserId=${encodeURIComponent(s.externalUserId)}&pluginIds=${encodeURIComponent(ids.join(","))}`, { signal: ctl.signal, headers: s.apikey ? { "x-ondemand-key": s.apikey } : {} })
+      .then((r) => r.json()).then((j: { ok?: boolean; sessionId?: string; pluginIds?: string[] }) => { if (j?.ok && j.sessionId) { prewarm.current = { sessionId: j.sessionId, pluginIds: j.pluginIds ?? ids }; setPrewarmState("ready"); } else setPrewarmState("failed"); })
+      .catch(() => setPrewarmState("failed"));
+    return () => ctl.abort();
+  }, [s.externalUserId, s.apikey]);
   // Built-in portfolio context (no OnDemand plugin id could be registered — see web/proof/plugin-registration.log): real backend values only, delta/basis verbatim from company.sentiment, capped at 6000 chars by the proxy.
   const systemContext = ctxCompanies.length ? `Portfolio data below comes from the B Capital portfolio API (live backend, fetched ${fetchedAt ?? new Date().toISOString()}). Use it ONLY for portfolio-internal questions (sentiment scores, deltas, which context companies moved, headline counts). For anything about external facts — recent announcements, funding rounds, valuations, IPOs, products, people, comparisons with earlier events — ALWAYS run the Perplexity web search and answer from fresh sources with citations; never say the feed lacks information when the web can answer it. Sentiment delta is null until a second scoring run exists — do not invent movement; a basis of "seed placeholder" means the score has not been scored by the workflow yet.\n${ctxCompanies.map((c) => `• ${c.name} — sector: ${c.sector}; status: ${c.status}; stage: ${c.stage ?? "n/a"}; sentiment: ${fmtScore(c.sentiment.score)} (${c.sentiment.label}), delta ${c.sentiment.delta == null ? "null (no prior run)" : fmtScore(c.sentiment.delta)}, updated ${c.sentiment.updated_at ?? "n/a"}, basis: ${c.sentiment.basis ?? "n/a"}; est. ticket ${c.estimated_ticket_size_usd ?? "n/a"}; news items: ${c.news_count ?? c.latest_news.length}; latest headlines: ${c.latest_news.length ? c.latest_news.slice(0, 3).map((n) => `"${n.title}" (${n.published_at ?? "undated"}, ${n.source ?? "source n/a"})`).join("; ") : "none"}`).join("\n")}`.slice(0, 6000) : "";
   const llm = useMemo(() => fetchLLM({
@@ -595,8 +631,10 @@ export function ChatShell({ companies, fetchedAt }: { companies: CoCtx[]; fetche
     fetch: async (input, init) => {
       // inject the per-thread OnDemand session, the EXPLICIT plugin selection and the portfolio context; capture the session id from the response
       const body = JSON.parse(String(init?.body ?? "{}")) as { threadId?: string; context?: Record<string, unknown> };
-      const tid = body.threadId ?? ""; const sid = sessionRef.current[tid] ?? (tid ? sessionFor(tid) : null);
+      const tid = body.threadId ?? ""; let sid = sessionRef.current[tid] ?? (tid ? sessionFor(tid) : null);
       const pluginIds = getSelectedPluginIds();
+      // First turn of a new thread: consume the pre-warmed session when its plugin set matches the explicit selection (same ids, same order).
+      if (!sid && prewarm.current && prewarm.current.pluginIds.join(",") === pluginIds.join(",")) { sid = prewarm.current.sessionId; prewarm.current = null; if (tid) { sessionRef.current[tid] = sid; rememberSession(tid, sid); } }
       body.context = { ...(body.context ?? {}), sessionId: sid ?? undefined, externalUserId: s.externalUserId, pluginIds, systemContext, sessionContext: ctxCompanies.map((c) => ({ key: `company:${c.slug}`, value: JSON.stringify({ name: c.name, sector: c.sector, status: c.status, sentiment: c.sentiment, news: c.latest_news.slice(0, 3) }).slice(0, 1800) })) };
       setStream({ ...IDLE, phase: "connecting", detail: PHASE_LABEL.connecting, startedAt: Date.now(), sessionId: sid ?? null, lastThreadId: tid, pluginIds, version: streamState.version }, true);
       let res: Response;
@@ -610,7 +648,7 @@ export function ChatShell({ companies, fetchedAt }: { companies: CoCtx[]; fetche
   }), [s.apikey, s.externalUserId, systemContext]); // eslint-disable-line react-hooks/exhaustive-deps
   const pluginLabel = selectedPlugins.map((id) => catalogueName(id)).join(", ");
   return (
-    <div className="chat-shell" data-testid="chat-shell">
+    <div className="chat-shell" data-testid="chat-shell" data-prewarm={prewarmState}>
       <AgentInterface llm={llm} storage={storage} agentName="Portfolio analyst" theme={{ mode: "light", lightTheme: responseTheme }} starters={starters} starterVariant="short" components={{ AssistantMessage, ToolCallTimeline: PluginTimeline }} scrollVariant="always">
         <AgentInterface.Welcome><ChatWelcome companies={ctxCompanies} /></AgentInterface.Welcome>
         <Persistence sessionRef={sessionRef} />

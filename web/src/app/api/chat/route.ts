@@ -136,8 +136,10 @@ export async function POST(req: NextRequest) {
   let reader: ReadableStreamDefaultReader<Uint8Array> | null = null;
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
-      let closed = false;
-      const send = (o: unknown) => { if (!closed) { try { controller.enqueue(frame(o)); } catch { closed = true; } } };
+      let closed = false; let seq = 0;
+      // Every frame carries a monotonically increasing `seq` (+ runId): the client tee drops any duplicate and the recorder can prove no frame
+      // was dropped (gap check) — idempotent frame ids per the step-5 integrity requirement.
+      const send = (o: unknown) => { if (!closed) { try { controller.enqueue(frame(o && typeof o === "object" ? { seq: ++seq, ...(o as Record<string, unknown>) } : o)); } catch { closed = true; } } };
       const finish = () => { if (!closed) { try { controller.enqueue(DONE); controller.close(); } catch { /* already closed */ } closed = true; } };
       let gotFirstByte = false, lastSentAt = Date.now();
       let firstByteTimer: ReturnType<typeof setTimeout> | undefined;
@@ -207,7 +209,7 @@ export async function POST(req: NextRequest) {
         toolDone(PLUGIN_ID, "error", { message: pluginErr.current.message, raw: raw.slice(0, 1200) });
       };
       let thinkingBuf = ""; let planBuf = ""; let planEmitted = false; let objectiveSent = false; let stepBuf = ""; const stepEmittedFor = new Set<number>();
-      let planStepTotal = 0; const derivedSummary = new Map<number, { title: string; hosts: string[]; n: number; closed: boolean }>();
+      let planStepTotal = 0; let earlyPlanSteps = 0; const derivedSummary = new Map<number, { title: string; hosts: string[]; n: number; closed: boolean }>();
       const tryParseJson = (t: string): unknown => { const i = t.indexOf("{"); if (i < 0) return null; let depth = 0, inStr = false, esc = false; for (let k = i; k < t.length; k++) { const c = t[k]; if (inStr) { if (esc) esc = false; else if (c === "\\") esc = true; else if (c === '"') inStr = false; continue; } if (c === '"') inStr = true; else if (c === "{") depth++; else if (c === "}") { depth--; if (depth === 0) { try { return JSON.parse(t.slice(i, k + 1)); } catch { return null; } } } } return null; };
       const planFromJson = (j: unknown): { objective?: string; steps: { id: string; title: string; query?: string; plugins?: string[] }[] } => { const r = (j && typeof j === "object" ? j : {}) as Record<string, unknown>; const steps = Array.isArray(r.steps) ? r.steps : []; return { objective: typeof r.objective === "string" ? r.objective.slice(0, 400) : typeof r.title === "string" ? r.title.slice(0, 400) : undefined, steps: steps.map((x, i) => { const o = (x && typeof x === "object" ? x : {}) as Record<string, unknown>; return { id: String(o.id ?? o.step_id ?? i + 1), title: String(o.title ?? o.user_query ?? `Step ${i + 1}`).slice(0, 160), query: typeof o.user_query === "string" ? o.user_query.slice(0, 600) : undefined, plugins: Array.isArray(o.plugins) ? o.plugins.map((p) => (typeof p === "string" ? p : String((p as Record<string, unknown>).name ?? (p as Record<string, unknown>).pluginId ?? ""))).filter(Boolean) : undefined }; }) }; };
 
@@ -250,7 +252,12 @@ export async function POST(req: NextRequest) {
               planBuf += u.delta;
               const parsed = tryParseJson(planBuf);
               if (parsed) { const plan = planFromJson(parsed); if (plan.objective || plan.steps.length) { planEmitted = true; planStepTotal = Math.max(planStepTotal, plan.steps.length); custom(CE.plan, { objective: plan.objective ?? null, steps: plan.steps, source: "planning_output" }); status("planning", { statusType: "plan_created", statusMessage: plan.objective ?? "Execution plan created", steps: plan.steps.length }); } }
-              else { const m = /"objective"\s*:\s*"((?:[^"\\]|\\.){12,})/.exec(planBuf); if (m && !objectiveSent) { objectiveSent = true; status("planning", { statusType: "planning", statusMessage: m[1].replace(/\\"/g, "\"").slice(0, 200) }); } }
+              else {
+                const m = /"objective"\s*:\s*"((?:[^"\\]|\\.){12,})/.exec(planBuf); if (m && !objectiveSent) { objectiveSent = true; status("planning", { statusType: "planning", statusMessage: m[1].replace(/\\"/g, "\"").slice(0, 200) }); }
+                // Early plan: the first complete step title is enough to paint the Plan card (state "provisional"); the full plan replaces it when the JSON closes.
+                const titles = [...planBuf.matchAll(/"title"\s*:\s*"((?:[^"\\]|\\.){4,160})"/g)].map((x) => x[1].replace(/\\"/g, "\"")).slice(1); // index 0 is the plan title itself
+                if (titles.length > earlyPlanSteps) { earlyPlanSteps = titles.length; custom(CE.plan, { objective: m ? m[1].replace(/\\"/g, "\"").slice(0, 400) : null, steps: titles.map((t, i) => ({ id: String(i + 1), title: t })), provisional: true, source: "planning_output:early" }); }
+              }
             }
             if (u.channel === "step_output" && u.delta) {
               stepBuf += u.delta;
