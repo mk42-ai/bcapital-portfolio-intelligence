@@ -1,0 +1,145 @@
+{
+  "url": "https://sb-3umbne3uc2g2.vercel.run/onboarding",
+  "ok": true,
+  "screenshots": [
+    "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/.ui-proof/SA7-onboarding-1440x900.png"
+  ],
+  "assertions": [
+    {
+      "kind": "http-status",
+      "target": "https://sb-3umbne3uc2g2.vercel.run/onboarding",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "kind": "wait-selector",
+      "target": "form button[type=submit]",
+      "ok": true,
+      "detail": "appeared"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{window.__set=(el,v)=>{const p=Object.getOwnPropertyDescriptor(el.tagName===\"SELECT\"?HTMLSelectElement.prototype:HTMLInputElement.prototype,\"value\").set;p.call(el,v);el.dispatchEvent(new Event(\"i",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{const b=getComputedStyle(document.body).backgroundColor;const dark=[...document.querySelectorAll(\"body *\")].filter(e=>{const r=e.getBoundingClientRect();if(r.width*r.height<30000)return false;co",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{const l=document.querySelectorAll(\"svg.lucide\").length;const foreign=[...document.querySelectorAll(\"[class*=\\\"fa-\\\"],[class*=\\\"material-icons\\\"],[class*=\\\"heroicon\\\"],i[class*=\\\"icon\\\"]\")].lengt",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{const b=document.querySelector(\"[data-testid=backend-status]\");window.__r=window.__r||{};window.__r.badge=b&&{live:b.dataset.live,text:b.textContent,title:b.title};return !!b&&b.dataset.live===\"",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(async()=>{localStorage.removeItem(\"bcap.settings.v1\");const f=document.querySelector(\"form\");const btn=f&&f.querySelector(\"button[type=submit]\");const t0=btn&&btn.textContent;btn.click();let i=0;whil",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).theme||null)",
+      "ok": true,
+      "detail": "\"{\\\"html\\\":\\\"light __variable_db5d2c __variable_703880\\\",\\\"body\\\":\\\"rgb(255, 255, 255)\\\",\\\"dark\\\":0}\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).lucide||null)",
+      "ok": true,
+      "detail": "\"{\\\"lucide\\\":10,\\\"foreign\\\":0,\\\"firstPartyImgs\\\":[],\\\"otherImgs\\\":[]}\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).badge||null)",
+      "ok": true,
+      "detail": "\"{\\\"live\\\":\\\"1\\\",\\\"text\\\":\\\"live backend\\\",\\\"title\\\":\\\"https://sb-3az18qgrrd3p.vercel.run\\\"}\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).stamp||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).search||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).sort||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).rowlink||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).news||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).ext||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).settings||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).onb||null)",
+      "ok": true,
+      "detail": "\"{\\\"button\\\":\\\"Enter workspace\\\",\\\"path\\\":\\\"/overview\\\",\\\"onboarded\\\":true,\\\"companies\\\":5}\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).gate||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).nf||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "page-rendered",
+      "target": "document.body",
+      "ok": true,
+      "detail": "innerText=1117 chars, bodyHeight=865px"
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "failedRequests": [
+    "Fetch: net::ERR_ABORTED https://sb-3umbne3uc2g2.vercel.run/overview?_rsc=B7yroOPNvpOYIw-w",
+    "Fetch: net::ERR_ABORTED https://sb-3umbne3uc2g2.vercel.run/overview?_rsc=fmOnZLAT5JpGdxS4"
+  ],
+  "browser": "/usr/bin/chromium",
+  "httpStatus": 200,
+  "title": "Welcome \u00b7 B Capital Portfolio Intelligence",
+  "textLength": 1117
+}

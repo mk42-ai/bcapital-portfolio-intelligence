@@ -26,6 +26,13 @@ function importLegacy() {
 export const sessionFor = (threadId: string) => read<string | null>(SES(threadId), null);
 export const rememberSession = (threadId: string, sessionId: string) => write(SES(threadId), sessionId);
 
+/** Real citations (`CUSTOM ondemand.sources`, incl. `imageUrl`) keyed by a hash of the answer text — OpenUI assigns its own message ids, so the text is the stable join key. */
+export type StoredSource = { url: string; title: string; sourceName: string; imageUrl?: string };
+const SRC = (h: string) => `bcap.chat.sources.v2.${h}`;
+export const sourcesKey = (text: string) => { let h = 5381; for (let i = 0; i < text.length; i++) h = ((h * 33) ^ text.charCodeAt(i)) >>> 0; return `${h.toString(36)}-${text.length}`; };
+export const rememberSources = (key: string, sources: StoredSource[]) => write(SRC(key), sources);
+export const sourcesFor = (key: string) => read<StoredSource[] | null>(SRC(key), null);
+
 export function localThreadStorage(): ChatStorage {
   importLegacy();
   return {

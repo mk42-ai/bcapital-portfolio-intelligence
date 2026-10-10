@@ -1,0 +1,110 @@
+{
+  "sessionCreatedThisRequest": false,
+  "totalUpstreamFrames": 61,
+  "first20": [
+    {
+      "ms": 3790,
+      "raw": "event:heartbeat\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"time\":\"2026-10-10T00:08:18Z\"}"
+    },
+    {
+      "ms": 4269,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"This follow-up question can be answered directly from the\"}}"
+    },
+    {
+      "ms": 4395,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" existing conversation context, so no\"}}"
+    },
+    {
+      "ms": 4453,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" plugin execution is needed here\"}}"
+    },
+    {
+      "ms": 4642,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"—this calls for plan_required false\"}}"
+    },
+    {
+      "ms": 4701,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" rather than invoking something\"}}"
+    },
+    {
+      "ms": 4888,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" like llm_knowledge as a stand-in for\"}}"
+    },
+    {
+      "ms": 6790,
+      "raw": "event:heartbeat\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"time\":\"2026-10-10T00:08:21Z\"}"
+    },
+    {
+      "ms": 8256,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":7,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"```json\\n{\\n  \\\"title\\\": \\\"I'm picking the single\"}}"
+    },
+    {
+      "ms": 8257,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":8,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" most investor-relevant item from the\"}}"
+    },
+    {
+      "ms": 8266,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":9,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" Fervo Energy announcements I already\"}}"
+    },
+    {
+      "ms": 8518,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":10,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" shared.\\\\nI'll answer in one s\"}}"
+    },
+    {
+      "ms": 8703,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":11,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"entence from the existing context.\\\",\\n  \\\"\"}}"
+    },
+    {
+      "ms": 8829,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":12,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"objective\\\": \\\"\\\",\\n  \\\"plan_required\\\": false,\"}}"
+    },
+    {
+      "ms": 8954,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":13,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"\\n  \\\"plan_skip_reason\\\": \\\"The user is\"}}"
+    },
+    {
+      "ms": 9079,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":14,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" asking for a one-sentence jud\"}}"
+    },
+    {
+      "ms": 9205,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":15,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"gment about which of the previ\"}}"
+    },
+    {
+      "ms": 9394,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":16,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"ously listed Fervo Energy announcements mat\"}}"
+    },
+    {
+      "ms": 9456,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":17,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"ters most to an investor; this\"}}"
+    },
+    {
+      "ms": 9580,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":18,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" is a pure analysis/synthesis of\"}}"
+    }
+  ],
+  "last5": [
+    {
+      "ms": 14672,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":53,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"\\n\\n\"}}"
+    },
+    {
+      "ms": 14672,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":54,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"\"}}"
+    },
+    {
+      "ms": 14678,
+      "raw": "event:message\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"eventIndex\":55,\"eventType\":\"metricsLog\",\"status\":\"processing\",\"publicMetrics\":{\"inputTokens\":2346,\"outputTokens\":281,\"totalTokens\":2627,\"ragTimeSec\":9.42,\"fulfillmentTimeSec\":4.46,\"totalTimeSec\":13.88}}"
+    },
+    {
+      "ms": 15789,
+      "raw": "event:heartbeat\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981ef261cbe2340483873\",\"time\":\"2026-10-10T00:08:30Z\"}"
+    },
+    {
+      "ms": 16690,
+      "raw": "event:message\ndata:[DONE]"
+    }
+  ],
+  "translatedChars": 330,
+  "elapsedMs": 16690
+}

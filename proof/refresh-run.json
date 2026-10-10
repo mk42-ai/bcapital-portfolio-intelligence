@@ -1,0 +1,646 @@
+{
+  "note": "Local run against DB copy (/tmp/sa/SA1/portfolio.sqlite) via POST /refresh on http://127.0.0.1:3301; API key and session ids redacted.",
+  "request": {
+    "method": "POST",
+    "path": "/refresh",
+    "auth": "X-Ingest-Secret: <redacted>",
+    "body": {
+      "slugs": [
+        "fervo-energy",
+        "perplexity-ai",
+        "apptronik",
+        "flutterwave",
+        "writer"
+      ]
+    }
+  },
+  "response": {
+    "ingest_run_id": "rf-2026-10-10T001147Z-965915",
+    "status": "ok",
+    "companies_touched": 5,
+    "news_upserted": 54,
+    "with_images": 54,
+    "dated": 43,
+    "errors": [],
+    "companies": [
+      {
+        "slug": "fervo-energy",
+        "name": "Fervo Energy",
+        "session_id": "<sid>",
+        "items": 12,
+        "with_images": 12,
+        "dated": 9,
+        "ms": 87686
+      },
+      {
+        "slug": "perplexity-ai",
+        "name": "Perplexity AI",
+        "session_id": "<sid>",
+        "items": 12,
+        "with_images": 12,
+        "dated": 8,
+        "ms": 115081
+      },
+      {
+        "slug": "apptronik",
+        "name": "Apptronik",
+        "session_id": "<sid>",
+        "items": 12,
+        "with_images": 12,
+        "dated": 8,
+        "ms": 107103
+      },
+      {
+        "slug": "flutterwave",
+        "name": "Flutterwave",
+        "session_id": "<sid>",
+        "items": 12,
+        "with_images": 12,
+        "dated": 12,
+        "ms": 100691
+      },
+      {
+        "slug": "writer",
+        "name": "WRITER",
+        "session_id": "<sid>",
+        "items": 6,
+        "with_images": 6,
+        "dated": 6,
+        "ms": 56119
+      }
+    ],
+    "items": [
+      {
+        "id": "n-adb3b802f0ff77a6",
+        "company_slug": "fervo-energy",
+        "title": "2026 Climate Tech Companies to Watch: Fervo Energy and its plan to streamline geothermal power | MIT Technology Review",
+        "url": "https://www.technologyreview.com/2026/10/06/1145252/fervo-energy-geothermal-power-streamline-plan/",
+        "source": "technologyreview.com",
+        "published_at": "2026-10-06",
+        "image_url": "https://wp.technologyreview.com/wp-content/uploads/2026/10/New-Fervo-Energy-Power-Plant-and-Drilling-Rig.jpg?resize=1200,600",
+        "fetched_at": "2026-10-10T00:13:13Z"
+      },
+      {
+        "id": "n-6327df4ada85d1e2",
+        "company_slug": "fervo-energy",
+        "title": "Fervo and Google sign world's largest deal for\u2026 | Canary Media",
+        "url": "https://www.canarymedia.com/articles/geothermal/fervo-google-deal-next-gen-geothermal",
+        "source": "canarymedia.com",
+        "published_at": "2026-09-01",
+        "image_url": "https://assets.canarymedia.com/content/uploads/Phase-Two-Power-Plant-and-Drilling-Rigs-2_8.10.26.jpg",
+        "fetched_at": "2026-10-10T00:13:13Z"
+      },
+      {
+        "id": "n-9dbb2e49e84dc078",
+        "company_slug": "fervo-energy",
+        "title": "Fervo Energy to Report Second Quarter 2026 Results on August 12, 2026 - Fervo Energy",
+        "url": "https://fervoenergy.com/fervo-energy-to-report-second-quarter-2026-results-on-august-12-2026/",
+        "source": "fervoenergy.com",
+        "published_at": "2026-08-12",
+        "image_url": "https://fervoenergy.com/wp-content/uploads/2026/08/ORC-1_8.4.26.png",
+        "fetched_at": "2026-10-10T00:13:13Z"
+      },
+      {
+        "id": "n-5c18adacb4af38c9",
+        "company_slug": "fervo-energy",
+        "title": "Fervo Hits First Power as Cape Station Geothermal Build Scales",
+        "url": "https://finance.yahoo.com/energy/articles/fervo-hits-first-power-cape-120500060.html",
+        "source": "finance.yahoo.com",
+        "published_at": "2026-09-24",
+        "image_url": "https://media.zenfs.com/en/zacks.com/76fd2c92c5a51f3b6550646bb7c51911.jpg",
+        "fetched_at": "2026-10-10T00:13:13Z"
+      },
+      {
+        "id": "n-c9af148420cf31e9",
+        "company_slug": "fervo-energy",
+        "title": "News - Fervo Energy",
+        "url": "https://fervoenergy.com/newsroom-2-2-2-2-2/",
+        "source": "fervoenergy.com",
+        "published_at": "2026-10-08",
+        "image_url": "https://fervoenergy.com/wp-content/uploads/2025/10/News-Page-Banner-scaled.jpg",
+        "fetched_at": "2026-10-10T00:13:13Z"
+      },
+      {
+        "id": "n-a5728d21c705d685",
+        "company_slug": "fervo-energy",
+        "title": "Fervo Shares Surge on Geothermal Power Deal With Google",
+        "url": "https://www.energyconnects.com/news/renewables/2026/september/fervo-shares-surge-on-geothermal-power-deal-with-google/",
+        "source": "energyconnects.com",
+        "published_at": "2026-08-12",
+        "image_url": "https://www.energyconnects.com/media/1trfzivi/bloombergmedia_tkopulkk3ny900_02-09-2026_04-34-12_639239040000000000.png?width=750&v=1dd3a944df007d0&format=webp",
+        "fetched_at": "2026-10-10T00:13:13Z"
+      },
+      {
+        "id": "n-5541bf570b8b9af1",
+        "company_slug": "fervo-energy",
+        "title": "Fervo Energy Ranked #1 on TIME's List of America's Top GreenTech Companies of 2026 - Fervo Energy",
+        "url": "https://fervoenergy.com/fervo-energy-ranked-1-on-times-list-of-americas-top-greentech-companies-of-2026/",
+        "source": "fervoenergy.com",
+        "published_at": null,
+        "image_url": "https://fervoenergy.com/wp-content/uploads/2026/03/TIME-Americas-Top-GreenTech-Companies-2026.jpg",
+        "fetched_at": "2026-10-10T00:13:13Z"
+      },
+      {
+        "id": "n-46fce0a7a9822ac9",
+        "company_slug": "fervo-energy",
+        "title": "Fervo Energy Geothermal 2026, $1.9B IPO & 750 MW Deal",
+        "url": "https://enkiai.com/geothermal/fervo-enhanced-geothermal-google/",
+        "source": "enkiai.com",
+        "published_at": "2026-10-06",
+        "image_url": "https://enkiai.com/wp-content/uploads/2026/08/enki_chart_cover_iVBORw0KGgoAAAAN-151.png",
+        "fetched_at": "2026-10-10T00:13:13Z"
+      },
+      {
+        "id": "n-a4fc494f0181392e",
+        "company_slug": "fervo-energy",
+        "title": "Fervo's enhanced geothermal plant is selling power \u2014 Fix The News",
+        "url": "https://fixthenews.com/s/fervo-s-enhanced-geothermal-plant-is-selling-power-596ce5",
+        "source": "fixthenews.com",
+        "published_at": "2026-10-06",
+        "image_url": "https://fixthenews.com/s/fervo-s-enhanced-geothermal-plant-is-selling-power-596ce5/opengraph-image",
+        "fetched_at": "2026-10-10T00:13:13Z"
+      },
+      {
+        "id": "n-feff865f2b88f5fe",
+        "company_slug": "fervo-energy",
+        "title": "2026: The Year of Fervo? - by Aaron Foyer - Insider",
+        "url": "https://orennia.substack.com/p/2026-the-year-of-fervo",
+        "source": "orennia.substack.com",
+        "published_at": null,
+        "image_url": "https://substackcdn.com/image/fetch/$s_!rPrN!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F08c2682b-c3e9-41c7-8ec9-fc6b6ec35d20_5900x2455.png",
+        "fetched_at": "2026-10-10T00:13:13Z"
+      },
+      {
+        "id": "n-9dc7f2fd76037469",
+        "company_slug": "fervo-energy",
+        "title": "Fervo Energy Secures Two U.S. Department of Energy Awards to Develop Next-Generation Geothermal in Idaho and Nevada - Fervo Energy",
+        "url": "https://fervoenergy.com/fervo-energy-secures-two-u-s-department-of-energy-awards-to-develop-next-generation-geothermal-in-idaho-and-nevada/",
+        "source": "fervoenergy.com",
+        "published_at": "2026-09-22",
+        "image_url": "https://fervoenergy.com/wp-content/uploads/2026/09/image-48.png",
+        "fetched_at": "2026-10-10T00:13:13Z"
+      },
+      {
+        "id": "n-9cb4e25bebe17059",
+        "company_slug": "fervo-energy",
+        "title": "Fervo Energy Announces Upsized Proposed Initial Public Offering - Fervo Energy",
+        "url": "https://fervoenergy.com/fervo-energy-announces-upsized-proposed-initial-public-offering/",
+        "source": "fervoenergy.com",
+        "published_at": null,
+        "image_url": "https://fervoenergy.com/wp-content/uploads/2026/05/Photo-for-upsize-press-release.png",
+        "fetched_at": "2026-10-10T00:13:13Z"
+      },
+      {
+        "id": "n-94d3c1c793a4e42f",
+        "company_slug": "apptronik",
+        "title": "Austin company unveils humanoid robot | KXAN Austin",
+        "url": "https://www.kxan.com/news/local/austin/austin-company-unveils-humanoid-robot/",
+        "source": "kxan.com",
+        "published_at": null,
+        "image_url": "https://www.kxan.com/wp-content/uploads/sites/40/2023/08/Apollo-Close-Up.jpg?w=1280",
+        "fetched_at": "2026-10-10T00:13:34Z"
+      },
+      {
+        "id": "n-a5844e7276c06cee",
+        "company_slug": "apptronik",
+        "title": "Apptronik unveils Apollo 2 and a flagship data collection and training facility - The Robot Report",
+        "url": "https://www.therobotreport.com/apptronik-unveils-apollo-2-flagship-data-collection-training-facility/",
+        "source": "therobotreport.com",
+        "published_at": "2026-06-30",
+        "image_url": "https://www.therobotreport.com/wp-content/uploads/2026/06/apollo2-featured.jpg",
+        "fetched_at": "2026-10-10T00:13:34Z"
+      },
+      {
+        "id": "n-f66e3b4b58606056",
+        "company_slug": "apptronik",
+        "title": "Apptronik launches robot training hub, unveils Apollo 2 humanoid robot | Reuters",
+        "url": "https://www.reuters.com/technology/apptronik-launches-robot-training-hub-unveils-apollo-2-humanoid-robot-2026-06-30/",
+        "source": "reuters.com",
+        "published_at": "2026-06-30",
+        "image_url": "https://www.reuters.com/resizer/v2/UJR6YUCZ6VLZDDEC5TXDPYGYBU.jpg?auth=795dec1fc5a8d7e9384a71e14c7275b8218f1402c3beaa6af00093874dbc7cca&width=1920&quality=80",
+        "fetched_at": "2026-10-10T00:13:34Z"
+      },
+      {
+        "id": "n-e3b6532440d3ab4a",
+        "company_slug": "apptronik",
+        "title": "Apptronik's Apollo humanoid robot gets to work at CES 2025 | TechCrunch",
+        "url": "https://techcrunch.com/2025/01/09/apptroniks-apollo-humanoid-robot-gets-to-work-at-ces-2025/",
+        "source": "techcrunch.com",
+        "published_at": "2025-01-09",
+        "image_url": "https://techcrunch.com/wp-content/uploads/2025/01/apptronik.jpg?w=1024",
+        "fetched_at": "2026-10-10T00:13:34Z"
+      },
+      {
+        "id": "n-81f0a61b49d5fd18",
+        "company_slug": "apptronik",
+        "title": "This is Apptronik's humanoid robot, Apollo | TechCrunch",
+        "url": "https://techcrunch.com/2023/08/23/this-is-apptroniks-humanoid-robot-apollo/",
+        "source": "techcrunch.com",
+        "published_at": "2023-08-23",
+        "image_url": "https://techcrunch.com/wp-content/uploads/2023/08/Apollo-Hero-Image.png",
+        "fetched_at": "2026-10-10T00:13:34Z"
+      },
+      {
+        "id": "n-41ca46721c24615e",
+        "company_slug": "apptronik",
+        "title": "Industry Insights: Apptronik Has Been Testing Its New Humanoid for a Year",
+        "url": "https://www.automate.org/robotics/industry-insights/this-years-model-apptroniks-next-apollo-is-nearly-ready-for-its-closeup",
+        "source": "automate.org",
+        "published_at": null,
+        "image_url": "https://www.automate.org/images/ogImages/698c001a47e2fa437e2cb7d4_Apptronik-Founders-New-2-p-3200.jpg",
+        "fetched_at": "2026-10-10T00:13:34Z"
+      },
+      {
+        "id": "n-d303547c1a7e0bf0",
+        "company_slug": "apptronik",
+        "title": "Industry Insights: Apptronik Launches New Humanoid, Physical AI Warehouse",
+        "url": "https://www.automate.org/robotics/industry-insights/apptronik-opens-90-000-sq-ft-testing-site-for-new-apollo-2-humanoid",
+        "source": "automate.org",
+        "published_at": null,
+        "image_url": "https://www.automate.org/userAssets/a3/contents/industry-insights/image/Apollo%202%20Wheeled%20and%20Biped%20lead%20800.jpg",
+        "fetched_at": "2026-10-10T00:13:34Z"
+      },
+      {
+        "id": "n-d0874e5221a10e09",
+        "company_slug": "apptronik",
+        "title": "Apptronik unveils Apollo humanoid robot - The Robot Report",
+        "url": "https://www.therobotreport.com/apptronik-unveils-apollo-humanoid-robot/",
+        "source": "therobotreport.com",
+        "published_at": "2026-07-01",
+        "image_url": "https://www.therobotreport.com/wp-content/uploads/2023/08/apptronik-astra-humanoid.jpg",
+        "fetched_at": "2026-10-10T00:13:34Z"
+      },
+      {
+        "id": "n-2d5b490dc2ea9f57",
+        "company_slug": "apptronik",
+        "title": "Industry Insights: Apptronik Launches New Humanoid, Physical AI Warehouse",
+        "url": "https://www.automate.org/robotics/industry-insights/apptronik-opens-90-000-sq-ft-testing-site-for-new-apollo-2-humanoid/aph",
+        "source": "automate.org",
+        "published_at": null,
+        "image_url": "https://www.automate.org/userAssets/a3/contents/industry-insights/image/Apollo%202%20Wave.jpg",
+        "fetched_at": "2026-10-10T00:13:34Z"
+      },
+      {
+        "id": "n-67209fae0e571004",
+        "company_slug": "apptronik",
+        "title": "Humanoid startup Apptronik raises $520 million with backing from Google and Mercedes-Benz | Reuters",
+        "url": "https://www.reuters.com/technology/humanoid-startup-apptronik-raises-520-million-with-backing-google-mercedes-benz-2026-02-11/",
+        "source": "reuters.com",
+        "published_at": "2026-02-11",
+        "image_url": "https://cloudfront-us-east-2.images.arcpublishing.com/reuters/TLD22DD4QJPQLGVAEO2D4GSWIY.jpg",
+        "fetched_at": "2026-10-10T00:13:34Z"
+      },
+      {
+        "id": "n-6b94cabe1dc1f4a1",
+        "company_slug": "apptronik",
+        "title": "Apptronik, which makes humanoid robots, raises $350M as category heats up | TechCrunch",
+        "url": "https://techcrunch.com/2025/02/13/apptronik-raises-350m-to-build-humanoid-robots-with-help-from-google/",
+        "source": "techcrunch.com",
+        "published_at": "2025-02-13",
+        "image_url": "https://techcrunch.com/wp-content/uploads/2025/01/apptronik.jpg?w=1024",
+        "fetched_at": "2026-10-10T00:13:34Z"
+      },
+      {
+        "id": "n-24327a5dafdf3fc2",
+        "company_slug": "apptronik",
+        "title": "Apptronik Apollo Review 2026: Price, Apollo 2 & Deployments | RoboZaps Blog",
+        "url": "https://blog.robozaps.com/b/apptronik-apollo-review",
+        "source": "blog.robozaps.com",
+        "published_at": "2026-07-16",
+        "image_url": "https://i.ytimg.com/vi/vH3d0MDwi8A/maxresdefault.jpg",
+        "fetched_at": "2026-10-10T00:13:34Z"
+      },
+      {
+        "id": "n-180e848402142c04",
+        "company_slug": "perplexity-ai",
+        "title": "Best Perplexity AI Statistics 2026: Users, Revenue and SEO Impact",
+        "url": "https://blognexasai.nexasai.in/perplexity-ai-statistics-2026/",
+        "source": "blognexasai.nexasai.in",
+        "published_at": "2026-10-05",
+        "image_url": "https://blognexasai.nexasai.in/wp-content/uploads/2026/10/Perplexity-AI-Statistics-2026.png",
+        "fetched_at": "2026-10-10T00:13:41Z"
+      },
+      {
+        "id": "n-d6d84a1f00ef5f09",
+        "company_slug": "perplexity-ai",
+        "title": "AI Search 2026 \u2014 Perplexity vs ChatGPT vs Google",
+        "url": "https://valueaddvc.com/blog/ai-search-2026-perplexity-vs-chatgpt-search-vs-google-ai-overviews-compared",
+        "source": "valueaddvc.com",
+        "published_at": "2026-09-29",
+        "image_url": "https://valueaddvc.com/quotes/ai-search-2026-perplexity-vs-chatgpt-search-vs-google-ai-overviews-compared.webp",
+        "fetched_at": "2026-10-10T00:13:41Z"
+      },
+      {
+        "id": "n-df392d25d2a34657",
+        "company_slug": "perplexity-ai",
+        "title": "Perplexity AI Statistics 2026: $450M ARR After Killing All Ads",
+        "url": "https://aibusinessweekly.net/p/perplexity-ai-statistics",
+        "source": "aibusinessweekly.net",
+        "published_at": "2026-08-01",
+        "image_url": "https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/9aa6d12b-d21f-43c4-b1b2-c778c32d7050/3.webp?t=1786372452",
+        "fetched_at": "2026-10-10T00:13:41Z"
+      },
+      {
+        "id": "n-cb60050a18cf73f9",
+        "company_slug": "perplexity-ai",
+        "title": "Perplexity AI Statistics 2026: Users, Revenue And Growth",
+        "url": "https://resourcera.com/data/artificial-intelligence/perplexity-ai-statistics/",
+        "source": "resourcera.com",
+        "published_at": "2026-06-18",
+        "image_url": "https://resourcera.com/wp-content/uploads/2026/06/perplexity-ai-market-share.webp",
+        "fetched_at": "2026-10-10T00:13:41Z"
+      },
+      {
+        "id": "n-a69d94420ed81f56",
+        "company_slug": "perplexity-ai",
+        "title": "AI startup Perplexity adds shopping features as search competition tightens | Reuters",
+        "url": "https://www.reuters.com/technology/artificial-intelligence/ai-startup-perplexity-adds-shopping-features-search-competition-tightens-2024-11-18/",
+        "source": "reuters.com",
+        "published_at": "2024-11-18",
+        "image_url": "https://www.reuters.com/resizer/v2/C73DBH3JHBJLBDAEG42JNSJXWY.jpg?auth=17b2ae507293a5355a4d4b1793359c5abeb74456d792d7d0eff633bf65c740e7&width=1920&quality=80",
+        "fetched_at": "2026-10-10T00:13:41Z"
+      },
+      {
+        "id": "n-88a40fcfaa92e59c",
+        "company_slug": "perplexity-ai",
+        "title": "Perplexity AI Valuation 2026: $20B, Users & Revenue Data",
+        "url": "https://aibusinessweekly.net/p/perplexity-ai-valuation-2026",
+        "source": "aibusinessweekly.net",
+        "published_at": "2026-04-02",
+        "image_url": "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,quality=80,format=auto,onerror=redirect/uploads/asset/file/08433111-dd9e-4d4f-bec3-3dd1d157919c/image__1_.webp?t=1786082608",
+        "fetched_at": "2026-10-10T00:13:41Z"
+      },
+      {
+        "id": "n-a11e998a80505b00",
+        "company_slug": "perplexity-ai",
+        "title": "No Title",
+        "url": "https://www.searchinsight.ai/how-to-track-sources-mentioned-by-perplexity/",
+        "source": "searchinsight.ai",
+        "published_at": null,
+        "image_url": "https://www.searchinsight.ai/wp-content/uploads/2026/06/perplexity-tracker.webp",
+        "fetched_at": "2026-10-10T00:13:41Z"
+      },
+      {
+        "id": "n-134850a7a1dab731",
+        "company_slug": "perplexity-ai",
+        "title": "No Title",
+        "url": "https://www.youtube.com/watch?v=8x4GrZeIRZA",
+        "source": "youtube.com",
+        "published_at": null,
+        "image_url": "https://i.ytimg.com/vi/8x4GrZeIRZA/sddefault.jpg",
+        "fetched_at": "2026-10-10T00:13:41Z"
+      },
+      {
+        "id": "n-1f09d0af3f2c6b91",
+        "company_slug": "perplexity-ai",
+        "title": "No Title",
+        "url": "https://www.facebook.com/groups/LMDE.users/posts/2684370778436328/",
+        "source": "facebook.com",
+        "published_at": null,
+        "image_url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=764881889804958",
+        "fetched_at": "2026-10-10T00:13:41Z"
+      },
+      {
+        "id": "n-eb4b645d5db372cd",
+        "company_slug": "perplexity-ai",
+        "title": "No Title",
+        "url": "https://www.youtube.com/watch?v=_Pv7waxJiXg",
+        "source": "youtube.com",
+        "published_at": null,
+        "image_url": "https://i.ytimg.com/vi/_Pv7waxJiXg/maxresdefault.jpg",
+        "fetched_at": "2026-10-10T00:13:41Z"
+      },
+      {
+        "id": "n-aa1210da0f7776e8",
+        "company_slug": "perplexity-ai",
+        "title": "No Title",
+        "url": "https://www.aifire.co/p/most-people-use-perplexity-ai-wrong-here-s-the-right-way",
+        "source": "aifire.co",
+        "published_at": "2025-10-07",
+        "image_url": "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/f71c9060-836a-4d66-a0b7-05102e1f3c05/image.png?t=1759829933",
+        "fetched_at": "2026-10-10T00:13:41Z"
+      },
+      {
+        "id": "n-d0abc00979b94821",
+        "company_slug": "perplexity-ai",
+        "title": "No Title",
+        "url": "https://www.tomsguide.com/ai/a-fake-perplexity-ai-chrome-extension-was-secretly-tracking-browser-searches-heres-how-to-check-if-you-installed-it",
+        "source": "tomsguide.com",
+        "published_at": "2026-07-02",
+        "image_url": "https://cdn.mos.cms.futurecdn.net/5SyvTWDUFdLZ7C3aQvvECM-1200-80.jpg",
+        "fetched_at": "2026-10-10T00:13:41Z"
+      },
+      {
+        "id": "n-2c0e9fabcfbb6263",
+        "company_slug": "writer",
+        "title": "WRITER Newsroom | Press Releases",
+        "url": "https://writer.com/newsroom/",
+        "source": "writer.com",
+        "published_at": "2026-09-09",
+        "image_url": "https://writer.com/wp-content/uploads/2026/09/forbes_9_9_2026-1-1.svg",
+        "fetched_at": "2026-10-10T00:14:30Z"
+      },
+      {
+        "id": "n-ef104c8707c1de97",
+        "company_slug": "writer",
+        "title": "Enterprise AI adoption in 2026: Why 79% face challenges despite high investment - WRITER",
+        "url": "https://writer.com/blog/enterprise-ai-adoption-2026/",
+        "source": "writer.com",
+        "published_at": "2026-04-07",
+        "image_url": "https://writer.com/wp-content/uploads/2026/04/2026-04-WPI-2026-5-1.png",
+        "fetched_at": "2026-10-10T00:14:30Z"
+      },
+      {
+        "id": "n-35165b8ad9ecf91f",
+        "company_slug": "writer",
+        "title": "WRITER raises $200M Series C at $1.9B valuation",
+        "url": "https://writer.com/blog/series-c-funding-writer-press-release/",
+        "source": "writer.com",
+        "published_at": "2024-11-12",
+        "image_url": "https://writer.com/wp-content/uploads/2024/11/series-c-pr-share.png",
+        "fetched_at": "2026-10-10T00:14:30Z"
+      },
+      {
+        "id": "n-6ad33678d5b2e1fe",
+        "company_slug": "writer",
+        "title": "The state of generative AI in the enterprise 2024 | survey results - WRITER",
+        "url": "https://writer.com/guides/generative-ai-survey/",
+        "source": "writer.com",
+        "published_at": "2024-09-12",
+        "image_url": "https://writer.com/wp-content/uploads/2024/09/In-your-opinion-how-will-generative-AI-deliver-value-to-your-company_%E2%80%A8-2-1.png?w=640",
+        "fetched_at": "2026-10-10T00:14:30Z"
+      },
+      {
+        "id": "n-39007da714b6e388",
+        "company_slug": "writer",
+        "title": "The state of generative AI in the enterprise 2023 | survey results - WRITER",
+        "url": "https://writer.com/guides/generative-ai-survey-2023/",
+        "source": "writer.com",
+        "published_at": "2023-05-08",
+        "image_url": "https://writer.com/wp-content/uploads/2023/05/book.jpg",
+        "fetched_at": "2026-10-10T00:14:30Z"
+      },
+      {
+        "id": "n-01614a0a25c91e6c",
+        "company_slug": "writer",
+        "title": "WRITER - The enterprise AI platform for agentic work",
+        "url": "https://writer.com/",
+        "source": "writer.com",
+        "published_at": "2026-09-09",
+        "image_url": "https://writer.com/wp-content/uploads/2026/09/Frame-2055248389.png?w=640",
+        "fetched_at": "2026-10-10T00:14:30Z"
+      },
+      {
+        "id": "n-c724bb6a17519775",
+        "company_slug": "flutterwave",
+        "title": "PYMNTS | Report: African FinTech Flutterwave Planning an IPO",
+        "url": "https://www.pymnts.com/news/investment-tracker/ipo/2023/report-african-fintech-flutterway-planning-an-ipo/",
+        "source": "pymnts.com",
+        "published_at": "2023-08-22",
+        "image_url": "https://www.pymnts.com/wp-content/uploads/2023/08/flutterwave-big.jpg?w=457",
+        "fetched_at": "2026-10-10T00:14:53Z"
+      },
+      {
+        "id": "n-9b4d542250b73735",
+        "company_slug": "flutterwave",
+        "title": "PYMNTS | Flutterwave Valuation Hits $3.3 Billion Following Ripple Inv\u2026",
+        "url": "https://www.pymnts.com/news/investment-tracker/2026/flutterwave-valuation-hits-3-3-billion-following-ripple-investment/",
+        "source": "pymnts.com",
+        "published_at": "2026-06-16",
+        "image_url": "https://www.pymnts.com/wp-content/uploads/2026/06/Flutterwave.jpeg?w=457",
+        "fetched_at": "2026-10-10T00:14:53Z"
+      },
+      {
+        "id": "n-65a914a512f4f788",
+        "company_slug": "flutterwave",
+        "title": "Fintech giant Flutterwave loses \u20a611 billion to security breach | Business Insider Africa",
+        "url": "https://africa.businessinsider.com/local/markets/fintech-giant-flutterwave-loses-naira11-billion-to-security-breach/bv1hdev",
+        "source": "africa.businessinsider.com",
+        "published_at": "2024-05-16",
+        "image_url": "https://ocdn.eu/pulscms/MDA_/686a0e1fabe90d6753a18fb81cfa657a.jpg",
+        "fetched_at": "2026-10-10T00:14:53Z"
+      },
+      {
+        "id": "n-b81d4ec8aa31f57e",
+        "company_slug": "flutterwave",
+        "title": "Flutterwave Reaches $3.25 Billion Valuation After New Investment From Ripple - Empower Africa",
+        "url": "https://empowerafrica.com/flutterwave-reaches-3-25-billion-valuation-after-new-investment-from-ripple/",
+        "source": "empowerafrica.com",
+        "published_at": "2026-06-16",
+        "image_url": "https://empowerafrica.com/wp-content/uploads/sites/2/2026/06/blue-1536x853-1.jpeg",
+        "fetched_at": "2026-10-10T00:14:53Z"
+      },
+      {
+        "id": "n-48c2dc7fffd275af",
+        "company_slug": "flutterwave",
+        "title": "Flutterwave, A Payments Infrastructure Company With A Strong Presence In Africa, Is Valued At $3.2B Following Series E Funding Round",
+        "url": "https://finance.yahoo.com/markets/crypto/articles/flutterwave-payments-infrastructure-company-strong-130104659.html",
+        "source": "finance.yahoo.com",
+        "published_at": "2026-04-02",
+        "image_url": "https://media.zenfs.com/en/afrotech_articles_589/17331534d005c6d0dad03ae1726362e8",
+        "fetched_at": "2026-10-10T00:14:53Z"
+      },
+      {
+        "id": "n-79dad94003d2de6a",
+        "company_slug": "flutterwave",
+        "title": "Ten Flutterwave Moments That Changed African Payments | The Flutterwave Blog",
+        "url": "https://flutterwave.com/tz/blog/ten-flutterwave-moments-that-changed-african-payments",
+        "source": "flutterwave.com",
+        "published_at": "2026-06-16",
+        "image_url": "https://v12.flutterwave.com/wp-content/uploads/2026/06/Verve-x-Flutterwave_Integrated-ID_5-scaled.jpg",
+        "fetched_at": "2026-10-10T00:14:53Z"
+      },
+      {
+        "id": "n-83033091d24f66f0",
+        "company_slug": "flutterwave",
+        "title": "Flutterwave's Gabriel Ologunwa Says Africa Can Achieve Real-Time Cross-Border Payments",
+        "url": "https://thecondia.com/partners/flutterwaves-gabriel-ologunwa-says-africa-is-within-reach-of-real-time-cross-border-payments/",
+        "source": "thecondia.com",
+        "published_at": "2026-08-05",
+        "image_url": "https://thecondia.com/cdn-cgi/image/format=auto,quality=auto/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-05-at-13.42.24.jpeg",
+        "fetched_at": "2026-10-10T00:14:53Z"
+      },
+      {
+        "id": "n-b7ba4f34107b9040",
+        "company_slug": "flutterwave",
+        "title": "Flutterwave and Acquired.com Join Forces to Tackle African Payments Providers' Biggest Challenges | The Fintech Times",
+        "url": "https://thefintechtimes.com/flutterwave-and-acquired-com-join-forces-to-tackle-african-payments-providers-biggest-challenges/",
+        "source": "thefintechtimes.com",
+        "published_at": "2024-04-30",
+        "image_url": "https://thefintechtimes.com/wp-content/uploads/2023/07/Africa-FI-map-960x640.jpg",
+        "fetched_at": "2026-10-10T00:14:53Z"
+      },
+      {
+        "id": "n-911797cae113d846",
+        "company_slug": "flutterwave",
+        "title": "African fintech Flutterwave triples valuation to over $3B after $250M Series D | TechCrunch",
+        "url": "https://techcrunch.com/2022/02/16/african-fintech-flutterwave-triples-valuation-to-over-3b-after-250m-series-d/",
+        "source": "techcrunch.com",
+        "published_at": "2022-02-16",
+        "image_url": "https://techcrunch.com/wp-content/uploads/2022/02/PhotoPictureResizer_220216_082315412_crop_2886x2165.jpg",
+        "fetched_at": "2026-10-10T00:14:53Z"
+      },
+      {
+        "id": "n-f23cdfae443f4f3e",
+        "company_slug": "flutterwave",
+        "title": "Fintech Flutterwave has accounts frozen in Kenya amid court probe | Technology News | Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2022/7/7/flutterwave-accounts-frozen-in-kenya-over-money-laundering-claims",
+        "source": "aljazeera.com",
+        "published_at": "2022-07-07",
+        "image_url": "https://www.aljazeera.com/wp-content/uploads/2022/02/flutterwave.jpg?resize=270%2C180&quality=80",
+        "fetched_at": "2026-10-10T00:14:53Z"
+      },
+      {
+        "id": "n-a73c591f09c3a75a",
+        "company_slug": "flutterwave",
+        "title": "Ripple Participates in Flutterwave's Series E With Strategic Investment to Accelerate African Stablecoin Payments",
+        "url": "https://www.prnewswire.com/news-releases/ripple-participates-in-flutterwaves-series-e-with-strategic-investment-to-accelerate-african-stablecoin-payments-302801599.html",
+        "source": "prnewswire.com",
+        "published_at": "2026-06-16",
+        "image_url": "https://mmx.prnewswire.com/media/MS1866853/Flutterwave_x_Ripple.jpg?id=OA2719713&p=twitter",
+        "fetched_at": "2026-10-10T00:14:53Z"
+      },
+      {
+        "id": "n-f53c7b0d269035a0",
+        "company_slug": "flutterwave",
+        "title": "Flutterwave Hits $3.2 Billion Valuation as Ripple Backs Stablecoin Expansion",
+        "url": "https://innovation-village.com/flutterwave-3-2-billion-valuation-ripple-stablecoin-investment/",
+        "source": "innovation-village.com",
+        "published_at": "2026-06-16",
+        "image_url": "https://innovation-village.com/wp-content/uploads/2026/06/Flutterwave.jpg",
+        "fetched_at": "2026-10-10T00:14:53Z"
+      }
+    ],
+    "started_at": "2026-10-10T00:11:47Z",
+    "finished_at": "2026-10-10T00:14:55Z"
+  },
+  "refresh_status_after": {
+    "running": false,
+    "last_run": {
+      "id": "rf-2026-10-10T001147Z-965915",
+      "status": "ok",
+      "companies_touched": 5,
+      "news_upserted": 54,
+      "errors": [],
+      "started_at": "2026-10-10T00:11:47Z",
+      "finished_at": "2026-10-10T00:14:55Z",
+      "model": "predefined-claude-fable-5.1"
+    },
+    "scheduler": {
+      "enabled": true,
+      "interval_minutes": 60,
+      "batch_limit": 40,
+      "next_scheduled_at": "2026-10-10T01:11:42Z"
+    },
+    "news_items_total": 101,
+    "news_items_with_images": 86,
+    "timestamp": "2026-10-10T00:15:29Z"
+  },
+  "previous_run_same_session": {
+    "ingest_run_id": "rf-2026-10-10T000727Z-3d7822",
+    "news_upserted": 56,
+    "with_images": 56,
+    "dated": 24,
+    "note": "first run before published-date fallbacks (URL path + article:published_time) were added"
+  }
+}

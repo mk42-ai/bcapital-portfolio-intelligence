@@ -133,6 +133,12 @@ async function runCase(name: string, url: string, op: any): Promise<void> {
 
 async function main(): Promise<void> {
   const paths = spec.paths as Record<string, Record<string, any>>;
+  // Deployed spec (if reachable) — used only to label drift between the local openapi.json and the running build.
+  let livePaths: Set<string> | null = null;
+  try {
+    const live = await fetch(`${baseUrl}/openapi.json`, { headers: { accept: "application/json" } });
+    if (live.ok) livePaths = new Set(Object.keys(((await live.json()) as any).paths ?? {}));
+  } catch { /* ignore */ }
   for (const [path, ops] of Object.entries(paths)) {
     const op = ops.get;
     if (!op) continue; // never execute POST /ingest etc.
@@ -144,6 +150,11 @@ async function main(): Promise<void> {
     if (path === "/companies") qs.set("limit", "200");
     const url = `${baseUrl}${concrete}${qs.toString() ? `?${qs}` : ""}`;
     await runCase(`GET ${path}`, url, op);
+    if (livePaths && !livePaths.has(path)) {
+      const last = results[results.length - 1];
+      last.detail.push("path is absent from the deployed /openapi.json — the live build predates the local spec (redeploy backend)");
+      last.ok = false;
+    }
     // Negative probe for the documented 404 on the single-company route.
     if (path === "/companies/{slug}" && op.responses?.["404"]) {
       await runCase(`GET ${path} (unknown slug → 404)`, `${baseUrl}/companies/__contract_test_missing__`, op);

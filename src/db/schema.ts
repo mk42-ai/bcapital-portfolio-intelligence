@@ -112,7 +112,7 @@ export const ingestRuns = sqliteTable("ingest_runs", {
 });
 
 export type BrandTokens = { primary: string | null; secondary: string | null; background: string | null; text: string | null; fonts: string[]; evidence_tier?: string; [k: string]: unknown };
-export type NewsItem = { id?: string; title: string; url?: string; source?: string; kind?: string; published_at?: string; summary?: string; image_url?: string };
+export type NewsItem = { id?: string; title: string; url?: string; source?: string; kind?: string; published_at?: string; summary?: string; image_url?: string; fetched_at?: string };
 export type Evidence = { url: string; quote: string; source?: string };
 export type Sentiment = { score: number; label: string; evidence: Evidence[]; updated_at: string; basis?: string; delta?: number | null };
 export type Mover = { slug: string; name: string; score: number; delta: number };

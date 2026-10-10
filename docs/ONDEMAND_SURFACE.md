@@ -928,3 +928,13 @@ curl -sS 'https://api.on-demand.io/config/v1/public/serverless/endpoint' -H 'api
 | 10 | `o_analyzer` node type / `add-delivery` key | Required by the dashboard but not in `Node.type` enum. |
 | 11 | SSE event schema for `responseMode: stream` | Narrative docs only (prior contracts doc); not in the OpenAPI spec. |
 | 12 | MQTT production host | Spec declares `gateway-dev.on-demand.io` only. |
+
+## 9. Portfolio plugin registration — SA6 findings (2026-10-10, see `web/proof/plugin-registration.log`)
+| Channel | Attempt | Result |
+|---|---|---|
+| Public REST docs | `GET /config/v1/public/docs/categories` (apikey) | 200; 40 documented endpoints (Chat, Media, Workflow, Projects, MQTT, Agents Flow Builder). **No plugin/tool/agent creation endpoint** — registration is dashboard-only. |
+| MCP `public_v1_suggest_plugins` | query "B Capital Portfolio Intelligence API" | No existing portfolio plugin (YouTube Captions, Chat Analytics, PitchBook Investor Finder, US Stock Fundamentals … only). |
+| MCP `plugin_v1_plugin_create` | identifier `rest` then `rest_api`, type chat, source external, category finance, `action.schema` = stringified openapi.json with `servers[0].url=https://sb-3az18qgrrd3p.vercel.run` | Both calls returned **empty output** (no pluginId/agentId, no error body); a follow-up suggest query still shows no portfolio plugin. |
+| MCP `public_v1_plugin_ai_generated_tool_create` (`isAutoSave: true`) | natural-language spec pointing at the backend `/openapi.json` | 1st: Cloudflare **524** origin timeout (120 s). 2nd after 120 s back-off: `{"message":"auto-save: create plugin: invalid agent category","errorCode":"invalid_request"}` — category is chosen server-side, not retryable. |
+
+**Consequence:** `portfolio_plugin_id` stays `null`. The chat does not depend on it: `web/src/app/chat/page.tsx` fetches the live backend server-side (`listCompanies`, 120 s revalidate) and `chat-shell.tsx` builds a `systemContext` string (≤ 6000 chars, prefixed to the first turn by `/api/chat`) containing, per selected context company: name, sector, status, stage, sentiment score + label + delta (verbatim `company.sentiment.delta`, currently `null` for all 137 rows — no second scoring run yet) + `updated_at` + `basis` (131/137 rows are `seed placeholder — not yet scored by workflow`; the 5 focus companies are `seed (intelligence JSON research_timestamp 2026-10-09)`), news count, and the 3 latest headlines with date + source. A rendered sample is in `web/proof/chat-systemcontext-sample.txt`. The Portfolio Plugin row in Settings and the chat sidebar now shows a **built-in context** badge with no toggle; if `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` is ever set it flips back to an active, default-on plugin automatically.

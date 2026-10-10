@@ -1,6 +1,6 @@
 export type Evidence = { url: string; quote: string; source?: string };
 export type Sentiment = { score: number; label: string; evidence: Evidence[]; updated_at: string; basis?: string; delta?: number | null };
-export type NewsItem = { id: string; title: string; url: string | null; source: string | null; kind: string; published_at: string | null; summary: string | null; image_url: string | null; sentiment_score?: number | null; ingest_run_id?: string | null; company_slug?: string };
+export type NewsItem = { id: string; title: string; url: string | null; source: string | null; kind: string; published_at: string | null; summary: string | null; image_url: string | null; sentiment_score?: number | null; ingest_run_id?: string | null; company_slug?: string; fetched_at?: string | null };
 export type BrandTokens = { primary: string | null; secondary: string | null; secondary_all?: string[]; background: string | null; text: string | null; fonts: string[]; evidence_tier?: string; guideline_url?: string | null; completeness_pct?: number; accent?: string; tagline?: string; identity?: string; values?: string[] };
 export type Company = {
   id: number; name: string; matrix_name: string | null; slug: string; sector: string; region: string; stage: string | null; status: string;

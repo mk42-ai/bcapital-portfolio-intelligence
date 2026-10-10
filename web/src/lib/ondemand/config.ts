@@ -29,7 +29,10 @@ export const VERIFIED_PLUGINS: { id: string; name: string; default: boolean }[] 
   { id: "plugin-1751872652", name: "X Search Agent", default: false },            // 200 · 105.3 s — opt-in (slow)
 ];
 /** Tested but DROPPED from the chat: LinkedIn Search plugin-1718116202 answered 200 but its tool returned 404 ("company search tool failed") and 151 s latency. */
-export const DEFAULT_PLUGIN_IDS: string[] = ["plugin-1722260873"]; // Perplexity only — see note above
+// Perplexity first. GPT Search is sent as the second plugin since 2026-10-10T01:03Z, when the account's Perplexity plugin began
+// answering "Internal server error: Not enough credits" (verified with a direct sync query): the fulfillment model then falls back to
+// GPT Search for live news instead of answering from training data. Override with ONDEMAND_DEFAULT_PLUGIN_IDS (comma-separated).
+export const DEFAULT_PLUGIN_IDS: string[] = (process.env.ONDEMAND_DEFAULT_PLUGIN_IDS ?? "plugin-1722260873,plugin-1741871229").split(",").map((s) => s.trim()).filter(Boolean);
 export const PLUGIN_NAMES: Record<string, string> = Object.fromEntries(VERIFIED_PLUGINS.map((p) => [p.id, p.name]));
 export const pluginName = (id: string) => PLUGIN_NAMES[id] ?? id;
 /** Upstream deadlines for /api/chat (ms). */
@@ -38,3 +41,7 @@ export const CHAT_TOTAL_MS = Number(process.env.ONDEMAND_TOTAL_MS) || 240_000;
 export const CHAT_HEARTBEAT_MS = 10_000;
 export const ALLOWED_PLUGIN_IDS = new Set(VERIFIED_PLUGINS.map((p) => p.id));
 export const DEFERRED_PLUGIN_IDS = new Set(["plugin-1777018662"]);
+/** /api/chat header fast-path: wait at most this long for session creation before returning the stream (sessionId then arrives via CUSTOM ondemand.session). */
+export const CHAT_SESSION_HEADER_WAIT_MS = Number(process.env.ONDEMAND_SESSION_HEADER_WAIT_MS) || 1_500;
+/** Debug only: ONDEMAND_PAYLOAD_DUMP=1 → /api/chat writes redacted upstream request/response shapes to <cwd>/proof/payloads/ (never the apikey). */
+export const PAYLOAD_DUMP = process.env.ONDEMAND_PAYLOAD_DUMP === "1";

@@ -6,7 +6,7 @@ to the OnDemand Chat & Agent Tools API **only through same-origin server routes*
 authenticate with the server-side `ONDEMAND_API_KEY` (`apikey` header). **Light theme only**, **Lucide icons only** (no raster/AI imagery),
 chat UI = **Open Intelligent UI** shell on the OpenUI `AgentInterface`.
 
-Live preview (ephemeral Vercel sandbox, see HANDOFF for TTL): **https://sb-3umbne3uc2g2.vercel.run** (redeployed 2026-10-09T23:25Z, HANDOFF §8; acceptance gate PASS, HANDOFF §7)
+Live preview (ephemeral Vercel sandbox, see HANDOFF for TTL): https://sb-1z9qy0mx48sk.vercel.run (live-data release, HANDOFF §9) (previous build: https://sb-3umbne3uc2g2.vercel.run, HANDOFF §8)
 
 ## Screens
 | Route | What it shows |
@@ -23,10 +23,14 @@ Live preview (ephemeral Vercel sandbox, see HANDOFF for TTL): **https://sb-3umbn
 browser ──(AG-UI SSE)──► Next.js /api/chat (OpenUI bridge) ──(apikey = ONDEMAND_API_KEY)──► https://api.on-demand.io/chat/v1/sessions + /sessions/{id}/query (stream)
 browser ──(optional x-ondemand-key)──► Next.js /api/ondemand/[...path] ──(apikey)──► https://api.on-demand.io  (sessions · query SSE · messages · plugin list)
 browser ────────────────────► Next.js server components ───────────────► portfolio backend (PORTFOLIO_API_URL) → SQLite  (ISR 120 s, snapshot fallback)
-browser ────────────────────► Next.js /api/portfolio/[...path] (read-only pass-through, /ingest blocked)
+browser ────────────────────► Next.js /api/portfolio/[...path] (read-only pass-through, /ingest and /refresh blocked)
 OnDemand Flow Builder (7 cron workflows, 06:00 UTC, Fable 5.1) ──► POST {backend}/ingest  (X-Ingest-Secret)
+backend scheduler (REFRESH_CRON_MINUTES, default 60) / POST {backend}/refresh (X-Ingest-Secret) ──(apikey)──► OnDemand Chat API + Perplexity plugin-1722260873 ──► news_items (image_url, published_at)
 ```
 * Server Components by default; `"use client"` only for filters, news feed, chat, settings, pickers, tooltips.
+* **Chat stream (live-data release).** `/api/chat` writes `RUN_STARTED` + `CUSTOM ondemand.status {phase:"connecting"}` before any upstream call (first byte 26–37 ms when no session has to be created, 621 ms when the ≤1.5 s header fast-path awaits the create — `web/proof/ttft-probe.log`), creates the OnDemand session **inside** the stream and announces it as `CUSTOM ondemand.session`, then relays `ondemand.status` phases (`creating-session → querying → streaming`), an `ondemand.heartbeat` every 10 s of silence, `TEXT_MESSAGE_CONTENT` deltas from upstream `fulfillment` frames and `ondemand.sources` (with `imageUrl` thumbnails) from `plugin_sources`. The client shows the phase and an elapsed-seconds counter because Perplexity's research phase puts the first answer token 30–70 s after the query (33.1 s / 14.7 s / 64.0 s in the three probe turns) — upstream latency, not a bridge defect. Unknown or deferred plugin ids are dropped server-side and reported as `droppedPluginIds`.
+* **Portfolio context.** No portfolio plugin could be registered (no public endpoint; `web/proof/plugin-registration.log`), so `src/app/chat/page.tsx` fetches live backend data server-side and `chat-shell.tsx` injects it as system context into every query. `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` stays empty. none (built-in context)
+* **Company logos.** `<CompanyLogo/>` (overview table, company picker, chat sidebar, news cards) renders the HTTP-verified `logo_url` resolved by the backend's `scripts/resolve-logos.ts` (clearbit → og:image → Google favicon) with a Lucide fallback; `proof/image-coverage.json` = 136 / 136 companies (110 existing, 20 og:image, 6 favicon). News cards show the article `image_url` persisted by the refresh pipeline.
 * `src/lib/api.ts`: live backend first, `src/data/snapshot.json` (fetched 2026-10-09T13:14Z) as offline fallback; the source is shown in each page header.
 * **Theme — light only.** `src/styles/tokens.css` ships ONE neutral light theme: `#FFFFFF` background, `#111827` text, `#E5E7EB` borders, `#6B7280` muted text, 8 px spacing scale, 1 px borders instead of shadows, no glows/gradients/blur. `<html class="light" style="color-scheme: light">` is forced; there is no `.dark`, no `dark:` variants, no `prefers-color-scheme: dark` rule, no theme toggle. Charts (treemap, KPI heatmap, gauges, Recharts) use a gray scale + one restrained accent. Per-company `brand_tokens` are used ONLY for the logo/accent chip after an AA contrast check, never as a page background.
 * **Icons — Lucide only** (`lucide-react` 0.546.0; no `@radix-ui/react-icons` was needed). Chat avatar `Bot`, empty states `Inbox` / `FolderOpen` / `Newspaper`, error/offline `AlertCircle` / `WifiOff`, sectors `Cpu` / `HeartPulse` / `Landmark` / `Zap` / `Leaf` / `ShoppingBag` / `Factory` …, nav `LayoutDashboard` / `Building2` / `Newspaper` / `MessageSquare` / `Settings`. App icon / favicon / OG image = the monochrome Lucide `hexagon` glyph (`src/app/icon.svg`, `src/app/favicon.ico`, `src/app/opengraph-image.tsx` via `next/og`). All AI-generated PNG/WebP assets were removed from `public/brand/` and from the UI.
@@ -44,31 +48,41 @@ BASE_URL=https://… CHROME_PATH=/usr/bin/chromium npm run test:e2e     # Playwr
 BASE_URL=https://… CHROME_PATH=/usr/bin/chromium npm run qa:lighthouse  # Lighthouse mobile + desktop → .lighthouse/summary.json
 BASE_URL=https://… node scripts/screenshots.mjs                        # full-page screenshots → docs/screenshots
 ```
-`ONDEMAND_API_KEY` must be set (server env) for the chat to work; `proof/chat-e2e.log` holds a real streamed round-trip captured against the deployed preview.
+`ONDEMAND_API_KEY` must be set (server env) for the chat to work; `proof/chat-e2e.log` holds a real streamed round-trip captured against the deployed preview, `proof/ttft-probe.log` the three-turn TTFT probe of the live-data release, `proof/payloads/` redacted upstream request/frame dumps (`ONDEMAND_PAYLOAD_DUMP=1`), `proof/functional-matrix.md` and `proof/security-sweep.md` the release checks.
+
+### Refresh pipeline (backend, consumed by this UI)
+News cards, the News Pulse and the chat context read `news_items` rows that the backend's **refresh pipeline** keeps fresh: `POST {backend}/refresh` (`X-Ingest-Secret`; body `{slugs?, limit?, concurrency?}`) streams one Perplexity query per company through the OnDemand Chat API, takes `plugin_sources.items[]` as the news items (title, url, domain, `imageUrl`), recovers `published_at` from the answer text / URL / page meta, backfills `og:image` when the plugin gave no image, and upserts with a deterministic id (`n-<sha1(slug|url)>`), recording one `ingest_runs` row (`source:"refresh"`). An in-process scheduler repeats this for the 40 stalest companies every `REFRESH_CRON_MINUTES` (default 60; `0` disables). `GET {backend}/refresh/status` (public) exposes the last run, counters and `next_scheduled_at`. The frontend proxy (`/api/portfolio/*`) blocks `/refresh` like `/ingest`; the UI only ever reads. Recorded run (`proof/refresh-run.json`, 5 focus companies): 54 items, 54 with images (100 %), 43 dated (80 %), 0 errors, 56–115 s per company. Full description: [`docs/REFRESH_PIPELINE.md`](docs/REFRESH_PIPELINE.md). Deployed-backend status after the first tick: DB on the deployed backend: 202 news items / 184 with image_url; last runs rf-2026-10-10T002013Z-0682e7 (23 companies, 91 items), rf-2026-10-10T004411Z-8edb67 (40 companies), rf-2026-10-10T011148Z-a5a309 (2 companies, 11 items, 8 with images, 9 dated); scheduler enabled every 60 min, batch 40, next 2026-10-10T02:24:27Z
 
 ## Environment variables (`.env`, gitignored — copy `.env.example`)
 | Variable | Default | Purpose |
 |---|---|---|
-| `NEXT_PUBLIC_PORTFOLIO_API_URL` | `https://sb-4wdkkmzv7w2z.vercel.run` | Backend shown/overridable in Settings |
+| `NEXT_PUBLIC_PORTFOLIO_API_URL` | https://sb-7d0g7nrod31w.vercel.run | Backend shown/overridable in Settings (previous: `https://sb-3az18qgrrd3p.vercel.run`) |
 | `NEXT_PUBLIC_DEFAULT_MODEL` | `predefined-claude-fable-5.1` | Chat endpointId (Fable 5.1) |
 | `NEXT_PUBLIC_DEFAULT_EXTERNAL_USER_ID` | `INV-001` | OnDemand externalUserId |
-| `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` | *(empty → "registration pending")* | Portfolio Plugin id once registered |
+| `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` | *(empty)* | Portfolio Plugin id — **no public registration endpoint exists** (HANDOFF §9.6); leave empty, context is injected server-side |
 | `NEXT_PUBLIC_PITCHBOOK_PLUGIN_ID` | `plugin-1777018662` | Labelled "PitchBook"; deferred |
 | `NEXT_PUBLIC_EARLIEST_TEST_UTC` | `2026-10-09T12:37:25Z` | Countdown for the deferred plugin |
 | `NEXT_PUBLIC_SITE_URL` | preview URL | `metadataBase` for OG images |
 | `ONDEMAND_BASE_URL` | `https://api.on-demand.io` | Upstream for `/api/chat` and `/api/ondemand/*` (server) |
 | `ONDEMAND_API_KEY` | *(secret, server only)* | Sent as the `apikey` header by the server routes. **Never** `NEXT_PUBLIC_`, never logged, never in the client bundle (`grep -r "$ONDEMAND_API_KEY" .next/static` → 0 hits). |
 | `PORTFOLIO_API_URL` | same as public | Server-side backend URL |
+| `ONDEMAND_SESSION_HEADER_WAIT_MS` | `1500` | How long `/api/chat` waits for the session create before streaming without the `x-ondemand-session` header (the id is always also sent as `CUSTOM ondemand.session`) |
+| `ONDEMAND_PAYLOAD_DUMP` | *(unset)* | `1` → write redacted upstream request/frame dumps to `proof/payloads/` (debug only; never in production) |
+
+Backend-side variables for the refresh pipeline (`ONDEMAND_API_KEY`, `ONDEMAND_BASE_URL`, `REFRESH_CRON_MINUTES`, `INGEST_SECRET`) live in the root `.env.example`, not here.
 
 A user may still paste their own key in Settings; it is kept in `localStorage` (`bcap.settings.v1`) and forwarded as `x-ondemand-key`, overriding the server key for that browser only.
 
-## OnDemand endpoints used (from the live public docs, 2026-10-09)
-| Step | Method + path | Headers | Body |
+## OnDemand endpoints used (from the live public docs, OpenAPI 3.0.3, fetched 2026-10-09)
+Security scheme: `apikey` (`in: header`, `name: apikey`). Errors: `4XX`/`5XX` → `{ errorCode, message }`. Full field tables in HANDOFF §9.4.
+| Step | Method + path | Headers | Body (required in **bold**) → response |
 |---|---|---|---|
-| Create session | `POST https://api.on-demand.io/chat/v1/sessions` | `apikey: <ONDEMAND_API_KEY>`, `content-type: application/json` | `{ externalUserId, pluginIds[], contextMetadata?[] }` → `data.id` |
-| Submit query (stream) | `POST https://api.on-demand.io/chat/v1/sessions/{sessionId}/query` | same + `accept: text/event-stream` | `{ query, endpointId, responseMode: "stream", pluginIds[] }` → `event:heartbeat|thinking|message` frames, `data:{"eventType":"fulfillment","answer":"…"}`, terminal `data:[DONE]` |
-| List sessions | `GET https://api.on-demand.io/chat/v1/sessions?externalUserId&limit` | `apikey` | — |
-| List messages | `GET https://api.on-demand.io/chat/v1/sessions/{sessionId}/messages` | `apikey` | — |
+| Create session | `POST https://api.on-demand.io/chat/v1/sessions` | `apikey`, `content-type: application/json` | `{ **externalUserId**, pluginIds[] (≤20), contextMetadata?[{key,value}] (undocumented, accepted) }` → `{ message, data: { id, companyId, externalUserId, pluginIds, title, createdBy, createdAt, updatedAt } }` |
+| Submit query | `POST https://api.on-demand.io/chat/v1/sessions/{sessionId}/query` | same + `accept: text/event-stream` | `{ **query**, **endpointId**, **responseMode**: "sync"\|"stream"\|"webhook", pluginIds[] (≤20), fulfillmentOnly?, modelConfigs?{fulfillmentPrompt, stopSequences, temperature, topP, presencePenalty, frequencyPenalty} }` → sync: `{ message, data: { sessionId, messageId, answer, status } }`; stream: SSE (below) |
+| List messages | `GET https://api.on-demand.io/chat/v1/sessions/{sessionId}/messages?externalUserId&sort=asc\|desc&cursor&limit(1–50)` | `apikey` | → `{ message, data: ChatMessage[], pagination: { next } }` |
+| List sessions | `GET https://api.on-demand.io/chat/v1/sessions?externalUserId&limit` | `apikey` | (used read-only by `/api/ondemand/*`; not among the three docs fetched) |
+
+**Observed stream shape** (not in the docs; one recorded Perplexity run, 65 s): `event:heartbeat|thinking|message` + `data:{sessionId, messageId, eventIndex, eventType, status}`; `eventType` in order of appearance `planning_thinking` → `planning_output` → `step_output` / `step_thinking` → `plugin_sources` (`sources.items[{title,url,domain,imageUrl}]`, `pluginId`, `pluginName`, +24.5 s) → `fulfillment_thinking` → `fulfillment` (`answer` deltas, first at +50.8 s) → `metricsLog` (`publicMetrics.{inputTokens,outputTokens,ragTimeSec,fulfillmentTimeSec,totalTimeSec}`) → terminal `data:[DONE]`. Heartbeats roughly every 3 s while idle.
 
 ### Verified plugin list (hard-coded in `src/lib/ondemand/config.ts`, Perplexity first)
 | Plugin ID | Name | Session | Query | First token | Total | Timestamp (UTC) | Decision |

@@ -12,11 +12,11 @@ export function NewsThumb({ src, companyLogo, host, alt = "", eager = false }: {
   const logoIdx = okUrl(companyLogo) ? chain.indexOf(okUrl(companyLogo) as string) : -1;
   const [i, setI] = useState(0);
   const cur = chain[i];
-  if (!cur) return <div className="grid size-24 shrink-0 place-items-center rounded-lg border border-border bg-surface-2 text-muted" aria-hidden><Newspaper className="size-6" strokeWidth={1.75} /></div>;
+  if (!cur) return <div data-testid="news-image-placeholder" className="grid size-24 shrink-0 place-items-center rounded-lg border border-border bg-surface-2 text-muted" aria-hidden><Newspaper className="size-6" strokeWidth={1.75} /></div>;
   const isFavicon = i === chain.length - 1 && !!host && cur.includes("faviconV2");
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={cur} alt={alt} width={96} height={96} loading={eager ? "eager" : "lazy"} decoding="async" referrerPolicy="no-referrer"
+    <img data-testid="news-image" src={cur} alt={alt} width={96} height={96} loading={eager ? "eager" : "lazy"} decoding="async" referrerPolicy="no-referrer"
       data-thumb-kind={isFavicon ? "favicon" : i === logoIdx ? "company-logo" : "article"}
       className={`size-24 shrink-0 rounded-lg border border-border bg-white ${isFavicon ? "object-contain p-6" : i === logoIdx ? "object-contain p-3" : "object-cover"}`}
       onError={() => setI((n) => n + 1)} />

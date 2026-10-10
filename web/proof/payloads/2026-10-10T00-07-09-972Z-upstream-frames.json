@@ -1,0 +1,110 @@
+{
+  "sessionCreatedThisRequest": true,
+  "totalUpstreamFrames": 329,
+  "first20": [
+    {
+      "ms": 4259,
+      "raw": "event:heartbeat\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"time\":\"2026-10-10T00:07:14Z\"}"
+    },
+    {
+      "ms": 5387,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"Since perplexity is the only available\"}}"
+    },
+    {
+      "ms": 5526,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" plugin here, I'll use it for a single search\"}}"
+    },
+    {
+      "ms": 5651,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" step to find Fervo Energy's rec\"}}"
+    },
+    {
+      "ms": 5776,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ent announcements, keeping the\"}}"
+    },
+    {
+      "ms": 6204,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":5,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"```json\\n{\\n  \\\"title\\\": \\\"I'll look up the latest announ\"}}"
+    },
+    {
+      "ms": 6208,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":6,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"cements from Fervo Energy, including rec\"}}"
+    },
+    {
+      "ms": 6208,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":7,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"ent press releases, funding, proj\"}}"
+    },
+    {
+      "ms": 6401,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":8,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"ects, and partnerships, and bring back\"}}"
+    },
+    {
+      "ms": 6530,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":9,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" the sources.\\\",\\n  \\\"objective\\\": \\\"\"}}"
+    },
+    {
+      "ms": 6653,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":10,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"Find out what Fervo Energy has announ\"}}"
+    },
+    {
+      "ms": 6779,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":11,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"ced recently, with cited sources.\\\",\\n  \\\"plan\"}}"
+    },
+    {
+      "ms": 6906,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":12,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"_required\\\": true,\\n  \\\"plan_skip_reason\"}}"
+    },
+    {
+      "ms": 7029,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":13,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"\\\": \\\"\\\",\\n  \\\"steps\\\": [\\n    {\\n      \\\"\"}}"
+    },
+    {
+      "ms": 7155,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":14,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"title\\\": \\\"Searching recent announ\"}}"
+    },
+    {
+      "ms": 7259,
+      "raw": "event:heartbeat\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"time\":\"2026-10-10T00:07:17Z\"}"
+    },
+    {
+      "ms": 7283,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":15,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"cements\\\",\\n      \\\"user_query\\\": \\\"Search for the most\"}}"
+    },
+    {
+      "ms": 7407,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":16,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" recent announcements from Fervo Energy as\"}}"
+    },
+    {
+      "ms": 7594,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":17,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" of 2026-10-10, including official\"}}"
+    },
+    {
+      "ms": 7724,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":18,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" press releases, funding rounds, new\"}}"
+    }
+  ],
+  "last5": [
+    {
+      "ms": 45920,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":311,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"\\n\\n\"}}"
+    },
+    {
+      "ms": 45920,
+      "raw": "event:thinking\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":312,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"\"}}"
+    },
+    {
+      "ms": 45932,
+      "raw": "event:message\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"eventIndex\":313,\"eventType\":\"metricsLog\",\"status\":\"processing\",\"publicMetrics\":{\"inputTokens\":9222,\"outputTokens\":2109,\"totalTokens\":11331,\"ragTimeSec\":21.66,\"fulfillmentTimeSec\":23,\"totalTimeSec\":44.66}}"
+    },
+    {
+      "ms": 46258,
+      "raw": "event:heartbeat\ndata:{\"sessionId\":\"<sid>\",\"messageId\":\"6ac981af261cbe2340483869\",\"time\":\"2026-10-10T00:07:56Z\"}"
+    },
+    {
+      "ms": 47941,
+      "raw": "event:message\ndata:[DONE]"
+    }
+  ],
+  "translatedChars": 3988,
+  "elapsedMs": 47942
+}

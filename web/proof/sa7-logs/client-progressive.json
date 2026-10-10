@@ -1,0 +1,74 @@
+{
+ "method": "next dev + mock AG-UI SSE server (frames: status 0 ms, session 200 ms, tool card 400 ms, 8 text deltas every 300 ms from 3 s, sources with imageUrl, [DONE]); ui-validator timed evals",
+ "captured_at": "2026-10-10T00:19Z",
+ "samples": [
+  {
+   "t": 569,
+   "pending": true,
+   "card_prefix": "Searching with Perplexity",
+   "len": null,
+   "btn": null,
+   "thumbs": null,
+   "truncated": true
+  },
+  {
+   "t": 1571,
+   "pending": true,
+   "card_prefix": "Searching with Perplexity",
+   "len": null,
+   "btn": null,
+   "thumbs": null,
+   "truncated": true
+  },
+  {
+   "t": 4072,
+   "pending": false,
+   "card_prefix": "Searching with Perplexity",
+   "len": 133,
+   "btn": "Cancel message",
+   "thumbs": 0,
+   "truncated": true
+  },
+  {
+   "t": 6073,
+   "pending": false,
+   "card_prefix": "Perplexity searched",
+   "len": 654,
+   "btn": "Send message",
+   "thumbs": 2,
+   "truncated": true
+  },
+  {
+   "t": 9075,
+   "pending": false,
+   "card_prefix": "Perplexity searched",
+   "len": 654,
+   "btn": "Send message",
+   "thumbs": 2,
+   "truncated": true
+  },
+  {
+   "t": 12076,
+   "pending": false,
+   "card_prefix": "Perplexity searched",
+   "len": 654,
+   "btn": "Send message",
+   "thumbs": 2,
+   "truncated": true
+  }
+ ],
+ "verdict": {
+  "pending_row_within_600ms": true,
+  "card_real_query_at_569ms": "Searching with Perplexity",
+  "progressive_len": [
+   null,
+   null,
+   133,
+   654,
+   654,
+   654
+  ],
+  "final_button": "Send message",
+  "thumbnails_final": 2
+ }
+}

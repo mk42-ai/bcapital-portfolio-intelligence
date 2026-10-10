@@ -13,7 +13,7 @@
   },
   "servers": [
     {
-      "url": "https://serverless.on-demand.io/apps/bcap-portfolio-api",
+      "url": "https://sb-1gek6bq0m1au.vercel.run",
       "description": "Deployed API"
     }
   ],
@@ -670,6 +670,273 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/refresh": {
+      "post": {
+        "operationId": "refresh",
+        "tags": [
+          "ingest"
+        ],
+        "summary": "Pull live news (with images + published dates) via the OnDemand Chat API / Perplexity plugin",
+        "description": "Server-side refresh: for each company creates an OnDemand chat session, streams a Perplexity query, stores every plugin source (title, url, domain, imageUrl) as a news item (og:image backfilled when missing), merges into latest_news and records an ingest_runs row (source 'refresh'). Same auth as /ingest (X-Ingest-Secret, Basic password or ?secret=). Synchronous — typically 60–120 s per batch of 3 companies. Without slugs the `limit` stalest companies (by updated_at) are refreshed.",
+        "security": [
+          {
+            "ingestSecret": []
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "slugs": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Company slugs to refresh (default: stalest companies)"
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "default": 40,
+                    "maximum": 200
+                  },
+                  "concurrency": {
+                    "type": "integer",
+                    "default": 3,
+                    "maximum": 6
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Refresh summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ingest_run_id": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "ok",
+                        "partial",
+                        "error"
+                      ]
+                    },
+                    "companies_touched": {
+                      "type": "integer"
+                    },
+                    "news_upserted": {
+                      "type": "integer"
+                    },
+                    "with_images": {
+                      "type": "integer"
+                    },
+                    "dated": {
+                      "type": "integer"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "companies": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "slug": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "items": {
+                            "type": "integer"
+                          },
+                          "with_images": {
+                            "type": "integer"
+                          },
+                          "dated": {
+                            "type": "integer"
+                          },
+                          "ms": {
+                            "type": "integer"
+                          },
+                          "error": {
+                            "type": "string",
+                            "nullable": true
+                          }
+                        }
+                      }
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "company_slug": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string"
+                          },
+                          "source": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "published_at": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "image_url": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "fetched_at": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "started_at": {
+                      "type": "string"
+                    },
+                    "finished_at": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid X-Ingest-Secret",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "ONDEMAND_API_KEY / INGEST_SECRET not configured",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/refresh/status": {
+      "get": {
+        "operationId": "getRefreshStatus",
+        "tags": [
+          "ingest"
+        ],
+        "summary": "Last refresh run + scheduler state (public)",
+        "responses": {
+          "200": {
+            "description": "Status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "running": {
+                      "type": "boolean"
+                    },
+                    "last_run": {
+                      "type": "object",
+                      "nullable": true,
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "companies_touched": {
+                          "type": "integer"
+                        },
+                        "news_upserted": {
+                          "type": "integer"
+                        },
+                        "errors": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "started_at": {
+                          "type": "string"
+                        },
+                        "finished_at": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "model": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    "scheduler": {
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "boolean"
+                        },
+                        "interval_minutes": {
+                          "type": "integer",
+                          "nullable": true
+                        },
+                        "batch_limit": {
+                          "type": "integer"
+                        },
+                        "next_scheduled_at": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    "news_items_total": {
+                      "type": "integer"
+                    },
+                    "news_items_with_images": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }

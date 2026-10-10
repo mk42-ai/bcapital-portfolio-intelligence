@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { CompanyPicker } from "@/components/chat/company-picker";
 import { Countdown } from "@/components/chat/countdown";
 import { BrandLogo } from "@/components/brand/logo";
-export function SettingsForm({ options }: { options: { slug: string; name: string; sector: string }[] }) {
+export function SettingsForm({ options }: { options: { slug: string; name: string; sector: string; logo_url?: string | null }[] }) {
   const [s, set] = useSettings(); const [test, setTest] = useState<{ state: "idle" | "busy" | "ok" | "err"; msg?: string }>({ state: "idle" }); const [keyErr, setKeyErr] = useState("");
   const [userErr, setUserErr] = useState(""); const [urlErr, setUrlErr] = useState("");
   /** externalUserId must be non-empty (whitespace-only rejected); the value is still echoed in the input so the user can fix it, but only valid values are persisted. */
@@ -49,8 +49,8 @@ export function SettingsForm({ options }: { options: { slug: string; name: strin
         <CardContent><ul className="divide-y divide-border">
           {PLUGINS.map((p) => (
             <li key={p.name} className="flex items-center justify-between gap-3 py-3">
-              <div className="min-w-0"><p className="flex flex-wrap items-center gap-2 text-sm font-medium">{p.name}{p.status === "pending" && <Badge tone="accent">registration pending</Badge>}{p.status === "deferred" && <Badge tone="muted">configuring — deferred</Badge>}{p.status === "dropped" && <Badge tone="muted">dropped — tool 404</Badge>}</p><p className="text-xs text-muted">{p.purpose}{p.id ? ` · ${p.id}` : " · id: null"}</p>{p.status === "deferred" && <p className="text-xs text-muted">Not callable before <Countdown iso={EARLIEST_TEST_UTC} /> — and never without the owner confirming it is configured.</p>}</div>
-              <Switch aria-label={`Enable ${p.name}`} checked={!!p.id && !!s.plugins[p.id]} disabled={!p.id || p.status !== "active"} onCheckedChange={(v) => p.id && set({ plugins: { ...s.plugins, [p.id]: v } })} />
+              <div className="min-w-0"><p className="flex flex-wrap items-center gap-2 text-sm font-medium">{p.name}{p.status === "builtin" && <Badge tone="muted">built-in context</Badge>}{p.status === "deferred" && <Badge tone="muted">configuring — deferred</Badge>}{p.status === "dropped" && <Badge tone="muted">dropped — tool 404</Badge>}</p><p className="text-xs text-muted">{p.purpose}{p.id ? ` · ${p.id}` : p.status === "builtin" ? "" : " · id: null"}</p>{p.status === "builtin" && <p className="text-xs text-muted" title="The OnDemand public API has no plugin-registration endpoint (docs/categories lists chat, media, workflow, project and MQTT endpoints only), so the portfolio API cannot be attached as a pluginId. Live backend data is injected as systemContext instead. See docs/ONDEMAND_SURFACE.md.">Always on — the OnDemand API has no public plugin-registration endpoint, so the live backend&apos;s sentiment, status and headlines are injected into each thread instead (<a className="underline" href="https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/docs/ONDEMAND_SURFACE.md" target="_blank" rel="noreferrer">docs/ONDEMAND_SURFACE.md</a>).</p>}{p.status === "deferred" && <p className="text-xs text-muted">Not callable before <Countdown iso={EARLIEST_TEST_UTC} /> — and never without the owner confirming it is configured.</p>}</div>
+              {p.status !== "builtin" && <Switch aria-label={`Enable ${p.name}`} checked={!!p.id && !!s.plugins[p.id]} disabled={!p.id || p.status !== "active"} onCheckedChange={(v) => p.id && set({ plugins: { ...s.plugins, [p.id]: v } })} />}
             </li>
           ))}
         </ul></CardContent></Card>

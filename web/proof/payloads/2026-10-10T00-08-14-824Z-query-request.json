@@ -1,0 +1,42 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.on-demand.io/chat/v1/sessions/<sid>/query",
+    "headers": {
+      "apikey": "<redacted>",
+      "content-type": "application/json",
+      "accept": "text/event-stream"
+    },
+    "body": {
+      "query": "In one sentence, which of those is most relevant to an investor?",
+      "endpointId": "predefined-claude-fable-5.1",
+      "responseMode": "stream",
+      "pluginIds": [
+        "plugin-1722260873"
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "access-control-expose-headers": "X-Trace-ID",
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cache-control": "no-cache, no-transform",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "a48163b5ac8e9c73-IAD",
+      "connection": "keep-alive",
+      "content-security-policy": "default-src 'none'; frame-ancestors 'none'",
+      "content-type": "text/event-stream; charset=utf-8",
+      "date": "Sat, 10 Oct 2026 00:08:15 GMT",
+      "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "referrer-policy": "no-referrer",
+      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=6%2BtumU%2FZZPOr9uC5qm6KIgMEfV76ZJuCBeY8RK5j44izs6XFM23QXAfYVm9Itb3U4mC7hIm%2BRFeTzzkKod6siQaafOaiRo%2BWjc9jQDdhxiGfah5rsbQBil3ejPeo9q1fETex\"}]}",
+      "server": "cloudflare",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "transfer-encoding": "chunked",
+      "x-content-type-options": "nosniff",
+      "x-trace-id": "41c02a7a13a089b2e4efbce1d837a864"
+    }
+  },
+  "elapsedMs": 759
+}

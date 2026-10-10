@@ -1,0 +1,144 @@
+{
+  "url": "https://sb-3umbne3uc2g2.vercel.run/company/fervo-energy?skip=1",
+  "ok": false,
+  "screenshots": [
+    "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/.ui-proof/SA7-company-390x844.png"
+  ],
+  "assertions": [
+    {
+      "kind": "http-status",
+      "target": "https://sb-3umbne3uc2g2.vercel.run/company/fervo-energy?skip=1",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "kind": "expect-text",
+      "target": "Fervo",
+      "ok": true,
+      "detail": "found"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{window.__set=(el,v)=>{const p=Object.getOwnPropertyDescriptor(el.tagName===\"SELECT\"?HTMLSelectElement.prototype:HTMLInputElement.prototype,\"value\").set;p.call(el,v);el.dispatchEvent(new Event(\"i",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{const b=getComputedStyle(document.body).backgroundColor;const dark=[...document.querySelectorAll(\"body *\")].filter(e=>{const r=e.getBoundingClientRect();if(r.width*r.height<30000)return false;co",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{const l=document.querySelectorAll(\"svg.lucide\").length;const foreign=[...document.querySelectorAll(\"[class*=\\\"fa-\\\"],[class*=\\\"material-icons\\\"],[class*=\\\"heroicon\\\"],i[class*=\\\"icon\\\"]\")].lengt",
+      "ok": false,
+      "detail": "false"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{const b=document.querySelector(\"[data-testid=backend-status]\");window.__r=window.__r||{};window.__r.badge=b&&{live:b.dataset.live,text:b.textContent,title:b.title};return !!b&&b.dataset.live===\"",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{const a=[...document.querySelectorAll(\"a[href^=\\\"http\\\"]\")].filter(x=>{try{return new URL(x.href).origin!==location.origin}catch{return false}});const bad=a.filter(x=>x.target!==\"_blank\"||!/noop",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).theme||null)",
+      "ok": true,
+      "detail": "\"{\\\"html\\\":\\\"light __variable_db5d2c __variable_703880\\\",\\\"body\\\":\\\"rgb(255, 255, 255)\\\",\\\"dark\\\":0}\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).lucide||null)",
+      "ok": true,
+      "detail": "\"{\\\"lucide\\\":10,\\\"foreign\\\":0,\\\"firstPartyImgs\\\":[],\\\"otherImgs\\\":[\\\"https://fervoenergy.com/wp-content/uploads/2022/08/Fervo-logo-primary-768x166.png\\\"]}\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).badge||null)",
+      "ok": true,
+      "detail": "\"{\\\"live\\\":\\\"1\\\",\\\"text\\\":\\\"live backend\\\",\\\"title\\\":\\\"https://sb-3az18qgrrd3p.vercel.run\\\"}\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).stamp||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).search||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).sort||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).rowlink||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).news||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).ext||null)",
+      "ok": true,
+      "detail": "\"{\\\"external\\\":8,\\\"bad\\\":0,\\\"badSample\\\":[]}\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).settings||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).onb||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).gate||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "eval",
+      "target": "JSON.stringify((window.__r||{}).nf||null)",
+      "ok": true,
+      "detail": "\"null\""
+    },
+    {
+      "kind": "page-rendered",
+      "target": "document.body",
+      "ok": true,
+      "detail": "innerText=3063 chars, bodyHeight=2875px"
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "failedRequests": [
+    "Fetch: net::ERR_ABORTED https://sb-3umbne3uc2g2.vercel.run/overview?_rsc=vXQvI466aGoUAklK"
+  ],
+  "browser": "/usr/bin/chromium",
+  "httpStatus": 200,
+  "title": "Fervo Energy \u2014 Energy & Resilience \u00b7 B Capital Portfolio Intelligence",
+  "textLength": 3063
+}

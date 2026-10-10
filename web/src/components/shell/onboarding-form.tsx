@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input, Field } from "@/components/ui/input";
 import { CompanyPicker } from "@/components/chat/company-picker";
 const GROWTH = [["G", "Generosity"], ["R", "Resilience"], ["O", "Open-mindedness"], ["W", "Will"], ["T", "Teamwork"], ["H", "Humility"]];
-export function OnboardingForm({ options }: { options: { slug: string; name: string; sector: string }[] }) {
+export function OnboardingForm({ options }: { options: { slug: string; name: string; sector: string; logo_url?: string | null }[] }) {
   const [s, set] = useSettings(); const router = useRouter();
   const [key, setKey] = useState(s.apikey); const [picked, setPicked] = useState<string[]>(s.companies?.length ? s.companies : DEFAULT_FOCUS); const [err, setErr] = useState("");
   function finish(skipKey = false) {

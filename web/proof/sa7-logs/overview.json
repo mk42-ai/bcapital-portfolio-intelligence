@@ -1,0 +1,95 @@
+{
+  "url": "https://sb-3umbne3uc2g2.vercel.run/overview?skip=1",
+  "ok": true,
+  "screenshots": [
+    "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/.ui-proof/SA7-overview-1440x900.png",
+    "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/.ui-proof/SA7-overview-390x844.png"
+  ],
+  "assertions": [
+    {
+      "kind": "http-status",
+      "target": "https://sb-3umbne3uc2g2.vercel.run/overview?skip=1",
+      "ok": true,
+      "detail": "200"
+    },
+    {
+      "kind": "wait-selector",
+      "target": "[data-testid=company-table]",
+      "ok": true,
+      "detail": "appeared"
+    },
+    {
+      "kind": "expect-selector",
+      "target": "[data-testid=backend-status][data-live='1']",
+      "ok": true,
+      "detail": "visible"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{window.__set=(el,v)=>{const p=Object.getOwnPropertyDescriptor(el.tagName===\"SELECT\"?HTMLSelectElement.prototype:HTMLInputElement.prototype,\"value\").set;p.call(el,v);el.dispatchEvent(new Event(\"i",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{const b=getComputedStyle(document.body).backgroundColor;const dark=[...document.querySelectorAll(\"body *\")].filter(e=>{const r=e.getBoundingClientRect();if(r.width*r.height<30000)return false;co",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{const l=document.querySelectorAll(\"svg.lucide\").length;const foreign=[...document.querySelectorAll(\"[class*=\\\"fa-\\\"],[class*=\\\"material-icons\\\"],[class*=\\\"heroicon\\\"],i[class*=\\\"icon\\\"]\")].lengt",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{const b=document.querySelector(\"[data-testid=backend-status]\");window.__r=window.__r||{};window.__r.badge=b&&{live:b.dataset.live,text:b.textContent,title:b.title};return !!b&&b.dataset.live===\"",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{const t=document.body.innerText;const m=t.match(/fetched (\\d{4}-\\d\\d-\\d\\dT[\\d:.]+Z)/);const age=m?(Date.now()-Date.parse(m[1]))/1000:null;window.__r=window.__r||{};window.__r.stamp={iso:m&&m[1],",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(async()=>{const i=document.querySelector(\"[data-testid=table-search]\");const before=document.querySelectorAll(\"[data-testid=company-table] tbody tr\").length;__set(i,\"fervo\");await __sleep(600);const ",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(async()=>{const fr=()=>document.querySelector(\"[data-testid=company-table] tbody tr\")?.innerText.replace(/\\s+/g,\" \").slice(0,50);const th=()=>document.querySelector(\"[data-testid=sort-score]\").closes",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{const a=document.querySelector(\"[data-testid=company-table] tbody tr a[href^=\\\"/company/\\\"]\");window.__r.rowlink=a&&a.getAttribute(\"href\");return !!a&&/^\\/company\\/[a-z0-9-]+$/.test(a.getAttribu",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "eval",
+      "target": "(()=>{console.log(\"SA7\"+JSON.stringify(window.__r));return true})()",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "kind": "page-rendered",
+      "target": "document.body",
+      "ok": true,
+      "detail": "innerText=7704 chars, bodyHeight=3241px"
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "browser": "/usr/bin/chromium",
+  "httpStatus": 200,
+  "title": "Portfolio Overview \u00b7 B Capital Portfolio Intelligence",
+  "textLength": 7704
+}

@@ -1,0 +1,24 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.on-demand.io/chat/v1/sessions",
+    "headers": {
+      "apikey": "<redacted>",
+      "content-type": "application/json"
+    },
+    "body": {
+      "externalUserId": "INV-001",
+      "pluginIds": [
+        "plugin-1722260873"
+      ]
+    }
+  },
+  "response": {
+    "status": 401,
+    "body": {
+      "errorCode": "unauthenticated",
+      "message": "Invalid API Key"
+    }
+  },
+  "elapsedMs": 187
+}
