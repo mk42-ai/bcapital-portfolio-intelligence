@@ -1,0 +1,36 @@
+/* Chat top bar (Agent 20) — 52 px, 8 px grid, brand green for active states only. Loaded after canvas.css; selectors are
+   scoped with `header.chat-topbar` so they win over the legacy `.chat-topbar*` rules in canvas.css (to be deleted by Agent 22). */
+header.chat-topbar { box-sizing: border-box; display: flex; align-items: center; gap: 8px; height: 52px; min-height: 52px; max-height: 52px; padding: 0 16px; border-bottom: 1px solid #e5e7eb; background: #fff; flex: none; overflow: hidden; }
+header.chat-topbar .chat-topbar__title { margin: 0; flex: 1 1 auto; min-width: 0; font: 600 14px/20px var(--font-body, system-ui); letter-spacing: 0; color: #111827; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+header.chat-topbar .chat-topbar__model { display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 8px; border: 1px solid #e5e7eb; border-radius: 999px; background: #fff; font: 500 11px/1 var(--font-body, system-ui); color: #4b5563; white-space: nowrap; flex: none; }
+header.chat-topbar .chat-topbar__model-icon { width: 12px; height: 12px; color: #047857; flex: none; }
+
+header.chat-topbar .chat-topbar__tabs { display: inline-flex; align-items: center; height: 32px; padding: 2px; border: 1px solid #e5e7eb; border-radius: 8px; background: #f9fafb; flex: none; }
+header.chat-topbar .chat-topbar__tabs button { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border: 0; border-radius: 6px; background: transparent; font: 500 12px/1 var(--font-body, system-ui); color: #4b5563; cursor: pointer; white-space: nowrap; }
+header.chat-topbar .chat-topbar__tabs button:hover { color: #111827; }
+header.chat-topbar .chat-topbar__tabs button:focus-visible { outline: 2px solid #0ac985; outline-offset: 1px; }
+header.chat-topbar .chat-topbar__tabs button[aria-selected="true"] { background: #fff; color: #047857; box-shadow: 0 1px 2px rgb(0 0 0 / 6%); }
+header.chat-topbar .chat-topbar__phase { font-size: 11px; font-weight: 400; color: #047857; }
+header.chat-topbar .chat-topbar__phase::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 4px; border-radius: 999px; background: #0ac985; vertical-align: middle; animation: chat-topbar-pulse 1.2s ease-in-out infinite; }
+
+header.chat-topbar .chat-topbar__readout { font: 400 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; color: #6b7280; white-space: nowrap; flex: none; }
+
+header.chat-topbar .chat-topbar__fresh { width: 8px; height: 8px; border-radius: 999px; background: #0ac985; box-shadow: 0 0 0 2px #e6faf3; flex: none; }
+header.chat-topbar .chat-topbar__fresh[data-source="snapshot"] { background: #9ca3af; box-shadow: 0 0 0 2px #f3f4f6; }
+
+header.chat-topbar .chat-topbar__inspector { display: inline-grid; place-items: center; width: 32px; height: 32px; border: 1px solid #e5e7eb; border-radius: 8px; background: #fff; color: #4b5563; cursor: pointer; flex: none; }
+header.chat-topbar .chat-topbar__inspector:hover { color: #111827; border-color: #d1d5db; }
+header.chat-topbar .chat-topbar__inspector:focus-visible { outline: 2px solid #0ac985; outline-offset: 1px; }
+header.chat-topbar .chat-topbar__inspector[aria-expanded="true"] { border-color: #0ac985; color: #047857; background: #e6faf3; }
+
+@keyframes chat-topbar-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@media (prefers-reduced-motion: reduce) { header.chat-topbar .chat-topbar__phase::before { animation: none; } }
+
+/* ≤ 640 px: icon-only model pill, tighter padding, hide the readout; bar stays 52 px. */
+@media (max-width: 640px) {
+  header.chat-topbar { padding: 0 8px; }
+  header.chat-topbar .chat-topbar__model { width: 24px; padding: 0; justify-content: center; }
+  header.chat-topbar .chat-topbar__model-text { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  header.chat-topbar .chat-topbar__readout { display: none; }
+}
