@@ -9,3 +9,7 @@ playwright-report/
 .lighthouse/
 tsconfig.tsbuildinfo
 !proof/*.log
+# perf recordings: large binaries stay out of git (delivered as run artifacts); metrics/sse/png/mp4 are committed
+proof/perf/**/trace.zip
+proof/perf/**/run.har
+proof/perf/**/run.webm
