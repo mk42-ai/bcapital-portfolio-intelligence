@@ -48,10 +48,10 @@ export function PlanStepper({ plan, reserve }: { plan: { objective: string | nul
   if (!plan || (!plan.objective && !plan.steps.length)) {
     // Reserved slot while the planner is still streaming its JSON: same box (border + min-height) the real stepper will occupy, so the
     // plan arriving does not push the plugin cards / thinking trace / working band down (the 0.10 CLS spike at plan_created on mobile).
-    return reserve ? <section className="oiu-plan oiu-plan--reserved" data-testid="plan-stepper" data-state="pending" aria-label="Execution plan"><p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />Planning…</p><div className="oiu-shimmer oiu-shimmer--plan" aria-hidden><span /><span /></div></section> : null;
+    return reserve ? <section id="run-plan" className="oiu-plan oiu-plan--reserved" data-testid="plan-stepper" data-state="pending" aria-label="Execution plan"><p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />Planning…</p><div className="oiu-shimmer oiu-shimmer--plan" aria-hidden><span /><span /></div></section> : null;
   }
   return (
-    <section className="oiu-plan" data-testid="plan-stepper" data-state={plan.provisional ? "provisional" : "ready"} aria-label="Execution plan">
+    <section id="run-plan" className="oiu-plan" data-testid="plan-stepper" data-state={plan.provisional ? "provisional" : "ready"} aria-label="Execution plan">
       <p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />{plan.objective || "Execution plan"}{plan.provisional && <span className="oiu-plan__prov" title="Steps are still streaming in">drafting…</span>}</p>
       {plan.steps.length > 0 && <ol className="oiu-plan__steps">{plan.steps.map((s, i) => (
         <li key={s.id} className={`oiu-plan__step oiu-plan__step--${s.state}`} data-testid="plan-step" data-state={s.state}>
