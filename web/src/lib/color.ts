@@ -19,7 +19,7 @@ export function aaBadge(ratio: number): { label: "AAA" | "AA" | "AA large" | "Fa
 }
 /** Derive a safe per-company accent set: company colours only when they clear AA; otherwise the neutral light tokens. */
 export function companyTheme(tokens: { primary: string | null; secondary: string | null; background: string | null; text: string | null }) {
-  const fallback = { primary: "#111827", background: "#ffffff", text: "#111827", accent: "#1d4ed8", source: "neutral" as const, checks: [] as { pair: string; ratio: number; ok: boolean }[] };
+  const fallback = { primary: "#111827", background: "#ffffff", text: "#111827", accent: "#047857", source: "neutral" as const, checks: [] as { pair: string; ratio: number; ok: boolean }[] };
   const bg = tokens.background && hexToRgb(tokens.background) ? tokens.background : null;
   const text = tokens.text && hexToRgb(tokens.text) ? tokens.text : bg ? bestInk(bg) : null;
   const primary = tokens.primary && hexToRgb(tokens.primary) ? tokens.primary : null;

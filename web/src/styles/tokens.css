@@ -12,9 +12,9 @@
   --border-strong: #d1d5db;
   --muted: #5f6b7a;
   --muted-2: #4b5563;
-  --primary: #1d4ed8;          /* single accent (links, active nav, primary button) */
+  --primary: #047857;          /* single accent = B Capital brand green ink (links, active nav, primary button); 5.5:1 on white */
   --primary-foreground: #ffffff;
-  --primary-soft: #1e40af;     /* accent as text on white/tints, 8.6:1 */
+  --primary-soft: #065f46;     /* accent as text on white/tints, 7.7:1 */
   --accent: #374151;           /* secondary emphasis — neutral, never a glow */
   --accent-foreground: #ffffff;
   --accent-soft: #374151;
@@ -24,7 +24,7 @@
   --danger: #b91c1c;           /* 6.5:1 on white; used sparingly for negative deltas/errors */
   --danger-foreground: #ffffff;
   --danger-soft: #991b1b;
-  --ring: #1d4ed8;
+  --ring: #0AC985;
   /* B Capital brand green — brand_tokens.primary of the B Capital row in the brand matrix / compendium (#0AC985, evidence tier Verified).
      --brand-green-ink is the AA-safe text variant on white (4.6:1); --brand-green-soft is the 10% tint for hover washes. */
   --brand-green: #0AC985;
@@ -32,6 +32,6 @@
   --brand-green-soft: #E6FAF3;
   --brand-green-strong: #089A66;
   --radius: 0.5rem;
-  --chart-1: #1f2937; --chart-2: #6b7280; --chart-3: #9ca3af; --chart-4: #1d4ed8; --chart-5: #b91c1c; --chart-6: #d1d5db;
+  --chart-1: #1f2937; --chart-2: #6b7280; --chart-3: #9ca3af; --chart-4: #0AC985; --chart-5: #b91c1c; --chart-6: #d1d5db;
   --sentiment-neg: #b91c1c; --sentiment-neu: #6b7280; --sentiment-pos: #1f2937;
 }

@@ -3,7 +3,7 @@ import { bestInk } from "@/lib/color";
 /** Blend a hex colour over white at the given alpha (so the label ink is chosen against the colour actually painted). */
 const over = (hex: string, a: number) => "#" + [1, 3, 5].map((i) => Math.round(parseInt(hex.slice(i, i + 2), 16) * a + 255 * (1 - a)).toString(16).padStart(2, "0")).join("");
 export type TreeNode = { name: string; slug?: string; value?: number; score?: number; children?: TreeNode[] };
-const PALETTE = ["#1f2937", "#4b5563", "#6b7280", "#94a3b8", "#1d4ed8", "#374151"];
+const PALETTE = ["#1f2937", "#4b5563", "#6b7280", "#94a3b8", "#047857", "#374151"];
 const fmt = (v: number) => v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : `$${Math.round(v / 1e6)}M`;
 /** Server-rendered squarified treemap (pure SVG, zero client JS). Every leaf is a real link → fully keyboard navigable. */
 export function TreemapSSR({ data, mode, width = 960, height = 440 }: { data: TreeNode; mode: string; width?: number; height?: number }) {

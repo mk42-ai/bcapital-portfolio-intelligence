@@ -351,7 +351,7 @@
 .oiu-plugin-error { display: flex; align-items: flex-start; gap: 8px; margin: 0 0 10px; padding: 8px 10px; border: 1px solid #fca5a5; border-radius: 8px; background: #fef2f2; color: #991b1b; font-size: 12px; line-height: 1.4; }
 .oiu-activity--error .oiu-activity__icon { color: #b91c1c; }
 .oiu-activity--error .oiu-activity__detail { color: #991b1b; overflow-wrap: anywhere; }
-.oiu-activity--running .oiu-activity__icon { color: #2563eb; }
+.oiu-activity--running .oiu-activity__icon { color: var(--brand-green-ink, #047857); }
 .oiu-sources--compact { margin-top: 6px; padding-top: 6px; }
 .oiu-sources--compact .oiu-sources__link { min-height: 24px; padding: 2px 6px; font-size: 11px; }
 .oiu-error__raw-toggle { margin-left: 6px; border: 0; background: transparent; color: #991b1b; font: inherit; font-size: 12px; text-decoration: underline; cursor: pointer; }
