@@ -11,7 +11,7 @@
 .oiu-card--browser__cancel { color: #4b5563; }
 @media (max-width: 480px) { .oiu-card--browser__head { grid-template-columns: 1fr; } .oiu-card--browser__art { width: 56px; height: 56px; } }
 
-/* ---- Shared base card (Agent 11 owns this block; Agents 12/13 only add `.oiu-card--creds*` / `.oiu-card--browser*`). ---- */
+
 /* 8 px grid, border 1px #e5e7eb, radius 12, padding 16, max-width 640. Green only. */
 .oiu-card { box-sizing: border-box; width: 100%; max-width: 640px; margin: 0 0 8px; padding: 16px; border: 1px solid #e5e7eb; border-radius: 12px; background: #ffffff; color: #111827; font-size: 13px; line-height: 1.45; display: grid; gap: 16px; }
 
@@ -36,3 +36,20 @@
 .oiu-card--input__submit:disabled { opacity: 0.5; cursor: not-allowed; }
 .oiu-card--input--done { grid-template-columns: none; grid-auto-flow: column; justify-content: start; align-items: center; gap: 8px; padding: 8px 16px; color: var(--brand-green-ink, #047857); border-color: var(--brand-green, #0AC985); background: var(--brand-green-soft, #e6faf3); font-weight: 600; }
 @media (max-width: 480px) { .oiu-card--input { grid-template-columns: 1fr; } .oiu-card--input__art { width: 56px; height: 56px; } }
+
+/* Agent 12 — require_creds card. Only `.oiu-card--creds*` rules belong to this agent; base `.oiu-card` is owned by Agent 11. */
+.oiu-card--creds { display: grid; grid-template-columns: 72px 1fr; gap: 16px; align-items: start; padding: 16px; border: 1px solid #E6FAF3; border-radius: 16px; background: #fff; }
+.oiu-card--creds__art { width: 72px; height: 72px; object-fit: contain; }
+.oiu-card--creds__form { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.oiu-card--creds__title { margin: 0; font-size: 15px; font-weight: 600; line-height: 24px; color: #047857; }
+.oiu-card--creds__field { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #374151; }
+.oiu-card--creds__field input { height: 40px; padding: 0 12px; border: 1px solid #d1d5db; border-radius: 8px; font: inherit; font-size: 14px; color: #111827; background: #fff; outline: none; }
+.oiu-card--creds__field input:focus { border-color: #0AC985; box-shadow: 0 0 0 3px #E6FAF3; }
+.oiu-card--creds__actions { display: flex; gap: 8px; margin-top: 8px; }
+.oiu-card--creds__btn { height: 40px; padding: 0 16px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; font: inherit; font-size: 14px; font-weight: 500; color: #111827; cursor: pointer; }
+.oiu-card--creds__btn:disabled { opacity: .55; cursor: default; }
+.oiu-card--creds__btn--primary { border-color: #0AC985; background: #0AC985; color: #fff; }
+.oiu-card--creds__btn--primary:hover:not(:disabled) { background: #047857; border-color: #047857; }
+.oiu-card--creds__hint { margin: 0; font-size: 12px; line-height: 16px; color: #6b7280; }
+.oiu-card--creds-done { color: #047857; }
+@media (max-width: 560px) { .oiu-card--creds { grid-template-columns: 1fr; } .oiu-card--creds__art { width: 56px; height: 56px; } }
