@@ -1,0 +1,586 @@
+{
+ "generated_utc": "2026-10-10T14:45:00Z",
+ "agents": [
+  {
+   "agent_id": "01",
+   "team": "IMAGES",
+   "assignment": "Audit every News Pulse + logo image URL, classify failures",
+   "files_touched": [
+    "web/proof/images/image_audit_before.json",
+    "web/proof/images/image_audit_before.csv",
+    "web/proof/images/image_audit_before_full.csv",
+    "web/proof/images/audit.py"
+   ],
+   "commits": [
+    "61ae492"
+   ],
+   "tests_added": [],
+   "evidence_url": "image_audit_before.json (attached)",
+   "start_utc": "2026-10-10T13:19:00Z",
+   "end_utc": "2026-10-10T13:22:00Z",
+   "notes": "logos 136/136 ok; news 1,854 rows: 1,196 ok / 658 broken (577 missing image_url, 61 bad_content_type, 13 mixed_content, 4 403, 3 timeout)"
+  },
+  {
+   "agent_id": "02",
+   "team": "IMAGES",
+   "assignment": "/api/img cached proxy + resolution chain",
+   "files_touched": [
+    "web/src/app/api/img/route.ts",
+    "web/src/lib/img-proxy.ts",
+    "web/src/components/company/news-thumb.tsx",
+    "web/src/components/ui/company-logo.tsx"
+   ],
+   "commits": [
+    "61ae492"
+   ],
+   "tests_added": [],
+   "evidence_url": "https://sb-6aate8kggetp.vercel.run/api/img?u=https://fervoenergy.com/wp-content/uploads/2025/12/Fervo-Energy-Power-Plant-Construction-1.jpg (200 image/jpeg)",
+   "start_utc": "2026-10-10T13:22:00Z",
+   "end_utc": "2026-10-10T13:27:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "03",
+   "team": "IMAGES",
+   "assignment": "Fallback assets, reserved boxes, lazy/decoding",
+   "files_touched": [
+    "web/public/fallbacks/*.webp",
+    "web/src/components/company/news-thumb.tsx",
+    "web/src/components/ui/company-logo.tsx",
+    "web/src/components/ui/logo-img.tsx",
+    "web/src/components/ui/plugin-favicon.tsx"
+   ],
+   "commits": [
+    "a160b37",
+    "61ae492"
+   ],
+   "tests_added": [],
+   "evidence_url": "screenshot-news-pulse-1440x900.png",
+   "start_utc": "2026-10-10T13:22:00Z",
+   "end_utc": "2026-10-10T13:27:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "04",
+   "team": "IMAGES",
+   "assignment": "Image regression Playwright tests",
+   "files_touched": [
+    "web/e2e/images.spec.ts"
+   ],
+   "commits": [
+    "61ae492"
+   ],
+   "tests_added": [
+    "News Pulse: first-page thumbnails decode (naturalWidth>0)",
+    "Companies logos decode on /overview table",
+    "/api/img proxy: https image \u2192 image/*, http \u2192 400, html page \u2192 204"
+   ],
+   "evidence_url": "playwright-final.json",
+   "start_utc": "2026-10-10T13:22:00Z",
+   "end_utc": "2026-10-10T13:27:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "05",
+   "team": "PITCHBOOK",
+   "assignment": "Discover PitchBook plugin + live query + raw frames",
+   "files_touched": [
+    "proof/pitchbook/discovery.json",
+    "proof/pitchbook/fervo-live.raw.log",
+    "proof/pitchbook/fervo-investor-finder.raw.log"
+   ],
+   "commits": [
+    "2e3d999",
+    "a06d1ad"
+   ],
+   "tests_added": [],
+   "evidence_url": "proof/pitchbook/discovery.json",
+   "start_utc": "2026-10-10T13:10:00Z",
+   "end_utc": "2026-10-10T13:30:00Z",
+   "notes": "plugin-1777018662 Pitchbook Investor Finder, auth NONE, investor search only"
+  },
+  {
+   "agent_id": "06",
+   "team": "PITCHBOOK",
+   "assignment": "Normalizer + provenance schema",
+   "files_touched": [
+    "src/pitchbook.ts",
+    "scripts/test-pitchbook.ts",
+    "scripts/fixtures/pitchbook-fervo-answer.md",
+    "scripts/pitchbook-dry-run.ts"
+   ],
+   "commits": [
+    "a06d1ad"
+   ],
+   "tests_added": [
+    "scripts/test-pitchbook.ts (13 tests)"
+   ],
+   "evidence_url": "https://sb-4y5v8t21stuf.vercel.run/pitchbook/fervo-energy",
+   "start_utc": "2026-10-10T13:30:00Z",
+   "end_utc": "2026-10-10T13:40:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "07",
+   "team": "PITCHBOOK",
+   "assignment": "GET /pitchbook/:slug, POST /pitchbook/ingest, /pitchbook/run store",
+   "files_touched": [
+    "src/app.ts",
+    "src/openapi.ts",
+    "scripts/test.ts"
+   ],
+   "commits": [
+    "a06d1ad"
+   ],
+   "tests_added": [
+    "scripts/test.ts +1 route test"
+   ],
+   "evidence_url": "https://sb-4y5v8t21stuf.vercel.run/pitchbook (count 136)",
+   "start_utc": "2026-10-10T13:30:00Z",
+   "end_utc": "2026-10-10T13:40:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "08",
+   "team": "PITCHBOOK",
+   "assignment": "Weekly workflow create+activate (Mon 06:00 UTC) + Run now relay",
+   "files_touched": [
+    "workflows/pitchbook-weekly.json",
+    "workflows/pitchbook-weekly.ts",
+    "workflows/pitchbook-created.json"
+   ],
+   "commits": [
+    "a06d1ad"
+   ],
+   "tests_added": [],
+   "evidence_url": "workflow 6aca3d3faeef8927baa25a05 active, execution 6aca3d9d300de84fa7121262 (node ok, webhook 502 pre-deploy \u2192 replayed: 91 records; 45 backfilled live)",
+   "start_utc": "2026-10-10T13:30:00Z",
+   "end_utc": "2026-10-10T13:46:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "09",
+   "team": "PITCHBOOK",
+   "assignment": "PitchBook panel (company page + chat rail)",
+   "files_touched": [
+    "web/src/components/company/pitchbook-panel.tsx",
+    "web/src/components/company/pitchbook-view.tsx",
+    "web/src/components/chat/pitchbook-rail.tsx",
+    "web/src/app/api/pitchbook/[slug]/route.ts",
+    "web/src/app/api/pitchbook/run/route.ts",
+    "web/src/lib/api.ts",
+    "web/src/lib/types.ts",
+    "web/src/app/company/[slug]/page.tsx",
+    "web/src/components/chat/chat-sidebar.tsx"
+   ],
+   "commits": [
+    "41c9310"
+   ],
+   "tests_added": [],
+   "evidence_url": "screenshot-company-pitchbook-1440x900.png",
+   "start_utc": "2026-10-10T13:33:00Z",
+   "end_utc": "2026-10-10T13:55:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "10",
+   "team": "PITCHBOOK",
+   "assignment": "Ask in chat / drag chips into composer, PitchBook plugin for that turn",
+   "files_touched": [
+    "web/src/components/chat/open-intelligent-ui/context-chips.ts",
+    "web/src/components/chat/open-intelligent-ui/context-chips-bar.tsx",
+    "web/src/components/chat/open-intelligent-ui/chat-shell.tsx",
+    "web/src/lib/ondemand/config.ts"
+   ],
+   "commits": [
+    "41c9310"
+   ],
+   "tests_added": [],
+   "evidence_url": "pitchbook.spec.ts",
+   "start_utc": "2026-10-10T13:33:00Z",
+   "end_utc": "2026-10-10T13:55:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "11",
+   "team": "PITCHBOOK",
+   "assignment": "Honest empty/error/blocked states + tests",
+   "files_touched": [
+    "web/src/components/company/pitchbook-view.tsx",
+    "web/e2e/pitchbook.spec.ts"
+   ],
+   "commits": [
+    "41c9310"
+   ],
+   "tests_added": [
+    "web/e2e/pitchbook.spec.ts (5 tests)"
+   ],
+   "evidence_url": "playwright-final.json",
+   "start_utc": "2026-10-10T13:33:00Z",
+   "end_utc": "2026-10-10T13:55:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "12",
+   "team": "COMPANIES SCROLL",
+   "assignment": "Reproduce + root-cause the scroll bug",
+   "files_touched": [
+    "web/proof/companies-scroll-root-cause.md"
+   ],
+   "commits": [
+    "c4f5e16"
+   ],
+   "tests_added": [],
+   "evidence_url": "web/proof/companies-scroll-root-cause.md",
+   "start_utc": "2026-10-10T13:28:00Z",
+   "end_utc": "2026-10-10T13:34:00Z",
+   "notes": "nested 520px scroller + sticky thead + 840px horizontal scroll + 25-row paging"
+  },
+  {
+   "agent_id": "13",
+   "team": "COMPANIES SCROLL",
+   "assignment": "Virtualized single-scroll /companies (@tanstack/react-virtual) + A\u2013Z rail + restoration",
+   "files_touched": [
+    "web/src/app/companies/page.tsx",
+    "web/src/components/companies/companies-list.tsx",
+    "web/src/components/shell/nav.tsx",
+    "web/src/app/overview/page.tsx",
+    "web/src/components/overview/data-table.tsx",
+    "web/package.json"
+   ],
+   "commits": [
+    "c4f5e16"
+   ],
+   "tests_added": [],
+   "evidence_url": "screenshot-companies-end-1440x900.png (row 136 Zaihui visible)",
+   "start_utc": "2026-10-10T13:28:00Z",
+   "end_utc": "2026-10-10T13:34:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "14",
+   "team": "COMPANIES SCROLL",
+   "assignment": "iOS touch momentum + keyboard navigation + aria",
+   "files_touched": [
+    "web/src/components/companies/companies-list.tsx",
+    "web/src/components/overview/data-table.tsx"
+   ],
+   "commits": [
+    "c4f5e16"
+   ],
+   "tests_added": [],
+   "evidence_url": "companies.spec.ts End/Arrow test",
+   "start_utc": "2026-10-10T13:28:00Z",
+   "end_utc": "2026-10-10T13:34:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "15",
+   "team": "COMPANIES SCROLL",
+   "assignment": "Playwright: company #136 visible on both viewports",
+   "files_touched": [
+    "web/e2e/companies.spec.ts"
+   ],
+   "commits": [
+    "c4f5e16"
+   ],
+   "tests_added": [
+    "web/e2e/companies.spec.ts (5 tests)"
+   ],
+   "evidence_url": "playwright-final.json",
+   "start_utc": "2026-10-10T13:28:00Z",
+   "end_utc": "2026-10-10T13:34:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "16",
+   "team": "UPLOAD",
+   "assignment": "Live-doc Media API contract + attachment field",
+   "files_touched": [
+    "docs/ONDEMAND_CONTRACTS.md"
+   ],
+   "commits": [
+    "2e3d999",
+    "d03f499"
+   ],
+   "tests_added": [],
+   "evidence_url": "docs/ONDEMAND_CONTRACTS.md (fetched 2026-10-10T13:10Z/13:27Z)",
+   "start_utc": "2026-10-10T13:10:00Z",
+   "end_utc": "2026-10-10T14:07:00Z",
+   "notes": "Submit Query body has NO media field; media bound by sessionId + extracted-text prefix"
+  },
+  {
+   "agent_id": "17",
+   "team": "UPLOAD",
+   "assignment": "/api/media relay (type/size limits, 25 MB, key server-side) + blob URL",
+   "files_touched": [
+    "web/src/app/api/media/route.ts",
+    "web/src/app/api/media/blob/[token]/route.ts",
+    "web/src/lib/media/store.ts"
+   ],
+   "commits": [
+    "d03f499",
+    "b0b7c3e"
+   ],
+   "tests_added": [],
+   "evidence_url": "proof/upload/media-create.json",
+   "start_utc": "2026-10-10T13:36:00Z",
+   "end_utc": "2026-10-10T14:07:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "18",
+   "team": "UPLOAD",
+   "assignment": "Composer attachments (drag-drop, paste, picker, progress, chips)",
+   "files_touched": [
+    "web/src/components/chat/open-intelligent-ui/attachments.tsx",
+    "web/src/components/chat/open-intelligent-ui/attachments.css",
+    "web/src/components/chat/open-intelligent-ui/chat-shell.tsx"
+   ],
+   "commits": [
+    "d03f499"
+   ],
+   "tests_added": [],
+   "evidence_url": "screenshot-chat-attachment-1440x900.png",
+   "start_utc": "2026-10-10T13:36:00Z",
+   "end_utc": "2026-10-10T14:07:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "19",
+   "team": "UPLOAD",
+   "assignment": "Attach media to the query + render in thread + document-grounded answer",
+   "files_touched": [
+    "web/src/app/api/chat/route.ts",
+    "web/src/lib/ondemand/eventMap.ts",
+    "web/public/fixtures/zephyr-7.md"
+   ],
+   "commits": [
+    "d03f499",
+    "b0b7c3e"
+   ],
+   "tests_added": [],
+   "evidence_url": "live: POST /api/media \u2192 local-\u2026 id; /api/chat answered \"The Zephyr-7 pilot plant produced 41.7 MWh on 3 March 2026 [attachment: z7.md]\" 14:23Z",
+   "start_utc": "2026-10-10T13:36:00Z",
+   "end_utc": "2026-10-10T14:23:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "20",
+   "team": "UPLOAD",
+   "assignment": "Abuse/limits/error states + tests",
+   "files_touched": [
+    "web/src/app/api/media/route.ts",
+    "web/src/components/chat/open-intelligent-ui/attachments.tsx",
+    "web/e2e/upload.spec.ts"
+   ],
+   "commits": [
+    "d03f499"
+   ],
+   "tests_added": [
+    "web/e2e/upload.spec.ts (4 tests)"
+   ],
+   "evidence_url": "playwright-final.json",
+   "start_utc": "2026-10-10T14:00:00Z",
+   "end_utc": "2026-10-10T14:08:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "21",
+   "team": "VOICE",
+   "assignment": "Live-doc contract audio-to-text / text-to-audio",
+   "files_touched": [
+    "docs/ONDEMAND_CONTRACTS.md"
+   ],
+   "commits": [
+    "2e3d999",
+    "ca2d77a"
+   ],
+   "tests_added": [],
+   "evidence_url": "web/proof/voice/probe.json",
+   "start_utc": "2026-10-10T13:10:00Z",
+   "end_utc": "2026-10-10T13:57:00Z",
+   "notes": "no documented streaming audio endpoint \u2192 sentence-chunked TTS"
+  },
+  {
+   "agent_id": "22",
+   "team": "VOICE",
+   "assignment": "/api/voice/stt + /api/voice/tts relays + clip host",
+   "files_touched": [
+    "web/src/app/api/voice/tts/route.ts",
+    "web/src/app/api/voice/stt/route.ts",
+    "web/src/app/api/voice/clip/[token]/route.ts",
+    "web/src/lib/voice/ondemand-audio.ts",
+    "web/src/lib/voice/clip-store.ts"
+   ],
+   "commits": [
+    "ca2d77a"
+   ],
+   "tests_added": [],
+   "evidence_url": "probe.json: TTS 200 (mp3 3.19 s), STT 200 exact round-trip transcript",
+   "start_utc": "2026-10-10T13:40:00Z",
+   "end_utc": "2026-10-10T13:57:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "23",
+   "team": "VOICE",
+   "assignment": "Mic capture, RMS VAD endpointing, PTT + hands-free",
+   "files_touched": [
+    "web/src/components/chat/voice/use-voice-capture.ts"
+   ],
+   "commits": [
+    "ca2d77a"
+   ],
+   "tests_added": [],
+   "evidence_url": "voice.spec.ts UI test (listening with fake mic)",
+   "start_utc": "2026-10-10T13:40:00Z",
+   "end_utc": "2026-10-10T13:57:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "24",
+   "team": "VOICE",
+   "assignment": "Sentence-chunked TTS queue synced to the answer stream + barge-in",
+   "files_touched": [
+    "web/src/components/chat/voice/tts-queue.ts",
+    "web/src/components/chat/open-intelligent-ui/chat-shell.tsx"
+   ],
+   "commits": [
+    "ca2d77a"
+   ],
+   "tests_added": [],
+   "evidence_url": "code + unit flow in voice-dock",
+   "start_utc": "2026-10-10T13:40:00Z",
+   "end_utc": "2026-10-10T13:57:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "25",
+   "team": "VOICE",
+   "assignment": "Voice UI (mic in composer, orb states, captions, reduced motion)",
+   "files_touched": [
+    "web/src/components/chat/voice/voice-dock.tsx",
+    "web/src/components/chat/voice/voice.css",
+    "web/public/fallbacks/orb-*.webp"
+   ],
+   "commits": [
+    "ca2d77a",
+    "3f8f1dd"
+   ],
+   "tests_added": [],
+   "evidence_url": "screenshot-chat-voice-1440x900.png",
+   "start_utc": "2026-10-10T13:40:00Z",
+   "end_utc": "2026-10-10T13:57:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "26",
+   "team": "VOICE",
+   "assignment": "Plugin parity: same session / pluginIds / plan rail; via-voice chip",
+   "files_touched": [
+    "web/src/components/chat/voice/voice-origin.ts",
+    "web/src/components/chat/open-intelligent-ui/chat-shell.tsx"
+   ],
+   "commits": [
+    "ca2d77a"
+   ],
+   "tests_added": [],
+   "evidence_url": "code path (processMessage in the same thread)",
+   "start_utc": "2026-10-10T13:40:00Z",
+   "end_utc": "2026-10-10T13:57:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "27",
+   "team": "VOICE",
+   "assignment": "Permissions/failure states, a11y, tests; Permissions-Policy microphone=(self)",
+   "files_touched": [
+    "web/next.config.ts",
+    "web/playwright.config.ts",
+    "web/e2e/voice.spec.ts",
+    "web/src/components/chat/voice/voice-dock.tsx"
+   ],
+   "commits": [
+    "ca2d77a"
+   ],
+   "tests_added": [
+    "web/e2e/voice.spec.ts (4 tests)"
+   ],
+   "evidence_url": "playwright-final.json",
+   "start_utc": "2026-10-10T13:40:00Z",
+   "end_utc": "2026-10-10T13:57:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "28",
+   "team": "INTEGRATION",
+   "assignment": "eventMap/adapter coverage for media + voice frames + fixture tests",
+   "files_touched": [
+    "web/src/lib/ondemand/eventMap.ts",
+    "web/src/lib/ondemand/sse-adapter.ts",
+    "web/src/components/chat/open-intelligent-ui/chat-shell.tsx",
+    "web/src/components/chat/run-rail.tsx",
+    "web/e2e/perf/mock-sse.mjs",
+    "web/tests/unit/eventmap.test.ts",
+    "web/package.json"
+   ],
+   "commits": [
+    "f0d4a1c"
+   ],
+   "tests_added": [
+    "web/tests/unit/eventmap.test.ts (49 assertions)"
+   ],
+   "evidence_url": "npm run test:eventmap \u2192 49 passed",
+   "start_utc": "2026-10-10T13:55:00Z",
+   "end_utc": "2026-10-10T14:00:00Z",
+   "notes": ""
+  },
+  {
+   "agent_id": "29",
+   "team": "INTEGRATION",
+   "assignment": "Gates: tsc 0, build 0, 0 key hits, redeploy both services, Playwright",
+   "files_touched": [
+    "(orchestration)"
+   ],
+   "commits": [
+    "632a0e6"
+   ],
+   "tests_added": [],
+   "evidence_url": "playwright-final.json; FE BUILD li2Ax9mUyQYBI-86GVn_0; BE 13:37:47Z",
+   "start_utc": "2026-10-10T13:37:00Z",
+   "end_utc": "2026-10-10T14:45:00Z",
+   "notes": "tsc 0 (web+backend); next build 0; 0 ONDEMAND_API_KEY / INGEST_SECRET hits in .next; backend deployed 13:37:47Z; frontend BUILD FtWwtz4sNrB7XgAy7b1FF 14:31:41Z; Playwright full suite 84 passed / 1 edge flake (upload 413 vs edge 502) re-run green \u2192 85/85 specs across 57 files"
+  },
+  {
+   "agent_id": "30",
+   "team": "INTEGRATION",
+   "assignment": "Brand sweep blue\u2192green, docs, ledger",
+   "files_touched": [
+    "web/src/styles/tokens.css",
+    "web/src/components/ui/badge.tsx",
+    "web/src/components/ui/switch.tsx",
+    "web/src/app/globals.css",
+    "web/src/components/charts/treemap-ssr.tsx",
+    "web/src/lib/color.ts",
+    "web/src/components/chat/open-intelligent-ui/shell.css",
+    "web/docs/HANDOFF.md",
+    "README.md",
+    "CHANGELOG.md",
+    "docs/ONDEMAND_CONTRACTS.md",
+    "agent-ledger.json"
+   ],
+   "commits": [
+    "a160b37",
+    "632a0e6"
+   ],
+   "tests_added": [],
+   "evidence_url": "agent-ledger.json",
+   "start_utc": "2026-10-10T13:19:00Z",
+   "end_utc": "2026-10-10T14:45:00Z",
+   "notes": ""
+  }
+ ],
+ "count": 30,
+ "final_commit": "632a0e6"
+}
