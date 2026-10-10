@@ -8,6 +8,8 @@ import { Field, Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CompanyPicker } from "@/components/chat/company-picker";
 import { BrandLogo } from "@/components/brand/logo";
+import { PerplexityStatus } from "./perplexity-status";
+import { PitchbookRefresh } from "./pitchbook-refresh";
 export function SettingsForm({ options }: { options: { slug: string; name: string; sector: string; logo_url?: string | null }[] }) {
   const [s, set] = useSettings(); const [test, setTest] = useState<{ state: "idle" | "busy" | "ok" | "err"; msg?: string }>({ state: "idle" }); const [keyErr, setKeyErr] = useState("");
   const [userErr, setUserErr] = useState(""); const [urlErr, setUrlErr] = useState("");
@@ -42,11 +44,12 @@ export function SettingsForm({ options }: { options: { slug: string; name: strin
           </div>
         </CardContent></Card>
       <Card><CardHeader><CardTitle>Plugins used in chat</CardTitle><CardDescription>The selected OnDemand plugins are sent as <code>pluginIds</code> on the session and on every query. <code>{PLUGIN_NAME} · {PLUGIN_ID}</code> is pinned and always on; the rest are per-session toggles. If a plugin fails upstream the chat shows a red error card — no other plugin is ever substituted.</CardDescription></CardHeader>
-        <CardContent><PluginPanel variant="settings" testId="plugin-list" /></CardContent></Card>
+        <CardContent className="space-y-4"><PerplexityStatus /><PluginPanel variant="settings" testId="plugin-list" /></CardContent></Card>
       <Card><CardHeader><CardTitle>Portfolio backend</CardTitle><CardDescription>Read API for companies, news and sentiment. Server pages use <code>PORTFOLIO_API_URL</code>; this override applies to client fetches.</CardDescription></CardHeader>
         <CardContent className="space-y-4">
           <Field label="Backend base URL" htmlFor="set-backend" hint={`Default ${DEFAULT_BACKEND} (NEXT_PUBLIC_PORTFOLIO_API_URL). Durable target once provisioned: https://serverless.on-demand.io/apps/bcap-portfolio-intel`} error={urlErr}><Input id="set-backend" defaultValue={s.backendUrl} onChange={(e) => onBackend(e.target.value)} aria-invalid={!!urlErr} aria-describedby={urlErr ? "set-backend-error" : "set-backend-hint"} inputMode="url" /></Field>
           <div><p className="mb-2 text-sm font-medium">Default chat context companies</p><CompanyPicker options={options} value={s.companies} onChange={(v) => set({ companies: v })} /></div>
+          <PitchbookRefresh />
         </CardContent></Card>
       <Card><CardHeader><CardTitle>Local data</CardTitle></CardHeader>
         <CardContent className="space-y-4">
