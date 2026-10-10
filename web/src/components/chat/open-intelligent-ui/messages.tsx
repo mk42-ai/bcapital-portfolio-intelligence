@@ -19,6 +19,7 @@ import { liveMeta, liveSources, setStream, useStreamSelector, useStreamState } f
 import { CitedMarkdown, SourceList, useThrottled } from "./citations-ui";
 import { AnswerBadge, PlanStepper, RawFrame, StepSummaryCard, ThinkingTrace, WorkingBand } from "./run-cards";
 import { PromptCard } from "./prompt-card";
+import { resumeSession } from "./resume";
 
 export const AssistantMessage: AssistantMessageComponent = memo(function AssistantMessage({ message, isStreaming }) {
   const content = typeof message.content === "string" ? message.content : "";
@@ -114,7 +115,7 @@ export const PluginTimeline: ToolCallTimelineComponent = ({ activities, steps, i
     {live && <PlanStepper plan={st.plan} reserve />}
     {live && st.summaries.map((s) => <StepSummaryCard key={s.index} s={s} live />)}
     {live && (st.thinking ? <ThinkingTrace text={thinkingTail} kinds={st.thinkingKinds} live /> : <div className="oiu-thinking oiu-thinking--reserved" data-testid="thinking-reserved" aria-hidden><span className="oiu-thinking__head"><Brain className="size-3.5" aria-hidden /> {LABEL.thinking}</span></div>)}
-    {live && st.prompt && <PromptCard prompt={st.prompt} sessionId={st.sessionId} onAnswer={(text) => { setStream({ prompt: null }, true); void processMessage({ role: "user", content: text }); }} />}
+    {live && st.prompt && <PromptCard prompt={st.prompt} sessionId={st.sessionId} onAnswer={(text) => { setStream({ prompt: null }, true); void resumeSession(text, { sessionId: st.sessionId, kind: st.prompt!.kind, send: processMessage }); }} />}
     {live && !liveText && <WorkingBand on={st.filler} tick={st.fillerTick} phase={st.detail} />}
     {(liveText || (live && st.phase === "answering")) && (
       <div className="oiu-assistant oiu-assistant--streaming" aria-live="polite" aria-busy="true" data-testid="assistant-streaming">
