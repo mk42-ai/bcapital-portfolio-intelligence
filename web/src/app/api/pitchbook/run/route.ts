@@ -9,7 +9,10 @@ export async function POST(req: NextRequest) {
   if (!secret) return Response.json({ code: "no_ingest_secret", message: "INGEST_SECRET is not configured on the frontend server" }, { status: 503 });
   let body: unknown = {};
   try { body = await req.json(); } catch { /* empty body is fine */ }
-  const slug = typeof (body as { slug?: unknown })?.slug === "string" ? (body as { slug: string }).slug.slice(0, 80) : undefined;
+  const raw = typeof (body as { slug?: unknown })?.slug === "string" ? (body as { slug: string }).slug.trim().toLowerCase() : undefined;
+  // "all" / empty → whole portfolio; anything else must be a plain company slug (never forwarded unvalidated).
+  const slug = !raw || raw === "all" ? undefined : raw;
+  if (slug && !/^[a-z0-9][a-z0-9-]{0,79}$/.test(slug)) return Response.json({ code: "bad_request", message: "slug must be 'all' or letters, digits and dashes" }, { status: 400 });
   try {
     const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 20000);
     const r = await fetch(`${backendBaseUrl}/pitchbook/run`, { method: "POST", headers: { accept: "application/json", "content-type": "application/json", "X-Ingest-Secret": secret }, body: JSON.stringify(slug ? { slug } : {}), signal: ctl.signal, cache: "no-store" });
