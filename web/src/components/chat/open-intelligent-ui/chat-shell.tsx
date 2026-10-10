@@ -20,6 +20,7 @@ import { getSelectedPluginIds, usePluginSelection } from "@/lib/plugin-selection
 import { pluginName as catalogueName, PLUGIN_CATALOGUE } from "@/lib/plugin-catalogue";
 import { PluginFavicon, preloadPluginFavicons } from "@/components/ui/plugin-favicon";
 import { fmtScore } from "@/lib/format";
+import { VoiceDock, VoiceUserMessage } from "@/components/chat/voice/voice-dock";
 
 export type CoCtx = { slug: string; name: string; sector: string; status: string; stage: string | null; sentiment: { score: number; label: string; delta?: number | null; updated_at?: string | null; basis?: string | null }; news_count?: number; latest_news: { title: string; url: string | null; published_at: string | null; source?: string | null }[]; estimated_ticket_size_usd: number | null; estimated_ownership_pct: number | null; b_capital_role: string };
 type Source = StoredSource;
@@ -79,6 +80,9 @@ export const useStreamState = () => useSyncExternalStore(subscribe, getStream, (
 /** Narrow subscription: re-render only when the selected value changes (previous assistant messages must not re-render per token). */
 export function useStreamSelector<T>(sel: (s: StreamState) => T): T { return useSyncExternalStore(subscribe, () => sel(streamState), () => sel(IDLE)); }
 export const getStreamPhase = () => streamState.phase;
+/** Non-React subscription (voice TTS queue): cb receives the flushed store after every commit; returns the unsubscribe. */
+export const subscribeStream = (cb: (s: Pick<StreamState, "phase" | "text" | "answerDone" | "version" | "lastThreadId" | "error">) => void) => { const l = () => cb(streamState); listeners.add(l); return () => { listeners.delete(l); }; };
+export const getStreamSnapshot = () => streamState;
 const PHASE_LABEL: Record<string, string> = {
   connecting: "Connecting to OnDemand…", "creating-session": "Creating OnDemand session…", querying: `Submitting to ${MODEL_LABEL}…`,
   streaming: `${MODEL_LABEL} is planning…`, planning: `${MODEL_LABEL} is planning…`, researching: `Searching with ${PLUGIN_NAME}…`, answering: "Writing the answer…", "awaiting-input": "Waiting for your input…", done: "Done",
@@ -649,10 +653,11 @@ export function ChatShell({ companies, fetchedAt }: { companies: CoCtx[]; fetche
   const pluginLabel = selectedPlugins.map((id) => catalogueName(id)).join(", ");
   return (
     <div className="chat-shell" data-testid="chat-shell" data-prewarm={prewarmState}>
-      <AgentInterface llm={llm} storage={storage} agentName="Portfolio analyst" theme={{ mode: "light", lightTheme: responseTheme }} starters={starters} starterVariant="short" components={{ AssistantMessage, ToolCallTimeline: PluginTimeline }} scrollVariant="always">
+      <AgentInterface llm={llm} storage={storage} agentName="Portfolio analyst" theme={{ mode: "light", lightTheme: responseTheme }} starters={starters} starterVariant="short" components={{ AssistantMessage, ToolCallTimeline: PluginTimeline, UserMessage: VoiceUserMessage }} scrollVariant="always">
         <AgentInterface.Welcome><ChatWelcome companies={ctxCompanies} /></AgentInterface.Welcome>
         <Persistence sessionRef={sessionRef} />
         <PendingRow />
+        <VoiceDock />
         <ScrollAnchor />
         <ErrorBanner />
         <Suspense fallback={null}><AutoAsk /></Suspense>

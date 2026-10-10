@@ -16,7 +16,7 @@ export default defineConfig({
     screenshot: "only-on-failure",
     launchOptions: {
       executablePath: process.env.CHROME_PATH || "/usr/bin/chromium",
-      args: ["--no-sandbox", "--disable-dev-shm-usage"],
+      args: ["--no-sandbox", "--disable-dev-shm-usage", "--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream"],
     },
   },
   projects: [
