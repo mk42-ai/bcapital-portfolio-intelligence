@@ -158,7 +158,15 @@ export function ChatShell({ companies }: { companies: CoCtx[] }) {
       body.context = { ...(body.context ?? {}), sessionId: sid ?? undefined, pluginIds: activePlugins, endpointId: s.model, externalUserId: s.externalUserId, systemContext, sessionContext: ctxCompanies.map((c) => ({ key: `company:${c.slug}`, value: JSON.stringify({ name: c.name, sector: c.sector, status: c.status, sentiment: c.sentiment, news: c.latest_news.slice(0, 3) }).slice(0, 1800) })) };
       const res = await fetch(input, { ...init, body: JSON.stringify(body) });
       const got = res.headers.get("x-ondemand-session"); if (got && tid) { sessionRef.current[tid] = got; rememberSession(tid, got); }
-      return res;
+      if (got || !res.body || !tid) return res;
+      // First turn: the session is created inside the stream, so its id arrives in the `CUSTOM ondemand.session` frame — tee the
+      // body, capture the id for the next turn, and hand OpenUI an untouched copy of the stream.
+      const [forUi, forUs] = res.body.tee();
+      (async () => { const rd = forUs.getReader(); const td = new TextDecoder(); let buf = "";
+        try { for (;;) { const { value, done } = await rd.read(); if (done) break; buf += td.decode(value, { stream: true });
+          const m = buf.match(/"name":"ondemand\.session","value":\{"sessionId":"([A-Za-z0-9]+)"/); if (m) { sessionRef.current[tid] = m[1]; rememberSession(tid, m[1]); await rd.cancel(); break; }
+          if (buf.length > 20000) buf = buf.slice(-5000); } } catch { /* stream closed */ } })();
+      return new Response(forUi, { status: res.status, statusText: res.statusText, headers: res.headers });
     },
   }), [s.apikey, s.model, s.externalUserId, activePlugins.join(","), systemContext]); // eslint-disable-line react-hooks/exhaustive-deps
   return (

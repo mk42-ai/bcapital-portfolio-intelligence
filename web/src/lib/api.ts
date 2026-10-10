@@ -43,14 +43,14 @@ export async function getRuns(): Promise<Sourced<IngestRun[]>> {
 }
 /** All news across the portfolio (for News Pulse): N parallel calls would be slow against the sandbox, so use the per-company latest_news
  *  embedded in /companies (always ≥ the news table for workflow-written items) merged with the snapshot news table. */
-export async function getAllNews(): Promise<Sourced<(NewsItem & { company_slug: string; company_name: string; sector: string; sentiment_score: number | null; sentiment_delta: number | null })[]>> {
+export async function getAllNews(): Promise<Sourced<(NewsItem & { company_slug: string; company_name: string; company_logo: string | null; sector: string; sentiment_score: number | null; sentiment_delta: number | null })[]>> {
   const cs = await listCompanies();
-  const items = new Map<string, NewsItem & { company_slug: string; company_name: string; sector: string; sentiment_score: number | null; sentiment_delta: number | null }>();
+  const items = new Map<string, NewsItem & { company_slug: string; company_name: string; company_logo: string | null; sector: string; sentiment_score: number | null; sentiment_delta: number | null }>();
   for (const c of cs.data) {
     const fromTable = snap.news[c.slug] ?? [];
     for (const n of [...(c.latest_news ?? []), ...fromTable]) {
       const id = n.id ?? `${c.slug}|${n.url ?? n.title}`;
-      if (!items.has(id)) items.set(id, { ...n, id, company_slug: c.slug, company_name: c.name, sector: c.sector, sentiment_score: c.sentiment?.score ?? null, sentiment_delta: c.sentiment?.delta ?? null });
+      if (!items.has(id)) items.set(id, { ...n, id, company_slug: c.slug, company_name: c.name, company_logo: c.logo_url ?? null, sector: c.sector, sentiment_score: c.sentiment?.score ?? null, sentiment_delta: c.sentiment?.delta ?? null });
     }
   }
   return { data: [...items.values()].sort((a, b) => (b.published_at ?? "").localeCompare(a.published_at ?? "")), source: cs.source, fetched_at: cs.fetched_at };

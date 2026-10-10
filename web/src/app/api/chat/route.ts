@@ -34,7 +34,7 @@ const SSE_HEADERS = (sessionId: string) => ({
   connection: "keep-alive",
   "x-accel-buffering": "no",
   "content-encoding": "identity",
-  "x-ondemand-session": sessionId,
+  ...(sessionId ? { "x-ondemand-session": sessionId } : {}), // first turn: the id arrives in the CUSTOM ondemand.session frame instead
 });
 
 export async function POST(req: NextRequest) {
@@ -65,37 +65,32 @@ export async function POST(req: NextRequest) {
   const totalTimer = setTimeout(() => abort("deadline-total"), CHAT_TOTAL_MS);
   const timeoutMessage = (phase: string) => `OnDemand did not answer within ${Math.round((Date.now() - startedAt) / 1000)} s (${phase}) — try again or disable extra plugins`;
 
-  // 1. session — reuse the one the client remembered for this thread; create only when absent.
+  // 1+2. session + streamed query are opened INSIDE the response stream so the browser gets headers + RUN_STARTED within
+  //      milliseconds (first status event < 300 ms) instead of waiting for OnDemand's session-create + query round-trips.
   let sessionId = typeof ctx.sessionId === "string" && /^[A-Za-z0-9]+$/.test(ctx.sessionId) ? ctx.sessionId : "";
-  let up: Response;
-  try {
+  const openUpstream = async (): Promise<Response> => {
     if (!sessionId) {
       const sc = Array.isArray(ctx.sessionContext) ? ctx.sessionContext.slice(0, 8).map((c) => ({ key: String(c.key).slice(0, 64), value: String(c.value).slice(0, 2000) })) : [];
       const r = await fetch(`${ONDEMAND_BASE_URL}/chat/v1/sessions`, { method: "POST", headers: H, body: JSON.stringify({ externalUserId, pluginIds, ...(sc.length ? { contextMetadata: sc } : {}) }), signal: ac.signal, cache: "no-store" });
       const j = (await r.json().catch(() => ({}))) as { message?: string; data?: { id?: string } };
-      if (!r.ok || !j?.data?.id) { clearTimeout(totalTimer); return jsonError(`OnDemand create session failed (${r.status}): ${j?.message ?? "no session id"}`, 502); }
+      if (!r.ok || !j?.data?.id) throw new Error(`OnDemand create session failed (${r.status}): ${j?.message ?? "no session id"}`);
       sessionId = j.data.id;
     }
-    // 2. query — stream
     const prefix = isFirstTurn && ctx.systemContext ? `${String(ctx.systemContext).slice(0, 6000)}\n\nQuestion: ` : "";
-    up = await fetch(`${ONDEMAND_BASE_URL}/chat/v1/sessions/${sessionId}/query`, {
+    const up = await fetch(`${ONDEMAND_BASE_URL}/chat/v1/sessions/${sessionId}/query`, {
       method: "POST", headers: { ...H, accept: "text/event-stream" }, body: JSON.stringify({ query: prefix + query, endpointId, responseMode: "stream", pluginIds }), signal: ac.signal, cache: "no-store",
     });
     if (!up.ok || !up.body) {
       const j = (await up.json().catch(() => ({}))) as { message?: string; error?: { message?: string } };
-      clearTimeout(totalTimer);
-      return jsonError(`OnDemand query failed (${up.status}): ${j?.message ?? j?.error?.message ?? up.statusText}`, up.status === 401 || up.status === 403 ? 401 : 502);
+      throw new Error(`OnDemand query failed (${up.status}): ${j?.message ?? j?.error?.message ?? up.statusText}`);
     }
-  } catch (e) {
-    clearTimeout(totalTimer);
-    const err = e as Error;
-    if (err.name === "AbortError") return abortReason === "client" ? new Response(null, { status: 499 }) : jsonError(timeoutMessage("connecting"), 504);
-    return jsonError(`Upstream fetch failed: ${err.message}`, 502);
-  }
+    return up;
+  };
 
   // 3. translate OnDemand SSE → AG-UI SSE (flushed per upstream frame)
-  const reader = up.body.getReader(); const dec = new TextDecoder();
+  const dec = new TextDecoder();
   const primaryId = pluginIds[0] ?? ""; const primaryName = primaryId ? pluginName(primaryId) : "";
+  let reader: ReadableStreamDefaultReader<Uint8Array> | null = null;
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
       let closed = false;
@@ -109,8 +104,8 @@ export async function POST(req: NextRequest) {
       }, CHAT_HEARTBEAT_MS);
       const cleanup = () => { clearInterval(heartbeat); clearTimeout(firstByteTimer); clearTimeout(totalTimer); };
 
-      send({ type: "RUN_STARTED", threadId, runId });
-      send({ type: "CUSTOM", name: "ondemand.session", value: { sessionId, pluginIds, endpointId } });
+      send({ type: "RUN_STARTED", threadId, runId }); // first status frame — flushed before any upstream round-trip
+      send({ type: "CUSTOM", name: "ondemand.status", value: { phase: sessionId ? "connecting" : "creating-session", t: new Date().toISOString() } });
       let text = "", textStarted = false, buf = "";
       const tools = new Map<string, { id: string; name: string; open: boolean }>(); // key = pluginId (or derived name)
       // Real citations: OnDemand emits `eventType:"plugin_sources"` frames ({sources:{pluginId,pluginName,items:[{title,url,domain}]}}) before the answer.
@@ -166,6 +161,9 @@ export async function POST(req: NextRequest) {
       };
 
       try {
+        const up = await openUpstream();
+        reader = up.body!.getReader();
+        send({ type: "CUSTOM", name: "ondemand.session", value: { sessionId, pluginIds, endpointId } }); // client persists this per thread
         let upstreamDone = false;
         while (!upstreamDone) {
           const { value, done } = await reader.read(); if (done) break;
@@ -192,16 +190,16 @@ export async function POST(req: NextRequest) {
         const err = e as Error;
         if (abortReason === "client") { closed = true; try { controller.close(); } catch { /* noop */ } }
         else {
-          const message = err.name === "AbortError" || abortReason.startsWith("deadline") ? timeoutMessage(abortReason === "deadline-first-byte" ? "no first byte" : abortReason === "deadline-total" ? "overall deadline" : "upstream closed") : err.message || "stream failed";
+          const message = err.name === "AbortError" || abortReason.startsWith("deadline") ? timeoutMessage(abortReason === "deadline-first-byte" ? "no first byte" : abortReason === "deadline-total" ? "overall deadline" : reader ? "upstream closed" : "connecting") : err.message || "stream failed";
           toolsDone("error", { message });
           if (textStarted) send({ type: "TEXT_MESSAGE_END", messageId });
           send({ type: "RUN_ERROR", message });
         }
       } finally {
-        cleanup(); reader.cancel().catch(() => {}); finish();
+        cleanup(); reader?.cancel().catch(() => {}); finish();
       }
     },
-    cancel() { abort("client"); reader.cancel().catch(() => {}); clearTimeout(totalTimer); },
+    cancel() { abort("client"); reader?.cancel().catch(() => {}); clearTimeout(totalTimer); },
   });
   return new Response(stream, { status: 200, headers: SSE_HEADERS(sessionId) });
 }
