@@ -71,8 +71,8 @@ export async function POST(req: NextRequest) {
   try { j = JSON.parse(raw); } catch { /* non-JSON upstream body */ }
   const data = j.data ?? {};
   const plainText = cls.ext === "txt" || cls.ext === "md" || cls.ext === "csv";
-  if ((!up.ok || typeof data.id !== "string") && plainText && up.status === 500) {
-    // Local-grounding fallback: OnDemand answers HTTP 500 (`errors.server_error`) for plain-text uploads even with the document plugin
+  if ((!up.ok || typeof data.id !== "string") && plainText && (up.status === 500 || up.status === 400)) {
+    // Local-grounding fallback: OnDemand answers HTTP 500 (`errors.server_error`) or 400 (`errors.mime.type.not.supported`, live 2026-10-10 for .md) for plain-text uploads even with the document plugin
     // (proof/upload/media-create.json). The bytes ARE the text, so keep ≤40 KB utf-8 under a locally generated `local-<hex>` id (passes the
     // /^[A-Za-z0-9_-]{6,64}$/ id check in /api/chat) and say so honestly — the chat still grounds on the document, nothing is stored upstream.
     deleteBlob(token);
