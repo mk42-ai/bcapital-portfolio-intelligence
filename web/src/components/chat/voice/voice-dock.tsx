@@ -5,6 +5,9 @@
  * toggle (Push-to-talk / Hands-free) and the voice <select>. A voice turn is an ordinary `processMessage({role:'user', content})` in the
  * SAME thread — same OnDemand session, same plugin selection, same Plan rail — marked only by the 'via voice' chip (voice-origin.ts).
  * Failure modes are honest: denied → retry; unsupported → disabled mic with tooltip; 400 not_subscribed → BLOCKED_BY_EXTERNAL_DEPENDENCY.
+ * Plugin parity (Agent 15, docs/VOICE_PARITY.md): before processMessage the dock reads getSelectedPluginIds() + the current session id and writes
+ * them into the stream store (setStream({voice, pluginIds, sessionId}, true)) so the run rail / plan show the SAME ids a typed turn would; the same
+ * two fields ride along on the STT form (pluginIds, sessionId) and the TTS JSON body, and are mirrored on the mic as data-plugin-ids / data-session-id.
  */
 import "./voice.css";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
@@ -13,6 +16,10 @@ import { useThread } from "@openuidev/react-ui";
 import type { UserMessage } from "@openuidev/react-headless";
 import { AudioLines, Loader2, Mic, MicOff, X } from "lucide-react";
 import { useSettings } from "@/lib/settings";
+import { getSelectedPluginIds, usePluginSelection } from "@/lib/plugin-selection";
+import { getCurrentSessionId } from "@/components/chat/open-intelligent-ui/chat-shell";
+import { getCurrentThreadId, setStream, useStreamSelector } from "@/components/chat/open-intelligent-ui/stream-store";
+import { VoiceOrb } from "./voice-orb";
 import { useVoiceCapture, type CaptureMode } from "./use-voice-capture";
 import { TtsQueue, type TtsState } from "./tts-queue";
 import { markVoiceOrigin, useVoiceOrigin } from "./voice-origin";
@@ -84,9 +91,17 @@ export function VoiceDock() {
   const headersRef = useRef(headers); headersRef.current = headers;
   const captureRef = useRef<ReturnType<typeof useVoiceCapture> | null>(null);
   const bargeIn = useRef(false);
+  // Parity snapshot (same sources chat-shell's fetch wrapper uses): explicit plugin selection + current OnDemand session for THIS thread.
+  const parity = useCallback((): { pluginIds: string[]; sessionId: string | null } => ({ pluginIds: getSelectedPluginIds(), sessionId: getCurrentSessionId({}, getCurrentThreadId()) }), []);
+  const parityRef = useRef(parity); parityRef.current = parity;
+  // Mirrored on the mic button for tests (mount-gated: sessionStorage / localStorage are not available on the server → React #418 otherwise).
+  const [mounted, setMounted] = useState(false); useEffect(() => setMounted(true), []);
+  const [selectedPlugins] = usePluginSelection(); const liveSessionId = useStreamSelector((s) => s.sessionId);
+  const dataPluginIds = mounted ? selectedPlugins.join(",") : ""; const dataSessionId = mounted ? (liveSessionId ?? getCurrentSessionId({}, getCurrentThreadId()) ?? "") : "";
 
   const tts = useMemo(() => new TtsQueue({
     voice: () => prefsRef.current.voice, headers: () => headersRef.current(),
+    context: () => parityRef.current(),
     onState: setTtsState,
     onSentence: (t) => { if (t) setCaption({ kind: "speaking", text: t }); },
     onError: (code, message) => { if (code === "not_subscribed") { setBlocked(true); setError({ code, message: NOT_ENABLED }); } else if (code === "upstream") setError({ code, message: `Speech playback unavailable: ${message}` }); },
@@ -94,24 +109,42 @@ export function VoiceDock() {
   }), []); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => tts.destroy(), [tts]);
 
+  /** Text-only tail of a voice turn (STT already done): parity write → origin chip → TTS follow → ordinary processMessage in the SAME thread. */
+  const submitTranscriptText = useCallback(async (raw: string) => {
+    const text = raw.trim(); if (!text) return;
+    setCaption({ kind: "final", text }); setError(null);
+    // Parity: the transcript is an ordinary user turn in the SAME thread (same session, plugins, plan rail) — only the chip differs.
+    const { pluginIds, sessionId } = parityRef.current();
+    setStream({ voice: { phase: "transcript", text }, pluginIds, ...(sessionId ? { sessionId } : {}) }, true);
+    markVoiceOrigin(text);
+    if (!blocked) tts.follow();
+    await processMessage({ role: "user", content: text });
+  }, [processMessage, tts, blocked]);
+  const submitTextRef = useRef(submitTranscriptText); submitTextRef.current = submitTranscriptText;
+  // E2E hook (Agent 16): text-only voice path without a microphone/STT, ONLY when localStorage "bcap.e2e" === "1".
+  useEffect(() => {
+    let on = false; try { on = localStorage.getItem("bcap.e2e") === "1"; } catch {}
+    if (!on) return;
+    const w = window as unknown as { __bcapVoiceSubmit?: (text: string) => Promise<void> };
+    w.__bcapVoiceSubmit = (text: string) => submitTextRef.current(text);
+    return () => { if (w.__bcapVoiceSubmit) delete w.__bcapVoiceSubmit; };
+  }, []);
+
   const submitTranscript = useCallback(async (blob: Blob, mimeType: string) => {
     setSttBusy(true); setCaption({ kind: "interim", text: "Transcribing…" });
     try {
       const ext = /mp4|m4a/.test(mimeType) ? "m4a" : /ogg/.test(mimeType) ? "ogg" : /wav/.test(mimeType) ? "wav" : /mpeg|mp3/.test(mimeType) ? "mp3" : "webm";
-      const fd = new FormData(); fd.append("audio", blob, `utterance.${ext}`);
+      const { pluginIds, sessionId } = parityRef.current();
+      const fd = new FormData(); fd.append("audio", blob, `utterance.${ext}`); fd.append("pluginIds", pluginIds.join(",")); fd.append("sessionId", sessionId ?? "");
       const r = await fetch("/api/voice/stt", { method: "POST", body: fd, headers: headersRef.current() });
-      const j = (await r.json().catch(() => ({}))) as { ok?: boolean; text?: string; code?: string; message?: string };
+      const j = (await r.json().catch(() => ({}))) as { ok?: boolean; text?: string; code?: string; message?: string; pluginIds?: string[]; sessionId?: string | null };
       if (!j?.ok) { if (j?.code === "not_subscribed") { setBlocked(true); setError({ code: "not_subscribed", message: NOT_ENABLED }); } else setError({ code: "upstream", message: j?.message ?? `Transcription failed (HTTP ${r.status})` }); setCaption({ kind: "hint", text: "" }); return; }
       const text = (j.text ?? "").trim();
       if (!text) { setCaption({ kind: "hint", text: "Didn't catch that — try again." }); if (prefsRef.current.mode === "hands-free") void captureRef.current?.start(); return; }
-      setCaption({ kind: "final", text }); setError(null);
-      // Parity: the transcript is an ordinary user turn in the SAME thread (same session, plugins, plan rail) — only the chip differs.
-      markVoiceOrigin(text);
-      if (!blocked) tts.follow();
-      await processMessage({ role: "user", content: text });
+      await submitTranscriptText(text);
     } catch (e) { setError({ code: "upstream", message: (e as Error).message }); }
     finally { setSttBusy(false); }
-  }, [processMessage, tts, blocked]);
+  }, [submitTranscriptText]);
 
   const capture = useVoiceCapture({
     mode: prefs.mode,
@@ -169,18 +202,14 @@ export function VoiceDock() {
   return (
     <>
       {barHost && createPortal(
-        <button ref={micRef} type="button" className="voice-mic" data-testid="voice-mic" data-state={state} data-mode={prefs.mode} aria-label={label} title={label} aria-pressed={capture.status === "listening"}
+        <button ref={micRef} type="button" className="voice-mic" data-testid="voice-mic" data-state={state} data-mode={prefs.mode} data-plugin-ids={dataPluginIds} data-session-id={dataSessionId} aria-label={label} title={label} aria-pressed={capture.status === "listening"}
           disabled={unsupported} aria-disabled={inert || undefined}
           onPointerDown={onPointerDown} onPointerUp={onPointerUp} onPointerCancel={onPointerUp} onPointerLeave={onPointerUp} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onClick={(e) => e.preventDefault()}>
           {state === "thinking" ? <Loader2 className="size-4 oiu-spin" aria-hidden /> : state === "speaking" ? <AudioLines className="size-4" aria-hidden /> : unsupported || capture.permission === "denied" ? <MicOff className="size-4" aria-hidden /> : <Mic className="size-4" aria-hidden />}
         </button>, barHost)}
       {panelHost && panelVisible && createPortal(
         <section className="voice-panel" data-testid="voice-panel" data-state={state} aria-label="Voice mode">
-          <div ref={orbRef} className="voice-orb" data-testid="voice-orb" data-state={state} aria-hidden>
-            <svg viewBox="0 0 44 44"><circle className="voice-orb__ring voice-orb__ring--2" cx="22" cy="22" r="19" /><circle className="voice-orb__ring voice-orb__ring--1" cx="22" cy="22" r="15" /><circle className="voice-orb__core" cx="22" cy="22" r="10" /></svg>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="voice-orb__poster" src={state === "idle" || state === "error" ? "/fallbacks/orb-idle.webp" : "/fallbacks/orb-active.webp"} data-reduced-motion={reduced ? "true" : undefined} alt="" width={44} height={44} />
-          </div>
+          <VoiceOrb ref={orbRef} state={state} reduced={reduced} />
           <div className="voice-panel__body">
             <p className="voice-caption" data-testid="voice-caption" data-kind={caption.kind} aria-live="polite" aria-atomic="true">{caption.text || (state === "idle" ? (prefs.mode === "ptt" ? "Hold the mic (or Space) and speak." : "Hands-free: speak after the tone, interrupt any time.") : state === "thinking" ? "Thinking…" : "")}</p>
             {error && <p className="voice-error" data-testid="voice-error" data-code={error.code} role="alert">

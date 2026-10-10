@@ -3,6 +3,7 @@
  * TTS queue — turns the live SSE answer into speech, sentence by sentence (there is no streaming TTS endpoint; see docs/ONDEMAND_CONTRACTS.md).
  *  • subscribeStream() from chat-shell feeds the accumulated answer text; completed sentences (. ! ? followed by space/newline, ≥ 20 chars
  *    after cleaning) are enqueued once; markdown, citation chips like [1] and URLs are stripped before synthesis
+ *  • every /api/voice/tts body carries { text, voice, pluginIds, sessionId } (parity with the typed turn — see docs/VOICE_PARITY.md)
  *  • ≤ 2 /api/voice/tts requests in flight, strictly ordered playback through ONE <audio> element routed via Web Audio gain (ducking)
  *  • stop() clears the queue and pauses; barge-in is wired by the dock: capture.onSpeechStart → stop() + cancelMessage()
  *  • a 400 not_subscribed from the relay surfaces as onError("not_subscribed") and the queue disables itself (BLOCKED_BY_EXTERNAL_DEPENDENCY)
@@ -18,6 +19,8 @@ export type TtsQueueOptions = {
   /** Called once when the answer is done AND every queued sentence has been played (hands-free re-arm). */
   onFinished?: () => void;
   headers?: () => Record<string, string>;
+  /** Parity context (voice-dock): the explicit plugin selection + current session id, sent in the /api/voice/tts body for logging/propagation. */
+  context?: () => { pluginIds: string[]; sessionId: string | null };
 };
 
 const SENTENCE_END = /([.!?]+["”’)]*)(?=\s|$)/g;
@@ -109,9 +112,10 @@ export class TtsQueue {
     if (this.queue.length && !this.playing) void this.playNext();
     if (this.queue.length || this.inFlight) this.setState(this.playing ? "speaking" : "buffering");
   }
+  private context(): { pluginIds: string[]; sessionId: string | null } { try { const c = this.opts.context?.(); return { pluginIds: Array.isArray(c?.pluginIds) ? c!.pluginIds : [], sessionId: typeof c?.sessionId === "string" && c.sessionId ? c.sessionId : null }; } catch { return { pluginIds: [], sessionId: null }; } }
   private async synth(text: string): Promise<string | null> {
     try {
-      const r = await fetch("/api/voice/tts", { method: "POST", headers: { "content-type": "application/json", ...(this.opts.headers?.() ?? {}) }, body: JSON.stringify({ text, voice: this.opts.voice() }) });
+      const r = await fetch("/api/voice/tts", { method: "POST", headers: { "content-type": "application/json", ...(this.opts.headers?.() ?? {}) }, body: JSON.stringify({ text, voice: this.opts.voice(), ...this.context() }) });
       const j = (await r.json().catch(() => ({}))) as { ok?: boolean; audioUrl?: string; code?: string; message?: string };
       if (j?.ok && j.audioUrl) return j.audioUrl;
       if (j?.code === "not_subscribed") { this.disabled = true; this.opts.onError?.("not_subscribed", j.message ?? "Voice service is not enabled on this OnDemand account"); this.stop(); return null; }
