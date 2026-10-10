@@ -17,3 +17,11 @@
 - Step-5 bridge deltas found only on the sandbox were synced into git (monotonic `seq` frame ids, session pre-warm, early plan, adaptive markdown cadence).
 - Composer host observers no longer ping-pong (voice panel / attachments / context chips) — fixed a page freeze.
 - PitchBook relative times render after mount (React #418).
+
+## 2026-10-10 — owner QA pass (`qa: full-screen chat, rail cleanup, pitchbook first-paint, citations`, d25d486 → merge 076c6b6)
+- /chat is one full-width thread canvas: OpenUI thread sidebar slot emptied, app-owned composer row (Attach · textarea · mic · send), slim top bar (title · New chat · Threads · Inspector).
+- Primary nav rail: 224 px expanded / 56 px icon mode (collapsed by default on /chat); inspector drawer holds This run · PitchBook · Company context · Model & plugins; telemetry + raw SSE frame behind one `dev-disclosure` reveal.
+- PitchBook: committed snapshot `web/src/data/pitchbook-snapshot.json` (136 companies) rendered server-side on the company page and in the drawer — no Run-now button, no execution ids, zero `/pitchbook|execute|workflow/` requests on load; "Ask in chat" appends to the composer draft.
+- Brand: blue-hue purge (tokens, charts, OpenUI theme, shell CSS) — computed colours stay below 0.15 saturation in the 190–260° band; `e2e/brand-hue.spec.ts`.
+- Citations: publisher-first chips with a "+N" overflow after three per claim.
+- QA evidence: `web/proof/qa-owner/` (36/36 checks at 1440×900 and 390×844, `qa_results.json`), specs `e2e/qa-owner-{a,b,c}.spec.ts`.

@@ -1,0 +1,298 @@
+{
+ "start_utc": "2026-10-10T17:29:27Z",
+ "preview_url": "https://sb-2bqmt98kq4ql.vercel.run",
+ "backend_url": "https://sb-l72jsdzjb4nt.vercel.run",
+ "baseline_commit": "ab2c6ae",
+ "qa_results": [
+  {
+   "check": "1a-single-thread-container",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/1a-single-thread-container-pass-1440x900-2026-10-10T1858Z.png",
+   "timestamp_utc": "2026-10-10T18:58:32.105Z",
+   "detail": "containers=1 messages=1 sidebars=[\"none\"]"
+  },
+  {
+   "check": "1a-single-thread-container",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/1a-single-thread-container-pass-390x844-2026-10-10T1859Z.png",
+   "timestamp_utc": "2026-10-10T18:59:18.078Z",
+   "detail": "containers=1 messages=1 sidebars=[\"none\"]"
+  },
+  {
+   "check": "1b-rail-collapse-width",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/1b-rail-collapse-width-pass-1440x900-2026-10-10T1858Z.png",
+   "timestamp_utc": "2026-10-10T18:58:34.154Z",
+   "detail": "start=56px expanded=224px collapsed=56px links=5/5"
+  },
+  {
+   "check": "1b-rail-collapse-width",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/1b-rail-collapse-width-pass-390x844-2026-10-10T1859Z.png",
+   "timestamp_utc": "2026-10-10T18:59:20.039Z",
+   "detail": "mobile rail 390x57px links=5"
+  },
+  {
+   "check": "1c-inspector-drawer",
+   "viewport": "1440x900",
+   "status": "fixed",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/1c-inspector-drawer-pass-1440x900-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:10.499Z",
+   "detail": "toggles in DOM=1 (visible=1); opened via toggle (pb-facts=true, run-rail=true); closed via Escape \u2192 data-open=false"
+  },
+  {
+   "check": "1c-inspector-drawer",
+   "viewport": "390x844",
+   "status": "fixed",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/1c-inspector-drawer-pass-390x844-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:13.371Z",
+   "detail": "toggles in DOM=1 (visible=1); opened via toggle (pb-facts=true, run-rail=true); closed via Escape \u2192 data-open=false"
+  },
+  {
+   "check": "1d-telemetry-single-reveal",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/1d-telemetry-single-reveal-pass-1440x900-2026-10-10T1858Z.png",
+   "timestamp_utc": "2026-10-10T18:58:39.793Z",
+   "detail": "dev-disclosure=1; request-body & rail-metrics hidden\u2192visible after summary click; stray raw-frame=0"
+  },
+  {
+   "check": "1d-telemetry-single-reveal",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/1d-telemetry-single-reveal-pass-390x844-2026-10-10T1859Z.png",
+   "timestamp_utc": "2026-10-10T18:59:24.069Z",
+   "detail": "dev-disclosure=1; request-body & rail-metrics hidden\u2192visible after summary click; stray raw-frame=0"
+  },
+  {
+   "check": "1e-no-blue-hue",
+   "viewport": "1440x900",
+   "status": "fixed",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/1e-no-blue-hue-pass-1440x900-2026-10-10T1902Z.png",
+   "timestamp_utc": "2026-10-10T19:02:21.525Z",
+   "detail": "swept /chat?skip=1, /chat?skip=1 +drawer, /overview, /company/apptronik \u2192 0 offenders each"
+  },
+  {
+   "check": "1e-no-blue-hue",
+   "viewport": "390x844",
+   "status": "fixed",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/1e-no-blue-hue-pass-390x844-2026-10-10T1902Z.png",
+   "timestamp_utc": "2026-10-10T19:02:51.352Z",
+   "detail": "swept /chat?skip=1, /chat?skip=1 +drawer, /overview, /company/apptronik \u2192 0 offenders each"
+  },
+  {
+   "check": "1f-composer-row-siblings",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/1f-composer-row-siblings-pass-1440x900-2026-10-10T1858Z.png",
+   "timestamp_utc": "2026-10-10T18:58:51.679Z",
+   "detail": "kids=input[attachment-input]>button[attachment-button]>textarea[composer-input]>span[composer-mic-slot]>button[composer-send] fileInput=block/0/1px topSpread=8.0px bottomGap=26.5px"
+  },
+  {
+   "check": "1f-composer-row-siblings",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/1f-composer-row-siblings-pass-390x844-2026-10-10T1859Z.png",
+   "timestamp_utc": "2026-10-10T18:59:34.302Z",
+   "detail": "kids=input[attachment-input]>button[attachment-button]>textarea[composer-input]>span[composer-mic-slot]>button[composer-send] fileInput=block/0/1px topSpread=8.0px bottomGap=0.0px"
+  },
+  {
+   "check": "2a-company-page-first-paint",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2a-company-page-first-paint-pass-1440x900-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:31.915Z",
+   "detail": "name=Apptronik; hq=Austin, TX; industry=Technology; employees=300; founded=2016; last_deal=Series A Extension \u00b7 $520M \u00b7 2026-02-11 \u00b7 led by B Capital, Alphabet (Google), Mercedes-Benz; investors=4; header=\"Pitchbook Investor Finder\u00b7 snapshot 2026-10-10\u00b7 next pull Mon 06:00 UTC\""
+  },
+  {
+   "check": "2a-company-page-first-paint",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2a-company-page-first-paint-pass-390x844-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:44.840Z",
+   "detail": "name=Apptronik; hq=Austin, TX; industry=Technology; employees=300; founded=2016; last_deal=Series A Extension \u00b7 $520M \u00b7 2026-02-11 \u00b7 led by B Capital, Alphabet (Google), Mercedes-Benz; investors=4; header=\"Pitchbook Investor Finder\u00b7 snapshot 2026-10-10\u00b7 next pull Mon 06:00 UTC\""
+  },
+  {
+   "check": "2b-company-page-no-runnow-no-execid",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2b-company-page-no-runnow-no-execid-pass-1440x900-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:33.302Z",
+   "detail": "runNow=0; pb-run-now=0; execId=none; bodyChars=11128"
+  },
+  {
+   "check": "2b-company-page-no-runnow-no-execid",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2b-company-page-no-runnow-no-execid-pass-390x844-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:46.158Z",
+   "detail": "runNow=0; pb-run-now=0; execId=none; bodyChars=11128"
+  },
+  {
+   "check": "2c-company-page-no-pitchbook-request",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2c-company-page-no-pitchbook-request-pass-1440x900-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:34.917Z",
+   "detail": "resourceEntries=44; matching=0; capturedRequestsMatching=0"
+  },
+  {
+   "check": "2c-company-page-no-pitchbook-request",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2c-company-page-no-pitchbook-request-pass-390x844-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:47.817Z",
+   "detail": "resourceEntries=42; matching=0; capturedRequestsMatching=0"
+  },
+  {
+   "check": "2d-ask-in-chat-lands-in-composer",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2d-ask-in-chat-lands-in-composer-pass-1440x900-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:36.470Z",
+   "detail": "composer=\"What do we know about Apptronik's Name (Apptronik)?\"; aria=\"Ask in chat about Name\"; threads=1; msgs=1; chips=1; tabs=1"
+  },
+  {
+   "check": "2d-ask-in-chat-lands-in-composer",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2d-ask-in-chat-lands-in-composer-pass-390x844-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:49.429Z",
+   "detail": "composer=\"What do we know about Apptronik's Name (Apptronik)?\"; aria=\"Ask in chat about Name\"; threads=1; msgs=1; chips=1; tabs=1"
+  },
+  {
+   "check": "2e-chat-drawer-first-paint",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2e-chat-drawer-first-paint-pass-1440x900-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:38.255Z",
+   "detail": "company=Perplexity AI; knownFields=6/6; paintMs=18; name=Perplexity AI; hq=San Francisco, United States; industry=Technology (Artificial Intelligence / Generative AI search); employees=964 (estimate, March 2026); founded=2022; last_deal=Angel / strategic tranche \u00b7 Undisclosed \u00b7 2025-12-01 \u00b7 led by Cristiano Ronaldo (reported); header=\"Pitchbook Investor Finder\u00b7 snapshot 2026-10-10\u00b7 next pull Mon 06:00 UTC\""
+  },
+  {
+   "check": "2e-chat-drawer-first-paint",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2e-chat-drawer-first-paint-pass-390x844-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:51.284Z",
+   "detail": "company=Perplexity AI; knownFields=6/6; paintMs=14; name=Perplexity AI; hq=San Francisco, United States; industry=Technology (Artificial Intelligence / Generative AI search); employees=964 (estimate, March 2026); founded=2022; last_deal=Angel / strategic tranche \u00b7 Undisclosed \u00b7 2025-12-01 \u00b7 led by Cristiano Ronaldo (reported); header=\"Pitchbook Investor Finder\u00b7 snapshot 2026-10-10\u00b7 next pull Mon 06:00 UTC\""
+  },
+  {
+   "check": "2f-chat-drawer-no-runnow-no-request",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2f-chat-drawer-no-runnow-no-request-pass-1440x900-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:39.715Z",
+   "detail": "runNow=0; execId=none; resourceEntries=100; matching=0; capturedMatching=0"
+  },
+  {
+   "check": "2f-chat-drawer-no-runnow-no-request",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2f-chat-drawer-no-runnow-no-request-pass-390x844-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:52.465Z",
+   "detail": "runNow=0; execId=none; resourceEntries=98; matching=0; capturedMatching=0"
+  },
+  {
+   "check": "2g-drawer-ask-same-thread",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2g-drawer-ask-same-thread-pass-1440x900-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:43.167Z",
+   "detail": "composer=\"What do we know about Perplexity AI's Name (Perplexity AI)?\"; aria=\"Ask in chat about Name\"; url=/chat?skip=1; threads=1; drawerAfterAsk=open"
+  },
+  {
+   "check": "2g-drawer-ask-same-thread",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/2g-drawer-ask-same-thread-pass-390x844-2026-10-10T1903Z.png",
+   "timestamp_utc": "2026-10-10T19:03:55.451Z",
+   "detail": "composer=\"What do we know about Perplexity AI's Name (Perplexity AI)?\"; aria=\"Ask in chat about Name\"; url=/chat?skip=1; threads=1; drawerAfterAsk=open"
+  },
+  {
+   "check": "3-upload-pdf-cited",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/3-upload-pdf-cited-pass-1440x900-2026-10-10T1913Z.png",
+   "timestamp_utc": "2026-10-10T19:13:01.085Z",
+   "detail": "answer(6.3s): \"The Zephyr-7 pilot plant produced 41.7 MWh on 3 March 2026 [attachment: zephyr-7.pdf].\" \u00b7 data-grounded=ondemand \u00b7 message-attachment chip under user bubble=true \u00b7 ready shot=3-upload-pdf-cited-ready-1440x900-2026-10-10T1913Z.png"
+  },
+  {
+   "check": "3-upload-pdf-cited",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/3-upload-pdf-cited-pass-390x844-2026-10-10T1915Z.png",
+   "timestamp_utc": "2026-10-10T19:15:00.054Z",
+   "detail": "answer(6.3s): \"According to the attached memo, the Zephyr-7 pilot plant produced 41.7 MWh on 3 March 2026 \u2014 output that was 11% above the forecast of 37.6 MWh because the second heat exchanger (HX-2) ran for the ful\" \u00b7 data-grounded=ondemand \u00b7 message-attachment chip under user bubble=true \u00b7 ready shot=3-upload-pdf-cited-ready-390x844-2026-10-10T1914Z.png"
+  },
+  {
+   "check": "4-voice-turn-plugin-plan-tts",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/4-voice-turn-plugin-plan-tts-pass-1440x900-2026-10-10T1913Z.png",
+   "timestamp_utc": "2026-10-10T19:13:09.646Z",
+   "detail": "transcript\u2192user turn in 2.5s: \"Fervo Energy achieved first power at Cape Station.\nvia voice\" \u00b7 request frame \"pluginIds\":[\"plugin-1722260873\",\"plugin-1741871229\"] \u00b7 dev-ids \"model predefined-deepseek-flash \u00b7 plugins plugin-1722260873, plugin-1741871229\" \u00b7 run-plugins chips [ | ] \u00b7 answer=answer \u00b7 tts audio={\"src\":\"https://airevprod.blob.core.windows.net/on-demand-prod//llm/6692b763e851d28a036ab30e/2026-10-10-19-13-44.mp3?se=2026-10-\",\"paused\":true,\"readyState\":0} \u00b7 pass-by=src populated (paused under headless autoplay) \u00b7 mic states idle\u2192thinking\u2192speaking \u00b7 frame shot=4-voice-turn-plugin-plan-tts-request-frame-1440x900-2026-10-10T1913Z.png"
+  },
+  {
+   "check": "4-voice-turn-plugin-plan-tts",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/4-voice-turn-plugin-plan-tts-pass-390x844-2026-10-10T1915Z.png",
+   "timestamp_utc": "2026-10-10T19:15:30.502Z",
+   "detail": "transcript\u2192user turn in 2.5s: \"Fervo Energy achieved first power at Cape Station.\nvia voice\" \u00b7 request frame \"pluginIds\":[\"plugin-1722260873\",\"plugin-1741871229\"] \u00b7 dev-ids \"model predefined-deepseek-flash \u00b7 plugins plugin-1722260873, plugin-1741871229\" \u00b7 run-plugins chips [ | ] \u00b7 answer=answer \u00b7 tts audio={\"src\":\"https://airevprod.blob.core.windows.net/on-demand-prod//llm/6692b763e851d28a036ab30e/2026-10-10-19-15-29.mp3?se=2026-10-\",\"paused\":true,\"readyState\":0} \u00b7 pass-by=src populated (paused under headless autoplay) \u00b7 mic states idle\u2192thinking\u2192speaking \u00b7 frame shot=4-voice-turn-plugin-plan-tts-request-frame-390x844-2026-10-10T1915Z.png"
+  },
+  {
+   "check": "5-citations-during-stream",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/5-citations-during-stream-pass-1440x900-2026-10-10T1914Z.png",
+   "timestamp_utc": "2026-10-10T19:13:46.930Z",
+   "detail": "first chips at 38.0s (still running=true; send=\"Cancel message\", assistant-streaming=1) count=1 publishers=[therobotreport] \u00b7 final chips=3 overflow(+N)=none sources-rail count=10 \u00b7 [DONE] at 40.7s \u00b7 midstream shot=5-citations-during-stream-midstream-1440x900-2026-10-10T1914Z.png"
+  },
+  {
+   "check": "5-citations-during-stream",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/5-citations-during-stream-pass-390x844-2026-10-10T1914Z.png",
+   "timestamp_utc": "2026-10-10T19:14:29.626Z",
+   "detail": "first chips at 16.9s (still running=true; send=\"Cancel message\", assistant-streaming=1) count=1 publishers=[reuters] \u00b7 final chips=6 overflow(+N)=none sources-rail count=10 \u00b7 [DONE] at 20.5s \u00b7 midstream shot=5-citations-during-stream-midstream-390x844-2026-10-10T1914Z.png"
+  },
+  {
+   "check": "6a-broken-images",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/6a-broken-images-pass-1440x900-2026-10-10T1859Z.png",
+   "timestamp_utc": "2026-10-10T18:58:51.971Z",
+   "detail": "/overview: 0/26 broken; /news: 0/121 broken; /companies: 0/22 broken"
+  },
+  {
+   "check": "6a-broken-images",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/6a-broken-images-pass-390x844-2026-10-10T1859Z.png",
+   "timestamp_utc": "2026-10-10T18:59:34.584Z",
+   "detail": "/overview: 0/26 broken; /news: 0/121 broken; /companies: 0/18 broken"
+  },
+  {
+   "check": "6b-last-company-row",
+   "viewport": "1440x900",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/6b-last-company-row-pass-1440x900-2026-10-10T1859Z.png",
+   "timestamp_utc": "2026-10-10T18:59:15.123Z",
+   "detail": "total=136; last row index=135 (data-last=true) in view after 1 scrolls at y=750\u2013815 of 900; rendered rows=21; scrollY=8178/9090; \"Zaihui Technology \u00b7 Asia 45 23 news items\""
+  },
+  {
+   "check": "6b-last-company-row",
+   "viewport": "390x844",
+   "status": "pass",
+   "evidence_url": "https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/web/proof/qa-owner/6b-last-company-row-pass-390x844-2026-10-10T1859Z.png",
+   "timestamp_utc": "2026-10-10T18:59:57.072Z",
+   "detail": "total=136; last row index=135 (data-last=true) in view after 1 scrolls at y=638\u2013723 of 844; rendered rows=17; scrollY=11128/11980; \"Zaihui Technology \u00b7 Asia 45 23\""
+  }
+ ],
+ "defects_fixed": [],
+ "end_utc": null
+}
