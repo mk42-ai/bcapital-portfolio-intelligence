@@ -11,6 +11,9 @@ import { AlertTriangle, RotateCcw } from "lucide-react";
 import { PLUGIN_NAME } from "@/lib/plugins";
 import { useStreamState } from "./stream-store";
 
+/** Perplexity credit shortage on the OnDemand account — reported once in Settings, only a compact pointer here. */
+export const NO_CREDITS_RE = /not enough credits|insufficient credits|quota/i;
+
 /** Visible, retryable error state: typed upstream error from the bridge (CUSTOM ondemand.error / RUN_ERROR) or a failed request. */
 export function ErrorBanner() {
   const threadError = useThread((s) => s.threadError); const isRunning = useThread((s) => s.isRunning);
@@ -34,6 +37,13 @@ export function ErrorBanner() {
   const retry = () => { if (lastUser) void processMessage({ role: "user", content: lastUser.content }); };
   const code = st.error?.code ?? "run_error";
   const message = st.error?.message ?? threadError?.message ?? "The run failed";
+  if (code === "plugin_error" && NO_CREDITS_RE.test(message)) {
+    return createPortal(
+      <p className="oiu-plugin-status" data-testid="plugin-status-line" data-reason="no_credits" data-error-code={code}>
+        {PLUGIN_NAME} is out of credits — see <a href="/settings">Settings → Plugins</a>
+        {lastUser && <button type="button" className="oiu-plugin-status__retry" onClick={retry}><RotateCcw className="size-3" aria-hidden /> Retry</button>}
+      </p>, host);
+  }
   return createPortal(
     <div className="oiu-error" role="alert" data-testid="chat-error" data-error-code={code}>
       <AlertTriangle className="size-4 shrink-0" aria-hidden />

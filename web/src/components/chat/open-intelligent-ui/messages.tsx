@@ -37,12 +37,14 @@ export const AssistantMessage: AssistantMessageComponent = memo(function Assista
         {meta?.plan && <PlanStepper plan={{ objective: meta.plan.objective, steps: meta.plan.steps.map((s) => ({ ...s, state: s.state === "running" ? "done" : s.state })) }} />}
         {meta?.summaries?.map((s) => <StepSummaryCard key={s.index} s={{ index: s.index, stepId: "", state: "done", text: s.text, optimistic: false, startedAt: 0, doneAt: s.doneAt ?? undefined }} />)}
         {meta?.thinking && <ThinkingTrace text={meta.thinking} />}
-        {meta?.error && (
+        {meta?.error && (/not enough credits|insufficient credits|quota/i.test(meta.error.message ?? "") ? (
+          <p className="oiu-plugin-status" data-testid="plugin-status-line" data-reason="no_credits">{PLUGIN_NAME} is out of credits — see <a href="/settings">Settings → Plugins</a></p>
+        ) : (
           <div className="oiu-plugin-error" role="alert" data-testid="plugin-error-card">
             <AlertTriangle className="size-4 shrink-0" aria-hidden />
             <span><strong>{PLUGIN_NAME} failed</strong> — {meta.error.message}</span>
           </div>
-        )}
+        ))}
         {/* Same block order as the live streaming block (badge → sources → text) so the live→final swap at stream end moves nothing. */}
         {!isStreaming && <AnswerBadge meta={meta} />}
         {!isStreaming && <SourceList sources={rail} live={meta != null} />}
