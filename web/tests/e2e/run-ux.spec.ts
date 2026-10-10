@@ -6,6 +6,9 @@
  *   raw-<label>-turn<N>-<viewport>.json             mutations / first-seen / layout-shift / LoAF / plugin states / CDP chunks for that turn
  *   timeline-<label>-<viewport>.json                 the per-turn timeline keys + smoothness metrics + GROWTH assertions
  *   <label>/screenshots/<name>-<viewport>.png        named milestone screenshots
+ *   compact-<label>-<viewport>.json                  compact timeline: events[] with t_ms (first-event, first-token, first-citation, answer-done …), CLS samples, long tasks
+ *   <label>/final-<viewport>.png                     final screenshot after turn 2; trace.zip + video.webm per project live under <label>/pw/ (playwright.ux.config.ts)
+ * scripts/ux-loop.sh <label> <url> wraps all of this and copies the proof set into docs/proof/<label>/.
  * Run: RUN_LABEL=before BASE_URL=https://… node node_modules/@playwright/test/cli.js test -c playwright.ux.config.ts
  */
 import { test, expect, type Page, type CDPSession } from "@playwright/test";
@@ -39,7 +42,9 @@ async function shot(page: Page, name: string, viewport: string, taken: Set<strin
   try { await page.screenshot({ path: path.join(SHOTS, `${name}-${viewport}.png`), fullPage: false, timeout: 8_000, animations: "allow" }); } catch (e) { notes.push(`screenshot ${name} failed: ${(e as Error).message.slice(0, 120)}`); }
 }
 
-type TurnResult = { timeline: Record<string, unknown>; metrics: Record<string, unknown>; errors: { console: { text: string; at: string }[]; page: { message: string; at: string }[]; failedRequests: { url: string; status: number | null; error?: string; favicon: boolean }[] } };
+type ClsSample = { t_ms: number; value: number; node: string | null };
+type LongTask = { t_ms: number; dur_ms: number; source: "long-animation-frame" | "longtask" };
+type TurnResult = { timeline: Record<string, unknown>; metrics: Record<string, unknown>; compact: { cls_samples: ClsSample[]; long_tasks: LongTask[] }; errors: { console: { text: string; at: string }[]; page: { message: string; at: string }[]; failedRequests: { url: string; status: number | null; error?: string; favicon: boolean }[] } };
 
 async function runTurn(page: Page, cdp: CDPSession, turn: number, viewport: string, taken: Set<string>, notes: string[], collectors: { console: { text: string; at: string }[]; page: { message: string; at: string }[]; failed: { url: string; status: number | null; error?: string; favicon: boolean; at: string }[] }, cdpChunks: { requestId: string; rel: number; bytes: number }[]): Promise<TurnResult> {
   const prompt = PROMPTS[turn - 1];
@@ -156,7 +161,47 @@ async function runTurn(page: Page, cdp: CDPSession, turn: number, viewport: stri
     failed_requests: { count: failed.length, favicon_failures: failed.filter((f) => f.favicon).length, urls: failed.map((f) => `${f.status ?? f.error ?? "?"} ${f.url}`) },
   };
   fs.writeFileSync(path.join(ART, `raw-${LABEL}-turn${turn}-${viewport}.json`), JSON.stringify({ turn, viewport, sendWall, endMs, firstSeen: raw.firstSeen, pluginStates: raw.pluginStates, mutations: raw.mutations, layoutShifts: raw.perf.layoutShifts, loaf: raw.perf.loaf, longTasks: raw.perf.longTasks, fillerSamples: raw.fillerSamples, cdpChunks: [...cdpChunks], request: raw.request }));
-  return { timeline, metrics, errors: { console: consoleErrs, page: pageErrs, failedRequests: failed } };
+  const compact = {
+    cls_samples: ls.map((e) => ({ t_ms: +(e.rel ?? 0).toFixed(0), value: e.value, node: e.nodes[0]?.node ?? null })).slice(0, 200),
+    long_tasks: longFrames.map((e) => ({ t_ms: +((e as { rel: number | null }).rel ?? 0).toFixed(0), dur_ms: e.dur, source: (raw.loafSupported ? "long-animation-frame" : "longtask") as LongTask["source"] })).slice(0, 200),
+  };
+  return { timeline, metrics, compact, errors: { console: consoleErrs, page: pageErrs, failedRequests: failed } };
+}
+
+/** Compact per-run timeline (docs/proof): ordered milestone events with t_ms from the Enter keypress of each turn, plus CLS samples and long tasks. */
+function compactTimeline(viewport: string, baseUrl: string | undefined, turns: TurnResult[], growthPass: boolean | undefined, notes: string[]) {
+  const events: { turn: number; name: string; t_ms: number; detail?: string }[] = [];
+  const num = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : null);
+  for (const r of turns) {
+    const tl = r.timeline; const turn = Number(tl.turn);
+    const add = (name: string, v: unknown, detail?: string) => { const n = num(v); if (n != null) events.push({ turn, name, t_ms: +n.toFixed(0), ...(detail ? { detail } : {}) }); };
+    add("first-event", tl.first_sse_frame, String(tl.first_sse_frame_type ?? ""));
+    add("first-thinking-visible", tl.first_thinking_visible);
+    add("plan-created", tl.plan_created);
+    for (const p of tl.plugins as { id: string | null; name: string | null; start_ms: number | null; end_ms: number | null; status: string }[]) { add("plugin-start", p.start_ms, `${p.name ?? p.id ?? "?"}`); add("plugin-end", p.end_ms, `${p.name ?? p.id ?? "?"}:${p.status}`); }
+    add("first-token", tl.first_answer_token);
+    add("first-answer-paint", tl.first_answer_paint);
+    add("first-citation", tl.first_inline_citation_chip);
+    add("first-source-in-rail", tl.first_source_in_rail);
+    add("error-card-visible", tl.error_card_visible, JSON.stringify((tl.perplexity as { error?: unknown })?.error ?? null).slice(0, 160));
+    add("final-badge-visible", tl.final_badge_visible);
+    add("answer-done", tl.done, String(tl.done_frame_type ?? ""));
+    add("composer-reset", tl.composer_reset_ms);
+  }
+  events.sort((a, b) => a.turn - b.turn || a.t_ms - b.t_ms);
+  const m = (r: TurnResult) => r.metrics as { stream_window_ms: number; dead_air_gaps: { count: number; max_gap_ms: number }; cumulative_layout_shift: { value: number; shifts: number }; scroll_jank: { long_frames_over_50ms: number; max_ms: number; total_ms: number }; console_errors: { count: number }; page_errors: { count: number }; failed_requests: { count: number } };
+  return {
+    schema: "ux-compact-timeline/1", label: LABEL, viewport, base_url: baseUrl ?? null, generated_utc: new Date().toISOString(),
+    turns: turns.map((r) => ({
+      turn: r.timeline.turn, prompt: r.timeline.prompt, sent_utc: r.timeline.sent_utc,
+      first_event_ms: r.timeline.first_sse_frame, first_token_ms: r.timeline.first_answer_token, first_citation_ms: r.timeline.first_inline_citation_chip, answer_done_ms: r.timeline.done, total_ms: r.timeline.total_ms,
+      done_frame_type: r.timeline.done_frame_type, frame_count: r.timeline.frame_count, perplexity: r.timeline.perplexity, bridge_http_status: r.timeline.bridge_http_status,
+      stream_window_ms: m(r).stream_window_ms, dead_air_gaps: m(r).dead_air_gaps.count, max_gap_ms: m(r).dead_air_gaps.max_gap_ms, cls: m(r).cumulative_layout_shift.value, cls_shifts: m(r).cumulative_layout_shift.shifts,
+      long_tasks: m(r).scroll_jank.long_frames_over_50ms, long_task_max_ms: m(r).scroll_jank.max_ms, long_task_total_ms: m(r).scroll_jank.total_ms, console_errors: m(r).console_errors.count, page_errors: m(r).page_errors.count, failed_requests: m(r).failed_requests.count,
+      cls_samples: r.compact.cls_samples, long_task_samples: r.compact.long_tasks,
+    })),
+    events, growth_pass: growthPass ?? null, notes,
+  };
 }
 
 async function growthCheck(page: Page, viewport: string, taken: Set<string>, notes: string[]) {
@@ -261,6 +306,10 @@ test(`run-ux ${LABEL}: GROWTH + one session, two turns`, async ({ page, context 
         turn1: t1.timeline, turn2: t2.timeline, metrics: { turn1: t1.metrics, turn2: t2.metrics }, growth, session_storage_keys: sessionIds, notes, screenshots: [...taken].map((n) => `${n}-${viewport}.png`),
       };
       fs.writeFileSync(path.join(ART, `timeline-${LABEL}-${viewport}.json`), JSON.stringify(out, null, 2));
+      // Compact timeline (docs/proof/<label>/timeline.json is assembled from these by scripts/ux-loop.sh) + final full-viewport screenshot.
+      const compact = compactTimeline(viewport, testInfo.project.use.baseURL, [t1, t2], (growth as { pass?: boolean }).pass, notes);
+      fs.writeFileSync(path.join(ART, `compact-${LABEL}-${viewport}.json`), JSON.stringify(compact, null, 2));
+      try { await page.screenshot({ path: path.join(ART, LABEL, `final-${viewport}.png`), fullPage: false, timeout: 10_000 }); } catch (e) { notes.push(`final screenshot failed: ${(e as Error).message.slice(0, 120)}`); }
       // Hard expectations that define a usable run (soft so the artifacts always get written; reported in results.json).
       expect.soft(t1.timeline.first_sse_frame, "turn 1 produced SSE frames").not.toBeNull();
       expect.soft(t2.timeline.first_sse_frame, "turn 2 produced SSE frames").not.toBeNull();
