@@ -1,0 +1,15 @@
+/* One-row composer (Agent 23): [Attach] [textarea] [mic] [send]; pinned to the bottom, ≤832 px centred, brand green only. */
+.chat-shell .openui-agent-composer-slot { padding: 0 16px 16px; }
+.chat-shell .openui-agent-thread-composer__input-wrapper { flex-direction: row; align-items: flex-end; gap: 8px; padding: 8px; border-radius: 16px; border: 1px solid #e5e7eb; box-shadow: 0 1px 2px rgb(0 0 0 / 4%); }
+.chat-shell .openui-agent-thread-composer__input-wrapper:focus-within { border-color: #0AC985; box-shadow: 0 0 0 3px rgb(10 201 133 / 18%); }
+.chat-shell .openui-agent-thread-composer__input { flex: 1 1 auto; min-width: 0; min-height: 32px; max-height: 168px; padding: 6px 4px; font-size: 15px; line-height: 1.4; }
+.chat-shell .openui-agent-thread-composer__action-bar { display: flex; align-items: center; gap: 8px; flex: none; }
+.chat-shell .oiu-attach-host { display: inline-flex; align-items: center; flex: none; height: 32px; }
+.chat-shell .oiu-att__attach-btn { display: inline-grid; place-items: center; width: 32px; height: 32px; border: 1px solid #d1d5db; border-radius: 999px; background: #fff; color: #374151; cursor: pointer; padding: 0; }
+.chat-shell .oiu-att__attach-btn:hover { border-color: #0AC985; color: #047857; background: #E6FAF3; }
+.chat-shell .oiu-att__attach-btn:focus-visible { outline: 2px solid #0AC985; outline-offset: 2px; }
+.chat-shell .openui-agent-thread-composer__submit-button { width: 32px; height: 32px; border-radius: 999px; background: #0AC985 !important; color: #04372a !important; border-color: #0AC985 !important; margin-left: 0; }
+.chat-shell .openui-agent-thread-composer__submit-button:hover { background: #089A66 !important; }
+.chat-shell .openui-agent-thread-composer__submit-button:disabled { opacity: .5; }
+/* Chips row above the input (attachments / context chips) inherits the same width. */
+.chat-shell .oiu-att-host, .chat-shell .oiu-context-chips-host { max-width: 832px; margin: 0 auto; }

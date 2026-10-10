@@ -20,6 +20,7 @@ import { CHAT_API_URL, IDLE, PHASE_LABEL, currentStream, getCurrentSessionId, ge
 import { AssistantMessage, PluginTimeline, UserBubble } from "./messages";
 import { AutoAsk, ErrorBanner, PendingRow, Persistence, ScrollAnchor, Suspense } from "./thread-helpers";
 import { ChatWelcome, starters } from "./chat-welcome";
+import { Composer } from "./composer";
 import { ThreadBusBridge } from "./thread-bus";
 
 /* Public surface kept stable for run-rail / tts-queue / drawer / tests. */
@@ -93,6 +94,7 @@ ${txt}`; }
         <PendingRow />
         <VoiceDock />
         <AttachmentBar />
+        <Composer />
         <ScrollAnchor />
         <ErrorBanner />
         <ContextChipsBar />
