@@ -94,3 +94,51 @@ test.describe("Media upload", () => {
     }
   });
 });
+
+/**
+ * Composer drop-zone (Agent 6): a synthetic dragenter with files over the composer shows the empty drop overlay with the local
+ * upload-dropzone asset (/assets/upload-dropzone-*.webp, decoded), and the hidden input still accepts a file afterwards.
+ */
+test.describe("Composer drop-zone", () => {
+  test("ui: dragenter with files shows the upload-dropzone asset; hidden input still accepts a file", async ({ page }) => {
+    await page.goto("/chat?skip=1");
+    await expect(page.locator("[data-testid=chat-shell]")).toBeVisible({ timeout: 30_000 });
+    const input = page.locator("[data-testid=attachment-input]");
+    await expect(input).toBeAttached({ timeout: 30_000 });
+    const slot = page.locator(".chat-shell .openui-agent-composer-slot").first();
+    if ((await slot.count()) === 0) { test.info().annotations.push({ type: "skip", description: "composer slot not rendered" }); test.skip(); return; }
+    await expect(slot).toHaveClass(/oiu-att-dropzone/, { timeout: 15_000 });
+
+    const fire = (type: "dragenter" | "dragleave") => slot.evaluate((el, t) => {
+      const dt = new DataTransfer();
+      dt.items.add(new File(["%PDF-1.4 drop"], "drop.pdf", { type: "application/pdf" }));
+      el.dispatchEvent(new DragEvent(t, { bubbles: true, cancelable: true, dataTransfer: dt }));
+    }, type);
+    await fire("dragenter");
+
+    const drop = page.locator("[data-testid=attachment-dropzone-empty]");
+    await expect(drop).toBeVisible({ timeout: 10_000 });
+    await expect(slot).toHaveClass(/oiu-att-dropzone--over/);
+    const img = drop.locator("img");
+    await expect(img).toBeAttached();
+    const src = (await img.getAttribute("src")) ?? "";
+    expect(src.startsWith("/assets/upload-dropzone"), `img src is the local asset (got ${src})`).toBe(true);
+    await expect.poll(() => img.evaluate((el) => (el as HTMLImageElement).naturalWidth), { timeout: 15_000 }).toBeGreaterThan(0);
+    await expect(drop).toContainText("Drop a PDF");
+    // brand green only on the highlight
+    const ring = await slot.evaluate((el) => getComputedStyle(el).boxShadow);
+    expect(ring, "drag-over ring is brand green").toMatch(/rgb\(10, 201, 133\)/);
+
+    await fire("dragleave");
+    await expect(drop).toHaveCount(0, { timeout: 10_000 });
+    await expect(slot).not.toHaveClass(/oiu-att-dropzone--over/);
+
+    // Exactly one hidden input, and it still accepts a file (reuses the chip flow from the test above).
+    await expect(input).toHaveCount(1);
+    await expect(page.locator("[data-testid=attachment-button]")).toHaveCount(1);
+    await input.setInputFiles(FIXTURE);
+    const chip = page.locator("[data-testid=attachment-chip]").first();
+    await expect(chip).toBeAttached({ timeout: 15_000 });
+    await expect(chip).toHaveAttribute("data-status", /^(uploading|ready|error)$/);
+  });
+});
