@@ -1,13 +1,16 @@
 "use client";
 /**
- * Empty-thread canvas (Agent 7): new-chat illustration (/assets/new-chat-512.webp), context chips, three starter prompts, recent threads.
+ * Empty-thread canvas (Agent 7): ChatGPT/Claude-style centred block — new-chat illustration, one-line title,
+ * compact context chips and three starter cards. Recent threads live in the nav rail (Agent 21), not here.
  * Rendered inside <AgentInterface.Welcome>; the library hides it once the first message exists.
  */
 import { useEffect, useState } from "react";
-import { useThread, useThreadList } from "@openuidev/react-ui";
-import { MessageSquareMore, Sparkles } from "lucide-react";
+import { useThread } from "@openuidev/react-ui";
+import { Sparkles } from "lucide-react";
+import { ASSET } from "@/lib/assets";
 import { fmtScore } from "@/lib/format";
 import type { CoCtx } from "./stream-store";
+import "./welcome.css";
 
 export const starters = [
   { displayText: "Latest Fervo news", prompt: "What is the latest news about Fervo Energy? Cite sources.", icon: null },
@@ -16,34 +19,39 @@ export const starters = [
   { displayText: "LP update draft", prompt: "Draft a one-paragraph LP update on the portfolio's sentiment this week.", icon: null },
 ];
 
-/** Compact welcome state (replaces the library's blank centre canvas): context chips, three starter prompts, recent threads. Hidden by the library once the first message exists. */
 export function ChatWelcome({ companies }: { companies: CoCtx[] }) {
-  const processMessage = useThread((s) => s.processMessage); const isRunning = useThread((s) => s.isRunning);
-  const threads = useThreadList((s) => s.threads); const selectThread = useThreadList((s) => s.selectThread); const selectedId = useThreadList((s) => s.selectedThreadId);
-  // Threads come from localStorage (client only): render the recent list only after mount so SSR and the first client render match (React #418).
-  const [mounted, setMounted] = useState(false); useEffect(() => { setMounted(true); }, []);
-  const recent = mounted ? threads.filter((t) => !t.isPending && t.id !== selectedId).slice(0, 3) : [];
+  const processMessage = useThread((s) => s.processMessage);
+  const isRunning = useThread((s) => s.isRunning);
+  // Context companies come from localStorage settings (client only): render the chip row only after mount so SSR and the first client render match (React #418).
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  const chips = mounted ? companies : [];
   return (
-    <div className="oiu-welcome" data-testid="chat-welcome">
-      <h2 className="oiu-welcome__title">Ask the portfolio</h2>
-      {companies.length > 0 && (
-        <ul className="oiu-welcome__chips" aria-label="Context companies" data-testid="welcome-context">
-          {companies.map((c) => <li key={c.slug} className="oiu-welcome__chip"><span className="oiu-welcome__dot" aria-hidden /> {c.name}<span className="oiu-welcome__chip-score">{fmtScore(c.sentiment.score)}</span></li>)}
+    <div className="oiu-welcome bc-welcome" data-testid="chat-welcome">
+      <img className="bc-welcome__art" src={ASSET.newChat} alt="" width={160} height={160} decoding="async" fetchPriority="high" />
+      <h2 className="oiu-welcome__title bc-welcome__title">Ask the portfolio</h2>
+      {chips.length > 0 && (
+        <ul className="oiu-welcome__chips bc-welcome__chips" aria-label="Context companies" data-testid="welcome-context">
+          {chips.map((c) => (
+            <li key={c.slug} className="oiu-welcome__chip bc-welcome__chip">
+              <span className="oiu-welcome__dot bc-welcome__dot" aria-hidden />
+              {c.name}
+              <span className="oiu-welcome__chip-score bc-welcome__score">{fmtScore(c.sentiment.score)}</span>
+            </li>
+          ))}
         </ul>
       )}
-      <div className="oiu-welcome__starters" data-testid="welcome-starters">
+      <div className="oiu-welcome__starters bc-welcome__starters" data-testid="welcome-starters">
         {starters.slice(0, 3).map((st) => (
-          <button key={st.prompt} type="button" className="oiu-welcome__starter" disabled={isRunning} onClick={() => { void processMessage({ role: "user", content: st.prompt }); }}>
-            <Sparkles className="size-3.5" aria-hidden /><span><strong>{st.displayText}</strong><span className="oiu-welcome__starter-prompt">{st.prompt}</span></span>
+          <button key={st.prompt} type="button" className="oiu-welcome__starter bc-welcome__starter" data-testid="welcome-starter" disabled={isRunning} onClick={() => { void processMessage({ role: "user", content: st.prompt }); }}>
+            <Sparkles className="bc-welcome__icon" aria-hidden />
+            <span className="bc-welcome__starter-body">
+              <strong>{st.displayText}</strong>
+              <span className="oiu-welcome__starter-prompt bc-welcome__prompt">{st.prompt}</span>
+            </span>
           </button>
         ))}
       </div>
-      {recent.length > 0 && (
-        <section className="oiu-welcome__recent" aria-label="Recent threads" data-testid="welcome-recent">
-          <p className="oiu-welcome__label"><MessageSquareMore className="size-3.5" aria-hidden /> Recent threads</p>
-          <ul>{recent.map((t) => <li key={t.id}><button type="button" className="oiu-welcome__thread" onClick={() => selectThread(t.id)}>{t.title || "Untitled thread"}</button></li>)}</ul>
-        </section>
-      )}
     </div>
   );
 }
