@@ -22,5 +22,19 @@ await t("ingest accepts strict + llm-text payload and computes deltas", async ()
   expect(r2.status === 200, "llm text"); const s: any = await (await get("/companies/writer/sentiment")).json(); expect(Math.abs(s.delta - (-0.4)) < 1e-6, `delta=${s.delta}`);
   const r3 = await get("/ingest", { method: "POST", headers: { "X-Ingest-Secret": "test-secret" }, body: "no json here" }); expect(r3.status === 400, "400 on garbage");
 });
+await t("pitchbook routes: list, slug, ingest validation, run fallback", async () => {
+  const l: any = await (await get("/pitchbook")).json(); expect(Array.isArray(l.data) && typeof l.count === "number" && /^\d{4}-\d{2}-\d{2}T06:00:00Z$/.test(l.next_run_utc) && new Date(l.next_run_utc).getUTCDay() === 1, JSON.stringify(l).slice(0, 200));
+  const g: any = await (await get("/pitchbook/writer")).json(); expect(g.company === "writer" && typeof g.enriched === "boolean" && !!g.next_run_utc, JSON.stringify(g).slice(0, 200)); expect((await get("/pitchbook/nope")).status === 404, "404");
+  expect((await get("/pitchbook/ingest", { method: "POST", body: "{}" })).status === 401, "401"); expect((await get("/pitchbook/run", { method: "POST" })).status === 401, "run 401");
+  const H = { "X-Ingest-Secret": "test-secret", "content-type": "application/json" };
+  const bad = await get("/pitchbook/ingest", { method: "POST", headers: H, body: JSON.stringify({ records: [{ slug: "writer" }] }) }); const bj: any = await bad.json(); expect(bad.status === 400 && bj.rejected?.length === 1, JSON.stringify(bj));
+  const ok = await get("/pitchbook/ingest", { method: "POST", headers: H, body: JSON.stringify({ execution_id: "ex-1", records: [{ slug: "writer", investors: { matched: [{ name: "Fund A", aum: "$1.5B", verticals: ["SaaS"] }], brief: "b", total_reported: 3 } }, { slug: "ghost", investors: { matched: [] } }] }) });
+  const oj: any = await ok.json(); expect(ok.status === 200 && oj.status === "partial" && oj.written === 1 && oj.unmatched[0] === "ghost", JSON.stringify(oj));
+  const g2: any = await (await get("/pitchbook/writer")).json(); expect(g2.enriched === true && g2.data.investors.matched[0].aum_musd === 1500 && g2.data.availability.investors === "VERIFIED" && g2.data.availability.financials === "NOT_AVAILABLE_FROM_PLUGIN" && g2.data.provenance.plugin_id === "plugin-1777018662", JSON.stringify(g2).slice(0, 300));
+  const l2: any = await (await get("/pitchbook")).json(); expect(l2.data.some((r: any) => r.slug === "writer" && r.investors === 1), "listed");
+  const trunc = await get("/pitchbook/ingest", { method: "POST", headers: H, body: '. {"workflow_name":"wf","records":[\n{"slug":"apptronik","investors":{"matched":[{"name":"Fund B","aum_musd":10}],"brief":"b","total_reported":5}},\n{"slug":"writer","investors":{"matched":[{"name":"Fund C","industries":["Softw' }); const tj: any = await trunc.json();
+  expect(trunc.status === 200 && tj.written === 1 && tj.slugs[0] === "apptronik" && tj.salvaged?.truncated_records === 1, JSON.stringify(tj));
+  const spec: any = await (await get("/openapi.json")).json(); for (const p of ["/pitchbook", "/pitchbook/{slug}", "/pitchbook/ingest", "/pitchbook/run"]) expect(!!spec.paths[p], `openapi missing ${p}`);
+});
 console.log(failed ? `\n${failed} test(s) FAILED` : "\nall tests passed");
 process.exit(failed ? 1 : 0);

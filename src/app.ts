@@ -10,6 +10,8 @@ import { labelFor, clampScore, normaliseEvidence, rollup } from "./sentiment.js"
 import { scorePortfolio, type CompanyInput, type SignalScore } from "./scoring.js";
 import { enrichShard, getProfile, profileCoverage, enrichCompany, ENRICH_PLUGINS } from "./enrich.js";
 import { refreshCompanies, lastRefreshRun, getRefreshState } from "./refresh.js";
+import { fetchPitchbook, pitchbookShard, getPitchbookRecord, listPitchbookRecords, writePitchbookRecord, normaliseIncomingRecord, salvageRecords, applyEnrichment, nextMondayUtc, PITCHBOOK_PLUGIN_ID, PITCHBOOK_SOURCE } from "./pitchbook.js";
+import { ONDEMAND_USER_AGENT } from "./config.js";
 
 type Vars = { requestId: string };
 const inner = new Hono<{ Variables: Vars }>();
@@ -364,6 +366,89 @@ inner.get("/enrich/jobs/:id", async (c) => {
   return c.json({ ...job, progress, completed: progress.filter((x) => x.enriched).length, total: job.slugs.length, timestamp: nowIso() }); void done;
 });
 inner.get("/enrich/jobs", async (c) => c.json({ data: [...enrichJobs.values()].map(({ result, ...j }) => ({ ...j, completed: result?.results.length ?? null })), timestamp: nowIso() }));
+
+// ---------- PitchBook (src/pitchbook.ts — plugin-1777018662 "Pitchbook Investor Finder", the only PitchBook plugin in the directory) ----------
+type PitchbookJob = { id: string; slugs: string[]; status: "running" | "done" | "error"; started_at: string; finished_at: string | null; result: Awaited<ReturnType<typeof pitchbookShard>> | null; error: string | null };
+const pitchbookJobs = new Map<string, PitchbookJob>();
+const PITCHBOOK_META = { plugin_id: PITCHBOOK_PLUGIN_ID, source: PITCHBOOK_SOURCE, cadence: "0 0 6 * * 1 (Mon 06:00 UTC)", availability_note: "investors VERIFIED via searchInvestors; overview/last_round/valuation_history/financials/comparables NOT_AVAILABLE_FROM_PLUGIN (back-filled FROM_ENRICHMENT when a profile exists)" };
+function startPitchbookJob(slugs: string[], conc: number): PitchbookJob {
+  const jobId = `pbjob-${Date.now().toString(36)}-${crypto.randomBytes(2).toString("hex")}`;
+  const job: PitchbookJob = { id: jobId, slugs, status: "running", started_at: nowIso(), finished_at: null, result: null, error: null };
+  pitchbookJobs.set(jobId, job);
+  pitchbookShard(job.slugs, conc).then((r) => { job.result = r; job.status = "done"; job.finished_at = nowIso(); }).catch((e) => { job.error = String((e as Error)?.message ?? e); job.status = "error"; job.finished_at = nowIso(); });
+  return job;
+}
+inner.get("/pitchbook", async (c) => {
+  const data = await listPitchbookRecords();
+  return c.json({ data, count: data.length, next_run_utc: nextMondayUtc(), workflow_id: process.env.PITCHBOOK_WORKFLOW_ID ?? null, ...PITCHBOOK_META, timestamp: nowIso() });
+});
+inner.get("/pitchbook/jobs/:id", async (c) => {
+  const job = pitchbookJobs.get(c.req.param("id")); if (!job) return err(c, 404, "not_found", "unknown job");
+  const progress: { slug: string; enriched: boolean; investors: number | null }[] = [];
+  for (const s of job.slugs) { const r = await getPitchbookRecord(s); const fresh = !!r && r.provenance.fetched_at >= job.started_at; progress.push({ slug: s, enriched: fresh, investors: fresh ? r!.investors.matched.length : null }); }
+  return c.json({ ...job, progress, completed: progress.filter((x) => x.enriched).length, total: job.slugs.length, timestamp: nowIso() });
+});
+inner.get("/pitchbook/jobs", async (c) => c.json({ data: [...pitchbookJobs.values()].map(({ result, ...j }) => ({ ...j, completed: result?.results.length ?? null })), timestamp: nowIso() }));
+inner.get("/pitchbook/:slug", async (c) => {
+  const row = await findCompany(c.req.param("slug"));
+  if (!row) return err(c, 404, "not_found", `No company with slug '${c.req.param("slug")}'`);
+  const data = await getPitchbookRecord(row.slug);
+  return c.json({ company: row.slug, name: row.name, data, enriched: !!data, next_run_utc: nextMondayUtc(), ...PITCHBOOK_META, timestamp: nowIso() });
+});
+inner.post("/pitchbook/ingest", async (c) => {
+  const denied = requireIngestSecret(c); if (denied) return denied;
+  const raw = await c.req.text();
+  let body: any = extractJson(raw);
+  if (body && typeof body === "object") { for (const k of ["payload", "data", "result", "output", "body"]) if (body[k] && typeof body[k] === "object" && !body.records && !body.slugs) body = body[k]; if (typeof body === "string") body = extractJson(body); }
+  let salvage: ReturnType<typeof salvageRecords> | null = null;
+  // Flow Builder webhook delivery posts the LLM text verbatim; a truncated answer (output budget) is still JSON-salvageable record by record.
+  if ((!body || typeof body !== "object" || !Array.isArray(body.records)) && /"slug"\s*:/.test(raw)) { salvage = salvageRecords(raw); if (salvage.records.length) body = { ...(body && typeof body === "object" ? body : {}), records: salvage.records, workflow_name: salvage.workflow_name }; }
+  if (!body || typeof body !== "object") return err(c, 400, "invalid_request", "Body must be JSON: {records:[PitchbookRecord]} or {slugs:[...], async?:true}");
+  const now = nowIso();
+  if (Array.isArray(body.records)) {
+    const written: string[] = []; const rejected: { index: number; error: string }[] = []; const unmatched: string[] = [];
+    for (const [i, item] of (body.records as any[]).entries()) {
+      const n = normaliseIncomingRecord(item, now); if (!n.ok) { rejected.push({ index: i, error: n.error }); continue; }
+      const row = await findCompany(n.record.slug); if (!row || row.bCapitalRole === "firm") { unmatched.push(n.record.slug); continue; }
+      n.record.slug = row.slug; if (body.execution_id && !n.record.provenance.note) n.record.provenance.note = `workflow execution ${body.execution_id}`;
+      applyEnrichment(n.record, await getProfile(row.slug).catch(() => null)); // overview/last_round FROM_ENRICHMENT when a profile exists — never claimed as PitchBook data
+      await writePitchbookRecord(n.record); written.push(row.slug);
+    }
+    const status = written.length ? (rejected.length || unmatched.length ? "partial" : "ok") : "error";
+    return c.json({ mode: "records", status, written: written.length, slugs: written, rejected, unmatched, salvaged: salvage ? { complete_json: salvage.complete_json, truncated_records: salvage.truncated } : null, next_run_utc: nextMondayUtc(), received_at: now, finished_at: nowIso() }, status === "error" ? 400 : 200);
+  }
+  if (Array.isArray(body.slugs)) {
+    if (!process.env.ONDEMAND_API_KEY) return err(c, 503, "resource_unavailable", "ONDEMAND_API_KEY is not configured on the server");
+    const slugs: string[] = body.slugs.map((s: unknown) => String(s).trim().toLowerCase()).filter(Boolean).slice(0, 20);
+    if (!slugs.length) return err(c, 400, "invalid_request", "slugs[] is empty");
+    const conc = Math.max(1, Math.min(Number(body?.concurrency) || 2, 2));
+    if (slugs.length === 1 && body?.dry_run) { const row = await findCompany(slugs[0]); if (!row) return err(c, 404, "not_found", slugs[0]); return c.json({ dry_run: true, record: await fetchPitchbook(row, { write: false }), timestamp: nowIso() }); }
+    if (body?.async) { const job = startPitchbookJob(slugs, conc); return c.json({ mode: "slugs", job_id: job.id, status: "running", slugs: job.slugs, poll: `/pitchbook/jobs/${job.id}`, timestamp: nowIso() }, 202); }
+    const r = await pitchbookShard(slugs, conc);
+    return c.json({ mode: "slugs", ...r, next_run_utc: nextMondayUtc(), timestamp: nowIso() });
+  }
+  return err(c, 400, "invalid_request", "Body must contain records[] or slugs[]");
+});
+/** UI 'Run now' relay: executes the weekly OnDemand workflow (env PITCHBOOK_WORKFLOW_ID) or falls back to a local async ingest of every portfolio company. */
+inner.post("/pitchbook/run", async (c) => {
+  const denied = requireIngestSecret(c); if (denied) return denied;
+  const wfId = (process.env.PITCHBOOK_WORKFLOW_ID ?? "").trim(); const apikey = process.env.ONDEMAND_API_KEY ?? "";
+  const base = (process.env.ONDEMAND_BASE_URL ?? "https://api.on-demand.io").replace(/\/$/, "");
+  if (wfId && apikey) {
+    try {
+      const r = await fetch(`${base}/automation/api/workflow/${wfId}/execute`, { method: "POST", headers: { apikey, "content-type": "application/json", "user-agent": ONDEMAND_USER_AGENT }, body: JSON.stringify({ payload: {} }), signal: AbortSignal.timeout(30_000) });
+      const txt = await r.text(); let j: any = {}; try { j = JSON.parse(txt); } catch { /* keep text */ }
+      const d = j?.data ?? j; const execId = d?.executionId ?? d?.executionID ?? d?.id ?? null;
+      if (r.ok && execId) return c.json({ mode: "workflow", workflow_id: wfId, execution_id: String(execId), status: String(d?.status ?? "executing"), next_run_utc: nextMondayUtc(), timestamp: nowIso() });
+      return c.json({ mode: "workflow", workflow_id: wfId, execution_id: execId ? String(execId) : null, status: "error", http_status: r.status, detail: txt.slice(0, 300), next_run_utc: nextMondayUtc(), timestamp: nowIso() }, 502);
+    } catch (e) { return c.json({ mode: "workflow", workflow_id: wfId, execution_id: null, status: "error", detail: String((e as Error)?.message ?? e), next_run_utc: nextMondayUtc(), timestamp: nowIso() }, 502); }
+  }
+  if (!apikey) return err(c, 503, "resource_unavailable", "ONDEMAND_API_KEY is not configured on the server");
+  const { db } = await getDb();
+  const slugs = db.select({ slug: schema.companies.slug }).from(schema.companies).where(sql`${schema.companies.bCapitalRole} != 'firm'`).orderBy(desc(schema.companies.isFocus), asc(schema.companies.slug)).all().map((r) => r.slug);
+  const job = startPitchbookJob(slugs, 2);
+  return c.json({ fallback: "local", reason: "PITCHBOOK_WORKFLOW_ID is not set", job_id: job.id, status: "running", total: slugs.length, poll: `/pitchbook/jobs/${job.id}`, next_run_utc: nextMondayUtc(), timestamp: nowIso() }, 202);
+});
 
 inner.notFound((c) => err(c, 404, "not_found", `Route not found: ${c.req.method} ${new URL(c.req.url).pathname}`));
 inner.onError((e, c) => { console.error(e); return err(c, 500, "server_error", e.message); });
