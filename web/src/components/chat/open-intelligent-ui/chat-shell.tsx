@@ -352,9 +352,10 @@ const AssistantMessage: AssistantMessageComponent = ({ message, isStreaming }) =
             <span><strong>{PLUGIN_NAME} failed</strong> — {meta.error.message}</span>
           </div>
         )}
-        <CitedMarkdown text={content || (isStreaming ? "…" : "")} known={meta?.error ? [] : known} streaming={!!isStreaming} onCites={setCites} />
-        {!isStreaming && <SourceList sources={rail} />}
+        {/* Same block order as the live streaming block (badge → sources → text) so the live→final swap at stream end moves nothing. */}
         {!isStreaming && <AnswerBadge meta={meta} />}
+        {!isStreaming && <SourceList sources={rail} live={rail.length === 0 && !meta?.error ? false : undefined} />}
+        <CitedMarkdown text={content || (isStreaming ? "…" : "")} known={meta?.error ? [] : known} streaming={!!isStreaming} onCites={setCites} />
       </div>
     </div>
   );
@@ -437,7 +438,8 @@ function ScrollAnchor() {
     node.addEventListener("scroll", onScroll, { passive: true }); onScroll();
     return () => node.removeEventListener("scroll", onScroll);
   }, [isRunning]);
-  useEffect(() => { const node = el.current; if (!node || !isRunning || !atBottom.current) return; node.scrollTop = node.scrollHeight; }, [st.version, isRunning]);
+  // Passive: OpenUI (scrollVariant="always") owns the follow-to-bottom scroll; this component only tracks whether the user left the bottom. Re-evaluated per store flush.
+  useEffect(() => { const node = el.current; if (!node || !isRunning) return; const gap = node.scrollHeight - node.scrollTop - node.clientHeight; atBottom.current = gap < 80; }, [st.version, isRunning]);
   if (!away || !isRunning) return null;
   return <button type="button" className="oiu-jump" data-testid="jump-to-latest" onClick={() => { const node = el.current; if (node) { node.scrollTo({ top: node.scrollHeight, behavior: "smooth" }); atBottom.current = true; setAway(false); } }}><ArrowDown className="size-3.5" aria-hidden /> Jump to latest</button>;
 }
