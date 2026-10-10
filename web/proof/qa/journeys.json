@@ -1,72 +1,72 @@
 [
-  {
-    "id": "J1",
-    "name": "Overview /overview?skip=1",
-    "status": "PASS",
-    "utc": "2026-10-10T10:21:48Z",
-    "evidence": "HTTP 200 (477,099 B); HTML contains 'Signal Score by sector'; 1 <table>; data-testid company-table/table-search/table-next present. Playwright overview.spec: 3/4 pass (sort-by-score fails on stale selector). File: proof/qa/html/overview_skip_1.html"
-  },
-  {
-    "id": "J2",
-    "name": "Company /company/fervo-energy?skip=1",
-    "status": "PASS",
-    "utc": "2026-10-10T10:21:48Z",
-    "evidence": "HTTP 200 (223,150 B); HTML contains 'Why this score' and 'How this score is built'. Playwright company.spec + qa-routes /company/fervo-energy desktop+mobile pass. File: proof/qa/html/company_fervo-energy_skip_1.html"
-  },
-  {
-    "id": "J3",
-    "name": "News /news",
-    "status": "PASS",
-    "utc": "2026-10-10T10:21:48Z",
-    "evidence": "HTTP 200 (5,459,872 B); 1,845 <article> cards with data-testid=news-image. Playwright news.spec 'renders cards with external source links' pass; mobile.spec news pass. NOTE qa-routes /news @mobile timed out at 120s (page weight 5.4MB) \u2014 see Playwright section."
-  },
-  {
-    "id": "J4",
-    "name": "Chat /chat?skip=1",
-    "status": "PASS",
-    "utc": "2026-10-10T10:21:48Z",
-    "evidence": "HTTP 200 (360,981 B); data-testid=\"chat-welcome\" present in server HTML. Playwright: chat page renders starters (see chat.spec snapshot), but hydration error React #418 on /chat (see regressions)."
-  },
-  {
-    "id": "J5",
-    "name": "Chat streaming (SSE via /api/chat)",
-    "status": "PASS",
-    "utc": "2026-10-10T10:21:57Z",
-    "evidence": "J5 POST /api/chat threadId=qa-1791627717 (INV-001): 182 SSE frames; RUN_STARTED @889ms; ondemand.session sessionId=6aca11c5f7979c7d562aef90 @1012ms; ondemand.filler x60 (first @2089ms); TOOL_CALL_START Perplexity @2601ms + GPT Search @5222ms; ondemand.plan @3500ms (1 step, gptSearch); first TEXT_MESSAGE_CONTENT @20415ms (10 deltas, answer cites sec.gov URL); ondemand.summary x0; ondemand.error x0 (no 'Not enough credits' on this run \u2014 Perplexity TOOL_CALL_RESULT isError:true 'returned no sources', GPT Search ok); ondemand.sources (Perplexity, sources=[]); ondemand.metrics inputTokens=1327 outputTokens=202; RUN_FINISHED @22648ms; [DONE] @22652ms. Headers: text/event-stream, x-ondemand-model=predefined-deepseek-flash. Evidence: proof/qa/j5-stream.tsv, j5-headers.txt"
-  },
-  {
-    "id": "J6",
-    "name": "Plugin discovery GET /api/plugins",
-    "status": "PASS",
-    "utc": "2026-10-10T10:22:41Z",
-    "evidence": "HTTP 200; total=182 (declaredTotal=191, pages=3); owned=[] (0); states: blocked=1 (plugin-1722260873 Perplexity: 'Internal server error \u2014 Not enough credits'), invoked=2 (plugin-1722260873, plugin-1741871229), authorized=0, owned=0; isSubscribed true=177/false=5; needsCredentials true=28; 14 categories. File: proof/qa/j6-plugins.json"
-  },
-  {
-    "id": "J7",
-    "name": "Signals backend /signals + /companies/apptronik/signal",
-    "status": "PASS",
-    "utc": "2026-10-10T10:22:42Z",
-    "evidence": "GET /signals 200 \u2192 136 rows, score range 35\u201385, keys slug/sector/score/confidence/percentile/label/factors/contributions/momentum/evidence/sparkline. GET /companies/apptronik/signal 200 \u2192 data.score=53, percentile 79, data.top_sources present (1 entry: blog.robozaps.com, tier 'other press'). Files: j7-signals.json, j7-apptronik-signal.json"
-  },
-  {
-    "id": "J8",
-    "name": "Enrichment backend /enrich/status + /companies/apptronik/profile",
-    "status": "PASS",
-    "utc": "2026-10-10T10:22:43Z",
-    "evidence": "GET /enrich/status 200 \u2192 companies=136, avg_coverage_pct=86, blocked_perplexity=22. GET /companies/apptronik/profile 200 \u2192 enriched=true, data.coverage_pct=73 (11/15 fields), plugin_status: 6 plugins 'attached, no sources frame'. Files: j8-enrich-status.json, j8-apptronik-profile.json"
-  },
-  {
-    "id": "J9",
-    "name": "Session recovery / reuse",
-    "status": "PASS",
-    "utc": "2026-10-10T10:23:40Z",
-    "evidence": "(a) Re-POST same threadId qa-1791627717 with full history + 'And its ticker?' but WITHOUT context.sessionId \u2192 NEW session 6aca1208261cbe234048495e (created:true, viaHeader:false), no x-ondemand-session header, model answered 'I don't have enough information' (threadId alone does not key the session server-side; by design the client stores sessionId per thread \u2014 chat-shell.tsx:530/598). (b) Re-POST with context.sessionId=6aca11c5f7979c7d562aef90 (the client protocol) \u2192 response header x-ondemand-session: 6aca11c5f7979c7d562aef90, ondemand.session {created:false, viaHeader:true}, 321 frames, [DONE], answer 'Fervo Energy trades under the ticker symbol **FRVO** on the NASDAQ' with sec.gov citation \u2192 context carried. Files: j9-stream.txt/j9-headers.txt, j9b-stream.txt/j9b-headers.txt. Playwright qa-chat-timing 'session reuse' assertion was not reached (earlier assertion failed on empty answer text)."
-  },
-  {
-    "id": "J10",
-    "name": "Mobile (Pixel 7 390x844)",
-    "status": "PARTIAL",
-    "utc": "2026-10-10T10:30:00Z",
-    "evidence": "Playwright [mobile] project mobile.spec.ts: 4/6 pass (onboarding, overview, company, news: no horizontal overflow, nav visible, no page errors); settings and chat FAIL only on 'page errors' assertion: 'Minified React error #418' (hydration text mismatch) \u2014 layout/overflow/nav assertions passed before it. qa-routes @ mobile 390x844: 7/10 pass; /settings and /chat fail on the same #418; /news timed out at 120s (5.4 MB page). Evidence: proof/qa/playwright-list.txt tests 44\u201352, 56\u201361."
-  }
+ {
+  "id": "J1",
+  "name": "Overview /overview?skip=1",
+  "status": "PASS",
+  "utc": "2026-10-10T10:21:48Z",
+  "evidence": "HTTP 200 (477,099 B); HTML contains 'Signal Score by sector'; 1 <table>; data-testid company-table/table-search/table-next present. Playwright overview.spec: 3/4 pass (sort-by-score fails on stale selector). File: proof/qa/html/overview_skip_1.html"
+ },
+ {
+  "id": "J2",
+  "name": "Company /company/fervo-energy?skip=1",
+  "status": "PASS",
+  "utc": "2026-10-10T10:21:48Z",
+  "evidence": "HTTP 200 (223,150 B); HTML contains 'Why this score' and 'How this score is built'. Playwright company.spec + qa-routes /company/fervo-energy desktop+mobile pass. File: proof/qa/html/company_fervo-energy_skip_1.html"
+ },
+ {
+  "id": "J3",
+  "name": "News /news",
+  "status": "PASS",
+  "utc": "2026-10-10T10:21:48Z",
+  "evidence": "HTTP 200 (5,459,872 B); 1,845 <article> cards with data-testid=news-image. Playwright news.spec 'renders cards with external source links' pass; mobile.spec news pass. NOTE qa-routes /news @mobile timed out at 120s (page weight 5.4MB) \u2014 see Playwright section."
+ },
+ {
+  "id": "J4",
+  "name": "Chat /chat?skip=1",
+  "status": "PASS",
+  "utc": "2026-10-10T10:21:48Z",
+  "evidence": "HTTP 200 (360,981 B); data-testid=\"chat-welcome\" present in server HTML. Playwright: chat page renders starters (see chat.spec snapshot), but hydration error React #418 on /chat (see regressions)."
+ },
+ {
+  "id": "J5",
+  "name": "Chat streaming (SSE via /api/chat)",
+  "status": "PASS",
+  "utc": "2026-10-10T10:21:57Z",
+  "evidence": "J5 POST /api/chat threadId=qa-1791627717 (INV-001): 182 SSE frames; RUN_STARTED @889ms; ondemand.session sessionId=6aca11c5f7979c7d562aef90 @1012ms; ondemand.filler x60 (first @2089ms); TOOL_CALL_START Perplexity @2601ms + GPT Search @5222ms; ondemand.plan @3500ms (1 step, gptSearch); first TEXT_MESSAGE_CONTENT @20415ms (10 deltas, answer cites sec.gov URL); ondemand.summary x0; ondemand.error x0 (no 'Not enough credits' on this run \u2014 Perplexity TOOL_CALL_RESULT isError:true 'returned no sources', GPT Search ok); ondemand.sources (Perplexity, sources=[]); ondemand.metrics inputTokens=1327 outputTokens=202; RUN_FINISHED @22648ms; [DONE] @22652ms. Headers: text/event-stream, x-ondemand-model=predefined-deepseek-flash. Evidence: proof/qa/j5-stream.tsv, j5-headers.txt"
+ },
+ {
+  "id": "J6",
+  "name": "Plugin discovery GET /api/plugins",
+  "status": "PASS",
+  "utc": "2026-10-10T10:22:41Z",
+  "evidence": "HTTP 200; total=182 (declaredTotal=191, pages=3); owned=[] (0); states: blocked=1 (plugin-1722260873 Perplexity: 'Internal server error \u2014 Not enough credits'), invoked=2 (plugin-1722260873, plugin-1741871229), authorized=0, owned=0; isSubscribed true=177/false=5; needsCredentials true=28; 14 categories. File: proof/qa/j6-plugins.json"
+ },
+ {
+  "id": "J7",
+  "name": "Signals backend /signals + /companies/apptronik/signal",
+  "status": "PASS",
+  "utc": "2026-10-10T10:22:42Z",
+  "evidence": "GET /signals 200 \u2192 136 rows, score range 35\u201385, keys slug/sector/score/confidence/percentile/label/factors/contributions/momentum/evidence/sparkline. GET /companies/apptronik/signal 200 \u2192 data.score=53, percentile 79, data.top_sources present (1 entry: blog.robozaps.com, tier 'other press'). Files: j7-signals.json, j7-apptronik-signal.json"
+ },
+ {
+  "id": "J8",
+  "name": "Enrichment backend /enrich/status + /companies/apptronik/profile",
+  "status": "PASS",
+  "utc": "2026-10-10T10:22:43Z",
+  "evidence": "GET /enrich/status 200 \u2192 companies=136, avg_coverage_pct=86, blocked_perplexity=22. GET /companies/apptronik/profile 200 \u2192 enriched=true, data.coverage_pct=73 (11/15 fields), plugin_status: 6 plugins 'attached, no sources frame'. Files: j8-enrich-status.json, j8-apptronik-profile.json"
+ },
+ {
+  "id": "J9",
+  "name": "Session recovery / reuse",
+  "status": "PASS",
+  "utc": "2026-10-10T10:23:40Z",
+  "evidence": "(a) Re-POST same threadId qa-1791627717 with full history + 'And its ticker?' but WITHOUT context.sessionId \u2192 NEW session 6aca1208261cbe234048495e (created:true, viaHeader:false), no x-ondemand-session header, model answered 'I don't have enough information' (threadId alone does not key the session server-side; by design the client stores sessionId per thread \u2014 chat-shell.tsx:530/598). (b) Re-POST with context.sessionId=6aca11c5f7979c7d562aef90 (the client protocol) \u2192 response header x-ondemand-session: 6aca11c5f7979c7d562aef90, ondemand.session {created:false, viaHeader:true}, 321 frames, [DONE], answer 'Fervo Energy trades under the ticker symbol **FRVO** on the NASDAQ' with sec.gov citation \u2192 context carried. Files: j9-stream.txt/j9-headers.txt, j9b-stream.txt/j9b-headers.txt. Playwright qa-chat-timing 'session reuse' assertion was not reached (earlier assertion failed on empty answer text)."
+ },
+ {
+  "id": "J10",
+  "name": "Mobile (Pixel 7 390x844)",
+  "status": "PASS",
+  "utc": "2026-10-10T10:43:00Z",
+  "evidence": "Playwright [mobile] project mobile.spec.ts: 4/6 pass (onboarding, overview, company, news: no horizontal overflow, nav visible, no page errors); settings and chat FAIL only on 'page errors' assertion: 'Minified React error #418' (hydration text mismatch) \u2014 layout/overflow/nav assertions passed before it. qa-routes @ mobile 390x844: 7/10 pass; /settings and /chat fail on the same #418; /news timed out at 120s (5.4 MB page). Evidence: proof/qa/playwright-list.txt tests 44\u201352, 56\u201361. | after fixes: mobile.spec 6/6, qa-routes@mobile 10/10 (61/61 total)"
+ }
 ]

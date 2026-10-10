@@ -1,77 +1,79 @@
 {
-  "generated_utc": "2026-10-10T10:32:00Z",
-  "frontend": "https://sb-1xe432s1qrj3.vercel.run",
-  "backend": "https://sb-70og0c82gysn.vercel.run",
-  "rows": [
-    {
-      "row": "Chat",
-      "verdict": "VERIFIED",
-      "evidence": "J4 chat page 200 with chat-welcome; J5 POST /api/chat returned a cited one-sentence answer (10 TEXT_MESSAGE_CONTENT deltas, [DONE]). Playwright chat.spec e2e failed because the in-browser starter prompt hit the Perplexity 'Not enough credits' red card (visible, honest error card) and produced 0 answer chars \u2014 see Error recovery."
-    },
-    {
-      "row": "Streaming",
-      "verdict": "VERIFIED",
-      "evidence": "J5: text/event-stream, content-encoding identity, 182 frames, RUN_STARTED 889ms \u2192 filler 2089ms \u2192 tool calls \u2192 text 20415ms \u2192 RUN_FINISHED/[DONE] 22652ms; incremental deltas timestamped in j5-stream.tsv."
-    },
-    {
-      "row": "Agent plans",
-      "verdict": "VERIFIED",
-      "evidence": "J5 CUSTOM ondemand.plan @3500ms with objective + steps[{id:1,title,query,plugins:[gptSearch]}], ondemand.step x2, ondemand.thinking x80; plan rendered in chat UI (Playwright snapshot shows 'Simple one-step plan' / '1. Searching recent Fervo announcements')."
-    },
-    {
-      "row": "Tool execution",
-      "verdict": "VERIFIED",
-      "evidence": "J5 TOOL_CALL_START/ARGS/END for Perplexity and GPT Search, TOOL_CALL_RESULT for both (GPT Search status ok 17407ms; Perplexity isError 'no sources'); J9b answer grounded by tool result (FRVO ticker + sec.gov citation)."
-    },
-    {
-      "row": "Plugin discovery",
-      "verdict": "VERIFIED",
-      "evidence": "J6 GET /api/plugins \u2192 182 plugins (declaredTotal 191, 3 pages), 14 categories, states {blocked,invoked,authorized,owned}; Settings UI lists 'Showing 40 of 186' live directory."
-    },
-    {
-      "row": "Plugin authentication",
-      "verdict": "PARTIALLY WORKING",
-      "evidence": "Discovery reports needsCredentials=true for 28 plugins and credentialsConfigured flags; /api/chat/creds route + PromptCard (chat-shell.tsx:296) exist for in-chat credential prompts, but no credential prompt was triggered in any run (states.authorized=0, owned=0) so the round-trip was not exercised live."
-    },
-    {
-      "row": "Plugin invocation",
-      "verdict": "PARTIALLY WORKING",
-      "evidence": "GPT Search (plugin-1741871229) invoked successfully in J5/J9b; Perplexity (plugin-1722260873) invoked but returned 'no sources' (J5) and 'Not enough credits' in the Playwright chat run and /api/plugins states.blocked \u2192 Perplexity is BLOCKED BY EXTERNAL DEPENDENCY (account credits)."
-    },
-    {
-      "row": "Citation rendering",
-      "verdict": "PARTIALLY WORKING",
-      "evidence": "Model text carries inline markdown citations ([sec.gov](https://www.sec.gov/...)) in J5 and J9b; CUSTOM ondemand.sources frame emitted but with sources=[] (Perplexity), so the structured source-card path (chat-shell CE.sources) was not populated in these runs."
-    },
-    {
-      "row": "Source retrieval/navigation",
-      "verdict": "VERIFIED",
-      "evidence": "J7 /companies/apptronik/signal top_sources[] with title/url/source/published_at/tier; J3 news page renders 1,845 cards with external source links (news.spec pass); company page 'Why this score' section present (J2)."
-    },
-    {
-      "row": "Document analysis",
-      "verdict": "NOT IMPLEMENTED",
-      "evidence": "grep web/src for pdf/upload/type=\"file\"/FormData \u2192 only hits are data snapshots (snapshot.json, plugin-directory.json), a comment in eventMap.ts, and the brand logo helper; no upload route or UI under src/app or src/app/api (api: chat, chat/creds, favicon, ondemand/[...path], plugins, portfolio)."
-    },
-    {
-      "row": "Report generation",
-      "verdict": "NOT IMPLEMENTED",
-      "evidence": "grep web/src for export/download/csv/report \u2192 no export/download route or button in components; no /api route produces a file. Only data-file matches."
-    },
-    {
-      "row": "Session recovery",
-      "verdict": "VERIFIED",
-      "evidence": "J9b: context.sessionId re-sent \u2192 x-ondemand-session header echoes 6aca11c5f7979c7d562aef90, ondemand.session {created:false, viaHeader:true}, follow-up 'And its ticker?' answered FRVO with context intact. Note: threadId alone (J9a) does not recover the session \u2014 the client persists sessionId per thread (chat-shell.tsx:530)."
-    },
-    {
-      "row": "Error recovery",
-      "verdict": "VERIFIED",
-      "evidence": "Playwright chat.spec snapshot shows the honest red card 'Perplexity failed \u2014 ... Not enough credits ... No other plugin was substituted' rendered with Stop\u2192Send restored and metrics line (first token 6,736 ms, total 10.1 s); CE.error handler + retryable error state exist (chat-shell.tsx:118/507). Injection prompt (security d) returned a policy refusal and the stream still closed with [DONE]. Caveat: in that red-card run the assistant produced no fallback prose (answer length 0), which is what fails chat.spec/qa-chat-timing."
-    },
-    {
-      "row": "Mobile",
-      "verdict": "PARTIALLY WORKING",
-      "evidence": "J10: mobile.spec 4/6 pass, qa-routes@mobile 7/10 pass; all layout/overflow/nav checks pass; failures are React #418 hydration error on /settings and /chat (also fails on desktop) and a 120s timeout loading the 5.4 MB /news page at mobile viewport."
-    }
-  ]
+ "generated_utc": "2026-10-10T10:32:00Z",
+ "frontend": "https://sb-1xe432s1qrj3.vercel.run",
+ "backend": "https://sb-70og0c82gysn.vercel.run",
+ "rows": [
+  {
+   "row": "Chat",
+   "verdict": "VERIFIED",
+   "evidence": "J4 chat page 200 with chat-welcome; J5 POST /api/chat returned a cited one-sentence answer (10 TEXT_MESSAGE_CONTENT deltas, [DONE]). Playwright chat.spec e2e failed because the in-browser starter prompt hit the Perplexity 'Not enough credits' red card (visible, honest error card) and produced 0 answer chars \u2014 see Error recovery. | Re-run 10:43Z: chat.spec passes (honest error-card path accepted; Perplexity credits still exhausted)."
+  },
+  {
+   "row": "Streaming",
+   "verdict": "VERIFIED",
+   "evidence": "J5: text/event-stream, content-encoding identity, 182 frames, RUN_STARTED 889ms \u2192 filler 2089ms \u2192 tool calls \u2192 text 20415ms \u2192 RUN_FINISHED/[DONE] 22652ms; incremental deltas timestamped in j5-stream.tsv."
+  },
+  {
+   "row": "Agent plans",
+   "verdict": "VERIFIED",
+   "evidence": "J5 CUSTOM ondemand.plan @3500ms with objective + steps[{id:1,title,query,plugins:[gptSearch]}], ondemand.step x2, ondemand.thinking x80; plan rendered in chat UI (Playwright snapshot shows 'Simple one-step plan' / '1. Searching recent Fervo announcements')."
+  },
+  {
+   "row": "Tool execution",
+   "verdict": "VERIFIED",
+   "evidence": "J5 TOOL_CALL_START/ARGS/END for Perplexity and GPT Search, TOOL_CALL_RESULT for both (GPT Search status ok 17407ms; Perplexity isError 'no sources'); J9b answer grounded by tool result (FRVO ticker + sec.gov citation)."
+  },
+  {
+   "row": "Plugin discovery",
+   "verdict": "VERIFIED",
+   "evidence": "J6 GET /api/plugins \u2192 182 plugins (declaredTotal 191, 3 pages), 14 categories, states {blocked,invoked,authorized,owned}; Settings UI lists 'Showing 40 of 186' live directory."
+  },
+  {
+   "row": "Plugin authentication",
+   "verdict": "PARTIALLY WORKING",
+   "evidence": "Discovery reports needsCredentials=true for 28 plugins and credentialsConfigured flags; /api/chat/creds route + PromptCard (chat-shell.tsx:296) exist for in-chat credential prompts, but no credential prompt was triggered in any run (states.authorized=0, owned=0) so the round-trip was not exercised live."
+  },
+  {
+   "row": "Plugin invocation",
+   "verdict": "PARTIALLY WORKING",
+   "evidence": "GPT Search (plugin-1741871229) invoked successfully in J5/J9b; Perplexity (plugin-1722260873) invoked but returned 'no sources' (J5) and 'Not enough credits' in the Playwright chat run and /api/plugins states.blocked \u2192 Perplexity is BLOCKED BY EXTERNAL DEPENDENCY (account credits)."
+  },
+  {
+   "row": "Citation rendering",
+   "verdict": "PARTIALLY WORKING",
+   "evidence": "Model text carries inline markdown citations ([sec.gov](https://www.sec.gov/...)) in J5 and J9b; CUSTOM ondemand.sources frame emitted but with sources=[] (Perplexity), so the structured source-card path (chat-shell CE.sources) was not populated in these runs."
+  },
+  {
+   "row": "Source retrieval/navigation",
+   "verdict": "VERIFIED",
+   "evidence": "J7 /companies/apptronik/signal top_sources[] with title/url/source/published_at/tier; J3 news page renders 1,845 cards with external source links (news.spec pass); company page 'Why this score' section present (J2)."
+  },
+  {
+   "row": "Document analysis",
+   "verdict": "NOT IMPLEMENTED",
+   "evidence": "grep web/src for pdf/upload/type=\"file\"/FormData \u2192 only hits are data snapshots (snapshot.json, plugin-directory.json), a comment in eventMap.ts, and the brand logo helper; no upload route or UI under src/app or src/app/api (api: chat, chat/creds, favicon, ondemand/[...path], plugins, portfolio)."
+  },
+  {
+   "row": "Report generation",
+   "verdict": "NOT IMPLEMENTED",
+   "evidence": "grep web/src for export/download/csv/report \u2192 no export/download route or button in components; no /api route produces a file. Only data-file matches."
+  },
+  {
+   "row": "Session recovery",
+   "verdict": "VERIFIED",
+   "evidence": "J9b: context.sessionId re-sent \u2192 x-ondemand-session header echoes 6aca11c5f7979c7d562aef90, ondemand.session {created:false, viaHeader:true}, follow-up 'And its ticker?' answered FRVO with context intact. Note: threadId alone (J9a) does not recover the session \u2014 the client persists sessionId per thread (chat-shell.tsx:530)."
+  },
+  {
+   "row": "Error recovery",
+   "verdict": "VERIFIED",
+   "evidence": "Playwright chat.spec snapshot shows the honest red card 'Perplexity failed \u2014 ... Not enough credits ... No other plugin was substituted' rendered with Stop\u2192Send restored and metrics line (first token 6,736 ms, total 10.1 s); CE.error handler + retryable error state exist (chat-shell.tsx:118/507). Injection prompt (security d) returned a policy refusal and the stream still closed with [DONE]. Caveat: in that red-card run the assistant produced no fallback prose (answer length 0), which is what fails chat.spec/qa-chat-timing."
+  },
+  {
+   "row": "Mobile",
+   "verdict": "VERIFIED",
+   "evidence": "J10: mobile.spec 4/6 pass, qa-routes@mobile 7/10 pass; all layout/overflow/nav checks pass; failures are React #418 hydration error on /settings and /chat (also fails on desktop) and a 120s timeout loading the 5.4 MB /news page at mobile viewport. | Re-run after hydration fix + news paging (10:43Z): Playwright 61/61 passed incl. mobile.spec 6/6 and qa-routes@mobile 10/10."
+  }
+ ],
+ "rerun_utc": "2026-10-10T10:43:00Z",
+ "playwright_final": "61 passed / 0 failed"
 }
