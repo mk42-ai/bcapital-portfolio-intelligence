@@ -1,0 +1,345 @@
+{
+  "label": "after",
+  "viewport": "mobile",
+  "viewportPx": {
+    "width": 390,
+    "height": 844
+  },
+  "url": "https://sb-70502obas4b3.vercel.run",
+  "startedUtc": "2026-10-10T05:42:45.182Z",
+  "prompt": "Which of my context companies moved most since the last sentiment run, and why?",
+  "companies": [
+    "Perplexity AI",
+    "Apptronik",
+    "Fervo Energy",
+    "Flutterwave",
+    "WRITER"
+  ],
+  "pluginTogglesPresent": true,
+  "pluginTogglesChecked": [
+    "plugin-1722260873",
+    "plugin-1741871229",
+    "plugin-1716429542",
+    "plugin-1748003575"
+  ],
+  "faviconFailures": [],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "notes": [],
+  "companiesInitial": [
+    "Perplexity AI",
+    "Apptronik",
+    "Fervo Energy",
+    "Flutterwave",
+    "WRITER"
+  ],
+  "companyCountText": "5/5 selected · Enter adds the first match",
+  "pluginsCardText": "Plugins (12 available · 4 on)Perplexitygeneralpinned · always onplugin-1722260873GPT Searchresearchplugin-1741871229US Stock Fundamentalsfinanceplugin-1716429542Reddit Postsmarketingplugin-1748003575X Search Agentgeneralplugin-1751872652US Stock Technical Analysisfinanceplugin-1716434059Internetresearchplugin-1713924030LinkedIn Searchresearchplugin-1718116202X (MCP)generalplugin-1785777296Quarterly financial report data tooldataplugin-1770369833ElevenLabs Agentgeneralplugin-1789123753Programmer Agentgeneralplugin-1726251045Sent explicitly as pluginIds on every request — nothing is substituted if a plugin fails.",
+  "sentUtc": "2026-10-10T05:42:49.090Z",
+  "submitLabels": [
+    {
+      "label": "Cancel message",
+      "atMs": 35
+    },
+    {
+      "label": "Send message",
+      "atMs": 38941
+    }
+  ],
+  "streamDoneWallMs": 38941,
+  "stopToSendResetMs": 8,
+  "submitLabelResetObserved": true,
+  "proxyPayload": {
+    "tools": [],
+    "context": {
+      "externalUserId": "INV-001",
+      "pluginIds": [
+        "plugin-1722260873",
+        "plugin-1741871229",
+        "plugin-1716429542",
+        "plugin-1748003575"
+      ],
+      "systemContext": "Portfolio data below comes from the B Capital portfolio API (live backend, fetched 2026-10-10T05:42:17.772Z). Use it ONLY for portfolio-internal questions (sentiment scores, deltas, which context companies moved, headline counts). For anything about external facts — recent announcements, funding rounds, valuations, IPOs, products, people, comparisons with earlier events — ALWAYS run the Perplexity web search and answer from fresh sources with citations; never say the feed lacks information when the web can answer it. Sentiment delta is null until a second scoring run exists — do not invent movement; a basis of \"seed placeholder\" means the score has not been scored by the workflow yet.\n• Apptronik — sector: Technology; status: private; stage: Series A-X ($520M ext Feb 11 2026, total Series A $935M, post-money ~$5.3B); sentiment: +0.30 (positive), delta null (no prior run), updated 2026-10-09T12:22:23Z, basis: seed (intelligence JSON research_timestamp 2026-10-09); est. ticket 200000000; news items: 20; latest headlines: \"Apptronik Apollo Review 2026: Price, Apollo 2 & Deployments | RoboZaps Blog\" (2026-07-16, blog.robozaps.com); \"Apptronik launches Robot Park to train Apollo humanoid robots with Google DeepMind\" (2026-07-06, roboticsandautomationnews.com); \"Apptronik unveils Apollo humanoid robot - The Robot Report\" (2026-07-01, therobotreport.com)\n• Fervo Energy — sector: Energy & Resilience; status: public (Nasdaq: FRVO); stage: IPO 2026-05-14 at $27/share, ~$2.17B proceeds, ~$10.1B mkt cap; PM mark ~$20.2B Sep 2026; sentiment: +0.60 (positive), delta null (no prior run), updated 2026-10-09T12:22:23Z, basis: seed (intelligence JSON research_timestamp 2026-10-09); est. ticket 462000000; news items: 20; latest headlines: \"News - Fervo Energy\" (2026-10-08, fervoenergy.com); \"2026 Climate Tech Companies to Watch: Fervo Energy and its plan to streamline geothermal power | MIT Technology Review\" (2026-10-06, technologyreview.com); \"Fervo Energy Geothermal 2026, $1.9B IPO & 750 MW Deal\" (2026-10-06, enkiai.com)\n• Flutterwave — sector: Technology; status: private; stage: Series E Jun 16 2026 ($262.75M at $3.2B, Ripple Ventures); Series E-II Circle Ventures Jul 2026; sentiment: +0.40 (positive), delta null (no prior run), updated 2026-10-09T12:22:23Z, basis: seed (intelligence JSON research_timestamp 2026-10-09); est. ticket 50000000; news items: 20; latest headlines: \"Flutterwave and Abuja Investments Partner to Expand Digital Payments in FCT - TechAfrica News\" (2026-08-13, techafricanews.com); \"Ten Years of Flutterwave: How a Single API Rewired African Payments – Pan- African Voice\" (2026-08-11, pan-africanvoice.com); \"Flutterwave's Gabriel Ologunwa Says Africa Can Achieve Real-Time Cross-Border Payments\" (2026-08-05, thecondia.com)\n• Perplexity AI — sector: Technology; status: private; stage: Series E (latest $20B valuation Sep 2025); sentiment: -0.35 (negative), delta null (no prior run), updated 2026-10-09T12:22:23Z, basis: seed (intelligence JSON research_timestamp 2026-10-09); est. ticket 50000000; news items: 21; latest headlines: \"Best Perplexity AI Statistics 2026: Users, Revenue and SEO Impact\" (2026-10-05, blognexasai.nexasai.in); \"r/perplexity_ai: complaints over Computer-mode credits, scheduled-task removal and billing support (Oct 2026)\" (2026-10-01, reddit.com); \"AI Search 2026 — Perplexity vs ChatGPT vs Google\" (2026-09-29, valueaddvc.com)\n• WRITER — sector: Technology; status: private; stage: Series C Nov 12 2024 ($200M at $1.9B); sentiment: +0.10 (neutral), delta null (no prior run), updated 2026-10-09T12:22:23Z, basis: seed (intelligence JSON research_timestamp 2026-10-09); est. ticket 5000000; news items: 15; latest headlines: \"WRITER Newsroom | Press Releases\" (2026-09-09, writer.com); \"WRITER - The enterprise AI platform for agentic work\" (2026-09-09, writer.com); \"No Title\" (2026-08-13, writer.com)",
+      "sessionContext": [
+        {
+          "key": "company:apptronik",
+          "value": "{\"name\":\"Apptronik\",\"sector\":\"Technology\",\"status\":\"private\",\"sentiment\":{\"score\":0.3,\"label\":\"positive\",\"delta\":null,\"updated_at\":\"2026-10-09T12:22:23Z\",\"basis\":\"seed (intelligence JSON research_timestamp 2026-10-09)\"},\"news\":[{\"title\":\"Apptronik Apollo Review 2026: Price, Apollo 2 & Deployments | RoboZaps Blog\",\"url\":\"https://blog.robozaps.com/b/apptronik-apollo-review\",\"published_at\":\"2026-07-16\",\"source\":\"blog.robozaps.com\"},{\"title\":\"Apptronik launches Robot Park to train Apollo humanoid robots with Google DeepMind\",\"url\":\"https://roboticsandautomationnews.com/2026/07/06/apptronik-launches-robot-park-to-train-apollo-humanoid-robots-with-google-deepmind/103069/\",\"published_at\":\"2026-07-06\",\"source\":\"roboticsandautomationnews.com\"},{\"title\":\"Apptronik unveils Apollo humanoid robot - The Robot Report\",\"url\":\"https://www.therobotreport.com/apptronik-unveils-apollo-humanoid-robot/\",\"published_at\":\"2026-07-01\",\"source\":\"therobotreport.com\"}]}"
+        },
+        {
+          "key": "company:fervo-energy",
+          "value": "{\"name\":\"Fervo Energy\",\"sector\":\"Energy & Resilience\",\"status\":\"public (Nasdaq: FRVO)\",\"sentiment\":{\"score\":0.6,\"label\":\"positive\",\"delta\":null,\"updated_at\":\"2026-10-09T12:22:23Z\",\"basis\":\"seed (intelligence JSON research_timestamp 2026-10-09)\"},\"news\":[{\"title\":\"News - Fervo Energy\",\"url\":\"https://fervoenergy.com/newsroom-2-2-2-2-2/\",\"published_at\":\"2026-10-08\",\"source\":\"fervoenergy.com\"},{\"title\":\"2026 Climate Tech Companies to Watch: Fervo Energy and its plan to streamline geothermal power | MIT Technology Review\",\"url\":\"https://www.technologyreview.com/2026/10/06/1145252/fervo-energy-geothermal-power-streamline-plan/\",\"published_at\":\"2026-10-06\",\"source\":\"technologyreview.com\"},{\"title\":\"Fervo Energy Geothermal 2026, $1.9B IPO & 750 MW Deal\",\"url\":\"https://enkiai.com/geothermal/fervo-enhanced-geothermal-google/\",\"published_at\":\"2026-10-06\",\"source\":\"enkiai.com\"}]}"
+        },
+        {
+          "key": "company:flutterwave",
+          "value": "{\"name\":\"Flutterwave\",\"sector\":\"Technology\",\"status\":\"private\",\"sentiment\":{\"score\":0.4,\"label\":\"positive\",\"delta\":null,\"updated_at\":\"2026-10-09T12:22:23Z\",\"basis\":\"seed (intelligence JSON research_timestamp 2026-10-09)\"},\"news\":[{\"title\":\"Flutterwave and Abuja Investments Partner to Expand Digital Payments in FCT - TechAfrica News\",\"url\":\"https://techafricanews.com/2026/08/13/flutterwave-and-abuja-investments-partner-to-expand-digital-payments-in-fct/\",\"published_at\":\"2026-08-13\",\"source\":\"techafricanews.com\"},{\"title\":\"Ten Years of Flutterwave: How a Single API Rewired African Payments – Pan- African Voice\",\"url\":\"https://pan-africanvoice.com/2026/08/11/ten-years-of-flutterwave-how-a-single-api-rewired-african-payments/\",\"published_at\":\"2026-08-11\",\"source\":\"pan-africanvoice.com\"},{\"title\":\"Flutterwave's Gabriel Ologunwa Says Africa Can Achieve Real-Time Cross-Border Payments\",\"url\":\"https://thecondia.com/partners/flutterwaves-gabriel-ologunwa-says-africa-is-within-reach-of-real-time-cross-border-payments/\",\"published_at\":\"2026-08-05\",\"source\":\"thecondia.com\"}]}"
+        },
+        {
+          "key": "company:perplexity-ai",
+          "value": "{\"name\":\"Perplexity AI\",\"sector\":\"Technology\",\"status\":\"private\",\"sentiment\":{\"score\":-0.35,\"label\":\"negative\",\"delta\":null,\"updated_at\":\"2026-10-09T12:22:23Z\",\"basis\":\"seed (intelligence JSON research_timestamp 2026-10-09)\"},\"news\":[{\"title\":\"Best Perplexity AI Statistics 2026: Users, Revenue and SEO Impact\",\"url\":\"https://blognexasai.nexasai.in/perplexity-ai-statistics-2026/\",\"published_at\":\"2026-10-05\",\"source\":\"blognexasai.nexasai.in\"},{\"title\":\"r/perplexity_ai: complaints over Computer-mode credits, scheduled-task removal and billing support (Oct 2026)\",\"url\":\"https://www.reddit.com/r/perplexity_ai/\",\"published_at\":\"2026-10-01\",\"source\":\"reddit.com\"},{\"title\":\"AI Search 2026 — Perplexity vs ChatGPT vs Google\",\"url\":\"https://valueaddvc.com/blog/ai-search-2026-perplexity-vs-chatgpt-search-vs-google-ai-overviews-compared\",\"published_at\":\"2026-09-29\",\"source\":\"valueaddvc.com\"}]}"
+        },
+        {
+          "key": "company:writer",
+          "value": "{\"name\":\"WRITER\",\"sector\":\"Technology\",\"status\":\"private\",\"sentiment\":{\"score\":0.1,\"label\":\"neutral\",\"delta\":null,\"updated_at\":\"2026-10-09T12:22:23Z\",\"basis\":\"seed (intelligence JSON research_timestamp 2026-10-09)\"},\"news\":[{\"title\":\"WRITER Newsroom | Press Releases\",\"url\":\"https://writer.com/newsroom/\",\"published_at\":\"2026-09-09\",\"source\":\"writer.com\"},{\"title\":\"WRITER - The enterprise AI platform for agentic work\",\"url\":\"https://writer.com/\",\"published_at\":\"2026-09-09\",\"source\":\"writer.com\"},{\"title\":\"No Title\",\"url\":\"https://writer.com/engineering/palmyra-x6/\",\"published_at\":\"2026-08-13\",\"source\":\"writer.com\"}]}"
+        }
+      ]
+    },
+    "threadId": "179803a3-636c-48f0-9cbf-71a200ef25b2",
+    "runId": "1c029306-409f-4c13-aa15-3c9bf0133dd2",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Which of my context companies moved most since the last sentiment run, and why?",
+        "id": "3672e81d-e065-4701-88f7-1f6f2461373a"
+      }
+    ]
+  },
+  "pluginIdsRequested": [
+    "plugin-1722260873",
+    "plugin-1741871229",
+    "plugin-1716429542",
+    "plugin-1748003575"
+  ],
+  "responseStatus": 200,
+  "responseHeaders": {
+    "cache-control": "no-cache, no-transform",
+    "content-encoding": "identity",
+    "content-security-policy": "frame-ancestors *;",
+    "content-type": "text/event-stream; charset=utf-8",
+    "date": "Sat, 10 Oct 2026 05:42:49 GMT",
+    "permissions-policy": "camera=(), microphone=(), geolocation=()",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "server": "Vercel",
+    "strict-transport-security": "max-age=63072000",
+    "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "x-content-type-options": "nosniff",
+    "x-ondemand-model": "predefined-deepseek-flash",
+    "x-vercel-id": "iad1::5v82v-1791610969118-00e32ea67280",
+    "x-vercel-internal-cache-level": "unknown",
+    "x-vercel-internal-deployment-id": "u",
+    "x-vercel-internal-metadata-state": "worker_stale",
+    "x-vercel-internal-owner-id": "u",
+    "x-vercel-internal-path-type": "sandbox",
+    "x-vercel-internal-project-id": "u",
+    "x-vercel-internal-proxy-cpu-load": "35",
+    "x-vercel-internal-proxy-pool": "blue",
+    "x-vercel-internal-request-cpu-ms": "0",
+    "x-vercel-internal-timing": "vcoe_from_proxy=22"
+  },
+  "headersAtMs": 57.40000009536743,
+  "sseFrameCount": 549,
+  "frameTypeCounts": {
+    "RUN_STARTED": 1,
+    "CUSTOM:ondemand.status": 10,
+    "CUSTOM:ondemand.session": 1,
+    "TOOL_CALL_START": 3,
+    "TOOL_CALL_ARGS": 3,
+    "TOOL_CALL_END": 3,
+    "CUSTOM:ondemand.thinking": 429,
+    "CUSTOM:ondemand.heartbeat": 3,
+    "CUSTOM:ondemand.sources": 2,
+    "TOOL_CALL_RESULT": 3,
+    "TEXT_MESSAGE_START": 1,
+    "TEXT_MESSAGE_CONTENT": 85,
+    "CUSTOM:ondemand.metrics": 1,
+    "TEXT_MESSAGE_END": 1,
+    "RUN_FINISHED": 1,
+    "[DONE]": 1,
+    "STREAM_CLOSED": 1
+  },
+  "firstEventMs": 60.09999990463257,
+  "firstTokenMs": 33591.59999990463,
+  "firstTokenPaintMs": 31193.099999904633,
+  "firstPendingRowMs": 20.59999990463257,
+  "firstPluginCardMs": 3338.7999999523163,
+  "firstPluginSearchedMs": 31177.099999904633,
+  "firstPluginFailedMs": null,
+  "firstThinkingTraceMs": 3338.7999999523163,
+  "firstCitationChipMs": null,
+  "firstStepSummaryMs": null,
+  "firstSourceLinkMs": 31193.099999904633,
+  "firstAnswerBadgeMs": 31193.099999904633,
+  "firstChatErrorMs": null,
+  "streamEndMs": 38789.40000009537,
+  "streamEndFrameType": "[DONE]",
+  "frameToPaintLatencyMs": -1191.25,
+  "frameToPaintParts": {
+    "toolCard": {
+      "frameType": "TOOL_CALL_START",
+      "frameMs": 3322.7999999523163,
+      "paintMs": 3338.7999999523163
+    },
+    "firstToken": {
+      "frameMs": 33591.59999990463,
+      "paintMs": 31193.099999904633
+    }
+  },
+  "firstSeen": {
+    "[data-testid=pending-row]": {
+      "t": 3278.399999856949,
+      "iso": "2026-10-10T05:42:49.108Z",
+      "text": "Connecting to OnDemand…0.0 s",
+      "sinceSend": 20.59999990463257
+    },
+    "[data-testid=plugin-activity]": {
+      "t": 6596.599999904633,
+      "iso": "2026-10-10T05:42:52.426Z",
+      "text": "Searching with Perplexity“Which of my context companies moved most since the last sentiment run, and why?”Searching with Perplexity…",
+      "sinceSend": 3338.7999999523163
+    },
+    "[data-testid=plugin-activity][data-state=searching]": {
+      "t": 6596.599999904633,
+      "iso": "2026-10-10T05:42:52.426Z",
+      "text": "Searching with Perplexity“Which of my context companies moved most since the last sentiment run, and why?”Searching with Perplexity…",
+      "sinceSend": 3338.7999999523163
+    },
+    "[data-testid=thinking-trace]": {
+      "t": 6596.599999904633,
+      "iso": "2026-10-10T05:42:52.426Z",
+      "text": "Thinking… · planning66 charsThe user asks: \"Which of my context companies moved most since the",
+      "sinceSend": 3338.7999999523163
+    },
+    "[data-testid=plugin-activity][data-state=searched]": {
+      "t": 34434.89999985695,
+      "iso": "2026-10-10T05:43:20.265Z",
+      "text": "Perplexity searched“Which of my context companies moved most since the last sentiment run, and why?”8 sources · 27.9 s",
+      "sinceSend": 31177.099999904633
+    },
+    "[data-testid=source-link]": {
+      "t": 34450.89999985695,
+      "iso": "2026-10-10T05:43:20.281Z",
+      "text": "1Geothermal startup Fervo Energy pops 33% in IPO debut fueled by AI data center demand | TechCrunchtechcrunch.com/2026/05/13/geothermal-startup-fervo-energy-pops-33-in-ipo-debut-fueled- (source 1, ope",
+      "sinceSend": 31193.099999904633
+    },
+    "[data-testid=answer-badge]": {
+      "t": 34450.89999985695,
+      "iso": "2026-10-10T05:43:20.281Z",
+      "text": "DeepSeek Flash v4.1·medium·plugin-1722260873plugin-1741871229plugin-1716429542plugin-1748003575·first event 36 ms·first token …",
+      "sinceSend": 31193.099999904633
+    },
+    ".oiu-assistant p": {
+      "t": 34450.89999985695,
+      "iso": "2026-10-10T05:43:20.281Z",
+      "text": "DeepSeek Flash v4.1·medium·plugin-1722260873plugin-1741871229plugin-1716429542plugin-1748003575·first event 36 ms·first token …",
+      "sinceSend": 31193.099999904633
+    },
+    "[data-testid=assistant-streaming]": {
+      "t": 34450.89999985695,
+      "iso": "2026-10-10T05:43:20.281Z",
+      "text": "DeepSeek Flash v4.1·medium·plugin-1722260873plugin-1741871229plugin-1716429542plugin-1748003575·first event 36 ms·first token …Sources (8)1Geothermal startup Fervo Energy pops 33% in IPO debut fueled ",
+      "sinceSend": 31193.099999904633
+    },
+    "[data-testid=assistant-message]": {
+      "t": 42068.09999990463,
+      "iso": "2026-10-10T05:43:27.898Z",
+      "text": "Thinking trace6,000 chars  \"plan_required\": true,\n  \"plan_skip_reason\": \"\",\n  \"steps\": [\n    {\n      \"title\": \"Checking public-market movement\",\n      \"user_query\": \"Pull the current share price, inst",
+      "sinceSend": 38810.299999952316
+    }
+  },
+  "cls": 0.8032,
+  "layoutShiftCount": 16,
+  "layoutShiftsAll": 36,
+  "longTasks": {
+    "count": 1,
+    "maxMs": 51,
+    "totalMs": 51,
+    "allBeforeSend": 4
+  },
+  "paints": [
+    {
+      "name": "first-paint",
+      "t": 412
+    },
+    {
+      "name": "first-contentful-paint",
+      "t": 412
+    }
+  ],
+  "slowEvents": {
+    "count": 75,
+    "maxDur": 24
+  },
+  "rafDroppedFrames": {
+    "sampled": 2375,
+    "dropped": 1,
+    "pct": 0.04,
+    "maxDeltaMs": 49.9,
+    "p95DeltaMs": 16.8
+  },
+  "scrollAnchoring": {
+    "samples": 159,
+    "atBottomPct": 12.6,
+    "atBottomWhileGrowingPct": 0,
+    "scroller": "light __variable_db5d2c __variable_703880",
+    "maxScrollHeight": 5788,
+    "userScrolled": false
+  },
+  "blankIntervalsOver1500ms": [],
+  "pluginCard": {
+    "statesSeen": [
+      "searching",
+      "searched"
+    ],
+    "finalState": "searched",
+    "errorText": null,
+    "finalText": "Perplexity searched“Which of my context companies moved most since the last sentiment run, and why?”8 sources · 27.9 s"
+  },
+  "errorCode": null,
+  "errorText": null,
+  "sourcesCount": 8,
+  "citationChips": 0,
+  "stepSummaries": 0,
+  "assistantMessages": 1,
+  "answerChars": 4464,
+  "answerBadgeText": "DeepSeek Flash v4.1·medium·plugin-1722260873plugin-1741871229plugin-1716429542plugin-1748003575·first event 36 ms·first token 33,568 ms·total 38.8 s·12,476 tokens",
+  "sessionId": "6ac9d05995268adc215dfc53",
+  "firstErrorFrame": null,
+  "growth": {
+    "quick": false,
+    "url": "https://sb-70502obas4b3.vercel.run/onboarding",
+    "tiles": 6,
+    "restingColor": "rgb(249, 250, 251)",
+    "hoverLatencyMs": 45,
+    "hoverColor": "rgb(10, 201, 133)",
+    "hoverTextColor": "rgb(255, 255, 255)",
+    "hoverTransform": "matrix(1.04, 0, 0, 1.04, 0, 0)",
+    "brandGreenVar": "#0ac985",
+    "primaryVar": "#1d4ed8",
+    "isBrandGreen": true,
+    "hoverChanged": true,
+    "expandLatencyMs": 25.7,
+    "expandWallMs": 83,
+    "expanded": true,
+    "expandedColor": "rgb(10, 201, 133)",
+    "panelText": "We give first: time, introductions, candour — because founders' wins compound.Example behaviourA partner opens their network before a term sheet is signed.",
+    "reducedMotionOk": true
+  },
+  "growthReducedMotion": {
+    "quick": true,
+    "url": "https://sb-70502obas4b3.vercel.run/onboarding",
+    "tiles": 6,
+    "restingColor": "rgb(249, 250, 251)",
+    "hoverLatencyMs": 11,
+    "hoverColor": "rgb(10, 201, 133)",
+    "hoverTextColor": "rgb(255, 255, 255)",
+    "hoverTransform": "none",
+    "brandGreenVar": "#0ac985",
+    "primaryVar": "#1d4ed8",
+    "isBrandGreen": true,
+    "hoverChanged": true,
+    "expandLatencyMs": 0.1,
+    "expandWallMs": 52,
+    "expanded": true,
+    "expandedColor": "rgb(10, 201, 133)",
+    "panelText": "We give first: time, introductions, candour — because founders' wins compound.Example behaviourA partner opens their network before a term sheet is signed."
+  },
+  "cdpMetrics": {
+    "LayoutCount": 23,
+    "RecalcStyleCount": 57,
+    "JSHeapUsedSize": 27929488,
+    "TaskDuration": 0.793094,
+    "ScriptDuration": 0.045313,
+    "LayoutDuration": 0.009389,
+    "Nodes": 4085
+  },
+  "finishedUtc": "2026-10-10T05:45:12.012Z"
+}

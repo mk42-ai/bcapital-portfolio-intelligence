@@ -1,0 +1,376 @@
+{
+  "label": "after",
+  "viewport": "desktop",
+  "viewportPx": {
+    "width": 1440,
+    "height": 900
+  },
+  "url": "https://sb-70502obas4b3.vercel.run",
+  "startedUtc": "2026-10-10T06:04:06.519Z",
+  "prompt": "Which of my context companies moved most since the last sentiment run, and why?",
+  "companies": [
+    "Perplexity AI",
+    "Apptronik",
+    "Fervo Energy",
+    "Flutterwave",
+    "WRITER"
+  ],
+  "pluginTogglesPresent": true,
+  "pluginTogglesChecked": [
+    "plugin-1722260873",
+    "plugin-1741871229",
+    "plugin-1716429542",
+    "plugin-1748003575"
+  ],
+  "faviconFailures": [
+    {
+      "url": "https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://blognexasai.nexasai.in&size=32",
+      "status": 404,
+      "at": "2026-10-10T06:04:48.889Z"
+    }
+  ],
+  "consoleErrors": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 ()",
+      "url": "https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://blognexasai.nexasai.in&size=32",
+      "thirdParty": true,
+      "at": "2026-10-10T06:04:48.889Z"
+    }
+  ],
+  "pageErrors": [],
+  "notes": [],
+  "companiesInitial": [
+    "Perplexity AI",
+    "Apptronik",
+    "Fervo Energy",
+    "Flutterwave",
+    "WRITER"
+  ],
+  "companyCountText": "5/5 selected · Enter adds the first match",
+  "pluginsCardText": "Plugins (12 available · 4 on)Perplexitygeneralpinned · always onplugin-1722260873GPT Searchresearchplugin-1741871229US Stock Fundamentalsfinanceplugin-1716429542Reddit Postsmarketingplugin-1748003575X Search Agentgeneralplugin-1751872652US Stock Technical Analysisfinanceplugin-1716434059Internetresearchplugin-1713924030LinkedIn Searchresearchplugin-1718116202X (MCP)generalplugin-1785777296Quarterly financial report data tooldataplugin-1770369833ElevenLabs Agentgeneralplugin-1789123753Programmer Agentgeneralplugin-1726251045Sent explicitly as pluginIds on every request — nothing is substituted if a plugin fails.",
+  "sentUtc": "2026-10-10T06:04:10.677Z",
+  "submitLabels": [
+    {
+      "label": "Cancel message",
+      "atMs": 77
+    },
+    {
+      "label": "Send message",
+      "atMs": 42461
+    }
+  ],
+  "streamDoneWallMs": 42461,
+  "stopToSendResetMs": 12,
+  "submitLabelResetObserved": true,
+  "proxyPayload": {
+    "tools": [],
+    "context": {
+      "externalUserId": "INV-001",
+      "pluginIds": [
+        "plugin-1722260873",
+        "plugin-1741871229",
+        "plugin-1716429542",
+        "plugin-1748003575"
+      ],
+      "systemContext": "Portfolio data below comes from the B Capital portfolio API (live backend, fetched 2026-10-10T06:03:43.283Z). Use it ONLY for portfolio-internal questions (sentiment scores, deltas, which context companies moved, headline counts). For anything about external facts — recent announcements, funding rounds, valuations, IPOs, products, people, comparisons with earlier events — ALWAYS run the Perplexity web search and answer from fresh sources with citations; never say the feed lacks information when the web can answer it. Sentiment delta is null until a second scoring run exists — do not invent movement; a basis of \"seed placeholder\" means the score has not been scored by the workflow yet.\n• Apptronik — sector: Technology; status: private; stage: Series A-X ($520M ext Feb 11 2026, total Series A $935M, post-money ~$5.3B); sentiment: +0.30 (positive), delta null (no prior run), updated 2026-10-09T12:22:23Z, basis: seed (intelligence JSON research_timestamp 2026-10-09); est. ticket 200000000; news items: 20; latest headlines: \"Apptronik Apollo Review 2026: Price, Apollo 2 & Deployments | RoboZaps Blog\" (2026-07-16, blog.robozaps.com); \"Apptronik launches Robot Park to train Apollo humanoid robots with Google DeepMind\" (2026-07-06, roboticsandautomationnews.com); \"Apptronik unveils Apollo humanoid robot - The Robot Report\" (2026-07-01, therobotreport.com)\n• Fervo Energy — sector: Energy & Resilience; status: public (Nasdaq: FRVO); stage: IPO 2026-05-14 at $27/share, ~$2.17B proceeds, ~$10.1B mkt cap; PM mark ~$20.2B Sep 2026; sentiment: +0.60 (positive), delta null (no prior run), updated 2026-10-09T12:22:23Z, basis: seed (intelligence JSON research_timestamp 2026-10-09); est. ticket 462000000; news items: 20; latest headlines: \"News - Fervo Energy\" (2026-10-08, fervoenergy.com); \"2026 Climate Tech Companies to Watch: Fervo Energy and its plan to streamline geothermal power | MIT Technology Review\" (2026-10-06, technologyreview.com); \"Fervo Energy Geothermal 2026, $1.9B IPO & 750 MW Deal\" (2026-10-06, enkiai.com)\n• Flutterwave — sector: Technology; status: private; stage: Series E Jun 16 2026 ($262.75M at $3.2B, Ripple Ventures); Series E-II Circle Ventures Jul 2026; sentiment: +0.40 (positive), delta null (no prior run), updated 2026-10-09T12:22:23Z, basis: seed (intelligence JSON research_timestamp 2026-10-09); est. ticket 50000000; news items: 20; latest headlines: \"Flutterwave and Abuja Investments Partner to Expand Digital Payments in FCT - TechAfrica News\" (2026-08-13, techafricanews.com); \"Ten Years of Flutterwave: How a Single API Rewired African Payments – Pan- African Voice\" (2026-08-11, pan-africanvoice.com); \"Flutterwave's Gabriel Ologunwa Says Africa Can Achieve Real-Time Cross-Border Payments\" (2026-08-05, thecondia.com)\n• Perplexity AI — sector: Technology; status: private; stage: Series E (latest $20B valuation Sep 2025); sentiment: -0.35 (negative), delta null (no prior run), updated 2026-10-09T12:22:23Z, basis: seed (intelligence JSON research_timestamp 2026-10-09); est. ticket 50000000; news items: 21; latest headlines: \"Best Perplexity AI Statistics 2026: Users, Revenue and SEO Impact\" (2026-10-05, blognexasai.nexasai.in); \"r/perplexity_ai: complaints over Computer-mode credits, scheduled-task removal and billing support (Oct 2026)\" (2026-10-01, reddit.com); \"AI Search 2026 — Perplexity vs ChatGPT vs Google\" (2026-09-29, valueaddvc.com)\n• WRITER — sector: Technology; status: private; stage: Series C Nov 12 2024 ($200M at $1.9B); sentiment: +0.10 (neutral), delta null (no prior run), updated 2026-10-09T12:22:23Z, basis: seed (intelligence JSON research_timestamp 2026-10-09); est. ticket 5000000; news items: 15; latest headlines: \"WRITER Newsroom | Press Releases\" (2026-09-09, writer.com); \"WRITER - The enterprise AI platform for agentic work\" (2026-09-09, writer.com); \"No Title\" (2026-08-13, writer.com)",
+      "sessionContext": [
+        {
+          "key": "company:apptronik",
+          "value": "{\"name\":\"Apptronik\",\"sector\":\"Technology\",\"status\":\"private\",\"sentiment\":{\"score\":0.3,\"label\":\"positive\",\"delta\":null,\"updated_at\":\"2026-10-09T12:22:23Z\",\"basis\":\"seed (intelligence JSON research_timestamp 2026-10-09)\"},\"news\":[{\"title\":\"Apptronik Apollo Review 2026: Price, Apollo 2 & Deployments | RoboZaps Blog\",\"url\":\"https://blog.robozaps.com/b/apptronik-apollo-review\",\"published_at\":\"2026-07-16\",\"source\":\"blog.robozaps.com\"},{\"title\":\"Apptronik launches Robot Park to train Apollo humanoid robots with Google DeepMind\",\"url\":\"https://roboticsandautomationnews.com/2026/07/06/apptronik-launches-robot-park-to-train-apollo-humanoid-robots-with-google-deepmind/103069/\",\"published_at\":\"2026-07-06\",\"source\":\"roboticsandautomationnews.com\"},{\"title\":\"Apptronik unveils Apollo humanoid robot - The Robot Report\",\"url\":\"https://www.therobotreport.com/apptronik-unveils-apollo-humanoid-robot/\",\"published_at\":\"2026-07-01\",\"source\":\"therobotreport.com\"}]}"
+        },
+        {
+          "key": "company:fervo-energy",
+          "value": "{\"name\":\"Fervo Energy\",\"sector\":\"Energy & Resilience\",\"status\":\"public (Nasdaq: FRVO)\",\"sentiment\":{\"score\":0.6,\"label\":\"positive\",\"delta\":null,\"updated_at\":\"2026-10-09T12:22:23Z\",\"basis\":\"seed (intelligence JSON research_timestamp 2026-10-09)\"},\"news\":[{\"title\":\"News - Fervo Energy\",\"url\":\"https://fervoenergy.com/newsroom-2-2-2-2-2/\",\"published_at\":\"2026-10-08\",\"source\":\"fervoenergy.com\"},{\"title\":\"2026 Climate Tech Companies to Watch: Fervo Energy and its plan to streamline geothermal power | MIT Technology Review\",\"url\":\"https://www.technologyreview.com/2026/10/06/1145252/fervo-energy-geothermal-power-streamline-plan/\",\"published_at\":\"2026-10-06\",\"source\":\"technologyreview.com\"},{\"title\":\"Fervo Energy Geothermal 2026, $1.9B IPO & 750 MW Deal\",\"url\":\"https://enkiai.com/geothermal/fervo-enhanced-geothermal-google/\",\"published_at\":\"2026-10-06\",\"source\":\"enkiai.com\"}]}"
+        },
+        {
+          "key": "company:flutterwave",
+          "value": "{\"name\":\"Flutterwave\",\"sector\":\"Technology\",\"status\":\"private\",\"sentiment\":{\"score\":0.4,\"label\":\"positive\",\"delta\":null,\"updated_at\":\"2026-10-09T12:22:23Z\",\"basis\":\"seed (intelligence JSON research_timestamp 2026-10-09)\"},\"news\":[{\"title\":\"Flutterwave and Abuja Investments Partner to Expand Digital Payments in FCT - TechAfrica News\",\"url\":\"https://techafricanews.com/2026/08/13/flutterwave-and-abuja-investments-partner-to-expand-digital-payments-in-fct/\",\"published_at\":\"2026-08-13\",\"source\":\"techafricanews.com\"},{\"title\":\"Ten Years of Flutterwave: How a Single API Rewired African Payments – Pan- African Voice\",\"url\":\"https://pan-africanvoice.com/2026/08/11/ten-years-of-flutterwave-how-a-single-api-rewired-african-payments/\",\"published_at\":\"2026-08-11\",\"source\":\"pan-africanvoice.com\"},{\"title\":\"Flutterwave's Gabriel Ologunwa Says Africa Can Achieve Real-Time Cross-Border Payments\",\"url\":\"https://thecondia.com/partners/flutterwaves-gabriel-ologunwa-says-africa-is-within-reach-of-real-time-cross-border-payments/\",\"published_at\":\"2026-08-05\",\"source\":\"thecondia.com\"}]}"
+        },
+        {
+          "key": "company:perplexity-ai",
+          "value": "{\"name\":\"Perplexity AI\",\"sector\":\"Technology\",\"status\":\"private\",\"sentiment\":{\"score\":-0.35,\"label\":\"negative\",\"delta\":null,\"updated_at\":\"2026-10-09T12:22:23Z\",\"basis\":\"seed (intelligence JSON research_timestamp 2026-10-09)\"},\"news\":[{\"title\":\"Best Perplexity AI Statistics 2026: Users, Revenue and SEO Impact\",\"url\":\"https://blognexasai.nexasai.in/perplexity-ai-statistics-2026/\",\"published_at\":\"2026-10-05\",\"source\":\"blognexasai.nexasai.in\"},{\"title\":\"r/perplexity_ai: complaints over Computer-mode credits, scheduled-task removal and billing support (Oct 2026)\",\"url\":\"https://www.reddit.com/r/perplexity_ai/\",\"published_at\":\"2026-10-01\",\"source\":\"reddit.com\"},{\"title\":\"AI Search 2026 — Perplexity vs ChatGPT vs Google\",\"url\":\"https://valueaddvc.com/blog/ai-search-2026-perplexity-vs-chatgpt-search-vs-google-ai-overviews-compared\",\"published_at\":\"2026-09-29\",\"source\":\"valueaddvc.com\"}]}"
+        },
+        {
+          "key": "company:writer",
+          "value": "{\"name\":\"WRITER\",\"sector\":\"Technology\",\"status\":\"private\",\"sentiment\":{\"score\":0.1,\"label\":\"neutral\",\"delta\":null,\"updated_at\":\"2026-10-09T12:22:23Z\",\"basis\":\"seed (intelligence JSON research_timestamp 2026-10-09)\"},\"news\":[{\"title\":\"WRITER Newsroom | Press Releases\",\"url\":\"https://writer.com/newsroom/\",\"published_at\":\"2026-09-09\",\"source\":\"writer.com\"},{\"title\":\"WRITER - The enterprise AI platform for agentic work\",\"url\":\"https://writer.com/\",\"published_at\":\"2026-09-09\",\"source\":\"writer.com\"},{\"title\":\"No Title\",\"url\":\"https://writer.com/engineering/palmyra-x6/\",\"published_at\":\"2026-08-13\",\"source\":\"writer.com\"}]}"
+        }
+      ]
+    },
+    "threadId": "071913c9-1b0a-47bc-b3af-4cc3a7c8dc5b",
+    "runId": "d0ccd06f-ddc6-40d4-aca2-74853792d20b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Which of my context companies moved most since the last sentiment run, and why?",
+        "id": "2edab502-a799-47ce-ad98-ce0b0e47c63e"
+      }
+    ]
+  },
+  "pluginIdsRequested": [
+    "plugin-1722260873",
+    "plugin-1741871229",
+    "plugin-1716429542",
+    "plugin-1748003575"
+  ],
+  "responseStatus": 200,
+  "responseHeaders": {
+    "cache-control": "no-cache, no-transform",
+    "content-encoding": "identity",
+    "content-security-policy": "frame-ancestors *;",
+    "content-type": "text/event-stream; charset=utf-8",
+    "date": "Sat, 10 Oct 2026 06:04:10 GMT",
+    "permissions-policy": "camera=(), microphone=(), geolocation=()",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "server": "Vercel",
+    "strict-transport-security": "max-age=63072000",
+    "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "x-content-type-options": "nosniff",
+    "x-ondemand-model": "predefined-deepseek-flash",
+    "x-vercel-id": "iad1::4stng-1791612250736-044e1fd81f10",
+    "x-vercel-internal-cache-level": "unknown",
+    "x-vercel-internal-deployment-id": "u",
+    "x-vercel-internal-metadata-state": "worker_stale",
+    "x-vercel-internal-owner-id": "u",
+    "x-vercel-internal-path-type": "sandbox",
+    "x-vercel-internal-project-id": "u",
+    "x-vercel-internal-proxy-cpu-load": "43",
+    "x-vercel-internal-proxy-pool": "blue",
+    "x-vercel-internal-request-cpu-ms": "0",
+    "x-vercel-internal-timing": "vcoe_from_proxy=17"
+  },
+  "headersAtMs": 86.90000009536743,
+  "sseFrameCount": 560,
+  "frameTypeCounts": {
+    "RUN_STARTED": 1,
+    "CUSTOM:ondemand.status": 9,
+    "CUSTOM:ondemand.session": 1,
+    "TOOL_CALL_START": 3,
+    "TOOL_CALL_ARGS": 3,
+    "TOOL_CALL_END": 3,
+    "CUSTOM:ondemand.thinking": 396,
+    "CUSTOM:ondemand.heartbeat": 4,
+    "TEXT_MESSAGE_START": 1,
+    "TEXT_MESSAGE_CONTENT": 130,
+    "CUSTOM:ondemand.metrics": 1,
+    "TOOL_CALL_RESULT": 3,
+    "TEXT_MESSAGE_END": 1,
+    "CUSTOM:ondemand.sources": 1,
+    "RUN_FINISHED": 1,
+    "[DONE]": 1,
+    "STREAM_CLOSED": 1
+  },
+  "firstEventMs": 91.40000009536743,
+  "firstTokenMs": 36014.700000047684,
+  "firstTokenPaintMs": 36028.5,
+  "firstPendingRowMs": 59.10000014305115,
+  "firstPluginCardMs": 2588.5,
+  "firstPluginSearchedMs": 42469.90000009537,
+  "firstPluginFailedMs": 42467.5,
+  "firstThinkingTraceMs": 2588.5,
+  "firstCitationChipMs": 37420.300000190735,
+  "firstStepSummaryMs": null,
+  "firstSourceLinkMs": 37422.40000009537,
+  "firstAnswerBadgeMs": 36028.5,
+  "firstChatErrorMs": null,
+  "streamEndMs": 42449.10000014305,
+  "streamEndFrameType": "[DONE]",
+  "frameToPaintLatencyMs": 13.599999904632568,
+  "frameToPaintParts": {
+    "toolCard": {
+      "frameType": "TOOL_CALL_START",
+      "frameMs": 2575.100000143051,
+      "paintMs": 2588.5
+    },
+    "firstToken": {
+      "frameMs": 36014.700000047684,
+      "paintMs": 36028.5
+    }
+  },
+  "firstSeen": {
+    "[data-testid=pending-row]": {
+      "t": 3564.7000000476837,
+      "iso": "2026-10-10T06:04:10.732Z",
+      "text": "Connecting to OnDemand…0.0 s",
+      "sinceSend": 59.10000014305115
+    },
+    "[data-testid=plugin-activity]": {
+      "t": 6094.099999904633,
+      "iso": "2026-10-10T06:04:13.261Z",
+      "text": "Searching with Perplexity“Which of my context companies moved most since the last sentiment run, and why?”Searching with Perplexity…",
+      "sinceSend": 2588.5
+    },
+    "[data-testid=plugin-activity][data-state=searching]": {
+      "t": 6094.099999904633,
+      "iso": "2026-10-10T06:04:13.261Z",
+      "text": "Searching with Perplexity“Which of my context companies moved most since the last sentiment run, and why?”Searching with Perplexity…",
+      "sinceSend": 2588.5
+    },
+    "[data-testid=thinking-trace]": {
+      "t": 6094.099999904633,
+      "iso": "2026-10-10T06:04:13.261Z",
+      "text": "Thinking… · planning35 charsThe user asks: \"Which of my context",
+      "sinceSend": 2588.5
+    },
+    "[data-testid=answer-badge]": {
+      "t": 39534.09999990463,
+      "iso": "2026-10-10T06:04:46.701Z",
+      "text": "DeepSeek Flash v4.1·medium·plugin-1722260873plugin-1741871229plugin-1716429542plugin-1748003575·first event 37 ms·first token 35,960 ms",
+      "sinceSend": 36028.5
+    },
+    ".oiu-assistant p": {
+      "t": 39534.09999990463,
+      "iso": "2026-10-10T06:04:46.701Z",
+      "text": "DeepSeek Flash v4.1·medium·plugin-1722260873plugin-1741871229plugin-1716429542plugin-1748003575·first event 37 ms·first token 35,960 ms",
+      "sinceSend": 36028.5
+    },
+    "[data-testid=assistant-streaming]": {
+      "t": 39534.09999990463,
+      "iso": "2026-10-10T06:04:46.701Z",
+      "text": "DeepSeek Flash v4.1·medium·plugin-1722260873plugin-1741871229plugin-1716429542plugin-1748003575·first event 37 ms·first token 35,960 msSources (0) · waiting for the first citation…",
+      "sinceSend": 36028.5
+    },
+    "[data-testid=citation-chip]": {
+      "t": 40925.90000009537,
+      "iso": "2026-10-10T06:04:48.093Z",
+      "text": "1reddit.comreddit.com",
+      "sinceSend": 37420.300000190735
+    },
+    "[data-testid=source-link]": {
+      "t": 40928,
+      "iso": "2026-10-10T06:04:48.095Z",
+      "text": "1reddit.comreddit.com/r/perplexity_ai/ (source 1, opens in a new tab)",
+      "sinceSend": 37422.40000009537
+    },
+    "[data-testid=plugin-activity][data-state=failed]": {
+      "t": 45973.09999990463,
+      "iso": "2026-10-10T06:04:53.140Z",
+      "text": "Perplexity failed“Which of my context companies moved most since the last sentiment run, and why?”Perplexity returned no sources for this question",
+      "sinceSend": 42467.5
+    },
+    "[data-testid=plugin-activity][data-state=searched]": {
+      "t": 45975.5,
+      "iso": "2026-10-10T06:04:53.142Z",
+      "text": "US Stock Fundamentals searched“Which of my context companies moved most since the last sentiment run, and why?”0 sources · 15.6 s",
+      "sinceSend": 42469.90000009537
+    },
+    "[data-testid=assistant-message]": {
+      "t": 45994.40000009537,
+      "iso": "2026-10-10T06:04:53.161Z",
+      "text": "Thinking trace6,000 chars  \"plan_required\": true,\n  \"plan_skip_reason\": \"\",\n  \"steps\": [\n    {\n      \"title\": \"Searching recent company developments\",\n      \"user_query\": \"Search for the most recent n",
+      "sinceSend": 42488.800000190735
+    }
+  },
+  "cls": 0.0142,
+  "layoutShiftCount": 17,
+  "layoutShiftsAll": 21,
+  "longTasks": {
+    "count": 1,
+    "maxMs": 65,
+    "totalMs": 65,
+    "allBeforeSend": 4
+  },
+  "paints": [
+    {
+      "name": "first-paint",
+      "t": 252
+    },
+    {
+      "name": "first-contentful-paint",
+      "t": 252
+    }
+  ],
+  "slowEvents": {
+    "count": 182,
+    "maxDur": 64
+  },
+  "rafDroppedFrames": {
+    "sampled": 2579,
+    "dropped": 4,
+    "pct": 0.16,
+    "maxDeltaMs": 100,
+    "p95DeltaMs": 16.8
+  },
+  "scrollAnchoring": {
+    "samples": 173,
+    "atBottomPct": 22,
+    "atBottomWhileGrowingPct": 45,
+    "scroller": "light __variable_db5d2c __variable_703880",
+    "maxScrollHeight": 3086,
+    "userScrolled": false
+  },
+  "blankIntervalsOver1500ms": [
+    {
+      "startMs": 118,
+      "endMs": 2616
+    }
+  ],
+  "pluginCard": {
+    "statesSeen": [
+      "searching",
+      "failed"
+    ],
+    "finalState": "failed",
+    "errorText": "Perplexity failed“Which of my context companies moved most since the last sentiment run, and why?”Perplexity returned no sources for this question",
+    "finalText": "Perplexity failed“Which of my context companies moved most since the last sentiment run, and why?”Perplexity returned no sources for this question"
+  },
+  "errorCode": null,
+  "errorText": null,
+  "sourcesCount": 11,
+  "citationChips": 11,
+  "stepSummaries": 0,
+  "assistantMessages": 1,
+  "answerChars": 5624,
+  "answerBadgeText": "DeepSeek Flash v4.1·medium·plugin-1722260873plugin-1741871229plugin-1716429542plugin-1748003575·first event 37 ms·first token 35,960 ms·total 42.4 s·8,613 tokens",
+  "sessionId": "6ac9d55af7979c7d562ae599",
+  "firstErrorFrame": null,
+  "growth": {
+    "quick": false,
+    "url": "https://sb-70502obas4b3.vercel.run/onboarding",
+    "tiles": 6,
+    "restingColor": "rgb(249, 250, 251)",
+    "hoverLatencyMs": 28,
+    "hoverColor": "rgb(10, 201, 133)",
+    "hoverTextColor": "rgb(255, 255, 255)",
+    "hoverTransform": "matrix(1.04, 0, 0, 1.04, 0, 0)",
+    "brandGreenVar": "#0ac985",
+    "primaryVar": "#1d4ed8",
+    "isBrandGreen": true,
+    "hoverChanged": true,
+    "expandLatencyMs": 24.6,
+    "expandWallMs": 79,
+    "expanded": true,
+    "expandedColor": "rgb(10, 201, 133)",
+    "panelText": "We give first: time, introductions, candour — because founders' wins compound.Example behaviourA partner opens their network before a term sheet is signed.",
+    "reducedMotionOk": true
+  },
+  "growthReducedMotion": {
+    "quick": true,
+    "url": "https://sb-70502obas4b3.vercel.run/onboarding",
+    "tiles": 6,
+    "restingColor": "rgb(249, 250, 251)",
+    "hoverLatencyMs": 9.4,
+    "hoverColor": "rgb(10, 201, 133)",
+    "hoverTextColor": "rgb(255, 255, 255)",
+    "hoverTransform": "none",
+    "brandGreenVar": "#0ac985",
+    "primaryVar": "#1d4ed8",
+    "isBrandGreen": true,
+    "hoverChanged": true,
+    "expandLatencyMs": 0,
+    "expandWallMs": 52,
+    "expanded": true,
+    "expandedColor": "rgb(10, 201, 133)",
+    "panelText": "We give first: time, introductions, candour — because founders' wins compound.Example behaviourA partner opens their network before a term sheet is signed."
+  },
+  "cdpMetrics": {
+    "LayoutCount": 21,
+    "RecalcStyleCount": 57,
+    "JSHeapUsedSize": 28211564,
+    "TaskDuration": 0.858473,
+    "ScriptDuration": 0.042845,
+    "LayoutDuration": 0.0105,
+    "Nodes": 4608
+  },
+  "finishedUtc": "2026-10-10T06:06:17.195Z"
+}

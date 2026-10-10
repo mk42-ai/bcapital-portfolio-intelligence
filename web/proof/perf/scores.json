@@ -1,0 +1,418 @@
+{
+ "items": [
+  {
+   "item": "1 Time-to-first-event (first SSE frame, ms)",
+   "threshold10": "\u2264 400 ms",
+   "before-desktop": [
+    52,
+    10
+   ],
+   "before-mobile": [
+    67,
+    10
+   ],
+   "after-desktop": [
+    91,
+    10
+   ],
+   "after-mobile": [
+    62,
+    10
+   ]
+  },
+  {
+   "item": "2 Time-to-first-token (first fulfillment delta, ms)",
+   "threshold10": "\u2264 1 500 ms client-side; upstream-dominated",
+   "before-desktop": [
+    34381,
+    6.3
+   ],
+   "before-mobile": [
+    29251,
+    6.9
+   ],
+   "after-desktop": [
+    36015,
+    6.1
+   ],
+   "after-mobile": [
+    67411,
+    2.6
+   ]
+  },
+  {
+   "item": "3 First inline citation chip before stream end",
+   "threshold10": "chip painted during the stream (< [DONE])",
+   "before-desktop": [
+    null,
+    0
+   ],
+   "before-mobile": [
+    null,
+    0
+   ],
+   "after-desktop": [
+    37420,
+    10
+   ],
+   "after-mobile": [
+    null,
+    0
+   ]
+  },
+  {
+   "item": "4 Step-summary (summarize_history) card between steps",
+   "threshold10": "handler verified (fixture); live emission depends on upstream",
+   "before-desktop": [
+    0,
+    null
+   ],
+   "before-mobile": [
+    0,
+    null
+   ],
+   "after-desktop": [
+    0,
+    null
+   ],
+   "after-mobile": [
+    0,
+    null
+   ]
+  },
+  {
+   "item": "5 Frame-to-paint latency (SSE frame \u2192 DOM paint, ms)",
+   "threshold10": "\u2264 50 ms",
+   "before-desktop": [
+    15.7,
+    10
+   ],
+   "before-mobile": [
+    24.3,
+    10
+   ],
+   "after-desktop": [
+    13.4,
+    10
+   ],
+   "after-mobile": [
+    20.6,
+    10
+   ]
+  },
+  {
+   "item": "6 CLS during stream (no recent input)",
+   "threshold10": "\u2264 0.10",
+   "before-desktop": [
+    0.0094,
+    10
+   ],
+   "before-mobile": [
+    0.0609,
+    10
+   ],
+   "after-desktop": [
+    0.0142,
+    10
+   ],
+   "after-mobile": [
+    0.6557,
+    0
+   ]
+  },
+  {
+   "item": "7 Long tasks > 50 ms during stream",
+   "threshold10": "0 (\u22641 of \u226475 ms = 8)",
+   "before-desktop": [
+    "1 (max 57 ms)",
+    8
+   ],
+   "before-mobile": [
+    "2 (max 103 ms)",
+    6
+   ],
+   "after-desktop": [
+    "1 (max 65 ms)",
+    8
+   ],
+   "after-mobile": [
+    "1 (max 67 ms)",
+    8
+   ]
+  },
+  {
+   "item": "8 Animation jank (rAF dropped frames while streaming)",
+   "threshold10": "\u2264 0.5 % dropped, p95 \u2264 17 ms",
+   "before-desktop": [
+    "0.04 % (p95 16.7 ms)",
+    10
+   ],
+   "before-mobile": [
+    "0.1 % (p95 16.8 ms)",
+    10
+   ],
+   "after-desktop": [
+    "0.16 % (p95 16.8 ms)",
+    10
+   ],
+   "after-mobile": [
+    "0.02 % (p95 16.7 ms)",
+    10
+   ]
+  },
+  {
+   "item": "9 Scroll anchoring while streaming",
+   "threshold10": "\u2265 90 % of growth samples at bottom, no user scroll",
+   "before-desktop": [
+    "100 %",
+    10
+   ],
+   "before-mobile": [
+    "90.9 %",
+    10
+   ],
+   "after-desktop": [
+    "45 %",
+    5.0
+   ],
+   "after-mobile": [
+    "23.8 %",
+    2.6
+   ]
+  },
+  {
+   "item": "10 Favicon load failures (HAR 4xx/5xx/aborted)",
+   "threshold10": "0 broken images painted (404s fall back to hidden/monogram)",
+   "before-desktop": [
+    0,
+    10
+   ],
+   "before-mobile": [
+    0,
+    10
+   ],
+   "after-desktop": [
+    1,
+    8
+   ],
+   "after-mobile": [
+    0,
+    10
+   ]
+  },
+  {
+   "item": "11 Stop\u2192Send reset latency (ms)",
+   "threshold10": "\u2264 100 ms after [DONE]",
+   "before-desktop": [
+    5,
+    10
+   ],
+   "before-mobile": [
+    6,
+    10
+   ],
+   "after-desktop": [
+    12,
+    10
+   ],
+   "after-mobile": [
+    6,
+    10
+   ]
+  },
+  {
+   "item": "12 Blank / spinner-only intervals > 1.5 s",
+   "threshold10": "none",
+   "before-desktop": [
+    0,
+    10
+   ],
+   "before-mobile": [
+    0,
+    10
+   ],
+   "after-desktop": [
+    1,
+    6
+   ],
+   "after-mobile": [
+    0,
+    10
+   ]
+  },
+  {
+   "item": "13 GROWTH hover/expand responsiveness + colour",
+   "threshold10": "hover \u2264 100 ms, expand \u2264 100 ms, colour = #0AC985",
+   "before-desktop": [
+    "28.9 / 17.9 ms \u00b7 rgb(29, 78, 216)",
+    0
+   ],
+   "before-mobile": [
+    "43.8 / 25.5 ms \u00b7 rgb(29, 78, 216)",
+    0
+   ],
+   "after-desktop": [
+    "28 / 24.6 ms \u00b7 rgb(10, 201, 133)",
+    10
+   ],
+   "after-mobile": [
+    "41.6 / 24.9 ms \u00b7 rgb(10, 201, 133)",
+    10
+   ]
+  }
+ ],
+ "runs": {
+  "before-desktop": {
+   "startedUtc": "2026-10-10T05:07:17.668Z",
+   "firstEventMs": 51.5,
+   "firstTokenMs": 34381.299999952316,
+   "firstCitationChipMs": null,
+   "streamEndMs": 39291.700000047684,
+   "stopToSendResetMs": 5,
+   "cls": 0.0094,
+   "longTasks": {
+    "count": 1,
+    "maxMs": 57,
+    "totalMs": 57,
+    "allBeforeSend": 4
+   },
+   "rafDroppedFrames": {
+    "sampled": 2400,
+    "dropped": 1,
+    "pct": 0.04,
+    "maxDeltaMs": 50,
+    "p95DeltaMs": 16.7
+   },
+   "scrollAnchoring": {
+    "samples": 160,
+    "atBottomPct": 14.4,
+    "atBottomWhileGrowingPct": 100,
+    "scroller": "light __variable_db5d2c __variable_703880",
+    "maxScrollHeight": 2309,
+    "userScrolled": false
+   },
+   "faviconFailures": [],
+   "sourcesCount": 6,
+   "citationChips": 0,
+   "pluginIdsRequested": null
+  },
+  "before-mobile": {
+   "startedUtc": "2026-10-10T05:10:50.812Z",
+   "firstEventMs": 67.10000014305115,
+   "firstTokenMs": 29251.10000014305,
+   "firstCitationChipMs": null,
+   "streamEndMs": 34108.799999952316,
+   "stopToSendResetMs": 6,
+   "cls": 0.0609,
+   "longTasks": {
+    "count": 2,
+    "maxMs": 103,
+    "totalMs": 155,
+    "allBeforeSend": 4
+   },
+   "rafDroppedFrames": {
+    "sampled": 2086,
+    "dropped": 2,
+    "pct": 0.1,
+    "maxDeltaMs": 100,
+    "p95DeltaMs": 16.8
+   },
+   "scrollAnchoring": {
+    "samples": 139,
+    "atBottomPct": 15.1,
+    "atBottomWhileGrowingPct": 90.9,
+    "scroller": "light __variable_db5d2c __variable_703880",
+    "maxScrollHeight": 2678,
+    "userScrolled": false
+   },
+   "faviconFailures": [],
+   "sourcesCount": 0,
+   "citationChips": 0,
+   "pluginIdsRequested": null
+  },
+  "after-desktop": {
+   "startedUtc": "2026-10-10T06:04:06.519Z",
+   "firstEventMs": 91.40000009536743,
+   "firstTokenMs": 36014.700000047684,
+   "firstCitationChipMs": 37420.300000190735,
+   "streamEndMs": 42449.10000014305,
+   "stopToSendResetMs": 12,
+   "cls": 0.0142,
+   "longTasks": {
+    "count": 1,
+    "maxMs": 65,
+    "totalMs": 65,
+    "allBeforeSend": 4
+   },
+   "rafDroppedFrames": {
+    "sampled": 2579,
+    "dropped": 4,
+    "pct": 0.16,
+    "maxDeltaMs": 100,
+    "p95DeltaMs": 16.8
+   },
+   "scrollAnchoring": {
+    "samples": 173,
+    "atBottomPct": 22,
+    "atBottomWhileGrowingPct": 45,
+    "scroller": "light __variable_db5d2c __variable_703880",
+    "maxScrollHeight": 3086,
+    "userScrolled": false
+   },
+   "faviconFailures": [
+    {
+     "url": "https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://blognexasai.nexasai.in&size=32",
+     "status": 404,
+     "at": "2026-10-10T06:04:48.889Z"
+    }
+   ],
+   "sourcesCount": 11,
+   "citationChips": 11,
+   "pluginIdsRequested": [
+    "plugin-1722260873",
+    "plugin-1741871229",
+    "plugin-1716429542",
+    "plugin-1748003575"
+   ]
+  },
+  "after-mobile": {
+   "startedUtc": "2026-10-10T06:04:09.522Z",
+   "firstEventMs": 62.299999952316284,
+   "firstTokenMs": 67410.79999995232,
+   "firstCitationChipMs": null,
+   "streamEndMs": 73553.20000004768,
+   "stopToSendResetMs": 6,
+   "cls": 0.6557,
+   "longTasks": {
+    "count": 1,
+    "maxMs": 67,
+    "totalMs": 67,
+    "allBeforeSend": 4
+   },
+   "rafDroppedFrames": {
+    "sampled": 4460,
+    "dropped": 1,
+    "pct": 0.02,
+    "maxDeltaMs": 66.7,
+    "p95DeltaMs": 16.7
+   },
+   "scrollAnchoring": {
+    "samples": 298,
+    "atBottomPct": 77.2,
+    "atBottomWhileGrowingPct": 23.8,
+    "scroller": "light __variable_db5d2c __variable_703880",
+    "maxScrollHeight": 7300,
+    "userScrolled": false
+   },
+   "faviconFailures": [],
+   "sourcesCount": 0,
+   "citationChips": 0,
+   "pluginIdsRequested": [
+    "plugin-1722260873",
+    "plugin-1741871229",
+    "plugin-1716429542",
+    "plugin-1748003575"
+   ]
+  }
+ }
+}

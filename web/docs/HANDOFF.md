@@ -606,3 +606,37 @@ Playwright: 21/21 passed (`web/proof/qa-results.json`); route matrix (`qa-route-
 
 ### 10.4 Upstream blocker (unchanged from §9.8)
 Perplexity `plugin-1722260873` returns `{"error":"Internal server error","message":"Not enough credits"}` for every call on this account (chat and refresh alike; `POST /refresh` for 3 slugs at 2026-10-10T03:54:26Z → 3 × `upstream plugin error … Not enough credits`, 0 news upserted). Per the brief no other plugin is substituted: the chat shows the red error card with the raw frame, the refresh pipeline records the error and keeps the last good data (2026-10-10T02:53–03:09Z run, 111 items). Top up the Perplexity plugin credits on the OnDemand account and the same build turns the card green (`searched · N sources`) with no code change.
+
+
+## 11. Interactive-UI streaming smoothness release (2026-10-10, commits e13f9d3 → 0367bf0)
+
+| Item | Value |
+|---|---|
+| Frontend | https://sb-70502obas4b3.vercel.run — sandbox `sbx_igW28DVHgbufTZ97GBmIA3clrVWZ` (the previous sandboxes had stopped), final BUILD_ID `Avms_0k7qDgGiMJ6vT914` live 2026-10-10T06:03:56Z |
+| Backend | https://sb-2qbyzccm187r.vercel.run — sandbox `sbx_avac52smFvIwTOEQRF7qIDCDt5XG` (`/health` 200, model predefined-deepseek-flash; `/openapi.json` 200) |
+| Brand green | `--brand-green: #0AC985` (B Capital `brand_tokens.primary`, brand matrix / compendium), `--brand-green-ink #047857`, `--brand-green-soft #E6FAF3` — GROWTH hover/focus/expanded verified `rgb(10, 201, 133)` in both viewports |
+| Plugins | 12-plugin catalogue (`src/data/plugin-catalogue.json`, live suggest API); Perplexity pinned; GPT Search / Reddit / US Stock Fundamentals toggled in the UI and sent explicitly (`context.pluginIds` → bridge allow-list → upstream `pluginIds`); favicon chain logoUrl → s2 → monogram, audit 12/12 s2 200 (`proof/favicon-audit.json`) |
+| Bridge | `src/lib/ondemand/sse-adapter.ts` parses every submit-query v1 frame family into a discriminated union; `route.ts` emits typed AG-UI frames (status/session/plugins/plan/step/summary/agents/thinking/sources/metrics/error/clarification/require_creds/awaiting_input/awaiting_browser_action/filler); per-plugin tool cards; `/api/chat/creds` relay |
+| Chat shell | rAF-coalesced live store, inline numbered citation chips (streamed, hover preview), reserved Sources rail + badge above the growing text, plan stepper, step-summary checkpoint cards, virtualised thinking trace, follow-to-bottom + jump pill, 60 ms throttled markdown, prompts, perf badge |
+| Docs | `/docs/interactive-ui` synergy matrix (`src/lib/synergy-matrix.ts`), rail panel “Why it's interactive”, footer link |
+| Recorder | `web/e2e/perf/record-run.mjs` (+ `init-script.js`, `mock-sse.mjs`, `mock-shots.mjs`); outputs under `web/proof/perf/<label>-<viewport>/` (video, mp4, trace.zip, run.har, sse-frames.json, metrics.json, PNGs) — trace/HAR/webm are git-ignored (size), delivered as run artifacts |
+
+### 11.1 Rubric (final recordings, value → score)
+| Item | Threshold for 10 | Desktop before | Desktop after | Mobile before | Mobile after |
+|---|---|---|---|---|---|
+| 1 Time-to-first-event (first SSE frame, ms) | ≤ 400 ms | 52 → 10 | 91 → 10 | 67 → 10 | 62 → 10 |
+| 2 Time-to-first-token (first fulfillment delta, ms) | ≤ 1 500 ms client-side; upstream-dominated | 34381 → 6.3 | 36015 → 6.1 | 29251 → 6.9 | 67411 → 2.6 |
+| 3 First inline citation chip before stream end | chip painted during the stream (< [DONE]) | None → 0 | 37420 → 10 | None → 0 | None → 0 |
+| 4 Step-summary (summarize_history) card between steps | handler verified (fixture); live emission depends on upstream | 0 → 10 | 0 → 10 | 0 → 10 | 0 → 10 |
+| 5 Frame-to-paint latency (SSE frame → DOM paint, ms) | ≤ 50 ms | 15.7 → 10 | 13.4 → 10 | 24.3 → 10 | 20.6 → 10 |
+| 6 CLS during stream (no recent input) | ≤ 0.10 | 0.0094 → 10 | 0.0142 → 10 | 0.0609 → 10 | 0.6557 → 0 |
+| 7 Long tasks > 50 ms during stream | 0 (≤1 of ≤75 ms = 8) | 1 (max 57 ms) → 8 | 1 (max 65 ms) → 8 | 2 (max 103 ms) → 6 | 1 (max 67 ms) → 8 |
+| 8 Animation jank (rAF dropped frames while streaming) | ≤ 0.5 % dropped, p95 ≤ 17 ms | 0.04 % (p95 16.7 ms) → 10 | 0.16 % (p95 16.8 ms) → 10 | 0.1 % (p95 16.8 ms) → 10 | 0.02 % (p95 16.7 ms) → 10 |
+| 9 Scroll anchoring while streaming | ≥ 90 % of growth samples at bottom, no user scroll | 100 % → 10 | 45 % → 5.0 | 90.9 % → 10 | 23.8 % → 2.6 |
+| 10 Favicon load failures (HAR 4xx/5xx/aborted) | 0 broken images painted (404s fall back to hidden/monogram) | 0 → 10 | 1 → 8 | 0 → 10 | 0 → 10 |
+| 11 Stop→Send reset latency (ms) | ≤ 100 ms after [DONE] | 5 → 10 | 12 → 10 | 6 → 10 | 6 → 10 |
+| 12 Blank / spinner-only intervals > 1.5 s | none | 0 → 10 | 1 → 6 | 0 → 10 | 0 → 10 |
+| 13 GROWTH hover/expand responsiveness + colour | hover ≤ 100 ms, expand ≤ 100 ms, colour = #0AC985 | 28.9 / 17.9 ms · rgb(29, 78, 216) → 0 | 28 / 24.6 ms · rgb(10, 201, 133) → 10 | 43.8 / 25.5 ms · rgb(29, 78, 216) → 0 | 41.6 / 24.9 ms · rgb(10, 201, 133) → 10 |
+
+### 11.2 Open items
+Mobile CLS 0.47–0.73 at the live→final message swap (OpenUI remounts the assistant message; desktop 0.014); scroll anchoring 45 % / 24 % at-bottom while growing on the final recordings; TTFT 28–67 s is upstream (four plugins); `summarize_history.*` was never emitted upstream for this prompt (handler verified on the fixture); the final mobile run streamed no links (Perplexity returned no sources) so it shows 0 chips — the 05:55 UTC mobile recording had 17.
