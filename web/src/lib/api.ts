@@ -1,6 +1,7 @@
 import "server-only";
 import snapshot from "@/data/snapshot.json";
-import type { Company, CompanySentiment, NewsItem, PortfolioSentiment, IngestRun, SignalScore, SignalBands, SignalsResponse, PitchbookResponse } from "./types";
+import pbSnapshot from "@/data/pitchbook-snapshot.json";
+import type { Company, CompanySentiment, NewsItem, PortfolioSentiment, IngestRun, SignalScore, SignalBands, SignalsResponse, PitchbookResponse, PitchbookRecord } from "./types";
 
 /** Server-side data access. Live backend first (ISR 120 s); the committed snapshot (fetched 2026-10-09T13:14Z) is the offline fallback so
  *  every page still renders with 136 records if the ephemeral sandbox backend is down. The `source` is surfaced in the UI. */
@@ -64,8 +65,24 @@ export async function getAllNews(): Promise<Sourced<(NewsItem & { company_slug: 
   }
   return { data: [...items.values()].sort((a, b) => (b.published_at ?? "").localeCompare(a.published_at ?? "")), source: cs.source, fetched_at: cs.fetched_at };
 }
-/** PitchBook record for one company (backend `/pitchbook/{slug}`, built by the PitchBook team). No snapshot exists: the offline fallback is
- *  `null` (source 'snapshot'), which the panel renders as its honest "offline" state — never a blank card, never a credentials message. */
+/** PitchBook record for one company (backend `/pitchbook/{slug}`). Live backend first; when it does not answer, the committed
+ *  `pitchbook-snapshot.json` (regenerate with `node scripts/pitchbook-snapshot.mjs`) supplies the stored weekly record so first paint
+ *  always has content (source 'snapshot'). Only a slug missing from BOTH yields `data: null` → the honest "offline" state. */
+type PbSnap = { fetched_at: string; source: string; records: Record<string, { name: string; data: PitchbookRecord | null; next_run_utc: string | null }> };
+const pbSnap = pbSnapshot as unknown as PbSnap;
+function pitchbookFromSnapshot(slug: string): PitchbookResponse | null {
+  const r = pbSnap.records[slug]; if (!r) return null;
+  return { company: slug, name: r.name, data: r.data, enriched: false, next_run_utc: r.next_run_utc };
+}
 export async function getPitchbook(slug: string): Promise<Sourced<PitchbookResponse | null>> {
-  return get<PitchbookResponse | null>(`/pitchbook/${encodeURIComponent(slug)}`, () => null);
+  const r = await get<PitchbookResponse | null>(`/pitchbook/${encodeURIComponent(slug)}`, () => pitchbookFromSnapshot(slug));
+  // A live 200 with no record is still "answered": keep source 'live'. A live miss falls back to the snapshot above.
+  if (r.source === "snapshot") return { ...r, fetched_at: pbSnap.fetched_at };
+  return r;
+}
+/** Several PitchBook records in parallel (chat page pre-fetch for the default context companies), keyed by slug. */
+export async function getPitchbookMany(slugs: string[]): Promise<Record<string, PitchbookResponse | null>> {
+  const uniq = [...new Set(slugs)];
+  const rs = await Promise.all(uniq.map(async (slug) => [slug, (await getPitchbook(slug)).data] as const));
+  return Object.fromEntries(rs);
 }
