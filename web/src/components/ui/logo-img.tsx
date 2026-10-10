@@ -4,6 +4,9 @@ import { useEffect, useState, type CSSProperties, type SyntheticEvent } from "re
 /** First letter of the name (first non-space character), upper-cased; "?" when empty. */
 export const monogramInitial = (name: string) => (name.trim().match(/[\p{L}\p{N}]/u)?.[0] ?? name.trim()[0] ?? "?").toUpperCase();
 
+/** True when `name` yields a real letter/digit monogram (not empty, not "?" / punctuation) — callers otherwise show an asset. */
+export const hasMonogram = (name?: string | null) => !!name && /[\p{L}\p{N}]/u.test(monogramInitial(name));
+
 /**
  * Serif-initial tile used whenever a real logo cannot be shown. Pure CSS/typography — never a generated image.
  * `testId` lets CompanyLogo keep its legacy `company-logo-fallback` testid for the e2e suite; it always carries the

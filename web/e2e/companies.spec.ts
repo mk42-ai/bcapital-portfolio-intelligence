@@ -106,3 +106,54 @@ test("companies nav item points at /companies and overview links to the full lis
   const capped = await page.getByTestId("company-table-scroller").evaluate((el) => el.scrollHeight > el.clientHeight + 2 && getComputedStyle(el).overflowY === "auto");
   expect(capped).toBe(false);
 });
+
+// ── Agent 03: company logo avatars — real logo, monogram, or the local company-logo asset; never a broken image ──
+test.describe("companies list logos", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await primeSettings(page);
+    await page.goto("/companies?skip=1");
+    await expect(page.getByTestId("companies-list")).toHaveAttribute("data-total", "136");
+    // let lazy logos in the first viewport settle
+    await page.waitForLoadState("networkidle").catch(() => {});
+    await page.waitForTimeout(500);
+  });
+
+  test("every rendered row shows a decoded logo or a fallback (monogram / company-logo asset)", async ({ page }) => {
+    const rows = page.locator('[data-testid="companies-list"] [data-testid="company-row"]');
+    const n = await rows.count();
+    test.skip(n === 0, "no company rows rendered (live data absent)");
+    const stats = await page.evaluate(() => {
+      const list = document.querySelector('[data-testid="companies-list"]')!;
+      const rows = Array.from(list.querySelectorAll('[data-testid="company-row"]'));
+      let decoded = 0, fallback = 0, missing = 0;
+      for (const r of rows) {
+        const img = r.querySelector('img[data-testid="company-logo"]') as HTMLImageElement | null;
+        const fb = r.querySelector('[data-testid="company-logo-fallback"]');
+        if (img && img.naturalWidth > 0) decoded++;
+        else if (fb) fallback++;
+        else if (img && !img.complete) decoded++; // still loading — not a broken state
+        else missing++;
+      }
+      return { decoded, fallback, missing, total: rows.length };
+    });
+    expect(stats.decoded + stats.fallback).toBeGreaterThan(0);
+    expect(stats.missing, `rows with neither a logo nor a fallback: ${JSON.stringify(stats)}`).toBe(0);
+  });
+
+  test("zero broken <img> elements inside the companies list", async ({ page }) => {
+    const broken = await page.evaluate(() => {
+      const list = document.querySelector('[data-testid="companies-list"]');
+      if (!list) return [];
+      return Array.from(list.querySelectorAll("img")).filter((i) => i.complete && i.naturalWidth === 0).map((i) => i.getAttribute("src") ?? "");
+    });
+    expect(broken, `broken images: ${broken.join(", ")}`).toEqual([]);
+  });
+
+  test("no image src references the retired /fallbacks/ directory", async ({ page }) => {
+    const bad = await page.evaluate(() => Array.from(document.querySelectorAll("img")).map((i) => i.getAttribute("src") ?? "").filter((s) => s.includes("/fallbacks/")));
+    expect(bad).toEqual([]);
+    const fallbackAssets = await page.evaluate(() => Array.from(document.querySelectorAll('img[data-testid="company-logo-fallback"]')).map((i) => i.getAttribute("src") ?? ""));
+    for (const s of fallbackAssets) expect(s).toMatch(/^\/assets\/company-logo-(256|512)\.(webp|png)$/);
+  });
+});
