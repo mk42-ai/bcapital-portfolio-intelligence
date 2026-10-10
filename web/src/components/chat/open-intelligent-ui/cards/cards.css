@@ -1,0 +1,38 @@
+/* awaiting_browser_action card (Agent 13) — rules prefixed .oiu-card--browser only; base .oiu-prompt styles live in shell.css (Agent 11). */
+.oiu-card--browser { gap: 16px; padding: 16px; }
+.oiu-card--browser__head { display: grid; grid-template-columns: 72px 1fr; gap: 16px; align-items: center; }
+.oiu-card--browser__art { width: 72px; height: 72px; object-fit: contain; display: block; }
+.oiu-card--browser__body { display: grid; gap: 8px; min-width: 0; }
+.oiu-card--browser__title { flex-wrap: wrap; gap: 8px; font-size: 13.5px; }
+.oiu-card--browser__chip { display: inline-flex; align-items: center; min-height: 20px; padding: 0 8px; border: 1px solid var(--brand-green, #0AC985); border-radius: 999px; background: var(--brand-green-soft, #e6faf3); color: var(--brand-green-ink, #047857); font-size: 11px; font-weight: 600; line-height: 1; text-transform: capitalize; }
+.oiu-card--browser__actions { flex-wrap: wrap; gap: 8px; }
+.oiu-card--browser__open { display: inline-flex; align-items: center; gap: 6px; background: var(--brand-green-ink, #047857); border-color: var(--brand-green-ink, #047857); }
+.oiu-card--browser__open:hover { background: #065f46; border-color: #065f46; }
+.oiu-card--browser__cancel { color: #4b5563; }
+@media (max-width: 480px) { .oiu-card--browser__head { grid-template-columns: 1fr; } .oiu-card--browser__art { width: 56px; height: 56px; } }
+
+/* ---- Shared base card (Agent 11 owns this block; Agents 12/13 only add `.oiu-card--creds*` / `.oiu-card--browser*`). ---- */
+/* 8 px grid, border 1px #e5e7eb, radius 12, padding 16, max-width 640. Green only. */
+.oiu-card { box-sizing: border-box; width: 100%; max-width: 640px; margin: 0 0 8px; padding: 16px; border: 1px solid #e5e7eb; border-radius: 12px; background: #ffffff; color: #111827; font-size: 13px; line-height: 1.45; display: grid; gap: 16px; }
+
+/* ---- awaiting_input / clarification card (Agent 11) — rules prefixed .oiu-card--input only. ---- */
+.oiu-card--input { grid-template-columns: 72px minmax(0, 1fr); align-items: start; }
+.oiu-card--input__art { width: 72px; height: 72px; object-fit: contain; display: block; }
+.oiu-card--input__form { display: grid; gap: 16px; min-width: 0; }
+.oiu-card--input__title { display: flex; align-items: center; gap: 8px; margin: 0; font-weight: 600; color: #111827; }
+.oiu-card--input__title svg { color: var(--brand-green-ink, #047857); }
+.oiu-card--input__q { display: grid; gap: 8px; }
+.oiu-card--input__question { margin: 0; color: #374151; }
+.oiu-card--input__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.oiu-card--input__chip { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; padding: 0 16px; border: 1px solid #d1d5db; border-radius: 999px; background: #ffffff; color: #374151; font: inherit; font-size: 13px; cursor: pointer; transition: background 150ms ease, border-color 150ms ease, color 150ms ease; }
+.oiu-card--input__chip:hover { border-color: var(--brand-green, #0AC985); color: var(--brand-green-ink, #047857); }
+.oiu-card--input__chip--on, .oiu-card--input__chip[aria-pressed="true"] { border-color: var(--brand-green, #0AC985); background: var(--brand-green-soft, #e6faf3); color: var(--brand-green-ink, #047857); font-weight: 600; }
+.oiu-card--input__chip:focus-visible, .oiu-card--input__input:focus-visible, .oiu-card--input__submit:focus-visible { outline: 2px solid var(--brand-green, #0AC985); outline-offset: 2px; }
+.oiu-card--input__input { width: 100%; min-height: 40px; padding: 8px 16px; border: 1px solid #d1d5db; border-radius: 8px; background: #ffffff; font: inherit; font-size: 13px; color: #111827; }
+.oiu-card--input__input:focus { border-color: var(--brand-green, #0AC985); outline: none; }
+.oiu-card--input__actions { display: flex; justify-content: flex-end; gap: 8px; }
+.oiu-card--input__submit { min-height: 40px; padding: 0 24px; border: 1px solid var(--brand-green-ink, #047857); border-radius: 8px; background: var(--brand-green-ink, #047857); color: #ffffff; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 150ms ease; }
+.oiu-card--input__submit:hover:not(:disabled) { background: #065f46; }
+.oiu-card--input__submit:disabled { opacity: 0.5; cursor: not-allowed; }
+.oiu-card--input--done { grid-template-columns: none; grid-auto-flow: column; justify-content: start; align-items: center; gap: 8px; padding: 8px 16px; color: var(--brand-green-ink, #047857); border-color: var(--brand-green, #0AC985); background: var(--brand-green-soft, #e6faf3); font-weight: 600; }
+@media (max-width: 480px) { .oiu-card--input { grid-template-columns: 1fr; } .oiu-card--input__art { width: 56px; height: 56px; } }
