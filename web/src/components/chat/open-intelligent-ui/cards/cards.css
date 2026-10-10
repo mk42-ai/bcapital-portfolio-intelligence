@@ -1,0 +1,12 @@
+/* awaiting_browser_action card (Agent 13) — rules prefixed .oiu-card--browser only; base .oiu-prompt styles live in shell.css (Agent 11). */
+.oiu-card--browser { gap: 16px; padding: 16px; }
+.oiu-card--browser__head { display: grid; grid-template-columns: 72px 1fr; gap: 16px; align-items: center; }
+.oiu-card--browser__art { width: 72px; height: 72px; object-fit: contain; display: block; }
+.oiu-card--browser__body { display: grid; gap: 8px; min-width: 0; }
+.oiu-card--browser__title { flex-wrap: wrap; gap: 8px; font-size: 13.5px; }
+.oiu-card--browser__chip { display: inline-flex; align-items: center; min-height: 20px; padding: 0 8px; border: 1px solid var(--brand-green, #0AC985); border-radius: 999px; background: var(--brand-green-soft, #e6faf3); color: var(--brand-green-ink, #047857); font-size: 11px; font-weight: 600; line-height: 1; text-transform: capitalize; }
+.oiu-card--browser__actions { flex-wrap: wrap; gap: 8px; }
+.oiu-card--browser__open { display: inline-flex; align-items: center; gap: 6px; background: var(--brand-green-ink, #047857); border-color: var(--brand-green-ink, #047857); }
+.oiu-card--browser__open:hover { background: #065f46; border-color: #065f46; }
+.oiu-card--browser__cancel { color: #4b5563; }
+@media (max-width: 480px) { .oiu-card--browser__head { grid-template-columns: 1fr; } .oiu-card--browser__art { width: 56px; height: 56px; } }
