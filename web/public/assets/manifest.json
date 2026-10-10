@@ -4,83 +4,167 @@
     "png256": "/assets/news-card-256.png",
     "webp512": "/assets/news-card-512.webp",
     "png512": "/assets/news-card-512.png",
-    "transparent_pct": 50.3
+    "bytes": {
+      "webp256": 3178,
+      "png256": 38664,
+      "webp512": 7170,
+      "png512": 142183
+    },
+    "transparent_pct": 12.8,
+    "source_bg_pct": 50.3
   },
   "company-logo": {
     "webp256": "/assets/company-logo-256.webp",
     "png256": "/assets/company-logo-256.png",
     "webp512": "/assets/company-logo-512.webp",
     "png512": "/assets/company-logo-512.png",
-    "transparent_pct": 42.8
+    "bytes": {
+      "webp256": 3328,
+      "png256": 47146,
+      "webp512": 5576,
+      "png512": 182522
+    },
+    "transparent_pct": 12.5,
+    "source_bg_pct": 42.8
   },
   "financial-empty": {
     "webp256": "/assets/financial-empty-256.webp",
     "png256": "/assets/financial-empty-256.png",
     "webp512": "/assets/financial-empty-512.webp",
     "png512": "/assets/financial-empty-512.png",
-    "transparent_pct": 93.1
+    "bytes": {
+      "webp256": 6968,
+      "png256": 20893,
+      "webp512": 13450,
+      "png512": 64124
+    },
+    "transparent_pct": 82.5,
+    "source_bg_pct": 93.1
   },
   "voice-orb-idle": {
     "webp256": "/assets/voice-orb-idle-256.webp",
     "png256": "/assets/voice-orb-idle-256.png",
     "webp512": "/assets/voice-orb-idle-512.webp",
     "png512": "/assets/voice-orb-idle-512.png",
-    "transparent_pct": 77.6
+    "bytes": {
+      "webp256": 7902,
+      "png256": 47670,
+      "webp512": 16472,
+      "png512": 172611
+    },
+    "transparent_pct": 35.9,
+    "source_bg_pct": 77.6
   },
   "voice-orb-listening": {
     "webp256": "/assets/voice-orb-listening-256.webp",
     "png256": "/assets/voice-orb-listening-256.png",
     "webp512": "/assets/voice-orb-listening-512.webp",
     "png512": "/assets/voice-orb-listening-512.png",
-    "transparent_pct": 57.9
+    "bytes": {
+      "webp256": 11256,
+      "png256": 57579,
+      "webp512": 24034,
+      "png512": 195456
+    },
+    "transparent_pct": 33.2,
+    "source_bg_pct": 57.9
   },
   "upload-dropzone": {
     "webp256": "/assets/upload-dropzone-256.webp",
     "png256": "/assets/upload-dropzone-256.png",
     "webp512": "/assets/upload-dropzone-512.webp",
     "png512": "/assets/upload-dropzone-512.png",
-    "transparent_pct": 96.2
+    "bytes": {
+      "webp256": 11460,
+      "png256": 19574,
+      "webp512": 23640,
+      "png512": 53080
+    },
+    "transparent_pct": 95.2,
+    "source_bg_pct": 96.2
   },
   "awaiting-input": {
     "webp256": "/assets/awaiting-input-256.webp",
     "png256": "/assets/awaiting-input-256.png",
     "webp512": "/assets/awaiting-input-512.webp",
     "png512": "/assets/awaiting-input-512.png",
-    "transparent_pct": 95.0
+    "bytes": {
+      "webp256": 4312,
+      "png256": 16860,
+      "webp512": 8700,
+      "png512": 48750
+    },
+    "transparent_pct": 80.0,
+    "source_bg_pct": 95.0
   },
   "require-creds": {
     "webp256": "/assets/require-creds-256.webp",
     "png256": "/assets/require-creds-256.png",
     "webp512": "/assets/require-creds-512.webp",
     "png512": "/assets/require-creds-512.png",
-    "transparent_pct": 91.4
+    "bytes": {
+      "webp256": 13952,
+      "png256": 40977,
+      "webp512": 28474,
+      "png512": 120621
+    },
+    "transparent_pct": 73.5,
+    "source_bg_pct": 91.4
   },
   "browser-action": {
     "webp256": "/assets/browser-action-256.webp",
     "png256": "/assets/browser-action-256.png",
     "webp512": "/assets/browser-action-512.webp",
     "png512": "/assets/browser-action-512.png",
-    "transparent_pct": 73.4
+    "bytes": {
+      "webp256": 3926,
+      "png256": 28821,
+      "webp512": 8176,
+      "png512": 100554
+    },
+    "transparent_pct": 31.6,
+    "source_bg_pct": 73.4
   },
   "synced-badge": {
     "webp256": "/assets/synced-badge-256.webp",
     "png256": "/assets/synced-badge-256.png",
     "webp512": "/assets/synced-badge-512.webp",
     "png512": "/assets/synced-badge-512.png",
-    "transparent_pct": 89.2
+    "bytes": {
+      "webp256": 14594,
+      "png256": 47640,
+      "webp512": 30994,
+      "png512": 138577
+    },
+    "transparent_pct": 57.4,
+    "source_bg_pct": 89.2
   },
   "new-chat": {
     "webp256": "/assets/new-chat-256.webp",
     "png256": "/assets/new-chat-256.png",
     "webp512": "/assets/new-chat-512.webp",
     "png512": "/assets/new-chat-512.png",
-    "transparent_pct": 90.0
+    "bytes": {
+      "webp256": 3776,
+      "png256": 11335,
+      "webp512": 7284,
+      "png512": 35721
+    },
+    "transparent_pct": 85.0,
+    "source_bg_pct": 90.0
   },
   "voice-orb-thinking": {
     "webp256": "/assets/voice-orb-thinking-256.webp",
     "png256": "/assets/voice-orb-thinking-256.png",
     "webp512": "/assets/voice-orb-thinking-512.webp",
     "png512": "/assets/voice-orb-thinking-512.png",
-    "transparent_pct": 89.8
+    "bytes": {
+      "webp256": 15396,
+      "png256": 45113,
+      "webp512": 31372,
+      "png512": 137488
+    },
+    "transparent_pct": 62.5,
+    "source_bg_pct": 89.8
   }
 }
