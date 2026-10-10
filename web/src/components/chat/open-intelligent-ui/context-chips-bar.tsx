@@ -19,8 +19,9 @@ export function ContextChipsBar() {
     const ensure = () => {
       const composer = document.querySelector<HTMLElement>(COMPOSER_SEL);
       if (!composer || !composer.parentElement) { setHost(null); return; }
-      let h = composer.previousElementSibling as HTMLElement | null;
-      if (!h || !h.classList.contains(HOST_CLASS)) { h = document.createElement("div"); h.className = HOST_CLASS; composer.parentElement.insertBefore(h, composer); }
+      // Reuse an existing host anywhere among the composer's siblings (the voice panel host may sit in between) — never create a second one.
+      let h = composer.parentElement.querySelector<HTMLElement>(`:scope > .${HOST_CLASS}`);
+      if (!h) { h = document.createElement("div"); h.className = HOST_CLASS; composer.parentElement.insertBefore(h, composer); }
       setHost((prev) => (prev === h ? prev : h));
     };
     ensure();

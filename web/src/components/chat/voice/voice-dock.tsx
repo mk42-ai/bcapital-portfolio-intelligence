@@ -58,7 +58,8 @@ function usePanelHost() {
       const composer = document.querySelector<HTMLElement>(".chat-shell .openui-agent-thread-composer, .chat-shell .openui-agent-desktop-welcome-composer");
       const parent = composer?.parentElement ?? null;
       if (!parent || !composer) { if (current) { current.remove(); current = null; setHost(null); } return; }
-      if (current && current.parentElement === parent && current.nextElementSibling === composer) return;
+      // Other hosts (attachments / context-chips) may sit between this host and the composer: only re-insert when detached (a stricter check ping-ponged with them in a MutationObserver loop and froze the page).
+      if (current && current.parentElement === parent) return;
       current?.remove(); const div = document.createElement("div"); div.className = "voice-panel-host"; parent.insertBefore(div, composer); current = div; setHost(div);
     };
     ensure(); const mo = new MutationObserver(() => ensure()); mo.observe(document.body, { childList: true, subtree: true });
