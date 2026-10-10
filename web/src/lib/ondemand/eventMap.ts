@@ -124,6 +124,7 @@ export const CLIENT_EVENT = {
   error: "ondemand.error", clarification: "ondemand.clarification", requireCreds: "ondemand.require_creds", awaitingInput: "ondemand.awaiting_input",
   awaitingBrowserAction: "ondemand.awaiting_browser_action", filler: "ondemand.filler", agent: "ondemand.agent", heartbeat: "ondemand.heartbeat",
   answerComplete: "ondemand.answer_complete", unknown: "ondemand.unknown", request: "ondemand.request",
+  attachments: "ondemand.attachments",
 } as const;
 
 /** User-facing wording for the live line (the UX doc: first-person labels, one word for reasoning). */

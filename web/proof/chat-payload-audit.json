@@ -1286,5 +1286,126 @@
         "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e497f7979c7d562ae7ab\",\"messageId\":\"6ac9e498f7979c7d562ae7ae\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\".30, Fervo +0.20, Apptronik +0\"}}"
       }
     ]
+  },
+  {
+    "at": "2026-10-10T13:45:28.686Z",
+    "threadId": "up-1791639897864",
+    "runId": "a5054503-66cd-481f-98d9-d895f54e7f8a",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873"
+    ],
+    "droppedPluginIds": [],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "contextMetadata": []
+      },
+      "response": {
+        "status": 201,
+        "id": "6aca417af7979c7d562af64f",
+        "message": "Chat session created successfully",
+        "elapsedMs": 1985
+      }
+    },
+    "sessionId": "6aca417af7979c7d562af64f",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6aca417af7979c7d562af64f/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext+attachments 547 chars> According to the attached document, how many MWh did the Zephyr-7 pilot plant produce and on what date? Answer in one sentence.",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "reasoningMode": "medium"
+      },
+      "attachments": [
+        {
+          "mediaId": "local-51ae4344b01ebb546d2a94eb",
+          "name": "zephyr-7.md",
+          "chars": 357
+        }
+      ]
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 6216
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 6218,
+      "firstTokenMs": 6236,
+      "totalMs": 7699,
+      "upstreamFrames": 28,
+      "answerChars": 117,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 6218,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user asks a simple question\"}}"
+      },
+      {
+        "ms": 6222,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" answerable from the attached document\"}}"
+      },
+      {
+        "ms": 6223,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\". No plugin needed. plan_required\"}}"
+      },
+      {
+        "ms": 6224,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":4,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"{\\\"title\\\": \\\"I'll answer the Zeph\"}}"
+      },
+      {
+        "ms": 6225,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":5,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"yr-7 output question directly from\"}}"
+      },
+      {
+        "ms": 6225,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":6,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" the attached document.\\\", \\\"objective\"}}"
+      },
+      {
+        "ms": 6226,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":7,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"\\\": \\\"\\\", \\\"plan_required\\\": false,\"}}"
+      },
+      {
+        "ms": 6227,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":8,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" \\\"plan_skip_reason\\\": \\\"The question\"}}"
+      },
+      {
+        "ms": 6228,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":9,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" is answered directly from the\"}}"
+      },
+      {
+        "ms": 6229,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":10,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" attached document (41.7 MWh on\"}}"
+      }
+    ]
   }
 ]

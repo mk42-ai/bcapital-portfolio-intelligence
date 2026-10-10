@@ -1,0 +1,301 @@
+{
+  "fetched_at": "2026-10-10T13:27:13Z",
+  "endpoint": "POST https://api.on-demand.io/media/v1/public/file",
+  "note": "apikey header redacted; extractedTextUrl SAS query string redacted. plugins:[] (documented as required array) returns HTTP 500 errors.no.executable.plugin.found / errors.server_error \u2014 the file-type plugin id must be passed.",
+  "probes": [
+    {
+      "name": "iso_8859-1.txt",
+      "plugins": [],
+      "http_status": 500,
+      "response": {
+        "message": "errors.server_error",
+        "errorCode": "server_error"
+      }
+    },
+    {
+      "name": "dummy.pdf",
+      "plugins": [],
+      "http_status": 500,
+      "response": {
+        "message": "errors.no.executable.plugin.found",
+        "errorCode": "server_error"
+      }
+    },
+    {
+      "name": "dummy.pdf",
+      "plugins": [
+        "plugin-1713954536"
+      ],
+      "responseMode": "sync",
+      "http_status": 200,
+      "response": {
+        "message": "Media Created",
+        "data": {
+          "id": "6aca3ce1cf3ee6ce34738fd6",
+          "companyId": "6692b763e851d28a036ab30e",
+          "sessionId": "6aca3ccd261cbe2340484da9",
+          "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+          "sourceUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+          "extractedTextUrl": "https://airevprod.blob.core.windows.net/on-demand-prod/6692b763e851d28a036ab30e/media/tempfile-1791638754187760318_20261010-132554.txt?<sas-redacted>",
+          "extractedTextLength": 3,
+          "name": "dummy.pdf",
+          "sizeBytes": 13264,
+          "source": "document",
+          "mimeType": "application/pdf",
+          "extension": "pdf",
+          "plugins": [
+            "plugin-1713954536"
+          ],
+          "agents": [
+            "agent-1713954536"
+          ],
+          "context": "\nDummy PDF file",
+          "extractedText": "\nDummy PDF file",
+          "searchLevel": "shallow",
+          "responseMode": "sync",
+          "createdBy": "6692b763e851d28a036ab30f",
+          "externalUserId": "INV-001",
+          "createdAt": "2026-10-10T13:25:53.802Z",
+          "updatedAt": "2026-10-10T13:25:53.802Z"
+        }
+      },
+      "data_keys": [
+        "agents",
+        "companyId",
+        "context",
+        "createdAt",
+        "createdBy",
+        "extension",
+        "externalUserId",
+        "extractedText",
+        "extractedTextLength",
+        "extractedTextUrl",
+        "id",
+        "mimeType",
+        "name",
+        "plugins",
+        "responseMode",
+        "searchLevel",
+        "sessionId",
+        "sizeBytes",
+        "source",
+        "sourceUrl",
+        "updatedAt",
+        "url"
+      ]
+    },
+    {
+      "name": "demo.docx",
+      "plugins": [
+        "plugin-1713954536"
+      ],
+      "responseMode": "sync",
+      "http_status": 200,
+      "response": {
+        "message": "Media Created",
+        "data": {
+          "id": "6aca3d1dc536376e5904a1c7",
+          "companyId": "6692b763e851d28a036ab30e",
+          "sessionId": "6aca3ccd261cbe2340484da9",
+          "url": "https://calibre-ebook.com/downloads/demos/demo.docx",
+          "sourceUrl": "https://calibre-ebook.com/downloads/demos/demo.docx",
+          "extractedTextUrl": "https://airevprod.blob.core.windows.net/on-demand-prod/6692b763e851d28a036ab30e/media/tempfile-1791638813688857550_20261010-132653.txt?<sas-redacted>",
+          "extractedTextLength": 1494,
+          "name": "demo.docx",
+          "sizeBytes": 1311881,
+          "source": "document",
+          "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "extension": "docx",
+          "plugins": [
+            "plugin-1713954536"
+          ],
+          "agents": [
+            "agent-1713954536"
+          ],
+          "context": "Demonstration of DOCX support in calibre\nThis document demonstrates the ability of the calibre DOCX Input plugin to convert the various typographic features in a Microsoft Word (2007 and newer) docume",
+          "extractedText": "Demonstration of DOCX support in calibre\nThis document demonstrates the ability of the calibre DOCX Input plugin to convert the various typographic features in a Microsoft Word (2007 and newer) docume",
+          "searchLevel": "shallow",
+          "responseMode": "sync",
+          "createdBy": "6692b763e851d28a036ab30f",
+          "externalUserId": "INV-001",
+          "createdAt": "2026-10-10T13:26:53.152Z",
+          "updatedAt": "2026-10-10T13:26:53.152Z"
+        }
+      },
+      "data_keys": [
+        "agents",
+        "companyId",
+        "context",
+        "createdAt",
+        "createdBy",
+        "extension",
+        "externalUserId",
+        "extractedText",
+        "extractedTextLength",
+        "extractedTextUrl",
+        "id",
+        "mimeType",
+        "name",
+        "plugins",
+        "responseMode",
+        "searchLevel",
+        "sessionId",
+        "sizeBytes",
+        "source",
+        "sourceUrl",
+        "updatedAt",
+        "url"
+      ]
+    },
+    {
+      "name": "README.md",
+      "plugins": [
+        "plugin-1713954536"
+      ],
+      "responseMode": "sync",
+      "http_status": 200,
+      "response": {
+        "message": "Media Created",
+        "data": {
+          "id": "6aca3cf1cf3ee6ce34738fda",
+          "companyId": "6692b763e851d28a036ab30e",
+          "sessionId": "6aca3ccd261cbe2340484da9",
+          "url": "https://raw.githubusercontent.com/github/gitignore/main/README.md",
+          "sourceUrl": "https://raw.githubusercontent.com/github/gitignore/main/README.md",
+          "extractedTextUrl": "https://airevprod.blob.core.windows.net/on-demand-prod/6692b763e851d28a036ab30e/media/tempfile-1791638770230595830_20261010-132610.txt?<sas-redacted>",
+          "extractedTextLength": 766,
+          "name": "README.md",
+          "sizeBytes": 5847,
+          "source": "document",
+          "mimeType": "text/plain",
+          "extension": "txt",
+          "plugins": [
+            "plugin-1713954536"
+          ],
+          "agents": [
+            "agent-1713954536"
+          ],
+          "context": "# A collection of `.gitignore` templates\n\nThis is GitHub\u2019s collection of [`.gitignore`][man] file templates.\nWe use this list to populate the `.gitignore` template choosers available\nin the GitHub.com",
+          "extractedText": "# A collection of `.gitignore` templates\n\nThis is GitHub\u2019s collection of [`.gitignore`][man] file templates.\nWe use this list to populate the `.gitignore` template choosers available\nin the GitHub.com",
+          "searchLevel": "shallow",
+          "responseMode": "sync",
+          "createdBy": "6692b763e851d28a036ab30f",
+          "externalUserId": "INV-001",
+          "createdAt": "2026-10-10T13:26:09.871Z",
+          "updatedAt": "2026-10-10T13:26:09.871Z"
+        }
+      },
+      "data_keys": [
+        "agents",
+        "companyId",
+        "context",
+        "createdAt",
+        "createdBy",
+        "extension",
+        "externalUserId",
+        "extractedText",
+        "extractedTextLength",
+        "extractedTextUrl",
+        "id",
+        "mimeType",
+        "name",
+        "plugins",
+        "responseMode",
+        "searchLevel",
+        "sessionId",
+        "sizeBytes",
+        "source",
+        "sourceUrl",
+        "updatedAt",
+        "url"
+      ]
+    },
+    {
+      "name": "alphatest.png",
+      "plugins": [
+        "plugin-1713958591"
+      ],
+      "responseMode": "sync",
+      "http_status": 200,
+      "response": {
+        "message": "Media Created",
+        "data": {
+          "id": "6aca3d13c536376e5904a1c4",
+          "companyId": "6692b763e851d28a036ab30e",
+          "sessionId": "6aca3ccd261cbe2340484da9",
+          "url": "https://www.w3.org/Graphics/PNG/alphatest.png",
+          "sourceUrl": "https://www.w3.org/Graphics/PNG/alphatest.png",
+          "name": "alphatest.png",
+          "sizeBytes": 17752,
+          "source": "image",
+          "mimeType": "image/png",
+          "extension": "png",
+          "plugins": [
+            "plugin-1713958591"
+          ],
+          "agents": [
+            "agent-1713958591"
+          ],
+          "context": "A minimalist abstract digital graphic is centered against a solid black background, consisting of one large horizontal geometric bar near the top and three thinner parallel bars stacked below it with ",
+          "extractedText": "A minimalist abstract digital graphic is centered against a solid black background, consisting of one large horizontal geometric bar near the top and three thinner parallel bars stacked below it with ",
+          "searchLevel": "deep",
+          "actionStatus": "completed",
+          "responseMode": "sync",
+          "createdBy": "6692b763e851d28a036ab30f",
+          "externalUserId": "INV-001",
+          "createdAt": "2026-10-10T13:26:42.908Z",
+          "updatedAt": "2026-10-10T13:26:42.908Z"
+        }
+      },
+      "data_keys": [
+        "actionStatus",
+        "agents",
+        "companyId",
+        "context",
+        "createdAt",
+        "createdBy",
+        "extension",
+        "externalUserId",
+        "extractedText",
+        "id",
+        "mimeType",
+        "name",
+        "plugins",
+        "responseMode",
+        "searchLevel",
+        "sessionId",
+        "sizeBytes",
+        "source",
+        "sourceUrl",
+        "updatedAt",
+        "url"
+      ]
+    },
+    {
+      "name": "BabyElephantWalk60.wav",
+      "plugins": [
+        "plugin-1713958830"
+      ],
+      "responseMode": "sync",
+      "http_status": 500,
+      "response": {
+        "message": "errors.server_error",
+        "errorCode": "server_error"
+      },
+      "data_keys": []
+    },
+    {
+      "name": "iso_8859-1.txt",
+      "plugins": [
+        "plugin-1713954536"
+      ],
+      "responseMode": "sync",
+      "http_status": 500,
+      "response": {
+        "message": "errors.server_error",
+        "errorCode": "server_error"
+      },
+      "data_keys": []
+    }
+  ]
+}
