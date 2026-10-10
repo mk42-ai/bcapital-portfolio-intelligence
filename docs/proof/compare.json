@@ -1,0 +1,363 @@
+{
+  "generated_utc": "2026-10-10T18:08:41.713Z",
+  "before": "before",
+  "after": "after",
+  "smoothness": {
+    "before": 7.25,
+    "after": 7.5,
+    "delta": 0.25
+  },
+  "viewports": {
+    "desktop": {
+      "turns": {
+        "turn1": {
+          "first_event_ms": {
+            "before": 279.3,
+            "after": 72.1,
+            "delta": -207.2
+          },
+          "first_token_ms": {
+            "before": 15065.3,
+            "after": 32690.7,
+            "delta": 17625.4
+          },
+          "first_citation_ms": {
+            "before": 17721.7,
+            "after": 33313.5,
+            "delta": 15591.8
+          },
+          "answer_done_ms": {
+            "before": 20151.1,
+            "after": 39300.6,
+            "delta": 19149.5
+          },
+          "total_ms": {
+            "before": 20532,
+            "after": 39420,
+            "delta": 18888
+          },
+          "frame_count": {
+            "before": 243,
+            "after": 526,
+            "delta": 283
+          },
+          "dead_air_gaps": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          "max_gap_ms": {
+            "before": 1410,
+            "after": 0,
+            "delta": -1410
+          },
+          "cls": {
+            "before": 0.0575,
+            "after": 0.0505,
+            "delta": -0.007
+          },
+          "cls_shifts": {
+            "before": 23,
+            "after": 28,
+            "delta": 5
+          },
+          "long_tasks": {
+            "before": 67,
+            "after": 18,
+            "delta": -49
+          },
+          "long_task_max_ms": {
+            "before": 338.4,
+            "after": 81.5,
+            "delta": -256.9
+          },
+          "long_task_total_ms": {
+            "before": 4935,
+            "after": 1041,
+            "delta": -3894
+          },
+          "console_errors": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          "page_errors": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          "failed_requests": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          }
+        },
+        "turn2": {
+          "first_event_ms": {
+            "before": 126.2,
+            "after": 79.7,
+            "delta": -46.5
+          },
+          "first_token_ms": {
+            "before": 17247.7,
+            "after": 15505.8,
+            "delta": -1741.9
+          },
+          "first_citation_ms": {
+            "before": 18527.3,
+            "after": 16250.6,
+            "delta": -2276.7
+          },
+          "answer_done_ms": {
+            "before": 22414.3,
+            "after": 20744.2,
+            "delta": -1670.1
+          },
+          "total_ms": {
+            "before": 22645,
+            "after": 20997,
+            "delta": -1648
+          },
+          "frame_count": {
+            "before": 321,
+            "after": 273,
+            "delta": -48
+          },
+          "dead_air_gaps": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          "max_gap_ms": {
+            "before": 1893,
+            "after": 0,
+            "delta": -1893
+          },
+          "cls": {
+            "before": 0.0405,
+            "after": 0.1419,
+            "delta": 0.1014
+          },
+          "cls_shifts": {
+            "before": 12,
+            "after": 21,
+            "delta": 9
+          },
+          "long_tasks": {
+            "before": 15,
+            "after": 1,
+            "delta": -14
+          },
+          "long_task_max_ms": {
+            "before": 69.7,
+            "after": 54.8,
+            "delta": -14.9
+          },
+          "long_task_total_ms": {
+            "before": 907,
+            "after": 55,
+            "delta": -852
+          },
+          "console_errors": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          "page_errors": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          "failed_requests": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          }
+        }
+      },
+      "score": {
+        "before": 7.5,
+        "after": 7.5,
+        "delta": 0
+      }
+    },
+    "mobile": {
+      "turns": {
+        "turn1": {
+          "first_event_ms": {
+            "before": 201.2,
+            "after": 78.7,
+            "delta": -122.5
+          },
+          "first_token_ms": {
+            "before": 30705.9,
+            "after": 18143.5,
+            "delta": -12562.4
+          },
+          "first_citation_ms": {
+            "before": 31432.4,
+            "after": 18823.7,
+            "delta": -12608.7
+          },
+          "answer_done_ms": {
+            "before": 37594.2,
+            "after": 23035.6,
+            "delta": -14558.6
+          },
+          "total_ms": {
+            "before": 37961,
+            "after": 23206,
+            "delta": -14755
+          },
+          "frame_count": {
+            "before": 482,
+            "after": 291,
+            "delta": -191
+          },
+          "dead_air_gaps": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          "max_gap_ms": {
+            "before": 1652,
+            "after": 902,
+            "delta": -750
+          },
+          "cls": {
+            "before": 0.1977,
+            "after": 0.2445,
+            "delta": 0.0468
+          },
+          "cls_shifts": {
+            "before": 30,
+            "after": 18,
+            "delta": -12
+          },
+          "long_tasks": {
+            "before": 16,
+            "after": 4,
+            "delta": -12
+          },
+          "long_task_max_ms": {
+            "before": 322.6,
+            "after": 115.2,
+            "delta": -207.4
+          },
+          "long_task_total_ms": {
+            "before": 1212,
+            "after": 292,
+            "delta": -920
+          },
+          "console_errors": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          "page_errors": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          "failed_requests": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          }
+        },
+        "turn2": {
+          "first_event_ms": {
+            "before": 62.3,
+            "after": 61.4,
+            "delta": -0.9
+          },
+          "first_token_ms": {
+            "before": 29122,
+            "after": 29735.3,
+            "delta": 613.3
+          },
+          "first_citation_ms": {
+            "before": 29822.3,
+            "after": 30409.6,
+            "delta": 587.3
+          },
+          "answer_done_ms": {
+            "before": 33496.3,
+            "after": 37302.1,
+            "delta": 3805.8
+          },
+          "total_ms": {
+            "before": 33680,
+            "after": 38863,
+            "delta": 5183
+          },
+          "frame_count": {
+            "before": 495,
+            "after": 482,
+            "delta": -13
+          },
+          "dead_air_gaps": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          "max_gap_ms": {
+            "before": 1916,
+            "after": 0,
+            "delta": -1916
+          },
+          "cls": {
+            "before": 0.3063,
+            "after": 0.294,
+            "delta": -0.0123
+          },
+          "cls_shifts": {
+            "before": 24,
+            "after": 23,
+            "delta": -1
+          },
+          "long_tasks": {
+            "before": 0,
+            "after": 1,
+            "delta": 1
+          },
+          "long_task_max_ms": {
+            "before": 0,
+            "after": 75,
+            "delta": 75
+          },
+          "long_task_total_ms": {
+            "before": 0,
+            "after": 75,
+            "delta": 75
+          },
+          "console_errors": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          "page_errors": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          },
+          "failed_requests": {
+            "before": 0,
+            "after": 0,
+            "delta": 0
+          }
+        }
+      },
+      "score": {
+        "before": 7,
+        "after": 7.5,
+        "delta": 0.5
+      }
+    }
+  },
+  "top_findings": [
+    "desktop turn 1: first answer token 15065.3ms → 32690.7ms (worse, 117%).",
+    "desktop turn 2: CLS 0.0405 → 0.1419 (worse, 10%).",
+    "mobile turn 2: long tasks 0 → 1 (worse, 100%)."
+  ]
+}

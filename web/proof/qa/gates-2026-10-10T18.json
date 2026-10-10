@@ -1,0 +1,289 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "playwright.config.ts",
+      "e2e/gates.spec.ts",
+      "--project=desktop",
+      "--reporter=json"
+    ],
+    "configFile": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/playwright.config.ts",
+    "rootDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": [
+          "/mobile\\.spec\\.ts/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/mobile\\.spec\\.ts/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "desktop",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "snapshotDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": {},
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 240000,
+        "use": {
+          "baseURL": "https://sb-2bqmt98kq4ql.vercel.run",
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox",
+              "--disable-dev-shm-usage",
+              "--use-fake-ui-for-media-stream",
+              "--use-fake-device-for-media-stream"
+            ]
+          },
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "desktop"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "gates.spec.ts",
+      "file": "gates.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "gate: zero broken images on /news, /companies, /chat",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [
+                {
+                  "type": "broken_images",
+                  "description": "0"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16638,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T18:10:54.231Z",
+                  "annotations": [
+                    {
+                      "type": "broken_images",
+                      "description": "0"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1e7fd5982b0400c7b53-dd46373cc29ac6a201eb",
+          "file": "gates.spec.ts",
+          "line": 97,
+          "column": 1
+        },
+        {
+          "title": "gate: nav rail width ≤ 224 px at 1440×900",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [
+                {
+                  "type": "rail_width_px",
+                  "description": "224"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2572,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T18:10:54.234Z",
+                  "annotations": [
+                    {
+                      "type": "rail_width_px",
+                      "description": "224"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1e7fd5982b0400c7b53-29dc372240f823967bf3",
+          "file": "gates.spec.ts",
+          "line": 113,
+          "column": 1
+        },
+        {
+          "title": "gate: last company row reachable on /companies",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [
+                {
+                  "type": "companies_total",
+                  "description": "136"
+                },
+                {
+                  "type": "last_row_reachable",
+                  "description": "true"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5893,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-10T18:10:57.292Z",
+                  "annotations": [
+                    {
+                      "type": "companies_total",
+                      "description": "136"
+                    },
+                    {
+                      "type": "last_row_reachable",
+                      "description": "true"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1e7fd5982b0400c7b53-9b27e1e71012d7f26262",
+          "file": "gates.spec.ts",
+          "line": 123,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-10T18:10:53.730Z",
+    "duration": 17818.41,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

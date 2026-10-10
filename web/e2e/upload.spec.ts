@@ -127,7 +127,7 @@ test.describe("Composer drop-zone", () => {
     await expect(drop).toContainText("Drop a PDF");
     // brand green only on the highlight
     const ring = await slot.evaluate((el) => getComputedStyle(el).boxShadow);
-    expect(ring, "drag-over ring is brand green").toMatch(/rgb\(10, 201, 133\)/);
+    expect(ring, "drag-over ring is brand green").toMatch(/rgba?\(10, 201, 133/); // computed mid-transition may carry alpha
 
     await fire("dragleave");
     await expect(drop).toHaveCount(0, { timeout: 10_000 });

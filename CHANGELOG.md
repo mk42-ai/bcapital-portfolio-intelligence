@@ -1,3 +1,15 @@
+## 2026-10-10 — 30-agent parallel pass: full-screen chat canvas, PitchBook pre-populated, interactive cards, assets
+
+- **Chat canvas** (Agents 19–24): 52 px top bar (thread title · model pill · Plan/Run · freshness dot · inspector toggle), full-height conversation column with messages centred ≤800 px, one-row composer (Attach · textarea · mic · send) pinned to the bottom, floating jump-to-latest, slide-over inspector drawer ≤360 px with ONE `details` reveal (plugin ids, tokens, latencies, raw frame) and the plan rendered once (drawer references `#run-plan`). The page header, subtitle, data-source line, footer and OpenUI's "Portfolio analyst" thread column are gone.
+- **Navigation rail** (Agent 21): ≤224 px expanded / 64 px icon rail, persisted (`bcap.nav.rail`), thread list (New chat + threads) nested under Chat, "live backend" pill.
+- **Assets** (Agents 1–8): twelve transparent illustrations under `web/public/assets` (WebP+PNG 256/512; `scripts/assets-pipeline.py`), wired to news fallback, logo avatars, PitchBook empty states, voice orb states, composer drop-zone, new-chat canvas, synced badge, interactive cards. `/public/fallbacks` retired; no runtime blob URLs.
+- **Citations** (Agents 9–10): live inline numbered chips with hover card; Sources collapsed into one compact publisher-first chip row (+N) above the answer.
+- **Interactive cards** (Agents 11–14): awaiting_input / require_creds / awaiting_browser_action cards with illustrations; answers resume the SAME OnDemand session (`resumeSession`, `/api/chat/resume`); credentials go through `/api/chat/creds` only.
+- **Voice parity** (Agents 15–16): pluginIds + sessionId carried through STT → query → TTS; `voice-parity.spec.ts`.
+- **PitchBook** (Agents 25–27): synchronous server render on company pages and in the chat drawer (committed `pitchbook-snapshot.json` fallback, 136/136), "Run now"/execution id removed, "PitchBook · synced <date> · weekly" stamp, per-field ask-in-chat into the EXISTING composer, manual refresh in Settings behind a reveal, zero-network-first-paint test.
+- **Honesty** (Agent 18): one Perplexity status banner in Settings (`/api/plugins/status`); no red error cards.
+- **Proof** (Agents 17, 28–30): `docs/proof/{before,after}` timelines + `compare.md`, brand audit (0 blues), gates (`scripts/gates.sh`), proof screenshots, `docs/parallel-ledger-2026-10-10.{md,json}`.
+
 # Changelog
 
 ## 2026-10-10 — images · PitchBook · companies scroll · upload · voice (30-agent continuation)

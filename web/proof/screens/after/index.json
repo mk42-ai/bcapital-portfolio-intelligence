@@ -1,0 +1,65 @@
+[
+  {
+    "name": "chat-desktop",
+    "viewport": "1440x900",
+    "path": "proof/screens/after/chat-desktop.png",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "name": "chat-mobile",
+    "viewport": "390x844",
+    "path": "proof/screens/after/chat-mobile.png",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "name": "rail-collapsed",
+    "viewport": "1440x900",
+    "path": "proof/screens/after/rail-collapsed.png",
+    "ok": true,
+    "note": "nav-rail width after toggle = 64px"
+  },
+  {
+    "name": "inspector-drawer",
+    "viewport": "1440x900",
+    "path": "proof/screens/after/inspector-drawer.png",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "name": "pitchbook-drawer",
+    "viewport": "1440x900",
+    "path": "proof/screens/after/pitchbook-drawer.png",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "name": "company-pitchbook",
+    "viewport": "1440x900",
+    "path": "proof/screens/after/company-pitchbook.png",
+    "ok": true,
+    "note": ""
+  },
+  {
+    "name": "chat-voice-listening",
+    "viewport": "1440x900",
+    "path": "proof/screens/after/chat-voice-listening.png",
+    "ok": true,
+    "note": "voice-mic data-state=listening; voice-panel data-state=listening"
+  },
+  {
+    "name": "chat-citations",
+    "viewport": "1440x900",
+    "path": "proof/screens/after/chat-citations.png",
+    "ok": true,
+    "note": "citation-chip=2; source-link=2"
+  },
+  {
+    "name": "interactive-card",
+    "viewport": "1440x900",
+    "path": "proof/screens/after/interactive-card.png",
+    "ok": true,
+    "note": "prompt visible=true; options visible=true"
+  }
+]

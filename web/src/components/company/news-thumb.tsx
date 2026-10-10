@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, type SyntheticEvent } from "react";
+import { useEffect, useRef, useState, type SyntheticEvent } from "react";
 import { LogoMonogram } from "@/components/ui/logo-img";
 import { resolveLogo } from "@/lib/local-logos";
 import { FALLBACK_NEWS_TILE, imageSrc, isRemoteUrl } from "@/lib/img-proxy";
@@ -38,10 +38,19 @@ export function NewsThumb({ src, companyLogo, companyName, companySlug, host, al
     );
   }
   const kind = i === favIdx ? "favicon" : i === logoIdx ? "company-logo" : "article";
+  // A 204 from the proxy decodes to a 0×0 image WITHOUT firing onError in Chromium; onLoad does not always fire for it either — poll once after mount
+  // and advance the chain so the final DOM never keeps a `complete && naturalWidth===0` element (the broken-image gate).
   const onLoad = (e: SyntheticEvent<HTMLImageElement>) => { if (e.currentTarget.naturalWidth === 0) setI((n) => n + 1); };
+  const imgRef = useRef<HTMLImageElement>(null);
+  useEffect(() => {
+    const el = imgRef.current; if (!el) return;
+    const check = () => { if (el.complete && el.naturalWidth === 0 && el.getAttribute("src") === cur) setI((n) => n + 1); };
+    const t1 = setTimeout(check, 1500); const t2 = setTimeout(check, 4000);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [cur]);
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img data-testid="news-image" src={cur} alt={alt} width={96} height={96} loading={loading} decoding="async" fetchPriority={fetchPriority} referrerPolicy="no-referrer"
+    <img ref={imgRef} data-testid="news-image" src={cur} alt={alt} width={96} height={96} loading={loading} decoding="async" fetchPriority={fetchPriority} referrerPolicy="no-referrer"
       data-thumb-kind={kind}
       className={`${BOX} bg-white ${kind === "favicon" ? "object-contain p-6" : kind === "company-logo" ? "object-contain p-3" : "object-cover"}`}
       onError={() => setI((n) => n + 1)} onLoad={onLoad} />

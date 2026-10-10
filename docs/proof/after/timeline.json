@@ -1,0 +1,996 @@
+{
+  "schema": "ux-proof-timeline/1",
+  "label": "after",
+  "base_url": "https://sb-2bqmt98kq4ql.vercel.run",
+  "generated_utc": "2026-10-10T18:07:12.813Z",
+  "viewports": {
+    "desktop": {
+      "schema": "ux-compact-timeline/1",
+      "label": "after",
+      "viewport": "desktop",
+      "base_url": "https://sb-2bqmt98kq4ql.vercel.run",
+      "generated_utc": "2026-10-10T18:06:40.087Z",
+      "turns": [
+        {
+          "turn": 1,
+          "prompt": "What is the latest news about Fervo Energy? Cite sources.",
+          "sent_utc": "2026-10-10T18:05:35.962Z",
+          "first_event_ms": 72.1,
+          "first_token_ms": 32690.7,
+          "first_citation_ms": 33313.5,
+          "answer_done_ms": 39300.6,
+          "total_ms": 39420,
+          "done_frame_type": "[DONE]",
+          "frame_count": 526,
+          "perplexity": {
+            "status": "ok",
+            "error": null,
+            "error_card_shown": false,
+            "substituted": false
+          },
+          "bridge_http_status": 200,
+          "stream_window_ms": 39301,
+          "dead_air_gaps": 0,
+          "max_gap_ms": 0,
+          "cls": 0.0505,
+          "cls_shifts": 28,
+          "long_tasks": 18,
+          "long_task_max_ms": 81.5,
+          "long_task_total_ms": 1041,
+          "console_errors": 0,
+          "page_errors": 0,
+          "failed_requests": 0,
+          "cls_samples": [
+            {
+              "t_ms": 602,
+              "value": 0.00011,
+              "node": "span[data-testid=model-pill].chat-topbar__model"
+            },
+            {
+              "t_ms": 1540,
+              "value": 0.0188,
+              "node": "div"
+            },
+            {
+              "t_ms": 1553,
+              "value": 0.00174,
+              "node": "section[data-testid=plan-stepper].oiu-plan.oiu-plan--reserved"
+            },
+            {
+              "t_ms": 1691,
+              "value": 0.00396,
+              "node": "div"
+            },
+            {
+              "t_ms": 1844,
+              "value": 0.00392,
+              "node": "div"
+            },
+            {
+              "t_ms": 2597,
+              "value": 0.00001,
+              "node": "span.oiu-thinking__len"
+            },
+            {
+              "t_ms": 3385,
+              "value": 0.00005,
+              "node": "span[data-testid=model-pill].chat-topbar__model"
+            },
+            {
+              "t_ms": 3666,
+              "value": 0.00072,
+              "node": "span.oiu-activity__elapsed"
+            },
+            {
+              "t_ms": 7635,
+              "value": 0.00067,
+              "node": "span.oiu-activity__elapsed"
+            },
+            {
+              "t_ms": 10042,
+              "value": 0.00001,
+              "node": "span.oiu-activity__elapsed"
+            },
+            {
+              "t_ms": 10051,
+              "value": 0.00005,
+              "node": "span[data-testid=model-pill].chat-topbar__model"
+            },
+            {
+              "t_ms": 18623,
+              "value": 0.00035,
+              "node": "span.oiu-activity__elapsed"
+            },
+            {
+              "t_ms": 20735,
+              "value": 0.00041,
+              "node": "span.oiu-activity__elapsed"
+            },
+            {
+              "t_ms": 28546,
+              "value": 0.00138,
+              "node": "span[data-testid=model-pill].chat-topbar__model"
+            },
+            {
+              "t_ms": 28547,
+              "value": 0.00337,
+              "node": "div"
+            },
+            {
+              "t_ms": 28556,
+              "value": 0.00348,
+              "node": "div"
+            },
+            {
+              "t_ms": 32699,
+              "value": 0.00639,
+              "node": "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming"
+            },
+            {
+              "t_ms": 32713,
+              "value": 0.00108,
+              "node": "div[data-testid=answer-markdown].oiu-md"
+            },
+            {
+              "t_ms": 32832,
+              "value": 0,
+              "node": "span.oiu-caret"
+            },
+            {
+              "t_ms": 33327,
+              "value": 0.00039,
+              "node": "li.oiu-srcrow__item"
+            },
+            {
+              "t_ms": 34048,
+              "value": 0.00039,
+              "node": "li.oiu-srcrow__item"
+            },
+            {
+              "t_ms": 34402,
+              "value": 0.00001,
+              "node": "span.oiu-caret"
+            },
+            {
+              "t_ms": 34413,
+              "value": 0.0005,
+              "node": "li.oiu-srcrow__item"
+            },
+            {
+              "t_ms": 36009,
+              "value": 0,
+              "node": "span.oiu-caret"
+            },
+            {
+              "t_ms": 36768,
+              "value": 0.00001,
+              "node": "span.oiu-caret"
+            },
+            {
+              "t_ms": 37022,
+              "value": 0,
+              "node": "span.oiu-caret"
+            },
+            {
+              "t_ms": 37367,
+              "value": 0.00087,
+              "node": "div[data-testid=plan-run-toggle].chat-topbar__tabs"
+            },
+            {
+              "t_ms": 39348,
+              "value": 0.00179,
+              "node": "span[data-testid=model-pill].chat-topbar__model"
+            }
+          ],
+          "long_task_samples": [
+            {
+              "t_ms": 1609,
+              "dur_ms": 81.5,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 1730,
+              "dur_ms": 56.1,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 1792,
+              "dur_ms": 71.4,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 1872,
+              "dur_ms": 54.3,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 1945,
+              "dur_ms": 51.9,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 2273,
+              "dur_ms": 53.1,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 2335,
+              "dur_ms": 53.2,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 2394,
+              "dur_ms": 71,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 2466,
+              "dur_ms": 54.2,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 2522,
+              "dur_ms": 50.3,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 6780,
+              "dur_ms": 62.1,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 7187,
+              "dur_ms": 51.2,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 7725,
+              "dur_ms": 55.9,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 8411,
+              "dur_ms": 53.6,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 9005,
+              "dur_ms": 50.2,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 14956,
+              "dur_ms": 62,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 15484,
+              "dur_ms": 55.3,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 39297,
+              "dur_ms": 54,
+              "source": "long-animation-frame"
+            }
+          ]
+        },
+        {
+          "turn": 2,
+          "prompt": "Compare the latest funding and project news of Fervo Energy and Ormat Technologies, then give me a one-paragraph summary with citations.",
+          "sent_utc": "2026-10-10T18:06:18.143Z",
+          "first_event_ms": 79.7,
+          "first_token_ms": 15505.8,
+          "first_citation_ms": 16250.6,
+          "answer_done_ms": 20744.2,
+          "total_ms": 20997,
+          "done_frame_type": "[DONE]",
+          "frame_count": 273,
+          "perplexity": {
+            "status": "ok",
+            "error": null,
+            "error_card_shown": false,
+            "substituted": false
+          },
+          "bridge_http_status": 200,
+          "stream_window_ms": 20744,
+          "dead_air_gaps": 0,
+          "max_gap_ms": 0,
+          "cls": 0.1419,
+          "cls_shifts": 21,
+          "long_tasks": 1,
+          "long_task_max_ms": 54.8,
+          "long_task_total_ms": 55,
+          "console_errors": 0,
+          "page_errors": 0,
+          "failed_requests": 0,
+          "cls_samples": [
+            {
+              "t_ms": 579,
+              "value": 0.00011,
+              "node": "span[data-testid=model-pill].chat-topbar__model"
+            },
+            {
+              "t_ms": 1702,
+              "value": 0.01076,
+              "node": "div"
+            },
+            {
+              "t_ms": 1708,
+              "value": 0.00015,
+              "node": "section[data-testid=plan-stepper].oiu-plan.oiu-plan--reserved"
+            },
+            {
+              "t_ms": 1967,
+              "value": 0.00392,
+              "node": "div"
+            },
+            {
+              "t_ms": 2422,
+              "value": 0.00005,
+              "node": "span[data-testid=model-pill].chat-topbar__model"
+            },
+            {
+              "t_ms": 2640,
+              "value": 0.05433,
+              "node": "section[data-testid=plan-stepper].oiu-plan"
+            },
+            {
+              "t_ms": 2718,
+              "value": 0.00001,
+              "node": "span.oiu-thinking__len"
+            },
+            {
+              "t_ms": 5289,
+              "value": 0.05091,
+              "node": "section[data-testid=plan-stepper].oiu-plan"
+            },
+            {
+              "t_ms": 10034,
+              "value": 0.00006,
+              "node": "span[data-testid=model-pill].chat-topbar__model"
+            },
+            {
+              "t_ms": 13594,
+              "value": 0.00138,
+              "node": "span[data-testid=model-pill].chat-topbar__model"
+            },
+            {
+              "t_ms": 13595,
+              "value": 0.00337,
+              "node": "div"
+            },
+            {
+              "t_ms": 13607,
+              "value": 0.00348,
+              "node": "div"
+            },
+            {
+              "t_ms": 15514,
+              "value": 0.00639,
+              "node": "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming"
+            },
+            {
+              "t_ms": 15527,
+              "value": 0,
+              "node": "span.oiu-caret"
+            },
+            {
+              "t_ms": 15651,
+              "value": 0,
+              "node": "span.oiu-caret"
+            },
+            {
+              "t_ms": 16261,
+              "value": 0.00136,
+              "node": "li.oiu-srcrow__item"
+            },
+            {
+              "t_ms": 16384,
+              "value": 0.00119,
+              "node": "li.oiu-srcrow__item"
+            },
+            {
+              "t_ms": 16501,
+              "value": 0.00069,
+              "node": "li.oiu-srcrow__item"
+            },
+            {
+              "t_ms": 17002,
+              "value": 0.00107,
+              "node": "li.oiu-srcrow__item"
+            },
+            {
+              "t_ms": 18806,
+              "value": 0.00087,
+              "node": "div[data-testid=plan-run-toggle].chat-topbar__tabs"
+            },
+            {
+              "t_ms": 20771,
+              "value": 0.00179,
+              "node": "span[data-testid=model-pill].chat-topbar__model"
+            }
+          ],
+          "long_task_samples": [
+            {
+              "t_ms": 17988,
+              "dur_ms": 54.8,
+              "source": "long-animation-frame"
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "turn": 1,
+          "name": "first-event",
+          "t_ms": 72,
+          "detail": "RUN_STARTED"
+        },
+        {
+          "turn": 1,
+          "name": "plugin-start",
+          "t_ms": 1511,
+          "detail": "Perplexity"
+        },
+        {
+          "turn": 1,
+          "name": "first-thinking-visible",
+          "t_ms": 1821
+        },
+        {
+          "turn": 1,
+          "name": "plan-created",
+          "t_ms": 3641
+        },
+        {
+          "turn": 1,
+          "name": "plugin-end",
+          "t_ms": 18534,
+          "detail": "Perplexity:ok"
+        },
+        {
+          "turn": 1,
+          "name": "first-source-in-rail",
+          "t_ms": 28543
+        },
+        {
+          "turn": 1,
+          "name": "final-badge-visible",
+          "t_ms": 28543
+        },
+        {
+          "turn": 1,
+          "name": "first-token",
+          "t_ms": 32691
+        },
+        {
+          "turn": 1,
+          "name": "first-answer-paint",
+          "t_ms": 32706
+        },
+        {
+          "turn": 1,
+          "name": "first-citation",
+          "t_ms": 33314
+        },
+        {
+          "turn": 1,
+          "name": "answer-done",
+          "t_ms": 39301,
+          "detail": "[DONE]"
+        },
+        {
+          "turn": 1,
+          "name": "composer-reset",
+          "t_ms": 39420
+        },
+        {
+          "turn": 2,
+          "name": "first-event",
+          "t_ms": 80,
+          "detail": "RUN_STARTED"
+        },
+        {
+          "turn": 2,
+          "name": "plugin-start",
+          "t_ms": 1687,
+          "detail": "Perplexity"
+        },
+        {
+          "turn": 2,
+          "name": "first-thinking-visible",
+          "t_ms": 1956
+        },
+        {
+          "turn": 2,
+          "name": "plan-created",
+          "t_ms": 2580
+        },
+        {
+          "turn": 2,
+          "name": "plugin-end",
+          "t_ms": 13495,
+          "detail": "Perplexity:ok"
+        },
+        {
+          "turn": 2,
+          "name": "first-source-in-rail",
+          "t_ms": 13591
+        },
+        {
+          "turn": 2,
+          "name": "final-badge-visible",
+          "t_ms": 13591
+        },
+        {
+          "turn": 2,
+          "name": "first-token",
+          "t_ms": 15506
+        },
+        {
+          "turn": 2,
+          "name": "first-answer-paint",
+          "t_ms": 15524
+        },
+        {
+          "turn": 2,
+          "name": "first-citation",
+          "t_ms": 16251
+        },
+        {
+          "turn": 2,
+          "name": "answer-done",
+          "t_ms": 20744,
+          "detail": "[DONE]"
+        },
+        {
+          "turn": 2,
+          "name": "composer-reset",
+          "t_ms": 20997
+        }
+      ],
+      "growth_pass": true,
+      "notes": []
+    },
+    "mobile": {
+      "schema": "ux-compact-timeline/1",
+      "label": "after",
+      "viewport": "mobile",
+      "base_url": "https://sb-2bqmt98kq4ql.vercel.run",
+      "generated_utc": "2026-10-10T18:06:41.781Z",
+      "turns": [
+        {
+          "turn": 1,
+          "prompt": "What is the latest news about Fervo Energy? Cite sources.",
+          "sent_utc": "2026-10-10T18:05:35.740Z",
+          "first_event_ms": 78.7,
+          "first_token_ms": 18143.5,
+          "first_citation_ms": 18823.7,
+          "answer_done_ms": 23035.6,
+          "total_ms": 23206,
+          "done_frame_type": "[DONE]",
+          "frame_count": 291,
+          "perplexity": {
+            "status": "ok",
+            "error": null,
+            "error_card_shown": false,
+            "substituted": false
+          },
+          "bridge_http_status": 200,
+          "stream_window_ms": 23036,
+          "dead_air_gaps": 0,
+          "max_gap_ms": 902,
+          "cls": 0.2445,
+          "cls_shifts": 18,
+          "long_tasks": 4,
+          "long_task_max_ms": 115.2,
+          "long_task_total_ms": 292,
+          "console_errors": 0,
+          "page_errors": 0,
+          "failed_requests": 0,
+          "cls_samples": [
+            {
+              "t_ms": 744,
+              "value": 0.00033,
+              "node": "div[data-testid=plan-run-toggle].chat-topbar__tabs"
+            },
+            {
+              "t_ms": 2002,
+              "value": 0.07256,
+              "node": "div"
+            },
+            {
+              "t_ms": 2047,
+              "value": 0.00519,
+              "node": "section[data-testid=plan-stepper].oiu-plan.oiu-plan--reserved"
+            },
+            {
+              "t_ms": 2090,
+              "value": 0.0159,
+              "node": "div"
+            },
+            {
+              "t_ms": 2357,
+              "value": 0.01568,
+              "node": "div"
+            },
+            {
+              "t_ms": 3082,
+              "value": 0.00005,
+              "node": "span.oiu-thinking__len"
+            },
+            {
+              "t_ms": 3852,
+              "value": 0.00137,
+              "node": "div[data-testid=plan-run-toggle].chat-topbar__tabs"
+            },
+            {
+              "t_ms": 4016,
+              "value": 0.00232,
+              "node": "span.oiu-activity__phase"
+            },
+            {
+              "t_ms": 5947,
+              "value": 0.01072,
+              "node": "section[data-testid=plan-stepper].oiu-plan"
+            },
+            {
+              "t_ms": 10043,
+              "value": 0.00006,
+              "node": "span.oiu-activity__elapsed"
+            },
+            {
+              "t_ms": 16663,
+              "value": 0.02496,
+              "node": "div"
+            },
+            {
+              "t_ms": 16664,
+              "value": 0.01202,
+              "node": "div"
+            },
+            {
+              "t_ms": 16682,
+              "value": 0.01113,
+              "node": "div"
+            },
+            {
+              "t_ms": 18157,
+              "value": 0.06861,
+              "node": "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming"
+            },
+            {
+              "t_ms": 18836,
+              "value": 0.00222,
+              "node": "li.oiu-srcrow__item"
+            },
+            {
+              "t_ms": 19928,
+              "value": 0.00005,
+              "node": "span.oiu-caret"
+            },
+            {
+              "t_ms": 20157,
+              "value": 0.00006,
+              "node": "span.oiu-caret"
+            },
+            {
+              "t_ms": 23079,
+              "value": 0.00124,
+              "node": "div[data-testid=plan-run-toggle].chat-topbar__tabs"
+            }
+          ],
+          "long_task_samples": [
+            {
+              "t_ms": 1932,
+              "dur_ms": 115.2,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 15612,
+              "dur_ms": 55.9,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 16208,
+              "dur_ms": 53.8,
+              "source": "long-animation-frame"
+            },
+            {
+              "t_ms": 23024,
+              "dur_ms": 66.9,
+              "source": "long-animation-frame"
+            }
+          ]
+        },
+        {
+          "turn": 2,
+          "prompt": "Compare the latest funding and project news of Fervo Energy and Ormat Technologies, then give me a one-paragraph summary with citations.",
+          "sent_utc": "2026-10-10T18:06:01.816Z",
+          "first_event_ms": 61.4,
+          "first_token_ms": 29735.3,
+          "first_citation_ms": 30409.6,
+          "answer_done_ms": 37302.1,
+          "total_ms": 38863,
+          "done_frame_type": "[DONE]",
+          "frame_count": 482,
+          "perplexity": {
+            "status": "ok",
+            "error": null,
+            "error_card_shown": false,
+            "substituted": false
+          },
+          "bridge_http_status": 200,
+          "stream_window_ms": 37302,
+          "dead_air_gaps": 0,
+          "max_gap_ms": 0,
+          "cls": 0.294,
+          "cls_shifts": 23,
+          "long_tasks": 1,
+          "long_task_max_ms": 75,
+          "long_task_total_ms": 75,
+          "console_errors": 0,
+          "page_errors": 0,
+          "failed_requests": 0,
+          "cls_samples": [
+            {
+              "t_ms": 649,
+              "value": 0.00033,
+              "node": "div[data-testid=plan-run-toggle].chat-topbar__tabs"
+            },
+            {
+              "t_ms": 1667,
+              "value": 0.0446,
+              "node": "div"
+            },
+            {
+              "t_ms": 1672,
+              "value": 0.00089,
+              "node": "section[data-testid=plan-stepper].oiu-plan.oiu-plan--reserved"
+            },
+            {
+              "t_ms": 1815,
+              "value": 0.01249,
+              "node": "div"
+            },
+            {
+              "t_ms": 1930,
+              "value": 0.01548,
+              "node": "div"
+            },
+            {
+              "t_ms": 2928,
+              "value": 0.00005,
+              "node": "span.oiu-thinking__len"
+            },
+            {
+              "t_ms": 3600,
+              "value": 0.00028,
+              "node": "div[data-testid=plan-run-toggle].chat-topbar__tabs"
+            },
+            {
+              "t_ms": 4119,
+              "value": 0.03009,
+              "node": "div"
+            },
+            {
+              "t_ms": 6699,
+              "value": 0.02929,
+              "node": "div"
+            },
+            {
+              "t_ms": 10045,
+              "value": 0.00006,
+              "node": "span.oiu-activity__elapsed"
+            },
+            {
+              "t_ms": 15167,
+              "value": 0.03655,
+              "node": "div"
+            },
+            {
+              "t_ms": 17167,
+              "value": 0.00222,
+              "node": "span.oiu-activity__elapsed"
+            },
+            {
+              "t_ms": 25852,
+              "value": 0.02476,
+              "node": "div"
+            },
+            {
+              "t_ms": 25853,
+              "value": 0.01202,
+              "node": "div"
+            },
+            {
+              "t_ms": 25864,
+              "value": 0.01113,
+              "node": "div"
+            },
+            {
+              "t_ms": 29748,
+              "value": 0.06848,
+              "node": "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming"
+            },
+            {
+              "t_ms": 29978,
+              "value": 0.00009,
+              "node": "span.oiu-caret"
+            },
+            {
+              "t_ms": 30421,
+              "value": 0.00238,
+              "node": "li.oiu-srcrow__item"
+            },
+            {
+              "t_ms": 30644,
+              "value": 0.00091,
+              "node": "li.oiu-srcrow__item"
+            },
+            {
+              "t_ms": 30882,
+              "value": 0.00062,
+              "node": "li.oiu-srcrow__item"
+            },
+            {
+              "t_ms": 31105,
+              "value": 0.00003,
+              "node": "span.oiu-caret"
+            },
+            {
+              "t_ms": 32662,
+              "value": 0.00002,
+              "node": "span.oiu-caret"
+            },
+            {
+              "t_ms": 37367,
+              "value": 0.00124,
+              "node": "div[data-testid=plan-run-toggle].chat-topbar__tabs"
+            }
+          ],
+          "long_task_samples": [
+            {
+              "t_ms": 37296,
+              "dur_ms": 75,
+              "source": "long-animation-frame"
+            }
+          ]
+        }
+      ],
+      "events": [
+        {
+          "turn": 1,
+          "name": "first-event",
+          "t_ms": 79,
+          "detail": "RUN_STARTED"
+        },
+        {
+          "turn": 1,
+          "name": "plugin-start",
+          "t_ms": 1935,
+          "detail": "Perplexity"
+        },
+        {
+          "turn": 1,
+          "name": "first-thinking-visible",
+          "t_ms": 2327
+        },
+        {
+          "turn": 1,
+          "name": "plan-created",
+          "t_ms": 3932
+        },
+        {
+          "turn": 1,
+          "name": "plugin-end",
+          "t_ms": 16492,
+          "detail": "Perplexity:ok"
+        },
+        {
+          "turn": 1,
+          "name": "first-source-in-rail",
+          "t_ms": 16659
+        },
+        {
+          "turn": 1,
+          "name": "final-badge-visible",
+          "t_ms": 16659
+        },
+        {
+          "turn": 1,
+          "name": "first-token",
+          "t_ms": 18144
+        },
+        {
+          "turn": 1,
+          "name": "first-answer-paint",
+          "t_ms": 18155
+        },
+        {
+          "turn": 1,
+          "name": "first-citation",
+          "t_ms": 18824
+        },
+        {
+          "turn": 1,
+          "name": "answer-done",
+          "t_ms": 23036,
+          "detail": "[DONE]"
+        },
+        {
+          "turn": 1,
+          "name": "composer-reset",
+          "t_ms": 23206
+        },
+        {
+          "turn": 2,
+          "name": "first-event",
+          "t_ms": 61,
+          "detail": "RUN_STARTED"
+        },
+        {
+          "turn": 2,
+          "name": "plugin-start",
+          "t_ms": 1657,
+          "detail": "Perplexity"
+        },
+        {
+          "turn": 2,
+          "name": "first-thinking-visible",
+          "t_ms": 1918
+        },
+        {
+          "turn": 2,
+          "name": "plan-created",
+          "t_ms": 4105
+        },
+        {
+          "turn": 2,
+          "name": "plugin-end",
+          "t_ms": 15011,
+          "detail": "Perplexity:ok"
+        },
+        {
+          "turn": 2,
+          "name": "first-source-in-rail",
+          "t_ms": 25849
+        },
+        {
+          "turn": 2,
+          "name": "final-badge-visible",
+          "t_ms": 25849
+        },
+        {
+          "turn": 2,
+          "name": "first-token",
+          "t_ms": 29735
+        },
+        {
+          "turn": 2,
+          "name": "first-answer-paint",
+          "t_ms": 29745
+        },
+        {
+          "turn": 2,
+          "name": "first-citation",
+          "t_ms": 30410
+        },
+        {
+          "turn": 2,
+          "name": "answer-done",
+          "t_ms": 37302,
+          "detail": "[DONE]"
+        },
+        {
+          "turn": 2,
+          "name": "composer-reset",
+          "t_ms": 38863
+        }
+      ],
+      "growth_pass": true,
+      "notes": []
+    }
+  }
+}

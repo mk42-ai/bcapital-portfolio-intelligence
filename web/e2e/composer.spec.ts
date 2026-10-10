@@ -12,6 +12,7 @@ test.describe("composer", () => {
       await page.setViewportSize(vp);
       await page.goto("/chat?skip=1");
       const shell = page.getByTestId("chat-shell"); await expect(shell).toBeVisible({ timeout: 30_000 });
+      await page.locator(".chat-shell .oiu-attach-host").first().waitFor({ state: "attached", timeout: 10_000 }).catch(() => {}); // enhancer mounts after hydration
       if (!(await page.locator(".chat-shell .oiu-attach-host").count())) { testInfo.annotations.push({ type: "soft-skip", description: "composer enhancer absent (old build)" }); test.skip(); }
       const ta = page.locator("textarea:visible").first(); await expect(ta).toBeVisible();
       const parts = [page.getByTestId("attachment-button").first(), ta, page.getByTestId("voice-mic").first(), page.locator("button.openui-agent-thread-composer__submit-button").first()];
