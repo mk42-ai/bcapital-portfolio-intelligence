@@ -15,7 +15,7 @@ const COLS: { key: SortKey; label: string; right?: boolean }[] = [
 ];
 export function DataTable({ rows, caption, sort, onSort }: { rows: TableRow[]; caption: string; sort?: SortState; onSort?: (key: SortKey) => void }) {
   return (
-    <div className="max-h-[520px] overflow-auto rounded-xl border border-border" tabIndex={0} aria-label={caption}>
+    <div className="max-h-[520px] overflow-x-auto overflow-y-auto rounded-xl border border-border [-webkit-overflow-scrolling:touch] [overscroll-behavior-y:auto] lg:max-h-none lg:overflow-y-visible" data-testid="company-table-scroller" tabIndex={0} aria-label={caption}>
       <table data-testid="company-table" className="w-full min-w-[840px] text-sm">
         <caption className="sr-only">{caption}</caption>
         <thead className="sticky top-0 bg-surface-2 text-left text-xs uppercase tracking-wide text-muted"><tr>
