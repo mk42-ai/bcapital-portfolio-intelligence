@@ -49,7 +49,7 @@ test.describe("Analyst chat — streaming", () => {
     await expect(textarea).toBeVisible();
     await expect(page.locator('img[data-testid="brand-logo"]').first()).toBeAttached();
 
-    const responseP = page.waitForResponse((r) => r.url().includes("/api/chat"), { timeout: 30_000 });
+    const responseP = page.waitForResponse((r) => /\/api\/chat(\?|$)/.test(r.url()) && r.request().method() === "POST", { timeout: 30_000 }); // not the /api/chat/prewarm GET (JSON)
     await textarea.fill(QUESTION);
     const t0 = Date.now();
     await textarea.press("Enter");

@@ -102,3 +102,9 @@ runs rf-2026-10-10T002013Z-0682e7 (23 companies, 91 items), rf-2026-10-10T004411
 ## Frontend (`web/`)
 A Next.js 15 dashboard (overview · company detail · news pulse · OnDemand chat · settings) lives in [`web/`](web/README.md).
 Live preview: https://sb-1z9qy0mx48sk.vercel.run (backend: https://sb-7d0g7nrod31w.vercel.run) · hand-off notes: [`web/docs/HANDOFF.md`](web/docs/HANDOFF.md) (§9 = live-data release 2026-10-09).
+
+## 2026-10-10 additions (see CHANGELOG.md)
+
+* `GET /pitchbook`, `GET /pitchbook/:slug`, `POST /pitchbook/ingest`, `POST /pitchbook/run` — PitchBook Investor Finder (`plugin-1777018662`) records with per-field provenance; weekly workflow `6aca3d3faeef8927baa25a05` (Mon 06:00 UTC). Env: `PITCHBOOK_WORKFLOW_ID`.
+* Frontend: `/companies` virtualized list, `/api/img` image proxy, `/api/media` document upload relay, `/api/voice/{tts,stt}` voice relays, `/api/pitchbook/*` relays (`INGEST_SECRET` on the frontend server only for "Run now").
+* Contracts used: `docs/ONDEMAND_CONTRACTS.md` (fetched live from the OnDemand docs API).
