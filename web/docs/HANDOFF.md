@@ -38,8 +38,8 @@ flowchart LR
 ## 2. URLs and IDs
 | Item | Value |
 |---|---|
-| Frontend live preview | **https://sb-3umbne3uc2g2.vercel.run** (sandbox `sbx_W6xF81UAEW2qdPnN9oq1oNwR3FhW`, redeployed 2026-10-09T23:25Z — see §8; earlier: https://sb-2yrz211gekox.vercel.run `sbx_XnBw3bQ18gn303SzlLJW7Qv6Fs0T`, port 3000; `next start` with `ONDEMAND_API_KEY` in its env; redeploy = `sandbox create` + `npm ci && npm run build && npm start`) |
-| Backend base URL (live) | **https://sb-3az18qgrrd3p.vercel.run** — sandbox `sbx_Buo0S1DoSSNBxot3Psnt31AFOIzm` (redeployed 2026-10-09T23:22Z; earlier https://sb-1gek6bq0m1au.vercel.run `sbx_s2v1UAKFK3gFbzPBGdyxZoZfIuAC`) (`/health` 200) |
+| Frontend live preview | **https://sb-1mw4ywgyt3fa.vercel.run** (sandbox `sbx_TT3hknRhFFNvTUeEMnnM0SL8VfRD`, redeployed 2026-10-10T23:32Z after the previous sandboxes expired; build `T4VH1e7Xf6_annLS_Afn5`; redeploy = `sandbox create` + `npm ci` + `next build` + `next start -H 0.0.0.0 -p 3000` with web `.env` exported). Earlier: https://sb-2bqmt98kq4ql.vercel.run (2026-10-10 QA pass), https://sb-3umbne3uc2g2.vercel.run, https://sb-2yrz211gekox.vercel.run. |
+| Backend base URL (live) | **https://sb-4wg000bgek46.vercel.run** — sandbox `sbx_WQqT9XI7aAAqzjIk3tv8dGuvUYXf` (redeployed 2026-10-10T23:29Z from the committed tree: `npm ci` + `npm run build` + `node dist/server.js`, seed DB `data/portfolio.sqlite`; `/health` 200 `db_record_count` 136, `/openapi.json` 3.1.0, contract test 12/12). Earlier: https://sb-l72jsdzjb4nt.vercel.run, https://sb-3az18qgrrd3p.vercel.run, https://sb-1gek6bq0m1au.vercel.run `sbx_s2v1UAKFK3gFbzPBGdyxZoZfIuAC`. |
 | Backend durable target | https://serverless.on-demand.io/apps/bcap-portfolio-intel — **OnDemand serverless endpoint provisioning failed** 3× (image built OK: app `6ac8de2d1f7d82eff69ac0d9`, runs chfbs…chfbv; endpoints `initializing → failed`, `containerAppEnv` never assigned). The 7 workflows already deliver to this URL; nothing changes once it comes up. |
 | Repo | https://github.com/mk42-ai/bcapital-portfolio-intelligence (`web/` = this app) |
 | Portfolio Plugin ID | **null** — `POST /plugin/v1` returned `400 {"message":"schema is required"}` for 20 payload shapes incl. the documented one; MCP `plugin_v1_plugin_create` returned an empty body; `ai_generated_tool` timed out (Cloudflare 524) ×3. Registration body ready in `../scripts/register-plugin.ts`; UI shows "registration pending" and reads `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` / `src/data/run-meta.json` at runtime. |
@@ -60,7 +60,7 @@ flowchart LR
 ## 3. Environment variables
 | Variable | Where | Value / note |
 |---|---|---|
-| `NEXT_PUBLIC_PORTFOLIO_API_URL` | web `.env` | `https://sb-4wdkkmzv7w2z.vercel.run` (override in Settings) |
+| `NEXT_PUBLIC_PORTFOLIO_API_URL` | web `.env` | `https://sb-4wg000bgek46.vercel.run` (override in Settings) |
 | `PORTFOLIO_API_URL` | web `.env` (server) | same; switch to the serverless URL when provisioned |
 | `ONDEMAND_BASE_URL` | web `.env` (server) | `https://api.on-demand.io` |
 | `ONDEMAND_API_KEY` | web `.env` (server) + frontend sandbox env | OnDemand apikey used by `/api/chat` and `/api/ondemand/*` (`apikey` header). Never `NEXT_PUBLIC_`, never logged, absent from `.next/static` (grep = 0 hits). `.env` is gitignored; copy `.env.example`. |

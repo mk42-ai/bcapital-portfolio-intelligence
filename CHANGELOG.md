@@ -25,3 +25,7 @@
 - Brand: blue-hue purge (tokens, charts, OpenUI theme, shell CSS) — computed colours stay below 0.15 saturation in the 190–260° band; `e2e/brand-hue.spec.ts`.
 - Citations: publisher-first chips with a "+N" overflow after three per claim.
 - QA evidence: `web/proof/qa-owner/` (36/36 checks at 1440×900 and 390×844, `qa_results.json`), specs `e2e/qa-owner-{a,b,c}.spec.ts`.
+
+## 2026-10-10T23:29Z — backend redeploy (no code changes)
+- `B Capital Portfolio Intelligence API` redeployed from the committed tree (`npm ci` → `npm run build` → `node dist/server.js`, seed `data/portfolio.sqlite`) to https://sb-4wg000bgek46.vercel.run after the previous sandbox expired; `/health` 200 (`db_record_count` 136), `/openapi.json` 3.1.0, `scripts/contract-test.ts` 12/12.
+- Frontend `.env` (git-ignored) repointed and rebuilt at https://sb-1mw4ywgyt3fa.vercel.run (the earlier frontend sandbox had also expired); `/overview`, `/company/1au`, `/news`, `/chat` verified 200 with the live-backend badge and zero console errors at 1440×900.
