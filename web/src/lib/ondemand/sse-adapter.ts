@@ -25,7 +25,7 @@ export type UiEvent =
   | { kind: "summary_start"; stepId?: string; index: number }
   | { kind: "summary_done"; stepId?: string; index: number; text: string }
   | { kind: "thinking"; channel: "planning" | "step" | "fulfillment" | "plan" | "step_output"; delta: string; stepId?: string }
-  | { kind: "sources"; pluginId?: string; pluginName?: string; items: Citation[] }
+  | { kind: "sources"; pluginId?: string; pluginName?: string; items: Citation[]; stepId?: string; stepTitle?: string }
   | { kind: "answer"; delta: string }
   | { kind: "answer_complete"; text: string }
   | { kind: "metrics"; publicMetrics: Record<string, number> }
@@ -110,7 +110,7 @@ export function parseFrame(ev: string, data: string): UiEvent {
     const s = asRecord(j.sources); const items = Array.isArray(s.items) ? s.items : Array.isArray(j.items) ? j.items : [];
     const cites: Citation[] = [];
     for (const it of items) { const x = asRecord(it); const url = str(x.url, 800); if (!url || !/^https?:\/\//.test(url)) continue; let host = str(x.domain, 120); if (!host) { try { host = new URL(url).hostname.replace(/^www\./, ""); } catch { host = url; } } const img = str(x.imageUrl, 800); cites.push({ url, title: (str(x.title, 160) || host), sourceName: host, ...(img && /^https?:\/\//.test(img) ? { imageUrl: img } : {}) }); }
-    return { kind: "sources", pluginId: str(s.pluginId, 80) || undefined, pluginName: str(s.pluginName, 120) || undefined, items: cites };
+    return { kind: "sources", pluginId: str(s.pluginId, 80) || undefined, pluginName: str(s.pluginName, 120) || undefined, items: cites, stepId: str(j.stepId, 40) || undefined, stepTitle: str(j.stepTitle, 160) || undefined };
   }
   if (mapped === "clarification") {
     const cr = asRecord(j.clarificationRequest); const qs = Array.isArray(cr.queries) ? cr.queries : [];

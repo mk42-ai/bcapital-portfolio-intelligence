@@ -1,0 +1,252 @@
+{
+  "question": "Which SSE frame carries the between-step summarisation, and does it match what src/lib/ondemand/eventMap.ts binds (statusLog summarize_history.initialized/.completed)?",
+  "observed_utc": {
+    "turn1": "2026-10-10T07:35:19.589Z",
+    "turn2": "2026-10-10T07:35:41.951Z"
+  },
+  "session_id": "6ac9eaad261cbe23404841b1",
+  "found_structural_summarisation_frame": false,
+  "event_name": null,
+  "status_type": null,
+  "explanation": "Across both turns (raw upstream SSE, 229 + 583 frames) OnDemand emitted NO statusLog frame at all: zero occurrences of 'statusLog', 'currentStatusLog', 'statusType', 'plan_created' or 'summarize_history'. The only SSE event names were thinking / message / heartbeat and the only eventTypes were planning_thinking, planning_output, step_thinking, step_output, plugin_sources, fulfillment_thinking, fulfillment, metricsLog. The 35 frames whose text matched /summar/i in turn 2 are LLM token deltas (the user prompt asked for a summary) \u2014 not a structural event. The step boundary the UI must mark therefore has to be derived: the last frame of step N is its plugin_sources (eventType plugin_sources, stepId N, stepTitle) and the first frame of step N+1 is step_thinking with stepId N+1.",
+  "step_boundary_frames_observed": {
+    "end_of_step_1": {
+      "ms": 22427,
+      "eventType": "plugin_sources",
+      "stepId": "1",
+      "stepTitle": "Searching latest financing news",
+      "items": 7
+    },
+    "first_frame_of_step_2": {
+      "ms": 23674,
+      "eventType": "step_thinking",
+      "stepId": "2"
+    },
+    "gap_ms": 1247
+  },
+  "sample_payload": {
+    "sessionId": "6ac9eaad261cbe23404841b1",
+    "messageId": "6ac9eacef7979c7d562ae8b5",
+    "eventIndex": 336,
+    "eventType": "plugin_sources",
+    "stepId": "1",
+    "stepTitle": "Searching latest financing news",
+    "status": "processing",
+    "sources": {
+      "agentId": "agent-1722260873",
+      "pluginId": "plugin-1722260873",
+      "pluginName": "Perplexity",
+      "operationId": "perplexity",
+      "items": [
+        {
+          "title": "Fervo and X-Energy: How Federal Support Powered IPO Successes",
+          "url": "https://efifoundation.org/energy-innovation-project-analysis/fervo-and-x-energy-how-federal-support-powered-clean-firm-ipo-successes/",
+          "domain": "efifoundation.org",
+          "imageUrl": "https://efifoundation.org/wp-content/uploads/sites/3/2026/05/FervoXenergy-Figure2-1-1024x512.png"
+        },
+        {
+          "title": "Fervo's IPO Establishes Enhanced Geothermal Baselines, Presents New Competition to Fission, and Adds a New LDES Class | Cleantech Group",
+          "url": "https://cleantech.com/fervo-energys-ipo-a-validation-of-geothermal-as-category/",
+          "domain": "cleantech.com",
+          "imageUrl": "https://cleantech.com/wp-content/uploads/2026/05/Frame-2147239544.png"
+        },
+        "\u2026 5 more"
+      ]
+    }
+  },
+  "eventmap_binding_before": {
+    "summarize_history.initialized": "summary_start",
+    "summarize_history.completed": "summary_done"
+  },
+  "eventmap_rebound": true,
+  "rebind": "eventMap.ts keeps the documented statusLog summarize_history.* pair (it costs nothing and will light up the moment OnDemand emits it) AND gains a DERIVED binding: STEP_BOUNDARY = { endOfStep: 'plugin_sources', startOfNextStep: 'step_thinking' | 'step_output' }. The bridge (src/app/api/chat/route.ts) now emits ondemand.summary {phase:'start', derived:true, index:N} when plugin_sources for step N arrives while the plan has more steps, and ondemand.summary {phase:'done', derived:true, text:'<step title> \u2014 <k> sources from <hosts>'} when the next step's first frame arrives, so the Summarising pill + collapsed step card render from the real step boundary instead of never.",
+  "all_event_types_seen": {
+    "upstream_sse_event_names": [
+      "heartbeat",
+      "message",
+      "thinking"
+    ],
+    "upstream_eventTypes": [
+      "fulfillment",
+      "fulfillment_thinking",
+      "metricsLog",
+      "planning_output",
+      "planning_thinking",
+      "plugin_sources",
+      "step_output",
+      "step_thinking"
+    ],
+    "upstream_statusTypes": [],
+    "per_turn": {
+      "turn1": {
+        "event_names": {
+          "thinking": 74,
+          "heartbeat": 7,
+          "message": 148
+        },
+        "eventTypes": {
+          "planning_thinking": 18,
+          "planning_output": 16,
+          "step_thinking": 6,
+          "step_output": 17,
+          "plugin_sources": 1,
+          "fulfillment_thinking": 17,
+          "fulfillment": 145,
+          "metricsLog": 1
+        },
+        "statusTypes": {}
+      },
+      "turn2": {
+        "event_names": {
+          "thinking": 427,
+          "heartbeat": 14,
+          "message": 142
+        },
+        "eventTypes": {
+          "planning_thinking": 189,
+          "planning_output": 43,
+          "step_thinking": 105,
+          "step_output": 47,
+          "plugin_sources": 2,
+          "fulfillment_thinking": 43,
+          "fulfillment": 138,
+          "metricsLog": 1
+        },
+        "statusTypes": {}
+      }
+    },
+    "bridge_ag_ui_frames": {
+      "desktop-turn1": {
+        "RUN_STARTED": 1,
+        "CUSTOM:ondemand.status#connecting": 1,
+        "CUSTOM:ondemand.status#creating-session": 1,
+        "CUSTOM:ondemand.session": 1,
+        "CUSTOM:ondemand.status#querying": 1,
+        "CUSTOM:ondemand.request": 1,
+        "CUSTOM:ondemand.status#streaming": 1,
+        "CUSTOM:ondemand.status#planning": 3,
+        "TOOL_CALL_START": 1,
+        "TOOL_CALL_ARGS": 1,
+        "TOOL_CALL_END": 1,
+        "CUSTOM:ondemand.status#researching": 1,
+        "CUSTOM:ondemand.thinking": 241,
+        "CUSTOM:ondemand.plan": 1,
+        "CUSTOM:ondemand.heartbeat": 3,
+        "CUSTOM:ondemand.step#start": 2,
+        "CUSTOM:ondemand.sources": 3,
+        "TOOL_CALL_RESULT": 1,
+        "CUSTOM:ondemand.status#answering": 2,
+        "TEXT_MESSAGE_START": 1,
+        "TEXT_MESSAGE_CONTENT": 137,
+        "CUSTOM:ondemand.metrics": 1,
+        "TEXT_MESSAGE_END": 1,
+        "CUSTOM:ondemand.step#done": 1,
+        "CUSTOM:ondemand.status#done": 1,
+        "RUN_FINISHED": 1,
+        "[DONE]": 1,
+        "STREAM_CLOSED": 1
+      },
+      "desktop-turn2": {
+        "RUN_STARTED": 1,
+        "CUSTOM:ondemand.status#connecting": 1,
+        "CUSTOM:ondemand.session": 1,
+        "CUSTOM:ondemand.status#querying": 1,
+        "CUSTOM:ondemand.request": 1,
+        "CUSTOM:ondemand.status#streaming": 1,
+        "CUSTOM:ondemand.status#planning": 3,
+        "TOOL_CALL_START": 1,
+        "TOOL_CALL_ARGS": 1,
+        "TOOL_CALL_END": 1,
+        "CUSTOM:ondemand.status#researching": 1,
+        "CUSTOM:ondemand.thinking": 254,
+        "CUSTOM:ondemand.plan": 1,
+        "CUSTOM:ondemand.step#start": 2,
+        "CUSTOM:ondemand.heartbeat": 3,
+        "CUSTOM:ondemand.sources": 3,
+        "TOOL_CALL_RESULT": 1,
+        "CUSTOM:ondemand.status#answering": 2,
+        "TEXT_MESSAGE_START": 1,
+        "TEXT_MESSAGE_CONTENT": 119,
+        "CUSTOM:ondemand.metrics": 1,
+        "TEXT_MESSAGE_END": 1,
+        "CUSTOM:ondemand.step#done": 1,
+        "CUSTOM:ondemand.status#done": 1,
+        "RUN_FINISHED": 1,
+        "[DONE]": 1,
+        "STREAM_CLOSED": 1
+      },
+      "mobile-turn1": {
+        "RUN_STARTED": 1,
+        "CUSTOM:ondemand.status#connecting": 1,
+        "CUSTOM:ondemand.status#creating-session": 1,
+        "CUSTOM:ondemand.session": 1,
+        "CUSTOM:ondemand.status#querying": 1,
+        "CUSTOM:ondemand.request": 1,
+        "CUSTOM:ondemand.status#streaming": 1,
+        "CUSTOM:ondemand.status#planning": 3,
+        "TOOL_CALL_START": 1,
+        "TOOL_CALL_ARGS": 1,
+        "TOOL_CALL_END": 1,
+        "CUSTOM:ondemand.status#researching": 1,
+        "CUSTOM:ondemand.thinking": 95,
+        "CUSTOM:ondemand.plan": 1,
+        "CUSTOM:ondemand.step#start": 1,
+        "CUSTOM:ondemand.heartbeat": 2,
+        "CUSTOM:ondemand.sources": 2,
+        "TOOL_CALL_RESULT": 1,
+        "CUSTOM:ondemand.status#answering": 1,
+        "TEXT_MESSAGE_START": 1,
+        "TEXT_MESSAGE_CONTENT": 109,
+        "CUSTOM:ondemand.metrics": 1,
+        "TEXT_MESSAGE_END": 1,
+        "CUSTOM:ondemand.step#done": 1,
+        "CUSTOM:ondemand.status#done": 1,
+        "RUN_FINISHED": 1,
+        "[DONE]": 1,
+        "STREAM_CLOSED": 1
+      },
+      "mobile-turn2": {
+        "RUN_STARTED": 1,
+        "CUSTOM:ondemand.status#connecting": 1,
+        "CUSTOM:ondemand.session": 1,
+        "CUSTOM:ondemand.status#querying": 1,
+        "CUSTOM:ondemand.request": 1,
+        "CUSTOM:ondemand.status#streaming": 1,
+        "CUSTOM:ondemand.status#planning": 3,
+        "TOOL_CALL_START": 1,
+        "TOOL_CALL_ARGS": 1,
+        "TOOL_CALL_END": 1,
+        "CUSTOM:ondemand.status#researching": 1,
+        "CUSTOM:ondemand.thinking": 568,
+        "CUSTOM:ondemand.plan": 1,
+        "CUSTOM:ondemand.heartbeat": 4,
+        "CUSTOM:ondemand.step#start": 2,
+        "CUSTOM:ondemand.sources": 3,
+        "TOOL_CALL_RESULT": 1,
+        "CUSTOM:ondemand.status#answering": 2,
+        "TEXT_MESSAGE_START": 1,
+        "TEXT_MESSAGE_CONTENT": 153,
+        "CUSTOM:ondemand.metrics": 1,
+        "TEXT_MESSAGE_END": 1,
+        "CUSTOM:ondemand.step#done": 1,
+        "CUSTOM:ondemand.status#done": 1,
+        "RUN_FINISHED": 1,
+        "[DONE]": 1,
+        "STREAM_CLOSED": 1
+      }
+    }
+  },
+  "eventmap_coverage": {
+    "upstream_eventTypes_bound_in_eventMap": [
+      "fulfillment",
+      "fulfillment_thinking",
+      "metricsLog",
+      "planning_output",
+      "planning_thinking",
+      "plugin_sources",
+      "step_output",
+      "step_thinking"
+    ],
+    "unbound": []
+  }
+}

@@ -2,7 +2,7 @@
 import "@openuidev/react-ui/styles/index.css";
 import "./response-theme.css";
 import "./shell.css";
-import { Suspense, memo, useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { Suspense, memo, useEffect, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { useSearchParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -33,7 +33,7 @@ const starters = [
 /** Chat endpoint — overridable for local mock-SSE verification (NEXT_PUBLIC_CHAT_API_URL=http://127.0.0.1:3404/api/chat). */
 const CHAT_API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || "/api/chat";
 /** Google favicon service for source chips (favicons only — never AI-generated assets). */
-export const faviconFor = (url: string) => `https://www.google.com/s2/favicons?domain=${encodeURIComponent(hostOf(url))}&sz=32`;
+export const faviconFor = (url: string) => `/api/favicon?host=${encodeURIComponent(hostOf(url))}`;
 
 /* ------------------------------------------------------------------------------------------------------------------
  * Live-stream store. Fed by a tee of the SSE body (res.clone()) in the fetch wrapper — independent of OpenUI's own parser.
@@ -53,10 +53,10 @@ type StreamState = {
   firstStatusMs: number | null; firstTokenMs: number | null; firstCitationMs: number | null; chunks: number; thinking: string; thinkingKinds: string[]; error: StreamError;
   sources: Source[]; metrics: Record<string, number> | null; lastThreadId: string | null;
   pluginIds: string[]; suggested: { id: string; name: string; logoUrl?: string }[]; plan: { objective: string | null; steps: PlanStep[] } | null;
-  summaries: StepSummary[]; prompt: Prompt | null; filler: boolean; text: string; answerDone: boolean;
+  summaries: StepSummary[]; prompt: Prompt | null; filler: boolean; fillerTick: number; text: string; answerDone: boolean;
   request: Record<string, unknown> | null; agentLog: { subtype: string; at: number }[]; stepRaw: Record<string, string>;
 };
-const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, text: "", answerDone: false, request: null, agentLog: [], stepRaw: {} };
+const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, request: null, agentLog: [], stepRaw: {} };
 let streamState: StreamState = IDLE;
 let pending: Partial<StreamState> | null = null; let rafId = 0;
 const liveSources = new Map<string, Source[]>();
@@ -139,7 +139,7 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
           case CE.awaitingInput: setStream({ prompt: { kind: "awaiting_input", prompt: String(v.prompt ?? ""), options: Array.isArray(v.options) ? v.options.map(String) : [] }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
           case CE.requireCreds: setStream({ prompt: { kind: "require_creds", pluginId: (v.pluginId as string) ?? null, service: (v.service as string) ?? null, fields: (v.fields as { key: string; label?: string; type?: string }[]) ?? [] }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
           case CE.awaitingBrowserAction: setStream({ prompt: { kind: "awaiting_browser_action", action: (v.action as string) ?? null, message: (v.message as string) ?? null, url: (v.url as string) ?? null }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
-          case CE.filler: setStream({ filler: !!v.on }); break;
+          case CE.filler: setStream({ filler: !!v.on, fillerTick: v.on ? Number(v.tick ?? 0) : 0 }, true); break;
           case CE.request: setStream({ request: v }); break;
           case CE.agent: setStream({ agentLog: [...st.agentLog.slice(-30), { subtype: String(v.subtype ?? "agent"), at: now - t0 }] }); break;
         }
@@ -188,7 +188,7 @@ function useThrottled<T>(value: T, ms: number): T {
   return v;
 }
 const CitedMarkdown = memo(function CitedMarkdown({ text, known, streaming, onCites }: { text: string; known: Source[]; streaming: boolean; onCites?: (c: Cite[]) => void }) {
-  const throttled = useThrottled(text, streaming ? 60 : 0);
+  const throttled = useThrottled(text, streaming ? 90 : 0);
   const { md, cites } = useMemo(() => extractCitations(throttled, known, streaming), [throttled, known, streaming]);
   useEffect(() => { onCites?.(cites); }, [cites, onCites]);
   const components = useMemo(() => ({
@@ -258,8 +258,12 @@ function ThinkingTrace({ text, kinds, live }: { text: string; kinds?: string[]; 
   );
 }
 /** Plan stepper (plan_created / step start / done / failed). */
-function PlanStepper({ plan }: { plan: { objective: string | null; steps: PlanStep[] } | null }) {
-  if (!plan || (!plan.objective && !plan.steps.length)) return null;
+function PlanStepper({ plan, reserve }: { plan: { objective: string | null; steps: PlanStep[] } | null; reserve?: boolean }) {
+  if (!plan || (!plan.objective && !plan.steps.length)) {
+    // Reserved slot while the planner is still streaming its JSON: same box (border + min-height) the real stepper will occupy, so the
+    // plan arriving does not push the plugin cards / thinking trace / working band down (the 0.10 CLS spike at plan_created on mobile).
+    return reserve ? <section className="oiu-plan oiu-plan--reserved" data-testid="plan-stepper" data-state="pending" aria-label="Execution plan"><p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />Planning…</p><div className="oiu-shimmer oiu-shimmer--plan" aria-hidden><span /><span /></div></section> : null;
+  }
   return (
     <section className="oiu-plan" data-testid="plan-stepper" aria-label="Execution plan">
       <p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />{plan.objective || "Execution plan"}</p>
@@ -384,7 +388,7 @@ const PluginTimeline: ToolCallTimelineComponent = ({ activities, steps, isLast, 
   if (cards.length === 0 && !liveText && !(live && (st.plan || st.summaries.length || st.prompt))) { void awaitingResponse; return null; }
   const railSources = live ? (st.error?.code === "plugin_error" ? [] : liveCites.length ? liveCites : st.sources) : [];
   return (<>
-    {live && <PlanStepper plan={st.plan} />}
+    {live && <PlanStepper plan={st.plan} reserve />}
     {cards.length > 0 && <ol className="oiu-activity-list" aria-label="Plugin activity">
       {cards.map((a) => {
         const i = a.input as PluginInput; const pid = i.pluginId ?? PLUGIN_ID; const name = i.plugin || a.toolName || catalogueName(pid);
@@ -411,7 +415,7 @@ const PluginTimeline: ToolCallTimelineComponent = ({ activities, steps, isLast, 
     {live && st.summaries.map((s) => <StepSummaryCard key={s.index} s={s} live />)}
     {live && st.thinking && <ThinkingTrace text={st.thinking} kinds={st.thinkingKinds} live />}
     {live && st.prompt && <PromptCard prompt={st.prompt} sessionId={st.sessionId} onAnswer={(text) => { setStream({ prompt: null }, true); void processMessage({ role: "user", content: text }); }} />}
-    {live && st.filler && !liveText && <p className="oiu-working" data-testid="filler" role="status">{LABEL.working}</p>}
+    {live && !liveText && <WorkingBand on={st.filler} tick={st.fillerTick} phase={st.detail} />}
     {(liveText || (live && st.phase === "answering")) && (
       <div className="oiu-assistant oiu-assistant--streaming" aria-live="polite" aria-busy="true" data-testid="assistant-streaming">
         <div className="oiu-assistant__avatar" aria-hidden><Bot className="size-4" strokeWidth={2} /></div>
@@ -419,12 +423,28 @@ const PluginTimeline: ToolCallTimelineComponent = ({ activities, steps, isLast, 
           {/* Rail + live badge sit ABOVE the growing text so streaming never pushes a layout box that is already painted (CLS ≈ 0). */}
           <AnswerBadge meta={{ pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, totalMs: null, metrics: null }} live />
           <SourceList sources={railSources} live streamingNow />
-          <CitedMarkdown text={liveText} known={st.error?.code === "plugin_error" ? [] : st.sources} streaming onCites={setLiveCites} />
+          <div className="oiu-answer-stage"><CitedMarkdown text={liveText} known={st.error?.code === "plugin_error" ? [] : st.sources} streaming onCites={setLiveCites} /></div>
         </div>
       </div>
     )}
   </>);
 };
+/** Reserved-height stage slot under the activity cards. While the bridge's stall watchdog reports >600 ms of silence it shows the animated
+ *  "Working…" band (shimmer + elapsed ticker); otherwise the slot stays empty but keeps its height, so toggling it never shifts layout. */
+function WorkingBand({ on, tick, phase }: { on: boolean; tick: number; phase: string }) {
+  const [dots, setDots] = useState(0);
+  useEffect(() => { if (!on) return; const id = setInterval(() => setDots((d) => (d + 1) % 4), 400); return () => clearInterval(id); }, [on]);
+  return (
+    <div className={`oiu-slot oiu-slot--working${on ? " oiu-slot--on" : ""}`} data-testid="working-band" data-on={on ? "true" : "false"} data-tick={tick} role="status" aria-live="polite">
+      {on && (<>
+        <span className="oiu-working__pulse" aria-hidden><span /><span /><span /></span>
+        <span className="oiu-working__label">{LABEL.working.replace(/…$/, "")}{".".repeat(dots)}</span>
+        <span className="oiu-working__phase">{phase && phase !== LABEL.working ? phase : "still waiting on OnDemand"}</span>
+        <span className="oiu-working__tick" data-testid="stall-tick" aria-hidden>{tick > 0 ? `+${(tick * 0.3).toFixed(1)} s` : ""}</span>
+      </>)}
+    </div>
+  );
+}
 function RawFrame({ raw }: { raw: string }) {
   const [open, setOpen] = useState(false);
   return <span className="oiu-raw"><button type="button" className="oiu-error__raw-toggle" aria-expanded={open} onClick={() => setOpen((v) => !v)}>{open ? "hide raw frame" : "show raw frame"}</button>{open && <pre className="oiu-error__raw" data-testid="raw-frame">{raw}</pre>}</span>;
@@ -444,14 +464,17 @@ function ScrollAnchor() {
   }, [isRunning]);
   // Follow-to-bottom with an INSTANT scrollTop write (OpenUI's own smooth scrollTo lags behind fast growth on narrow viewports and leaves a
   // 100–300 px gap). Only while the user has not scrolled away (gap < 120 px); a programmatic scroll never counts as a layout shift.
-  useEffect(() => {
+  useLayoutEffect(() => {
     const node = el.current; if (!node || !isRunning) return;
     const gap = node.scrollHeight - node.scrollTop - node.clientHeight;
     if (atBottom.current && gap > 2) node.scrollTop = node.scrollHeight;
     else atBottom.current = gap < 120;
   }, [st.version, isRunning]);
-  if (!away || !isRunning) return null;
-  return <button type="button" className="oiu-jump" data-testid="jump-to-latest" onClick={() => { const node = el.current; if (node) { node.scrollTo({ top: node.scrollHeight, behavior: "smooth" }); atBottom.current = true; setAway(false); } }}><ArrowDown className="size-3.5" aria-hidden /> Jump to latest</button>;
+  // The "Jump to latest" pill is PORTALLED into the scroll container (absolute, out of flow). Rendering it as a sibling of the thread made
+  // OpenUI's flex row shrink the whole thread by 128 px on every toggle — the single biggest layout shift in the recordings (CLS 0.23–0.81).
+  const host = typeof document !== "undefined" ? el.current?.parentElement ?? null : null;
+  if (!away || !isRunning || !host) return null;
+  return createPortal(<button type="button" className="oiu-jump" data-testid="jump-to-latest" onClick={() => { const node = el.current; if (node) { node.scrollTo({ top: node.scrollHeight, behavior: "smooth" }); atBottom.current = true; setAway(false); } }}><ArrowDown className="size-3.5" aria-hidden /> Jump to latest</button>, host);
 }
 
 /**
@@ -469,9 +492,9 @@ function PendingRow() {
     const tick = setInterval(() => setNow(Date.now()), 500);
     return () => { mo.disconnect(); clearInterval(tick); };
   }, [isRunning]);
-  if (!isRunning || !host || st.phase === "answering") return null;
+  if (!isRunning || !host || st.firstTokenMs != null) return null;
   const secs = st.startedAt ? Math.max(0, (now - st.startedAt) / 1000) : 0;
-  const label = st.filler ? "…" : st.detail || PHASE_LABEL.connecting;
+  const label = st.detail || PHASE_LABEL.connecting;
   return createPortal(
     <p className="oiu-activity oiu-activity--pending" role="status" data-phase={st.phase || "connecting"} data-testid="pending-row" data-first-status-ms={st.firstStatusMs ?? ""}>
       <Loader2 className="size-3.5 oiu-spin" aria-hidden />

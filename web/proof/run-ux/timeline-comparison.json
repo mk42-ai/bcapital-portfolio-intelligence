@@ -1,0 +1,1017 @@
+{
+  "generated_utc": "2026-10-10T08:52:47.181Z",
+  "viewports": {
+    "desktop": {
+      "overall_score": {
+        "before": 7,
+        "after": 10,
+        "delta": 3
+      },
+      "growth_pass": {
+        "before": false,
+        "after": true,
+        "failed_before": [
+          "Escape collapses the expanded tile and keeps focus"
+        ],
+        "failed_after": []
+      },
+      "turns": {
+        "turn1": {
+          "prompt": "What is the latest news about Fervo Energy? Cite sources.",
+          "timeline": {
+            "first_sse_frame": {
+              "before": 75.8,
+              "after": 78.8,
+              "delta": 3
+            },
+            "first_thinking_visible": {
+              "before": 2776.6,
+              "after": 2051,
+              "delta": -725.6
+            },
+            "plan_created": {
+              "before": 7903.5,
+              "after": 3477.9,
+              "delta": -4425.6
+            },
+            "plan_visible": {
+              "before": 7917.6,
+              "after": 2051,
+              "delta": -5866.6
+            },
+            "first_between_step_summary": {
+              "before": null,
+              "after": null
+            },
+            "first_between_step_summary_visible": {
+              "before": null,
+              "after": null
+            },
+            "between_step_summary_done": {
+              "before": null,
+              "after": null
+            },
+            "summary_done_visible": {
+              "before": null,
+              "after": null
+            },
+            "first_inline_citation_chip": {
+              "before": 34440.9,
+              "after": 16810.6,
+              "delta": -17630.3
+            },
+            "first_answer_token": {
+              "before": 33530.6,
+              "after": 15969.5,
+              "delta": -17561.1
+            },
+            "first_answer_paint": {
+              "before": 33540.7,
+              "after": 15988.2,
+              "delta": -17552.5
+            },
+            "first_source_in_rail": {
+              "before": 19884.9,
+              "after": 14091.8,
+              "delta": -5793.1
+            },
+            "final_badge_visible": {
+              "before": 19884.9,
+              "after": 14091.8,
+              "delta": -5793.1
+            },
+            "error_card_visible": {
+              "before": null,
+              "after": null
+            },
+            "done": {
+              "before": 39623.7,
+              "after": 22567.3,
+              "delta": -17056.4
+            },
+            "total_ms": {
+              "before": 39821,
+              "after": 22716,
+              "delta": -17105
+            },
+            "composer_reset_ms": {
+              "before": 39821,
+              "after": 22716,
+              "delta": -17105
+            },
+            "frame_count": {
+              "before": 412,
+              "after": 332,
+              "delta": -80
+            },
+            "request_body_disclosed": {
+              "before": true,
+              "after": true
+            },
+            "model_row_text": {
+              "before": "DeepSeek Flash v4.1 · predefined-deepseek-flash · reasoning medium · stream",
+              "after": "DeepSeek Flash v4.1 · predefined-deepseek-flash · reasoning medium · stream"
+            },
+            "plugins": {
+              "before": [
+                {
+                  "id": "plugin-1722260873",
+                  "start_ms": 2754.6,
+                  "end_ms": 19853.6,
+                  "status": "ok",
+                  "sources": 10
+                }
+              ],
+              "after": [
+                {
+                  "id": "plugin-1722260873",
+                  "start_ms": 2031.1,
+                  "end_ms": 14059.5,
+                  "status": "ok",
+                  "sources": 10
+                }
+              ]
+            },
+            "perplexity_status": {
+              "before": "ok",
+              "after": "ok"
+            }
+          },
+          "metrics": {
+            "score": {
+              "before": 7,
+              "after": 10,
+              "delta": 3
+            },
+            "penalties": {
+              "before": {
+                "dead_air": 0,
+                "cls": 0,
+                "long_frames": 0,
+                "errors": 2,
+                "growth": 1
+              },
+              "after": {
+                "dead_air": 0,
+                "cls": 0,
+                "long_frames": 0,
+                "errors": 0,
+                "growth": 0
+              }
+            },
+            "dead_air_gaps_count": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "gaps_over_800_any": {
+              "before": 3,
+              "after": 1,
+              "delta": -2
+            },
+            "gaps_bridged_by_filler": {
+              "before": 3,
+              "after": 1,
+              "delta": -2
+            },
+            "max_gap_ms": {
+              "before": 9751,
+              "after": 1955,
+              "delta": -7796
+            },
+            "cumulative_layout_shift": {
+              "before": 0.0173,
+              "after": 0.0307,
+              "delta": 0
+            },
+            "layout_shift_count": {
+              "before": 14,
+              "after": 17,
+              "delta": 3
+            },
+            "top_shifting_nodes": {
+              "before": [
+                {
+                  "node": "div",
+                  "value": 0.0137
+                },
+                {
+                  "node": "svg",
+                  "value": 0.0103
+                },
+                {
+                  "node": "ol.oiu-activity-list",
+                  "value": 0.0093
+                }
+              ],
+              "after": [
+                {
+                  "node": "div",
+                  "value": 0.0213
+                },
+                {
+                  "node": "div[data-testid=thinking-trace].oiu-thinking",
+                  "value": 0.0123
+                },
+                {
+                  "node": "div[data-testid=working-band].oiu-slot.oiu-slot--working",
+                  "value": 0.0123
+                }
+              ]
+            },
+            "long_frames_over_50ms": {
+              "before": 1,
+              "after": 2,
+              "delta": 1
+            },
+            "long_frame_max_ms": {
+              "before": 76.9,
+              "after": 76.5,
+              "delta": -0.4
+            },
+            "console_errors": {
+              "before": 3,
+              "after": 0,
+              "delta": -3
+            },
+            "page_errors": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "failed_requests": {
+              "before": 3,
+              "after": 0,
+              "delta": -3
+            },
+            "favicon_failures": {
+              "before": 3,
+              "after": 0,
+              "delta": -3
+            },
+            "visible_dom_changes": {
+              "before": 344,
+              "after": 230,
+              "delta": -114
+            }
+          }
+        },
+        "turn2": {
+          "prompt": "Compare the latest funding and project news of Fervo Energy and Ormat Technologies, then give me a one-paragraph summary with citations.",
+          "timeline": {
+            "first_sse_frame": {
+              "before": 62.5,
+              "after": 79.7,
+              "delta": 17.2
+            },
+            "first_thinking_visible": {
+              "before": 1840.8,
+              "after": 1566.9,
+              "delta": -273.9
+            },
+            "plan_created": {
+              "before": 6339.2,
+              "after": 5673.9,
+              "delta": -665.3
+            },
+            "plan_visible": {
+              "before": 6351.2,
+              "after": 1566.9,
+              "delta": -4784.3
+            },
+            "first_between_step_summary": {
+              "before": null,
+              "after": 16133.9,
+              "delta": null
+            },
+            "first_between_step_summary_visible": {
+              "before": null,
+              "after": 16155.8,
+              "delta": null
+            },
+            "between_step_summary_done": {
+              "before": null,
+              "after": 17662.1,
+              "delta": null
+            },
+            "summary_done_visible": {
+              "before": null,
+              "after": 17680.8,
+              "delta": null
+            },
+            "first_inline_citation_chip": {
+              "before": null,
+              "after": 29953,
+              "delta": null
+            },
+            "first_answer_token": {
+              "before": 28344.1,
+              "after": 29387.8,
+              "delta": 1043.7
+            },
+            "first_answer_paint": {
+              "before": 28356.5,
+              "after": 29412.5,
+              "delta": 1056
+            },
+            "first_source_in_rail": {
+              "before": 17741.5,
+              "after": 26031.1,
+              "delta": 8289.6
+            },
+            "final_badge_visible": {
+              "before": 17741.5,
+              "after": 26031.1,
+              "delta": 8289.6
+            },
+            "error_card_visible": {
+              "before": null,
+              "after": null
+            },
+            "done": {
+              "before": 34444.1,
+              "after": 34547.1,
+              "delta": 103
+            },
+            "total_ms": {
+              "before": 34563,
+              "after": 36101,
+              "delta": 1538
+            },
+            "composer_reset_ms": {
+              "before": 34563,
+              "after": 36101,
+              "delta": 1538
+            },
+            "frame_count": {
+              "before": 406,
+              "after": 464,
+              "delta": 58
+            },
+            "request_body_disclosed": {
+              "before": true,
+              "after": true
+            },
+            "model_row_text": {
+              "before": "DeepSeek Flash v4.1 · predefined-deepseek-flash · reasoning medium · stream",
+              "after": "DeepSeek Flash v4.1 · predefined-deepseek-flash · reasoning medium · stream"
+            },
+            "plugins": {
+              "before": [
+                {
+                  "id": "plugin-1722260873",
+                  "start_ms": 1817.4,
+                  "end_ms": 17725.7,
+                  "status": "ok",
+                  "sources": 10
+                }
+              ],
+              "after": [
+                {
+                  "id": "plugin-1722260873",
+                  "start_ms": 1546.7,
+                  "end_ms": 16133.9,
+                  "status": "ok",
+                  "sources": 9
+                }
+              ]
+            },
+            "perplexity_status": {
+              "before": "ok",
+              "after": "ok"
+            }
+          },
+          "metrics": {
+            "score": {
+              "before": 7,
+              "after": 10,
+              "delta": 3
+            },
+            "penalties": {
+              "before": {
+                "dead_air": 0,
+                "cls": 2,
+                "long_frames": 0,
+                "errors": 0,
+                "growth": 1
+              },
+              "after": {
+                "dead_air": 0,
+                "cls": 0,
+                "long_frames": 0,
+                "errors": 0,
+                "growth": 0
+              }
+            },
+            "dead_air_gaps_count": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "gaps_over_800_any": {
+              "before": 7,
+              "after": 1,
+              "delta": -6
+            },
+            "gaps_bridged_by_filler": {
+              "before": 7,
+              "after": 1,
+              "delta": -6
+            },
+            "max_gap_ms": {
+              "before": 11390,
+              "after": 1996,
+              "delta": -9394
+            },
+            "cumulative_layout_shift": {
+              "before": 0.2294,
+              "after": 0.0251,
+              "delta": -0.2
+            },
+            "layout_shift_count": {
+              "before": 4,
+              "after": 14,
+              "delta": 10
+            },
+            "top_shifting_nodes": {
+              "before": [
+                {
+                  "node": "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming",
+                  "value": 0.1421
+                },
+                {
+                  "node": "div[data-testid=answer-markdown].oiu-md",
+                  "value": 0.1421
+                },
+                {
+                  "node": "div.openui-agent-thread-composer__action-bar",
+                  "value": 0.1421
+                }
+              ],
+              "after": [
+                {
+                  "node": "div",
+                  "value": 0.0146
+                },
+                {
+                  "node": "div[data-testid=thinking-trace].oiu-thinking",
+                  "value": 0.0098
+                },
+                {
+                  "node": "div[data-testid=working-band].oiu-slot.oiu-slot--working",
+                  "value": 0.0098
+                }
+              ]
+            },
+            "long_frames_over_50ms": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "long_frame_max_ms": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "console_errors": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "page_errors": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "failed_requests": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "favicon_failures": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "visible_dom_changes": {
+              "before": 132,
+              "after": 431,
+              "delta": 299
+            }
+          }
+        }
+      }
+    },
+    "mobile": {
+      "overall_score": {
+        "before": 6.5,
+        "after": 7.5,
+        "delta": 1
+      },
+      "growth_pass": {
+        "before": false,
+        "after": true,
+        "failed_before": [
+          "Escape collapses the expanded tile and keeps focus"
+        ],
+        "failed_after": []
+      },
+      "turns": {
+        "turn1": {
+          "prompt": "What is the latest news about Fervo Energy? Cite sources.",
+          "timeline": {
+            "first_sse_frame": {
+              "before": 91.4,
+              "after": 68.9,
+              "delta": -22.5
+            },
+            "first_thinking_visible": {
+              "before": 2773,
+              "after": 2466.1,
+              "delta": -306.9
+            },
+            "plan_created": {
+              "before": 4102.2,
+              "after": 7417.5,
+              "delta": 3315.3
+            },
+            "plan_visible": {
+              "before": 4114.8,
+              "after": 2466.1,
+              "delta": -1648.7
+            },
+            "first_between_step_summary": {
+              "before": null,
+              "after": 18145.8,
+              "delta": null
+            },
+            "first_between_step_summary_visible": {
+              "before": null,
+              "after": 18164.9,
+              "delta": null
+            },
+            "between_step_summary_done": {
+              "before": null,
+              "after": 18969,
+              "delta": null
+            },
+            "summary_done_visible": {
+              "before": null,
+              "after": 18977.6,
+              "delta": null
+            },
+            "first_inline_citation_chip": {
+              "before": 20223.7,
+              "after": 45169.8,
+              "delta": 24946.1
+            },
+            "first_answer_token": {
+              "before": 19545.1,
+              "after": 44109.9,
+              "delta": 24564.8
+            },
+            "first_answer_paint": {
+              "before": 19554.3,
+              "after": 44123.1,
+              "delta": 24568.8
+            },
+            "first_source_in_rail": {
+              "before": 17629.4,
+              "after": 42104.5,
+              "delta": 24475.1
+            },
+            "final_badge_visible": {
+              "before": 17629.4,
+              "after": 42104.5,
+              "delta": 24475.1
+            },
+            "error_card_visible": {
+              "before": null,
+              "after": null
+            },
+            "done": {
+              "before": 24619.2,
+              "after": 49521.2,
+              "delta": 24902
+            },
+            "total_ms": {
+              "before": 26125,
+              "after": 49794,
+              "delta": 23669
+            },
+            "composer_reset_ms": {
+              "before": 26125,
+              "after": 49794,
+              "delta": 23669
+            },
+            "frame_count": {
+              "before": 234,
+              "after": 904,
+              "delta": 670
+            },
+            "request_body_disclosed": {
+              "before": true,
+              "after": true
+            },
+            "model_row_text": {
+              "before": "DeepSeek Flash v4.1 · predefined-deepseek-flash · reasoning medium · stream",
+              "after": "DeepSeek Flash v4.1 · predefined-deepseek-flash · reasoning medium · stream"
+            },
+            "plugins": {
+              "before": [
+                {
+                  "id": "plugin-1722260873",
+                  "start_ms": 2744.3,
+                  "end_ms": 17592.6,
+                  "status": "ok",
+                  "sources": 10
+                }
+              ],
+              "after": [
+                {
+                  "id": "plugin-1722260873",
+                  "start_ms": 2433.4,
+                  "end_ms": 18145.7,
+                  "status": "ok",
+                  "sources": 10
+                }
+              ]
+            },
+            "perplexity_status": {
+              "before": "ok",
+              "after": "ok"
+            }
+          },
+          "metrics": {
+            "score": {
+              "before": 6,
+              "after": 7,
+              "delta": 1
+            },
+            "penalties": {
+              "before": {
+                "dead_air": 0,
+                "cls": 2,
+                "long_frames": 0,
+                "errors": 1,
+                "growth": 1
+              },
+              "after": {
+                "dead_air": 0,
+                "cls": 2,
+                "long_frames": 1,
+                "errors": 0,
+                "growth": 0
+              }
+            },
+            "dead_air_gaps_count": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "gaps_over_800_any": {
+              "before": 2,
+              "after": 1,
+              "delta": -1
+            },
+            "gaps_bridged_by_filler": {
+              "before": 2,
+              "after": 1,
+              "delta": -1
+            },
+            "max_gap_ms": {
+              "before": 1582,
+              "after": 2019,
+              "delta": 437
+            },
+            "cumulative_layout_shift": {
+              "before": 0.6693,
+              "after": 0.1705,
+              "delta": -0.5
+            },
+            "layout_shift_count": {
+              "before": 13,
+              "after": 18,
+              "delta": 5
+            },
+            "top_shifting_nodes": {
+              "before": [
+                {
+                  "node": "p",
+                  "value": 1.1262
+                },
+                {
+                  "node": "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming",
+                  "value": 0.5631
+                },
+                {
+                  "node": "li",
+                  "value": 0.3329
+                }
+              ],
+              "after": [
+                {
+                  "node": "div",
+                  "value": 0.1197
+                },
+                {
+                  "node": "div[data-testid=working-band].oiu-slot.oiu-slot--working",
+                  "value": 0.1017
+                },
+                {
+                  "node": "div[data-testid=thinking-trace].oiu-thinking",
+                  "value": 0.1017
+                }
+              ]
+            },
+            "long_frames_over_50ms": {
+              "before": 1,
+              "after": 4,
+              "delta": 3
+            },
+            "long_frame_max_ms": {
+              "before": 78.4,
+              "after": 90.9,
+              "delta": 12.5
+            },
+            "console_errors": {
+              "before": 1,
+              "after": 0,
+              "delta": -1
+            },
+            "page_errors": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "failed_requests": {
+              "before": 1,
+              "after": 0,
+              "delta": -1
+            },
+            "favicon_failures": {
+              "before": 1,
+              "after": 0,
+              "delta": -1
+            },
+            "visible_dom_changes": {
+              "before": 178,
+              "after": 835,
+              "delta": 657
+            }
+          }
+        },
+        "turn2": {
+          "prompt": "Compare the latest funding and project news of Fervo Energy and Ormat Technologies, then give me a one-paragraph summary with citations.",
+          "timeline": {
+            "first_sse_frame": {
+              "before": 54.5,
+              "after": 96.1,
+              "delta": 41.6
+            },
+            "first_thinking_visible": {
+              "before": 1631.4,
+              "after": 1548.6,
+              "delta": -82.8
+            },
+            "plan_created": {
+              "before": 9727.2,
+              "after": 6172.2,
+              "delta": -3555
+            },
+            "plan_visible": {
+              "before": 9745.3,
+              "after": 1548.6,
+              "delta": -8196.7
+            },
+            "first_between_step_summary": {
+              "before": null,
+              "after": 16481,
+              "delta": null
+            },
+            "first_between_step_summary_visible": {
+              "before": null,
+              "after": 16495.6,
+              "delta": null
+            },
+            "between_step_summary_done": {
+              "before": null,
+              "after": 17652.7,
+              "delta": null
+            },
+            "summary_done_visible": {
+              "before": null,
+              "after": 17662.3,
+              "delta": null
+            },
+            "first_inline_citation_chip": {
+              "before": 45277.6,
+              "after": 44194.2,
+              "delta": -1083.4
+            },
+            "first_answer_token": {
+              "before": 40985.5,
+              "after": 43585.5,
+              "delta": 2600
+            },
+            "first_answer_paint": {
+              "before": 40996.8,
+              "after": 43638.4,
+              "delta": 2641.6
+            },
+            "first_source_in_rail": {
+              "before": 20650.6,
+              "after": 43594.6,
+              "delta": 22944
+            },
+            "final_badge_visible": {
+              "before": 20650.6,
+              "after": 43594.6,
+              "delta": 22944
+            },
+            "error_card_visible": {
+              "before": null,
+              "after": null
+            },
+            "done": {
+              "before": 48216.8,
+              "after": 49848,
+              "delta": 1631.2
+            },
+            "total_ms": {
+              "before": 48469,
+              "after": 50028,
+              "delta": 1559
+            },
+            "composer_reset_ms": {
+              "before": 48469,
+              "after": 50028,
+              "delta": 1559
+            },
+            "frame_count": {
+              "before": 755,
+              "after": 838,
+              "delta": 83
+            },
+            "request_body_disclosed": {
+              "before": true,
+              "after": true
+            },
+            "model_row_text": {
+              "before": "DeepSeek Flash v4.1 · predefined-deepseek-flash · reasoning medium · stream",
+              "after": "DeepSeek Flash v4.1 · predefined-deepseek-flash · reasoning medium · stream"
+            },
+            "plugins": {
+              "before": [
+                {
+                  "id": "plugin-1722260873",
+                  "start_ms": 1616.8,
+                  "end_ms": 20632.7,
+                  "status": "ok",
+                  "sources": 10
+                }
+              ],
+              "after": [
+                {
+                  "id": "plugin-1722260873",
+                  "start_ms": 1535.6,
+                  "end_ms": 16481,
+                  "status": "ok",
+                  "sources": 10
+                }
+              ]
+            },
+            "perplexity_status": {
+              "before": "ok",
+              "after": "ok"
+            }
+          },
+          "metrics": {
+            "score": {
+              "before": 7,
+              "after": 8,
+              "delta": 1
+            },
+            "penalties": {
+              "before": {
+                "dead_air": 0,
+                "cls": 2,
+                "long_frames": 0,
+                "errors": 0,
+                "growth": 1
+              },
+              "after": {
+                "dead_air": 0,
+                "cls": 2,
+                "long_frames": 0,
+                "errors": 0,
+                "growth": 0
+              }
+            },
+            "dead_air_gaps_count": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "gaps_over_800_any": {
+              "before": 10,
+              "after": 1,
+              "delta": -9
+            },
+            "gaps_bridged_by_filler": {
+              "before": 10,
+              "after": 1,
+              "delta": -9
+            },
+            "max_gap_ms": {
+              "before": 10905,
+              "after": 2014,
+              "delta": -8891
+            },
+            "cumulative_layout_shift": {
+              "before": 0.8054,
+              "after": 0.2115,
+              "delta": -0.6
+            },
+            "layout_shift_count": {
+              "before": 5,
+              "after": 12,
+              "delta": 7
+            },
+            "top_shifting_nodes": {
+              "before": [
+                {
+                  "node": "p",
+                  "value": 0.9848
+                },
+                {
+                  "node": "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming",
+                  "value": 0.4924
+                },
+                {
+                  "node": "ul",
+                  "value": 0.4924
+                }
+              ],
+              "after": [
+                {
+                  "node": "div",
+                  "value": 0.2096
+                },
+                {
+                  "node": "div[data-testid=working-band].oiu-slot.oiu-slot--working",
+                  "value": 0.1787
+                },
+                {
+                  "node": "div[data-testid=thinking-trace].oiu-thinking",
+                  "value": 0.1787
+                }
+              ]
+            },
+            "long_frames_over_50ms": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "long_frame_max_ms": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "console_errors": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "page_errors": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "failed_requests": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "favicon_failures": {
+              "before": 0,
+              "after": 0,
+              "delta": 0
+            },
+            "visible_dom_changes": {
+              "before": 265,
+              "after": 768,
+              "delta": 503
+            }
+          }
+        }
+      }
+    }
+  },
+  "smoothness": {
+    "before": 6.75,
+    "after": 8.75,
+    "delta": 2
+  },
+  "formula": "start 10; −1 per dead-air gap >800 ms between consecutive VISIBLE DOM changes with no filler/progress element changing and no in-viewport filler animation running (cap −4); −2 if cumulative layout shift (non-input, send→[DONE]) >0.1, −1 if >0.05; −1 per 3 long animation frames >50 ms (cap −2); −1 per console error or page error (cap −2); −1 if any GROWTH colour/keyboard assertion fails (applied once per viewport). Turn score = 10 − turn penalties − GROWTH penalty; overall per viewport = mean(turn1, turn2); overall = mean of viewports."
+}

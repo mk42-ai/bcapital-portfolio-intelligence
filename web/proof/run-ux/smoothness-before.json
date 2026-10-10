@@ -1,0 +1,948 @@
+{
+  "label": "before",
+  "generated_utc": "2026-10-10T08:32:55.251Z",
+  "formula": "start 10; −1 per dead-air gap >800 ms between consecutive VISIBLE DOM changes with no filler/progress element changing and no in-viewport filler animation running (cap −4); −2 if cumulative layout shift (non-input, send→[DONE]) >0.1, −1 if >0.05; −1 per 3 long animation frames >50 ms (cap −2); −1 per console error or page error (cap −2); −1 if any GROWTH colour/keyboard assertion fails (applied once per viewport). Turn score = 10 − turn penalties − GROWTH penalty; overall per viewport = mean(turn1, turn2); overall = mean of viewports.",
+  "viewports": {
+    "desktop": {
+      "turn1": {
+        "score": 7,
+        "penalties": {
+          "dead_air": 0,
+          "cls": 0,
+          "long_frames": 0,
+          "errors": 2,
+          "growth": 1
+        },
+        "metrics": {
+          "stream_window_ms": 39624,
+          "total_ms": 39821,
+          "first_sse_frame_ms": 75.8,
+          "first_answer_token_ms": 33530.6,
+          "done_ms": 39623.7,
+          "dead_air_gaps": {
+            "count": 0,
+            "gaps": [],
+            "gaps_over_800_any": 3,
+            "gaps_bridged_by_filler": 3,
+            "max_gap_ms": 9751
+          },
+          "cumulative_layout_shift": {
+            "value": 0.0173,
+            "shifts": 14,
+            "top_nodes": [
+              {
+                "node": "div",
+                "value": 0.0137
+              },
+              {
+                "node": "svg",
+                "value": 0.0103
+              },
+              {
+                "node": "ol.oiu-activity-list",
+                "value": 0.0093
+              },
+              {
+                "node": "div[data-testid=thinking-trace].oiu-thinking",
+                "value": 0.0093
+              },
+              {
+                "node": "div[data-testid=answer-markdown].oiu-md",
+                "value": 0.0024
+              },
+              {
+                "node": "span.oiu-activity__elapsed",
+                "value": 0.0011
+              }
+            ],
+            "largest": [
+              {
+                "ms": 7920,
+                "value": 0.00932,
+                "nodes": [
+                  "ol.oiu-activity-list",
+                  "div",
+                  "div[data-testid=thinking-trace].oiu-thinking",
+                  "svg"
+                ]
+              },
+              {
+                "ms": 2778.3,
+                "value": 0.00442,
+                "nodes": [
+                  "div"
+                ]
+              },
+              {
+                "ms": 32122.7,
+                "value": 0.00238,
+                "nodes": [
+                  "div[data-testid=answer-markdown].oiu-md"
+                ]
+              }
+            ]
+          },
+          "scroll_jank": {
+            "source": "long-animation-frame",
+            "long_frames_over_50ms": 1,
+            "max_ms": 76.9,
+            "total_ms": 77,
+            "top": [
+              {
+                "t": 4179.299999952316,
+                "rel": 265.5,
+                "dur": 76.9,
+                "blocking": 14.1,
+                "scripts": [
+                  "FrameRequestCallback"
+                ]
+              }
+            ]
+          },
+          "console_errors": {
+            "count": 3,
+            "messages": [
+              "Failed to load resource: the server responded with a status of 404 ()",
+              "Failed to load resource: the server responded with a status of 404 ()",
+              "Failed to load resource: the server responded with a status of 404 ()"
+            ]
+          },
+          "page_errors": {
+            "count": 0,
+            "messages": []
+          },
+          "failed_requests": {
+            "count": 3,
+            "favicon_failures": 3,
+            "urls": [
+              "404 https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://orennia.substack.com&size=32",
+              "404 https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://thinkgeoenergy.com&size=32",
+              "404 https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://avanzaenergy.substack.com&size=32"
+            ]
+          },
+          "perplexity": {
+            "status": "ok",
+            "error": null,
+            "error_card_shown": false,
+            "substituted": false
+          },
+          "plugins": [
+            {
+              "id": "plugin-1722260873",
+              "name": "Perplexity",
+              "start_ms": 2754.6,
+              "end_ms": 19853.6,
+              "status": "ok",
+              "sources": 10
+            }
+          ]
+        }
+      },
+      "turn2": {
+        "score": 7,
+        "penalties": {
+          "dead_air": 0,
+          "cls": 2,
+          "long_frames": 0,
+          "errors": 0,
+          "growth": 1
+        },
+        "metrics": {
+          "stream_window_ms": 34444,
+          "total_ms": 34563,
+          "first_sse_frame_ms": 62.5,
+          "first_answer_token_ms": 28344.1,
+          "done_ms": 34444.1,
+          "dead_air_gaps": {
+            "count": 0,
+            "gaps": [],
+            "gaps_over_800_any": 7,
+            "gaps_bridged_by_filler": 7,
+            "max_gap_ms": 11390
+          },
+          "cumulative_layout_shift": {
+            "value": 0.2294,
+            "shifts": 4,
+            "top_nodes": [
+              {
+                "node": "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming",
+                "value": 0.1421
+              },
+              {
+                "node": "div[data-testid=answer-markdown].oiu-md",
+                "value": 0.1421
+              },
+              {
+                "node": "div.openui-agent-thread-composer__action-bar",
+                "value": 0.1421
+              },
+              {
+                "node": "span.oiu-badge__plugins",
+                "value": 0.1421
+              },
+              {
+                "node": "div",
+                "value": 0.0873
+              },
+              {
+                "node": "div[data-testid=assistant-message].oiu-assistant",
+                "value": 0.0849
+              }
+            ],
+            "largest": [
+              {
+                "ms": 29367.7,
+                "value": 0.14209,
+                "nodes": [
+                  "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming",
+                  "div[data-testid=answer-markdown].oiu-md",
+                  "div.openui-agent-thread-composer__action-bar",
+                  "span.oiu-badge__plugins"
+                ]
+              },
+              {
+                "ms": 1908.2,
+                "value": 0.0849,
+                "nodes": [
+                  "div[data-testid=assistant-message].oiu-assistant",
+                  "div.openui-agent-thread-message-user",
+                  "div",
+                  "button.openui-agent-thread-scroll-latest"
+                ]
+              },
+              {
+                "ms": 1842.3,
+                "value": 0.00237,
+                "nodes": [
+                  "div"
+                ]
+              }
+            ]
+          },
+          "scroll_jank": {
+            "source": "long-animation-frame",
+            "long_frames_over_50ms": 0,
+            "max_ms": 0,
+            "total_ms": 0,
+            "top": []
+          },
+          "console_errors": {
+            "count": 0,
+            "messages": []
+          },
+          "page_errors": {
+            "count": 0,
+            "messages": []
+          },
+          "failed_requests": {
+            "count": 0,
+            "favicon_failures": 0,
+            "urls": []
+          },
+          "perplexity": {
+            "status": "ok",
+            "error": null,
+            "error_card_shown": false,
+            "substituted": false
+          },
+          "plugins": [
+            {
+              "id": "plugin-1722260873",
+              "name": "Perplexity",
+              "start_ms": 1817.4,
+              "end_ms": 17725.7,
+              "status": "ok",
+              "sources": 10
+            }
+          ]
+        }
+      },
+      "overall": 7,
+      "growth": {
+        "pass": false,
+        "failed_assertions": [
+          "Escape collapses the expanded tile and keeps focus"
+        ],
+        "tokens": {
+          "green": "#0ac985",
+          "ink": "#047857",
+          "soft": "#e6faf3",
+          "expected_tile_rgb": "rgb(10, 201, 133)",
+          "expected_chevron_rgb": "rgb(4, 120, 87)",
+          "spec_tile_rgb": "rgb(10, 201, 133)",
+          "spec_chevron_rgb": "rgb(4, 120, 87)"
+        },
+        "hover": {
+          "border": "rgb(10, 201, 133)",
+          "item_bg": "rgb(230, 250, 243)",
+          "tile_bg": "rgb(10, 201, 133)",
+          "tile_border": "rgb(10, 201, 133)",
+          "chevron": "rgb(4, 120, 87)",
+          "outline": "rgb(17, 24, 39)",
+          "outline_style": "none",
+          "outline_width": "3px",
+          "expanded": "false",
+          "focus_visible": false,
+          "rotate": "none"
+        },
+        "expanded": {
+          "border": "rgb(10, 201, 133)",
+          "item_bg": "rgb(230, 250, 243)",
+          "tile_bg": "rgb(10, 201, 133)",
+          "tile_border": "rgb(10, 201, 133)",
+          "chevron": "rgb(4, 120, 87)",
+          "outline": "rgb(10, 201, 133)",
+          "outline_style": "solid",
+          "outline_width": "2px",
+          "expanded": "true",
+          "focus_visible": true,
+          "rotate": "matrix(-1, 0, 0, -1, 0, 0)"
+        },
+        "keyboard_reached": [
+          "generosity",
+          "resilience",
+          "open-mindedness",
+          "will",
+          "teamwork",
+          "humility"
+        ],
+        "assertions": [
+          {
+            "name": "token --brand-green equals spec rgb(10, 201, 133)",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "token --brand-green-ink equals spec rgb(4, 120, 87)",
+            "ok": true,
+            "expected": "rgb(4, 120, 87)",
+            "observed": "rgb(4, 120, 87)"
+          },
+          {
+            "name": "six tiles rendered",
+            "ok": true,
+            "expected": 6,
+            "observed": 6
+          },
+          {
+            "name": "letters read G→R→O→W→T→H in DOM order",
+            "ok": true,
+            "expected": "GROWTH",
+            "observed": "GROWTH"
+          },
+          {
+            "name": "hover: tile bg is brand green",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "hover: card border is brand green",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "hover: chevron is brand-green ink",
+            "ok": true,
+            "expected": "rgb(4, 120, 87)",
+            "observed": "rgb(4, 120, 87)"
+          },
+          {
+            "name": "focus-visible ring present on first tile",
+            "ok": true,
+            "expected": {
+              "focusVisible": true,
+              "outline": ">0"
+            },
+            "observed": {
+              "focus_visible": true,
+              "outline_style": "solid",
+              "outline_width": "2px"
+            }
+          },
+          {
+            "name": "focus: outline colour is brand green",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "focus: tile bg is brand green",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "all six tiles reachable by Tab in G→R→O→W→T→H order",
+            "ok": true,
+            "expected": [
+              "generosity",
+              "resilience",
+              "open-mindedness",
+              "will",
+              "teamwork",
+              "humility"
+            ],
+            "observed": [
+              "generosity",
+              "resilience",
+              "open-mindedness",
+              "will",
+              "teamwork",
+              "humility"
+            ]
+          },
+          {
+            "name": "Shift+Tab moves focus back to the previous tile",
+            "ok": true,
+            "expected": "teamwork",
+            "observed": "teamwork"
+          },
+          {
+            "name": "Enter: aria-expanded toggles to true",
+            "ok": true,
+            "expected": "true",
+            "observed": "true"
+          },
+          {
+            "name": "expanded: tile bg is brand green",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "expanded: card border is brand green",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "expanded: chevron is brand-green ink",
+            "ok": true,
+            "expected": "rgb(4, 120, 87)",
+            "observed": "rgb(4, 120, 87)"
+          },
+          {
+            "name": "expanded panel open with three lines",
+            "ok": true,
+            "expected": {
+              "state": "open",
+              "lines": [
+                true,
+                true,
+                true
+              ]
+            },
+            "observed": {
+              "state": "open",
+              "hidden": "false",
+              "lines": [
+                true,
+                true,
+                true
+              ]
+            }
+          },
+          {
+            "name": "Space: aria-expanded toggles back to false",
+            "ok": true,
+            "expected": "false",
+            "observed": "false"
+          },
+          {
+            "name": "Escape collapses the expanded tile and keeps focus",
+            "ok": false,
+            "expected": {
+              "expanded": "false",
+              "focused": true
+            },
+            "observed": {
+              "expanded": "true",
+              "focused": true
+            }
+          },
+          {
+            "name": "no blue in the GROWTH grid",
+            "ok": true,
+            "expected": [],
+            "observed": []
+          }
+        ]
+      },
+      "notes": []
+    },
+    "mobile": {
+      "turn1": {
+        "score": 6,
+        "penalties": {
+          "dead_air": 0,
+          "cls": 2,
+          "long_frames": 0,
+          "errors": 1,
+          "growth": 1
+        },
+        "metrics": {
+          "stream_window_ms": 24619,
+          "total_ms": 26125,
+          "first_sse_frame_ms": 91.4,
+          "first_answer_token_ms": 19545.1,
+          "done_ms": 24619.2,
+          "dead_air_gaps": {
+            "count": 0,
+            "gaps": [],
+            "gaps_over_800_any": 2,
+            "gaps_bridged_by_filler": 2,
+            "max_gap_ms": 1582
+          },
+          "cumulative_layout_shift": {
+            "value": 0.6693,
+            "shifts": 13,
+            "top_nodes": [
+              {
+                "node": "p",
+                "value": 1.1262
+              },
+              {
+                "node": "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming",
+                "value": 0.5631
+              },
+              {
+                "node": "li",
+                "value": 0.3329
+              },
+              {
+                "node": "ul",
+                "value": 0.2302
+              },
+              {
+                "node": "div",
+                "value": 0.1056
+              },
+              {
+                "node": "div[data-testid=thinking-trace].oiu-thinking",
+                "value": 0.081
+              }
+            ],
+            "largest": [
+              {
+                "ms": 23107.8,
+                "value": 0.33292,
+                "nodes": [
+                  "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming",
+                  "p",
+                  "p",
+                  "li"
+                ]
+              },
+              {
+                "ms": 20171.4,
+                "value": 0.23018,
+                "nodes": [
+                  "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming",
+                  "p",
+                  "p",
+                  "ul"
+                ]
+              },
+              {
+                "ms": 4117.5,
+                "value": 0.05828,
+                "nodes": [
+                  "div",
+                  "div[data-testid=thinking-trace].oiu-thinking",
+                  "ol.oiu-activity-list"
+                ]
+              }
+            ]
+          },
+          "scroll_jank": {
+            "source": "long-animation-frame",
+            "long_frames_over_50ms": 1,
+            "max_ms": 78.4,
+            "total_ms": 78,
+            "top": [
+              {
+                "t": 4177.599999904633,
+                "rel": 226.3,
+                "dur": 78.4,
+                "blocking": 14.4,
+                "scripts": [
+                  "FrameRequestCallback"
+                ]
+              }
+            ]
+          },
+          "console_errors": {
+            "count": 1,
+            "messages": [
+              "Failed to load resource: the server responded with a status of 404 ()"
+            ]
+          },
+          "page_errors": {
+            "count": 0,
+            "messages": []
+          },
+          "failed_requests": {
+            "count": 1,
+            "favicon_failures": 1,
+            "urls": [
+              "404 https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://orennia.substack.com&size=32"
+            ]
+          },
+          "perplexity": {
+            "status": "ok",
+            "error": null,
+            "error_card_shown": false,
+            "substituted": false
+          },
+          "plugins": [
+            {
+              "id": "plugin-1722260873",
+              "name": "Perplexity",
+              "start_ms": 2744.3,
+              "end_ms": 17592.6,
+              "status": "ok",
+              "sources": 10
+            }
+          ]
+        }
+      },
+      "turn2": {
+        "score": 7,
+        "penalties": {
+          "dead_air": 0,
+          "cls": 2,
+          "long_frames": 0,
+          "errors": 0,
+          "growth": 1
+        },
+        "metrics": {
+          "stream_window_ms": 48217,
+          "total_ms": 48469,
+          "first_sse_frame_ms": 54.5,
+          "first_answer_token_ms": 40985.5,
+          "done_ms": 48216.8,
+          "dead_air_gaps": {
+            "count": 0,
+            "gaps": [],
+            "gaps_over_800_any": 10,
+            "gaps_bridged_by_filler": 10,
+            "max_gap_ms": 10905
+          },
+          "cumulative_layout_shift": {
+            "value": 0.8054,
+            "shifts": 5,
+            "top_nodes": [
+              {
+                "node": "p",
+                "value": 0.9848
+              },
+              {
+                "node": "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming",
+                "value": 0.4924
+              },
+              {
+                "node": "ul",
+                "value": 0.4924
+              },
+              {
+                "node": "div[data-testid=assistant-message].oiu-assistant",
+                "value": 0.2965
+              },
+              {
+                "node": "div.openui-agent-thread-message-user",
+                "value": 0.2965
+              },
+              {
+                "node": "button.openui-agent-thread-scroll-latest",
+                "value": 0.2965
+              }
+            ],
+            "largest": [
+              {
+                "ms": 46743.3,
+                "value": 0.49238,
+                "nodes": [
+                  "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming",
+                  "p",
+                  "ul",
+                  "p"
+                ]
+              },
+              {
+                "ms": 1651.8,
+                "value": 0.29654,
+                "nodes": [
+                  "div[data-testid=assistant-message].oiu-assistant",
+                  "div.openui-agent-thread-message-user",
+                  "button.openui-agent-thread-scroll-latest"
+                ]
+              },
+              {
+                "ms": 1632.6,
+                "value": 0.01636,
+                "nodes": [
+                  "div"
+                ]
+              }
+            ]
+          },
+          "scroll_jank": {
+            "source": "long-animation-frame",
+            "long_frames_over_50ms": 0,
+            "max_ms": 0,
+            "total_ms": 0,
+            "top": []
+          },
+          "console_errors": {
+            "count": 0,
+            "messages": []
+          },
+          "page_errors": {
+            "count": 0,
+            "messages": []
+          },
+          "failed_requests": {
+            "count": 0,
+            "favicon_failures": 0,
+            "urls": []
+          },
+          "perplexity": {
+            "status": "ok",
+            "error": null,
+            "error_card_shown": false,
+            "substituted": false
+          },
+          "plugins": [
+            {
+              "id": "plugin-1722260873",
+              "name": "Perplexity",
+              "start_ms": 1616.8,
+              "end_ms": 20632.7,
+              "status": "ok",
+              "sources": 10
+            }
+          ]
+        }
+      },
+      "overall": 6.5,
+      "growth": {
+        "pass": false,
+        "failed_assertions": [
+          "Escape collapses the expanded tile and keeps focus"
+        ],
+        "tokens": {
+          "green": "#0ac985",
+          "ink": "#047857",
+          "soft": "#e6faf3",
+          "expected_tile_rgb": "rgb(10, 201, 133)",
+          "expected_chevron_rgb": "rgb(4, 120, 87)",
+          "spec_tile_rgb": "rgb(10, 201, 133)",
+          "spec_chevron_rgb": "rgb(4, 120, 87)"
+        },
+        "hover": {
+          "border": "rgb(10, 201, 133)",
+          "item_bg": "rgb(230, 250, 243)",
+          "tile_bg": "rgb(10, 201, 133)",
+          "tile_border": "rgb(10, 201, 133)",
+          "chevron": "rgb(4, 120, 87)",
+          "outline": "rgb(17, 24, 39)",
+          "outline_style": "none",
+          "outline_width": "3px",
+          "expanded": "false",
+          "focus_visible": false,
+          "rotate": "none"
+        },
+        "expanded": {
+          "border": "rgb(10, 201, 133)",
+          "item_bg": "rgb(230, 250, 243)",
+          "tile_bg": "rgb(10, 201, 133)",
+          "tile_border": "rgb(10, 201, 133)",
+          "chevron": "rgb(4, 120, 87)",
+          "outline": "rgb(10, 201, 133)",
+          "outline_style": "solid",
+          "outline_width": "2px",
+          "expanded": "true",
+          "focus_visible": true,
+          "rotate": "matrix(-1, 0, 0, -1, 0, 0)"
+        },
+        "keyboard_reached": [
+          "generosity",
+          "resilience",
+          "open-mindedness",
+          "will",
+          "teamwork",
+          "humility"
+        ],
+        "assertions": [
+          {
+            "name": "token --brand-green equals spec rgb(10, 201, 133)",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "token --brand-green-ink equals spec rgb(4, 120, 87)",
+            "ok": true,
+            "expected": "rgb(4, 120, 87)",
+            "observed": "rgb(4, 120, 87)"
+          },
+          {
+            "name": "six tiles rendered",
+            "ok": true,
+            "expected": 6,
+            "observed": 6
+          },
+          {
+            "name": "letters read G→R→O→W→T→H in DOM order",
+            "ok": true,
+            "expected": "GROWTH",
+            "observed": "GROWTH"
+          },
+          {
+            "name": "hover: tile bg is brand green",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "hover: card border is brand green",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "hover: chevron is brand-green ink",
+            "ok": true,
+            "expected": "rgb(4, 120, 87)",
+            "observed": "rgb(4, 120, 87)"
+          },
+          {
+            "name": "focus-visible ring present on first tile",
+            "ok": true,
+            "expected": {
+              "focusVisible": true,
+              "outline": ">0"
+            },
+            "observed": {
+              "focus_visible": true,
+              "outline_style": "solid",
+              "outline_width": "2px"
+            }
+          },
+          {
+            "name": "focus: outline colour is brand green",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "focus: tile bg is brand green",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "all six tiles reachable by Tab in G→R→O→W→T→H order",
+            "ok": true,
+            "expected": [
+              "generosity",
+              "resilience",
+              "open-mindedness",
+              "will",
+              "teamwork",
+              "humility"
+            ],
+            "observed": [
+              "generosity",
+              "resilience",
+              "open-mindedness",
+              "will",
+              "teamwork",
+              "humility"
+            ]
+          },
+          {
+            "name": "Shift+Tab moves focus back to the previous tile",
+            "ok": true,
+            "expected": "teamwork",
+            "observed": "teamwork"
+          },
+          {
+            "name": "Enter: aria-expanded toggles to true",
+            "ok": true,
+            "expected": "true",
+            "observed": "true"
+          },
+          {
+            "name": "expanded: tile bg is brand green",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "expanded: card border is brand green",
+            "ok": true,
+            "expected": "rgb(10, 201, 133)",
+            "observed": "rgb(10, 201, 133)"
+          },
+          {
+            "name": "expanded: chevron is brand-green ink",
+            "ok": true,
+            "expected": "rgb(4, 120, 87)",
+            "observed": "rgb(4, 120, 87)"
+          },
+          {
+            "name": "expanded panel open with three lines",
+            "ok": true,
+            "expected": {
+              "state": "open",
+              "lines": [
+                true,
+                true,
+                true
+              ]
+            },
+            "observed": {
+              "state": "open",
+              "hidden": "false",
+              "lines": [
+                true,
+                true,
+                true
+              ]
+            }
+          },
+          {
+            "name": "Space: aria-expanded toggles back to false",
+            "ok": true,
+            "expected": "false",
+            "observed": "false"
+          },
+          {
+            "name": "Escape collapses the expanded tile and keeps focus",
+            "ok": false,
+            "expected": {
+              "expanded": "false",
+              "focused": true
+            },
+            "observed": {
+              "expanded": "true",
+              "focused": true
+            }
+          },
+          {
+            "name": "no blue in the GROWTH grid",
+            "ok": true,
+            "expected": [],
+            "observed": []
+          }
+        ]
+      },
+      "notes": []
+    }
+  },
+  "overall": 6.75
+}

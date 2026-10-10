@@ -144,8 +144,17 @@ export async function POST(req: NextRequest) {
         if (closed) return;
         send({ type: "CUSTOM", name: CE.heartbeat, value: { t: new Date().toISOString(), elapsedMs: Date.now() - t0, sinceLastFrameMs: Date.now() - lastSentAt } });
       }, CHAT_HEARTBEAT_MS);
-      const cleanup = () => { clearInterval(heartbeat); clearTimeout(firstByteTimer); clearTimeout(totalTimer); };
-      const status = (phase: string, extra: Record<string, unknown> = {}) => send({ type: "CUSTOM", name: CE.status, value: { phase, elapsedMs: Date.now() - t0, ...extra } });
+      // Stall watchdog: when no visible frame has gone out for >600 ms the shell shows the animated "Working…" band (ondemand.filler on), and the
+      // band is withdrawn on the next real frame — so dead air never exceeds 800 ms without a visible change, whatever upstream is doing.
+      let fillerOn = false; let stallTicks = 0;
+      const stall = setInterval(() => {
+        if (closed) return;
+        const quiet = Date.now() - lastSentAt;
+        if (!fillerOn && quiet > 600) { fillerOn = true; send({ type: "CUSTOM", name: CE.filler, value: { on: true, derived: true, quietMs: quiet, elapsedMs: Date.now() - t0 } }); }
+        else if (fillerOn && quiet > 600) { stallTicks += 1; send({ type: "CUSTOM", name: CE.filler, value: { on: true, derived: true, tick: stallTicks, quietMs: quiet, elapsedMs: Date.now() - t0 } }); }
+      }, 300);
+      const cleanup = () => { clearInterval(heartbeat); clearInterval(stall); clearTimeout(firstByteTimer); clearTimeout(totalTimer); };
+      const status = (phase: string, extra: Record<string, unknown> = {}) => { send({ type: "CUSTOM", name: CE.status, value: { phase, elapsedMs: Date.now() - t0, ...extra } }); lastSentAt = Date.now(); };
 
       // Immediate frames — flushed before any upstream await (first visible event well under 400 ms).
       send({ type: "RUN_STARTED", threadId, runId });
@@ -156,7 +165,8 @@ export async function POST(req: NextRequest) {
       const realSources = new Map<string, Src>();
       const pluginErr: { current: { message: string; raw: string } | null } = { current: null };
       const startText = () => { if (!textStarted) { textStarted = true; send({ type: "TEXT_MESSAGE_START", messageId, role: "assistant" }); } };
-      const custom = (name: string, value: Record<string, unknown>) => { send({ type: "CUSTOM", name, value: { elapsedMs: Date.now() - t0, ...value } }); lastSentAt = Date.now(); };
+      const fillerOff = () => { if (fillerOn) { fillerOn = false; stallTicks = 0; send({ type: "CUSTOM", name: CE.filler, value: { on: false, derived: true, elapsedMs: Date.now() - t0 } }); } };
+      const custom = (name: string, value: Record<string, unknown>) => { if (name !== CE.filler && name !== CE.heartbeat) fillerOff(); send({ type: "CUSTOM", name, value: { elapsedMs: Date.now() - t0, ...value } }); lastSentAt = Date.now(); };
       // ---- tool cards: one per plugin id (pinned Perplexity opens on the first planning frame; others open when the plan/agents name them)
       type Tool = { id: string; name: string; open: boolean; stepId?: string; startedAt: number };
       const tools = new Map<string, Tool>();
@@ -193,6 +203,7 @@ export async function POST(req: NextRequest) {
         toolDone(PLUGIN_ID, "error", { message: pluginErr.current.message, raw: raw.slice(0, 1200) });
       };
       let thinkingBuf = ""; let planBuf = ""; let planEmitted = false; let objectiveSent = false; let stepBuf = ""; const stepEmittedFor = new Set<number>();
+      let planStepTotal = 0; const derivedSummary = new Map<number, { title: string; hosts: string[]; n: number; closed: boolean }>();
       const tryParseJson = (t: string): unknown => { const i = t.indexOf("{"); if (i < 0) return null; let depth = 0, inStr = false, esc = false; for (let k = i; k < t.length; k++) { const c = t[k]; if (inStr) { if (esc) esc = false; else if (c === "\\") esc = true; else if (c === '"') inStr = false; continue; } if (c === '"') inStr = true; else if (c === "{") depth++; else if (c === "}") { depth--; if (depth === 0) { try { return JSON.parse(t.slice(i, k + 1)); } catch { return null; } } } } return null; };
       const planFromJson = (j: unknown): { objective?: string; steps: { id: string; title: string; query?: string; plugins?: string[] }[] } => { const r = (j && typeof j === "object" ? j : {}) as Record<string, unknown>; const steps = Array.isArray(r.steps) ? r.steps : []; return { objective: typeof r.objective === "string" ? r.objective.slice(0, 400) : typeof r.title === "string" ? r.title.slice(0, 400) : undefined, steps: steps.map((x, i) => { const o = (x && typeof x === "object" ? x : {}) as Record<string, unknown>; return { id: String(o.id ?? o.step_id ?? i + 1), title: String(o.title ?? o.user_query ?? `Step ${i + 1}`).slice(0, 160), query: typeof o.user_query === "string" ? o.user_query.slice(0, 600) : undefined, plugins: Array.isArray(o.plugins) ? o.plugins.map((p) => (typeof p === "string" ? p : String((p as Record<string, unknown>).name ?? (p as Record<string, unknown>).pluginId ?? ""))).filter(Boolean) : undefined }; }) }; };
 
@@ -204,7 +215,7 @@ export async function POST(req: NextRequest) {
           case "error": throw new UpstreamError(`OnDemand error frame: ${u.message}`, 502, u.code);
           case "metrics": custom(CE.metrics, { publicMetrics: u.publicMetrics, firstTokenMs: firstTokenAt ? firstTokenAt - t0 : null, pluginIds }); return false;
           case "plugins_suggested": custom(CE.plugins, { phase: u.phase, plugins: u.plugins }); if (u.phase === "initialized") status("planning", { statusType: "plugin_suggestion.initialized", statusMessage: "Finding plugins" }); return false;
-          case "plan": custom(CE.plan, { objective: u.objective ?? null, steps: u.steps }); status("planning", { statusType: "plan_created", statusMessage: u.objective ?? "Execution plan created", steps: u.steps.length }); return false;
+          case "plan": planStepTotal = Math.max(planStepTotal, u.steps.length); custom(CE.plan, { objective: u.objective ?? null, steps: u.steps }); status("planning", { statusType: "plan_created", statusMessage: u.objective ?? "Execution plan created", steps: u.steps.length }); return false;
           case "step_start": {
             stepCounter += 1; currentStepId = u.stepId || String(stepCounter);
             custom(CE.step, { phase: "start", stepId: currentStepId, index: stepCounter, label: u.label, query: u.query ?? null });
@@ -224,13 +235,17 @@ export async function POST(req: NextRequest) {
           case "summary_done": custom(CE.summary, { phase: "done", index: u.index || summaryIndex || stepCounter, stepId: u.stepId ?? currentStepId, text: u.text, at: new Date().toISOString() }); return false;
           case "thinking": {
             if (u.channel === "planning" || u.channel === "plan" || u.channel === "step" || u.channel === "step_output") toolStart(PLUGIN_ID, PLUGIN_NAME, u.stepId);
+            if ((u.channel === "step" || u.channel === "step_output" || u.channel === "fulfillment") && derivedSummary.size) {
+              const cur = u.channel === "fulfillment" ? Number.MAX_SAFE_INTEGER : Number(u.stepId) || 0;
+              for (const [idx, d] of derivedSummary) if (!d.closed && cur > idx) { d.closed = true; custom(CE.summary, { phase: "done", index: idx, stepId: String(idx), derived: true, text: `${d.title} — ${d.n} source${d.n === 1 ? "" : "s"}${d.hosts.length ? ` from ${d.hosts.join(", ")}` : ""}.`, at: new Date().toISOString() }); }
+            }
             if (u.delta) { custom(CE.thinking, { kind: u.channel, delta: u.delta, stepId: u.stepId ?? currentStepId }); thinkingBuf = (thinkingBuf + u.delta).slice(-800); detectPluginError(thinkingBuf, raw); }
             // This account's stream carries the plan only as planning_output JSON text (no statusLog plan_created frame): read it while it streams
             // (UX doc "Read while it streams: the objective becomes the opening sentence") and emit ondemand.plan once it parses.
             if (u.channel === "plan" && u.delta && !planEmitted) {
               planBuf += u.delta;
               const parsed = tryParseJson(planBuf);
-              if (parsed) { const plan = planFromJson(parsed); if (plan.objective || plan.steps.length) { planEmitted = true; custom(CE.plan, { objective: plan.objective ?? null, steps: plan.steps, source: "planning_output" }); status("planning", { statusType: "plan_created", statusMessage: plan.objective ?? "Execution plan created", steps: plan.steps.length }); } }
+              if (parsed) { const plan = planFromJson(parsed); if (plan.objective || plan.steps.length) { planEmitted = true; planStepTotal = Math.max(planStepTotal, plan.steps.length); custom(CE.plan, { objective: plan.objective ?? null, steps: plan.steps, source: "planning_output" }); status("planning", { statusType: "plan_created", statusMessage: plan.objective ?? "Execution plan created", steps: plan.steps.length }); } }
               else { const m = /"objective"\s*:\s*"((?:[^"\\]|\\.){12,})/.exec(planBuf); if (m && !objectiveSent) { objectiveSent = true; status("planning", { statusType: "planning", statusMessage: m[1].replace(/\\"/g, "\"").slice(0, 200) }); } }
             }
             if (u.channel === "step_output" && u.delta) {
@@ -256,12 +271,24 @@ export async function POST(req: NextRequest) {
             const pid = u.pluginId && pluginIds.includes(u.pluginId) ? u.pluginId : PLUGIN_ID;
             emitSources(true, pid);
             toolDone(pid, "ok", { items: u.items.length });
-            status("answering", { sources: realSources.size });
+            // STEP_BOUNDARY (eventMap.ts): plugin_sources is the last frame of its step. When the plan has a further step, open the DERIVED
+            // "Summarising step N" checkpoint now; it is closed (with the step title + source hosts) by the next step's first frame.
+            const sIdx = Number(u.stepId) || stepCounter || 1;
+            const hosts = [...new Set(u.items.map((c) => c.sourceName))].slice(0, 4);
+            const moreSteps = planStepTotal > sIdx;
+            if (moreSteps && !derivedSummary.has(sIdx)) {
+              derivedSummary.set(sIdx, { title: u.stepTitle ?? `Step ${sIdx}`, hosts, n: u.items.length, closed: false });
+              custom(CE.summary, { phase: "start", index: sIdx, stepId: String(sIdx), derived: true, source: "plugin_sources", stepTitle: u.stepTitle ?? null });
+              custom(CE.step, { phase: "done", stepId: String(sIdx), index: sIdx, message: `${u.items.length} sources`, derived: true });
+              status("planning", { statusType: "summarising", statusMessage: `Summarising step ${sIdx}`, stepId: String(sIdx) });
+            } else {
+              status("answering", { sources: realSources.size });
+            }
             return false;
           }
           case "answer": {
             if (!firstTokenAt && u.delta) firstTokenAt = Date.now();
-            startText(); text += u.delta; send({ type: "TEXT_MESSAGE_CONTENT", messageId, delta: u.delta }); lastSentAt = Date.now();
+            fillerOff(); startText(); text += u.delta; send({ type: "TEXT_MESSAGE_CONTENT", messageId, delta: u.delta }); lastSentAt = Date.now();
             detectPluginError(text.slice(-600), raw);
             return false;
           }
@@ -334,6 +361,7 @@ export async function POST(req: NextRequest) {
         } else {
           for (const [pid, t] of tools) if (t.open) toolDone(pid, realSources.size || pid !== PLUGIN_ID ? "ok" : "error", realSources.size || pid !== PLUGIN_ID ? {} : { message: "Perplexity returned no sources for this question" });
           send({ type: "TEXT_MESSAGE_END", messageId });
+          for (const [idx, d] of derivedSummary) if (!d.closed) { d.closed = true; custom(CE.summary, { phase: "done", index: idx, stepId: String(idx), derived: true, text: `${d.title} — ${d.n} source${d.n === 1 ? "" : "s"}${d.hosts.length ? ` from ${d.hosts.join(", ")}` : ""}.`, at: new Date().toISOString() }); }
           if (stepCounter > 0) custom(CE.step, { phase: "done", stepId: currentStepId, index: stepCounter, message: "answer written" });
           emitSources(false);
           status("done", { chars: text.length, sources: realSources.size, firstTokenMs: firstTokenAt ? firstTokenAt - t0 : null });

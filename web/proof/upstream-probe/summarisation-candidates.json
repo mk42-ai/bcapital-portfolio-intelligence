@@ -1,0 +1,635 @@
+{
+  "found": true,
+  "note": "found=true only because the regex /summar/i matched the WORDS 'summary/summarize' inside LLM token deltas (planning_thinking / planning_output / fulfillment_thinking / fulfillment) for a query that literally asked for a summary. No frame with a distinct event name, eventType, statusType or statusLog relating to history summarisation (e.g. statusLog summarize_history.*, plan_created, currentStatusLog) was emitted in either turn. Turn 1 had zero /summar/i matches of any kind.",
+  "frames": [
+    {
+      "turn": 2,
+      "turn_ms": 2269,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 5,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " summary with citations. I need"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 2452,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 11,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " comparison/summary with citations"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 2521,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 13,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " \u2014 but rule 8 says no summarizing"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 2563,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 14,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": "/analysis steps... Hmm. \"No summarizing"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 2675,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 17,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " to just summarize; instead combine"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 2729,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 19,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": ".\n\nSo actually the summary generation"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 2852,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 23,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": "agraph summary with citations."
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 3151,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 33,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " sources, then... but the summary"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 3403,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 40,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": ", rule 8 prohibits a summarizing"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 3703,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 50,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": "-paragraph comparison summary \u2014"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 3789,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 51,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " but that's summarizing/analysis"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 3846,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 54,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " summary generation with an execute"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 3981,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 58,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " summary with citations from gathered"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 4117,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 61,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " 8 says no summarizing/analysis"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 4223,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 65,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " says \"summarize the results\" as"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 4317,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 68,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " itself is a comparison summary"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 5129,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 90,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " summary \u2014 but for step 2 to have"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 5369,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 98,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": "; rule 8 says no summarizing. H"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 5764,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 110,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " a comparative one-paragraph summary"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 5844,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 113,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " separate summarization step. That"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 6342,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 130,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": "-paragraph summary with citations"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 6494,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 134,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " the summary paragraph is the key"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 6926,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 146,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " me reconsider rule 8: \"No summarizing"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 6986,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 148,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " folding the summary generation"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 7731,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 174,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " summary of the two companies with"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 7934,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 180,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": "2 steps to avoid the summarizing"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 8123,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 185,
+        "eventType": "planning_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": "/analysis. But rule 8 says no summarizing"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 8524,
+      "event": "thinking",
+      "eventType": "planning_output",
+      "statusType": null,
+      "content_token_only": false,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 197,
+        "eventType": "planning_output",
+        "status": "processing",
+        "output": {
+          "delta": " a one-paragraph summary with source"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 9140,
+      "event": "thinking",
+      "eventType": "planning_output",
+      "statusType": null,
+      "content_token_only": false,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 223,
+        "eventType": "planning_output",
+        "status": "processing",
+        "output": {
+          "delta": "agraph comparative summary of the"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 34826,
+      "event": "thinking",
+      "eventType": "fulfillment_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 390,
+        "eventType": "fulfillment_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": ", with a one-paragraph summary"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 35723,
+      "event": "thinking",
+      "eventType": "fulfillment_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 417,
+        "eventType": "fulfillment_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " one-paragraph summary with citations"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 35879,
+      "event": "thinking",
+      "eventType": "fulfillment_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 422,
+        "eventType": "fulfillment_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": "-paragraph summary. Actually the"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 35920,
+      "event": "thinking",
+      "eventType": "fulfillment_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 424,
+        "eventType": "fulfillment_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " give me a one-paragraph summary"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 35981,
+      "event": "thinking",
+      "eventType": "fulfillment_thinking",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "eventIndex": 426,
+        "eventType": "fulfillment_thinking",
+        "status": "processing",
+        "thinking": {
+          "delta": " and then the summary paragraph"
+        }
+      }
+    },
+    {
+      "turn": 2,
+      "turn_ms": 37817,
+      "event": "message",
+      "eventType": "fulfillment",
+      "statusType": null,
+      "content_token_only": true,
+      "payload": {
+        "sessionId": "6ac9eaad261cbe23404841b1",
+        "messageId": "6ac9eacef7979c7d562ae8b5",
+        "answer": ").\n\n**One-paragraph summary:**\n",
+        "status": "processing",
+        "eventIndex": 478,
+        "eventType": "fulfillment"
+      }
+    }
+  ],
+  "structural_summarisation_frame_found": false
+}

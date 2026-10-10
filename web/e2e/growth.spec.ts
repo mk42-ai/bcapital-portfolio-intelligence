@@ -197,6 +197,17 @@ test.describe("GROWTH values grid", () => {
     await expect(chevron).not.toHaveCSS("color", GREEN_INK);
   });
 
+  test("Escape collapses the focused expanded tile and keeps focus on it", async ({ page }) => {
+    await page.goto("/onboarding?skip=1");
+    const first = page.locator("[data-testid=growth-value]").first();
+    await first.focus();
+    await page.keyboard.press("Enter");
+    await expect(first).toHaveAttribute("aria-expanded", "true");
+    await page.keyboard.press("Escape");
+    await expect(first).toHaveAttribute("aria-expanded", "false");
+    await expect(first).toBeFocused();
+  });
+
   test("lights up G→R→O→W→T→H once on first scroll-into-view (data-lit timer chain)", async ({ page }) => {
     // Start with the grid out of view so the IntersectionObserver fires on scroll, then record the data-lit sequence.
     await page.setViewportSize({ width: 1280, height: 300 });

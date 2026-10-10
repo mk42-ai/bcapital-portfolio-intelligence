@@ -1,0 +1,2298 @@
+{
+  "session": "6ac9eaad261cbe23404841b1",
+  "turns": {
+    "turn1": {
+      "start_utc": "2026-10-10T07:35:19.589Z",
+      "end_utc": "2026-10-10T07:35:41.922Z",
+      "total_ms": 22333,
+      "frame_count": 229,
+      "first_frame_ms": 2151,
+      "first_answer_ms": 16484,
+      "done_ms": 22326,
+      "distinct_event_names": {
+        "thinking": 74,
+        "heartbeat": 7,
+        "message": 148
+      },
+      "distinct_eventTypes": {
+        "planning_thinking": 18,
+        "planning_output": 16,
+        "step_thinking": 6,
+        "step_output": 17,
+        "plugin_sources": 1,
+        "fulfillment_thinking": 17,
+        "fulfillment": 145,
+        "metricsLog": 1
+      },
+      "distinct_statusTypes": {},
+      "plugin_sources_frames": 1,
+      "sources_count": 10,
+      "interesting_frame_groups": {
+        "thinking/planning_output/None": 16,
+        "thinking/step_output/None": 17,
+        "message/plugin_sources/None": 1,
+        "message/metricsLog/None": 1
+      },
+      "interesting_frames_note": "token-delta frames (thinking/fulfillment) whose text merely mentions plan/step/etc. are excluded; count=186",
+      "interesting_frames": [
+        {
+          "ms": 2748,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 17,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "{\"title\": \"I'll research the latest"
+            }
+          }
+        },
+        {
+          "ms": 2821,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 18,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " news about Fervo Energy and gather"
+            }
+          }
+        },
+        {
+          "ms": 2828,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 19,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " cited sources for you.\", \"objective"
+            }
+          }
+        },
+        {
+          "ms": 2832,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 20,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "\": \"Find the latest news about"
+            }
+          }
+        },
+        {
+          "ms": 2861,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 21,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " Fervo Energy and provide it with"
+            }
+          }
+        },
+        {
+          "ms": 2882,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 22,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " cited sources.\", \"plan_required"
+            }
+          }
+        },
+        {
+          "ms": 2901,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 23,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "\": true, \"plan_skip_reason\": \"\","
+            }
+          }
+        },
+        {
+          "ms": 2934,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 24,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " \"steps\": [{\"title\": \"Gathering"
+            }
+          }
+        },
+        {
+          "ms": 2964,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 25,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " latest Fervo Energy news\", \"user"
+            }
+          }
+        },
+        {
+          "ms": 2994,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 26,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "_query\": \"What is the latest news"
+            }
+          }
+        },
+        {
+          "ms": 3022,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 27,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " about Fervo Energy? Provide recent"
+            }
+          }
+        },
+        {
+          "ms": 3047,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 28,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " developments and include cited"
+            }
+          }
+        },
+        {
+          "ms": 3173,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 29,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " sources with URLs.\", \"assistant"
+            }
+          }
+        },
+        {
+          "ms": 3177,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 30,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "_query\": \"\", \"depends\": [], \"plugins"
+            }
+          }
+        },
+        {
+          "ms": 3185,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 32,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "\": [\"perplexity\"]}]}"
+            }
+          }
+        },
+        {
+          "ms": 3192,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 34,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": ""
+            }
+          }
+        },
+        {
+          "ms": 4126,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 39,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": "{\"title\": \"Searching Fervo Energy"
+            }
+          }
+        },
+        {
+          "ms": 4154,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 40,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " news\", \"plugins\": [{\"pluginId"
+            }
+          }
+        },
+        {
+          "ms": 4176,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 41,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": "\": \"plugin-1722260873\", \"name\":"
+            }
+          }
+        },
+        {
+          "ms": 4195,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 42,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " \"perplexity\", \"description\": \""
+            }
+          }
+        },
+        {
+          "ms": 4228,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 43,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": "This endpoint allows querying and"
+            }
+          }
+        },
+        {
+          "ms": 4266,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 44,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " returns relevant sources and images"
+            }
+          }
+        },
+        {
+          "ms": 4276,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 45,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": ", ensuring that both content and"
+            }
+          }
+        },
+        {
+          "ms": 4292,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 46,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " image URLs are included in the"
+            }
+          }
+        },
+        {
+          "ms": 4316,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 47,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " response.\", \"api_request_parameters"
+            }
+          }
+        },
+        {
+          "ms": 4344,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 48,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": "\": {\"message\": \"What is the latest"
+            }
+          }
+        },
+        {
+          "ms": 4358,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 49,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " news about Fervo Energy? Provide"
+            }
+          }
+        },
+        {
+          "ms": 4382,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 50,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " recent developments and include"
+            }
+          }
+        },
+        {
+          "ms": 4397,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 51,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " cited sources with URLs.\"}, \""
+            }
+          }
+        },
+        {
+          "ms": 4424,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 52,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": "all_parameters_hydrated\": true"
+            }
+          }
+        },
+        {
+          "ms": 4438,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 53,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": ", \"dependencies\": [], \"identifier"
+            }
+          }
+        },
+        {
+          "ms": 4472,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 55,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": "\": \"rest_api\"}]}"
+            }
+          }
+        },
+        {
+          "ms": 4479,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 57,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": ""
+            }
+          }
+        },
+        {
+          "ms": 14479,
+          "event": "message",
+          "eventType": "plugin_sources",
+          "statusType": null,
+          "payload": "{\"sessionId\":\"6ac9eaad261cbe23404841b1\",\"messageId\":\"6ac9eab895268adc215e0015\",\"eventIndex\":58,\"eventType\":\"plugin_sources\",\"stepId\":\"1\",\"stepTitle\":\"Searching Fervo Energy news\",\"status\":\"processing\",\"sources\":{\"agentId\":\"agent-1722260873\",\"pluginId\":\"plugin-1722260873\",\"pluginName\":\"Perplexity\",\"operationId\":\"perplexity\",\"items\":[{\"title\":\"2026 Climate Tech Companies to Watch: Fervo Energy and its plan to streamline geothermal power | MIT Technology Review\",\"url\":\"https://www.technologyreview.com/2026/10/06/1145252/fervo-energy-geothermal-power-streamline-plan/\",\"domain\":\"technologyreview.com\",\"imageUrl\":\"https://wp.technologyreview.com/wp-content/uploads/2026/10/New-Fervo-Energy-Power-Plant-and-Drilling-Rig.jpg\"},{\"title\":\"Fervo Energy Raises $462 Million Series E to Accelerate Geothermal Development and Meet Surging Energy Demand with Clean, Firm Power - Fervo Energy\",\"url\":\"https://fervoenergy.com/fervo-energy-raises-462-million-series-e-to-accelerate-geothermal-development-and-meet-surging-energy-demand-with-clean-firm-power/\",\"domain\":\"fervoenergy.com\",\"imageUrl\":\"https://fervoenergy.com/wp-content/uploads/2025/12/Fervo-Energy-Power-Plant-Construction-1.jpg\"},{\"title\":\"Fervo Energy (Fervo) has announced that its flagship Cape Station geothermal development in Beaver County, Utah, has synchronized to the grid and is exporting electricity for the first time. This marks the\",\"url\":\"https://www.instagram.com/p/Dd_1ryVCBkv/\",\"domain\":\"instagram.com\",\"imageUrl\":\"https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3999151081686318950\"},{\"title\":\"Fervo Energy Secures $206 Million In New Financing To Accelerate Cape Station Development - Fervo Energy\",\"url\":\"https://fervoenergy.com/fervo-secures-new-financing-to-accelerate-development/\",\"domain\":\"fervoenergy.com\",\"imageUrl\":\"https://fervoenergy.com/wp-content/uploads/2025/06/cape-station-beaver-county.jpg\"},{\"title\":\"Fervo Energy Hits Geothermal Milestone: Will It Matter For The Stock?\",\"url\":\"https://finance.yahoo.com/markets/stocks/articles/fervo-energy-hits-geothermal-milestone-171500803.html\",\"domain\":\"finance.yahoo.com\",\"imageUrl\":\"https://s.yimg.com/lo/mysterio/api/ff5cff0d15b2501a0933b3c7a4cc3be6a390f1922f01a158dfeb824a4f6f89ba/lightyear_networkapi/resizefit_w960%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fmarketbeat_955%2F88f6cc8279aaf1f4b87c9beee01c0d2c.png\"},{\"title\":\"Fervo Energy Secures $421 Million in Non-Recourse Project Financing for Cape Station - Fervo Energy\",\"url\":\"https://fervoenergy.com/fervo-energy-secures-421-million-in-non-recourse-project-financing-for-cape-station/\",\"domain\":\"fervoenergy.com\",\"imageUrl\":\"https://fervoenergy.com/wp-content/uploads/2026/03/ORC-image_4.png\"},{\"title\":\"Fervo Energy and PNNL Leverage AI and NVIDIA Accelerated Computing for New Digital Twin Platform Designed to Advance Geothermal Development - Fervo Energy\",\"url\":\"https://fervoenergy.com/fervo-energy-and-pnnl-leverage-ai-and-nvidia-accelerated-computing-for-new-digital-twin-platform-designed-to-advance-geothermal-development/\",\"domain\":\"fervoenergy.com\",\"imageUrl\":\"https://fervoenergy.com/wp-content/uploads/2026/06/Fervo-Phase-II-Site.jpg\"},{\"title\":\"Fervo Energy Announces Technology Breakthrough in Next-Generation Geothermal - Fervo Energy\",\"url\":\"https://fervoenergy.com/fervo-energy-announces-technology-breakthrough-in-next-generation-geothermal/\",\"domain\":\"fervoenergy.com\",\"imageUrl\":\"https://fervoenergy.com/wp-content/uploads/2023/07/Fervo-Energy_Project-Red_Rig-2-2048x1367.jpg\"},{\"title\":\"Geothermal Developer Fervo Energy Raises $1.9 Billion in Upsized IPO - ESG Today\",\"url\":\"https://www.esgtoday.com/geothermal-developer-fervo-energy-raises-1-9-billion-in-upsized-ipo/\",\"domain\":\"esgtoday.com\",\"imageUrl\":\"https://www.esgtoday.com/wp-content/uploads/2026/05/Fervo6.jpg\"},{\"title\":\"Fervo Energy Secures $421 Million in Non-Recourse Project Financing for Cape Station - Allstream Insiders\",\"url\":\"https://allstreaminsiders.com/fervo-energy-sec...[truncated 283 chars]"
+        },
+        {
+          "ms": 20316,
+          "event": "message",
+          "eventType": "metricsLog",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eab895268adc215e0015",
+            "eventIndex": 221,
+            "eventType": "metricsLog",
+            "status": "processing",
+            "publicMetrics": {
+              "inputTokens": 5985,
+              "outputTokens": 1282,
+              "totalTokens": 7267,
+              "ragTimeSec": 14.26,
+              "fulfillmentTimeSec": 5.46,
+              "totalTimeSec": 19.72
+            }
+          }
+        }
+      ],
+      "error_frames": []
+    },
+    "turn2": {
+      "start_utc": "2026-10-10T07:35:41.951Z",
+      "end_utc": "2026-10-10T07:36:24.709Z",
+      "total_ms": 42758,
+      "frame_count": 583,
+      "first_frame_ms": 2181,
+      "first_answer_ms": 36056,
+      "done_ms": 42750,
+      "distinct_event_names": {
+        "thinking": 427,
+        "heartbeat": 14,
+        "message": 142
+      },
+      "distinct_eventTypes": {
+        "planning_thinking": 189,
+        "planning_output": 43,
+        "step_thinking": 105,
+        "step_output": 47,
+        "plugin_sources": 2,
+        "fulfillment_thinking": 43,
+        "fulfillment": 138,
+        "metricsLog": 1
+      },
+      "distinct_statusTypes": {},
+      "plugin_sources_frames": 2,
+      "sources_count": 15,
+      "interesting_frame_groups": {
+        "thinking/planning_output/None": 43,
+        "thinking/step_output/None": 47,
+        "message/plugin_sources/None": 2,
+        "message/metricsLog/None": 1
+      },
+      "interesting_frames_note": "token-delta frames (thinking/fulfillment) whose text merely mentions plan/step/etc. are excluded; count=475",
+      "interesting_frames": [
+        {
+          "ms": 8294,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 188,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "{\n  \"title\": \"I'll pull the latest"
+            }
+          }
+        },
+        {
+          "ms": 8312,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 189,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " funding and project news for F"
+            }
+          }
+        },
+        {
+          "ms": 8333,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 190,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "ervo Energy and Ormat Technologies"
+            }
+          }
+        },
+        {
+          "ms": 8402,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 191,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": ".\\nThen I'll deliver a cited one"
+            }
+          }
+        },
+        {
+          "ms": 8416,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 192,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "-paragraph comparison of the two"
+            }
+          }
+        },
+        {
+          "ms": 8431,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 193,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " companies.\",\n  \"objective\": \""
+            }
+          }
+        },
+        {
+          "ms": 8443,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 194,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "Compare the latest funding and"
+            }
+          }
+        },
+        {
+          "ms": 8455,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 195,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " project news of Fervo Energy and"
+            }
+          }
+        },
+        {
+          "ms": 8474,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 196,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " Ormat Technologies and provide"
+            }
+          }
+        },
+        {
+          "ms": 8524,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 197,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " a one-paragraph summary with source"
+            }
+          }
+        },
+        {
+          "ms": 8528,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 198,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " citations.\",\n  \"plan_required"
+            }
+          }
+        },
+        {
+          "ms": 8532,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 199,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "\": true,\n  \"plan_skip_reason\":"
+            }
+          }
+        },
+        {
+          "ms": 8543,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 200,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " \"\",\n  \"steps\": [\n    {\n      \""
+            }
+          }
+        },
+        {
+          "ms": 8562,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 201,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "title\": \"Gathering funding news"
+            }
+          }
+        },
+        {
+          "ms": 8603,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 202,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "\",\n      \"user_query\": \"Find the"
+            }
+          }
+        },
+        {
+          "ms": 8616,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 203,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " latest funding, financing, and"
+            }
+          }
+        },
+        {
+          "ms": 8641,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 204,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " capital-markets news for Ferv"
+            }
+          }
+        },
+        {
+          "ms": 8660,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 205,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "o Energy and Ormat Technologies"
+            }
+          }
+        },
+        {
+          "ms": 8759,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 206,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": ", including deal amounts, investors"
+            }
+          }
+        },
+        {
+          "ms": 8763,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 207,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " or lenders, and dates, with direct"
+            }
+          }
+        },
+        {
+          "ms": 8848,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 208,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " source links for each item.\",\n"
+            }
+          }
+        },
+        {
+          "ms": 8852,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 209,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "      \"assistant_query\": \"\",\n     "
+            }
+          }
+        },
+        {
+          "ms": 8856,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 210,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " \"depends\": [],\n      \"plugins"
+            }
+          }
+        },
+        {
+          "ms": 8872,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 211,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "\": [\"perplexity\"]\n    },\n    {\n"
+            }
+          }
+        },
+        {
+          "ms": 8891,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 212,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "      \"title\": \"Gathering project"
+            }
+          }
+        },
+        {
+          "ms": 8917,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 213,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " news\",\n      \"user_query\": \"Find"
+            }
+          }
+        },
+        {
+          "ms": 8936,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 214,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " the latest project, development"
+            }
+          }
+        },
+        {
+          "ms": 8960,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 215,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": ", and deployment news for Ferv"
+            }
+          }
+        },
+        {
+          "ms": 8964,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 216,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "o Energy and Ormat Technologies"
+            }
+          }
+        },
+        {
+          "ms": 8978,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 217,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": ", including capacity, contracts"
+            }
+          }
+        },
+        {
+          "ms": 9007,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 218,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": ", PPAs, timelines, and milestones"
+            }
+          }
+        },
+        {
+          "ms": 9031,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 219,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": ", with direct source links. Then"
+            }
+          }
+        },
+        {
+          "ms": 9078,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 220,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " combine these project findings"
+            }
+          }
+        },
+        {
+          "ms": 9103,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 221,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " with the previously gathered funding"
+            }
+          }
+        },
+        {
+          "ms": 9136,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 222,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " news and write a single one-par"
+            }
+          }
+        },
+        {
+          "ms": 9140,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 223,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "agraph comparative summary of the"
+            }
+          }
+        },
+        {
+          "ms": 9159,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 224,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " two companies' latest funding"
+            }
+          }
+        },
+        {
+          "ms": 9166,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 225,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " and project developments, with"
+            }
+          }
+        },
+        {
+          "ms": 9185,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 226,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": " inline citations for every claim"
+            }
+          }
+        },
+        {
+          "ms": 9207,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 227,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": ".\",\n      \"assistant_query\": \"\",\n"
+            }
+          }
+        },
+        {
+          "ms": 9269,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 228,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "      \"depends\": [1],\n      \"plugins"
+            }
+          }
+        },
+        {
+          "ms": 9284,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 230,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": "\": [\"perplexity\"]\n    }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "ms": 9292,
+          "event": "thinking",
+          "eventType": "planning_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 232,
+            "eventType": "planning_output",
+            "status": "processing",
+            "output": {
+              "delta": ""
+            }
+          }
+        },
+        {
+          "ms": 13403,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 311,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": "{\n  \"title\": \"Searching latest"
+            }
+          }
+        },
+        {
+          "ms": 13417,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 312,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " financing news\",\n  \"plugins\":"
+            }
+          }
+        },
+        {
+          "ms": 13431,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 313,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " [\n    {\n      \"pluginId\": \"plugin"
+            }
+          }
+        },
+        {
+          "ms": 13471,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 314,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": "-1722260873\",\n      \"name\": \"per"
+            }
+          }
+        },
+        {
+          "ms": 13484,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 315,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": "plexity\",\n      \"description\":"
+            }
+          }
+        },
+        {
+          "ms": 13498,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 316,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " \"This endpoint allows querying"
+            }
+          }
+        },
+        {
+          "ms": 13525,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 317,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " and returns relevant sources and"
+            }
+          }
+        },
+        {
+          "ms": 13554,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 318,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " images, ensuring that both content"
+            }
+          }
+        },
+        {
+          "ms": 13568,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 319,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " and image URLs are included in"
+            }
+          }
+        },
+        {
+          "ms": 13595,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 320,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " the response.\",\n      \"api_request"
+            }
+          }
+        },
+        {
+          "ms": 13611,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 321,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": "_parameters\": {\n        \"message"
+            }
+          }
+        },
+        {
+          "ms": 13620,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 322,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": "\": \"Latest funding, financing,"
+            }
+          }
+        },
+        {
+          "ms": 13634,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 323,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " capital-markets news for Ferv"
+            }
+          }
+        },
+        {
+          "ms": 13661,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 324,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": "o Energy and Ormat Technologies"
+            }
+          }
+        },
+        {
+          "ms": 13676,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 325,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": ". Include deal amounts, investors"
+            }
+          }
+        },
+        {
+          "ms": 13689,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 326,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " or lenders, dates, and direct"
+            }
+          }
+        },
+        {
+          "ms": 13717,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 327,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " source links for each item. Focus"
+            }
+          }
+        },
+        {
+          "ms": 13743,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 328,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " on 2025-2026.\"\n      },\n     "
+            }
+          }
+        },
+        {
+          "ms": 13818,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 329,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " \"all_parameters_hydrated\": true"
+            }
+          }
+        },
+        {
+          "ms": 13822,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 330,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": ",\n      \"dependencies\": [],\n     "
+            }
+          }
+        },
+        {
+          "ms": 13826,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 331,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": " \"identifier\": \"rest_api\"\n    }\n"
+            }
+          }
+        },
+        {
+          "ms": 13835,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 333,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": "  ]\n}"
+            }
+          }
+        },
+        {
+          "ms": 13842,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 335,
+            "eventType": "step_output",
+            "stepId": "1",
+            "status": "processing",
+            "output": {
+              "delta": ""
+            }
+          }
+        },
+        {
+          "ms": 22422,
+          "event": "message",
+          "eventType": "plugin_sources",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 336,
+            "eventType": "plugin_sources",
+            "stepId": "1",
+            "stepTitle": "Searching latest financing news",
+            "status": "processing",
+            "sources": {
+              "agentId": "agent-1722260873",
+              "pluginId": "plugin-1722260873",
+              "pluginName": "Perplexity",
+              "operationId": "perplexity",
+              "items": [
+                {
+                  "title": "Fervo and X-Energy: How Federal Support Powered IPO Successes",
+                  "url": "https://efifoundation.org/energy-innovation-project-analysis/fervo-and-x-energy-how-federal-support-powered-clean-firm-ipo-successes/",
+                  "domain": "efifoundation.org",
+                  "imageUrl": "https://efifoundation.org/wp-content/uploads/sites/3/2026/05/FervoXenergy-Figure2-1-1024x512.png"
+                },
+                {
+                  "title": "Fervo's IPO Establishes Enhanced Geothermal Baselines, Presents New Competition to Fission, and Adds a New LDES Class | Cleantech Group",
+                  "url": "https://cleantech.com/fervo-energys-ipo-a-validation-of-geothermal-as-category/",
+                  "domain": "cleantech.com",
+                  "imageUrl": "https://cleantech.com/wp-content/uploads/2026/05/Frame-2147239544.png"
+                },
+                {
+                  "title": "Fervo Energy Secures Additional $255 Million Funding to Meet Unprecedented Energy Demand - Fervo Energy",
+                  "url": "https://fervoenergy.com/fervo-energy-secures-additional-255-million-funding/",
+                  "domain": "fervoenergy.com",
+                  "imageUrl": "https://fervoenergy.com/wp-content/uploads/2024/12/original-62B2BCF5-0EB7-41DF-AC15-09A6660661A049.jpg"
+                },
+                {
+                  "title": "Fervo Energy Raises $462 Million Series E to Accelerate Geothermal Development and Meet Surging Energy Demand with Clean, Firm Power - Fervo Energy",
+                  "url": "https://fervoenergy.com/fervo-energy-raises-462-million-series-e-to-accelerate-geothermal-development-and-meet-surging-energy-demand-with-clean-firm-power/",
+                  "domain": "fervoenergy.com",
+                  "imageUrl": "https://fervoenergy.com/wp-content/uploads/2025/12/Fervo-Energy-Power-Plant-Construction-1.jpg"
+                },
+                {
+                  "title": "Advanced Geothermal Energy Is Widely Available, Clean, and Maybe Cheap Enough to Make a Big Impact | Reports & Briefings | May 18, 2026 | ITIF",
+                  "url": "https://itif.org/publications/2026/05/18/advanced-geothermal-energy-widely-available-clean-maybe-cheap-enough/",
+                  "domain": "itif.org",
+                  "imageUrl": "https://itif-publications-production.s3.amazonaws.com/2026-advanced-geothermal_HTML_files/image005.png"
+                },
+                {
+                  "title": "Why Wait for Nuclear? One Solution Is Under Our Feet - Texas Geothermal",
+                  "url": "https://www.txgea.org/why-wait-for-nuclear-one-solution-is-under-our-feet/",
+                  "domain": "txgea.org",
+                  "imageUrl": "https://www.txgea.org/wp-content/uploads/2026/07/495f2b35-f233-4a60-8af8-ffdcf82f6868_1600x1237.webp"
+                },
+                {
+                  "title": "Fervo Energy upsizes IPO to $1.8bn, lifts valuation outlook",
+                  "url": "https://www.thinkgeoenergy.com/fervo-energy-upsizes-ipo-to-1-8bn-lifts-valuation-outlook/",
+                  "domain": "thinkgeoenergy.com",
+                  "imageUrl": "https://www.thinkgeoenergy.com/wp-content/uploads/2026/05/CapeStation_FervoEnergy-May2026-1024x540.png"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "ms": 24346,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 360,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": "{\"title\": \"Searching latest project"
+            }
+          }
+        },
+        {
+          "ms": 24443,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 361,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " developments\", \"plugins\": [{\""
+            }
+          }
+        },
+        {
+          "ms": 24447,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 362,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": "pluginId\": \"plugin-1722260873\","
+            }
+          }
+        },
+        {
+          "ms": 24451,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 363,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " \"name\": \"perplexity\", \"description"
+            }
+          }
+        },
+        {
+          "ms": 24456,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 364,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": "\": \"This endpoint allows query"
+            }
+          }
+        },
+        {
+          "ms": 24468,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 365,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": "ing and returns relevant sources"
+            }
+          }
+        },
+        {
+          "ms": 24490,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 366,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " and images, ensuring that both"
+            }
+          }
+        },
+        {
+          "ms": 24507,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 367,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " content and image URLs are included"
+            }
+          }
+        },
+        {
+          "ms": 24529,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 368,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " in the response.\", \"api_request"
+            }
+          }
+        },
+        {
+          "ms": 24560,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 369,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": "_parameters\": {\"message\": \"Latest"
+            }
+          }
+        },
+        {
+          "ms": 24587,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 370,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " project, development, and deployment"
+            }
+          }
+        },
+        {
+          "ms": 24598,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 371,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " news for Fervo Energy and Ormat"
+            }
+          }
+        },
+        {
+          "ms": 24624,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 372,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " Technologies in 2026, including"
+            }
+          }
+        },
+        {
+          "ms": 24668,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 373,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " capacity (MW), contracts, power"
+            }
+          }
+        },
+        {
+          "ms": 24697,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 374,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " purchase agreements (PPAs), timelines"
+            }
+          }
+        },
+        {
+          "ms": 24725,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 375,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": ", and milestones. Include details"
+            }
+          }
+        },
+        {
+          "ms": 24811,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 376,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " on Fervo's Cape Station and other"
+            }
+          }
+        },
+        {
+          "ms": 24864,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 377,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " projects, and Ormat's new geothermal"
+            }
+          }
+        },
+        {
+          "ms": 24984,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 378,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " plants, expansions, and PPA sign"
+            }
+          }
+        },
+        {
+          "ms": 24988,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 379,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": "ings. Provide direct source links"
+            }
+          }
+        },
+        {
+          "ms": 24992,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 380,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": ".\"}, \"all_parameters_hydrated\":"
+            }
+          }
+        },
+        {
+          "ms": 24996,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 381,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": " true, \"dependencies\": [], \"identifier"
+            }
+          }
+        },
+        {
+          "ms": 25012,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 383,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": "\": \"rest_api\"}]}"
+            }
+          }
+        },
+        {
+          "ms": 25020,
+          "event": "thinking",
+          "eventType": "step_output",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 385,
+            "eventType": "step_output",
+            "stepId": "2",
+            "status": "processing",
+            "output": {
+              "delta": ""
+            }
+          }
+        },
+        {
+          "ms": 32908,
+          "event": "message",
+          "eventType": "plugin_sources",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 386,
+            "eventType": "plugin_sources",
+            "stepId": "2",
+            "stepTitle": "Searching latest project developments",
+            "status": "processing",
+            "sources": {
+              "agentId": "agent-1722260873",
+              "pluginId": "plugin-1722260873",
+              "pluginName": "Perplexity",
+              "operationId": "perplexity",
+              "items": [
+                {
+                  "title": "Fervo Energy Achieves First Power at Cape Station, a Landmark Moment for the Future of Enhanced Geothermal Systems - Fervo Energy",
+                  "url": "https://fervoenergy.com/fervo-energy-achieves-first-power-at-cape-station-a-landmark-moment-for-the-future-of-enhanced-geothermal-systems/",
+                  "domain": "fervoenergy.com",
+                  "imageUrl": "https://fervoenergy.com/wp-content/uploads/2026/09/cape_phase1_8.4.26_3-e1790116044727.png"
+                },
+                {
+                  "title": "Fervo Hits First Power as Cape Station Geothermal Build Scales",
+                  "url": "https://finance.yahoo.com/energy/articles/fervo-hits-first-power-cape-120500060.html",
+                  "domain": "finance.yahoo.com",
+                  "imageUrl": "https://media.zenfs.com/en/zacks.com/76fd2c92c5a51f3b6550646bb7c51911.jpg"
+                },
+                {
+                  "title": "Fervo Energy Declares Commercial Operation at Cape Station Ahead of Schedule, Leading the Race for Next-Generation Geothermal Energy - Fervo Energy",
+                  "url": "https://fervoenergy.com/fervo-energy-declares-commercial-operation-at-cape-station-ahead-of-schedule-leading-the-race-for-next-generation-geothermal-energy/",
+                  "domain": "fervoenergy.com",
+                  "imageUrl": "https://fervoenergy.com/wp-content/uploads/2026/09/COD-featured-image.png"
+                },
+                {
+                  "title": "Fervo Energy Geothermal 2026, 400 MW Cape Station PPA - ENKI",
+                  "url": "https://enkiai.com/geothermal/fervo-energy-data-center-ppa/",
+                  "domain": "enkiai.com",
+                  "imageUrl": "https://enkiai.com/wp-content/uploads/2026/06/cover_Fervo_Energy_Signs_Phased_PPAs_with_Big_Tech__Scal.jpg"
+                },
+                {
+                  "title": "Fervo Energy Announces 31 MW Power Purchase Agreement with Shell Energy - Fervo Energy",
+                  "url": "https://fervoenergy.com/fervo-energy-announces-31-mw-power-purchase-agreement-with-shell-energy/",
+                  "domain": "fervoenergy.com",
+                  "imageUrl": "https://fervoenergy.com/wp-content/uploads/2025/04/Fervo-Energy-Power-Plant_3.11.25_3.png"
+                },
+                {
+                  "title": "Fervo Energy Geothermal 2026, $421M Google Partnership",
+                  "url": "https://enkiai.com/geothermal/enhanced-geothermal-projects-data-centers/",
+                  "domain": "enkiai.com",
+                  "imageUrl": "https://enkiai.com/wp-content/uploads/2026/04/cover_Geothermal_Data_Centers.jpg"
+                },
+                {
+                  "title": "Geothermal Groundbreakers: The Projects Redefining Renewable Power - POWER Magazine",
+                  "url": "https://www.powermag.com/partner-content/geothermal-groundbreakers-the-projects-redefining-firm-clean-power/",
+                  "domain": "powermag.com",
+                  "imageUrl": "https://www.powermag.com/wp-content/uploads/2026/02/fig3-cape-station-geothermal-fervo.jpg"
+                },
+                {
+                  "title": "Fervo Energy Geothermal 2026, $1.9B IPO & 750 MW Deal",
+                  "url": "https://enkiai.com/geothermal/fervo-enhanced-geothermal-google/",
+                  "domain": "enkiai.com",
+                  "imageUrl": "https://enkiai.com/wp-content/uploads/2026/08/enki_chart_cover_iVBORw0KGgoAAAAN-151.png"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "ms": 40739,
+          "event": "message",
+          "eventType": "metricsLog",
+          "statusType": null,
+          "payload": {
+            "sessionId": "6ac9eaad261cbe23404841b1",
+            "messageId": "6ac9eacef7979c7d562ae8b5",
+            "eventIndex": 568,
+            "eventType": "metricsLog",
+            "status": "processing",
+            "publicMetrics": {
+              "inputTokens": 12065,
+              "outputTokens": 1440,
+              "totalTokens": 13505,
+              "ragTimeSec": 32.95,
+              "fulfillmentTimeSec": 7.17,
+              "totalTimeSec": 40.12
+            }
+          }
+        }
+      ],
+      "error_frames": []
+    }
+  },
+  "structural_summarisation_or_statusLog_frames_found": false,
+  "perplexity_status": "ok (plugin_sources returned 10 items turn1, 7+8 items turn2; no 'Not enough credits' / 'Internal server error' frames)"
+}

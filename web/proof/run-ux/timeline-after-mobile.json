@@ -1,0 +1,870 @@
+{
+  "label": "after",
+  "viewport": "mobile",
+  "viewport_px": "390x844",
+  "base_url": "https://sb-70502obas4b3.vercel.run",
+  "started_utc": "2026-10-10T08:48:59.297Z",
+  "finished_utc": "2026-10-10T08:50:57.119Z",
+  "playwright_version": "1.64.0",
+  "turn1": {
+    "turn": 1,
+    "prompt": "What is the latest news about Fervo Energy? Cite sources.",
+    "viewport": "mobile",
+    "sent_utc": "2026-10-10T08:49:12.657Z",
+    "first_sse_frame": 68.9,
+    "first_sse_frame_type": "RUN_STARTED",
+    "first_thinking_visible": 2466.1,
+    "plugins": [
+      {
+        "name": "Perplexity",
+        "id": "plugin-1722260873",
+        "start_ms": 2433.4,
+        "end_ms": 18145.7,
+        "status": "ok",
+        "message": null,
+        "sources": 10,
+        "query": "What is the latest news about Fervo Energy? Cite sources.",
+        "dom_states": [
+          {
+            "state": "searching",
+            "ms": 2466.1
+          },
+          {
+            "state": "searched",
+            "ms": 18151.7
+          }
+        ]
+      }
+    ],
+    "plan_created": 7417.5,
+    "plan_visible": 2466.1,
+    "first_between_step_summary": 18145.8,
+    "first_between_step_summary_visible": 18164.9,
+    "between_step_summary_done": 18969,
+    "summary_done_visible": 18977.6,
+    "first_inline_citation_chip": 45169.8,
+    "first_answer_token": 44109.9,
+    "first_answer_paint": 44123.1,
+    "first_source_in_rail": 42104.5,
+    "final_badge_visible": 42104.5,
+    "error_card_visible": null,
+    "done": 49521.2,
+    "done_frame_type": "[DONE]",
+    "total_ms": 49794,
+    "composer_reset_ms": 49794,
+    "request_body_disclosed": true,
+    "request_body_keys": [
+      "endpointId",
+      "endpointLabel",
+      "reasoningMode",
+      "responseMode",
+      "pluginIds",
+      "queryChars",
+      "systemContextChars"
+    ],
+    "model_row_text": "DeepSeek Flash v4.1 · predefined-deepseek-flash · reasoning medium · stream",
+    "bridge_request_body": {
+      "tools": [],
+      "context": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "systemContext": "Portfolio data below comes from the B Capital portfolio API (live backend, fetched 2026-10-09T13:14:00Z). Use it ONLY for portfolio-internal questions (sentiment scores, deltas, which context companies moved, headline counts). For anything about external facts — recent announcements, funding rounds, valuations, IPOs, products, people, comparisons with earlier events — ALWAYS run the Perplexity web search and answer from fresh sources with citations; never say the feed lacks information when the web can answer it. Sentiment delta is null until a second scoring run exists — do not invent movement; a basis of \"seed placeholder\" means the score has not been scored by the workflow yet.\n• Apptronik — sector: Technology; status: Private; no IPO filing, acquisition, merger, rename, or shutdown reported as of 2026-10-09. Latest round: $520M Series A extension (2026-02-11) co-led by B Capital, Google, Mercedes-Benz, PEAK6 at $5.3B post-money; ~$935M raised across Series A rounds. B Capital co-led both the Feb 2025 Series A and the Feb 2026 extension. No new financing in the last 30 days; Apollo 2 (Gemini-powered) launch and GXO deployment are not tied to new capital. PitchBook data pending.; stage: Series A (extension); no Series B or growth round reported; sentiment: +0.45 (positive), delta +0.15, updated 2026-10-09T13:03:52Z, basis: workflow bcap-focus-daily; est. ticket 200000000; news items: 1; latest headlines: \"Apptronik closes over $935M Series A with new $520M extension\" (2026-02-11, apptronik.com)\n• Fervo Energy — sector: Energy & Resilience; status: Public company (Nasdaq: FRVO) following May 2026 IPO priced at $27.00/share, 80.5M Class A shares, ~$1.89B gross proceeds, ~$7.66–7.7B implied valuation; lock-up release expected 2026-11-08. B Capital led the Dec 2025 $462M Series E and no share sales have been reported. In the last 30 days: first Cape Station GeoBlock (33 MW) reached commercial operation 2026-09-30, one day ahead of schedule; two U.S. DOE awards (~$20M total, non-dilutive) for Idaho and Nevada EGS. Phase I ~100 MW targeted by 2027-01-01; Phase II (400 MW) targeted 2028. PitchBook data pending.; stage: Public company (Nasdaq: FRVO); last private round was Series E; sentiment: +0.80 (very positive), delta +0.20, updated 2026-10-09T13:03:52Z, basis: workflow bcap-focus-daily; est. ticket 462000000; news items: 7; latest headlines: \"Fervo Energy declares commercial operation at Cape Station ahead of schedule\" (2026-10-02, Fervo Energy (via X post by @ionyad)); \"World's first enhanced geothermal power plant completed in just 23 months\" (2026-10-01, TechCrunch (via X post by @ADODonoghue)); \"Fervo Energy Wins DOE Grants for Enhanced Geothermal Systems\" (undated, LinkedIn (Fervo Energy))\n• Flutterwave — sector: Technology; status: Private; IPO rumored/confidential filing per Forge but no confirmed filing or listing timeline; no rename or shutdown. Latest round: ~$262.75M Series E (June 2026) led by Ripple at ~$3.2–3.25B post-money, a modest up round from the $3B+ Series D (Feb 2022) that B Capital led; Circle Ventures follow-on tranche (2026-07-07, undisclosed, partially verified). B Capital not named in the June 2026 Series E. Acquired Nigerian open-banking startup Mono in an all-stock deal valued at $25–40M (announced 2026-01-05). Obtained a Nigerian microfinance banking license in early 2026; no license revocation or asset freeze confirmed. No new funding in the last 30 days. PitchBook data pending.; stage: Series E (late-stage, pre-IPO); sentiment: +0.50 (positive), delta +0.10, updated 2026-10-09T13:03:52Z, basis: workflow bcap-focus-daily; est. ticket 50000000; news items: 6; latest headlines: \"Flutterwave acquires Nigeria's Mono in deal worth up to $40M\" (undated, BusinessDay); \"Ripple backs Flutterwave with undisclosed funding as Africa's stablecoin battle intensifies\" (undated, BusinessDay); \"Flutterwave's Circle deal signals stablecoins are moving from crypto to core payment infrastructure\" (undated, BusinessDay)\n• Perplexity AI — sector: Technology; status: Private; CEO has stated a 2028 IPO target; no IPO filing, acquisition, rename, or shutdown. Latest round: $525M Series E (2026-01-09) led by Accel at ~$20.4–20.5B post-money; ~$1.7B raised to date; secondary-market mark ~$19.7B (Oct 2026). B Capital confirmed in the Dec 2024 round; participation in the Jan 2026 Series E unverified. ARR ~$200M (late 2025/early 2026). No new financing in the last 30 days; Decisions API and pplx-embed-v2-late launches are product news. User sentiment on Reddit is mixed-to-negative around the credit-based 'Computer' mode, usage limits, billing support, and refunds, with continued praise for search quality (Reddit post URLs not returned, so not cited as evidence). PitchBook data pending.; stage: Late-stage / growth (Series E with extensions); sentiment: +0.15 (neutral), delta +0.50, updated 2026-10-09T13:03:52Z, basis: workflow bcap-focus-daily; est. ticket 50000000; news items: 4; latest headlines: \"Perplexity introduces the Decisions API (pplx-decider-v1-27b)\" (2026-10-02, X (@perplexitydevs)); \"Perplexity AI unveils new pplx-embed-v2-late models\" (2026-10-07, TechAI Mag); \"Perplexity valued at $20B in Sep 2025 raise\" (2025-09-30, perplexityaimagazine.com)\n• WRITER — sector: Technology; status: Private; no IPO filing, acquisition, rename, or shutdown reported as of 2026-10-09. Latest round: $200M Series C (2024-11-12) led by Premji Invest, Radical Ventures, ICONIQ Growth at $1.9B post-money, with B Capital participating; ~$326M raised to date. No secondary trades since the last priced round. No funding news in the last 30 days; named Best AI Platform at the 2026 Digiday Technology Awards with a Qualcomm deployment highlighted. PitchBook data pending.; stage: Series C / later-stage growth; sentiment: +0.40 (positive), delta +0.30, updated 2026-10-09T13:03:52Z, basis: workflow bcap-focus-daily; est. ticket 5000000; news items: 1; latest headlines: \"WRITER raises $200M Series C at $1.9B val",
+        "sessionContext": [
+          {
+            "key": "company:apptronik",
+            "value": "{\"name\":\"Apptronik\",\"sector\":\"Technology\",\"status\":\"Private; no IPO filing, acquisition, merger, rename, or shutdown reported as of 2026-10-09. Latest round: $520M Series A extension (2026-02-11) co-led by B Capital, Google, Mercedes-Benz, PEAK6 at $5.3B post-money; ~$935M raised across Series A rounds. B Capital co-led both the Feb 2025 Series A and the Feb 2026 extension. No new financing in the last 30 days; Apollo 2 (Gemini-powered) launch and GXO deployment are not tied to new capital. PitchBook data pending.\",\"sentiment\":{\"score\":0.45,\"label\":\"positive\",\"delta\":0.15,\"updated_at\":\"2026-10-09T13:03:52Z\",\"basis\":\"workflow bcap-focus-daily\"},\"news\":[{\"title\":\"Apptronik closes over $935M Series A with new $520M extension\",\"url\":\"https://apptronik.com/news-collection/apptronik-closes-over-935-million-series-a\",\"published_at\":\"2026-02-11\",\"source\":\"apptronik.com\"}]}"
+          },
+          {
+            "key": "company:fervo-energy",
+            "value": "{\"name\":\"Fervo Energy\",\"sector\":\"Energy & Resilience\",\"status\":\"Public company (Nasdaq: FRVO) following May 2026 IPO priced at $27.00/share, 80.5M Class A shares, ~$1.89B gross proceeds, ~$7.66–7.7B implied valuation; lock-up release expected 2026-11-08. B Capital led the Dec 2025 $462M Series E and no share sales have been reported. In the last 30 days: first Cape Station GeoBlock (33 MW) reached commercial operation 2026-09-30, one day ahead of schedule; two U.S. DOE awards (~$20M total, non-dilutive) for Idaho and Nevada EGS. Phase I ~100 MW targeted by 2027-01-01; Phase II (400 MW) targeted 2028. PitchBook data pending.\",\"sentiment\":{\"score\":0.8,\"label\":\"very positive\",\"delta\":0.2,\"updated_at\":\"2026-10-09T13:03:52Z\",\"basis\":\"workflow bcap-focus-daily\"},\"news\":[{\"title\":\"Fervo Energy declares commercial operation at Cape Station ahead of schedule\",\"url\":\"https://fervoenergy.com/fervo-energy-declares-commercial-operation-at-cape-station-ahead-of-schedule-leading-the-race-for-next-generation-geothermal-energy/\",\"published_at\":\"2026-10-02\",\"source\":\"Fervo Energy (via X post by @ionyad)\"},{\"title\":\"World's first enhanced geothermal power plant completed in just 23 months\",\"url\":\"https://techcrunch.com/2026/10/01/worlds-first-enhanced-geothermal-power-plant-completed-in-just-23-months/?utm_source=tldrnewsletter\",\"published_at\":\"2026-10-01\",\"source\":\"TechCrunch (via X post by @ADODonoghue)\"},{\"title\":\"Fervo Energy Wins DOE Grants for Enhanced Geothermal Systems\",\"url\":\"https://www.linkedin.com/posts/fervo-energy_fervo-energy-has-been-awarded-two-grants-activity-7508260021005312000-cftB\",\"published_at\":null,\"source\":\"LinkedIn (Fervo Energy)\"}]}"
+          },
+          {
+            "key": "company:flutterwave",
+            "value": "{\"name\":\"Flutterwave\",\"sector\":\"Technology\",\"status\":\"Private; IPO rumored/confidential filing per Forge but no confirmed filing or listing timeline; no rename or shutdown. Latest round: ~$262.75M Series E (June 2026) led by Ripple at ~$3.2–3.25B post-money, a modest up round from the $3B+ Series D (Feb 2022) that B Capital led; Circle Ventures follow-on tranche (2026-07-07, undisclosed, partially verified). B Capital not named in the June 2026 Series E. Acquired Nigerian open-banking startup Mono in an all-stock deal valued at $25–40M (announced 2026-01-05). Obtained a Nigerian microfinance banking license in early 2026; no license revocation or asset freeze confirmed. No new funding in the last 30 days. PitchBook data pending.\",\"sentiment\":{\"score\":0.5,\"label\":\"positive\",\"delta\":0.1,\"updated_at\":\"2026-10-09T13:03:52Z\",\"basis\":\"workflow bcap-focus-daily\"},\"news\":[{\"title\":\"Flutterwave acquires Nigeria's Mono in deal worth up to $40M\",\"url\":\"https://businessday.ng/technology/article/flutterwave-acquires-nigerias-mono-in-deal-worth-up-to-40m/\",\"published_at\":null,\"source\":\"BusinessDay\"},{\"title\":\"Ripple backs Flutterwave with undisclosed funding as Africa's stablecoin battle intensifies\",\"url\":\"https://businessday.ng/technology/article/ripple-backs-flutterwave-with-undisclosed-funding-as-africas-stablecoin-battle-intensifies/\",\"published_at\":null,\"source\":\"BusinessDay\"},{\"title\":\"Flutterwave's Circle deal signals stablecoins are moving from crypto to core payment infrastructure\",\"url\":\"https://businessday.ng/technology/article/flutterwaves-circle-deal-signals-stablecoins-are-moving-from-crypto-to-core-payment-infrastructure/\",\"published_at\":null,\"source\":\"BusinessDay\"}]}"
+          },
+          {
+            "key": "company:perplexity-ai",
+            "value": "{\"name\":\"Perplexity AI\",\"sector\":\"Technology\",\"status\":\"Private; CEO has stated a 2028 IPO target; no IPO filing, acquisition, rename, or shutdown. Latest round: $525M Series E (2026-01-09) led by Accel at ~$20.4–20.5B post-money; ~$1.7B raised to date; secondary-market mark ~$19.7B (Oct 2026). B Capital confirmed in the Dec 2024 round; participation in the Jan 2026 Series E unverified. ARR ~$200M (late 2025/early 2026). No new financing in the last 30 days; Decisions API and pplx-embed-v2-late launches are product news. User sentiment on Reddit is mixed-to-negative around the credit-based 'Computer' mode, usage limits, billing support, and refunds, with continued praise for search quality (Reddit post URLs not returned, so not cited as evidence). PitchBook data pending.\",\"sentiment\":{\"score\":0.15,\"label\":\"neutral\",\"delta\":0.5,\"updated_at\":\"2026-10-09T13:03:52Z\",\"basis\":\"workflow bcap-focus-daily\"},\"news\":[{\"title\":\"Perplexity introduces the Decisions API (pplx-decider-v1-27b)\",\"url\":\"https://x.com/perplexitydevs/status/2105725598882832414\",\"published_at\":\"2026-10-02\",\"source\":\"X (@perplexitydevs)\"},{\"title\":\"Perplexity AI unveils new pplx-embed-v2-late models\",\"url\":\"https://www.techaimag.com/ai-news/perplexity-ai-unveils-new-pplx-embed-v2-late-models\",\"published_at\":\"2026-10-07\",\"source\":\"TechAI Mag\"},{\"title\":\"Perplexity valued at $20B in Sep 2025 raise\",\"url\":\"https://perplexityaimagazine.com/perplexity-hub/perplexity-ai-funding-history/\",\"published_at\":\"2025-09-30\",\"source\":\"perplexityaimagazine.com\"}]}"
+          },
+          {
+            "key": "company:writer",
+            "value": "{\"name\":\"WRITER\",\"sector\":\"Technology\",\"status\":\"Private; no IPO filing, acquisition, rename, or shutdown reported as of 2026-10-09. Latest round: $200M Series C (2024-11-12) led by Premji Invest, Radical Ventures, ICONIQ Growth at $1.9B post-money, with B Capital participating; ~$326M raised to date. No secondary trades since the last priced round. No funding news in the last 30 days; named Best AI Platform at the 2026 Digiday Technology Awards with a Qualcomm deployment highlighted. PitchBook data pending.\",\"sentiment\":{\"score\":0.4,\"label\":\"positive\",\"delta\":0.3,\"updated_at\":\"2026-10-09T13:03:52Z\",\"basis\":\"workflow bcap-focus-daily\"},\"news\":[{\"title\":\"WRITER raises $200M Series C at $1.9B valuation\",\"url\":\"https://writer.com/blog/series-c-funding-writer-press-release/\",\"published_at\":\"2024-11-12\",\"source\":\"writer.com\"}]}"
+          }
+        ]
+      },
+      "threadId": "b4556768-0952-43eb-ae1f-82eb4dcd3a8b",
+      "runId": "d70cfd64-206b-454f-aa8a-5629ed521194",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is the latest news about Fervo Energy? Cite sources.",
+          "id": "842285d8-db1c-4586-bafa-864dfc06889c"
+        }
+      ]
+    },
+    "bridge_http_status": 200,
+    "bridge_headers_at_ms": 66.1,
+    "frame_count": 904,
+    "frame_types": {
+      "RUN_STARTED": 1,
+      "CUSTOM:ondemand.status#connecting": 1,
+      "CUSTOM:ondemand.status#creating-session": 1,
+      "CUSTOM:ondemand.session": 1,
+      "CUSTOM:ondemand.status#querying": 1,
+      "CUSTOM:ondemand.request": 1,
+      "CUSTOM:ondemand.status#streaming": 1,
+      "CUSTOM:ondemand.filler": 73,
+      "CUSTOM:ondemand.status#planning": 4,
+      "TOOL_CALL_START": 1,
+      "TOOL_CALL_ARGS": 1,
+      "TOOL_CALL_END": 1,
+      "CUSTOM:ondemand.status#researching": 1,
+      "CUSTOM:ondemand.thinking": 679,
+      "CUSTOM:ondemand.plan": 1,
+      "CUSTOM:ondemand.step#start": 2,
+      "CUSTOM:ondemand.heartbeat": 4,
+      "CUSTOM:ondemand.sources": 3,
+      "TOOL_CALL_RESULT": 1,
+      "CUSTOM:ondemand.summary#start": 1,
+      "CUSTOM:ondemand.step#done": 2,
+      "CUSTOM:ondemand.summary#done": 1,
+      "CUSTOM:ondemand.status#answering": 1,
+      "TEXT_MESSAGE_START": 1,
+      "TEXT_MESSAGE_CONTENT": 114,
+      "CUSTOM:ondemand.metrics": 1,
+      "TEXT_MESSAGE_END": 1,
+      "CUSTOM:ondemand.status#done": 1,
+      "RUN_FINISHED": 1,
+      "[DONE]": 1,
+      "STREAM_CLOSED": 1
+    },
+    "status_types_seen": {
+      "planning": 1,
+      "plan_created": 1,
+      "summarising": 1
+    },
+    "perplexity": {
+      "status": "ok",
+      "error": null,
+      "error_card_shown": false,
+      "substituted": false
+    },
+    "cdp_chunks": 815,
+    "cdp_first_chunk_ms": 33.3
+  },
+  "turn2": {
+    "turn": 2,
+    "prompt": "Compare the latest funding and project news of Fervo Energy and Ormat Technologies, then give me a one-paragraph summary with citations.",
+    "viewport": "mobile",
+    "sent_utc": "2026-10-10T08:50:05.783Z",
+    "first_sse_frame": 96.1,
+    "first_sse_frame_type": "RUN_STARTED",
+    "first_thinking_visible": 1548.6,
+    "plugins": [
+      {
+        "name": "Perplexity",
+        "id": "plugin-1722260873",
+        "start_ms": 1535.6,
+        "end_ms": 16481,
+        "status": "ok",
+        "message": null,
+        "sources": 10,
+        "query": "Compare the latest funding and project news of Fervo Energy and Ormat Technologies, then give me a one-paragraph summary with citations.",
+        "dom_states": [
+          {
+            "state": "searching",
+            "ms": 1548.6
+          },
+          {
+            "state": "searched",
+            "ms": 16489
+          }
+        ]
+      }
+    ],
+    "plan_created": 6172.2,
+    "plan_visible": 1548.6,
+    "first_between_step_summary": 16481,
+    "first_between_step_summary_visible": 16495.6,
+    "between_step_summary_done": 17652.7,
+    "summary_done_visible": 17662.3,
+    "first_inline_citation_chip": 44194.2,
+    "first_answer_token": 43585.5,
+    "first_answer_paint": 43638.4,
+    "first_source_in_rail": 43594.6,
+    "final_badge_visible": 43594.6,
+    "error_card_visible": null,
+    "done": 49848,
+    "done_frame_type": "[DONE]",
+    "total_ms": 50028,
+    "composer_reset_ms": 50028,
+    "request_body_disclosed": true,
+    "request_body_keys": [
+      "endpointId",
+      "endpointLabel",
+      "reasoningMode",
+      "responseMode",
+      "pluginIds",
+      "queryChars",
+      "systemContextChars"
+    ],
+    "model_row_text": "DeepSeek Flash v4.1 · predefined-deepseek-flash · reasoning medium · stream",
+    "bridge_request_body": {
+      "tools": [],
+      "context": {
+        "sessionId": "6ac9fc08261cbe23404843bd",
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "systemContext": "Portfolio data below comes from the B Capital portfolio API (live backend, fetched 2026-10-09T13:14:00Z). Use it ONLY for portfolio-internal questions (sentiment scores, deltas, which context companies moved, headline counts). For anything about external facts — recent announcements, funding rounds, valuations, IPOs, products, people, comparisons with earlier events — ALWAYS run the Perplexity web search and answer from fresh sources with citations; never say the feed lacks information when the web can answer it. Sentiment delta is null until a second scoring run exists — do not invent movement; a basis of \"seed placeholder\" means the score has not been scored by the workflow yet.\n• Apptronik — sector: Technology; status: Private; no IPO filing, acquisition, merger, rename, or shutdown reported as of 2026-10-09. Latest round: $520M Series A extension (2026-02-11) co-led by B Capital, Google, Mercedes-Benz, PEAK6 at $5.3B post-money; ~$935M raised across Series A rounds. B Capital co-led both the Feb 2025 Series A and the Feb 2026 extension. No new financing in the last 30 days; Apollo 2 (Gemini-powered) launch and GXO deployment are not tied to new capital. PitchBook data pending.; stage: Series A (extension); no Series B or growth round reported; sentiment: +0.45 (positive), delta +0.15, updated 2026-10-09T13:03:52Z, basis: workflow bcap-focus-daily; est. ticket 200000000; news items: 1; latest headlines: \"Apptronik closes over $935M Series A with new $520M extension\" (2026-02-11, apptronik.com)\n• Fervo Energy — sector: Energy & Resilience; status: Public company (Nasdaq: FRVO) following May 2026 IPO priced at $27.00/share, 80.5M Class A shares, ~$1.89B gross proceeds, ~$7.66–7.7B implied valuation; lock-up release expected 2026-11-08. B Capital led the Dec 2025 $462M Series E and no share sales have been reported. In the last 30 days: first Cape Station GeoBlock (33 MW) reached commercial operation 2026-09-30, one day ahead of schedule; two U.S. DOE awards (~$20M total, non-dilutive) for Idaho and Nevada EGS. Phase I ~100 MW targeted by 2027-01-01; Phase II (400 MW) targeted 2028. PitchBook data pending.; stage: Public company (Nasdaq: FRVO); last private round was Series E; sentiment: +0.80 (very positive), delta +0.20, updated 2026-10-09T13:03:52Z, basis: workflow bcap-focus-daily; est. ticket 462000000; news items: 7; latest headlines: \"Fervo Energy declares commercial operation at Cape Station ahead of schedule\" (2026-10-02, Fervo Energy (via X post by @ionyad)); \"World's first enhanced geothermal power plant completed in just 23 months\" (2026-10-01, TechCrunch (via X post by @ADODonoghue)); \"Fervo Energy Wins DOE Grants for Enhanced Geothermal Systems\" (undated, LinkedIn (Fervo Energy))\n• Flutterwave — sector: Technology; status: Private; IPO rumored/confidential filing per Forge but no confirmed filing or listing timeline; no rename or shutdown. Latest round: ~$262.75M Series E (June 2026) led by Ripple at ~$3.2–3.25B post-money, a modest up round from the $3B+ Series D (Feb 2022) that B Capital led; Circle Ventures follow-on tranche (2026-07-07, undisclosed, partially verified). B Capital not named in the June 2026 Series E. Acquired Nigerian open-banking startup Mono in an all-stock deal valued at $25–40M (announced 2026-01-05). Obtained a Nigerian microfinance banking license in early 2026; no license revocation or asset freeze confirmed. No new funding in the last 30 days. PitchBook data pending.; stage: Series E (late-stage, pre-IPO); sentiment: +0.50 (positive), delta +0.10, updated 2026-10-09T13:03:52Z, basis: workflow bcap-focus-daily; est. ticket 50000000; news items: 6; latest headlines: \"Flutterwave acquires Nigeria's Mono in deal worth up to $40M\" (undated, BusinessDay); \"Ripple backs Flutterwave with undisclosed funding as Africa's stablecoin battle intensifies\" (undated, BusinessDay); \"Flutterwave's Circle deal signals stablecoins are moving from crypto to core payment infrastructure\" (undated, BusinessDay)\n• Perplexity AI — sector: Technology; status: Private; CEO has stated a 2028 IPO target; no IPO filing, acquisition, rename, or shutdown. Latest round: $525M Series E (2026-01-09) led by Accel at ~$20.4–20.5B post-money; ~$1.7B raised to date; secondary-market mark ~$19.7B (Oct 2026). B Capital confirmed in the Dec 2024 round; participation in the Jan 2026 Series E unverified. ARR ~$200M (late 2025/early 2026). No new financing in the last 30 days; Decisions API and pplx-embed-v2-late launches are product news. User sentiment on Reddit is mixed-to-negative around the credit-based 'Computer' mode, usage limits, billing support, and refunds, with continued praise for search quality (Reddit post URLs not returned, so not cited as evidence). PitchBook data pending.; stage: Late-stage / growth (Series E with extensions); sentiment: +0.15 (neutral), delta +0.50, updated 2026-10-09T13:03:52Z, basis: workflow bcap-focus-daily; est. ticket 50000000; news items: 4; latest headlines: \"Perplexity introduces the Decisions API (pplx-decider-v1-27b)\" (2026-10-02, X (@perplexitydevs)); \"Perplexity AI unveils new pplx-embed-v2-late models\" (2026-10-07, TechAI Mag); \"Perplexity valued at $20B in Sep 2025 raise\" (2025-09-30, perplexityaimagazine.com)\n• WRITER — sector: Technology; status: Private; no IPO filing, acquisition, rename, or shutdown reported as of 2026-10-09. Latest round: $200M Series C (2024-11-12) led by Premji Invest, Radical Ventures, ICONIQ Growth at $1.9B post-money, with B Capital participating; ~$326M raised to date. No secondary trades since the last priced round. No funding news in the last 30 days; named Best AI Platform at the 2026 Digiday Technology Awards with a Qualcomm deployment highlighted. PitchBook data pending.; stage: Series C / later-stage growth; sentiment: +0.40 (positive), delta +0.30, updated 2026-10-09T13:03:52Z, basis: workflow bcap-focus-daily; est. ticket 5000000; news items: 1; latest headlines: \"WRITER raises $200M Series C at $1.9B val",
+        "sessionContext": [
+          {
+            "key": "company:apptronik",
+            "value": "{\"name\":\"Apptronik\",\"sector\":\"Technology\",\"status\":\"Private; no IPO filing, acquisition, merger, rename, or shutdown reported as of 2026-10-09. Latest round: $520M Series A extension (2026-02-11) co-led by B Capital, Google, Mercedes-Benz, PEAK6 at $5.3B post-money; ~$935M raised across Series A rounds. B Capital co-led both the Feb 2025 Series A and the Feb 2026 extension. No new financing in the last 30 days; Apollo 2 (Gemini-powered) launch and GXO deployment are not tied to new capital. PitchBook data pending.\",\"sentiment\":{\"score\":0.45,\"label\":\"positive\",\"delta\":0.15,\"updated_at\":\"2026-10-09T13:03:52Z\",\"basis\":\"workflow bcap-focus-daily\"},\"news\":[{\"title\":\"Apptronik closes over $935M Series A with new $520M extension\",\"url\":\"https://apptronik.com/news-collection/apptronik-closes-over-935-million-series-a\",\"published_at\":\"2026-02-11\",\"source\":\"apptronik.com\"}]}"
+          },
+          {
+            "key": "company:fervo-energy",
+            "value": "{\"name\":\"Fervo Energy\",\"sector\":\"Energy & Resilience\",\"status\":\"Public company (Nasdaq: FRVO) following May 2026 IPO priced at $27.00/share, 80.5M Class A shares, ~$1.89B gross proceeds, ~$7.66–7.7B implied valuation; lock-up release expected 2026-11-08. B Capital led the Dec 2025 $462M Series E and no share sales have been reported. In the last 30 days: first Cape Station GeoBlock (33 MW) reached commercial operation 2026-09-30, one day ahead of schedule; two U.S. DOE awards (~$20M total, non-dilutive) for Idaho and Nevada EGS. Phase I ~100 MW targeted by 2027-01-01; Phase II (400 MW) targeted 2028. PitchBook data pending.\",\"sentiment\":{\"score\":0.8,\"label\":\"very positive\",\"delta\":0.2,\"updated_at\":\"2026-10-09T13:03:52Z\",\"basis\":\"workflow bcap-focus-daily\"},\"news\":[{\"title\":\"Fervo Energy declares commercial operation at Cape Station ahead of schedule\",\"url\":\"https://fervoenergy.com/fervo-energy-declares-commercial-operation-at-cape-station-ahead-of-schedule-leading-the-race-for-next-generation-geothermal-energy/\",\"published_at\":\"2026-10-02\",\"source\":\"Fervo Energy (via X post by @ionyad)\"},{\"title\":\"World's first enhanced geothermal power plant completed in just 23 months\",\"url\":\"https://techcrunch.com/2026/10/01/worlds-first-enhanced-geothermal-power-plant-completed-in-just-23-months/?utm_source=tldrnewsletter\",\"published_at\":\"2026-10-01\",\"source\":\"TechCrunch (via X post by @ADODonoghue)\"},{\"title\":\"Fervo Energy Wins DOE Grants for Enhanced Geothermal Systems\",\"url\":\"https://www.linkedin.com/posts/fervo-energy_fervo-energy-has-been-awarded-two-grants-activity-7508260021005312000-cftB\",\"published_at\":null,\"source\":\"LinkedIn (Fervo Energy)\"}]}"
+          },
+          {
+            "key": "company:flutterwave",
+            "value": "{\"name\":\"Flutterwave\",\"sector\":\"Technology\",\"status\":\"Private; IPO rumored/confidential filing per Forge but no confirmed filing or listing timeline; no rename or shutdown. Latest round: ~$262.75M Series E (June 2026) led by Ripple at ~$3.2–3.25B post-money, a modest up round from the $3B+ Series D (Feb 2022) that B Capital led; Circle Ventures follow-on tranche (2026-07-07, undisclosed, partially verified). B Capital not named in the June 2026 Series E. Acquired Nigerian open-banking startup Mono in an all-stock deal valued at $25–40M (announced 2026-01-05). Obtained a Nigerian microfinance banking license in early 2026; no license revocation or asset freeze confirmed. No new funding in the last 30 days. PitchBook data pending.\",\"sentiment\":{\"score\":0.5,\"label\":\"positive\",\"delta\":0.1,\"updated_at\":\"2026-10-09T13:03:52Z\",\"basis\":\"workflow bcap-focus-daily\"},\"news\":[{\"title\":\"Flutterwave acquires Nigeria's Mono in deal worth up to $40M\",\"url\":\"https://businessday.ng/technology/article/flutterwave-acquires-nigerias-mono-in-deal-worth-up-to-40m/\",\"published_at\":null,\"source\":\"BusinessDay\"},{\"title\":\"Ripple backs Flutterwave with undisclosed funding as Africa's stablecoin battle intensifies\",\"url\":\"https://businessday.ng/technology/article/ripple-backs-flutterwave-with-undisclosed-funding-as-africas-stablecoin-battle-intensifies/\",\"published_at\":null,\"source\":\"BusinessDay\"},{\"title\":\"Flutterwave's Circle deal signals stablecoins are moving from crypto to core payment infrastructure\",\"url\":\"https://businessday.ng/technology/article/flutterwaves-circle-deal-signals-stablecoins-are-moving-from-crypto-to-core-payment-infrastructure/\",\"published_at\":null,\"source\":\"BusinessDay\"}]}"
+          },
+          {
+            "key": "company:perplexity-ai",
+            "value": "{\"name\":\"Perplexity AI\",\"sector\":\"Technology\",\"status\":\"Private; CEO has stated a 2028 IPO target; no IPO filing, acquisition, rename, or shutdown. Latest round: $525M Series E (2026-01-09) led by Accel at ~$20.4–20.5B post-money; ~$1.7B raised to date; secondary-market mark ~$19.7B (Oct 2026). B Capital confirmed in the Dec 2024 round; participation in the Jan 2026 Series E unverified. ARR ~$200M (late 2025/early 2026). No new financing in the last 30 days; Decisions API and pplx-embed-v2-late launches are product news. User sentiment on Reddit is mixed-to-negative around the credit-based 'Computer' mode, usage limits, billing support, and refunds, with continued praise for search quality (Reddit post URLs not returned, so not cited as evidence). PitchBook data pending.\",\"sentiment\":{\"score\":0.15,\"label\":\"neutral\",\"delta\":0.5,\"updated_at\":\"2026-10-09T13:03:52Z\",\"basis\":\"workflow bcap-focus-daily\"},\"news\":[{\"title\":\"Perplexity introduces the Decisions API (pplx-decider-v1-27b)\",\"url\":\"https://x.com/perplexitydevs/status/2105725598882832414\",\"published_at\":\"2026-10-02\",\"source\":\"X (@perplexitydevs)\"},{\"title\":\"Perplexity AI unveils new pplx-embed-v2-late models\",\"url\":\"https://www.techaimag.com/ai-news/perplexity-ai-unveils-new-pplx-embed-v2-late-models\",\"published_at\":\"2026-10-07\",\"source\":\"TechAI Mag\"},{\"title\":\"Perplexity valued at $20B in Sep 2025 raise\",\"url\":\"https://perplexityaimagazine.com/perplexity-hub/perplexity-ai-funding-history/\",\"published_at\":\"2025-09-30\",\"source\":\"perplexityaimagazine.com\"}]}"
+          },
+          {
+            "key": "company:writer",
+            "value": "{\"name\":\"WRITER\",\"sector\":\"Technology\",\"status\":\"Private; no IPO filing, acquisition, rename, or shutdown reported as of 2026-10-09. Latest round: $200M Series C (2024-11-12) led by Premji Invest, Radical Ventures, ICONIQ Growth at $1.9B post-money, with B Capital participating; ~$326M raised to date. No secondary trades since the last priced round. No funding news in the last 30 days; named Best AI Platform at the 2026 Digiday Technology Awards with a Qualcomm deployment highlighted. PitchBook data pending.\",\"sentiment\":{\"score\":0.4,\"label\":\"positive\",\"delta\":0.3,\"updated_at\":\"2026-10-09T13:03:52Z\",\"basis\":\"workflow bcap-focus-daily\"},\"news\":[{\"title\":\"WRITER raises $200M Series C at $1.9B valuation\",\"url\":\"https://writer.com/blog/series-c-funding-writer-press-release/\",\"published_at\":\"2024-11-12\",\"source\":\"writer.com\"}]}"
+          }
+        ]
+      },
+      "threadId": "b4556768-0952-43eb-ae1f-82eb4dcd3a8b",
+      "runId": "7c643245-6fd2-4aad-a856-ea2d4ea82058",
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is the latest news about Fervo Energy? Cite sources.",
+          "id": "842285d8-db1c-4586-bafa-864dfc06889c"
+        },
+        {
+          "id": "fb0c78dd-56ed-4b92-be42-deda8f8f716d",
+          "role": "assistant",
+          "content": "",
+          "toolCalls": [
+            {
+              "id": "45c96968-ba07-4a0b-88a3-b560eca3d0ce",
+              "type": "function",
+              "function": {
+                "name": "Perplexity",
+                "arguments": "{\"plugin\":\"Perplexity\",\"pluginId\":\"plugin-1722260873\",\"query\":\"What is the latest news about Fervo Energy? Cite sources.\",\"stepId\":\"\",\"endpointId\":\"predefined-deepseek-flash\",\"endpointLabel\":\"DeepSeek Flash v4.1\",\"reasoningMode\":\"medium\"}"
+              }
+            }
+          ]
+        },
+        {
+          "id": "5bf9e000-d13f-419c-9b10-5be088cc9544",
+          "role": "tool",
+          "toolCallId": "45c96968-ba07-4a0b-88a3-b560eca3d0ce",
+          "content": "{\"status\":\"ok\",\"plugin\":\"Perplexity\",\"pluginId\":\"plugin-1722260873\",\"durationMs\":15713,\"sources\":10,\"items\":10}"
+        },
+        {
+          "id": "f1a37f28-7004-4fba-9ba4-ccd10ad4c52a",
+          "role": "assistant",
+          "content": "**Latest news on Fervo Energy (Nasdaq: FRVO)**\n\nThe biggest recent development is that Fervo Energy's first power plant at Cape Station in Beaver County, Utah, has reached commercial operation — making it the first greenfield enhanced geothermal (EGS) development in the world to hit contractual commercial operations.\n\n**Commercial operation reached ahead of schedule**\n- The first GeoBlock achieved **33 MW of net power production**, meeting the expected production threshold under its Power Purchase Agreement (PPA), and is now generating revenue. Cape Station synchronized to the grid on September 24 and declared commercial operation on September 30 — **one day before its contractual COD**.\n- Fervo built and commissioned the facility in just **23 months**, and CEO Tim Latimer noted the company targets compressing that timeline further (an **18-month** construction target for future GeoBlocks).\n- Source: [Fervo Energy — Declares Commercial Operation at Cape Station Ahead of Schedule](https://fervoenergy.com/fervo-energy-declares-commercial-operation-at-cape-station-ahead-of-schedule-leading-the-race-for-next-generation-geothermal-energy/)\n\n**First Power milestone (late September)**\n- Cape Station achieved **First Power** on September 24, 2026 — the first time a utility-scale greenfield EGS development reached this milestone — just over four months after Fervo's May 2026 IPO. Phase I is an approximately **100 MW** installation, with **900 MW fully contracted** and more than **4 GW** of capacity planned.\n- Source: [Fervo Energy — Achieves First Power at Cape Station](https://fervoenergy.com/fervo-energy-achieves-first-power-at-cape-station-a-landmark-moment-for-the-future-of-enhanced-geothermal-systems/)\n\n**Third-party coverage**\n- TechCrunch covered it as the [\"World's first enhanced geothermal power plant completed in just 23 months\"](https://techcrunch.com/2026/10/01/worlds-first-enhanced-geothermal-power-plant-completed-in-just-23-months/?utm_source=tldrnewsletter)\n- Power Magazine and StockTitan also reported the 33-MW Cape unit reaching commercial operation: [StockTitan](https://www.stocktitan.net/news/FRVO/fervo-energy-declares-commercial-operation-at-cape-station-ahead-of-si904pbzylgp.html)\n\n**DOE grants**\n- Fervo was awarded **two U.S. DOE grants** (about $20M total, non-dilutive) for Idaho and Nevada EGS projects. Source: [LinkedIn (Fervo Energy)](https://www.linkedin.com/posts/fervo-energy_fervo-energy-has-been-awarded-two-grants-activity-7508260021005312000-cftB)\n\n**Other notable items**\n- **Google PPA**: On September 1, 2026, Google signed a **396 MW** PPA with Fervo — the largest EGS deal ever — with an option to expand toward nearly 1 GW by June 2030. Source: [The $10.2 Billion Head Start: What Google's 396 MW Geothermal Deal Actually Bought](https://avanzaenergy.substack.com/p/the-102-billion-head-start-what-googles)\n- **Pipeline/contracts**: Fervo had 1,054 MW of binding agreements representing about **$11.9 billion of contracted revenue** as of September 2026, though current revenues remain small ($113,000 in Q2 2026). Source: [FRVO Stock Hits Its Lowest Valuation](https://es.tradingview.com/news/zacks:2577c34e3094b:0-frvo-stock-hits-its-lowest-valuation-is-it-time-to-buy/)\n\n⚠️ **Note**: A critical research report from Morpheus Research (\"Fervo Energy: Big Tech's Clean Energy Bet Is Unraveling\") alleges undisclosed technical issues, including inconsistent production temperatures, premature thermal decline, water loss, seismicity-related equipment damage, and ballooning costs, and claims material misstatements to investors. These are unverified allegations from a short-seller-style research outlet. Source: [Morpheus Research](https://www.morpheus-research.com/fervo/)",
+          "toolCalls": []
+        },
+        {
+          "role": "user",
+          "content": "Compare the latest funding and project news of Fervo Energy and Ormat Technologies, then give me a one-paragraph summary with citations.",
+          "id": "c8e4f667-bc55-43f0-8f37-20e3000c1cf3"
+        }
+      ]
+    },
+    "bridge_http_status": 200,
+    "bridge_headers_at_ms": 88.6,
+    "frame_count": 838,
+    "frame_types": {
+      "RUN_STARTED": 1,
+      "CUSTOM:ondemand.status#connecting": 1,
+      "CUSTOM:ondemand.session": 1,
+      "CUSTOM:ondemand.status#querying": 1,
+      "CUSTOM:ondemand.request": 1,
+      "CUSTOM:ondemand.status#streaming": 1,
+      "CUSTOM:ondemand.filler": 73,
+      "CUSTOM:ondemand.status#planning": 5,
+      "TOOL_CALL_START": 1,
+      "TOOL_CALL_ARGS": 1,
+      "TOOL_CALL_END": 1,
+      "CUSTOM:ondemand.status#researching": 1,
+      "CUSTOM:ondemand.thinking": 602,
+      "CUSTOM:ondemand.plan": 1,
+      "CUSTOM:ondemand.step#start": 3,
+      "CUSTOM:ondemand.heartbeat": 4,
+      "CUSTOM:ondemand.sources": 3,
+      "TOOL_CALL_RESULT": 1,
+      "CUSTOM:ondemand.summary#start": 2,
+      "CUSTOM:ondemand.step#done": 3,
+      "CUSTOM:ondemand.summary#done": 2,
+      "TEXT_MESSAGE_START": 1,
+      "TEXT_MESSAGE_CONTENT": 122,
+      "CUSTOM:ondemand.metrics": 1,
+      "TEXT_MESSAGE_END": 1,
+      "CUSTOM:ondemand.status#done": 1,
+      "RUN_FINISHED": 1,
+      "[DONE]": 1,
+      "STREAM_CLOSED": 1
+    },
+    "status_types_seen": {
+      "planning": 1,
+      "plan_created": 1,
+      "summarising": 2
+    },
+    "perplexity": {
+      "status": "ok",
+      "error": null,
+      "error_card_shown": false,
+      "substituted": false
+    },
+    "cdp_chunks": 749,
+    "cdp_first_chunk_ms": 40.1
+  },
+  "metrics": {
+    "turn1": {
+      "stream_window_ms": 49521,
+      "visible_dom_changes": 835,
+      "dead_air_gaps": {
+        "count": 0,
+        "gaps": [],
+        "gaps_over_800_any": 1,
+        "gaps_bridged_by_filler": 1,
+        "max_gap_ms": 2019
+      },
+      "cumulative_layout_shift": {
+        "value": 0.1705,
+        "shifts": 18,
+        "top_nodes": [
+          {
+            "node": "div",
+            "value": 0.1197
+          },
+          {
+            "node": "div[data-testid=working-band].oiu-slot.oiu-slot--working",
+            "value": 0.1017
+          },
+          {
+            "node": "div[data-testid=thinking-trace].oiu-thinking",
+            "value": 0.1017
+          },
+          {
+            "node": "svg",
+            "value": 0.0711
+          },
+          {
+            "node": "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming",
+            "value": 0.0302
+          },
+          {
+            "node": "span.oiu-activity__elapsed",
+            "value": 0.0211
+          }
+        ],
+        "largest": [
+          {
+            "ms": 7432.4,
+            "value": 0.0422,
+            "nodes": [
+              "div",
+              "div[data-testid=working-band].oiu-slot.oiu-slot--working",
+              "div[data-testid=thinking-trace].oiu-thinking",
+              "svg"
+            ]
+          },
+          {
+            "ms": 9879.2,
+            "value": 0.03136,
+            "nodes": [
+              "div",
+              "div[data-testid=thinking-trace].oiu-thinking",
+              "div[data-testid=working-band].oiu-slot.oiu-slot--working"
+            ]
+          },
+          {
+            "ms": 44125.6,
+            "value": 0.03023,
+            "nodes": [
+              "div[data-testid=assistant-streaming].oiu-assistant.oiu-assistant--streaming"
+            ]
+          }
+        ]
+      },
+      "scroll_jank": {
+        "source": "long-animation-frame",
+        "long_frames_over_50ms": 4,
+        "max_ms": 90.9,
+        "total_ms": 288,
+        "top": [
+          {
+            "t": 51009.5,
+            "rel": 47124.2,
+            "dur": 90.9,
+            "blocking": 26.6,
+            "scripts": [
+              "MessagePort.onmessage",
+              "FrameRequestCallback",
+              "FrameRequestCallback"
+            ]
+          },
+          {
+            "t": 4176.799999952316,
+            "rel": 291.5,
+            "dur": 74.7,
+            "blocking": 10.2,
+            "scripts": [
+              "FrameRequestCallback"
+            ]
+          },
+          {
+            "t": 53392,
+            "rel": 49506.7,
+            "dur": 62.8,
+            "blocking": 0,
+            "scripts": [
+              "ReadableStreamDefaultReader.read.then",
+              "Promise.resolve"
+            ]
+          }
+        ]
+      },
+      "console_errors": {
+        "count": 0,
+        "messages": []
+      },
+      "page_errors": {
+        "count": 0,
+        "messages": []
+      },
+      "failed_requests": {
+        "count": 0,
+        "favicon_failures": 0,
+        "urls": []
+      }
+    },
+    "turn2": {
+      "stream_window_ms": 49848,
+      "visible_dom_changes": 768,
+      "dead_air_gaps": {
+        "count": 0,
+        "gaps": [],
+        "gaps_over_800_any": 1,
+        "gaps_bridged_by_filler": 1,
+        "max_gap_ms": 2014
+      },
+      "cumulative_layout_shift": {
+        "value": 0.2115,
+        "shifts": 12,
+        "top_nodes": [
+          {
+            "node": "div",
+            "value": 0.2096
+          },
+          {
+            "node": "div[data-testid=working-band].oiu-slot.oiu-slot--working",
+            "value": 0.1787
+          },
+          {
+            "node": "div[data-testid=thinking-trace].oiu-thinking",
+            "value": 0.1787
+          },
+          {
+            "node": "svg",
+            "value": 0.0993
+          },
+          {
+            "node": "ol.oiu-activity-list",
+            "value": 0.0811
+          },
+          {
+            "node": "span.oiu-activity__elapsed",
+            "value": 0.0036
+          }
+        ],
+        "largest": [
+          {
+            "ms": 6180.2,
+            "value": 0.08113,
+            "nodes": [
+              "div",
+              "ol.oiu-activity-list",
+              "div[data-testid=working-band].oiu-slot.oiu-slot--working",
+              "div[data-testid=thinking-trace].oiu-thinking"
+            ]
+          },
+          {
+            "ms": 16498.5,
+            "value": 0.0331,
+            "nodes": [
+              "div",
+              "div[data-testid=thinking-trace].oiu-thinking",
+              "div[data-testid=working-band].oiu-slot.oiu-slot--working",
+              "svg"
+            ]
+          },
+          {
+            "ms": 26581.1,
+            "value": 0.03299,
+            "nodes": [
+              "div",
+              "div[data-testid=thinking-trace].oiu-thinking",
+              "div[data-testid=working-band].oiu-slot.oiu-slot--working",
+              "svg"
+            ]
+          }
+        ]
+      },
+      "scroll_jank": {
+        "source": "long-animation-frame",
+        "long_frames_over_50ms": 0,
+        "max_ms": 0,
+        "total_ms": 0,
+        "top": []
+      },
+      "console_errors": {
+        "count": 0,
+        "messages": []
+      },
+      "page_errors": {
+        "count": 0,
+        "messages": []
+      },
+      "failed_requests": {
+        "count": 0,
+        "favicon_failures": 0,
+        "urls": []
+      }
+    }
+  },
+  "growth": {
+    "url": "https://sb-70502obas4b3.vercel.run/onboarding?skip=1",
+    "assertions": [
+      {
+        "name": "token --brand-green equals spec rgb(10, 201, 133)",
+        "ok": true,
+        "expected": "rgb(10, 201, 133)",
+        "observed": "rgb(10, 201, 133)"
+      },
+      {
+        "name": "token --brand-green-ink equals spec rgb(4, 120, 87)",
+        "ok": true,
+        "expected": "rgb(4, 120, 87)",
+        "observed": "rgb(4, 120, 87)"
+      },
+      {
+        "name": "six tiles rendered",
+        "ok": true,
+        "expected": 6,
+        "observed": 6
+      },
+      {
+        "name": "letters read G→R→O→W→T→H in DOM order",
+        "ok": true,
+        "expected": "GROWTH",
+        "observed": "GROWTH"
+      },
+      {
+        "name": "hover: tile bg is brand green",
+        "ok": true,
+        "expected": "rgb(10, 201, 133)",
+        "observed": "rgb(10, 201, 133)"
+      },
+      {
+        "name": "hover: card border is brand green",
+        "ok": true,
+        "expected": "rgb(10, 201, 133)",
+        "observed": "rgb(10, 201, 133)"
+      },
+      {
+        "name": "hover: chevron is brand-green ink",
+        "ok": true,
+        "expected": "rgb(4, 120, 87)",
+        "observed": "rgb(4, 120, 87)"
+      },
+      {
+        "name": "focus-visible ring present on first tile",
+        "ok": true,
+        "expected": {
+          "focusVisible": true,
+          "outline": ">0"
+        },
+        "observed": {
+          "focus_visible": true,
+          "outline_style": "solid",
+          "outline_width": "2px"
+        }
+      },
+      {
+        "name": "focus: outline colour is brand green",
+        "ok": true,
+        "expected": "rgb(10, 201, 133)",
+        "observed": "rgb(10, 201, 133)"
+      },
+      {
+        "name": "focus: tile bg is brand green",
+        "ok": true,
+        "expected": "rgb(10, 201, 133)",
+        "observed": "rgb(10, 201, 133)"
+      },
+      {
+        "name": "all six tiles reachable by Tab in G→R→O→W→T→H order",
+        "ok": true,
+        "expected": [
+          "generosity",
+          "resilience",
+          "open-mindedness",
+          "will",
+          "teamwork",
+          "humility"
+        ],
+        "observed": [
+          "generosity",
+          "resilience",
+          "open-mindedness",
+          "will",
+          "teamwork",
+          "humility"
+        ]
+      },
+      {
+        "name": "Shift+Tab moves focus back to the previous tile",
+        "ok": true,
+        "expected": "teamwork",
+        "observed": "teamwork"
+      },
+      {
+        "name": "Enter: aria-expanded toggles to true",
+        "ok": true,
+        "expected": "true",
+        "observed": "true"
+      },
+      {
+        "name": "expanded: tile bg is brand green",
+        "ok": true,
+        "expected": "rgb(10, 201, 133)",
+        "observed": "rgb(10, 201, 133)"
+      },
+      {
+        "name": "expanded: card border is brand green",
+        "ok": true,
+        "expected": "rgb(10, 201, 133)",
+        "observed": "rgb(10, 201, 133)"
+      },
+      {
+        "name": "expanded: chevron is brand-green ink",
+        "ok": true,
+        "expected": "rgb(4, 120, 87)",
+        "observed": "rgb(4, 120, 87)"
+      },
+      {
+        "name": "expanded panel open with three lines",
+        "ok": true,
+        "expected": {
+          "state": "open",
+          "lines": [
+            true,
+            true,
+            true
+          ]
+        },
+        "observed": {
+          "state": "open",
+          "hidden": "false",
+          "lines": [
+            true,
+            true,
+            true
+          ]
+        }
+      },
+      {
+        "name": "Space: aria-expanded toggles back to false",
+        "ok": true,
+        "expected": "false",
+        "observed": "false"
+      },
+      {
+        "name": "Escape collapses the expanded tile and keeps focus",
+        "ok": true,
+        "expected": {
+          "expanded": "false",
+          "focused": true
+        },
+        "observed": {
+          "expanded": "false",
+          "focused": true
+        }
+      },
+      {
+        "name": "no blue in the GROWTH grid",
+        "ok": true,
+        "expected": [],
+        "observed": []
+      }
+    ],
+    "tokens": {
+      "green": "#0ac985",
+      "ink": "#047857",
+      "soft": "#e6faf3",
+      "expected_tile_rgb": "rgb(10, 201, 133)",
+      "expected_chevron_rgb": "rgb(4, 120, 87)",
+      "spec_tile_rgb": "rgb(10, 201, 133)",
+      "spec_chevron_rgb": "rgb(4, 120, 87)"
+    },
+    "hover": {
+      "border": "rgb(10, 201, 133)",
+      "item_bg": "rgb(230, 250, 243)",
+      "tile_bg": "rgb(10, 201, 133)",
+      "tile_border": "rgb(10, 201, 133)",
+      "chevron": "rgb(4, 120, 87)",
+      "outline": "rgb(17, 24, 39)",
+      "outline_style": "none",
+      "outline_width": "3px",
+      "expanded": "false",
+      "focus_visible": false,
+      "rotate": "none"
+    },
+    "keyboard": {
+      "reached": [
+        "generosity",
+        "resilience",
+        "open-mindedness",
+        "will",
+        "teamwork",
+        "humility"
+      ],
+      "focusStates": [
+        {
+          "value": "generosity",
+          "border": "rgb(10, 201, 133)",
+          "item_bg": "rgb(230, 250, 243)",
+          "tile_bg": "rgb(10, 201, 133)",
+          "tile_border": "rgb(10, 201, 133)",
+          "chevron": "rgb(4, 120, 87)",
+          "outline": "rgb(10, 201, 133)",
+          "outline_style": "solid",
+          "outline_width": "2px",
+          "expanded": "false",
+          "focus_visible": true,
+          "rotate": "none"
+        },
+        {
+          "value": "resilience",
+          "border": "rgb(10, 201, 133)",
+          "item_bg": "rgb(230, 250, 243)",
+          "tile_bg": "rgb(10, 201, 133)",
+          "tile_border": "rgb(10, 201, 133)",
+          "chevron": "rgb(4, 120, 87)",
+          "outline": "rgb(10, 201, 133)",
+          "outline_style": "solid",
+          "outline_width": "2px",
+          "expanded": "false",
+          "focus_visible": true,
+          "rotate": "none"
+        },
+        {
+          "value": "open-mindedness",
+          "border": "rgb(10, 201, 133)",
+          "item_bg": "rgb(230, 250, 243)",
+          "tile_bg": "rgb(10, 201, 133)",
+          "tile_border": "rgb(10, 201, 133)",
+          "chevron": "rgb(4, 120, 87)",
+          "outline": "rgb(10, 201, 133)",
+          "outline_style": "solid",
+          "outline_width": "2px",
+          "expanded": "false",
+          "focus_visible": true,
+          "rotate": "none"
+        },
+        {
+          "value": "will",
+          "border": "rgb(10, 201, 133)",
+          "item_bg": "rgb(230, 250, 243)",
+          "tile_bg": "rgb(10, 201, 133)",
+          "tile_border": "rgb(10, 201, 133)",
+          "chevron": "rgb(4, 120, 87)",
+          "outline": "rgb(10, 201, 133)",
+          "outline_style": "solid",
+          "outline_width": "2px",
+          "expanded": "false",
+          "focus_visible": true,
+          "rotate": "none"
+        },
+        {
+          "value": "teamwork",
+          "border": "rgb(10, 201, 133)",
+          "item_bg": "rgb(230, 250, 243)",
+          "tile_bg": "rgb(10, 201, 133)",
+          "tile_border": "rgb(10, 201, 133)",
+          "chevron": "rgb(4, 120, 87)",
+          "outline": "rgb(10, 201, 133)",
+          "outline_style": "solid",
+          "outline_width": "2px",
+          "expanded": "false",
+          "focus_visible": true,
+          "rotate": "none"
+        },
+        {
+          "value": "humility",
+          "border": "rgb(10, 201, 133)",
+          "item_bg": "rgb(230, 250, 243)",
+          "tile_bg": "rgb(10, 201, 133)",
+          "tile_border": "rgb(10, 201, 133)",
+          "chevron": "rgb(4, 120, 87)",
+          "outline": "rgb(10, 201, 133)",
+          "outline_style": "solid",
+          "outline_width": "2px",
+          "expanded": "false",
+          "focus_visible": true,
+          "rotate": "none"
+        }
+      ]
+    },
+    "expanded": {
+      "border": "rgb(10, 201, 133)",
+      "item_bg": "rgb(230, 250, 243)",
+      "tile_bg": "rgb(10, 201, 133)",
+      "tile_border": "rgb(10, 201, 133)",
+      "chevron": "rgb(4, 120, 87)",
+      "outline": "rgb(10, 201, 133)",
+      "outline_style": "solid",
+      "outline_width": "2px",
+      "expanded": "true",
+      "focus_visible": true,
+      "rotate": "matrix(-1, 0, 0, -1, 0, 0)"
+    },
+    "pass": true,
+    "failed": []
+  },
+  "session_storage_keys": [
+    "bcap.chat.session.v2.b4556768-0952-43eb-ae1f-82eb4dcd3a8b=\"6ac9fc08261cbe23404843bd\""
+  ],
+  "notes": [],
+  "screenshots": [
+    "growth-green-hover-mobile.png",
+    "growth-expanded-mobile.png",
+    "chat-loaded-mobile.png",
+    "chat-favicon-strip-running-mobile.png",
+    "chat-working-band-mobile.png",
+    "chat-plan-stepper-mobile.png",
+    "chat-summarising-pill-mobile.png",
+    "chat-step-collapsed-mobile.png",
+    "chat-sources-rail-partial-mobile.png",
+    "chat-inline-citation-chip-mobile.png",
+    "chat-final-badge-mobile.png",
+    "run-rail-request-disclosed-mobile.png",
+    "plugin-picker-rail-mobile.png"
+  ]
+}

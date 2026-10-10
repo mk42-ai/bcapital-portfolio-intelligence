@@ -136,6 +136,12 @@ export function GrowthValues({ className = "" }: { className?: string }) {
 
   function onKeyDown(e: KeyboardEvent<HTMLButtonElement>, i: number) {
     const n = GROWTH_VALUES.length;
+    // Escape collapses the focused tile when it is open (focus stays on the button — WAI-ARIA disclosure pattern).
+    if (e.key === "Escape") {
+      const key = GROWTH_VALUES[i].key;
+      if (open[key]) { e.preventDefault(); setOpen((prev) => ({ ...prev, [key]: false })); }
+      return;
+    }
     let next: number | null = null;
     if (e.key === "ArrowDown" || e.key === "ArrowRight") next = (i + 1) % n;
     else if (e.key === "ArrowUp" || e.key === "ArrowLeft") next = (i - 1 + n) % n;

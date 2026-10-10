@@ -88,6 +88,19 @@ export const AGENT_SUBTYPE: Record<string, UiKind> = {
   // artifact_ready, preview_ready, sandbox_created, novnc_ready, novnc_ended, graphs_ready, graphs_ended
 };
 
+/**
+ * Between-step summarisation — OBSERVED binding (2026-10-10, session 6ac9eaad261cbe23404841b1, two turns, 812 raw frames, see
+ * web/artifacts/summarisation-event-observed.json): this account's stream carries NO statusLog frame of any kind — zero `summarize_history.*`,
+ * zero `plan_created`. The step boundary is only visible as the LAST frame of step N (`plugin_sources`, stepId N, stepTitle) followed by the
+ * FIRST frame of step N+1 (`step_thinking` / `step_output`, stepId N+1). The bridge derives the Summarising checkpoint from that pair and marks
+ * the frames it emits `derived: true`; the documented `summarize_history.*` pair above stays bound so a real frame takes over the moment it ships.
+ */
+export const STEP_BOUNDARY = {
+  endOfStep: "plugin_sources",                       // eventType that closes a step (carries stepId + stepTitle)
+  startOfNextStep: ["step_thinking", "step_output"], // first eventTypes of the following step (stepId increments)
+  summaryTextFrom: "stepTitle+sources",              // what the derived checkpoint text is built from
+} as const;
+
 /** Upstream plugin failure signature — OnDemand delivers it only inside thinking/answer deltas, never as an error frame. */
 export const PLUGIN_ERROR_PATTERNS: RegExp = /not enough credits|"error"\s*:\s*"internal server error"|tool returned an error|insufficient credits|rate limit exceeded/i;
 

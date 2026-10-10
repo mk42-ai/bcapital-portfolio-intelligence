@@ -13,3 +13,6 @@ tsconfig.tsbuildinfo
 proof/perf/**/trace.zip
 proof/perf/**/run.har
 proof/perf/**/run.webm
+
+# run-ux recorder output (delivered as run artifacts, never committed)
+artifacts/
