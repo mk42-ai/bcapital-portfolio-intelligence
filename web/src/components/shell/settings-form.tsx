@@ -1,12 +1,11 @@
 "use client";
 import { useState } from "react";
 import { useSettings, clearSettings, DEFAULT_BACKEND } from "@/lib/settings";
-import { PLUGINS, MODEL_ID, MODEL_LABEL, REASONING_MODE, PLUGIN_ID, PLUGIN_NAME } from "@/lib/plugins";
+import { MODEL_ID, MODEL_LABEL, REASONING_MODE, PLUGIN_ID, PLUGIN_NAME } from "@/lib/plugins";
+import { PluginPanel } from "@/components/chat/plugin-panel";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Field, Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { CompanyPicker } from "@/components/chat/company-picker";
 import { BrandLogo } from "@/components/brand/logo";
 export function SettingsForm({ options }: { options: { slug: string; name: string; sector: string; logo_url?: string | null }[] }) {
@@ -42,15 +41,8 @@ export function SettingsForm({ options }: { options: { slug: string; name: strin
             <p className="mt-1 text-xs text-muted">endpointId <code>{MODEL_ID}</code> · reasoningMode <code>{REASONING_MODE}</code> · responseMode <code>stream</code>. The bridge sends exactly this configuration on every query — there is no model fallback chain and no per-user override.</p>
           </div>
         </CardContent></Card>
-      <Card><CardHeader><CardTitle>Plugin used in chat</CardTitle><CardDescription>Exactly one OnDemand plugin is sent as <code>pluginIds</code> on the session and on every query: <code>{PLUGIN_NAME} · {PLUGIN_ID}</code>. If it fails upstream the chat shows a red error card — no other plugin is ever substituted.</CardDescription></CardHeader>
-        <CardContent><ul className="divide-y divide-border" data-testid="plugin-list">
-          {PLUGINS.map((p) => (
-            <li key={p.name} className="flex items-center justify-between gap-3 py-3">
-              <div className="min-w-0"><p className="flex flex-wrap items-center gap-2 text-sm font-medium">{p.name}{p.status === "builtin" && <Badge tone="muted">built-in context</Badge>}{p.status === "active" && <Badge tone="primary">always on</Badge>}</p><p className="text-xs text-muted">{p.purpose}{p.id ? ` · ${p.id}` : ""}</p>{p.status === "builtin" && <p className="text-xs text-muted" title="The OnDemand public API has no plugin-registration endpoint, so the portfolio API cannot be attached as a pluginId. Live backend data is injected as systemContext instead. See docs/ONDEMAND_SURFACE.md.">Always on — the live backend&apos;s sentiment, status and headlines for your context companies are injected server-side into each thread (<a className="underline" href="https://github.com/mk42-ai/bcapital-portfolio-intelligence/blob/main/docs/ONDEMAND_SURFACE.md" target="_blank" rel="noreferrer">docs/ONDEMAND_SURFACE.md</a>).</p>}</div>
-              {p.status === "active" && <Switch aria-label={`${p.name} (always on)`} checked disabled />}
-            </li>
-          ))}
-        </ul></CardContent></Card>
+      <Card><CardHeader><CardTitle>Plugins used in chat</CardTitle><CardDescription>The selected OnDemand plugins are sent as <code>pluginIds</code> on the session and on every query. <code>{PLUGIN_NAME} · {PLUGIN_ID}</code> is pinned and always on; the rest are per-session toggles. If a plugin fails upstream the chat shows a red error card — no other plugin is ever substituted.</CardDescription></CardHeader>
+        <CardContent><PluginPanel variant="settings" testId="plugin-list" /></CardContent></Card>
       <Card><CardHeader><CardTitle>Portfolio backend</CardTitle><CardDescription>Read API for companies, news and sentiment. Server pages use <code>PORTFOLIO_API_URL</code>; this override applies to client fetches.</CardDescription></CardHeader>
         <CardContent className="space-y-4">
           <Field label="Backend base URL" htmlFor="set-backend" hint={`Default ${DEFAULT_BACKEND} (NEXT_PUBLIC_PORTFOLIO_API_URL). Durable target once provisioned: https://serverless.on-demand.io/apps/bcap-portfolio-intel`} error={urlErr}><Input id="set-backend" defaultValue={s.backendUrl} onChange={(e) => onBackend(e.target.value)} aria-invalid={!!urlErr} aria-describedby={urlErr ? "set-backend-error" : "set-backend-hint"} inputMode="url" /></Field>

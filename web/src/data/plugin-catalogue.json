@@ -1,0 +1,115 @@
+{
+  "fetchedAt": "2026-10-10T04:51:39Z",
+  "source": "OnDemand suggest-plugins API (public_v1_suggest_plugins, query 'web search news perplexity gpt search reddit stock fundamentals x search', limit 12) + GET /plugin/v1/list (HTTP 200, total 0 account-owned agents)",
+  "note": "logoUrl values returned by the API are SAS-signed Azure CDN URLs that expire on 2026-10-14; the UI therefore resolves favicons as logoUrl (while valid) \u2192 https://www.google.com/s2/favicons?domain=<domain>&sz=64 \u2192 SVG monogram.",
+  "plugins": [
+    {
+      "id": "plugin-1722260873",
+      "name": "Perplexity",
+      "domain": "perplexity.ai",
+      "category": "general",
+      "pinned": true,
+      "defaultOn": true,
+      "description": "Live web research with cited sources \u2014 pinned, always on."
+    },
+    {
+      "id": "plugin-1741871229",
+      "name": "GPT Search",
+      "domain": "openai.com",
+      "category": "research_and_insights",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "GPT-4o web-grounded research and verification."
+    },
+    {
+      "id": "plugin-1716429542",
+      "name": "US Stock Fundamentals",
+      "domain": "sec.gov",
+      "category": "finance",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "Real-time prices, movers, institutional holdings, balance sheets for US stocks."
+    },
+    {
+      "id": "plugin-1748003575",
+      "name": "Reddit Posts",
+      "domain": "reddit.com",
+      "category": "marketing",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "Subreddit posts and comments for community / retail-investor sentiment."
+    },
+    {
+      "id": "plugin-1751872652",
+      "name": "X Search Agent",
+      "domain": "x.com",
+      "category": "general",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "Real-time X (Twitter) search by date range, country and handle."
+    },
+    {
+      "id": "plugin-1716434059",
+      "name": "US Stock Technical Analysis",
+      "domain": "tradingview.com",
+      "category": "finance",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "RSI, MACD and moving averages for US stocks."
+    },
+    {
+      "id": "plugin-1713924030",
+      "name": "Internet",
+      "domain": "bing.com",
+      "category": "research_and_insights",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "General web search: weather, news, current events."
+    },
+    {
+      "id": "plugin-1718116202",
+      "name": "LinkedIn Search",
+      "domain": "linkedin.com",
+      "category": "research_and_insights",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "LinkedIn profile lookup (returned 404 from its tool in the 2026-10-09 verification run)."
+    },
+    {
+      "id": "plugin-1785777296",
+      "name": "X (MCP)",
+      "domain": "x.com",
+      "category": "general",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "X MCP server: post, search, manage the account."
+    },
+    {
+      "id": "plugin-1770369833",
+      "name": "Quarterly financial report data tool",
+      "domain": "on-demand.io",
+      "category": "data_and_analytics",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "Knowledge agent with quarterly financial data."
+    },
+    {
+      "id": "plugin-1789123753",
+      "name": "ElevenLabs Agent",
+      "domain": "elevenlabs.io",
+      "category": "general",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "Text-to-speech, voice cloning, transcription."
+    },
+    {
+      "id": "plugin-1726251045",
+      "name": "Programmer Agent",
+      "domain": "on-demand.io",
+      "category": "general",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "Knowledge agent (timetable)."
+    }
+  ]
+}

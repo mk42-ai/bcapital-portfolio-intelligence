@@ -11,7 +11,8 @@
     "test:e2e": "playwright test",
     "qa:lighthouse": "node scripts/lighthouse.mjs",
     "test:e2e:live": "BASE_URL=https://sb-1z9qy0mx48sk.vercel.run playwright test",
-    "logo:audit": "node scripts/logo-audit.mjs"
+    "logo:audit": "node scripts/logo-audit.mjs",
+    "favicon:audit": "node scripts/favicon-audit.mjs"
   },
   "dependencies": {
     "@openuidev/react-headless": "^0.17.0",
@@ -29,7 +30,9 @@
     "next": "15.5.27",
     "react": "19.3.0",
     "react-dom": "19.3.0",
+    "react-markdown": "^10.1.0",
     "recharts": "^3.3.0",
+    "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.3.1",
     "zod": "^4.6.5",
     "zustand": "^4.5.7"

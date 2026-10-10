@@ -1,0 +1,251 @@
+{
+  "generatedAt": "2026-10-10T05:02:45.945Z",
+  "totalPlugins": 12,
+  "byPlugin": [
+    {
+      "id": "plugin-1722260873",
+      "name": "Perplexity",
+      "domain": "perplexity.ai",
+      "chain": [
+        {
+          "url": "https://www.google.com/s2/favicons?domain=perplexity.ai&sz=64",
+          "kind": "s2",
+          "status": 200,
+          "contentType": "image/png",
+          "bytes": 805,
+          "ok": true
+        }
+      ],
+      "used": "s2"
+    },
+    {
+      "id": "plugin-1741871229",
+      "name": "GPT Search",
+      "domain": "openai.com",
+      "chain": [
+        {
+          "url": "https://www.google.com/s2/favicons?domain=openai.com&sz=64",
+          "kind": "s2",
+          "status": 200,
+          "contentType": "image/png",
+          "bytes": 821,
+          "ok": true
+        }
+      ],
+      "used": "s2"
+    },
+    {
+      "id": "plugin-1716429542",
+      "name": "US Stock Fundamentals",
+      "domain": "sec.gov",
+      "chain": [
+        {
+          "url": "https://www.google.com/s2/favicons?domain=sec.gov&sz=64",
+          "kind": "s2",
+          "status": 200,
+          "contentType": "image/png",
+          "bytes": 1557,
+          "ok": true
+        }
+      ],
+      "used": "s2"
+    },
+    {
+      "id": "plugin-1748003575",
+      "name": "Reddit Posts",
+      "domain": "reddit.com",
+      "chain": [
+        {
+          "url": "https://www.google.com/s2/favicons?domain=reddit.com&sz=64",
+          "kind": "s2",
+          "status": 200,
+          "contentType": "image/png",
+          "bytes": 1380,
+          "ok": true
+        }
+      ],
+      "used": "s2"
+    },
+    {
+      "id": "plugin-1751872652",
+      "name": "X Search Agent",
+      "domain": "x.com",
+      "chain": [
+        {
+          "url": "https://www.google.com/s2/favicons?domain=x.com&sz=64",
+          "kind": "s2",
+          "status": 200,
+          "contentType": "image/png",
+          "bytes": 583,
+          "ok": true
+        }
+      ],
+      "used": "s2"
+    },
+    {
+      "id": "plugin-1716434059",
+      "name": "US Stock Technical Analysis",
+      "domain": "tradingview.com",
+      "chain": [
+        {
+          "url": "https://www.google.com/s2/favicons?domain=tradingview.com&sz=64",
+          "kind": "s2",
+          "status": 200,
+          "contentType": "image/png",
+          "bytes": 553,
+          "ok": true
+        }
+      ],
+      "used": "s2"
+    },
+    {
+      "id": "plugin-1713924030",
+      "name": "Internet",
+      "domain": "bing.com",
+      "chain": [
+        {
+          "url": "https://www.google.com/s2/favicons?domain=bing.com&sz=64",
+          "kind": "s2",
+          "status": 200,
+          "contentType": "image/png",
+          "bytes": 548,
+          "ok": true
+        }
+      ],
+      "used": "s2"
+    },
+    {
+      "id": "plugin-1718116202",
+      "name": "LinkedIn Search",
+      "domain": "linkedin.com",
+      "chain": [
+        {
+          "url": "https://www.google.com/s2/favicons?domain=linkedin.com&sz=64",
+          "kind": "s2",
+          "status": 200,
+          "contentType": "image/png",
+          "bytes": 834,
+          "ok": true
+        }
+      ],
+      "used": "s2"
+    },
+    {
+      "id": "plugin-1785777296",
+      "name": "X (MCP)",
+      "domain": "x.com",
+      "chain": [
+        {
+          "url": "https://www.google.com/s2/favicons?domain=x.com&sz=64",
+          "kind": "s2",
+          "status": 200,
+          "contentType": "image/png",
+          "bytes": 583,
+          "ok": true
+        }
+      ],
+      "used": "s2"
+    },
+    {
+      "id": "plugin-1770369833",
+      "name": "Quarterly financial report data tool",
+      "domain": "on-demand.io",
+      "chain": [
+        {
+          "url": "https://www.google.com/s2/favicons?domain=on-demand.io&sz=64",
+          "kind": "s2",
+          "status": 200,
+          "contentType": "image/png",
+          "bytes": 1369,
+          "ok": true
+        }
+      ],
+      "used": "s2"
+    },
+    {
+      "id": "plugin-1789123753",
+      "name": "ElevenLabs Agent",
+      "domain": "elevenlabs.io",
+      "chain": [
+        {
+          "url": "https://www.google.com/s2/favicons?domain=elevenlabs.io&sz=64",
+          "kind": "s2",
+          "status": 200,
+          "contentType": "image/png",
+          "bytes": 153,
+          "ok": true
+        }
+      ],
+      "used": "s2"
+    },
+    {
+      "id": "plugin-1726251045",
+      "name": "Programmer Agent",
+      "domain": "on-demand.io",
+      "chain": [
+        {
+          "url": "https://www.google.com/s2/favicons?domain=on-demand.io&sz=64",
+          "kind": "s2",
+          "status": 200,
+          "contentType": "image/png",
+          "bytes": 1369,
+          "ok": true
+        }
+      ],
+      "used": "s2"
+    }
+  ],
+  "contextCompanies": [
+    {
+      "domain": "perplexity.ai",
+      "url": "https://www.google.com/s2/favicons?domain=perplexity.ai&sz=64",
+      "kind": "s2",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 805,
+      "ok": true
+    },
+    {
+      "domain": "apptronik.com",
+      "url": "https://www.google.com/s2/favicons?domain=apptronik.com&sz=64",
+      "kind": "s2",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 688,
+      "ok": true
+    },
+    {
+      "domain": "fervoenergy.com",
+      "url": "https://www.google.com/s2/favicons?domain=fervoenergy.com&sz=64",
+      "kind": "s2",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 815,
+      "ok": true
+    },
+    {
+      "domain": "flutterwave.com",
+      "url": "https://www.google.com/s2/favicons?domain=flutterwave.com&sz=64",
+      "kind": "s2",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 5043,
+      "ok": true
+    },
+    {
+      "domain": "writer.com",
+      "url": "https://www.google.com/s2/favicons?domain=writer.com&sz=64",
+      "kind": "s2",
+      "status": 200,
+      "contentType": "image/png",
+      "bytes": 496,
+      "ok": true
+    }
+  ],
+  "summary": {
+    "logo": 0,
+    "s2": 12,
+    "monogram": 0,
+    "failures": []
+  }
+}
