@@ -1,0 +1,113 @@
+{
+  "name": "B Capital — PitchBook weekly enrichment",
+  "trigger": {
+    "type": "cron",
+    "cron": {
+      "expression": "0 0 6 * * 1",
+      "type": "advanced"
+    },
+    "nextNodeKeys": [
+      "pitchbook"
+    ],
+    "position": {
+      "x": 0,
+      "y": 0
+    },
+    "measured": {
+      "width": 300,
+      "height": 500
+    }
+  },
+  "nodes": [
+    {
+      "key": "pitchbook",
+      "kind": "source",
+      "type": "llm",
+      "dependencies": [],
+      "nextNodeKeys": [
+        "analyzer-0"
+      ],
+      "position": {
+        "x": 100,
+        "y": 200
+      },
+      "measured": {
+        "width": 300,
+        "height": 500
+      },
+      "llm": {
+        "model": "predefined-deepseek-flash",
+        "plugins": [
+          {
+            "id": "plugin-1777018662"
+          }
+        ],
+        "fulfillmentPrompt": "You are the B Capital PitchBook enrichment agent. Use the attached PitchBook Investor Finder plugin (searchInvestors) for EVERY company listed, one brief per company. Output STRICT JSON only — the payload is POSTed verbatim to the backend /pitchbook/ingest endpoint which validates {records:[{slug, investors:{matched:[…], brief, total_reported}}]}.",
+        "prompt": "You are the B Capital PitchBook enrichment agent. The attached plugin is the PitchBook Investor Finder (operation searchInvestors): it takes a free-text fundraising brief and returns up to 10 enriched investor profiles from PitchBook. It has NO company-profile lookup — do not invent overview, valuation, financials or comparables.\nFor EACH company below: (1) build a brief in exactly this format —\nStage: <Seed / Series A-B / Growth (Series B+) / Public-PIPE>\nRaise Size (USD): <range>\nInvestor types: <Venture Capital, Growth Equity, Corporate VC, Infrastructure funds … per sector>\nTarget geographies: <from HQ/region, else Global>\nTicket size range: <range>\nWhat the company does: <name — sector; one sentence>\n(2) call the PitchBook investor finder with that brief, (3) record every investor it returns with: name, website, location, year_founded, status, type, aum_musd (AUM in USD millions), dry_powder_musd, team_size, investment_range, deal_types[], industries[], verticals[], geographies[], preferences[]; unknown scalars = null, unknown lists = []. OUTPUT BUDGET: keep at most the 5 best-fit investors per company and at most 6 items per list (deal_types/industries/verticals/geographies/preferences) — a run with all companies must fit in one answer, so be compact (no whitespace/newlines between JSON tokens). Also record total_reported (the total number of results the plugin reported) and the brief you used.\nFOCUS companies (do these first, never skip): Apptronik [apptronik; Technology]; Fervo Energy [fervo-energy; Energy & Resilience]; Perplexity AI [perplexity-ai; Technology]; WRITER [writer; Technology]; Flutterwave [flutterwave; Technology].\nOther portfolio companies: 1AU [1au; Opportunistic]; 6sense [6sense; Technology]; Accacia [accacia; Opportunistic]; AIMotive [aimotive; Opportunistic]; Archimetis [archimetis; Technology]; ARTBIO [artbio; Healthcare]; Aurora YaoCheng [aurora-yaocheng; Healthcare]; Axiom [axiom; Technology]; Baichuan [baichuan; Technology]; Bhanzu [bhanzu; Opportunistic]; Branch International [branch-international; Technology]; Brik [brik; Technology]; BuildOps [buildops; Opportunistic]; Cadence [cadence; Healthcare]; Judi Rx [judi-rx; Healthcare]; Carrick [carrick; Healthcare]; Carro [carro; Opportunistic]; Centivo [centivo; Healthcare]; Certn [certn; Technology]; ChipAgents [chipagents; Technology]; Cloudwise [cloudwise; Technology]; Code Metal [code-metal; Technology]; CoinDCX [coindcx; Opportunistic]; Collinear AI [collinear-ai; Technology]; CompanyCam [companycam; Technology]; Curbwaste [curbwaste; Technology]; DailyHunt [dailyhunt; Opportunistic]; Deferred [deferred; Technology]; Dream Labs [dream-labs; Technology]; EeroQ [eeroq; Opportunistic]; Eureka Robotics [eureka-robotics; Technology]; EvenUp [evenup; Technology]; Evidation Health [evidation-health; Healthcare]; Evommune [evommune; Healthcare]; Extend [extend; Technology]; FalconX [falconx; Opportunistic]; Figment [figment; Opportunistic]; Floor NFTs [floor-nfts; Opportunistic]; Flourish Health [flourish-health; Healthcare]; FlowGPT [flowgpt; Technology]; Forest [forest; Technology]; Fountain [fountain; Technology]; Gable [gable; Technology]; Goodfire [goodfire; Technology]; Goose [goose; Technology]; Grace Investment Machine [grace-investment-machine; Technology]; GrayMatter Robotics [graymatter-robotics; Opportunistic]; Grit [grit; Healthcare]; Gushwork [gushwork; Technology]; HavocAI [havocai; Technology]; HeyLibby [heylibby; Technology]; HifiBio [hifibio; Healthcare]; HotSpot Therapeutics [hotspot-therapeutics; Healthcare]; Hypersonix [hypersonix; Technology]; Icertis [icertis; Technology]; InfraHub [infrahub; Technology]; Innovaccer [innovaccer; Healthcare]; Insilico Medicine [insilico-medicine; Healthcare]; Inspace [inspace; Technology]; Iru [iru; Technology]; Isaac Health [isaac-health; Healthcare]; JetZero [jetzero; Energy & Resilience]; Karman Industries [karman-industries; Energy & Resilience]; Khatabook [khatabook; Technology]; Knox [knox; Technology]; Kopi Kenangan [kopi-kenangan; Opportunistic]; Labelbox [labelbox; Technology]; Labviva [labviva; Healthcare]; Lambda [lambda; Energy & Resilience]; LevelTen [levelten; Energy & Resilience]; LinKMORE [linkmore; Technology]; Lively [lively; Healthcare]; Lumara Health [lumara-health; Healthcare]; Lunar Energy [lunar-energy; Energy & Resilience]; MacroLux [macrolux; Healthcare]; MediTrust [meditrust; Healthcare]; Meesho [meesho; Opportunistic]; Miotech [miotech; Technology]; Mswipe [mswipe; Technology]; Nalu [nalu; Healthcare]; Nektar.AI [nektar-ai; Technology]; Nest Genomics [nest-genomics; Healthcare]; Neushen Therapeutics [neushen-therapeutics; Healthcare]; Ninja Van [ninja-van; Opportunistic]; Numerion Labs [numerion-labs; Healthcare]; Nuvig [nuvig; Healthcare]; Odeko [odeko; Technology]; Omnidian [omnidian; Energy & Resilience]; Oro Labs [oro-labs; Technology]; Overstory [overstory; Energy & Resilience]; PaleBlueDot [palebluedot; Technology]; PAYFAZZ [payfazz; Technology]; Pendo [pendo; Technology]; Percent [percent; Technology]; Perimeter 81 [perimeter-81; Technology]; Phenom People [phenom-people; Technology]; PicnicHealth [picnichealth; Healthcare]; Poolside [poolside; Energy & Resilience]; Positive Development [positive-development; Healthcare]; Precision Neuro [precision-neuro; Opportunistic]; ProfoundBio [profoundbio; Healthcare]; Rapyd [rapyd; Technology]; Reflection [reflection; Technology]; Remote [remote; Technology]; Rona Therapeutics [rona-therapeutics; Healthcare]; Seltz [seltz; Technology]; Sharpa [sharpa; Technology]; Shipday [shipday; Opportunistic]; Sift Healthcare [sift-healthcare; Healthcare]; SilverCloud Health [silvercloud-health; Healthcare]; Solar Square [solar-square; Energy & Resilience]; Solve Therapeutics [solve-therapeutics; Healthcare]; Sonilo [sonilo; Technology]; Spectrumedics [spectrumedics; Healthcare]; Star Catcher [star-catcher; Energy & Resilience]; Starburst Data [starburst-data; Technology]; Sugarfit [sugarfit; Healthcare]; Synapticure [synapticure; Healthcare]; Tacta [tacta; Technology]; TinyHealth [tinyhealth; Healthcare]; TRM Labs [trm-labs; Opportunistic]; Turbine [turbine; Technology]; Turno [turno; Technology]; Unblocked Brands [unblocked-brands; Opportunistic]; Vivacta [vivacta; Healthcare]; Volastra [volastra; Healthcare]; When [when; Technology]; Wildfire [wildfire; Technology]; Xingyun [xingyun; Technology]; Yalo [yalo; Technology]; Zaihui [zaihui; Technology].\nReturn STRICT JSON only, no prose, no markdown fence: {\"workflow_name\":\"B Capital — PitchBook weekly enrichment\",\"records\":[{\"slug\":\"<slug>\",\"investors\":{\"matched\":[{\"name\":\"\",\"website\":null,\"location\":null,\"year_founded\":null,\"status\":null,\"type\":null,\"aum_musd\":null,\"dry_powder_musd\":null,\"team_size\":null,\"investment_range\":null,\"deal_types\":[],\"industries\":[],\"verticals\":[],\"geographies\":[],\"preferences\":[]}],\"brief\":\"<the brief>\",\"total_reported\":null}}]}. Use the exact slugs given in brackets. If the plugin returns nothing for a company, still include it with \"matched\":[] and \"total_reported\":0."
+      }
+    },
+    {
+      "key": "analyzer-0",
+      "kind": "sink",
+      "type": "o_analyzer",
+      "dependencies": [
+        {
+          "nodeKey": "pitchbook"
+        }
+      ],
+      "nextNodeKeys": [
+        "add-delivery"
+      ],
+      "position": {
+        "x": 500,
+        "y": 200
+      },
+      "measured": {
+        "width": 300,
+        "height": 500
+      }
+    }
+  ],
+  "delivery": [
+    {
+      "channel": "webhook",
+      "config": {
+        "webhook": {
+          "url": "https://sb-4y5v8t21stuf.vercel.run/pitchbook/ingest?secret=<INGEST_SECRET>",
+          "method": "POST",
+          "basicAuth": {
+            "username": "ingest",
+            "password": "<INGEST_SECRET>"
+          }
+        }
+      },
+      "position": {
+        "x": 900,
+        "y": 200
+      },
+      "measured": {
+        "width": 300,
+        "height": 500
+      }
+    },
+    {
+      "channel": "email",
+      "config": {
+        "email": {
+          "addresses": [
+            "mk@airev.ae"
+          ]
+        }
+      },
+      "position": {
+        "x": 900,
+        "y": 800
+      },
+      "measured": {
+        "width": 300,
+        "height": 500
+      }
+    }
+  ],
+  "enableMemory": true
+}

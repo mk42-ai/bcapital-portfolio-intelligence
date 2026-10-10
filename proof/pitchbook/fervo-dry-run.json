@@ -1,0 +1,276 @@
+{
+  "slug": "fervo-energy",
+  "overview": {
+    "value": "Fervo Energy provides 24/7 carbon-free energy through the development of next-generation geothermal power, applying innovation in drilling and subsurface analytics to make enhanced geothermal systems cost competitive for the future electric grid.",
+    "source_url": "https://www.linkedin.com/company/fervo-energy/",
+    "published_date": null,
+    "fetched_at": "2026-10-10T09:48:30Z",
+    "plugin_id": "answer"
+  },
+  "last_round": {
+    "value": {
+      "date": "2026-05-01",
+      "amount_usd": 2200000000,
+      "amount_text": "$2.2B",
+      "round": "IPO (NASDAQ: FRVO)",
+      "lead_investors": []
+    },
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1853868/000162828026056457/frvo-20260630.htm?utm_source=openai",
+    "published_date": "2026-05-01",
+    "fetched_at": "2026-10-10T09:48:30Z",
+    "plugin_id": "answer"
+  },
+  "valuation_history": [],
+  "investors": {
+    "matched": [
+      {
+        "name": "New Enterprise Associates",
+        "website": "www.nea.com",
+        "location": "Menlo Park, United States",
+        "year_founded": 1977,
+        "status": null,
+        "type": "Venture Capital",
+        "aum_musd": 35583,
+        "dry_powder_musd": 1986.3,
+        "team_size": null,
+        "investment_range": "$0.1M – $50.0M",
+        "deal_types": [
+          "Early Stage VC",
+          "Later Stage VC",
+          "PE Growth/Expansion",
+          "PIPE",
+          "Seed Round"
+        ],
+        "industries": [
+          "Biotechnology",
+          "Commercial Services",
+          "Energy Services",
+          "Exploration",
+          "Production and Refining",
+          "Financial Services",
+          "Healthcare Devices and Supplies",
+          "Healthcare Services",
+          "Healthcare Technology Systems",
+          "Internet Service Providers",
+          "Media",
+          "Other IT Services",
+          "Software",
+          "Systems and Information Management"
+        ],
+        "verticals": [
+          "Artificial Intelligence & Machine Learning",
+          "Big Data",
+          "CleanTech",
+          "Digital Health",
+          "E-Commerce",
+          "FinTech",
+          "HealthTech",
+          "Industrials",
+          "Infrastructure",
+          "Internet of Things",
+          "Life Sciences",
+          "LOHAS & Wellness",
+          "Manufacturing",
+          "SaaS",
+          "TMT"
+        ],
+        "geographies": [
+          "Asia",
+          "Americas > South America > Brazil",
+          "United States"
+        ],
+        "preferences": [
+          "Prefers minority stake",
+          "Will syndicate"
+        ]
+      },
+      {
+        "name": "Caterpillar Venture Capital",
+        "website": null,
+        "location": "Irving, United States",
+        "year_founded": 2015,
+        "status": null,
+        "type": "Corporate Venture Capital",
+        "aum_musd": 400,
+        "dry_powder_musd": null,
+        "team_size": null,
+        "investment_range": "$0.5M – $50.0M",
+        "deal_types": [
+          "Convertible Debt",
+          "Early Stage VC",
+          "Later Stage VC",
+          "PIPE",
+          "Public Investment 2nd Offering",
+          "Seed Round"
+        ],
+        "industries": [
+          "Commercial Services",
+          "Energy",
+          "Information Technology",
+          "Metals",
+          "Minerals and Mining",
+          "Transportation"
+        ],
+        "verticals": [
+          "3D Printing",
+          "Advanced Manufacturing",
+          "Artificial Intelligence & Machine Learning",
+          "Climate Tech",
+          "Construction Technology",
+          "Industrials",
+          "Infrastructure",
+          "Internet of Things",
+          "Manufacturing",
+          "Mobility Tech",
+          "Oil & Gas",
+          "Robotics and Drones",
+          "SaaS",
+          "Space Technology",
+          "Supply Chain Tech",
+          "TMT"
+        ],
+        "geographies": [
+          "Americas",
+          "Canada",
+          "Europe",
+          "United States"
+        ],
+        "preferences": [
+          "Prefers minority stake",
+          "Will syndicate"
+        ]
+      },
+      {
+        "name": "Syren Capital Advisors",
+        "website": "www.syrencapitaladvisors.com",
+        "location": "New York, United States",
+        "year_founded": 2016,
+        "status": null,
+        "type": "Venture Capital",
+        "aum_musd": 65,
+        "dry_powder_musd": null,
+        "team_size": null,
+        "investment_range": "$0.4M – $50.0M",
+        "deal_types": [
+          "Buyout/LBO",
+          "Early Stage VC",
+          "Later Stage VC",
+          "PE Growth/Expansion",
+          "PIPE",
+          "Seed Round"
+        ],
+        "industries": [
+          "Software"
+        ],
+        "verticals": [
+          "Artificial Intelligence & Machine Learning",
+          "Big Data",
+          "Life Sciences",
+          "Robotics and Drones",
+          "TMT",
+          "Virtual Reality"
+        ],
+        "geographies": [
+          "Africa",
+          "Americas",
+          "Asia",
+          "Canada",
+          "Europe",
+          "Middle East",
+          "United States"
+        ],
+        "preferences": [
+          "Prefers majority stake",
+          "Prefers minority stake",
+          "Will syndicate"
+        ]
+      },
+      {
+        "name": "Insight Capital Partners",
+        "website": "www.insightcapm.com",
+        "location": "Hong Kong, Hong Kong",
+        "year_founded": 2009,
+        "status": null,
+        "type": "PE/Buyout",
+        "aum_musd": null,
+        "dry_powder_musd": null,
+        "team_size": null,
+        "investment_range": "$1.0M – $100.0M",
+        "deal_types": [
+          "Later Stage VC",
+          "PE Growth/Expansion",
+          "PIPE",
+          "Secondary Transaction - Private"
+        ],
+        "industries": [
+          "Business Products and Services (B2B)",
+          "Consumer Products and Services (B2C)",
+          "Information Technology"
+        ],
+        "verticals": [
+          "3D Printing",
+          "AdTech",
+          "Advanced Manufacturing",
+          "AgTech",
+          "Artificial Intelligence & Machine Learning",
+          "Augmented Reality",
+          "Autonomous cars",
+          "Big Data",
+          "CleanTech",
+          "Climate Tech",
+          "Cybersecurity",
+          "E-Commerce",
+          "EdTech",
+          "FoodTech",
+          "Gaming",
+          "Impact Investing",
+          "InsurTech",
+          "Internet of Things",
+          "Legal Tech",
+          "Life Sciences",
+          "Marketing Tech",
+          "Mobility Tech",
+          "Mortgage Tech",
+          "Nanotechnology",
+          "Pet Technology",
+          "Robotics and Drones",
+          "SaaS",
+          "TMT",
+          "Virtual Reality"
+        ],
+        "geographies": [
+          "Americas",
+          "Asia",
+          "Canada",
+          "Europe",
+          "Middle East",
+          "United States"
+        ],
+        "preferences": [
+          "Seeks ESG investments",
+          "Seeks Impact investments"
+        ]
+      }
+    ],
+    "brief": "Stage: Public / PIPE / Crossover\nRaise Size (USD): $1.8B-$3.3B\nInvestor types: Venture Capital, Growth Equity, Infrastructure funds, Strategic energy investors\nTarget geographies: North America\nTicket size range: $231M-$924M\nIndustry / verticals: CleanTech, Climate Tech, Energy Transition, Infrastructure\nWhat the company does: Fervo Energy — Fervo Energy provides 24/7 carbon-free energy through the development of next-generation geothermal power, applying innovation in drilling and subsurface analytics to make enhanced geothermal systems cost competitive for the future electric grid.; based in Houston, United States; sector: Energy & Resilience",
+    "total_reported": null
+  },
+  "financials": null,
+  "comparables": [],
+  "provenance": {
+    "plugin_id": "plugin-1777018662",
+    "session_id": "6aca3d3f95268adc215e0c2d",
+    "fetched_at": "2026-10-10T13:27:27Z",
+    "source": "pitchbook-investor-finder",
+    "plugin_calls": 1
+  },
+  "availability": {
+    "overview": "FROM_ENRICHMENT",
+    "last_round": "FROM_ENRICHMENT",
+    "valuation_history": "NOT_AVAILABLE_FROM_PLUGIN",
+    "financials": "NOT_AVAILABLE_FROM_PLUGIN",
+    "comparables": "NOT_AVAILABLE_FROM_PLUGIN",
+    "investors": "VERIFIED"
+  },
+  "ms": 12142
+}

@@ -1,0 +1,103 @@
+{
+  "plugin_id": "plugin-1777018662",
+  "agent_id": "agent-1777018662",
+  "name": "Pitchbook Investor Finder",
+  "operations": [
+    "searchInvestors"
+  ],
+  "auth": "NONE (account token configured server-side)",
+  "subscription": {
+    "isSubscribed": true,
+    "pluginConfiguration": "active",
+    "directory_hits_for_query_pitchbook": 1
+  },
+  "state": "VERIFIED (investor search) / NOT_AVAILABLE_FROM_PLUGIN (company profile fields)",
+  "field_availability": {
+    "investors": "VERIFIED",
+    "overview": "NOT_AVAILABLE_FROM_PLUGIN",
+    "last_round": "NOT_AVAILABLE_FROM_PLUGIN",
+    "valuation_history": "NOT_AVAILABLE_FROM_PLUGIN",
+    "financials": "NOT_AVAILABLE_FROM_PLUGIN",
+    "comparables": "NOT_AVAILABLE_FROM_PLUGIN"
+  },
+  "probe_sessions": [
+    {
+      "session_id": "6aca396cf7979c7d562af497",
+      "query_kind": "company profile (Fervo Energy)",
+      "raw_log": "proof/pitchbook/fervo-live.raw.log",
+      "frames": 506,
+      "event_types": {
+        "planning_thinking": 184,
+        "planning_output": 33,
+        "step_thinking": 146,
+        "step_output": 39,
+        "fulfillment_thinking": 28,
+        "fulfillment": 68,
+        "metricsLog": 1
+      },
+      "plugin_invoked": false,
+      "outcome": "planner skipped the plugin \u2014 no profile data came back (searchInvestors has no company-profile operation)",
+      "answer_chars": 2178
+    },
+    {
+      "session_id": "6aca399995268adc215e0bf1",
+      "query_kind": "investor finder brief (Fervo Energy)",
+      "raw_log": "proof/pitchbook/fervo-investor-finder.raw.log",
+      "frames": 364,
+      "event_types": {
+        "planning_thinking": 62,
+        "planning_output": 50,
+        "step_thinking": 22,
+        "step_output": 56,
+        "fulfillment_thinking": 25,
+        "fulfillment": 143,
+        "metricsLog": 1
+      },
+      "plugin_invoked": true,
+      "plugin_calls": 2,
+      "total_reported": 106,
+      "profiles_in_answer": 10,
+      "outcome": "106 matches reported, 10 enriched profiles with real PitchBook data (AUM, dry powder, investment range, deal types, verticals, preferences, website)",
+      "answer_chars": 4539
+    },
+    {
+      "session_id": "6aca3d3f95268adc215e0c2d",
+      "query_kind": "fetchPitchbook() dry run (src/pitchbook.ts, Fervo Energy, no DB write)",
+      "raw_log": "proof/pitchbook/fervo-dry-run.json",
+      "plugin_invoked": true,
+      "plugin_calls": 1,
+      "profiles_in_answer": 4,
+      "outcome": "plugin invoked by planner; 4 investors parsed (NEA, Caterpillar VC, Syren, Insight); overview/last_round back-filled FROM_ENRICHMENT",
+      "ms": 12143
+    }
+  ],
+  "raw_frame_sample": {
+    "sessionId": "6aca399995268adc215e0bf1",
+    "messageId": "6aca399b261cbe2340484d6f",
+    "eventIndex": 118,
+    "eventType": "step_output",
+    "stepId": "1",
+    "status": "processing",
+    "output": {
+      "delta": "Id\": \"plugin-1777018662\", \"name"
+    }
+  },
+  "raw_frame_sample_context": {
+    "note": "step_output is streamed as deltas; the concatenated step_output of session 6aca399995268adc215e0bf1 begins:",
+    "concatenated_head": "{\"title\": \"Searching geothermal investors\", \"plugins\": [{\"pluginId\": \"plugin-1777018662\", \"name\": \"searchInvestors\", \"description\": \"Parses a free-text fundraising query to extract filters (deal stage, investor type, geographies, ticket size, raise size, industry, verticals) and returns up to 10 enriched investor profiles from PitchBook.\", \"api_request_parameters\": {\"query\": \"Stage: Series E / Growth\\nRaise Size (USD"
+  },
+  "fetched_at": "2026-10-10T13:36:35Z",
+  "workflow": {
+    "id": "6aca3d3faeef8927baa25a05",
+    "name": "B Capital \u2014 PitchBook weekly enrichment",
+    "cadence": "0 0 6 * * 1 (Mon 06:00 UTC)",
+    "active": true,
+    "next_run_utc": "2026-10-12T06:00:00Z",
+    "first_execution": {
+      "execution_id": "6aca3d9d300de84fa7121262",
+      "status": "failed (delivery) \u2014 LLM node succeeded in 337.7 s, 92 records started / 91 complete (260 663 chars, output truncated), webhook delivery to https://sb-4y5v8t21stuf.vercel.run/pitchbook/ingest failed because that backend (HTTP 502 at run time) does not yet serve /pitchbook routes",
+      "node_outputs": "proof/pitchbook/workflow-exec-6aca3d9d-node-outputs.json",
+      "local_replay": "proof/pitchbook/replay-local-6aca3d9d.log \u2192 91 records written in-process via salvage path"
+    }
+  }
+}
