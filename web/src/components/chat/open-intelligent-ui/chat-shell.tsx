@@ -21,6 +21,7 @@ import { AssistantMessage, PluginTimeline, UserBubble } from "./messages";
 import { AutoAsk, ErrorBanner, PendingRow, Persistence, ScrollAnchor, Suspense } from "./thread-helpers";
 import { ChatWelcome, starters } from "./chat-welcome";
 import { ThreadBusBridge } from "./thread-bus";
+import { ThreadWindow } from "./thread-window";
 
 /* Public surface kept stable for run-rail / tts-queue / drawer / tests. */
 export { useStreamState, useStreamSelector, subscribeStream, getStreamSnapshot, getStreamPhase, getCurrentSessionId, faviconFor } from "./stream-store";
@@ -89,6 +90,7 @@ ${txt}`; }
         <AgentInterface.Sidebar>{null}</AgentInterface.Sidebar>
         <AgentInterface.Welcome><ChatWelcome companies={ctxCompanies} /></AgentInterface.Welcome>
         <ThreadBusBridge />
+        <ThreadWindow />
         <Persistence sessionRef={sessionRef} />
         <PendingRow />
         <VoiceDock />
