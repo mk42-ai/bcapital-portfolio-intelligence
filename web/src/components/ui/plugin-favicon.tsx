@@ -47,7 +47,7 @@ export function PluginFavicon({ id, meta, size = 20, className }: Props) {
     <img
       key={url}
       src={url} alt="" title={name} width={size} height={size}
-      loading={size <= 24 ? "eager" : "lazy"} decoding="async" referrerPolicy="no-referrer"
+      loading={size <= 24 ? "eager" : "lazy"} decoding="async" fetchPriority={size <= 24 ? "auto" : "low"} referrerPolicy="no-referrer"
       data-testid="plugin-favicon" data-source={sourceFor(url, m)} data-plugin-id={m?.id ?? id}
       className={cn("shrink-0 rounded-[5px] bg-surface-2 object-contain", className)}
       style={px}

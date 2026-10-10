@@ -1,0 +1,1546 @@
+{
+ "generated_utc": "2026-10-10T13:21:53.830802+00:00",
+ "backend": "https://sb-70og0c82gysn.vercel.run",
+ "companies_total_rows": 137,
+ "firm_rows_excluded": [
+  "b-capital"
+ ],
+ "companies_audited": 136,
+ "news_items_total": 1869,
+ "news_unique_image_urls": 1277,
+ "news_api_errors": {},
+ "total": 1990,
+ "probed_unique_urls": 1413,
+ "capped": false,
+ "logos": {
+  "total": 136,
+  "ok": 136,
+  "broken": 0,
+  "broken_by_class": {}
+ },
+ "news": {
+  "total": 1854,
+  "ok": 1196,
+  "broken": 658,
+  "broken_by_class": {
+   "missing": 577,
+   "bad_content_type": 61,
+   "mixed_content": 13,
+   "403_hotlink": 4,
+   "cors_or_blocked": 3
+  }
+ },
+ "broken_by_class": {
+  "missing": 577,
+  "bad_content_type": 61,
+  "mixed_content": 13,
+  "403_hotlink": 4,
+  "cors_or_blocked": 3
+ },
+ "news_pulse_latest_news_subset": {
+  "unique_urls": 1231,
+  "by_class": {
+   "ok": 1150,
+   "cors_or_blocked": 9,
+   "bad_content_type": 61,
+   "other": 7,
+   "403_hotlink": 4
+  }
+ },
+ "top_failing_domains": [
+  {
+   "domain": "x.com",
+   "count": 37,
+   "class": "missing",
+   "classes": {
+    "missing": 37
+   }
+  },
+  {
+   "domain": "lookaside.fbsbx.com",
+   "count": 36,
+   "class": "bad_content_type",
+   "classes": {
+    "bad_content_type": 36
+   }
+  },
+  {
+   "domain": "www.prnewswire.com",
+   "count": 34,
+   "class": "missing",
+   "classes": {
+    "missing": 34
+   }
+  },
+  {
+   "domain": "lookaside.instagram.com",
+   "count": 18,
+   "class": "bad_content_type",
+   "classes": {
+    "bad_content_type": 18
+   }
+  },
+  {
+   "domain": "techcrunch.com",
+   "count": 10,
+   "class": "missing",
+   "classes": {
+    "missing": 10
+   }
+  },
+  {
+   "domain": "www.globenewswire.com",
+   "count": 10,
+   "class": "missing",
+   "classes": {
+    "missing": 10
+   }
+  },
+  {
+   "domain": "isaac.health",
+   "count": 8,
+   "class": "missing",
+   "classes": {
+    "mixed_content": 3,
+    "missing": 5
+   }
+  },
+  {
+   "domain": "writer.com",
+   "count": 6,
+   "class": "missing",
+   "classes": {
+    "missing": 6
+   }
+  },
+  {
+   "domain": "www.bizjournals.com",
+   "count": 5,
+   "class": "missing",
+   "classes": {
+    "missing": 5
+   }
+  },
+  {
+   "domain": "centivo.com",
+   "count": 5,
+   "class": "missing",
+   "classes": {
+    "missing": 5
+   }
+  },
+  {
+   "domain": "inc42.com",
+   "count": 5,
+   "class": "missing",
+   "classes": {
+    "missing": 5
+   }
+  },
+  {
+   "domain": "www.evenuplaw.com",
+   "count": 5,
+   "class": "missing",
+   "classes": {
+    "missing": 5
+   }
+  },
+  {
+   "domain": "ir.evommune.com",
+   "count": 5,
+   "class": "missing",
+   "classes": {
+    "missing": 5
+   }
+  },
+  {
+   "domain": "www.falconx.io",
+   "count": 5,
+   "class": "missing",
+   "classes": {
+    "missing": 5
+   }
+  },
+  {
+   "domain": "app.dealroom.co",
+   "count": 5,
+   "class": "missing",
+   "classes": {
+    "missing": 5
+   }
+  },
+  {
+   "domain": "www.fountain.com",
+   "count": 5,
+   "class": "missing",
+   "classes": {
+    "missing": 5
+   }
+  },
+  {
+   "domain": "www.jetzero.aero",
+   "count": 5,
+   "class": "missing",
+   "classes": {
+    "missing": 5
+   }
+  },
+  {
+   "domain": "www.sohu.com",
+   "count": 5,
+   "class": "missing",
+   "classes": {
+    "missing": 5
+   }
+  },
+  {
+   "domain": "www.sifthealthcare.com",
+   "count": 5,
+   "class": "missing",
+   "classes": {
+    "missing": 5
+   }
+  },
+  {
+   "domain": "www.starburst.io",
+   "count": 5,
+   "class": "missing",
+   "classes": {
+    "missing": 5
+   }
+  },
+  {
+   "domain": "www.volastratx.com",
+   "count": 5,
+   "class": "missing",
+   "classes": {
+    "missing": 5
+   }
+  },
+  {
+   "domain": "i.tracxn.com",
+   "count": 4,
+   "class": "bad_content_type",
+   "classes": {
+    "bad_content_type": 4
+   }
+  },
+  {
+   "domain": "6sense.com",
+   "count": 4,
+   "class": "missing",
+   "classes": {
+    "missing": 4
+   }
+  },
+  {
+   "domain": "www.morningstar.com",
+   "count": 4,
+   "class": "missing",
+   "classes": {
+    "missing": 4
+   }
+  },
+  {
+   "domain": "artbio.com",
+   "count": 4,
+   "class": "missing",
+   "classes": {
+    "missing": 4
+   }
+  }
+ ],
+ "sample_failures": [
+  {
+   "kind": "news",
+   "slug": "6sense",
+   "url": "http://sn56.scholastic.com/content/dam/classroom-magazines/sn56/issues/2026-27/092826/Cover.jpg",
+   "status": "",
+   "content_type": "",
+   "class": "mixed_content",
+   "domain": "sn56.scholastic.com",
+   "error": "[other] OSError(101, 'Network is unreachable')"
+  },
+  {
+   "kind": "news",
+   "slug": "aimotive",
+   "url": "https://www.media.stellantis.com/cache/7/8/e/1/5/78e153ace4a6a7d97944129359809f72653cee3f.jpeg",
+   "status": "403",
+   "content_type": "text/html",
+   "class": "403_hotlink",
+   "domain": "www.media.stellantis.com",
+   "error": "HTTP Error 403: Forbidden"
+  },
+  {
+   "kind": "news",
+   "slug": "accacia",
+   "url": "https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3560339450050109962",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.instagram.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "aurora-yaocheng",
+   "url": "http://english.scio.gov.cn/2026-07/16/118602099_t2_0X0X506X337_dc7da42f-d5d2-407c-8b4e-d46075939dae.jpg",
+   "status": "",
+   "content_type": "",
+   "class": "mixed_content",
+   "domain": "english.scio.gov.cn",
+   "error": "[cors_or_blocked] TimeoutError('timed out')"
+  },
+  {
+   "kind": "news",
+   "slug": "aurora-yaocheng",
+   "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=1319560680384795",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.fbsbx.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "axiom",
+   "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=1227143185950630",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.fbsbx.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "bhanzu",
+   "url": "https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3962831795252542606",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.instagram.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "bhanzu",
+   "url": "https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3996136620813489329",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.instagram.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "branch-international",
+   "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=1445617647428221",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.fbsbx.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "branch-international",
+   "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=4512113309071598&get_thumbnail=1",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.fbsbx.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "brik",
+   "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=604969608088940",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.fbsbx.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "carro",
+   "url": "https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3977958536595532182",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.instagram.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "carro",
+   "url": "https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3839640355822575706",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.instagram.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "code-metal",
+   "url": "http://media.wired.com/photos/6996574c8ea1d07fab1e3328/master/pass/Buzzy-Startup-Business-Code-Metal-10-30-25-30.jpg",
+   "status": "",
+   "content_type": "",
+   "class": "mixed_content",
+   "domain": "media.wired.com",
+   "error": "[other] OSError(101, 'Network is unreachable')"
+  },
+  {
+   "kind": "news",
+   "slug": "collinear-ai",
+   "url": "https://i.tracxn.com/logo/company/collinear_ai_08150d5f-d6b0-48c2-822a-e852a38c32f0",
+   "status": "200",
+   "content_type": "binary/octet-stream",
+   "class": "bad_content_type",
+   "domain": "i.tracxn.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "curbwaste",
+   "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=1590011822521351",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.fbsbx.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "curbwaste",
+   "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=1451108237051529",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.fbsbx.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "dailyhunt",
+   "url": "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=795604822584694",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.fbsbx.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "dailyhunt",
+   "url": "https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=4001872405605489642",
+   "status": "200",
+   "content_type": "text/html; charset=\"utf-8\"",
+   "class": "bad_content_type",
+   "domain": "lookaside.instagram.com",
+   "error": ""
+  },
+  {
+   "kind": "news",
+   "slug": "deferred",
+   "url": "http://www.defuniakherald.com/wp-content/uploads/2026/09/SEPT.30.26.book_.img_-scaled-e1790780024713-1024x1024.jpg",
+   "status": "",
+   "content_type": "",
+   "class": "mixed_content",
+   "domain": "www.defuniakherald.com",
+   "error": "[cors_or_blocked] TimeoutError('timed out')"
+  }
+ ],
+ "per_company_news_breakdown": {
+  "1au": {
+   "ok": 16,
+   "missing": 3
+  },
+  "6sense": {
+   "ok": 7,
+   "mixed_content": 1,
+   "missing": 5
+  },
+  "accacia": {
+   "ok": 19,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "aimotive": {
+   "ok": 13,
+   "403_hotlink": 1,
+   "missing": 5
+  },
+  "apptronik": {
+   "ok": 25,
+   "missing": 5
+  },
+  "archimetis": {
+   "ok": 9,
+   "missing": 4
+  },
+  "artbio": {
+   "ok": 9,
+   "missing": 5
+  },
+  "aurora-yaocheng": {
+   "ok": 20,
+   "mixed_content": 1,
+   "bad_content_type": 1,
+   "missing": 3
+  },
+  "axiom": {
+   "ok": 14,
+   "bad_content_type": 1,
+   "missing": 4
+  },
+  "baichuan": {
+   "ok": 12,
+   "missing": 5
+  },
+  "bhanzu": {
+   "ok": 15,
+   "bad_content_type": 2,
+   "missing": 4
+  },
+  "branch-international": {
+   "ok": 13,
+   "bad_content_type": 2,
+   "missing": 3
+  },
+  "brik": {
+   "ok": 15,
+   "bad_content_type": 1,
+   "missing": 3
+  },
+  "buildops": {
+   "ok": 11,
+   "missing": 6
+  },
+  "cadence": {
+   "ok": 6,
+   "missing": 4
+  },
+  "carrick": {
+   "ok": 6,
+   "missing": 4
+  },
+  "carro": {
+   "ok": 6,
+   "bad_content_type": 2
+  },
+  "centivo": {
+   "ok": 10,
+   "missing": 5
+  },
+  "certn": {
+   "ok": 6,
+   "missing": 5
+  },
+  "chipagents": {
+   "ok": 13,
+   "missing": 1
+  },
+  "cloudwise": {
+   "ok": 20,
+   "missing": 2
+  },
+  "code-metal": {
+   "ok": 12,
+   "mixed_content": 1,
+   "missing": 6
+  },
+  "coindcx": {
+   "ok": 10,
+   "missing": 5
+  },
+  "collinear-ai": {
+   "bad_content_type": 1,
+   "ok": 4,
+   "missing": 5
+  },
+  "companycam": {
+   "ok": 12,
+   "missing": 3
+  },
+  "curbwaste": {
+   "ok": 13,
+   "bad_content_type": 2,
+   "missing": 3
+  },
+  "dailyhunt": {
+   "ok": 21,
+   "bad_content_type": 2,
+   "missing": 5
+  },
+  "deferred": {
+   "ok": 20,
+   "mixed_content": 2,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "dream-labs": {
+   "ok": 12,
+   "missing": 2
+  },
+  "eeroq": {
+   "ok": 7,
+   "missing": 4
+  },
+  "eureka-robotics": {
+   "ok": 6,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "evenup": {
+   "ok": 9,
+   "missing": 5
+  },
+  "evidation-health": {
+   "ok": 7,
+   "bad_content_type": 1,
+   "missing": 4
+  },
+  "evommune": {
+   "ok": 12,
+   "missing": 5
+  },
+  "extend": {
+   "ok": 3,
+   "missing": 5
+  },
+  "falconx": {
+   "ok": 7,
+   "missing": 5
+  },
+  "fervo-energy": {
+   "ok": 21,
+   "bad_content_type": 2,
+   "missing": 8
+  },
+  "figment": {
+   "ok": 12,
+   "missing": 4
+  },
+  "floor-nfts": {
+   "ok": 7,
+   "bad_content_type": 1,
+   "missing": 4
+  },
+  "flourish-health": {
+   "ok": 11,
+   "bad_content_type": 1,
+   "403_hotlink": 1,
+   "missing": 3
+  },
+  "flowgpt": {
+   "ok": 7,
+   "bad_content_type": 4,
+   "missing": 5
+  },
+  "flutterwave": {
+   "ok": 27,
+   "missing": 7
+  },
+  "forest": {
+   "ok": 9,
+   "missing": 2
+  },
+  "fountain": {
+   "ok": 5,
+   "missing": 5
+  },
+  "gable": {
+   "ok": 5,
+   "missing": 5
+  },
+  "goodfire": {
+   "ok": 11,
+   "mixed_content": 1,
+   "missing": 4
+  },
+  "goose": {
+   "ok": 9,
+   "missing": 5
+  },
+  "grace-investment-machine": {
+   "ok": 7,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "graymatter-robotics": {
+   "ok": 9,
+   "missing": 5
+  },
+  "grit": {
+   "ok": 9,
+   "missing": 2
+  },
+  "gushwork": {
+   "ok": 8,
+   "missing": 3
+  },
+  "havocai": {
+   "ok": 7,
+   "missing": 5
+  },
+  "heylibby": {
+   "ok": 5,
+   "bad_content_type": 1,
+   "403_hotlink": 1,
+   "missing": 4
+  },
+  "hifibio": {
+   "ok": 6,
+   "missing": 2
+  },
+  "hotspot-therapeutics": {
+   "ok": 7,
+   "missing": 5
+  },
+  "hypersonix": {
+   "ok": 5
+  },
+  "icertis": {
+   "ok": 9,
+   "missing": 5
+  },
+  "infrahub": {
+   "ok": 8,
+   "bad_content_type": 1
+  },
+  "innovaccer": {
+   "ok": 9,
+   "missing": 5
+  },
+  "insilico-medicine": {
+   "ok": 12,
+   "missing": 5
+  },
+  "inspace": {
+   "ok": 8,
+   "missing": 5
+  },
+  "iru": {
+   "ok": 3,
+   "missing": 5
+  },
+  "isaac-health": {
+   "mixed_content": 3,
+   "ok": 4,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "jetzero": {
+   "ok": 7,
+   "missing": 5
+  },
+  "judi-rx": {
+   "ok": 8,
+   "missing": 5
+  },
+  "karman-industries": {
+   "ok": 3,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "khatabook": {
+   "ok": 10,
+   "mixed_content": 1,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "knox": {
+   "ok": 12,
+   "missing": 5
+  },
+  "kopi-kenangan": {
+   "ok": 8,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "labelbox": {
+   "ok": 7,
+   "missing": 4
+  },
+  "labviva": {
+   "ok": 6,
+   "missing": 5
+  },
+  "lambda": {
+   "ok": 10,
+   "missing": 5
+  },
+  "levelten": {
+   "ok": 8,
+   "missing": 5
+  },
+  "linkmore": {
+   "ok": 8,
+   "bad_content_type": 2,
+   "missing": 5
+  },
+  "lively": {
+   "ok": 4,
+   "missing": 5
+  },
+  "lumara-health": {
+   "ok": 8
+  },
+  "lunar-energy": {
+   "ok": 6,
+   "missing": 5
+  },
+  "macrolux": {
+   "ok": 4,
+   "missing": 5
+  },
+  "meditrust": {
+   "ok": 7,
+   "bad_content_type": 2,
+   "missing": 5
+  },
+  "meesho": {
+   "ok": 10,
+   "missing": 6
+  },
+  "miotech": {
+   "ok": 8,
+   "missing": 5
+  },
+  "mswipe": {
+   "ok": 7,
+   "missing": 5
+  },
+  "nalu": {
+   "ok": 6,
+   "cors_or_blocked": 3,
+   "bad_content_type": 1,
+   "missing": 4
+  },
+  "nektar-ai": {
+   "ok": 11,
+   "missing": 3
+  },
+  "nest-genomics": {
+   "ok": 4
+  },
+  "neushen-therapeutics": {
+   "ok": 8,
+   "missing": 5
+  },
+  "ninja-van": {
+   "bad_content_type": 2,
+   "ok": 10,
+   "missing": 5
+  },
+  "numerion-labs": {
+   "ok": 5,
+   "bad_content_type": 2,
+   "missing": 5
+  },
+  "nuvig": {
+   "ok": 8,
+   "missing": 5
+  },
+  "odeko": {
+   "ok": 9
+  },
+  "omnidian": {
+   "ok": 3,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "oro-labs": {
+   "ok": 7,
+   "missing": 5
+  },
+  "overstory": {
+   "ok": 4,
+   "mixed_content": 1,
+   "missing": 5
+  },
+  "palebluedot": {
+   "ok": 7,
+   "bad_content_type": 1,
+   "missing": 3
+  },
+  "payfazz": {
+   "ok": 8,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "pendo": {
+   "ok": 7,
+   "missing": 5
+  },
+  "percent": {
+   "ok": 6,
+   "missing": 5
+  },
+  "perimeter-81": {
+   "ok": 7,
+   "missing": 2
+  },
+  "perplexity-ai": {
+   "ok": 23,
+   "bad_content_type": 1,
+   "missing": 7
+  },
+  "phenom-people": {
+   "ok": 8,
+   "missing": 5
+  },
+  "picnichealth": {
+   "ok": 6,
+   "missing": 5
+  },
+  "poolside": {
+   "ok": 8,
+   "missing": 5
+  },
+  "positive-development": {
+   "ok": 6,
+   "missing": 5
+  },
+  "precision-neuro": {
+   "ok": 4,
+   "missing": 5
+  },
+  "profoundbio": {
+   "ok": 4,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "rapyd": {
+   "ok": 8,
+   "missing": 4
+  },
+  "reflection": {
+   "ok": 10,
+   "bad_content_type": 2,
+   "missing": 5
+  },
+  "remote": {
+   "ok": 12,
+   "missing": 5
+  },
+  "rona-therapeutics": {
+   "ok": 5,
+   "missing": 4
+  },
+  "seltz": {
+   "ok": 6,
+   "missing": 5
+  },
+  "sharpa": {
+   "ok": 12,
+   "missing": 5
+  },
+  "shipday": {
+   "ok": 11,
+   "bad_content_type": 1,
+   "missing": 4
+  },
+  "sift-healthcare": {
+   "ok": 5,
+   "missing": 5
+  },
+  "silvercloud-health": {
+   "ok": 4,
+   "missing": 5
+  },
+  "solar-square": {
+   "ok": 12,
+   "missing": 4
+  },
+  "solve-therapeutics": {
+   "ok": 3,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "sonilo": {
+   "ok": 7,
+   "missing": 4
+  },
+  "spectrumedics": {
+   "ok": 8,
+   "mixed_content": 1,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "star-catcher": {
+   "ok": 6,
+   "missing": 5
+  },
+  "starburst-data": {
+   "ok": 6,
+   "missing": 5
+  },
+  "sugarfit": {
+   "ok": 5,
+   "missing": 4
+  },
+  "synapticure": {
+   "ok": 5,
+   "bad_content_type": 1,
+   "missing": 5
+  },
+  "tacta": {
+   "ok": 8,
+   "missing": 2
+  },
+  "tinyhealth": {
+   "ok": 6,
+   "403_hotlink": 1,
+   "missing": 5
+  },
+  "trm-labs": {
+   "ok": 3,
+   "missing": 5
+  },
+  "turbine": {
+   "ok": 8,
+   "missing": 1
+  },
+  "turno": {
+   "ok": 11,
+   "missing": 2
+  },
+  "unblocked-brands": {
+   "ok": 6,
+   "bad_content_type": 1,
+   "missing": 2
+  },
+  "vivacta": {
+   "ok": 10,
+   "missing": 4
+  },
+  "volastra": {
+   "ok": 2,
+   "missing": 5
+  },
+  "when": {
+   "ok": 1,
+   "missing": 5
+  },
+  "wildfire": {
+   "ok": 7,
+   "bad_content_type": 1
+  },
+  "writer": {
+   "ok": 18,
+   "missing": 6
+  },
+  "xingyun": {
+   "ok": 7,
+   "bad_content_type": 1,
+   "mixed_content": 1,
+   "missing": 3
+  },
+  "yalo": {
+   "bad_content_type": 2,
+   "ok": 6,
+   "missing": 3
+  },
+  "zaihui": {
+   "ok": 8,
+   "bad_content_type": 3,
+   "missing": 5
+  }
+ },
+ "flutterwave": [
+  {
+   "kind": "logo",
+   "url": "https://www.google.com/s2/favicons?domain=flutterwave.com&sz=128",
+   "status": 200,
+   "content_type": "image/png",
+   "class": "ok",
+   "domain": "www.google.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://flutterwave.com&size=128",
+   "source": null
+  },
+  {
+   "kind": "news",
+   "url": "https://logos-world.net/wp-content/uploads/2025/07/Flutterwave-Logo.png",
+   "status": 200,
+   "content_type": "image/png",
+   "class": "ok",
+   "domain": "logos-world.net",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://logos-world.net/wp-content/uploads/2025/07/Flutterwave-Logo.png",
+   "source": "logos-world.net"
+  },
+  {
+   "kind": "news",
+   "url": "https://logos-world.net/wp-content/uploads/2022/05/Flutterwave-New-Logo.png",
+   "status": 200,
+   "content_type": "image/png",
+   "class": "ok",
+   "domain": "logos-world.net",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://logos-world.net/wp-content/uploads/2022/05/Flutterwave-New-Logo.png",
+   "source": "logos-world.net"
+  },
+  {
+   "kind": "news",
+   "url": "https://techafricanews.com/wp-content/uploads/2026/08/flutterwave-2.png",
+   "status": 200,
+   "content_type": "image/png",
+   "class": "ok",
+   "domain": "techafricanews.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://techafricanews.com/wp-content/uploads/2026/08/flutterwave-2.png",
+   "source": "techafricanews.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://pan-africanvoice.com/wp-content/uploads/2026/08/Top-25-Series-website-2.png",
+   "status": 200,
+   "content_type": "image/png",
+   "class": "ok",
+   "domain": "pan-africanvoice.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://pan-africanvoice.com/wp-content/uploads/2026/08/Top-25-Series-website-2.png",
+   "source": "pan-africanvoice.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://thecondia.com/cdn-cgi/image/format=auto,quality=auto/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-05-at-13.42.24.jpeg",
+   "status": 200,
+   "content_type": "image/avif",
+   "class": "ok",
+   "domain": "thecondia.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://thecondia.com/cdn-cgi/image/format=auto,quality=auto/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-05-at-13.42.24.jpeg",
+   "source": "thecondia.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://v12.flutterwave.com/wp-content/uploads/2026/06/Verve-x-Flutterwave_Integrated-ID_5-scaled.jpg",
+   "status": 200,
+   "content_type": "image/jpeg",
+   "class": "ok",
+   "domain": "v12.flutterwave.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://v12.flutterwave.com/wp-content/uploads/2026/06/Verve-x-Flutterwave_Integrated-ID_5-scaled.jpg",
+   "source": "flutterwave.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://www.pymnts.com/wp-content/uploads/2026/06/Flutterwave.jpeg?w=457",
+   "status": 200,
+   "content_type": "image/webp",
+   "class": "ok",
+   "domain": "www.pymnts.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://www.pymnts.com/wp-content/uploads/2026/06/Flutterwave.jpeg?w=457",
+   "source": "pymnts.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://empowerafrica.com/wp-content/uploads/sites/2/2026/06/blue-1536x853-1.jpeg",
+   "status": 200,
+   "content_type": "image/jpeg",
+   "class": "ok",
+   "domain": "empowerafrica.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://empowerafrica.com/wp-content/uploads/sites/2/2026/06/blue-1536x853-1.jpeg",
+   "source": "empowerafrica.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://mmx.prnewswire.com/media/MS1866853/Flutterwave_x_Ripple.jpg?id=OA2719713&p=twitter",
+   "status": 200,
+   "content_type": "image/jpeg",
+   "class": "ok",
+   "domain": "mmx.prnewswire.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://mmx.prnewswire.com/media/MS1866853/Flutterwave_x_Ripple.jpg?id=OA2719713&p=twitter",
+   "source": "prnewswire.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://innovation-village.com/wp-content/uploads/2026/06/Flutterwave.jpg",
+   "status": 200,
+   "content_type": "image/jpeg",
+   "class": "ok",
+   "domain": "innovation-village.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://innovation-village.com/wp-content/uploads/2026/06/Flutterwave.jpg",
+   "source": "innovation-village.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://v12.flutterwave.com/wp-content/uploads/2026/09/PR-4.jpg",
+   "status": 200,
+   "content_type": "image/jpeg",
+   "class": "ok",
+   "domain": "v12.flutterwave.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://v12.flutterwave.com/wp-content/uploads/2026/09/PR-4.jpg",
+   "source": "flutterwave.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://v12.flutterwave.com/wp-content/uploads/2026/05/image.jpeg",
+   "status": 200,
+   "content_type": "image/jpeg",
+   "class": "ok",
+   "domain": "v12.flutterwave.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://v12.flutterwave.com/wp-content/uploads/2026/05/image.jpeg",
+   "source": "flutterwave.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://msmeafricaonline.com/wp-content/uploads/2024/08/flutterwave-logo.jpg",
+   "status": 200,
+   "content_type": "image/jpeg",
+   "class": "ok",
+   "domain": "msmeafricaonline.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://msmeafricaonline.com/wp-content/uploads/2024/08/flutterwave-logo.jpg",
+   "source": "msmeafricaonline.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://media.zenfs.com/en/afrotech_articles_589/17331534d005c6d0dad03ae1726362e8",
+   "status": 200,
+   "content_type": "image/jpeg",
+   "class": "ok",
+   "domain": "media.zenfs.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://media.zenfs.com/en/afrotech_articles_589/17331534d005c6d0dad03ae1726362e8",
+   "source": "finance.yahoo.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://v12.flutterwave.com/wp-content/uploads/2026/01/FLW-Mon-1.png",
+   "status": 200,
+   "content_type": "image/png",
+   "class": "ok",
+   "domain": "v12.flutterwave.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://v12.flutterwave.com/wp-content/uploads/2026/01/FLW-Mon-1.png",
+   "source": "flutterwave.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://c76c7bbc41.mjedge.net/wp-content/uploads/tc/2023/11/flutterwave_2-1024x683.jpg",
+   "status": 200,
+   "content_type": "image/jpeg",
+   "class": "ok",
+   "domain": "c76c7bbc41.mjedge.net",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://c76c7bbc41.mjedge.net/wp-content/uploads/tc/2023/11/flutterwave_2-1024x683.jpg",
+   "source": "techcabal.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://ocdn.eu/pulscms/MDA_/686a0e1fabe90d6753a18fb81cfa657a.jpg",
+   "status": 200,
+   "content_type": "image/jpeg",
+   "class": "ok",
+   "domain": "ocdn.eu",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://ocdn.eu/pulscms/MDA_/686a0e1fabe90d6753a18fb81cfa657a.jpg",
+   "source": "africa.businessinsider.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://thefintechtimes.com/wp-content/uploads/2023/07/Africa-FI-map-960x640.jpg",
+   "status": 200,
+   "content_type": "image/jpeg",
+   "class": "ok",
+   "domain": "thefintechtimes.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://thefintechtimes.com/wp-content/uploads/2023/07/Africa-FI-map-960x640.jpg",
+   "source": "thefintechtimes.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://www.pymnts.com/wp-content/uploads/2023/08/flutterwave-big.jpg?w=457",
+   "status": 200,
+   "content_type": "image/webp",
+   "class": "ok",
+   "domain": "www.pymnts.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://www.pymnts.com/wp-content/uploads/2023/08/flutterwave-big.jpg?w=457",
+   "source": "pymnts.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://www.aljazeera.com/wp-content/uploads/2022/02/flutterwave.jpg?resize=270%2C180&quality=80",
+   "status": 200,
+   "content_type": "image/webp",
+   "class": "ok",
+   "domain": "www.aljazeera.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://www.aljazeera.com/wp-content/uploads/2022/02/flutterwave.jpg?resize=270%2C180&quality=80",
+   "source": "aljazeera.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://techcrunch.com/wp-content/uploads/2022/02/PhotoPictureResizer_220216_082315412_crop_2886x2165.jpg",
+   "status": 200,
+   "content_type": "image/webp",
+   "class": "ok",
+   "domain": "techcrunch.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://techcrunch.com/wp-content/uploads/2022/02/PhotoPictureResizer_220216_082315412_crop_2886x2165.jpg",
+   "source": "techcrunch.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://ocdn.eu/pulscms-transforms/1/GuIktkpTURBXy8xZWJlNDhmY2QxNzgzNThmNjhiMzNhNGM1MWU2ZGI4Yy5qcGeSlQMhAM0CFc0BLJMFzQFZzKw",
+   "status": 200,
+   "content_type": "image/jpeg",
+   "class": "ok",
+   "domain": "ocdn.eu",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://ocdn.eu/pulscms-transforms/1/GuIktkpTURBXy8xZWJlNDhmY2QxNzgzNThmNjhiMzNhNGM1MWU2ZGI4Yy5qcGeSlQMhAM0CFc0BLJMFzQFZzKw",
+   "source": "africa.businessinsider.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://tech-ish.com/wp-content/uploads/2022/02/Flutterwave-new-logo_inverted.jpg",
+   "status": 200,
+   "content_type": "image/webp",
+   "class": "ok",
+   "domain": "tech-ish.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://tech-ish.com/wp-content/uploads/2022/02/Flutterwave-new-logo_inverted.jpg",
+   "source": "tech-ish.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://prod.cdn-medias.theafricareport.com/cdn-cgi/image/q=auto,f=auto,metadata=none,fit=cover/https://prod.cdn-medias.theafricareport.com/medias/2021/03/Hi-res_Olugbenga-Headshot-1-1-002.jpg",
+   "status": 200,
+   "content_type": "image/webp",
+   "class": "ok",
+   "domain": "prod.cdn-medias.theafricareport.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://prod.cdn-medias.theafricareport.com/cdn-cgi/image/q=auto,f=auto,metadata=none,fit=cover/https://prod.cdn-medias.theafricareport.com/medias/2021/03/Hi-res_Olugbenga-Headshot-1-1-002.jpg",
+   "source": "theafricareport.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://www.aljazeera.com/wp-content/uploads/2022/02/flutterwave.jpg?resize=1800%2C1800",
+   "status": 200,
+   "content_type": "image/webp",
+   "class": "ok",
+   "domain": "www.aljazeera.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://www.aljazeera.com/wp-content/uploads/2022/02/flutterwave.jpg?resize=1800%2C1800",
+   "source": "aljazeera.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://media.zenfs.com/en/prnewswire.com/da6bd80c048b4fd4bc569fac5c289ac7",
+   "status": 200,
+   "content_type": "image/jpeg",
+   "class": "ok",
+   "domain": "media.zenfs.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://media.zenfs.com/en/prnewswire.com/da6bd80c048b4fd4bc569fac5c289ac7",
+   "source": "finance.yahoo.com"
+  },
+  {
+   "kind": "news",
+   "url": "https://imgproxy.divecdn.com/rodrlx7rSwJhWvr3mUINwn9G4_czoSNUzLaVtmAAdjU/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9XZWJfQXBwLnBuZw==.webp",
+   "status": 200,
+   "content_type": "image/webp",
+   "class": "ok",
+   "domain": "imgproxy.divecdn.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": "https://imgproxy.divecdn.com/rodrlx7rSwJhWvr3mUINwn9G4_czoSNUzLaVtmAAdjU/g:ce/rs:fill:1200:675:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9XZWJfQXBwLnBuZw==.webp",
+   "source": "paymentsdive.com"
+  },
+  {
+   "kind": "news",
+   "url": "",
+   "status": null,
+   "content_type": "",
+   "class": "missing",
+   "domain": "v12.flutterwave.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": null,
+   "source": "v12.flutterwave.com"
+  },
+  {
+   "kind": "news",
+   "url": "",
+   "status": null,
+   "content_type": "",
+   "class": "missing",
+   "domain": "v12.flutterwave.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": null,
+   "source": "v12.flutterwave.com"
+  },
+  {
+   "kind": "news",
+   "url": "",
+   "status": null,
+   "content_type": "",
+   "class": "missing",
+   "domain": "v12.flutterwave.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": null,
+   "source": "v12.flutterwave.com"
+  },
+  {
+   "kind": "news",
+   "url": "",
+   "status": null,
+   "content_type": "",
+   "class": "missing",
+   "domain": "flutterwave.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": null,
+   "source": "flutterwave.com"
+  },
+  {
+   "kind": "news",
+   "url": "",
+   "status": null,
+   "content_type": "",
+   "class": "missing",
+   "domain": "www.startupresearcher.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": null,
+   "source": "startupresearcher.com"
+  },
+  {
+   "kind": "news",
+   "url": "",
+   "status": null,
+   "content_type": "",
+   "class": "missing",
+   "domain": "seedtable.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": null,
+   "source": "seedtable.com"
+  },
+  {
+   "kind": "news",
+   "url": "",
+   "status": null,
+   "content_type": "",
+   "class": "missing",
+   "domain": "seedtable.com",
+   "bytes": 0,
+   "error": "",
+   "final_url": null,
+   "source": "seedtable.com"
+  }
+ ],
+ "elapsed_s": 76.9,
+ "flutterwave_missing_articles_og_check": [
+  {
+   "article_url": "https://v12.flutterwave.com/2026/10/06/flutterwave-hosts-nigerian-vice-president-ministers-state-governors-ambassadors-and-global-business-leaders-at-unga-81-to-shape-africas-growth-strategy/",
+   "source": "v12.flutterwave.com",
+   "status": 200,
+   "og_image": null
+  },
+  {
+   "article_url": "https://v12.flutterwave.com/2026/09/23/flutterwave-names-former-access-holdings-cfo-morounke-olufemi-as-new-global-cfo/",
+   "source": "v12.flutterwave.com",
+   "status": 200,
+   "og_image": null
+  },
+  {
+   "article_url": "https://v12.flutterwave.com/2026/09/15/flutterwave-offers-seamless-digital-participation-in-dangote-ipo/",
+   "source": "v12.flutterwave.com",
+   "status": 200,
+   "og_image": null
+  },
+  {
+   "article_url": "https://flutterwave.com/us/blog/the-dangote-refinery-ipo-is-live-on-flutterwave",
+   "source": "flutterwave.com",
+   "status": 200,
+   "og_image": "https://v12.flutterwave.com/wp-content/uploads/2026/09/BLOG-2.jpg"
+  },
+  {
+   "article_url": "https://www.startupresearcher.com/news/flutterwave-powers-digital-access-to-dangote-refinery-ipo",
+   "source": "startupresearcher.com",
+   "status": null,
+   "og_image": null,
+   "error": "<HTTPError 429: 'Too Many Requests'>"
+  },
+  {
+   "article_url": "https://seedtable.com/companies/flutterwave",
+   "source": "seedtable.com",
+   "status": null,
+   "og_image": null,
+   "error": "<HTTPError 403: 'Forbidden'>"
+  },
+  {
+   "article_url": "https://seedtable.com/companies/flutterwave",
+   "source": "seedtable.com",
+   "status": null,
+   "og_image": null,
+   "error": "<HTTPError 403: 'Forbidden'>"
+  }
+ ],
+ "flutterwave_summary": {
+  "news_total": 34,
+  "by_class": {
+   "ok": 27,
+   "missing": 7
+  },
+  "first_12_feed_order_image_present": [
+   true,
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   true,
+   true,
+   true,
+   false,
+   true
+  ],
+  "note": "All 28 Flutterwave image_url values return HTTP 200 image/* with and without a browser Referer; the blank tiles come from items whose image_url is null in the API (7 of 35), 5 of which sit in positions 3-7 and 11 of the feed."
+ },
+ "classification_note": "http:// URLs are always classed mixed_content (browser blocks them on an https page) \u2014 the underlying probe result is prefixed in the error column of image_audit_before_full.csv."
+}

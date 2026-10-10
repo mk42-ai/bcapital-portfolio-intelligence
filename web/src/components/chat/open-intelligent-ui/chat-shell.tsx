@@ -178,7 +178,7 @@ const CiteChip = memo(function CiteChip({ n, cite }: { n: number; cite?: Cite })
       <span className="oiu-cite__n">{n}</span>
       <span className="oiu-cite__preview" role="tooltip">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={faviconFor(url)} alt="" width={14} height={14} loading="lazy" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.style.visibility = "hidden"; }} />
+        <img src={faviconFor(url)} alt="" width={14} height={14} loading="lazy" decoding="async" fetchPriority="low" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.style.visibility = "hidden"; }} />
         <span className="oiu-cite__title">{cite?.title ?? host}</span><span className="oiu-cite__host">{host}</span>
       </span>
     </a>
@@ -224,7 +224,7 @@ function SourceList({ sources, compact, live, streamingNow }: { sources: Source[
             <a href={src.url} target="_blank" rel="noopener noreferrer" className="oiu-sources__link" data-testid="source-link">
               <span className="oiu-sources__num">{i + 1}</span>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={faviconFor(src.url)} alt="" width={16} height={16} className="oiu-sources__favicon" loading="lazy" referrerPolicy="no-referrer" data-testid="source-favicon" onError={(e) => { e.currentTarget.style.visibility = "hidden"; }} />
+              <img src={faviconFor(src.url)} alt="" width={16} height={16} className="oiu-sources__favicon" loading="lazy" decoding="async" fetchPriority="low" referrerPolicy="no-referrer" data-testid="source-favicon" onError={(e) => { e.currentTarget.style.visibility = "hidden"; }} />
               <span className="oiu-sources__text">
                 <span className="oiu-sources__name">{src.title && src.title !== src.sourceName ? src.title : src.sourceName}</span>
                 <span className="oiu-sources__meta"><span className="oiu-sources__host">{src.sourceName}</span><span className="oiu-sources__path">{src.url.replace(/^https?:\/\/(www\.)?[^/]+/, "").slice(0, 72) || "/"}</span></span>

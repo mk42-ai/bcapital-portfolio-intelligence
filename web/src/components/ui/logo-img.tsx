@@ -45,7 +45,7 @@ export function LogoImg({ src, name, size = 20, className = "", alt = "", eager 
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img data-testid="logo-img" src={src as string} alt={alt} title={alt ? undefined : name} width={size} height={size}
-      loading={eager ? "eager" : "lazy"} decoding="async" referrerPolicy="no-referrer" fetchPriority={eager ? "high" : "auto"}
+      loading={eager ? "eager" : "lazy"} decoding="async" referrerPolicy="no-referrer" fetchPriority={eager ? "high" : "low"}
       onError={() => setFailed(true)} onLoad={onLoad}
       style={{ width: size, height: size, ...style }}
       className={`shrink-0 object-contain ${className} ${imgClassName}`} />
