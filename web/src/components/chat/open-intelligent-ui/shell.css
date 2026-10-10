@@ -15,8 +15,6 @@
   .chat-shell .openui-agent-container:has(.oiu-welcome) .openui-agent-composer-slot .openui-agent-thread-composer { padding-top: 4px; }
   .oiu-welcome__starter-prompt { display: none; }
 }
-/* Collapse OpenUI's thread sidebar (threads list) on the empty state too — recent threads live in the welcome block. */
-.chat-shell .openui-agent-container:has(.oiu-welcome) .openui-agent-sidebar-container:not(.openui-agent-sidebar-container--collapsed) { width: 208px; }
 .chat-shell .openui-agent-container:has(.oiu-welcome) .openui-agent-thread-scroll-area {
   display: none;
 }
@@ -253,8 +251,6 @@
 .oiu-assistant__body { min-width: 0; flex: 1; }
 .oiu-sources { margin-top: 12px; border-top: 1px solid #e5e7eb; padding-top: 10px; }
 .oiu-sources__title { margin: 0 0 6px; font-size: 12px; font-weight: 600; color: #5f6b7a; }
-.oiu-footer { display: flex; align-items: center; gap: 6px; margin: 8px 0 0; font-size: 12px; color: #5f6b7a; }
-.oiu-footer code { font-size: 11px; background: #f3f4f6; padding: 1px 4px; border-radius: 4px; }
 .chat-shell .openui-agent-sidebar-container { background: #f9fafb; border-right: 1px solid #e5e7eb; }
 
 /* Citation list under each assistant message: plain anchors (one per source), neutral, no carousel. */
