@@ -1,6 +1,7 @@
-/* Single light theme. Neutral grays + one restrained accent. Every text pairing below is WCAG 2.2 AA:
-   #111827 on #FFFFFF 17.7:1 · #5F6B7A on #FFFFFF 5.6:1 (4.9:1 on #F3F4F6) · #374151 on #F9FAFB 9.9:1 · accent #1D4ED8 on #FFFFFF 6.7:1 (text) ·
-   #E5E7EB borders ≥3:1 non-text against #111827 content; borders themselves are decorative 1px lines. */
+/* Single light theme. Neutral grays + ONE accent: B Capital brand green (#0AC985 brand, #047857 ink, #E6FAF3 tint). No blue anywhere —
+   focus rings (--ring), ::selection, links, active nav, primary badges and switches all derive from the green tokens below.
+   Every text pairing is WCAG 2.2 AA: #111827 on #FFFFFF 17.7:1 · #5F6B7A on #FFFFFF 5.6:1 (4.9:1 on #F3F4F6) · #374151 on #F9FAFB 9.9:1 ·
+   #047857 on #FFFFFF 5.5:1 (text) · #065F46 on #E6FAF3 7.2:1 · #E5E7EB borders are decorative 1px lines (≥3:1 non-text vs #111827 content). */
 :root {
   color-scheme: light;
   --background: #ffffff;
