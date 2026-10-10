@@ -45,19 +45,21 @@ test.describe("PitchBook panel", () => {
     await expect(page.getByTestId("context-chip")).toHaveCount(0);
   });
 
-  test("chat rail: expanded rail has the PitchBook card; collapsed strip has the PitchBook icon", async ({ page }) => {
+  test("inspector drawer: opening it via the top-bar toggle reveals the PitchBook panel; closing hides it again", async ({ page }) => {
     await page.goto("/chat?skip=1");
-    const rail = page.getByTestId("chat-rail");
-    await expect(rail).toBeVisible();
-    if ((await page.viewportSize())!.width < 1024) { await expect(rail.getByTestId("pitchbook-rail")).toBeVisible(); return; }
-    await expect(rail.getByTestId("pitchbook-rail")).toBeVisible();
-    await expect(rail.getByTestId("pitchbook-rail").locator('[data-testid="pb-chip"], [data-testid="pb-investor"], [data-testid="pb-empty"], [data-testid="pb-offline"], [data-testid="pb-unavailable"], [data-testid="pb-no-context"]').first()).toBeVisible({ timeout: 15_000 });
-    if ((await rail.getAttribute("data-collapsed")) !== "true") await page.getByTestId("rail-toggle").click();
-    await expect(rail).toHaveAttribute("data-collapsed", "true");
-    await expect(page.getByTestId("rail-strip-pitchbook")).toBeVisible();
-    await page.getByTestId("rail-strip-pitchbook").click();
-    await expect(rail).toHaveAttribute("data-collapsed", "false");
-    await expect(rail.getByTestId("pitchbook-rail")).toBeVisible();
+    const drawer = page.getByTestId("chat-inspector");
+    const toggle = page.getByTestId("inspector-toggle");
+    await expect(toggle).toBeVisible();
+    if ((await drawer.getAttribute("data-open")) !== "true") await toggle.click();
+    await expect(drawer).toHaveAttribute("data-open", "true");
+    await expect(drawer.getByTestId("pitchbook-rail")).toBeVisible();
+    await expect(drawer.getByTestId("pitchbook-rail").locator('[data-testid="pb-chip"], [data-testid="pb-investor"], [data-testid="pb-empty"], [data-testid="pb-offline"], [data-testid="pb-unavailable"], [data-testid="pb-no-context"]').first()).toBeVisible({ timeout: 15_000 });
+    await page.getByTestId("inspector-close").click();
+    await expect(drawer).toHaveAttribute("data-open", "false");
+    await expect(drawer.getByTestId("pitchbook-rail")).toBeHidden();
+    await toggle.click();
+    await expect(drawer).toHaveAttribute("data-open", "true");
+    await expect(drawer.getByTestId("pitchbook-rail")).toBeVisible();
   });
 
   test("keyboard: Enter on a focused chip (company page or rail) adds a context chip", async ({ page }) => {
@@ -65,6 +67,7 @@ test.describe("PitchBook panel", () => {
     let chip = page.getByTestId("pitchbook-card").locator('[data-testid="pb-chip"], [data-testid="pb-investor"]').first();
     if (!(await chip.count())) {
       await page.goto("/chat?skip=1");
+      if ((await page.getByTestId("chat-inspector").getAttribute("data-open")) !== "true") await page.getByTestId("inspector-toggle").click();
       const rail = page.getByTestId("pitchbook-rail");
       await expect(rail.locator('[data-testid="pb-chip"], [data-testid="pb-investor"], [data-testid="pb-empty"], [data-testid="pb-offline"], [data-testid="pb-unavailable"]').first()).toBeVisible({ timeout: 15_000 });
       chip = rail.locator('[data-testid="pb-chip"], [data-testid="pb-investor"]').first();
