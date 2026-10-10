@@ -8,7 +8,7 @@
  *   plugin_sources, agent/ondemand_agent.* (lifecycle, execution, outputs, interaction), heartbeat, [DONE], [ERROR]:.
  * Unknown subtypes are tolerated (→ {kind:"unknown"}) and never throw.
  */
-import { TERMINAL, SSE_EVENT, EVENT_TYPE, THINKING_CHANNEL, STATUS_TYPE, STATUS_FIELDS, AGENT_PREFIX, AGENT_SUBTYPE, PLUGIN_ERROR_PATTERNS } from "./eventMap";
+import { TERMINAL, SSE_EVENT, EVENT_TYPE, THINKING_CHANNEL, STATUS_TYPE, STATUS_FIELDS, AGENT_PREFIX, AGENT_SUBTYPE, PLUGIN_ERROR_PATTERNS, CLIENT_EVENT } from "./eventMap";
 export type PluginRef = { id: string; name: string; logoUrl?: string };
 export type PlanStep = { id: string; title: string; query?: string; plugins?: string[] };
 export type Citation = { url: string; title: string; sourceName: string; imageUrl?: string };
@@ -142,3 +142,21 @@ export function parseFrame(ev: string, data: string): UiEvent {
 
 /** Upstream plugin failure signature — bound in eventMap.ts. */
 export const PLUGIN_ERROR_RE = PLUGIN_ERROR_PATTERNS;
+
+/**
+ * Classify one client-side AG-UI frame (what the shell's teeStream receives) by family, so the shell and fixture tests can assert coverage:
+ *   "attachments" — CUSTOM CE.attachments (Media API items); "voice" — CUSTOM CE.voice (voice phases);
+ *   "known" — any other CUSTOM name bound in CLIENT_EVENT, or a standard AG-UI frame type (TEXT_MESSAGE_*, RUN_*, TOOL_CALL_*);
+ *   "unknown" — a CUSTOM frame whose name is not in CLIENT_EVENT, or a frame with no usable type. Pure; never throws.
+ */
+const CLIENT_EVENT_NAMES: ReadonlySet<string> = new Set(Object.values(CLIENT_EVENT));
+export function classifyClientFrame(frame: { type?: string; name?: string; value?: unknown }): "attachments" | "voice" | "known" | "unknown" {
+  const type = typeof frame?.type === "string" ? frame.type : "";
+  if (type === "CUSTOM") {
+    const name = typeof frame.name === "string" ? frame.name : "";
+    if (name === CLIENT_EVENT.attachments) return "attachments";
+    if (name === CLIENT_EVENT.voice) return "voice";
+    return CLIENT_EVENT_NAMES.has(name) ? "known" : "unknown";
+  }
+  return /^(TEXT_MESSAGE_|RUN_|TOOL_CALL_|STEP_|STATE_|MESSAGES_|RAW$)/.test(type) ? "known" : "unknown";
+}

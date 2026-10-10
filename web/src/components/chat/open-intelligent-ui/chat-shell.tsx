@@ -60,8 +60,9 @@ type StreamState = {
   pluginIds: string[]; suggested: { id: string; name: string; logoUrl?: string }[]; plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null;
   summaries: StepSummary[]; prompt: Prompt | null; filler: boolean; fillerTick: number; text: string; answerDone: boolean; integrity: { dupes: number; gaps: number; frames: number } | null;
   request: Record<string, unknown> | null; agentLog: { subtype: string; at: number }[]; stepRaw: Record<string, string>;
+  attachments: { mediaId: string; name: string; kind?: string; extractedChars?: number; grounded?: boolean }[] | null; voice: { phase: string; text?: string } | null;
 };
-const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {} };
+const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null };
 let streamState: StreamState = IDLE;
 let pending: Partial<StreamState> | null = null; let rafId = 0;
 const liveSources = new Map<string, Source[]>();
@@ -161,6 +162,8 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
           case CE.filler: setStream({ filler: !!v.on, fillerTick: v.on ? Number(v.tick ?? 0) : 0 }, true); break;
           case CE.request: setStream({ request: v }); break;
           case CE.agent: setStream({ agentLog: [...st.agentLog.slice(-30), { subtype: String(v.subtype ?? "agent"), at: now - t0 }] }); break;
+          case CE.attachments: if (Array.isArray(v.items)) setStream({ attachments: (v.items as StreamState["attachments"]) ?? [] }); break;
+          case CE.voice: if (typeof v.phase === "string") setStream({ voice: { phase: v.phase, ...(typeof v.text === "string" ? { text: v.text } : {}) } }); break;
         }
         break;
       }

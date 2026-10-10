@@ -46,7 +46,7 @@ export function RunRail() {
       {st.request && (
         <details className="mt-2" data-testid="dev-disclosure">
           <summary className="cursor-pointer select-none text-[10px] text-muted">show raw frame</summary>
-          <p className="mt-1 font-mono text-[10px] text-muted" data-testid="dev-ids">model {MODEL_ID} · plugins {plugins.join(", ") || "—"}</p>
+          <p className="mt-1 font-mono text-[10px] text-muted" data-testid="dev-ids">model {MODEL_ID} · plugins {plugins.join(", ") || "—"}{st.attachments ? ` · attachments ${st.attachments.length}` : ""}{st.voice ? ` · voice ${st.voice.phase}` : ""}</p>
           <pre className="mt-1 max-h-48 overflow-auto rounded-md border border-border bg-surface-2 p-2 text-[10.5px] leading-snug" data-testid="request-body">{JSON.stringify(st.request.body, null, 2)}</pre>
         </details>
       )}

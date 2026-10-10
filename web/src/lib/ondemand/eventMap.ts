@@ -124,8 +124,31 @@ export const CLIENT_EVENT = {
   error: "ondemand.error", clarification: "ondemand.clarification", requireCreds: "ondemand.require_creds", awaitingInput: "ondemand.awaiting_input",
   awaitingBrowserAction: "ondemand.awaiting_browser_action", filler: "ondemand.filler", agent: "ondemand.agent", heartbeat: "ondemand.heartbeat",
   answerComplete: "ondemand.answer_complete", unknown: "ondemand.unknown", request: "ondemand.request",
-  attachments: "ondemand.attachments",
-} as const;
+  attachments: "ondemand.attachments",  // Media API: {items:[{mediaId,name,kind,extractedChars,grounded}]} emitted right after CE.request
+  voice: "ondemand.voice",              // Voice: {phase: "transcript"|"tts_queued"|"tts_playing"|"tts_done"|"barge_in", text?}
+} as const satisfies Record<string, `ondemand.${string}`>;
+/** Compile-time uniqueness guard: `_DuplicateClientEvent` is `never` while every CLIENT_EVENT value is distinct; a duplicate makes the line below fail tsc. */
+type _CE = typeof CLIENT_EVENT;
+type _DuplicateClientEvent = { [K in keyof _CE]: _CE[K] extends _CE[Exclude<keyof _CE, K>] ? K : never }[keyof _CE];
+export const CLIENT_EVENT_VALUES_UNIQUE: [_DuplicateClientEvent] extends [never] ? true : never = true;
+/** Voice phases carried by CE.voice (client-side; produced by the voice relay/shell, not by upstream SSE). */
+export const VOICE_PHASE = ["transcript", "tts_queued", "tts_playing", "tts_done", "barge_in"] as const;
+export type VoicePhase = (typeof VOICE_PHASE)[number];
+
+/**
+ * MEDIA_EVENT — client-side names for the Media API side (docs/ONDEMAND_CONTRACTS.md, media flow). These are NOT upstream SSE frames:
+ * the /api/media relay answers an HTTP POST (upload → extract) and the shell's attachmentsStore raises one of these into the stream store
+ * so RunRail / AttachmentBar can bind to a single name. `created` = media object exists (mediaId), `extracted` = text extraction finished
+ * (extractedChars known), `failed` = upload or extraction error (message).
+ */
+export const MEDIA_EVENT = { created: "media.created", extracted: "media.extracted", failed: "media.failed" } as const;
+
+/**
+ * UPSTREAM_UNKNOWN_POLICY — any `eventType` (or `statusType` / agent subtype) NOT bound in the tables above still flows through
+ * parseFrame → {kind:"unknown", eventType, raw} → bridge CUSTOM CE.unknown → chat shell, where it is rendered inside the RunRail developer
+ * disclosure. Unseen upstream names are therefore surfaced, never dropped and never thrown on; binding them is a one-line edit here.
+ */
+export const UPSTREAM_UNKNOWN_POLICY = "fallthrough:unknown→CE.unknown→dev-disclosure" as const;
 
 /** User-facing wording for the live line (the UX doc: first-person labels, one word for reasoning). */
 export const LABEL = {
