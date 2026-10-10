@@ -25,6 +25,7 @@ test.describe("Inspector drawer", () => {
     await toggle.click();
     await expect(drawer).toHaveAttribute("data-open", "true");
     await expect(drawer).toBeVisible();
+    await expect.poll(async () => drawer.evaluate((el) => getComputedStyle(el).transform)).toBe("none"); // slide-in finished
     const box = await drawer.boundingBox();
     expect(box).not.toBeNull();
     expect(box!.width).toBeLessThanOrEqual(360);
@@ -78,6 +79,7 @@ test.describe("Inspector drawer", () => {
     await expect(drawer).toHaveAttribute("data-open", "false");
     await toggle.click();
     await expect(drawer).toHaveAttribute("data-open", "true");
+    await expect.poll(async () => drawer.evaluate((el) => getComputedStyle(el).transform)).toBe("none"); // slide-in finished
     const box = await drawer.boundingBox();
     expect(box).not.toBeNull();
     expect(box!.width).toBeLessThanOrEqual(390);

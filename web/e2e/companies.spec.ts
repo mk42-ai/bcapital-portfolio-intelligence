@@ -100,7 +100,7 @@ test("companies nav item points at /companies and overview links to the full lis
   await page.setViewportSize({ width: 1440, height: 900 });
   await primeSettings(page);
   await page.goto("/overview?skip=1");
-  await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Companies" })).toHaveAttribute("href", "/companies");
+  await expect(page.getByTestId("nav-rail").getByRole("link", { name: "Companies" })).toHaveAttribute("href", "/companies");
   await expect(page.getByTestId("open-full-list")).toHaveAttribute("href", "/companies");
   // ≥1024 px: the overview table container no longer caps its height, so the page is the only vertical scroller there too
   const capped = await page.getByTestId("company-table-scroller").evaluate((el) => el.scrollHeight > el.clientHeight + 2 && getComputedStyle(el).overflowY === "auto");

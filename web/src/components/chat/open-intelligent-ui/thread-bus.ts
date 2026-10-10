@@ -20,7 +20,10 @@ export function readStoredThreads(): BusThread[] { try { const v = localStorage.
 export function ThreadBusBridge() {
   const threads = useThreadList((s) => s.threads); const selectedId = useThreadList((s) => s.selectedThreadId);
   const select = useThreadList((s) => s.selectThread); const newChat = useThreadList((s) => s.switchToNewThread);
+  const loadThreads = useThreadList((s) => s.loadThreads); const loading = useThreadList((s) => s.isLoadingThreads);
   const isRunning = useThread((s) => s.isRunning);
+  // OpenUI only lists threads inside its own (now deleted) sidebar: load them here once so the nav rail / top bar / ?thread= deep link work.
+  useEffect(() => { if (!threads.length && !loading) loadThreads(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { publish({ mounted: true, threads: threads.filter((t) => !t.isPending).map((t) => ({ id: t.id, title: t.title || "New conversation", createdAt: String(t.createdAt ?? "") })), selectedId, isRunning, select, newChat }); }, [threads, selectedId, isRunning, select, newChat]);
   useEffect(() => () => publish(EMPTY), []);
   // Deep link /chat?thread=<id> (from the nav rail on another route).

@@ -38,13 +38,16 @@ export const getResumeLog = (): readonly ResumeEntry[] => log;
  * Continue the SAME session with the card's answer through the live AgentInterface thread.
  * Returns the processMessage promise (resolved when the run finishes), or a resolved promise when `send` is absent.
  */
-export function resumeSession(text: string, opts: { sessionId: string | null; kind: ResumeKind; send?: SendFn; threadId?: string | null }): Promise<unknown> {
+export function resumeSession(text: string, opts: { sessionId: string | null; kind: ResumeKind; send?: SendFn; threadId?: string | null; cancel?: () => void; isRunning?: boolean }): Promise<unknown> {
   const sessionId = opts.sessionId && /^[A-Za-z0-9]+$/.test(opts.sessionId) ? opts.sessionId : null;
   const threadId = opts.threadId ?? getCurrentThreadId() ?? null;
   record({ threadId, sessionId, kind: opts.kind, at: Date.now(), mode: "stream" });
   if (sessionId) setStream({ sessionId }, true); // the /api/chat wrapper + getCurrentSessionId() see it before the next POST
   const content = text.trim();
   if (!content || !opts.send) return Promise.resolve();
+  // The paused upstream run keeps OpenUI's thread in `isRunning` (processMessage is a no-op while running): abort the paused stream first —
+  // the answer continues the SAME session (context.sessionId pinned above) as the next POST /chat/v1/sessions/{id}/query.
+  if (opts.isRunning && opts.cancel) { opts.cancel(); return new Promise((resolve) => setTimeout(() => resolve(opts.send!({ role: "user", content })), 50)); }
   return Promise.resolve(opts.send({ role: "user", content }));
 }
 

@@ -18,7 +18,7 @@ import { attachNetworkLog, type NetworkLog } from "./fixtures/network-log";
 const SLUG = "1au";
 const FIRST_DEFAULT = "perplexity-ai";
 const RENDERED = /data-testid="(pb-view|pb-empty|pb-field-empty)"/;
-const EXEC_ID = /execution [0-9a-f]{24}/i;
+const EXEC_ID = /(?:>|\s)execution [0-9a-f]{24}(?:\s*·\s*(?:executing|queued|running))/i; // visible "execution <id> · executing" status text, not the stored provenance note inside the serialised record
 const PB_CONTENT = '[data-testid="pb-view"], [data-testid="pb-empty"], [data-testid="pb-field-empty"]';
 /** Markers that only exist on the merged build (Agents 8/25/26): synced badge, honest per-field empty state, no "Run now". */
 const isNewBuildHtml = (html: string) => /data-testid="(pb-synced|pb-field-empty)"/.test(html) || !/data-testid="pb-run-now"/.test(html);

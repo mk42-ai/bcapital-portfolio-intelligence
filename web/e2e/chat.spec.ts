@@ -151,8 +151,8 @@ test.describe("Analyst chat — streaming", () => {
     // 5. final state: sources (only when the plugin actually searched) + idle composer
     const cardState = await plugin.last().getAttribute("data-state");
     if (pluginErrorCode === null && cardState !== "failed") {
-      await expect(page.locator('.oiu-sources a[href^="http"]').first()).toBeAttached({ timeout: 30_000 });
-      expect(await page.locator('.oiu-sources a[href^="http"]').count()).toBeGreaterThanOrEqual(1);
+      await expect(page.locator('[data-testid=sources-rail] a[href^="http"]').first()).toBeAttached({ timeout: 30_000 });
+      expect(await page.locator('[data-testid=sources-rail] a[href^="http"]').count()).toBeGreaterThanOrEqual(1);
     } else {
       expect(cardState, "plugin card ends in failed when Perplexity errored").toBe("failed");
       console.log(`[chat-stream] plugin_error surfaced (card=${cardState}); sources assertion skipped`);

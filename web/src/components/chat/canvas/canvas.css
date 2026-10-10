@@ -3,7 +3,7 @@
 .chat-canvas { display: flex; flex-direction: column; height: 100dvh; min-height: 0; background: #fff; }
 /* Mobile: the nav rail is a 48 px sticky top bar above the canvas (nav-rail.css) — subtract it so the composer stays on screen. */
 @media (max-width: 1023px) { .chat-canvas { height: calc(100dvh - 48px); } }
-.chat-canvas__body { position: relative; display: flex; flex: 1 1 auto; min-height: 0; }
+.chat-canvas__body { position: relative; display: flex; flex: 1 1 auto; min-height: 0; overflow: hidden; } /* clips the off-canvas inspector drawer — no horizontal page overflow */
 .chat-canvas__thread { flex: 1 1 auto; min-width: 0; min-height: 0; display: flex; flex-direction: column; }
 /* Conversation column (Agent 22): messages ≤800 px centred; user bubbles right-aligned ≤70 %; the thread scroll area is the ONLY scroller. */
 .chat-canvas .openui-agent-thread-messages { max-width: 800px; margin: 0 auto; padding: 0 16px; }
