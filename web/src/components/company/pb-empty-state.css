@@ -1,0 +1,40 @@
+/* PitchBook field empty-state (Agent 4). 8 px grid, muted text, dashed hairline, no blue. */
+.pb-field-empty {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  padding: 8px 12px;
+  border: 1px dashed #e5e7eb;
+  border-radius: 8px;
+  color: #5f6b7a;
+  font-size: 12px;
+  line-height: 16px;
+}
+.pb-field-empty__img {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+.pb-field-empty--compact .pb-field-empty__img {
+  width: 32px;
+  height: 32px;
+}
+.pb-field-empty--row .pb-field-empty__img {
+  width: 20px;
+  height: 20px;
+}
+.pb-field-empty__text {
+  margin: 0;
+  min-width: 0;
+}
+.pb-field-empty--row .pb-field-empty__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pb-field-empty__fields {
+  color: #374151;
+  font-weight: 500;
+}
