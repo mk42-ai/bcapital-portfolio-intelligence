@@ -10,9 +10,10 @@ import { FALLBACK_NEWS_TILE, imageSrc, isRemoteUrl } from "@/lib/img-proxy";
  *   2. the company's official logo (local LOCAL_LOGOS asset served direct, or the backend `logo_url` via the proxy)
  *   3. the publisher's favicon (Google S2 service, 128 px, via the proxy)
  *   4. a serif-initial monogram tile when the company name is known
- *   5. the neutral news-tile.webp placeholder (data-testid="news-image-placeholder") as the very last resort
- * Each step only advances on a decode error (the proxy answers 204 on any failure, which the browser reports as an error) or a
- * zero-width "successful" load. Every step renders the SAME 96×96 bordered rounded box so the swap causes no layout shift.
+ *   5. the transparent news-card asset (ASSET.newsCard) centred on a neutral #f3f4f6 tile (data-testid="news-image-placeholder")
+ *      as the very last resort
+ * Each step only advances on a decode error (the proxy is asked for `fb=none`, so it answers 204 on any failure — which the browser
+ * reports as an error — instead of serving the news-card asset in place of a real image) or a zero-width "successful" load. Every step renders the SAME 96×96 bordered rounded box so the swap causes no layout shift.
  */
 const BOX = "size-24 shrink-0 rounded-lg border border-border";
 
@@ -33,7 +34,7 @@ export function NewsThumb({ src, companyLogo, companyName, companySlug, host, al
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img data-testid="news-image-placeholder" src={FALLBACK_NEWS_TILE} alt="" width={96} height={96} loading={loading} decoding="async" fetchPriority={fetchPriority} aria-hidden
-        className={`${BOX} bg-surface-2 object-cover`} />
+        data-thumb-kind="placeholder" className={`${BOX} bg-[#f3f4f6] object-contain p-2`} />
     );
   }
   const kind = i === favIdx ? "favicon" : i === logoIdx ? "company-logo" : "article";

@@ -1,6 +1,9 @@
 import { NextRequest } from "next/server";
 import { lookup } from "node:dns/promises";
 import { isIP } from "node:net";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { newsFallbackAsset } from "@/lib/img-proxy";
 
 /**
  * Same-origin image proxy for news thumbnails and remote company logos (same pattern as /api/favicon).
@@ -15,8 +18,11 @@ import { isIP } from "node:net";
  * re-validated), only `content-type: image/*` is forwarded (anything else → 204), 3 MB size cap (aborted beyond → 204), bytes are
  * returned with the upstream content-type + `cache-control: public, max-age=86400, stale-while-revalidate=604800` +
  * `x-img-source: upstream|cache`. An in-memory LRU (≤200 entries, ≤40 MB, TTL 1 h) keyed by URL avoids refetching across renders.
- * Any failure answers 204 (never 500) so the client-side onError fallback chain simply advances. `?probe=1` returns JSON
- * {ok,status,contentType,bytes} for the image audit. NO credentials or API keys are ever read or forwarded here.
+ * Upstream failure (404/403/timeout/non-image/too large/unresolvable) never yields a 500:
+ *   • default (`fb` absent or `fb=news`): the local news-card asset (/assets/news-card-256.webp, 512 when `w` ≥ 320) is served as
+ *     200 image/webp with the same long cache-control and `x-img-source: fallback` (302 to the asset only if the file cannot be read);
+ *   • `fb=0` / `fb=none`: 204 with `x-img-source: none`, so a client-side onError fallback chain (news-thumb, company-logo) advances.
+ * `?probe=1` returns JSON {ok,status,contentType,bytes} for the image audit. NO credentials or API keys are ever read or forwarded.
  */
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -60,6 +66,29 @@ function lruSet(key: string, e: Entry) {
 }
 
 const empty = (reason: string) => new Response(null, { status: 204, headers: { "cache-control": "public, max-age=600", "x-img-source": "none", "x-img-reason": reason } });
+
+// News-card fallback asset bytes, read once per warm instance from web/public/assets (same bytes Next serves statically).
+const assetCache = new Map<string, Promise<Uint8Array<ArrayBuffer> | null>>();
+function assetBytes(publicPath: string): Promise<Uint8Array<ArrayBuffer> | null> {
+  let p = assetCache.get(publicPath);
+  if (!p) {
+    p = readFile(path.join(process.cwd(), "public", ...publicPath.split("/").filter(Boolean)))
+      .then((b) => new Uint8Array(b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength)) as Uint8Array<ArrayBuffer>)
+      .catch(() => null);
+    assetCache.set(publicPath, p);
+  }
+  return p;
+}
+/** Upstream failed → the transparent news-card illustration (200 image/webp, long cache) or a 302 to it when the file is unreadable. */
+async function fallback(reason: string, w: number, req: NextRequest): Promise<Response> {
+  const asset = newsFallbackAsset(w);
+  const bytes = await assetBytes(asset);
+  const common = { "cache-control": CACHE_CONTROL, "x-img-source": "fallback", "x-img-reason": reason, "x-img-fallback": asset };
+  if (bytes && bytes.byteLength > 0) {
+    return new Response(bytes, { status: 200, headers: { ...common, "content-type": "image/webp", "content-length": String(bytes.byteLength), "x-content-type-options": "nosniff" } });
+  }
+  return new Response(null, { status: 302, headers: { ...common, location: new URL(asset, req.nextUrl.origin).toString() } });
+}
 const bad = (msg: string) => new Response(msg, { status: 400, headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" } });
 const json = (p: Probe) => Response.json(p, { headers: { "cache-control": "no-store" } });
 
@@ -148,6 +177,10 @@ export async function GET(req: NextRequest) {
   const probe = sp.get("probe") === "1";
   const wParam = Number(sp.get("w") ?? 0); // accepted for forward-compat (cache key); bytes are passed through unresized
   const w = Number.isFinite(wParam) && wParam > 0 ? Math.min(4096, Math.round(wParam)) : 0;
+  const fbParam = (sp.get("fb") ?? "news").trim().toLowerCase();
+  const noFallback = fbParam === "0" || fbParam === "none";
+  // What a non-probe failure answers: 204 (client chain advances) or the news-card asset (default).
+  const fail = (reason: string) => (noFallback ? Promise.resolve(empty(reason)) : fallback(reason, w, req));
 
   if (!raw) return probe ? json({ ok: false, status: 400, contentType: null, bytes: 0, error: "missing u" }) : bad("missing u");
   let u: URL;
@@ -167,19 +200,19 @@ export async function GET(req: NextRequest) {
   const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   try {
     const r = await fetchImage(u, ctrl.signal);
-    if ("error" in r) return probe ? json({ ok: false, status: r.status, contentType: null, bytes: 0, error: r.error }) : empty(r.error);
+    if ("error" in r) return probe ? json({ ok: false, status: r.status, contentType: null, bytes: 0, error: r.error }) : fail(r.error);
     const { res } = r;
     const ct = (res.headers.get("content-type") ?? "").split(";")[0].trim().toLowerCase();
-    if (!res.ok) { await res.body?.cancel().catch(() => {}); return probe ? json({ ok: false, status: res.status, contentType: ct || null, bytes: 0, error: `upstream ${res.status}` }) : empty(`upstream-${res.status}`); }
-    if (!ct.startsWith("image/")) { await res.body?.cancel().catch(() => {}); return probe ? json({ ok: false, status: res.status, contentType: ct || null, bytes: 0, error: "not an image" }) : empty("not-image"); }
+    if (!res.ok) { await res.body?.cancel().catch(() => {}); return probe ? json({ ok: false, status: res.status, contentType: ct || null, bytes: 0, error: `upstream ${res.status}` }) : fail(`upstream-${res.status}`); }
+    if (!ct.startsWith("image/")) { await res.body?.cancel().catch(() => {}); return probe ? json({ ok: false, status: res.status, contentType: ct || null, bytes: 0, error: "not an image" }) : fail("not-image"); }
     const bytes = await readCapped(res, ctrl);
-    if (!bytes || bytes.byteLength === 0) return probe ? json({ ok: false, status: res.status, contentType: ct, bytes: bytes?.byteLength ?? 0, error: bytes ? "empty body" : "too large" }) : empty(bytes ? "empty" : "too-large");
+    if (!bytes || bytes.byteLength === 0) return probe ? json({ ok: false, status: res.status, contentType: ct, bytes: bytes?.byteLength ?? 0, error: bytes ? "empty body" : "too large" }) : fail(bytes ? "empty" : "too-large");
     lruSet(key, { bytes, contentType: ct, at: Date.now() });
     if (probe) return json({ ok: true, status: res.status, contentType: ct, bytes: bytes.byteLength });
     return new Response(bytes, { status: 200, headers: { "content-type": ct, "content-length": String(bytes.byteLength), "cache-control": CACHE_CONTROL, "x-img-source": "upstream", "x-content-type-options": "nosniff" } });
   } catch (e) {
     const msg = e instanceof Error ? (e.name === "AbortError" || e.name === "TimeoutError" ? "timeout" : e.message.slice(0, 120)) : "fetch failed";
-    return probe ? json({ ok: false, status: 0, contentType: null, bytes: 0, error: msg }) : empty(msg === "timeout" ? "timeout" : "fetch-failed");
+    return probe ? json({ ok: false, status: 0, contentType: null, bytes: 0, error: msg }) : fail(msg === "timeout" ? "timeout" : "fetch-failed");
   } finally {
     clearTimeout(timer);
   }
