@@ -1,13 +1,38 @@
-/* GROWTH values — interactive, accessible disclosure tiles. Light theme only; tokens from src/styles/tokens.css. */
+/* GROWTH values — interactive, accessible disclosure tiles. Light theme only; brand-green tokens from src/styles/tokens.css. */
 
+.growth-grid {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Sequential G‑R‑O‑W‑T‑H reveal: hidden until the list enters the viewport, then staggered by --i (set inline per item). */
 .growth-item {
-  transition: transform 160ms ease, box-shadow 160ms ease;
-  will-change: transform;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    box-shadow 160ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+  transition-delay: calc(var(--i, 0) * 80ms);
+  will-change: transform, opacity;
+}
+.growth-grid[data-revealed="true"] .growth-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Once revealed, hover/focus lift must respond instantly (no stagger delay). */
+.growth-grid[data-revealed="true"] .growth-item:hover,
+.growth-grid[data-revealed="true"] .growth-item:has(.growth-btn:focus-visible) {
+  transition-delay: 0ms;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px -8px rgba(4, 120, 87, 0.35);
 }
 .growth-item:hover,
 .growth-item:has(.growth-btn:focus-visible) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px -8px rgba(15, 23, 42, 0.25);
+  background-color: var(--brand-green-soft);
+  border-color: var(--brand-green);
 }
 
 .growth-btn {
@@ -16,34 +41,54 @@
   cursor: pointer;
   color: inherit;
   font: inherit;
+  transition: background-color 150ms ease;
 }
 .growth-btn:focus-visible {
-  outline: 2px solid var(--ring);
+  outline: 2px solid var(--brand-green);
   outline-offset: 2px;
 }
 
-/* Letter tile: subtle accent on hover / focus / open. */
+/* Long value names ("Open-mindedness") must wrap inside a 390px single column. */
+.growth-name {
+  overflow-wrap: anywhere;
+}
+
+/* Letter tile: solid brand green on hover / focus-visible / expanded — no opacity or blend, so computed bg is rgb(10, 201, 133). */
 .growth-tile {
-  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
 }
 .growth-btn:hover .growth-tile,
 .growth-btn:focus-visible .growth-tile,
 .growth-btn[aria-expanded="true"] .growth-tile {
-  background-color: var(--primary);
-  border-color: var(--primary);
-  color: var(--primary-foreground);
+  background-color: var(--brand-green);
+  border-color: var(--brand-green);
+  color: #ffffff;
   transform: scale(1.04);
 }
 
-/* Chevron rotates 180° when expanded. */
+/* Chevron rotates 180° and takes the AA-safe green ink when expanded. */
 .growth-chevron {
-  transition: transform 200ms ease;
+  transition: transform 200ms ease, color 150ms ease;
 }
 .growth-btn[aria-expanded="true"] .growth-chevron {
   transform: rotate(180deg);
+  color: var(--brand-green-ink);
 }
 
-/* Panel: CSS grid-row trick so height animates without measuring. No `hidden` attribute (it would kill the transition). */
+/* "Example behaviour" line: small-caps label in brand ink, then the sentence. */
+.growth-example-label {
+  display: block;
+  font-variant-caps: all-small-caps;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--brand-green-ink);
+}
+
+/* Panel: CSS grid-row trick so height animates with no JS measurement. No `hidden` attribute (it would kill the transition). */
 .growth-panel {
   display: grid;
   grid-template-rows: 0fr;
@@ -61,13 +106,20 @@
 
 @media (prefers-reduced-motion: reduce) {
   .growth-item,
+  .growth-grid[data-revealed="true"] .growth-item,
+  .growth-grid[data-revealed="true"] .growth-item:hover,
+  .growth-grid[data-revealed="true"] .growth-item:has(.growth-btn:focus-visible) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    transition-delay: 0ms;
+  }
+  .growth-btn,
   .growth-tile,
   .growth-chevron,
   .growth-panel {
     transition: none;
   }
-  .growth-item:hover,
-  .growth-item:has(.growth-btn:focus-visible),
   .growth-btn:hover .growth-tile,
   .growth-btn:focus-visible .growth-tile,
   .growth-btn[aria-expanded="true"] .growth-tile {

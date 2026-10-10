@@ -25,6 +25,12 @@
   --danger-foreground: #ffffff;
   --danger-soft: #991b1b;
   --ring: #1d4ed8;
+  /* B Capital brand green — brand_tokens.primary of the B Capital row in the brand matrix / compendium (#0AC985, evidence tier Verified).
+     --brand-green-ink is the AA-safe text variant on white (4.6:1); --brand-green-soft is the 10% tint for hover washes. */
+  --brand-green: #0AC985;
+  --brand-green-ink: #047857;
+  --brand-green-soft: #E6FAF3;
+  --brand-green-strong: #089A66;
   --radius: 0.5rem;
   --chart-1: #1f2937; --chart-2: #6b7280; --chart-3: #9ca3af; --chart-4: #1d4ed8; --chart-5: #b91c1c; --chart-6: #d1d5db;
   --sentiment-neg: #b91c1c; --sentiment-neu: #6b7280; --sentiment-pos: #1f2937;

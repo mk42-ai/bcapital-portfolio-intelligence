@@ -76,9 +76,85 @@ test.describe("GROWTH values grid", () => {
     await expect(page.locator(VALUE).nth(1)).toBeFocused();
   });
 
+  test("renders an 'Example behaviour' line per value and a letter tile", async ({ page }) => {
+    await expect(page.locator('[data-testid="growth-tile"]')).toHaveCount(6);
+    await expect(page.locator('[data-testid="growth-example"]')).toHaveCount(6);
+    await page.locator(VALUE).first().click();
+    await expect(page.locator('#growth-panel-generosity [data-testid="growth-example"]')).toContainText("opens their network before a term sheet");
+  });
+
+  test("reveals G-R-O-W-T-H on viewport entry (data-revealed, staggered --i)", async ({ page }) => {
+    const grid = page.locator('[data-testid="growth-grid"]');
+    await expect(grid).toHaveAttribute("data-brand", "green");
+    await grid.scrollIntoViewIfNeeded();
+    await expect(grid).toHaveAttribute("data-revealed", "true");
+    // Every item ends fully visible with its own stagger index.
+    const items = grid.locator("li.growth-item");
+    await expect(items).toHaveCount(6);
+    for (let i = 0; i < 6; i++) {
+      await expect(items.nth(i)).toHaveCSS("opacity", "1");
+      expect(await items.nth(i).evaluate((el) => (el as HTMLElement).style.getPropertyValue("--i"))).toBe(String(i));
+    }
+  });
+
+  test("hovered tile is brand green (rgb(10, 201, 133)) and no old blue remains in hover/expanded states", async ({ page }) => {
+    const BLUE = "rgb(29, 78, 216)";
+    const GREEN = "rgb(10, 201, 133)";
+    const first = page.locator(VALUE).first();
+    const tile = first.locator('[data-testid="growth-tile"]');
+    await page.locator('[data-testid="growth-grid"]').scrollIntoViewIfNeeded();
+    // Hover state.
+    await first.hover();
+    await expect(tile).toHaveCSS("background-color", GREEN);
+    await expect(tile).toHaveCSS("color", "rgb(255, 255, 255)");
+    // Expanded state (keep hovering off to prove the open state alone drives the green).
+    await first.click();
+    await expect(first).toHaveAttribute("aria-expanded", "true");
+    await page.mouse.move(0, 0);
+    await expect(tile).toHaveCSS("background-color", GREEN);
+    // Keyboard focus-visible state → green outline on the button.
+    await first.focus();
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Shift+Tab");
+    await expect(first).toBeFocused();
+    const outline = await first.evaluate((el) => getComputedStyle(el).outlineColor);
+    expect(outline).not.toBe(BLUE);
+    // Sweep every element in the grid (expanded + hovered) for the old blue.
+    await first.hover();
+    const offenders = await page.locator('[data-testid="growth-grid"]').evaluate((root, blue) => {
+      const bad: string[] = [];
+      root.querySelectorAll<HTMLElement>("*").forEach((el) => {
+        const cs = getComputedStyle(el);
+        if (cs.backgroundColor === blue || cs.outlineColor === blue || cs.borderColor === blue || cs.color === blue) {
+          bad.push(`${el.tagName.toLowerCase()}.${el.className}`);
+        }
+      });
+      return bad;
+    }, BLUE);
+    expect(offenders).toEqual([]);
+  });
+
+  test("390px viewport: single column, no horizontal overflow, long names wrap", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.reload();
+    const grid = page.locator('[data-testid="growth-grid"]');
+    await expect(grid).toBeVisible();
+    const cols = await grid.evaluate((el) => getComputedStyle(el).gridTemplateColumns.trim().split(/\s+/).length);
+    expect(cols).toBe(1);
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    expect(overflow).toBeLessThanOrEqual(0);
+    const gridRight = await grid.evaluate((el) => el.getBoundingClientRect().right);
+    expect(gridRight).toBeLessThanOrEqual(390);
+  });
+
   test("still toggles under prefers-reduced-motion", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.reload();
+    // Items are visible without any reveal stagger or transform under reduced motion.
+    const items = page.locator('[data-testid="growth-grid"] li.growth-item');
+    await expect(items.first()).toHaveCSS("opacity", "1");
+    await expect(items.last()).toHaveCSS("opacity", "1");
+    expect(await items.last().evaluate((el) => getComputedStyle(el).transitionDelay)).toBe("0s");
     const first = page.locator(VALUE).first();
     await first.click();
     await expect(first).toHaveAttribute("aria-expanded", "true");
