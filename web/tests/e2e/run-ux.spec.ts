@@ -51,7 +51,7 @@ async function runTurn(page: Page, cdp: CDPSession, turn: number, viewport: stri
   const sendWall = Date.now();
   await page.evaluate(([t, p]) => (window as unknown as { __ux: { mark: (t: number, p: string) => void } }).__ux.mark(Number(t), String(p)), [turn, prompt] as const);
   await ta.press("Enter");
-  const submit = page.locator('button.openui-agent-thread-composer__submit-button:visible, button[aria-label="Send message"]:visible, button[aria-label="Cancel message"]:visible').first();
+  const submit = page.locator('button[data-testid=composer-send]:visible, button[aria-label="Send message"]:visible, button[aria-label="Cancel message"]:visible').first();
   const state = async () => page.evaluate(() => { const u = (window as unknown as { __ux: Raw }).__ux; const done = u.frames.find((f) => f.type === "[DONE]" || f.type === "STREAM_CLOSED" || f.type === "STREAM_ERROR"); return { n: u.frames.length, done: !!done, doneT: done?.tMs ?? null, seen: u.firstSeen, states: u.pluginStates }; });
   let doneWall: number | null = null; let labelResetWall: number | null = null; let cancelSeen = false;
   while (Date.now() - sendWall < STREAM_MAX_MS) {

@@ -11,7 +11,7 @@ const POLL_MS = 200;
 const MAX_MS = 240_000;
 const Q1 = "What is the latest news about Fervo Energy? Cite sources.";
 const Q2 = "Summarise that in one sentence.";
-const SUBMIT = "button.openui-agent-thread-composer__submit-button";
+const SUBMIT = "button[data-testid=composer-send]";
 
 type Turn = {
   question: string;
@@ -130,7 +130,7 @@ async function runTurn(page: Page, turnIdx: number, question: string, W: number,
         cardState: card ? card.dataset.state ?? null : null,
         cardCount: cards.length,
         phase: pend ? pend.dataset.phase ?? null : null,
-        label: document.querySelector("button.openui-agent-thread-composer__submit-button")?.getAttribute("aria-label") ?? null,
+        label: document.querySelector("button[data-testid=composer-send]")?.getAttribute("aria-label") ?? null,
       };
     }, { sel: pluginSel, before: assistantCountBefore });
     const t = Date.now() - t0;

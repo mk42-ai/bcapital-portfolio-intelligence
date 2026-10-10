@@ -1,6 +1,6 @@
 "use client";
 /**
- * Voice dock (Agents 23–27). Mic IconButton portaled into OpenUI's composer action bar BEFORE the send button (MutationObserver finds the
+ * Voice dock (Agents 23–27). Mic button rendered into the app composer row's mic slot (between the textarea and the send button; no DOM polling —
  * bar, like PendingRow finds the loader host), plus a panel above the composer: brand-green SVG orb, live caption strip (aria-live), mode
  * toggle (Push-to-talk / Hands-free) and the voice <select>. A voice turn is an ordinary `processMessage({role:'user', content})` in the
  * SAME thread — same OnDemand session, same plugin selection, same Plan rail — marked only by the 'via voice' chip (voice-origin.ts).
@@ -16,6 +16,7 @@ import { useSettings } from "@/lib/settings";
 import { useVoiceCapture, type CaptureMode } from "./use-voice-capture";
 import { TtsQueue, type TtsState } from "./tts-queue";
 import { markVoiceOrigin, useVoiceOrigin } from "./voice-origin";
+import { useComposerSlot } from "@/components/chat/open-intelligent-ui/composer-store";
 
 export type VoiceState = "idle" | "listening" | "thinking" | "speaking" | "error";
 const VOICES = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"] as const;
@@ -26,47 +27,9 @@ const UNSUPPORTED = "Voice input needs a secure (https) context and microphone s
 type VoiceError = { code: "denied" | "unsupported" | "not_subscribed" | "upstream" | "device" | "playback"; message: string } | null;
 
 const readPrefs = (): { mode: CaptureMode; voice: string } => { try { const j = JSON.parse(localStorage.getItem(PREF_KEY) ?? "{}"); return { mode: j.mode === "hands-free" ? "hands-free" : "ptt", voice: VOICES.includes(j.voice) ? j.voice : "alloy" }; } catch { return { mode: "ptt", voice: "alloy" }; } };
-const ACTION_BAR = ".chat-shell .openui-agent-thread-composer__action-bar, .chat-shell .openui-agent-desktop-welcome-composer__action-bar";
-const SUBMIT = ".openui-agent-thread-composer__submit-button, .openui-agent-desktop-welcome-composer__submit-button";
-
-/** Finds the live composer action bar and keeps a host <span> inserted BEFORE the send button (re-inserted when OpenUI re-renders). */
-function useActionBarHost() {
-  const [host, setHost] = useState<HTMLElement | null>(null);
-  useEffect(() => {
-    let current: HTMLElement | null = null;
-    const ensure = () => {
-      const bar = document.querySelector<HTMLElement>(ACTION_BAR);
-      if (!bar) { if (current) { current.remove(); current = null; setHost(null); } return; }
-      if (current && current.parentElement === bar) return;
-      current?.remove();
-      const span = document.createElement("span"); span.className = "voice-dock-host"; span.setAttribute("data-testid", "voice-dock-host");
-      const submit = bar.querySelector(SUBMIT); bar.insertBefore(span, submit ?? bar.firstChild);
-      current = span; setHost(span);
-    };
-    ensure();
-    const mo = new MutationObserver(() => ensure()); mo.observe(document.body, { childList: true, subtree: true });
-    return () => { mo.disconnect(); current?.remove(); };
-  }, []);
-  return host;
-}
-/** Host for the panel: a <div> inserted right before the composer. */
-function usePanelHost() {
-  const [host, setHost] = useState<HTMLElement | null>(null);
-  useEffect(() => {
-    let current: HTMLElement | null = null;
-    const ensure = () => {
-      const composer = document.querySelector<HTMLElement>(".chat-shell .openui-agent-thread-composer, .chat-shell .openui-agent-desktop-welcome-composer");
-      const parent = composer?.parentElement ?? null;
-      if (!parent || !composer) { if (current) { current.remove(); current = null; setHost(null); } return; }
-      // Other hosts (attachments / context-chips) may sit between this host and the composer: only re-insert when detached (a stricter check ping-ponged with them in a MutationObserver loop and froze the page).
-      if (current && current.parentElement === parent) return;
-      current?.remove(); const div = document.createElement("div"); div.className = "voice-panel-host"; parent.insertBefore(div, composer); current = div; setHost(div);
-    };
-    ensure(); const mo = new MutationObserver(() => ensure()); mo.observe(document.body, { childList: true, subtree: true });
-    return () => { mo.disconnect(); current?.remove(); };
-  }, []);
-  return host;
-}
+/** Hosts come from the app composer row (composer-store slots): the mic sits between the textarea and the send button; the panel sits above the row. */
+function useActionBarHost() { return useComposerSlot("mic"); }
+function usePanelHost() { return useComposerSlot("panel"); }
 
 export function VoiceDock() {
   const [settings] = useSettings();
@@ -162,6 +125,12 @@ export function VoiceDock() {
   useEffect(() => { const h = (e: KeyboardEvent) => { if (e.key === "Escape" && (capture.status === "listening" || ttsState !== "idle")) stopAll(); }; window.addEventListener("keydown", h); return () => window.removeEventListener("keydown", h); }, [capture.status, ttsState, stopAll]);
   const retry = async () => { setError(null); const ok = await capture.requestPermission(); if (ok) setCaption({ kind: "hint", text: "Microphone ready." }); };
 
+  // QA hook (owner QA pass): lets a browser test inject an utterance through the REAL path — /api/voice/stt → processMessage → TTS follow.
+  useEffect(() => {
+    const w = window as unknown as { __bcapVoice?: { injectAudio: (blob: Blob, mimeType?: string) => Promise<void> } };
+    w.__bcapVoice = { injectAudio: async (blob: Blob, mimeType = blob.type || "audio/mpeg") => { setOpen(true); tts.prime(); await submitTranscript(blob, mimeType); } };
+    return () => { delete w.__bcapVoice; };
+  }, [submitTranscript, tts]);
   const barHost = useActionBarHost(); const panelHost = usePanelHost();
   const reduced = usePrefersReducedMotion();
   const label = unsupported ? "Voice input is not supported here" : blocked ? NOT_ENABLED : state === "listening" ? (prefs.mode === "ptt" ? "Listening — release to send" : "Listening — click to stop") : state === "speaking" ? "Assistant is speaking — click to interrupt" : "Ask by voice";

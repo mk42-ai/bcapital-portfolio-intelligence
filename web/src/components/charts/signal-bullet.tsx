@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
  *  sector median as a thin dark tick, the score as a bold brand-green measure bar whose opacity encodes confidence (≥0.45),
  *  plus an explicit confidence band = score ± (1−confidence)×12 as a translucent rectangle, and the numeric score at the end.
  *  md/lg add a 30-day sentiment sparkline (−1…+1) below the bar. */
-const GREEN = "rgb(10,201,133)", GREEN_INK = "#047857", GREEN_SOFT = "#E6FAF3", MUTED_BAND = "#e2e8f0", NEUTRAL_BAND = "#f1f5f9", INK = "#334155", GRID = "#94a3b8";
+const GREEN = "rgb(10,201,133)", GREEN_INK = "#047857", GREEN_SOFT = "#E6FAF3", MUTED_BAND = "#e6e8eb", NEUTRAL_BAND = "#f3f4f5", INK = "#3b3f45", GRID = "#9a9ea4";
 const SIZES = { sm: { w: 180, barH: 10, spark: 0, font: 11, gap: 0 }, md: { w: 280, barH: 14, spark: 22, font: 13, gap: 6 }, lg: { w: 480, barH: 18, spark: 34, font: 17, gap: 8 } } as const;
 export type SignalBulletProps = {
   score: number; confidence: number; percentile?: number | null; label?: SignalLabel | string | null; bands?: SignalBands | null;
@@ -39,11 +39,11 @@ export function SignalBullet({ score, confidence, percentile = null, label = nul
       {/* score measure bar */}
       <rect x={0} y={measureY} width={Math.max(1, x(score))} height={measureH} fill={GREEN} opacity={opacity} />
       {bands && <line x1={x(bands.sector.median)} x2={x(bands.sector.median)} y1={barY - 2} y2={barY + S.barH + 2} stroke={INK} strokeWidth={1.5} />}
-      <rect x={0} y={barY} width={trackW} height={S.barH} fill="none" stroke="#cbd5e1" strokeWidth={0.5} />
+      <rect x={0} y={barY} width={trackW} height={S.barH} fill="none" stroke="#cfd2d6" strokeWidth={0.5} />
       <text x={trackW + 6} y={barY + S.barH / 2} dominantBaseline="central" fontSize={S.font} fontWeight={700} fill="var(--foreground)" fontFamily="var(--font-display)" style={{ fontVariantNumeric: "tabular-nums" }}>{Math.round(score)}</text>
       {showSpark && (
         <g>
-          <line x1={0} x2={trackW} y1={sy(0)} y2={sy(0)} stroke="#cbd5e1" strokeWidth={0.75} strokeDasharray="2 3" />
+          <line x1={0} x2={trackW} y1={sy(0)} y2={sy(0)} stroke="#cfd2d6" strokeWidth={0.75} strokeDasharray="2 3" />
           {pts.length > 1 ? (
             <>
               <polyline points={poly} fill="none" stroke={GREEN_INK} strokeWidth={1.5} strokeLinejoin="round" strokeLinecap="round" />

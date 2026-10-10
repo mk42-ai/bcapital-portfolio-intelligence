@@ -13,13 +13,13 @@ export function contrast(a: string, b: string): number {
   return +((hi + 0.05) / (lo + 0.05)).toFixed(2);
 }
 export const AA_TEXT = 4.5, AA_LARGE = 3, AA_NON_TEXT = 3;
-export function bestInk(bg: string): "#111827" | "#ffffff" { return contrast(bg, "#ffffff") >= contrast(bg, "#111827") ? "#ffffff" : "#111827"; }
+export function bestInk(bg: string): "#16181b" | "#ffffff" { return contrast(bg, "#ffffff") >= contrast(bg, "#16181b") ? "#ffffff" : "#16181b"; }
 export function aaBadge(ratio: number): { label: "AAA" | "AA" | "AA large" | "Fail"; ok: boolean } {
   if (ratio >= 7) return { label: "AAA", ok: true }; if (ratio >= 4.5) return { label: "AA", ok: true }; if (ratio >= 3) return { label: "AA large", ok: true }; return { label: "Fail", ok: false };
 }
 /** Derive a safe per-company accent set: company colours only when they clear AA; otherwise the neutral light tokens. */
 export function companyTheme(tokens: { primary: string | null; secondary: string | null; background: string | null; text: string | null }) {
-  const fallback = { primary: "#111827", background: "#ffffff", text: "#111827", accent: "#047857", source: "neutral" as const, checks: [] as { pair: string; ratio: number; ok: boolean }[] };
+  const fallback = { primary: "#16181b", background: "#ffffff", text: "#16181b", accent: "#047857", source: "neutral" as const, checks: [] as { pair: string; ratio: number; ok: boolean }[] };
   const bg = tokens.background && hexToRgb(tokens.background) ? tokens.background : null;
   const text = tokens.text && hexToRgb(tokens.text) ? tokens.text : bg ? bestInk(bg) : null;
   const primary = tokens.primary && hexToRgb(tokens.primary) ? tokens.primary : null;

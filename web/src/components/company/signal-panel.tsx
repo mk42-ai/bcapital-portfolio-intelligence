@@ -29,8 +29,8 @@ export function SignalPanel({ s, bands, name }: { s: SignalScore; bands: SignalB
             <li key={f.key} className="grid grid-cols-[6.5rem_1fr_3.5rem] items-center gap-2">
               <span><span className="font-medium">{f.label}</span><span className="block text-[11px] leading-tight text-muted">{f.hint}</span></span>
               <svg viewBox="0 0 100 10" width="100%" height={10} role="img" aria-label={`${f.label} contribution ${signed(v)}, factor ${f2(s.factors[f.key], 3)}`} style={{ display: "block" }}>
-                <rect x={0} y={0} width={100} height={10} fill="#f1f5f9" />
-                <line x1={50} x2={50} y1={0} y2={10} stroke="#94a3b8" strokeWidth={0.75} />
+                <rect x={0} y={0} width={100} height={10} fill="#f3f4f5" />
+                <line x1={50} x2={50} y1={0} y2={10} stroke="#9a9ea4" strokeWidth={0.75} />
                 <rect x={v >= 0 ? 50 : 50 - w} y={2} width={Math.max(0.5, w)} height={6} fill={v >= 0 ? POS : NEG} />
               </svg>
               <span className="text-right tabular-nums" style={{ color: v < 0 ? NEG : "var(--brand-green-ink)" }}>{signed(v)}</span>

@@ -69,7 +69,7 @@ test.describe("Analyst chat — streaming", () => {
     // `chat-error` banner with data-error-code="plugin_error" while the answer still streams. That is the designed
     // behaviour, not a transport failure, so it is recorded instead of failing the spec; any other error code still fails.
     let pluginErrorCode: string | null = null;
-    const submit = page.locator("button.openui-agent-thread-composer__submit-button");
+    const submit = page.locator("button[data-testid=composer-send]");
 
     const plugin = page.locator('[data-testid="plugin-activity"]');
     const errBanner = page.locator('[data-testid="chat-error"]');
@@ -84,7 +84,7 @@ test.describe("Analyst chat — streaming", () => {
           hasPlugin: !!document.querySelector('[data-testid="plugin-activity"]'),
           errCount: document.querySelectorAll('[data-testid="chat-error"]').length,
           errCode: errEl?.dataset.errorCode ?? null,
-          label: document.querySelector("button.openui-agent-thread-composer__submit-button")?.getAttribute("aria-label") ?? null,
+          label: document.querySelector("button[data-testid=composer-send]")?.getAttribute("aria-label") ?? null,
         };
       });
       const t = Date.now() - t0;
@@ -136,7 +136,7 @@ test.describe("Analyst chat — streaming", () => {
     expect(net.chunks.length, "network chunks received").toBeGreaterThanOrEqual(3);
     expect(net.chunks[0].t, "first network chunk < 5000 ms after fetch()").toBeLessThan(5_000);
     for (let i = 1; i < net.chunks.length; i++) {
-      expect(net.chunks[i].t, `chunk[${i}].t > chunk[${i - 1}].t`).toBeGreaterThan(net.chunks[i - 1].t);
+      expect(net.chunks[i].t, `chunk[${i}].t >= chunk[${i - 1}].t`).toBeGreaterThanOrEqual(net.chunks[i - 1].t); // two reader.read() resolutions can share a ms tick
     }
     const toolArgsFrame = net.text.split("\n").find((l) => l.includes('"type":"TOOL_CALL_ARGS"')) ?? "";
     expect(toolArgsFrame, "TOOL_CALL_ARGS frame present").not.toBe("");

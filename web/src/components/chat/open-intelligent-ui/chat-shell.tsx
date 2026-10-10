@@ -9,10 +9,10 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { AgentInterface, fetchLLM, agUIAdapter, useThread, useThreadList, type AssistantMessageComponent, type ToolCallTimelineComponent } from "@openuidev/react-ui";
 import type { Message, UserMessage } from "@openuidev/react-headless";
-import { AlertTriangle, ArrowDown, Bot, Brain, Check, CheckCircle2, ChevronDown, Circle, Cpu, ExternalLink, KeyRound, ListChecks, Loader2, MessageSquareMore, Mic, RotateCcw, Search, ShieldCheck, Sparkles, XCircle } from "lucide-react";
+import { AlertTriangle, ArrowDown, Bot, Brain, Check, CheckCircle2, ChevronDown, Circle, Cpu, ExternalLink, KeyRound, ListChecks, Loader2, MessageSquareMore, Mic, Plus, RotateCcw, Search, ShieldCheck, Sparkles, XCircle } from "lucide-react";
 import { responseTheme } from "./response-theme";
 import { localThreadStorage, saveMessages, sessionFor, rememberSession, rememberSources, sourcesFor, sourcesKey, rememberMeta, metaFor, type StoredSource, type StoredMeta } from "./local-storage";
-import { extractCitations, isCiteLabel, hostOf, type Cite } from "./citations";
+import { extractCitations, isCiteLabel, isOverflowLabel, publisherOf, hostOf, type Cite } from "./citations";
 import { useSettings } from "@/lib/settings";
 import { PLUGIN_ID, PLUGIN_NAME, MODEL_ID, MODEL_LABEL, REASONING_MODE } from "@/lib/plugins";
 import { CLIENT_EVENT as CE, LABEL } from "@/lib/ondemand/eventMap";
@@ -24,6 +24,8 @@ import { VoiceDock } from "@/components/chat/voice/voice-dock";
 import { useVoiceOrigin } from "@/components/chat/voice/voice-origin";
 import { AttachmentBar, SentChips, attachmentsStore, useAttachments } from "./attachments";
 import { ContextChipsBar } from "./context-chips-bar";
+import { AppComposer } from "./app-composer";
+import { composerStore } from "./composer-store";
 import { chipsBlock, clearContextChips, getContextChips, PITCHBOOK_PLUGIN_ID } from "./context-chips";
 
 export type CoCtx = { slug: string; name: string; sector: string; status: string; stage: string | null; sentiment: { score: number; label: string; delta?: number | null; updated_at?: string | null; basis?: string | null }; news_count?: number; latest_news: { title: string; url: string | null; published_at: string | null; source?: string | null }[]; estimated_ticket_size_usd: number | null; estimated_ownership_pct: number | null; b_capital_role: string };
@@ -186,9 +188,12 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
  * Markdown with inline numbered citation chips (streamed) + reserved Sources rail
  * ---------------------------------------------------------------------------------------------------------------- */
 const CiteChip = memo(function CiteChip({ n, cite }: { n: number; cite?: Cite }) {
-  const url = cite?.url ?? "#"; const host = cite?.sourceName ?? hostOf(url);
+  const url = cite?.url ?? "#"; const host = cite?.sourceName ?? hostOf(url); const pub = publisherOf(url);
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer" className="oiu-cite" data-testid="citation-chip" data-n={n} aria-label={`Source ${n}: ${cite?.title ?? host}`}>
+    <a href={url} target="_blank" rel="noopener noreferrer" className="oiu-cite" data-testid="citation-chip" data-n={n} data-publisher={pub} aria-label={`Source ${n}: ${cite?.title ?? host}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="oiu-cite__ico" src={faviconFor(url)} alt="" width={12} height={12} loading="lazy" decoding="async" fetchPriority="low" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.style.visibility = "hidden"; }} />
+      <span className="oiu-cite__pub">{pub}</span>
       <span className="oiu-cite__n">{n}</span>
       <span className="oiu-cite__preview" role="tooltip">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -196,6 +201,17 @@ const CiteChip = memo(function CiteChip({ n, cite }: { n: number; cite?: Cite })
         <span className="oiu-cite__title">{cite?.title ?? host}</span><span className="oiu-cite__host">{host}</span>
       </span>
     </a>
+  );
+});
+/** "+N" overflow chip: the 4th… citations of one claim, listed on hover/focus (each still a real link). */
+const CiteOverflow = memo(function CiteOverflow({ ids, cites }: { ids: number[]; cites: Cite[] }) {
+  return (
+    <span className="oiu-cite oiu-cite--more" data-testid="citation-overflow" data-count={ids.length} tabIndex={0} aria-label={`${ids.length} more sources`}>
+      <span className="oiu-cite__pub">+{ids.length}</span>
+      <span className="oiu-cite__preview oiu-cite__preview--list" role="tooltip">
+        {ids.map((n) => { const c = cites[n - 1]; const url = c?.url ?? "#"; return <a key={n} href={url} target="_blank" rel="noopener noreferrer" className="oiu-cite__more-item" data-testid="citation-chip" data-n={n} data-publisher={publisherOf(url)}><span className="oiu-cite__n">{n}</span><span className="oiu-cite__title">{c?.title ?? hostOf(url)}</span><span className="oiu-cite__host">{hostOf(url)}</span></a>; })}
+      </span>
+    </span>
   );
 });
 /** Debounced value: re-renders at most every `ms` while input keeps changing (markdown parse throttle, ~60 ms). */
@@ -218,8 +234,11 @@ const CitedMarkdown = memo(function CitedMarkdown({ text, known, streaming, onCi
   useEffect(() => { onCites?.(cites); }, [cites, onCites]);
   const components = useMemo(() => ({
     a: ({ href, children }: { href?: string; children?: ReactNode }) => {
-      const n = isCiteLabel(Array.isArray(children) ? children.map((c) => (typeof c === "string" ? c : "")).join("") : children);
+      const label = Array.isArray(children) ? children.map((c) => (typeof c === "string" ? c : "")).join("") : children;
+      const n = isCiteLabel(label);
       if (n) return <CiteChip n={n} cite={cites[n - 1]} />;
+      const more = isOverflowLabel(label);
+      if (more) return <CiteOverflow ids={more.ids} cites={cites} />;
       return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>;
     },
   }), [cites]);
@@ -636,7 +655,7 @@ function ChatWelcome({ companies }: { companies: CoCtx[] }) {
   );
 }
 
-export function ChatShell({ companies, fetchedAt }: { companies: CoCtx[]; fetchedAt?: string }) {
+export function ChatShell({ companies, fetchedAt, topBarRight }: { companies: CoCtx[]; fetchedAt?: string; topBarRight?: ReactNode }) {
   const [s] = useSettings();
   const [selectedPlugins] = usePluginSelection();
   const sessionRef = useRef<Record<string, string>>({});
@@ -694,7 +713,13 @@ ${txt}`; }
   return (
     <div className="chat-shell" data-testid="chat-shell" data-prewarm={prewarmState}>
       <AgentInterface llm={llm} storage={storage} agentName="Portfolio analyst" theme={{ mode: "light", lightTheme: responseTheme }} starters={starters} starterVariant="short" components={{ AssistantMessage, UserMessage: UserBubble, ToolCallTimeline: PluginTimeline }} scrollVariant="always">
+        {/* The thread sidebar slot is intentionally EMPTY: one full-width canvas, threads live in the top bar's "Threads" menu. */}
+        <AgentInterface.Sidebar><span hidden data-testid="thread-sidebar-off" /></AgentInterface.Sidebar>
+        {/* ONE top bar for every viewport (the library's mobile header slot is emptied; shell.css shows the thread header on mobile too). */}
+        <AgentInterface.ThreadHeader><ChatTopBar topBarRight={topBarRight} /></AgentInterface.ThreadHeader>
+        <AgentInterface.MobileHeader><span hidden data-testid="mobile-header-off" /></AgentInterface.MobileHeader>
         <AgentInterface.Welcome><ChatWelcome companies={ctxCompanies} /></AgentInterface.Welcome>
+        <AgentInterface.Composer><AppComposer /></AgentInterface.Composer>
         <Persistence sessionRef={sessionRef} />
         <PendingRow />
         <VoiceDock />
@@ -705,6 +730,34 @@ ${txt}`; }
         <Suspense fallback={null}><AutoAsk /></Suspense>
       </AgentInterface>
       <p className="oiu-footer" data-testid="chat-footer" data-model-id={MODEL_ID} data-reasoning={REASONING_MODE}><ShieldCheck className="size-3.5" aria-hidden /> Answers stream from {MODEL_LABEL} with <span data-testid="footer-plugins">{pluginLabel}</span> — sources are cited inline.</p>
+    </div>
+  );
+}
+
+/** Slim top bar over the thread: thread title · New chat · Threads menu (recent threads) · the page's right-side controls (inspector toggle). */
+function ChatTopBar({ topBarRight }: { topBarRight?: ReactNode }) {
+  const threads = useThreadList((s) => s.threads); const selectThread = useThreadList((s) => s.selectThread); const selectedId = useThreadList((s) => s.selectedThreadId);
+  const switchToNewThread = useThreadList((s) => s.switchToNewThread);
+  const isRunning = useThread((s) => s.isRunning);
+  const [mounted, setMounted] = useState(false); useEffect(() => { setMounted(true); }, []);
+  const current = mounted ? threads.find((t) => t.id === selectedId) : undefined;
+  const recent = mounted ? threads.filter((t) => !t.isPending).slice(0, 12) : [];
+  return (
+    <div className="oiu-topbar" data-testid="chat-topbar">
+      <div className="oiu-topbar__left">
+        <h1 className="oiu-topbar__title" data-testid="chat-title">{current?.title || "Analyst chat"}</h1>
+      </div>
+      <div className="oiu-topbar__right">
+        <button type="button" className="oiu-topbar__btn" data-testid="new-thread" onClick={() => { composerStore.clear(); switchToNewThread(); }} disabled={isRunning} title="New chat"><Plus className="size-3.5" aria-hidden /><span>New chat</span></button>
+        <details className="oiu-threads" data-testid="threads-menu">
+          <summary className="oiu-topbar__btn" aria-label="Threads"><MessageSquareMore className="size-3.5" aria-hidden /><span>Threads{recent.length ? ` (${recent.length})` : ""}</span></summary>
+          <ul className="oiu-threads__list" aria-label="Recent threads">
+            {recent.length === 0 && <li className="oiu-threads__empty">No threads yet</li>}
+            {recent.map((t) => <li key={t.id}><button type="button" className={`oiu-threads__item${t.id === selectedId ? " oiu-threads__item--active" : ""}`} onClick={(e) => { selectThread(t.id); (e.currentTarget.closest("details") as HTMLDetailsElement | null)?.removeAttribute("open"); }}>{t.title || "Untitled thread"}</button></li>)}
+          </ul>
+        </details>
+        <span className="oiu-topbar__slot" data-testid="topbar-right">{topBarRight}</span>
+      </div>
     </div>
   );
 }

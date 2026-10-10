@@ -36,10 +36,10 @@ test.describe("voice", () => {
     await page.goto("/chat?skip=1");
     const mic = page.getByTestId("voice-mic");
     await expect(mic).toBeVisible({ timeout: 30_000 });
-    // Portaled BEFORE the send button inside OpenUI's action bar.
+    // Rendered in the app composer row, BEFORE the send button (Attach · textarea · mic · send are siblings).
     const order = await page.evaluate(() => {
-      const bar = document.querySelector(".openui-agent-thread-composer__action-bar, .openui-agent-desktop-welcome-composer__action-bar");
-      const mic = bar?.querySelector("[data-testid=voice-mic]"); const send = bar?.querySelector(".openui-agent-thread-composer__submit-button, .openui-agent-desktop-welcome-composer__submit-button");
+      const bar = document.querySelector("[data-testid=composer-row]");
+      const mic = bar?.querySelector("[data-testid=voice-mic]"); const send = bar?.querySelector("[data-testid=composer-send]");
       return mic && send ? (mic.compareDocumentPosition(send) & Node.DOCUMENT_POSITION_FOLLOWING ? "mic-first" : "send-first") : "missing";
     });
     expect(order).toBe("mic-first");

@@ -3,7 +3,7 @@ import { bestInk } from "@/lib/color";
 /** Blend a hex colour over white at the given alpha (so the label ink is chosen against the colour actually painted). */
 const over = (hex: string, a: number) => "#" + [1, 3, 5].map((i) => Math.round(parseInt(hex.slice(i, i + 2), 16) * a + 255 * (1 - a)).toString(16).padStart(2, "0")).join("");
 export type TreeNode = { name: string; slug?: string; value?: number; score?: number; children?: TreeNode[] };
-const PALETTE = ["#1f2937", "#4b5563", "#6b7280", "#94a3b8", "#047857", "#374151"];
+const PALETTE = ["#202327", "#4b4f55", "#6e7277", "#9a9ea4", "#047857", "#3b3f45"];
 const fmt = (v: number) => v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : `$${Math.round(v / 1e6)}M`;
 /** Server-rendered squarified treemap (pure SVG, zero client JS). Every leaf is a real link → fully keyboard navigable. */
 export function TreemapSSR({ data, mode, width = 960, height = 440 }: { data: TreeNode; mode: string; width?: number; height?: number }) {
@@ -19,8 +19,8 @@ export function TreemapSSR({ data, mode, width = 960, height = 440 }: { data: Tr
           const color = PALETTE[gi % PALETTE.length];
           return (
             <g key={g.data.name}>
-              <rect x={g.x0} y={g.y0} width={g.x1 - g.x0} height={g.y1 - g.y0} fill="#f9fafb" stroke="#e5e7eb" rx={4} />
-              <text x={g.x0 + 8} y={g.y0 + 15} fontSize={12} fontWeight={600} fill="#111827">{g.data.name} · {g.leaves().length}</text>
+              <rect x={g.x0} y={g.y0} width={g.x1 - g.x0} height={g.y1 - g.y0} fill="#f7f8f9" stroke="#e4e6e9" rx={4} />
+              <text x={g.x0 + 8} y={g.y0 + 15} fontSize={12} fontWeight={600} fill="#16181b">{g.data.name} · {g.leaves().length}</text>
               {g.leaves().map((l) => {
                 const w = l.x1 - l.x0, h = l.y1 - l.y0; const alpha = +(0.72 + 0.28 * ((l.data.score ?? 0) + 1) / 2).toFixed(3); const ink = bestInk(over(color, alpha));
                 const label = w > 64 && h > 26; const small = w > 34 && h > 16 && !label;

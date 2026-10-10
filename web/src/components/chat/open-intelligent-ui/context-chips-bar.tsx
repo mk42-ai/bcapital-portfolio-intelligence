@@ -1,33 +1,20 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Landmark, X } from "lucide-react";
+import { useComposerSlot } from "./composer-store";
 import { addContextChip, hasChipTransfer, readChipTransfer, removeContextChip, useContextChips, domainOf, PITCHBOOK_PLUGIN_NAME } from "./context-chips";
 
-const COMPOSER_SEL = ".chat-shell .openui-agent-thread-composer, .chat-shell .openui-agent-welcome-screen__desktop-composer";
-const HOST_CLASS = "oiu-context-chips-host";
+const COMPOSER_SEL = ".chat-shell .oiu-composer";
 
 /**
- * Removable context chips rendered DIRECTLY ABOVE the composer (a host div inserted before OpenUI's composer node, portal inside) plus the
+ * Removable context chips rendered DIRECTLY ABOVE the composer row (the app composer's `above` slot) plus the
  * document-level drop target: dragging a PitchBook chip (MIME application/x-bcap-chip) over the composer highlights it brand-green-soft and
  * dropping pushes the chip into the store. Nothing here sends a message or creates a thread.
  */
 export function ContextChipsBar() {
   const chips = useContextChips();
-  const [host, setHost] = useState<HTMLElement | null>(null);
-  useEffect(() => {
-    const ensure = () => {
-      const composer = document.querySelector<HTMLElement>(COMPOSER_SEL);
-      if (!composer || !composer.parentElement) { setHost(null); return; }
-      // Reuse an existing host anywhere among the composer's siblings (the voice panel host may sit in between) — never create a second one.
-      let h = composer.parentElement.querySelector<HTMLElement>(`:scope > .${HOST_CLASS}`);
-      if (!h) { h = document.createElement("div"); h.className = HOST_CLASS; composer.parentElement.insertBefore(h, composer); }
-      setHost((prev) => (prev === h ? prev : h));
-    };
-    ensure();
-    const mo = new MutationObserver(() => ensure()); mo.observe(document.body, { childList: true, subtree: true });
-    return () => mo.disconnect();
-  }, []);
+  const host = useComposerSlot("above");
   useEffect(() => {
     const target = () => document.querySelector<HTMLElement>(COMPOSER_SEL);
     const over = (e: DragEvent) => { if (!hasChipTransfer(e.dataTransfer)) return; e.preventDefault(); if (e.dataTransfer) e.dataTransfer.dropEffect = "copy"; const t = target(); if (!t) return; t.classList.toggle("oiu-drop-active", t.contains(e.target as Node)); };

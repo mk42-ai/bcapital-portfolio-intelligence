@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 export function CompanyThemeScope({ tokens, children }: { tokens: BrandTokens; children: React.ReactNode }) {
   const primary = tokens.primary && hexToRgb(tokens.primary) ? tokens.primary : null;
   const ok = primary ? contrast(primary, "#ffffff") >= AA_NON_TEXT : false;
-  const style = { "--co-accent": ok && primary ? primary : "#111827" } as React.CSSProperties;
+  const style = { "--co-accent": ok && primary ? primary : "#16181b" } as React.CSSProperties;
   return (
     <div style={style} data-accent-source={ok ? "company" : "neutral"}>
       {primary && !ok && <p className="mb-3 text-xs text-muted" role="note">Company primary {primary.toUpperCase()} is {contrast(primary, "#ffffff")}:1 against white (below 3:1) — accent chip shown in neutral instead.</p>}
@@ -20,7 +20,7 @@ export function Swatches({ tokens }: { tokens: BrandTokens }) {
   const items = [["Primary", tokens.primary], ["Secondary", tokens.secondary], ...(tokens.secondary_all?.slice(1, 4).map((h, i) => [`Tertiary ${i + 1}`, h] as [string, string]) ?? []), ["Background", tokens.background], ["Text", tokens.text]].filter((x): x is [string, string] => !!x[1]);
   if (!items.length) return <p className="text-sm text-muted">No verified colours in the brand matrix for this company (evidence tier: {tokens.evidence_tier ?? "Missing"}).</p>;
   return (
-    <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4" aria-label="Palette swatches with WCAG contrast">
+    <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4" aria-label="Palette swatches with WCAG contrast" data-hue-audit-ignore="company-brand-data">
       {items.map(([label, hex]) => {
         const vsBg = label === "Background" ? contrast(hex, tokens.text ?? bestInk(hex)) : contrast(hex, bg); const b = aaBadge(vsBg); const ink = bestInk(hex);
         return (

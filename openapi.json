@@ -31,6 +31,9 @@
       "name": "ingest"
     },
     {
+      "name": "pitchbook"
+    },
+    {
       "name": "meta"
     }
   ],
@@ -937,6 +940,402 @@
           }
         }
       }
+    },
+    "/pitchbook": {
+      "get": {
+        "operationId": "listPitchbook",
+        "tags": [
+          "pitchbook"
+        ],
+        "summary": "PitchBook records on file (investor matches per company) + next weekly run",
+        "description": "Source: OnDemand plugin plugin-1777018662 'Pitchbook Investor Finder' (operation searchInvestors, auth NONE — account token server-side). Investor matches are VERIFIED; company overview / last round / valuation history / financials / comparables are NOT_AVAILABLE_FROM_PLUGIN.",
+        "responses": {
+          "200": {
+            "description": "Summary list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "slug": {
+                            "type": "string"
+                          },
+                          "fetched_at": {
+                            "type": "string"
+                          },
+                          "investors": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next_run_utc": {
+                      "type": "string"
+                    },
+                    "workflow_id": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "plugin_id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pitchbook/{slug}": {
+      "get": {
+        "operationId": "getPitchbook",
+        "tags": [
+          "pitchbook"
+        ],
+        "summary": "PitchBook record for one company (null when not yet fetched)",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Company slug, e.g. perplexity-ai, apptronik, fervo-energy, flutterwave, writer, b-capital"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "company": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/components/schemas/PitchbookRecord"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "enriched": {
+                      "type": "boolean"
+                    },
+                    "next_run_utc": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown slug",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pitchbook/ingest": {
+      "post": {
+        "operationId": "pitchbookIngest",
+        "tags": [
+          "pitchbook"
+        ],
+        "summary": "Write PitchBook records (workflow webhook) or fetch them server-side for a list of slugs",
+        "description": "Same auth as /ingest (X-Ingest-Secret, Basic password or ?secret=). Body is EITHER {records:[PitchbookRecord]} — validated (slug must exist, investors.matched[] shape) and upserted — OR {slugs:[…], async?:true, concurrency?:1-2} which runs the investor-finder query per slug (≤20 per call, concurrency 2) and writes rows; async returns 202 with a job to poll at /pitchbook/jobs/{id}.",
+        "security": [
+          {
+            "ingestSecret": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "records"
+                    ],
+                    "properties": {
+                      "execution_id": {
+                        "type": "string"
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/PitchbookRecord"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "slugs"
+                    ],
+                    "properties": {
+                      "slugs": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "maxItems": 20
+                      },
+                      "async": {
+                        "type": "boolean"
+                      },
+                      "concurrency": {
+                        "type": "integer",
+                        "maximum": 2
+                      },
+                      "dry_run": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Written / fetched",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "mode": {
+                      "type": "string",
+                      "enum": [
+                        "records",
+                        "slugs"
+                      ]
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "written": {
+                      "type": "integer"
+                    },
+                    "slugs": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "rejected": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "unmatched": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "next_run_utc": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Async job started",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "job_id": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "poll": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid X-Ingest-Secret",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "ONDEMAND_API_KEY not configured",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pitchbook/run": {
+      "post": {
+        "operationId": "pitchbookRun",
+        "tags": [
+          "pitchbook"
+        ],
+        "summary": "'Run now': execute the weekly OnDemand workflow (PITCHBOOK_WORKFLOW_ID) or fall back to a local async fetch of all companies",
+        "security": [
+          {
+            "ingestSecret": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow execution started",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "mode": {
+                      "type": "string"
+                    },
+                    "workflow_id": {
+                      "type": "string"
+                    },
+                    "execution_id": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "next_run_utc": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Local fallback job started (PITCHBOOK_WORKFLOW_ID unset)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "fallback": {
+                      "type": "string",
+                      "const": "local"
+                    },
+                    "job_id": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "poll": {
+                      "type": "string"
+                    },
+                    "next_run_utc": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid X-Ingest-Secret",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "OnDemand execute call failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "ONDEMAND_API_KEY not configured",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1398,6 +1797,285 @@
           "rollups": {
             "type": "object",
             "description": "Optional precomputed roll-ups from the workflow LLM node; the server recomputes authoritative roll-ups regardless."
+          }
+        }
+      },
+      "PitchbookInvestor": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "website": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "location": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "year_founded": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "aum_musd": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "dry_powder_musd": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "team_size": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "investment_range": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "deal_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "industries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "verticals": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "geographies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "preferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Sourced": {
+        "type": "object",
+        "properties": {
+          "value": {},
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "published_date": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fetched_at": {
+            "type": "string"
+          },
+          "plugin_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "PitchbookRecord": {
+        "type": "object",
+        "required": [
+          "slug",
+          "investors",
+          "provenance",
+          "availability"
+        ],
+        "properties": {
+          "slug": {
+            "type": "string"
+          },
+          "overview": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Sourced"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "last_round": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Sourced"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "valuation_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Sourced"
+            }
+          },
+          "investors": {
+            "type": "object",
+            "required": [
+              "matched"
+            ],
+            "properties": {
+              "matched": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PitchbookInvestor"
+                }
+              },
+              "brief": {
+                "type": "string"
+              },
+              "total_reported": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            }
+          },
+          "financials": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Sourced"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "comparables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Sourced"
+            }
+          },
+          "provenance": {
+            "type": "object",
+            "properties": {
+              "plugin_id": {
+                "type": "string",
+                "const": "plugin-1777018662"
+              },
+              "session_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "fetched_at": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string",
+                "const": "pitchbook-investor-finder"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          },
+          "availability": {
+            "type": "object",
+            "properties": {
+              "overview": {
+                "type": "string",
+                "enum": [
+                  "VERIFIED",
+                  "NOT_AVAILABLE_FROM_PLUGIN",
+                  "FROM_ENRICHMENT"
+                ]
+              },
+              "last_round": {
+                "type": "string",
+                "enum": [
+                  "VERIFIED",
+                  "NOT_AVAILABLE_FROM_PLUGIN",
+                  "FROM_ENRICHMENT"
+                ]
+              },
+              "valuation_history": {
+                "type": "string",
+                "enum": [
+                  "VERIFIED",
+                  "NOT_AVAILABLE_FROM_PLUGIN",
+                  "FROM_ENRICHMENT"
+                ]
+              },
+              "financials": {
+                "type": "string",
+                "enum": [
+                  "VERIFIED",
+                  "NOT_AVAILABLE_FROM_PLUGIN",
+                  "FROM_ENRICHMENT"
+                ]
+              },
+              "comparables": {
+                "type": "string",
+                "enum": [
+                  "VERIFIED",
+                  "NOT_AVAILABLE_FROM_PLUGIN",
+                  "FROM_ENRICHMENT"
+                ]
+              },
+              "investors": {
+                "type": "string",
+                "enum": [
+                  "VERIFIED",
+                  "NOT_AVAILABLE_FROM_PLUGIN",
+                  "FROM_ENRICHMENT"
+                ]
+              }
+            }
           }
         }
       },

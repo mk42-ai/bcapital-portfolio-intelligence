@@ -3,12 +3,11 @@
  * Composer attachments — paperclip button, drag-and-drop, paste, XHR upload to /api/media (progress), preview chips, and the per-message
  * attachment chips shown under the user bubble. State lives in a module store (useSyncExternalStore) so chat-shell's fetch wrapper can
  * read the ready attachments synchronously and attach `{mediaId,name,kind,extractedChars}` to `context.attachments`.
- * The bar portals itself into OpenUI's `.openui-agent-composer-slot` (found via MutationObserver), above the composer input.
+ * The chips render inside the app-owned composer row (app-composer.tsx) — no portals, no MutationObserver.
  */
 import "./attachments.css";
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type DragEvent as ReactDragEvent } from "react";
-import { createPortal } from "react-dom";
-import { AlertCircle, Check, FileSpreadsheet, FileText, Image as ImageIcon, Loader2, Music, Paperclip, RotateCcw, X } from "lucide-react";
+import { useSyncExternalStore } from "react";
+import { AlertCircle, Check, FileSpreadsheet, FileText, Image as ImageIcon, Loader2, Music, RotateCcw, X } from "lucide-react";
 
 export type AttachmentKind = "document" | "image" | "audio";
 export type AttachmentStatus = "uploading" | "ready" | "error";
@@ -179,72 +178,5 @@ export function SentChips({ items }: { items: SentAttachment[] }) {
   );
 }
 
-/** Finds the OpenUI composer slot and keeps a host <div> as its first child; re-finds it when the thread/welcome re-renders. */
-function useComposerHost() {
-  const [host, setHost] = useState<HTMLElement | null>(null);
-  const [slot, setSlot] = useState<HTMLElement | null>(null);
-  useEffect(() => {
-    let cur: HTMLElement | null = null;
-    const ensure = () => {
-      const s = document.querySelector<HTMLElement>(".chat-shell .openui-agent-composer-slot");
-      if (!s) { if (cur) { cur.remove(); cur = null; setHost(null); setSlot(null); } return; }
-      let h = s.querySelector<HTMLElement>(":scope > .oiu-att-host");
-      if (!h) { h = document.createElement("div"); h.className = "oiu-att-host"; s.insertBefore(h, s.firstChild); }
-      if (h !== cur) { cur = h; setHost(h); setSlot(s); }
-    };
-    ensure();
-    const mo = new MutationObserver(ensure);
-    mo.observe(document.body, { childList: true, subtree: true });
-    return () => { mo.disconnect(); };
-  }, []);
-  return { host, slot };
-}
-
-const hasFiles = (e: DragEvent | ReactDragEvent) => Array.from(e.dataTransfer?.types ?? []).includes("Files");
-
-export function AttachmentBar() {
-  const st = useAttachments();
-  const { host, slot } = useComposerHost();
-  const inputRef = useRef<HTMLInputElement>(null);
-  const depth = useRef(0);
-  const pick = useCallback((list: FileList | File[] | null) => { if (list && list.length) attachmentsStore.add(list); }, []);
-
-  // Drag-and-drop over the WHOLE composer area + paste (clipboard files) while focus is inside the composer.
-  useEffect(() => {
-    if (!slot) return;
-    const onEnter = (e: DragEvent) => { if (!hasFiles(e)) return; e.preventDefault(); depth.current += 1; attachmentsStore.setDragging(true); };
-    const onOver = (e: DragEvent) => { if (!hasFiles(e)) return; e.preventDefault(); if (e.dataTransfer) e.dataTransfer.dropEffect = "copy"; };
-    const onLeave = (e: DragEvent) => { if (!hasFiles(e)) return; depth.current = Math.max(0, depth.current - 1); if (depth.current === 0) attachmentsStore.setDragging(false); };
-    const onDrop = (e: DragEvent) => { if (!hasFiles(e)) return; e.preventDefault(); depth.current = 0; attachmentsStore.setDragging(false); pick(e.dataTransfer?.files ?? null); };
-    const onPaste = (e: ClipboardEvent) => { const fl = e.clipboardData?.files; if (fl && fl.length) { e.preventDefault(); pick(fl); } };
-    const onWinDrop = (e: DragEvent) => { if (hasFiles(e)) e.preventDefault(); }; // never let the browser navigate to a dropped file
-    slot.addEventListener("dragenter", onEnter); slot.addEventListener("dragover", onOver); slot.addEventListener("dragleave", onLeave); slot.addEventListener("drop", onDrop); slot.addEventListener("paste", onPaste);
-    window.addEventListener("dragover", onWinDrop); window.addEventListener("drop", onWinDrop);
-    slot.classList.add("oiu-att-dropzone");
-    return () => { slot.removeEventListener("dragenter", onEnter); slot.removeEventListener("dragover", onOver); slot.removeEventListener("dragleave", onLeave); slot.removeEventListener("drop", onDrop); slot.removeEventListener("paste", onPaste); window.removeEventListener("dragover", onWinDrop); window.removeEventListener("drop", onWinDrop); slot.classList.remove("oiu-att-dropzone", "oiu-att-dropzone--over"); };
-  }, [slot, pick]);
-  useEffect(() => { if (slot) slot.classList.toggle("oiu-att-dropzone--over", st.dragging); }, [slot, st.dragging]);
-
-  if (!host) return null;
-  const empty = st.items.length === 0;
-  const ready = st.items.filter((a) => a.status === "ready").length;
-  return createPortal(
-    <div className={`oiu-att${st.dragging ? " oiu-att--over" : ""}${empty ? " oiu-att--empty" : ""}`} data-testid="attachment-bar" data-count={st.items.length} data-ready={ready}>
-      <input ref={inputRef} type="file" multiple accept={ACCEPT_ATTR} className="oiu-att__input" data-testid="attachment-input" tabIndex={-1} aria-hidden onChange={(e) => { pick(e.currentTarget.files); e.currentTarget.value = ""; }} />
-      <button type="button" className="oiu-att__paperclip" aria-label="Attach a file" title={`Attach a file — ${DROP_HINT}`} data-testid="attachment-button" onClick={() => inputRef.current?.click()}>
-        <Paperclip className="size-4" aria-hidden />{empty && <span className="oiu-att__paperclip-label">Attach</span>}
-      </button>
-      {st.dragging && empty && (
-        <div className="oiu-att__drop" data-testid="attachment-dropzone-empty">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/fallbacks/dropzone.webp" alt="" width={64} height={64} className="oiu-att__drop-img" />
-          <p>{DROP_HINT}</p>
-        </div>
-      )}
-      {st.dragging && !empty && <p className="oiu-att__drop-inline">Drop to attach</p>}
-      {!empty && <ul className="oiu-att__chips" aria-label="Attachments">{st.items.map((a) => <AttachmentChip key={a.id} a={a} />)}</ul>}
-      <p className="sr-only" role="status" aria-live="polite" data-testid="attachment-live">{st.live}</p>
-    </div>,
-    host,
-  );
-}
+/** Legacy export kept for API compatibility — the attachment UI now lives inside <AppComposer> (app-composer.tsx); nothing is portalled. */
+export function AttachmentBar() { return null; }

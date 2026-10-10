@@ -1,26 +1,28 @@
-/* Single light theme. Neutral grays + one restrained accent. Every text pairing below is WCAG 2.2 AA:
-   #111827 on #FFFFFF 17.7:1 · #5F6B7A on #FFFFFF 5.6:1 (4.9:1 on #F3F4F6) · #374151 on #F9FAFB 9.9:1 · accent #1D4ED8 on #FFFFFF 6.7:1 (text) ·
-   #E5E7EB borders ≥3:1 non-text against #111827 content; borders themselves are decorative 1px lines. */
+/* Single light theme. Hue-neutral charcoals + the B Capital green. Brand rule: no computed colour may carry a blue hue
+   (HSL hue 190–260 with saturation > 0.15) — so the Tailwind/slate greys are replaced by desaturated charcoals of the same lightness.
+   Every text pairing below is WCAG 2.2 AA:
+   #16181b on #FFFFFF 17.8:1 · #5c6168 on #FFFFFF 6.2:1 (5.6:1 on #f1f2f4) · #3b3f45 on #f7f8f9 10:1 · brand ink #047857 on #FFFFFF 5.5:1 (text) ·
+   #e4e6e9 borders ≥3:1 non-text against #16181b content; borders themselves are decorative 1px lines. */
 :root {
   color-scheme: light;
   --background: #ffffff;
-  --foreground: #111827;
+  --foreground: #16181b;
   --surface: #ffffff;
-  --surface-2: #f9fafb;
-  --surface-3: #f3f4f6;
-  --border: #e5e7eb;
-  --border-strong: #d1d5db;
-  --muted: #5f6b7a;
-  --muted-2: #4b5563;
+  --surface-2: #f7f8f9;
+  --surface-3: #f1f2f4;
+  --border: #e4e6e9;
+  --border-strong: #c9ccd1;
+  --muted: #5c6168;
+  --muted-2: #4b4f55;
   --primary: #047857;          /* single accent = B Capital brand green ink (links, active nav, primary button); 5.5:1 on white */
   --primary-foreground: #ffffff;
   --primary-soft: #065f46;     /* accent as text on white/tints, 7.7:1 */
-  --accent: #374151;           /* secondary emphasis — neutral, never a glow */
+  --accent: #3b3f45;           /* secondary emphasis — neutral charcoal, never a glow, never blue */
   --accent-foreground: #ffffff;
-  --accent-soft: #374151;
-  --info: #4b5563;
+  --accent-soft: #3b3f45;
+  --info: #4b4f55;
   --info-foreground: #ffffff;
-  --info-soft: #374151;
+  --info-soft: #3b3f45;
   --danger: #b91c1c;           /* 6.5:1 on white; used sparingly for negative deltas/errors */
   --danger-foreground: #ffffff;
   --danger-soft: #991b1b;
@@ -32,6 +34,6 @@
   --brand-green-soft: #E6FAF3;
   --brand-green-strong: #089A66;
   --radius: 0.5rem;
-  --chart-1: #1f2937; --chart-2: #6b7280; --chart-3: #9ca3af; --chart-4: #0AC985; --chart-5: #b91c1c; --chart-6: #d1d5db;
-  --sentiment-neg: #b91c1c; --sentiment-neu: #6b7280; --sentiment-pos: #1f2937;
+  --chart-1: #202327; --chart-2: #6e7277; --chart-3: #9ea2a8; --chart-4: #0AC985; --chart-5: #b91c1c; --chart-6: #c9ccd1;
+  --sentiment-neg: #b91c1c; --sentiment-neu: #6e7277; --sentiment-pos: #202327;
 }

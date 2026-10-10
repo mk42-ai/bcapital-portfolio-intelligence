@@ -11,7 +11,7 @@ export async function BackendStatus() {
   } catch { live = false; }
   return (
     <span data-testid="backend-status" data-live={live ? "1" : "0"} className="inline-flex items-center gap-1.5 text-[11px] text-muted" title={backendBaseUrl}>
-      <span aria-hidden className={`inline-block size-1.5 rounded-full ${live ? "bg-[#15803d]" : "bg-[#9ca3af]"}`} />
+      <span aria-hidden className={`inline-block size-1.5 rounded-full ${live ? "bg-[#15803d]" : "bg-[#9ea2a8]"}`} />
       <Badge tone={live ? "primary" : "muted"}>{live ? "live backend" : "cached snapshot"}</Badge>
     </span>
   );
