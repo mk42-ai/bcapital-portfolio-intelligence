@@ -9,16 +9,20 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { extractCitations, isCiteLabel, hostOf, type Cite } from "./citations";
 import { faviconFor, type Source } from "./stream-store";
+import "./cite-chip.css";
 
+/** Numbered brand-green chip (18 px, pill) beside the claim. Focusable <a> → source in a new tab; hover/focus card = favicon · title · host. */
 export const CiteChip = memo(function CiteChip({ n, cite }: { n: number; cite?: Cite }) {
-  const url = cite?.url ?? "#"; const host = cite?.sourceName ?? hostOf(url);
+  const url = cite?.url ?? "#"; const host = (cite?.sourceName && cite.sourceName !== url ? cite.sourceName : "") || hostOf(url);
+  const title = cite?.title && cite.title !== url ? cite.title : host;
+  const id = `oiu-cite-${n}-${host.replace(/[^a-z0-9]/gi, "")}`;
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer" className="oiu-cite" data-testid="citation-chip" data-n={n} aria-label={`Source ${n}: ${cite?.title ?? host}`}>
-      <span className="oiu-cite__n">{n}</span>
-      <span className="oiu-cite__preview" role="tooltip">
+    <a href={url} target="_blank" rel="noopener noreferrer" className="oiu-cite" data-testid="citation-chip" data-n={n} data-host={host} aria-label={`Source ${n}: ${title}`} aria-describedby={id} title={`${title} — ${host}`}>
+      <span className="oiu-cite__n" aria-hidden>{n}</span>
+      <span className="oiu-cite__preview" role="tooltip" id={id} data-testid="citation-preview">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={faviconFor(url)} alt="" width={14} height={14} loading="lazy" decoding="async" fetchPriority="low" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.style.visibility = "hidden"; }} />
-        <span className="oiu-cite__title">{cite?.title ?? host}</span><span className="oiu-cite__host">{host}</span>
+        <span className="oiu-cite__title">{title}</span><span className="oiu-cite__host">{host}</span>
       </span>
     </a>
   );
