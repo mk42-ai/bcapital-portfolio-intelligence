@@ -1,0 +1,27 @@
+{
+  "tts": {
+    "status": 200,
+    "audio_url_host": "airevprod.blob.core.windows.net",
+    "format": "mp3",
+    "duration_s": 3.19,
+    "ms": 1789,
+    "input": "Fervo Energy achieved first power at Cape Station.",
+    "model": "tts-1",
+    "voice": "alloy"
+  },
+  "stt": {
+    "status": 200,
+    "text": "Fervo Energy achieved first power at Cape Station.",
+    "message": "Service executed successfully",
+    "ms": 867
+  },
+  "round_trip": "TTS audioUrl fed back as STT audioUrl",
+  "fetched_at": "2026-10-10T13:26:08.894Z",
+  "relay_local_check": {
+    "at": "2026-10-10T13:42:06.120Z",
+    "POST /api/voice/tts": "200 ok:true audioUrl airevprod.blob.core.windows.net (via next start)",
+    "GET /api/voice/clip/<token>": "200 audio/mpeg 51072 bytes, identical to the uploaded clip; 404 after the post-STT delete",
+    "POST /api/voice/stt (localhost)": "ok:false code:upstream — upstream HTTP 400 \"Unknown error\" because the clip URL (NEXT_PUBLIC_SITE_URL = an older sandbox without this route) is not fetchable by OnDemand from a local run; the STT contract itself is proven by the public-URL round trip above. Full in-app STT needs the deployed origin to serve /api/voice/clip/*.",
+    "Permissions-Policy": "microphone=(self) (next.config.ts; was microphone=() which blocked getUserMedia)"
+  }
+}
