@@ -45,7 +45,7 @@ export const AssistantMessage: AssistantMessageComponent = memo(function Assista
         )}
         {/* Same block order as the live streaming block (badge → sources → text) so the live→final swap at stream end moves nothing. */}
         {!isStreaming && <AnswerBadge meta={meta} />}
-        {!isStreaming && <SourceList sources={rail} live={meta != null} />}
+        {!isStreaming && <SourceList sources={rail} />}
         <CitedMarkdown text={content || (isStreaming ? "…" : "")} known={meta?.error ? [] : known} streaming={!!isStreaming} onCites={setCites} />
       </div>
     </div>
