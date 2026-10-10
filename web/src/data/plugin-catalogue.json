@@ -1,115 +1,165 @@
 {
-  "fetchedAt": "2026-10-10T04:51:39Z",
-  "source": "OnDemand suggest-plugins API (public_v1_suggest_plugins, query 'web search news perplexity gpt search reddit stock fundamentals x search', limit 12) + GET /plugin/v1/list (HTTP 200, total 0 account-owned agents)",
-  "note": "logoUrl values returned by the API are SAS-signed Azure CDN URLs that expire on 2026-10-14; the UI therefore resolves favicons as logoUrl (while valid) \u2192 https://www.google.com/s2/favicons?domain=<domain>&sz=64 \u2192 SVG monogram.",
+  "fetchedAt": "2026-10-10T06:50:14Z",
+  "source": "GET https://api.on-demand.io/plugin/v1/list (documented Agents API, header apikey; returned HTTP 200 data.total=0 for this account \u2014 it lists account-OWNED agents only) + POST public/v1 suggest-plugins (live, returns the marketplace plugins this account can call, with logoUrl). Reference screenshot ids all confirmed present in the live suggest results.",
+  "note": "logoUrl values from the API carry a SAS signature that expires (se=2026-10-14). The UI resolves favicons as live logoUrl (fetched server-side per request via /api/plugins) \u2192 logoUrlBase (unsigned CDN path, often 200) \u2192 Google s2 favicon by domain \u2192 SVG monogram.",
   "plugins": [
     {
       "id": "plugin-1722260873",
       "name": "Perplexity",
       "domain": "perplexity.ai",
       "category": "general",
+      "identifier": "rest_api",
+      "logoUrlBase": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1722260873__perplexity.png",
       "pinned": true,
       "defaultOn": true,
       "description": "Live web research with cited sources \u2014 pinned, always on."
-    },
-    {
-      "id": "plugin-1741871229",
-      "name": "GPT Search",
-      "domain": "openai.com",
-      "category": "research_and_insights",
-      "pinned": false,
-      "defaultOn": false,
-      "description": "GPT-4o web-grounded research and verification."
-    },
-    {
-      "id": "plugin-1716429542",
-      "name": "US Stock Fundamentals",
-      "domain": "sec.gov",
-      "category": "finance",
-      "pinned": false,
-      "defaultOn": false,
-      "description": "Real-time prices, movers, institutional holdings, balance sheets for US stocks."
-    },
-    {
-      "id": "plugin-1748003575",
-      "name": "Reddit Posts",
-      "domain": "reddit.com",
-      "category": "marketing",
-      "pinned": false,
-      "defaultOn": false,
-      "description": "Subreddit posts and comments for community / retail-investor sentiment."
-    },
-    {
-      "id": "plugin-1751872652",
-      "name": "X Search Agent",
-      "domain": "x.com",
-      "category": "general",
-      "pinned": false,
-      "defaultOn": false,
-      "description": "Real-time X (Twitter) search by date range, country and handle."
-    },
-    {
-      "id": "plugin-1716434059",
-      "name": "US Stock Technical Analysis",
-      "domain": "tradingview.com",
-      "category": "finance",
-      "pinned": false,
-      "defaultOn": false,
-      "description": "RSI, MACD and moving averages for US stocks."
     },
     {
       "id": "plugin-1713924030",
       "name": "Internet",
       "domain": "bing.com",
       "category": "research_and_insights",
+      "identifier": "rest_api",
+      "logoUrlBase": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1713924030__internet.png",
       "pinned": false,
       "defaultOn": false,
       "description": "General web search: weather, news, current events."
     },
     {
-      "id": "plugin-1718116202",
-      "name": "LinkedIn Search",
-      "domain": "linkedin.com",
+      "id": "plugin-1741871229",
+      "name": "GPT Search",
+      "domain": "openai.com",
       "category": "research_and_insights",
+      "identifier": "rest_api",
+      "logoUrlBase": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1741871229__gpt-search.png",
       "pinned": false,
       "defaultOn": false,
-      "description": "LinkedIn profile lookup (returned 404 from its tool in the 2026-10-09 verification run)."
+      "description": "GPT-4o web-grounded research and verification."
+    },
+    {
+      "id": "plugin-1751872652",
+      "name": "X Search Agent",
+      "domain": "x.com",
+      "category": "general",
+      "identifier": "rest_api",
+      "logoUrlBase": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1751872652__x-search-agent.png",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "Real-time X (Twitter) search by date range, country and handle."
     },
     {
       "id": "plugin-1785777296",
-      "name": "X (MCP)",
+      "name": "X",
       "domain": "x.com",
       "category": "general",
+      "identifier": "mcp",
+      "logoUrlBase": null,
       "pinned": false,
       "defaultOn": false,
-      "description": "X MCP server: post, search, manage the account."
+      "description": "X MCP server: post, search, manage the account.",
+      "logoUrlBaseNote": "unsigned CDN path answers 409 / application/octet-stream (favicon audit 2026-10-10) \u2014 skipped"
+    },
+    {
+      "id": "plugin-1716372717",
+      "name": "Tiktok",
+      "domain": "tiktok.com",
+      "category": "general",
+      "identifier": "rest_api",
+      "logoUrlBase": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1716372717__tiktok.png",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "TikTok scraping for platform analysis."
+    },
+    {
+      "id": "plugin-1716164040",
+      "name": "Instagram User Info Extracter",
+      "domain": "instagram.com",
+      "category": "general",
+      "identifier": "rest_api",
+      "logoUrlBase": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1716164040__instagram-user-info-extracter.png",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "Instagram profile information by username."
+    },
+    {
+      "id": "plugin-1785987361",
+      "name": "Instagram",
+      "domain": "instagram.com",
+      "category": "general",
+      "identifier": "rest_api",
+      "logoUrlBase": null,
+      "pinned": false,
+      "defaultOn": false,
+      "description": "Instagram Business account management and insights.",
+      "logoUrlBaseNote": "unsigned CDN path answers 409 / application/octet-stream (favicon audit 2026-10-10) \u2014 skipped"
+    },
+    {
+      "id": "plugin-1784356219",
+      "name": "YouTube Data API v3 - Captions",
+      "domain": "youtube.com",
+      "category": "general",
+      "identifier": "rest_api",
+      "logoUrlBase": null,
+      "pinned": false,
+      "defaultOn": false,
+      "description": "YouTube caption tracks and transcripts.",
+      "logoUrlBaseNote": "unsigned CDN path answers 409 / application/octet-stream (favicon audit 2026-10-10) \u2014 skipped"
+    },
+    {
+      "id": "plugin-1748003575",
+      "name": "Reddit Posts",
+      "domain": "reddit.com",
+      "category": "marketing",
+      "identifier": "rest_api",
+      "logoUrlBase": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1748003575__reddit-posts.png",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "Subreddit posts and comments for community / retail-investor sentiment."
+    },
+    {
+      "id": "plugin-1718116202",
+      "name": "Linkedin Search",
+      "domain": "linkedin.com",
+      "category": "research_and_insights",
+      "identifier": "rest_api",
+      "logoUrlBase": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1718116202__linkedin-search.png",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "LinkedIn profile lookup (its tool returned 404 in the 2026-10-09 verification run)."
+    },
+    {
+      "id": "plugin-1716429542",
+      "name": "US Stock Fundamental Analysis",
+      "domain": "sec.gov",
+      "category": "general",
+      "identifier": "rest_api",
+      "logoUrlBase": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1716429542__us-stock-fundamental-analysis.png",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "Real-time prices, movers, institutional holdings, balance sheets for US stocks."
+    },
+    {
+      "id": "plugin-1716434059",
+      "name": "US Stock Technical Analysis",
+      "domain": "tradingview.com",
+      "category": "finance",
+      "identifier": "rest_api",
+      "logoUrlBase": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1716434059__us-stock-technical-analysis.png",
+      "pinned": false,
+      "defaultOn": false,
+      "description": "RSI, MACD and moving averages for US stocks."
     },
     {
       "id": "plugin-1770369833",
       "name": "Quarterly financial report data tool",
       "domain": "on-demand.io",
       "category": "data_and_analytics",
+      "identifier": "plugin_knowledge_chat",
+      "logoUrlBase": null,
       "pinned": false,
       "defaultOn": false,
-      "description": "Knowledge agent with quarterly financial data."
-    },
-    {
-      "id": "plugin-1789123753",
-      "name": "ElevenLabs Agent",
-      "domain": "elevenlabs.io",
-      "category": "general",
-      "pinned": false,
-      "defaultOn": false,
-      "description": "Text-to-speech, voice cloning, transcription."
-    },
-    {
-      "id": "plugin-1726251045",
-      "name": "Programmer Agent",
-      "domain": "on-demand.io",
-      "category": "general",
-      "pinned": false,
-      "defaultOn": false,
-      "description": "Knowledge agent (timetable)."
+      "description": "Knowledge agent with quarterly financial data.",
+      "logoUrlBaseNote": "unsigned CDN path answers 409 / application/octet-stream (favicon audit 2026-10-10) \u2014 skipped"
     }
   ]
 }

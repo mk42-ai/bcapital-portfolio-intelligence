@@ -355,3 +355,5 @@
 .oiu-badge__plugins { display: inline-flex; flex-wrap: wrap; gap: 6px; } .oiu-badge__plugin { display: inline-flex; align-items: center; gap: 3px; }
 .oiu-raw { display: block; margin-top: 4px; }
 @media (prefers-reduced-motion: reduce) { .oiu-cite, .oiu-sources__item--in, .oiu-summary__panel, .oiu-cite__preview, .oiu-prompt__chip { animation: none; transition: none; } .oiu-caret, .oiu-shimmer span, .oiu-filler span { animation: none; } }
+/* filler_start/filler_end → plain "Working…" band (UX doc: no fake spinners) */
+.oiu-working { margin: 0 0 10px 40px; padding: 4px 10px; border-left: 2px solid var(--brand-green, #0AC985); color: #4b5563; font-size: 12px; }

@@ -746,5 +746,545 @@
         "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9c9e4261cbe2340483daf\",\"messageId\":\"6ac9c9e5261cbe2340483db0\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" run Perplexity.\\n\\nThe portfolio\"}}"
       }
     ]
+  },
+  {
+    "at": "2026-10-10T07:06:16.048Z",
+    "threadId": "5c5371c3-2985-4891-8526-d82ed7fd1fc2",
+    "runId": "f9112f17-d37a-4a98-b180-2ace841faed2",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873"
+    ],
+    "droppedPluginIds": [],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "contextMetadata": [
+          {
+            "key": "company:apptronik",
+            "valueChars": 877
+          },
+          {
+            "key": "company:fervo-energy",
+            "valueChars": 1668
+          },
+          {
+            "key": "company:flutterwave",
+            "valueChars": 1698
+          },
+          {
+            "key": "company:perplexity-ai",
+            "valueChars": 1533
+          },
+          {
+            "key": "company:writer",
+            "valueChars": 834
+          }
+        ]
+      },
+      "response": {
+        "status": 201,
+        "id": "6ac9e3e8261cbe2340484098",
+        "message": "Chat session created successfully",
+        "elapsedMs": 273
+      }
+    },
+    "sessionId": "6ac9e3e8261cbe2340484098",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6ac9e3e8261cbe2340484098/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext 6012 chars> Which of my context companies moved most since the last sentiment run, and why?",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "reasoningMode": "medium"
+      }
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 801
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 2481,
+      "firstTokenMs": 34401,
+      "totalMs": 40049,
+      "upstreamFrames": 692,
+      "answerChars": 3251,
+      "sources": 10,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 2481,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e3e8261cbe2340484098\",\"messageId\":\"6ac9e3e8261cbe2340484099\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user asks: \\\"Which of my context\"}}"
+      },
+      {
+        "ms": 2498,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e3e8261cbe2340484098\",\"messageId\":\"6ac9e3e8261cbe2340484099\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" companies moved most since the\"}}"
+      },
+      {
+        "ms": 2508,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e3e8261cbe2340484098\",\"messageId\":\"6ac9e3e8261cbe2340484099\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" last sentiment run, and why?\\\"\\n\\n\"}}"
+      },
+      {
+        "ms": 2537,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e3e8261cbe2340484098\",\"messageId\":\"6ac9e3e8261cbe2340484099\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"This is a portfolio-internal question\"}}"
+      },
+      {
+        "ms": 2568,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e3e8261cbe2340484098\",\"messageId\":\"6ac9e3e8261cbe2340484099\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" about sentiment deltas. The data\"}}"
+      },
+      {
+        "ms": 2608,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e3e8261cbe2340484098\",\"messageId\":\"6ac9e3e8261cbe2340484099\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" shows deltas for each company\"}}"
+      },
+      {
+        "ms": 2644,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e3e8261cbe2340484098\",\"messageId\":\"6ac9e3e8261cbe2340484099\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\". Perplexity AI has delta +0.50\"}}"
+      },
+      {
+        "ms": 2713,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e3e8261cbe2340484098\",\"messageId\":\"6ac9e3e8261cbe2340484099\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\", WRITER +0.30, Fervo +0.20, App\"}}"
+      },
+      {
+        "ms": 2766,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e3e8261cbe2340484098\",\"messageId\":\"6ac9e3e8261cbe2340484099\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"tronik +0.15, Flutterwave +0.10\"}}"
+      },
+      {
+        "ms": 2785,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e3e8261cbe2340484098\",\"messageId\":\"6ac9e3e8261cbe2340484099\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\".\\n\\nSo the answer: Perplexity moved\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-10T07:07:34.262Z",
+    "threadId": "9d316df1-d7ce-4e28-9e6d-0aebbdf84a41",
+    "runId": "96d9e299-18fd-4c37-9046-e175ebec2563",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873"
+    ],
+    "droppedPluginIds": [],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "contextMetadata": [
+          {
+            "key": "company:apptronik",
+            "valueChars": 877
+          },
+          {
+            "key": "company:fervo-energy",
+            "valueChars": 1668
+          },
+          {
+            "key": "company:flutterwave",
+            "valueChars": 1698
+          },
+          {
+            "key": "company:perplexity-ai",
+            "valueChars": 1533
+          },
+          {
+            "key": "company:writer",
+            "valueChars": 834
+          }
+        ]
+      },
+      "response": {
+        "status": 201,
+        "id": "6ac9e43695268adc215dfef2",
+        "message": "Chat session created successfully",
+        "elapsedMs": 276
+      }
+    },
+    "sessionId": "6ac9e43695268adc215dfef2",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6ac9e43695268adc215dfef2/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext 6012 chars> hello quick test",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "reasoningMode": "medium"
+      }
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 722
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 2011,
+      "firstTokenMs": 4148,
+      "totalMs": 6246,
+      "upstreamFrames": 31,
+      "answerChars": 82,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 2011,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e43695268adc215dfef2\",\"messageId\":\"6ac9e43695268adc215dfef3\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user's message is a big context\"}}"
+      },
+      {
+        "ms": 2051,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e43695268adc215dfef2\",\"messageId\":\"6ac9e43695268adc215dfef3\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" dump, but the actual question\"}}"
+      },
+      {
+        "ms": 2076,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e43695268adc215dfef2\",\"messageId\":\"6ac9e43695268adc215dfef3\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" at the end is \\\"hello quick test\"}}"
+      },
+      {
+        "ms": 2102,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e43695268adc215dfef2\",\"messageId\":\"6ac9e43695268adc215dfef3\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"\\\". That's a greeting/test with\"}}"
+      },
+      {
+        "ms": 2152,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e43695268adc215dfef2\",\"messageId\":\"6ac9e43695268adc215dfef3\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" no actionable task.\\n\\nSo plan_\"}}"
+      },
+      {
+        "ms": 2217,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e43695268adc215dfef2\",\"messageId\":\"6ac9e43695268adc215dfef3\",\"eventIndex\":6,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"{\\\"title\\\": \\\"I'll respond to your\"}}"
+      },
+      {
+        "ms": 2266,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e43695268adc215dfef2\",\"messageId\":\"6ac9e43695268adc215dfef3\",\"eventIndex\":7,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" quick greeting.\\\\nNo portfolio\"}}"
+      },
+      {
+        "ms": 2320,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e43695268adc215dfef2\",\"messageId\":\"6ac9e43695268adc215dfef3\",\"eventIndex\":8,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" analysis or plugin work is needed\"}}"
+      },
+      {
+        "ms": 2346,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e43695268adc215dfef2\",\"messageId\":\"6ac9e43695268adc215dfef3\",\"eventIndex\":9,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" here.\\\", \\\"objective\\\": \\\"\\\", \\\"plan\"}}"
+      },
+      {
+        "ms": 2376,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e43695268adc215dfef2\",\"messageId\":\"6ac9e43695268adc215dfef3\",\"eventIndex\":10,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"_required\\\": false, \\\"plan_skip_re\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-10T07:08:41.569Z",
+    "threadId": "8404ec16-ae74-41d4-ae39-8fe2298d1287",
+    "runId": "5016df12-61f8-4997-bdd7-0bf401108be0",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873"
+    ],
+    "droppedPluginIds": [],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "contextMetadata": [
+          {
+            "key": "company:apptronik",
+            "valueChars": 877
+          },
+          {
+            "key": "company:fervo-energy",
+            "valueChars": 1668
+          },
+          {
+            "key": "company:flutterwave",
+            "valueChars": 1698
+          },
+          {
+            "key": "company:perplexity-ai",
+            "valueChars": 1533
+          },
+          {
+            "key": "company:writer",
+            "valueChars": 834
+          }
+        ]
+      },
+      "response": {
+        "status": 201,
+        "id": "6ac9e479f7979c7d562ae7a2",
+        "message": "Chat session created successfully",
+        "elapsedMs": 208
+      }
+    },
+    "sessionId": "6ac9e479f7979c7d562ae7a2",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6ac9e479f7979c7d562ae7a2/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext 6012 chars> Which of my context companies moved most since the last sentiment run, and why?",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "reasoningMode": "medium"
+      }
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 673
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 1837,
+      "firstTokenMs": null,
+      "totalMs": 19510,
+      "upstreamFrames": 418,
+      "answerChars": 0,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": "client"
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 1837,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e479f7979c7d562ae7a2\",\"messageId\":\"6ac9e47af7979c7d562ae7a3\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user asks: \\\"Which of my context\"}}"
+      },
+      {
+        "ms": 1850,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e479f7979c7d562ae7a2\",\"messageId\":\"6ac9e47af7979c7d562ae7a3\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" companies moved most since the\"}}"
+      },
+      {
+        "ms": 1864,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e479f7979c7d562ae7a2\",\"messageId\":\"6ac9e47af7979c7d562ae7a3\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" last sentiment run, and why?\\\"\\n\\n\"}}"
+      },
+      {
+        "ms": 1877,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e479f7979c7d562ae7a2\",\"messageId\":\"6ac9e47af7979c7d562ae7a3\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"This is a portfolio-internal question\"}}"
+      },
+      {
+        "ms": 1904,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e479f7979c7d562ae7a2\",\"messageId\":\"6ac9e47af7979c7d562ae7a3\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" about sentiment deltas. The portfolio\"}}"
+      },
+      {
+        "ms": 1936,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e479f7979c7d562ae7a2\",\"messageId\":\"6ac9e47af7979c7d562ae7a3\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" data provides sentiment scores\"}}"
+      },
+      {
+        "ms": 2002,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e479f7979c7d562ae7a2\",\"messageId\":\"6ac9e47af7979c7d562ae7a3\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" and deltas. Let me look at the\"}}"
+      },
+      {
+        "ms": 2013,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e479f7979c7d562ae7a2\",\"messageId\":\"6ac9e47af7979c7d562ae7a3\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" deltas:\\n\\n- Apptronik: +0.45, delta\"}}"
+      },
+      {
+        "ms": 2055,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e479f7979c7d562ae7a2\",\"messageId\":\"6ac9e47af7979c7d562ae7a3\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" +0.15\\n- Fervo Energy: +0.80, delta\"}}"
+      },
+      {
+        "ms": 2198,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e479f7979c7d562ae7a2\",\"messageId\":\"6ac9e47af7979c7d562ae7a3\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" +0.20\\n- Flutterwave: +0.50, delta\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-10T07:09:11.678Z",
+    "threadId": "f5ed64f1-e26b-401e-b2a9-c9f0523fa17c",
+    "runId": "5ac27bb3-3932-40d7-98c8-aa79e2a8bcc7",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873"
+    ],
+    "droppedPluginIds": [],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "contextMetadata": [
+          {
+            "key": "company:apptronik",
+            "valueChars": 877
+          },
+          {
+            "key": "company:fervo-energy",
+            "valueChars": 1668
+          },
+          {
+            "key": "company:flutterwave",
+            "valueChars": 1698
+          },
+          {
+            "key": "company:perplexity-ai",
+            "valueChars": 1533
+          },
+          {
+            "key": "company:writer",
+            "valueChars": 834
+          }
+        ]
+      },
+      "response": {
+        "status": 201,
+        "id": "6ac9e497f7979c7d562ae7ab",
+        "message": "Chat session created successfully",
+        "elapsedMs": 223
+      }
+    },
+    "sessionId": "6ac9e497f7979c7d562ae7ab",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6ac9e497f7979c7d562ae7ab/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext 6012 chars> Which of my context companies moved most since the last sentiment run, and why?",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "reasoningMode": "medium"
+      }
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 668
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 1947,
+      "firstTokenMs": null,
+      "totalMs": 19483,
+      "upstreamFrames": 462,
+      "answerChars": 0,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": "client"
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 1947,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e497f7979c7d562ae7ab\",\"messageId\":\"6ac9e498f7979c7d562ae7ae\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user asks: \\\"Which of my context\"}}"
+      },
+      {
+        "ms": 1948,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e497f7979c7d562ae7ab\",\"messageId\":\"6ac9e498f7979c7d562ae7ae\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" companies moved most since the\"}}"
+      },
+      {
+        "ms": 1976,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e497f7979c7d562ae7ab\",\"messageId\":\"6ac9e498f7979c7d562ae7ae\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" last sentiment run, and why?\\\"\\n\\n\"}}"
+      },
+      {
+        "ms": 1992,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e497f7979c7d562ae7ab\",\"messageId\":\"6ac9e498f7979c7d562ae7ae\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"This is a portfolio-internal question\"}}"
+      },
+      {
+        "ms": 2011,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e497f7979c7d562ae7ab\",\"messageId\":\"6ac9e498f7979c7d562ae7ae\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" (sentiment deltas). But sentiment\"}}"
+      },
+      {
+        "ms": 2076,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e497f7979c7d562ae7ab\",\"messageId\":\"6ac9e498f7979c7d562ae7ae\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" delta is null until a second scoring\"}}"
+      },
+      {
+        "ms": 2078,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e497f7979c7d562ae7ab\",\"messageId\":\"6ac9e498f7979c7d562ae7ae\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" run exists. Actually the data\"}}"
+      },
+      {
+        "ms": 2096,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e497f7979c7d562ae7ab\",\"messageId\":\"6ac9e498f7979c7d562ae7ae\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" provides deltas. Perplexity is\"}}"
+      },
+      {
+        "ms": 2500,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e497f7979c7d562ae7ab\",\"messageId\":\"6ac9e498f7979c7d562ae7ae\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" +0.50 delta (most), WRITER +0\"}}"
+      },
+      {
+        "ms": 2503,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9e497f7979c7d562ae7ab\",\"messageId\":\"6ac9e498f7979c7d562ae7ae\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\".30, Fervo +0.20, Apptronik +0\"}}"
+      }
+    ]
   }
 ]

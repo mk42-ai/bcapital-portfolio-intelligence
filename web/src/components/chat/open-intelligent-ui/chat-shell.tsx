@@ -15,6 +15,7 @@ import { localThreadStorage, saveMessages, sessionFor, rememberSession, remember
 import { extractCitations, isCiteLabel, hostOf, type Cite } from "./citations";
 import { useSettings } from "@/lib/settings";
 import { PLUGIN_ID, PLUGIN_NAME, MODEL_ID, MODEL_LABEL, REASONING_MODE } from "@/lib/plugins";
+import { CLIENT_EVENT as CE, LABEL } from "@/lib/ondemand/eventMap";
 import { getSelectedPluginIds, usePluginSelection } from "@/lib/plugin-selection";
 import { pluginName as catalogueName, PLUGIN_CATALOGUE } from "@/lib/plugin-catalogue";
 import { PluginFavicon, preloadPluginFavicons } from "@/components/ui/plugin-favicon";
@@ -53,8 +54,9 @@ type StreamState = {
   sources: Source[]; metrics: Record<string, number> | null; lastThreadId: string | null;
   pluginIds: string[]; suggested: { id: string; name: string; logoUrl?: string }[]; plan: { objective: string | null; steps: PlanStep[] } | null;
   summaries: StepSummary[]; prompt: Prompt | null; filler: boolean; text: string; answerDone: boolean;
+  request: Record<string, unknown> | null; agentLog: { subtype: string; at: number }[]; stepRaw: Record<string, string>;
 };
-const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, text: "", answerDone: false };
+const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, text: "", answerDone: false, request: null, agentLog: [], stepRaw: {} };
 let streamState: StreamState = IDLE;
 let pending: Partial<StreamState> | null = null; let rafId = 0;
 const liveSources = new Map<string, Source[]>();
@@ -99,8 +101,8 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
       case "CUSTOM": {
         const v = f.value ?? {};
         switch (f.name) {
-          case "ondemand.session": if (typeof v.sessionId === "string" && v.sessionId) { onSession(v.sessionId); setStream({ sessionId: v.sessionId }); } break;
-          case "ondemand.status": {
+          case CE.session: if (typeof v.sessionId === "string" && v.sessionId) { onSession(v.sessionId); setStream({ sessionId: v.sessionId }); } break;
+          case CE.status: {
             if (typeof v.phase !== "string") break;
             const p = v.phase; const phase: StreamPhase = p === "researching" ? "researching" : p === "answering" ? "answering" : p === "awaiting-input" ? "awaiting-input" : p === "streaming" || p === "planning" ? "planning" : p === "done" ? "answering" : "connecting";
             const extra: Partial<StreamState> = { firstStatusMs: st.firstStatusMs ?? now - t0 };
@@ -110,13 +112,13 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
             else setStream(extra);
             break;
           }
-          case "ondemand.thinking": if (typeof v.delta === "string") { const kind = String(v.kind ?? "thinking"); setStream({ thinking: (st.thinking + v.delta).slice(-12000), thinkingKinds: st.thinkingKinds.includes(kind) ? st.thinkingKinds : [...st.thinkingKinds, kind], ...(st.phase === "connecting" ? { phase: "planning", detail: PHASE_LABEL.planning } : {}) }); } break;
-          case "ondemand.sources": if (Array.isArray(v.sources)) { const items = (v.sources as Partial<Source>[]).filter((x): x is Source => typeof x.url === "string" && !!x.url).map((x) => ({ url: x.url, title: x.title || x.sourceName || x.url, sourceName: x.sourceName || x.title || x.url, ...(typeof x.imageUrl === "string" && /^https?:\/\//.test(x.imageUrl) ? { imageUrl: x.imageUrl } : {}) })); setStream({ sources: items, firstCitationMs: st.firstCitationMs ?? (items.length ? now - t0 : null) }); } break;
-          case "ondemand.metrics": if (v.publicMetrics && typeof v.publicMetrics === "object") setStream({ metrics: v.publicMetrics as Record<string, number> }); break;
-          case "ondemand.error": setStream({ error: { code: String(v.code ?? "error"), message: String(v.message ?? "Upstream error"), raw: typeof v.raw === "string" ? v.raw : undefined } }, true); break;
-          case "ondemand.plugins": if (Array.isArray(v.plugins) && v.plugins.length) setStream({ suggested: (v.plugins as { id: string; name: string; logoUrl?: string }[]) }); break;
-          case "ondemand.plan": { const steps = Array.isArray(v.steps) ? (v.steps as Omit<PlanStep, "state">[]).map((s, i) => ({ ...s, id: String(s.id ?? i + 1), state: "pending" as const })) : []; setStream({ plan: { objective: typeof v.objective === "string" ? v.objective : null, steps }, ...(typeof v.objective === "string" && v.objective ? { detail: v.objective } : {}) }); break; }
-          case "ondemand.step": {
+          case CE.thinking: if (typeof v.delta === "string") { const kind = String(v.kind ?? "thinking"); setStream({ thinking: (st.thinking + v.delta).slice(-12000), thinkingKinds: st.thinkingKinds.includes(kind) ? st.thinkingKinds : [...st.thinkingKinds, kind], ...(st.phase === "connecting" ? { phase: "planning", detail: PHASE_LABEL.planning } : {}) }); } break;
+          case CE.sources: if (Array.isArray(v.sources)) { const items = (v.sources as Partial<Source>[]).filter((x): x is Source => typeof x.url === "string" && !!x.url).map((x) => ({ url: x.url, title: x.title || x.sourceName || x.url, sourceName: x.sourceName || x.title || x.url, ...(typeof x.imageUrl === "string" && /^https?:\/\//.test(x.imageUrl) ? { imageUrl: x.imageUrl } : {}) })); setStream({ sources: items, firstCitationMs: st.firstCitationMs ?? (items.length ? now - t0 : null) }); } break;
+          case CE.metrics: if (v.publicMetrics && typeof v.publicMetrics === "object") setStream({ metrics: v.publicMetrics as Record<string, number> }); break;
+          case CE.error: setStream({ error: { code: String(v.code ?? "error"), message: String(v.message ?? "Upstream error"), raw: typeof v.raw === "string" ? v.raw : undefined } }, true); break;
+          case CE.plugins: if (Array.isArray(v.plugins) && v.plugins.length) setStream({ suggested: (v.plugins as { id: string; name: string; logoUrl?: string }[]) }); break;
+          case CE.plan: { const steps = Array.isArray(v.steps) ? (v.steps as Omit<PlanStep, "state">[]).map((s, i) => ({ ...s, id: String(s.id ?? i + 1), state: "pending" as const })) : []; setStream({ plan: { objective: typeof v.objective === "string" ? v.objective : null, steps }, ...(typeof v.objective === "string" && v.objective ? { detail: v.objective } : {}) }); break; }
+          case CE.step: {
             const phase = String(v.phase); const stepId = String(v.stepId ?? ""); const index = Number(v.index ?? 0);
             const next: PlanStep["state"] = phase === "start" ? "running" : phase === "failed" ? "failed" : "done";
             const plan: { objective: string | null; steps: PlanStep[] } | null = st.plan ? { ...st.plan, steps: st.plan.steps.map((s, i): PlanStep => (s.id === stepId || i + 1 === index ? { ...s, state: next } : phase === "start" && s.state === "running" ? { ...s, state: "done" } : s)) } : (phase === "start" ? { objective: null, steps: [{ id: stepId || String(index), title: String(v.label ?? `Step ${index}`), query: typeof v.query === "string" ? v.query : undefined, state: "running" }] } : st.plan);
@@ -124,7 +126,7 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
             setStream({ plan, ...(phase === "start" && typeof v.label === "string" ? { detail: v.label } : {}) });
             break;
           }
-          case "ondemand.summary": {
+          case CE.summary: {
             const index = Number(v.index ?? 0); const stepId = String(v.stepId ?? "");
             const existing = st.summaries.find((s) => s.index === index);
             let summaries: StepSummary[];
@@ -133,11 +135,13 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
             setStream({ summaries });
             break;
           }
-          case "ondemand.clarification": setStream({ prompt: { kind: "clarification", queries: (v.queries as { question: string; options?: string[] }[]) ?? [] }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
-          case "ondemand.awaiting_input": setStream({ prompt: { kind: "awaiting_input", prompt: String(v.prompt ?? ""), options: Array.isArray(v.options) ? v.options.map(String) : [] }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
-          case "ondemand.require_creds": setStream({ prompt: { kind: "require_creds", pluginId: (v.pluginId as string) ?? null, service: (v.service as string) ?? null, fields: (v.fields as { key: string; label?: string; type?: string }[]) ?? [] }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
-          case "ondemand.awaiting_browser_action": setStream({ prompt: { kind: "awaiting_browser_action", action: (v.action as string) ?? null, message: (v.message as string) ?? null, url: (v.url as string) ?? null }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
-          case "ondemand.filler": setStream({ filler: !!v.on }); break;
+          case CE.clarification: setStream({ prompt: { kind: "clarification", queries: (v.queries as { question: string; options?: string[] }[]) ?? [] }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
+          case CE.awaitingInput: setStream({ prompt: { kind: "awaiting_input", prompt: String(v.prompt ?? ""), options: Array.isArray(v.options) ? v.options.map(String) : [] }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
+          case CE.requireCreds: setStream({ prompt: { kind: "require_creds", pluginId: (v.pluginId as string) ?? null, service: (v.service as string) ?? null, fields: (v.fields as { key: string; label?: string; type?: string }[]) ?? [] }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
+          case CE.awaitingBrowserAction: setStream({ prompt: { kind: "awaiting_browser_action", action: (v.action as string) ?? null, message: (v.message as string) ?? null, url: (v.url as string) ?? null }, phase: "awaiting-input", detail: PHASE_LABEL["awaiting-input"] }, true); break;
+          case CE.filler: setStream({ filler: !!v.on }); break;
+          case CE.request: setStream({ request: v }); break;
+          case CE.agent: setStream({ agentLog: [...st.agentLog.slice(-30), { subtype: String(v.subtype ?? "agent"), at: now - t0 }] }); break;
         }
         break;
       }
@@ -247,7 +251,7 @@ function ThinkingTrace({ text, kinds, live }: { text: string; kinds?: string[]; 
   return (
     <div className={`oiu-thinking${open ? " oiu-thinking--open" : ""}`} data-testid="thinking-trace" data-lines={lines.length}>
       <button type="button" className="oiu-thinking__toggle" aria-expanded={open} aria-controls={id} onClick={() => setOpen((o) => !o)}>
-        <Brain className="size-3.5" aria-hidden /><span>{live ? "Thinking…" : "Thinking trace"}{kinds?.length ? ` · ${kinds.join(" → ")}` : ""}</span><span className="oiu-thinking__len">{text.length.toLocaleString()} chars</span><ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden />
+        <Brain className="size-3.5" aria-hidden /><span>{LABEL.thinking}</span>{kinds?.length ? <span className="sr-only">{kinds.join(", ")}</span> : null}<span className="oiu-thinking__len">{text.length.toLocaleString()} chars</span><ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden />
       </button>
       <div id={id} className="oiu-thinking__panel" aria-hidden={!open}><div className="oiu-thinking__inner"><pre className="oiu-thinking__pre">{open ? shown.join("\n") : shown.slice(-6).join("\n")}</pre></div></div>
     </div>
@@ -276,7 +280,7 @@ function StepSummaryCard({ s, live }: { s: StepSummary; live?: boolean }) {
     <section className={`oiu-summary oiu-summary--${s.state}`} data-testid="step-summary" data-index={s.index} data-state={s.state} aria-live="polite">
       <button type="button" className="oiu-summary__head" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
         {s.state === "pending" ? <Loader2 className="size-3.5 oiu-spin" aria-hidden /> : <Sparkles className="size-3.5" aria-hidden />}
-        <span>{s.state === "pending" ? `Summarizing step ${s.index}…` : `Step ${s.index} checkpoint`}</span>
+        <span>{s.state === "pending" ? LABEL.summarising(s.index) : `Step ${s.index} · summary`}</span>
         {s.doneAt && <time className="oiu-summary__time" dateTime={s.doneAt}>{new Date(s.doneAt).toISOString().slice(11, 19)} UTC</time>}
         <ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden />
       </button>
@@ -395,7 +399,7 @@ const PluginTimeline: ToolCallTimelineComponent = ({ activities, steps, isLast, 
           <li key={a.id} className={`oiu-activity ${failed ? "oiu-activity--error" : running ? "oiu-activity--running" : "oiu-activity--done"}`} data-testid="plugin-activity" data-plugin={pid} data-state={state}>
             <span className="oiu-activity__icon" aria-hidden>{failed ? <AlertTriangle className="size-3.5" /> : running ? <Loader2 className="size-3.5 oiu-spin" /> : <Check className="size-3.5" />}</span>
             <span className="oiu-activity__text">
-              <span className="oiu-activity__name"><PluginFavicon id={pid} size={16} className="oiu-activity__favicon" /><Search className="size-3 oiu-activity__plugin-icon" aria-hidden />{running ? `Searching with ${name}` : failed ? `${name} failed` : `${name} searched`}</span>
+              <span className="oiu-activity__name"><PluginFavicon id={pid} size={16} className="oiu-activity__favicon" /><Search className="size-3 oiu-activity__plugin-icon" aria-hidden />{running ? LABEL.searching(name) : failed ? LABEL.failed(name) : n != null ? LABEL.searched(name, n) : `${name} searched`}</span>
               <span className="oiu-activity__query">“{i.query!.slice(0, 160)}{i.query!.length > 160 ? "…" : ""}”</span>
               {detail && <span className="oiu-activity__detail">{detail}</span>}
               {failed && (result.raw || st.error?.raw) && <RawFrame raw={result.raw || st.error?.raw || ""} />}
@@ -407,7 +411,7 @@ const PluginTimeline: ToolCallTimelineComponent = ({ activities, steps, isLast, 
     {live && st.summaries.map((s) => <StepSummaryCard key={s.index} s={s} live />)}
     {live && st.thinking && <ThinkingTrace text={st.thinking} kinds={st.thinkingKinds} live />}
     {live && st.prompt && <PromptCard prompt={st.prompt} sessionId={st.sessionId} onAnswer={(text) => { setStream({ prompt: null }, true); void processMessage({ role: "user", content: text }); }} />}
-    {live && st.filler && !liveText && <p className="oiu-filler" data-testid="filler" aria-hidden><span /><span /><span /></p>}
+    {live && st.filler && !liveText && <p className="oiu-working" data-testid="filler" role="status">{LABEL.working}</p>}
     {(liveText || (live && st.phase === "answering")) && (
       <div className="oiu-assistant oiu-assistant--streaming" aria-live="polite" aria-busy="true" data-testid="assistant-streaming">
         <div className="oiu-assistant__avatar" aria-hidden><Bot className="size-4" strokeWidth={2} /></div>

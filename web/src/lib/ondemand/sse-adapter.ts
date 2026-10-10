@@ -8,6 +8,7 @@
  *   plugin_sources, agent/ondemand_agent.* (lifecycle, execution, outputs, interaction), heartbeat, [DONE], [ERROR]:.
  * Unknown subtypes are tolerated (→ {kind:"unknown"}) and never throw.
  */
+import { TERMINAL, SSE_EVENT, EVENT_TYPE, THINKING_CHANNEL, STATUS_TYPE, STATUS_FIELDS, AGENT_PREFIX, AGENT_SUBTYPE, PLUGIN_ERROR_PATTERNS } from "./eventMap";
 export type PluginRef = { id: string; name: string; logoUrl?: string };
 export type PlanStep = { id: string; title: string; query?: string; plugins?: string[] };
 export type Citation = { url: string; title: string; sourceName: string; imageUrl?: string };
@@ -59,11 +60,13 @@ const toSteps = (plan: unknown): { objective?: string; steps: PlanStep[] } => {
   };
 };
 
-/** Parse one frame. `ev` = SSE event name (message|thinking|agent|heartbeat|""), `data` = the data payload (joined, trimmed). */
+const pick = (r: Record<string, unknown>, keys: readonly string[]): unknown => { for (const k of keys) if (r[k] !== undefined && r[k] !== null && r[k] !== "") return r[k]; return undefined; };
+
+/** Parse one frame. `ev` = SSE event name (message|thinking|agent|heartbeat|""), `data` = the data payload (joined, trimmed). Every name lookup goes through eventMap.ts. */
 export function parseFrame(ev: string, data: string): UiEvent {
-  if (data === "[DONE]") return { kind: "done" };
-  if (data.startsWith("[ERROR]")) {
-    const raw = data.slice(7).replace(/^:/, "").trim();
+  if (data === TERMINAL.done) return { kind: "done" };
+  if (data.startsWith(TERMINAL.errorPrefix)) {
+    const raw = data.slice(TERMINAL.errorPrefix.length).replace(/^:/, "").trim();
     let message = raw || "Upstream error"; let code = "upstream_error";
     try { const j = JSON.parse(raw) as { message?: string; errorCode?: string; error?: string }; message = j.message ?? j.error ?? message; code = j.errorCode ?? code; } catch { /* plain text */ }
     return { kind: "error", code, message, raw: data };
@@ -71,67 +74,71 @@ export function parseFrame(ev: string, data: string): UiEvent {
   let j: Record<string, unknown>;
   try { j = JSON.parse(data) as Record<string, unknown>; } catch { return { kind: "unknown", eventType: "unparseable", raw: { data: data.slice(0, 500) } }; }
   const et = str(j.eventType, 80);
-  if (ev === "heartbeat" || (!et && typeof j.time === "string")) return { kind: "heartbeat", time: str(j.time, 40) };
-  if (et === "error" || typeof j.error === "string" || (typeof j.message === "string" && typeof j.errorCode === "string")) {
+  if (ev === SSE_EVENT.heartbeat || (!et && typeof j.time === "string")) return { kind: "heartbeat", time: str(j.time, 40) };
+  if (EVENT_TYPE[et] === "error" || typeof j.error === "string" || (typeof j.message === "string" && typeof j.errorCode === "string")) {
     return { kind: "error", code: str(j.errorCode, 80) || "upstream_error", message: str(j.error ?? j.message, 1000) || "OnDemand reported an error", raw: data };
   }
   // ---- agent channel -------------------------------------------------------------------------------------
-  if (ev === "agent" || et.startsWith("ondemand_agent.")) {
-    const subtype = et.replace(/^ondemand_agent\./, "");
+  if (ev === SSE_EVENT.agent || et.startsWith(AGENT_PREFIX)) {
+    const subtype = et.startsWith(AGENT_PREFIX) ? et.slice(AGENT_PREFIX.length) : et;
     const agent = asRecord(j.agent); const d = asRecord(j.data);
     const agentRef = { id: str(agent.id, 80) || undefined, name: str(agent.name, 120) || undefined };
-    if (subtype === "require_creds") {
-      const fields = Array.isArray(d.fields) ? d.fields.map((f) => { const x = asRecord(f); return { key: str(x.key ?? x.name, 80), label: str(x.label ?? x.title, 120) || undefined, type: str(x.type, 40) || undefined }; }).filter((f) => f.key) : [];
-      return { kind: "require_creds", pluginId: str(d.pluginId, 80) || undefined, service: str(d.service, 120) || undefined, fields, agent: agentRef };
+    switch (AGENT_SUBTYPE[subtype]) {
+      case "require_creds": {
+        const fields = Array.isArray(d.fields) ? d.fields.map((f) => { const x = asRecord(f); return { key: str(x.key ?? x.name, 80), label: str(x.label ?? x.title, 120) || undefined, type: str(x.type, 40) || undefined }; }).filter((f) => f.key) : [];
+        return { kind: "require_creds", pluginId: str(d.pluginId, 80) || undefined, service: str(d.service, 120) || undefined, fields, agent: agentRef };
+      }
+      case "awaiting_input": {
+        const options = Array.isArray(d.options) ? d.options.map((o) => str(typeof o === "string" ? o : asRecord(o).label ?? asRecord(o).value, 200)).filter(Boolean) : undefined;
+        return { kind: "awaiting_input", prompt: str(d.prompt ?? d.content ?? d.question ?? d.message, 1000) || "The agent needs your input", options, agent: agentRef };
+      }
+      case "awaiting_browser_action": return { kind: "awaiting_browser_action", action: str(d.action, 40) || undefined, message: str(d.message ?? d.content, 600) || undefined, url: str(d.novncUrl ?? d.url, 600) || undefined, agent: agentRef };
+      case "filler": return { kind: "filler", on: subtype === "filler_start" };
+      case "thinking": return { kind: "thinking", channel: "step", delta: str(d.content, 4000) };
+      case "error": return { kind: "error", code: "agent_error", message: str(d.error ?? d.message ?? d.content, 1000) || "Agent error", raw: data };
+      default: return { kind: "agent", subtype, agent: agentRef, data: d };
     }
-    if (subtype === "awaiting_input") {
-      const options = Array.isArray(d.options) ? d.options.map((o) => str(typeof o === "string" ? o : asRecord(o).label ?? asRecord(o).value, 200)).filter(Boolean) : undefined;
-      return { kind: "awaiting_input", prompt: str(d.prompt ?? d.content ?? d.question ?? d.message, 1000) || "The agent needs your input", options, agent: agentRef };
-    }
-    if (subtype === "awaiting_browser_action") return { kind: "awaiting_browser_action", action: str(d.action, 40) || undefined, message: str(d.message ?? d.content, 600) || undefined, url: str(d.novncUrl ?? d.url, 600) || undefined, agent: agentRef };
-    if (subtype === "filler_start") return { kind: "filler", on: true };
-    if (subtype === "filler_end") return { kind: "filler", on: false };
-    if (subtype === "thinking" && typeof d.content === "string") return { kind: "thinking", channel: "step", delta: d.content };
-    return { kind: "agent", subtype, agent: agentRef, data: d };
   }
   // ---- thinking channel ----------------------------------------------------------------------------------
-  if (et.endsWith("_thinking")) {
-    const ch = et.replace(/_thinking$/, "");
-    return { kind: "thinking", channel: ch === "planning" ? "planning" : ch === "fulfillment" ? "fulfillment" : "step", delta: str(asRecord(j.thinking).delta, 4000), stepId: str(j.stepId, 40) || undefined };
-  }
-  if (et === "planning_output") return { kind: "thinking", channel: "plan", delta: str(asRecord(j.output).delta, 4000) };
-  if (et === "step_output") return { kind: "thinking", channel: "step_output", delta: str(asRecord(j.output).delta, 4000), stepId: str(j.stepId, 40) || undefined };
+  const th = THINKING_CHANNEL[et];
+  if (th) return { kind: "thinking", channel: th.channel, delta: str(asRecord(j[th.field]).delta, 4000), stepId: str(j.stepId, 40) || undefined };
   // ---- message channel -----------------------------------------------------------------------------------
-  if (et === "fulfillment" && typeof j.answer === "string") return { kind: "answer", delta: j.answer };
-  if (et === "metricsLog") return { kind: "metrics", publicMetrics: asRecord(j.publicMetrics) as Record<string, number> };
-  if (et === "plugin_sources") {
+  const mapped = EVENT_TYPE[et];
+  if (mapped === "answer" && typeof j.answer === "string") return { kind: "answer", delta: j.answer };
+  if (mapped === "metrics") return { kind: "metrics", publicMetrics: asRecord(j.publicMetrics) as Record<string, number> };
+  if (mapped === "sources") {
     const s = asRecord(j.sources); const items = Array.isArray(s.items) ? s.items : Array.isArray(j.items) ? j.items : [];
     const cites: Citation[] = [];
     for (const it of items) { const x = asRecord(it); const url = str(x.url, 800); if (!url || !/^https?:\/\//.test(url)) continue; let host = str(x.domain, 120); if (!host) { try { host = new URL(url).hostname.replace(/^www\./, ""); } catch { host = url; } } const img = str(x.imageUrl, 800); cites.push({ url, title: (str(x.title, 160) || host), sourceName: host, ...(img && /^https?:\/\//.test(img) ? { imageUrl: img } : {}) }); }
     return { kind: "sources", pluginId: str(s.pluginId, 80) || undefined, pluginName: str(s.pluginName, 120) || undefined, items: cites };
   }
-  if (et === "clarification_request") {
+  if (mapped === "clarification") {
     const cr = asRecord(j.clarificationRequest); const qs = Array.isArray(cr.queries) ? cr.queries : [];
     return { kind: "clarification", messageId: str(j.messageId, 80) || undefined, queries: qs.map((q) => { const x = asRecord(q); return { question: str(x.query ?? x.question, 600), options: Array.isArray(x.options) ? x.options.map((o) => str(typeof o === "string" ? o : asRecord(o).label ?? asRecord(o).value, 200)).filter(Boolean) : undefined }; }).filter((q) => q.question) };
   }
-  if (et === "statusLog") {
-    const cs = asRecord(j.currentStatusLog); const st = str(cs.statusType, 80); const message = str(cs.statusMessage, 400); const stepQuery = str(cs.stepQuery, 600) || undefined;
-    const stepId = str(cs.stepId ?? cs.step_id ?? j.stepId, 40) || undefined;
-    const plugins = toPluginRefs(cs.suggestedPlugins).length ? toPluginRefs(cs.suggestedPlugins) : toPluginRefs(cs.retrievedAgents).length ? toPluginRefs(cs.retrievedAgents) : toPluginRefs(cs.executedAgents);
-    if (st === "plugin_suggestion.initialized") return { kind: "plugins_suggested", plugins: [], phase: "initialized" };
-    if (st === "plugin_suggestion.completed") return { kind: "plugins_suggested", plugins, phase: "completed" };
-    if (st === "plan_created") { const { objective, steps } = toSteps(cs.queryPlan ?? cs.plan); return { kind: "plan", objective, steps, raw: cs.queryPlan ?? null }; }
-    if (st === "analyzing" && stepQuery) return { kind: "step_start", stepId: stepId ?? "", label: stepQuery.length > 90 ? `${stepQuery.slice(0, 88)}…` : stepQuery, query: stepQuery };
-    if (st === "agents_retrieved") return { kind: "agents_retrieved", stepId, plugins };
-    if (st === "executing") return { kind: "executing", stepId, plugins };
-    if (st === "execution_completed" || st === "execution_failed") return { kind: "execution_done", stepId, ok: st === "execution_completed", plugins, message };
-    if (st === "summarize_history.initialized") return { kind: "summary_start", stepId, index: Number(cs.stepIndex ?? cs.index ?? 0) || 0 };
-    if (st === "summarize_history.completed") return { kind: "summary_done", stepId, index: Number(cs.stepIndex ?? cs.index ?? 0) || 0, text: str(cs.summary ?? cs.answer ?? cs.statusMessage, 6000) };
-    if (st === "fulfillment_completed" && typeof cs.answer === "string") return { kind: "answer_complete", text: cs.answer };
+  if (mapped === "status") {
+    const cs = asRecord(j.currentStatusLog); const st = str(cs.statusType, 80); const message = str(cs.statusMessage, 400);
+    const stepQuery = str(pick(cs, STATUS_FIELDS.stepQuery), 600) || undefined;
+    const stepId = str(pick(cs, STATUS_FIELDS.stepId) ?? j.stepId, 40) || undefined;
+    const refs = (keys: readonly string[]) => toPluginRefs(pick(cs, keys));
+    const plugins = refs(STATUS_FIELDS.suggestedPlugins).length ? refs(STATUS_FIELDS.suggestedPlugins) : refs(STATUS_FIELDS.retrievedAgents).length ? refs(STATUS_FIELDS.retrievedAgents) : refs(STATUS_FIELDS.executedAgents);
+    const idx = Number(pick(cs, STATUS_FIELDS.summaryIndex) ?? 0) || 0;
+    switch (STATUS_TYPE[st]) {
+      case "plugins_suggested": return { kind: "plugins_suggested", plugins: st.endsWith("completed") ? plugins : [], phase: st.endsWith("completed") ? "completed" : "initialized" };
+      case "plan": { const { objective, steps } = toSteps(pick(cs, STATUS_FIELDS.plan)); return { kind: "plan", objective, steps, raw: pick(cs, STATUS_FIELDS.plan) ?? null }; }
+      case "step_start": if (stepQuery) return { kind: "step_start", stepId: stepId ?? "", label: stepQuery.length > 90 ? `${stepQuery.slice(0, 88)}…` : stepQuery, query: stepQuery }; break;
+      case "agents_retrieved": return { kind: "agents_retrieved", stepId, plugins };
+      case "executing": return { kind: "executing", stepId, plugins };
+      case "execution_done": return { kind: "execution_done", stepId, ok: st === "execution_completed", plugins, message };
+      case "summary_start": return { kind: "summary_start", stepId, index: idx };
+      case "summary_done": return { kind: "summary_done", stepId, index: idx, text: str(pick(cs, STATUS_FIELDS.summaryText), 6000) };
+      case "answer_complete": { const a = pick(cs, STATUS_FIELDS.answer); if (typeof a === "string") return { kind: "answer_complete", text: a }; break; }
+      default: break;
+    }
     return { kind: "status", statusType: st || "status", message, stepQuery, raw: cs };
   }
   return { kind: "unknown", eventType: et || ev || "?", raw: j };
 }
 
-/** Upstream plugin failure signature — OnDemand delivers it only inside thinking/answer deltas, never as an error frame. */
-export const PLUGIN_ERROR_RE = /not enough credits|"error"\s*:\s*"internal server error"|tool returned an error|insufficient credits|rate limit exceeded/i;
+/** Upstream plugin failure signature — bound in eventMap.ts. */
+export const PLUGIN_ERROR_RE = PLUGIN_ERROR_PATTERNS;

@@ -640,3 +640,16 @@ Perplexity `plugin-1722260873` returns `{"error":"Internal server error","messag
 
 ### 11.2 Open items
 Mobile CLS 0.47–0.73 at the live→final message swap (OpenUI remounts the assistant message; desktop 0.014); scroll anchoring 45 % / 24 % at-bottom while growing on the final recordings; TTFT 28–67 s is upstream (four plugins); `summarize_history.*` was never emitted upstream for this prompt (handler verified on the fixture); the final mobile run streamed no links (Perplexity returned no sources) so it shows 0 chips — the 05:55 UTC mobile recording had 17.
+
+
+## 12. eventMap release (2026-10-10, after e5d179b)
+
+| Item | Value |
+|---|---|
+| Frontend | https://sb-70502obas4b3.vercel.run (sandbox `sbx_igW28DVHgbufTZ97GBmIA3clrVWZ`), BUILD_ID `33FEHVkxu6Sq4OBfkppYI` live 2026-10-10T07:12:10Z |
+| Backend | https://sb-2qbyzccm187r.vercel.run (`/health` 200, model predefined-deepseek-flash) |
+| AgentInterface | `@openuidev/react-ui@0.17.0` `AgentInterface` (+ `@openuidev/react-headless@0.17.0` agUIAdapter). Live npm/GitHub check 2026-10-10: there is NO Hugging Face "AgentInterface" package — `npm search agentinterface` returns `agentinterface@1.0.0` (iteebz, a component-JSON renderer, not a chat shell) and nothing under `@huggingface/*`; huggingface/chat-ui is a SvelteKit app, not an npm component. The OpenUI AgentInterface already mounted on /chat is kept; its native parts are AG-UI frames (TEXT_MESSAGE_*, TOOL_CALL_*, CUSTOM, RUN_*) consumed by `agUIAdapter` + `processStreamedMessage`. |
+| Event bindings | `web/src/lib/ondemand/eventMap.ts` — the ONLY place SSE event names / eventTypes / statusTypes / agent subtypes / client CUSTOM names / labels live; `sse-adapter.ts`, `route.ts` and `chat-shell.tsx` import from it. Rebinding `summarize_history.*` is a one-line change in `STATUS_TYPE`. |
+| Plugins | `/api/plugins` (server-side `GET /plugin/v1/search?limit=100&page=N`, apikey never leaves the server) → 182 chat plugins; `GET /plugin/v1/list` (documented Agents API) returns total 0 for this account (account-owned agents only). Rail shows 40 (14 curated incl. all 11 reference ids first, then subscribed research/finance/social plugins), Perplexity locked on, others opt-in per turn, live `logoUrl` favicons → unsigned base → s2 → monogram. Browser check: 0 broken favicons of 41. |
+| Live probe through the bridge | 2026-10-10T07:12:48.916181Z → status 200, session `6ac9e57195268adc215dff0b`, pluginIds ['plugin-1722260873'], first event 66 ms, first token 41461 ms, [DONE] 46620 ms, 816 frames, 25 sources, Perplexity tool result `{"status":"ok","plugin":"Perplexity","pluginId":"plugin-1722260873","durationMs":25508,"sources":7,"items":7}` — **no "Not enough credits" this run** (credits available); the honest red card path is unchanged and verified on the fixture. Raw log `web/proof/probe-live-bridge.log`. |
+| Validation | tsc 0 errors; `next build` exit 0 at 2026-10-10T07:10:41Z; ONDEMAND_API_KEY value 0 hits in `.next/static` and `.next/server`; GROWTH verified in a headless browser on the deploy: expanded tile rgb(10,201,133), card border rgb(10,201,133), chevron rgb(4,120,87), no rgb(29,78,216) anywhere in the grid. |

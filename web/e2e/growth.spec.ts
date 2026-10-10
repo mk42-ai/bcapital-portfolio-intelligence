@@ -76,11 +76,49 @@ test.describe("GROWTH values grid", () => {
     await expect(page.locator(VALUE).nth(1)).toBeFocused();
   });
 
-  test("renders an 'Example behaviour' line per value and a letter tile", async ({ page }) => {
+  test("renders a letter tile and three labelled lines (Definition / What it looks like here / Example) per value", async ({ page }) => {
     await expect(page.locator('[data-testid="growth-tile"]')).toHaveCount(6);
+    await expect(page.locator('[data-testid="growth-definition"]')).toHaveCount(6);
+    await expect(page.locator('[data-testid="growth-here"]')).toHaveCount(6);
     await expect(page.locator('[data-testid="growth-example"]')).toHaveCount(6);
     await page.locator(VALUE).first().click();
-    await expect(page.locator('#growth-panel-generosity [data-testid="growth-example"]')).toContainText("opens their network before a term sheet");
+    const panel = page.locator("#growth-panel-generosity");
+    await expect(panel).toHaveAttribute("data-state", "open");
+    const def = panel.locator('[data-testid="growth-definition"]');
+    const here = panel.locator('[data-testid="growth-here"]');
+    const ex = panel.locator('[data-testid="growth-example"]');
+    await expect(def).toBeVisible();
+    await expect(here).toBeVisible();
+    await expect(ex).toBeVisible();
+    await expect(def).toContainText("Definition");
+    await expect(def).toContainText("We give first");
+    await expect(here).toContainText("What it looks like here");
+    await expect(here).toContainText("warm intros to each other and to LPs without asking twice");
+    await expect(ex).toContainText("Example");
+    await expect(ex).toContainText("opens their network before a term sheet");
+    // Order: definition, here, example.
+    const order = await panel.locator(".growth-line").evaluateAll((els) => els.map((e) => e.getAttribute("data-testid")));
+    expect(order).toEqual(["growth-definition", "growth-here", "growth-example"]);
+    // Collapsed panels are closed + inert.
+    const closed = page.locator("#growth-panel-resilience");
+    await expect(closed).toHaveAttribute("data-state", "closed");
+    await expect(closed).toHaveAttribute("aria-hidden", "true");
+    expect(await closed.locator(".growth-panel-inner").evaluate((el) => (el as HTMLElement).inert)).toBe(true);
+  });
+
+  test("every value carries its own 'What it looks like here' line", async ({ page }) => {
+    const expected: Record<string, string> = {
+      generosity: "without asking twice",
+      resilience: "2022–23 repricings",
+      "open-mindedness": "dissent section",
+      will: "full hold period",
+      teamwork: "cross-office second partner",
+      humility: "lowest scores first",
+    };
+    for (const [key, text] of Object.entries(expected)) {
+      await page.locator(`${VALUE}[data-value="${key}"]`).click();
+      await expect(page.locator(`#growth-panel-${key} [data-testid="growth-here"]`)).toContainText(text);
+    }
   });
 
   test("reveals G-R-O-W-T-H on viewport entry (data-revealed, staggered --i)", async ({ page }) => {
@@ -97,41 +135,103 @@ test.describe("GROWTH values grid", () => {
     }
   });
 
-  test("hovered tile is brand green (rgb(10, 201, 133)) and no old blue remains in hover/expanded states", async ({ page }) => {
-    const BLUE = "rgb(29, 78, 216)";
+  test("hover / expanded / focus states are brand green on tile, card border and chevron; no old blue anywhere", async ({ page }) => {
+    const BLUES = ["rgb(29, 78, 216)", "rgb(37, 99, 235)"];
     const GREEN = "rgb(10, 201, 133)";
+    const GREEN_INK = "rgb(4, 120, 87)";
     const first = page.locator(VALUE).first();
+    const card = page.locator('[data-testid="growth-grid"] li.growth-item').first();
     const tile = first.locator('[data-testid="growth-tile"]');
+    const chevron = first.locator('[data-testid="growth-chevron"]');
     await page.locator('[data-testid="growth-grid"]').scrollIntoViewIfNeeded();
-    // Hover state.
+    // Let the one-shot light-up finish so it cannot mask the resting state.
+    await page.waitForTimeout(1200);
+    // Hover state: tile fill green + white letter, card border green.
     await first.hover();
     await expect(tile).toHaveCSS("background-color", GREEN);
     await expect(tile).toHaveCSS("color", "rgb(255, 255, 255)");
-    // Expanded state (keep hovering off to prove the open state alone drives the green).
+    await expect(card).toHaveCSS("border-top-color", GREEN);
+    // Expanded state (hover off to prove the open state alone drives the green).
     await first.click();
     await expect(first).toHaveAttribute("aria-expanded", "true");
     await page.mouse.move(0, 0);
+    await page.locator("body").hover({ position: { x: 0, y: 0 } });
     await expect(tile).toHaveCSS("background-color", GREEN);
+    await expect(card).toHaveCSS("border-top-color", GREEN);
+    await expect(card).toHaveCSS("border-bottom-color", GREEN);
+    await expect(chevron).toHaveCSS("color", GREEN_INK);
+    // Chevron rotated 180° when open (matrix(-1, 0, 0, -1, 0, 0)).
+    const t = await chevron.evaluate((el) => getComputedStyle(el).transform);
+    expect(t.replace(/\s/g, "")).toMatch(/^matrix\(-1,0,0,-1,0,0\)$/);
     // Keyboard focus-visible state → green outline on the button.
     await first.focus();
     await page.keyboard.press("Tab");
     await page.keyboard.press("Shift+Tab");
     await expect(first).toBeFocused();
     const outline = await first.evaluate((el) => getComputedStyle(el).outlineColor);
-    expect(outline).not.toBe(BLUE);
-    // Sweep every element in the grid (expanded + hovered) for the old blue.
+    expect(outline).toBe(GREEN);
+    // Sweep every element in the grid (expanded + hovered) for either legacy blue.
     await first.hover();
-    const offenders = await page.locator('[data-testid="growth-grid"]').evaluate((root, blue) => {
+    const offenders = await page.locator('[data-testid="growth-grid"]').evaluate((root, blues) => {
       const bad: string[] = [];
       root.querySelectorAll<HTMLElement>("*").forEach((el) => {
         const cs = getComputedStyle(el);
-        if (cs.backgroundColor === blue || cs.outlineColor === blue || cs.borderColor === blue || cs.color === blue) {
-          bad.push(`${el.tagName.toLowerCase()}.${el.className}`);
-        }
+        const values = [
+          cs.color,
+          cs.backgroundColor,
+          cs.outlineColor,
+          cs.borderTopColor,
+          cs.borderRightColor,
+          cs.borderBottomColor,
+          cs.borderLeftColor,
+        ];
+        if (values.some((v) => blues.includes(v))) bad.push(`${el.tagName.toLowerCase()}.${el.className}`);
       });
       return bad;
-    }, BLUE);
+    }, BLUES);
     expect(offenders).toEqual([]);
+    // Collapsing returns the chevron to its resting colour and un-rotates it.
+    await first.click();
+    await page.mouse.move(0, 0);
+    await expect(first).toHaveAttribute("aria-expanded", "false");
+    await expect(chevron).not.toHaveCSS("color", GREEN_INK);
+  });
+
+  test("lights up G→R→O→W→T→H once on first scroll-into-view (data-lit timer chain)", async ({ page }) => {
+    // Start with the grid out of view so the IntersectionObserver fires on scroll, then record the data-lit sequence.
+    await page.setViewportSize({ width: 1280, height: 300 });
+    await page.evaluate(() => {
+      const grid = document.querySelector('[data-testid="growth-grid"]');
+      const spacer = document.createElement("div");
+      spacer.style.height = "2000px";
+      spacer.setAttribute("data-spacer", "1");
+      grid?.parentElement?.insertBefore(spacer, grid);
+      window.scrollTo(0, 0);
+      (window as unknown as { __lit: string[] }).__lit = [];
+      const mo = new MutationObserver((muts) => {
+        for (const m of muts) {
+          const el = m.target as HTMLElement;
+          if (el.getAttribute("data-lit") === "true") (window as unknown as { __lit: string[] }).__lit.push(el.getAttribute("data-testid") === "growth-tile" ? el.textContent ?? "" : "");
+        }
+      });
+      mo.observe(grid as Node, { attributes: true, subtree: true, attributeFilter: ["data-lit"] });
+    });
+    const grid = page.locator('[data-testid="growth-grid"]');
+    await expect(grid).toHaveAttribute("data-revealed", "false");
+    await grid.scrollIntoViewIfNeeded();
+    await expect(grid).toHaveAttribute("data-revealed", "true");
+    // ~120ms stagger × 6 + 350ms hold → everything is back to resting well inside 2s.
+    await page.waitForTimeout(2000);
+    const seq = await page.evaluate(() => (window as unknown as { __lit: string[] }).__lit.filter(Boolean));
+    expect(seq).toEqual(["G", "R", "O", "W", "T", "H"]);
+    await expect(page.locator("[data-lit]")).toHaveCount(0);
+    // Runs once: scrolling away and back must not replay.
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.waitForTimeout(200);
+    await grid.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(1200);
+    const again = await page.evaluate(() => (window as unknown as { __lit: string[] }).__lit.filter(Boolean));
+    expect(again).toEqual(["G", "R", "O", "W", "T", "H"]);
   });
 
   test("390px viewport: single column, no horizontal overflow, long names wrap", async ({ page }) => {
@@ -162,5 +262,25 @@ test.describe("GROWTH values grid", () => {
     await expect(page.locator("#growth-panel-generosity")).toContainText("founders' wins compound");
     await first.click();
     await expect(first).toHaveAttribute("aria-expanded", "false");
+  });
+
+  test("prefers-reduced-motion: no light-up (no data-lit after 2s) and no transitions on tile/chevron/panel", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.reload();
+    const grid = page.locator('[data-testid="growth-grid"]');
+    await grid.scrollIntoViewIfNeeded();
+    await expect(grid).toHaveAttribute("data-revealed", "true");
+    await page.waitForTimeout(2000);
+    await expect(page.locator("[data-lit]")).toHaveCount(0);
+    const first = page.locator(VALUE).first();
+    for (const sel of ['[data-testid="growth-tile"]', '[data-testid="growth-chevron"]']) {
+      const dur = await first.locator(sel).evaluate((el) => getComputedStyle(el).transitionDuration);
+      expect(dur.split(",").every((d) => d.trim() === "0s")).toBe(true);
+    }
+    const panelDur = await page.locator("#growth-panel-generosity").evaluate((el) => getComputedStyle(el).transitionDuration);
+    expect(panelDur.split(",").every((d) => d.trim() === "0s")).toBe(true);
+    // Green states still apply without motion.
+    await first.hover();
+    await expect(first.locator('[data-testid="growth-tile"]')).toHaveCSS("background-color", "rgb(10, 201, 133)");
   });
 });

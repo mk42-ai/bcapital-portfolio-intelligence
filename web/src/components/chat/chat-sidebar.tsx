@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { fmtScore } from "@/lib/format";
 import { CompanyLogo } from "@/components/ui/company-logo";
 import { WhyInteractive } from "./why-interactive";
+import { RunRail } from "./run-rail";
 export function ChatSidebar({ companies }: { companies: { slug: string; name: string; sector: string; logo_url?: string | null; score: number; news: number }[] }) {
   const [s, set] = useSettings();
   const ctx = companies.filter((c) => s.companies.includes(c.slug));
@@ -18,6 +19,7 @@ export function ChatSidebar({ companies }: { companies: { slug: string; name: st
         <p className="mb-2 text-xs text-muted" data-testid="sidebar-model">{MODEL_LABEL} · reasoning <code>{REASONING_MODE}</code> · stream</p>
         <PluginPanel variant="rail" testId="sidebar-plugins" />
       </Card>
+      <RunRail />
       <WhyInteractive />
     </aside>
   );

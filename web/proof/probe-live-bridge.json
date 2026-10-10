@@ -1,0 +1,36 @@
+{
+ "startedUtc": "2026-10-10T07:12:48.916181Z",
+ "endedUtc": "2026-10-10T07:13:35.537116Z",
+ "httpStatus": 200,
+ "headers": {
+  "Content-Type": "text/event-stream; charset=utf-8",
+  "Cache-Control": "no-cache, no-transform",
+  "Content-Encoding": "identity",
+  "X-Ondemand-Model": "predefined-deepseek-flash"
+ },
+ "sessionId": "6ac9e57195268adc215dff0b",
+ "pluginIdsSent": [
+  "plugin-1722260873"
+ ],
+ "firstEventMs": 66,
+ "firstTokenMs": 41461,
+ "doneMs": 46620,
+ "frames": 816,
+ "sources": 25,
+ "toolResults": [
+  {
+   "ms": 27791,
+   "content": "{\"status\":\"ok\",\"plugin\":\"Perplexity\",\"pluginId\":\"plugin-1722260873\",\"durationMs\":25508,\"sources\":7,\"items\":7}",
+   "isError": false
+  }
+ ],
+ "errorFrame": null,
+ "metrics": {
+  "inputTokens": 23731,
+  "outputTokens": 890,
+  "totalTokens": 24621,
+  "ragTimeSec": 38.4,
+  "fulfillmentTimeSec": 5.44,
+  "totalTimeSec": 43.84
+ }
+}
