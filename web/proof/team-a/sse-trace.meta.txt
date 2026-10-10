@@ -1,0 +1,3 @@
+session_id=6aca0a89261cbe2340484665
+{"message": "Chat session created successfully", "data": {"id": "6aca0a89261cbe2340484665", "companyId": "6692b763e851d28a036ab30e", "externalUserId": "team-a-agent11", "agentIds": [], "pluginIds": [], "contextMetadata": [], "title": "", "status": "draft", "createdBy": "6692b763e851d28a036ab30f", "createdAt": "2026-10-10T09:51:05.943310366Z", "updatedAt": "2026-10-10T09:51:05.943310366Z", "liveSet
+exit=0 lines=777

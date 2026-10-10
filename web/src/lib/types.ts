@@ -14,3 +14,25 @@ export type CompanySentiment = { company: string; name: string; current: Sentime
 export type Rollup = { scope: string; key: string; company_count: number; avg_score: number; label: string; delta: number | null; top_movers: { slug: string; name: string; score: number; delta: number }[]; computed_at: string };
 export type PortfolioSentiment = { portfolio: Rollup | null; sectors: Rollup[]; regions: Rollup[]; top_movers: { slug: string; name: string; sector: string; score: number; label: string; delta: number }[]; focus: { slug: string; name: string; score: number; label: string; delta: number | null; top_evidence: Evidence | null; updated_at: string }[]; computed_at: string | null };
 export type IngestRun = { id: string; source: string; workflowId: string | null; workflowName: string | null; executionId: string | null; model: string | null; companiesTouched: number; newsUpserted: number; sentimentRows: number; status: string; receivedAt: string; finishedAt: string | null };
+/** Evidence-weighted Signal Score (backend src/scoring.ts): 0–100 composite, z within portfolio+sector, score = 50 + 15z. */
+export type SignalLabel = "strong" | "constructive" | "balanced" | "soft" | "weak";
+export type SignalFactorKey = "level" | "momentum" | "volume" | "confidence";
+export type SignalSource = { title: string; url: string | null; source: string | null; published_at: string | null; weight: number; sentiment: number; tier: string };
+export type SignalScore = {
+  slug: string; sector: string; score: number; confidence: number; percentile: number; label: SignalLabel;
+  factors: Record<SignalFactorKey, number>;
+  /** weight × z per factor; sums to the composite z. */
+  contributions: Record<SignalFactorKey, number>;
+  momentum: { d7: number; d30: number; delta: number };
+  evidence: { items: number; decayed_mass: number; dated_items: number; window_days: number; positive_share: number; wilson_lower: number };
+  sparkline: { date: string; score: number }[];
+  /** Present on GET /companies/{slug}/signal only. */
+  top_sources?: SignalSource[]; z?: Record<SignalFactorKey | "composite", number>; method?: string; computed_at?: string;
+};
+export type SignalBand = { p25: number; median: number; p75: number };
+export type SignalBands = { portfolio: SignalBand; sector: SignalBand };
+export type SignalsResponse = {
+  data: SignalScore[];
+  portfolio: { n: number; mean: number; p25: number; p75: number; computed_at: string | null; method: string };
+  sectors: Record<string, { n: number; mean: number; p25: number; p75: number }>;
+};

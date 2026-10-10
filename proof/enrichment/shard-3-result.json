@@ -1,0 +1,149 @@
+{
+ "shard": 3,
+ "job_id": "job-mv27n5mq-d41d",
+ "status": "done",
+ "started_at": "2026-10-10T09:47:12Z",
+ "finished_at": "2026-10-10T09:59:55Z",
+ "companies": [
+  "branch-international",
+  "cloudwise",
+  "eeroq",
+  "flourish-health",
+  "grit",
+  "innovaccer",
+  "knox",
+  "lunar-energy",
+  "neushen-therapeutics",
+  "palebluedot",
+  "profoundbio",
+  "silvercloud-health",
+  "trm-labs",
+  "wildfire"
+ ],
+ "completed": 14,
+ "total": 14,
+ "coverage_by_field": {
+  "description": 93,
+  "sector": 86,
+  "hq": 86,
+  "founded": 79,
+  "ceo": 79,
+  "founders": 79,
+  "headcount": 64,
+  "total_raised": 93,
+  "last_valuation": 71,
+  "funding_rounds": 93,
+  "key_products": 93,
+  "competitors": 71,
+  "recent_news": 93,
+  "risk_signals": 93,
+  "social_sentiment": 93
+ },
+ "per_company": [
+  {
+   "slug": "cloudwise",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 66891
+  },
+  {
+   "slug": "branch-international",
+   "coverage_pct": 73,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 129127
+  },
+  {
+   "slug": "eeroq",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 99944
+  },
+  {
+   "slug": "flourish-health",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 105107
+  },
+  {
+   "slug": "grit",
+   "coverage_pct": 73,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 86336
+  },
+  {
+   "slug": "knox",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 85884
+  },
+  {
+   "slug": "innovaccer",
+   "coverage_pct": 100,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0a8b95268adc215e04e0\",\"messageId\":\"6aca0a8b261cbe2340484668\",\"eventIndex\":326,\"eventType\":\"step_thinking\",\"stepId\":\"3\",\"status\":\"processing\",\"thinking\":{\"delta\":\" with \\\"Not enough credits\\\" earlier\"}}"
+   ],
+   "ms": 131112
+  },
+  {
+   "slug": "lunar-energy",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 114096
+  },
+  {
+   "slug": "neushen-therapeutics",
+   "coverage_pct": 100,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0b0ef7979c7d562aed05\",\"messageId\":\"6aca0b0e261cbe23404846ae\",\"eventIndex\":374,\"eventType\":\"step_thinking\",\"stepId\":\"4\",\"status\":\"processing\",\"thinking\":{\"delta\":\" \\\"Not enough credits\\\" earlier,\"}}"
+   ],
+   "ms": 94386
+  },
+  {
+   "slug": "palebluedot",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 100724
+  },
+  {
+   "slug": "profoundbio",
+   "coverage_pct": 80,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 103801
+  },
+  {
+   "slug": "silvercloud-health",
+   "coverage_pct": 80,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 77874
+  },
+  {
+   "slug": "trm-labs",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 98881
+  },
+  {
+   "slug": "wildfire",
+   "coverage_pct": 0,
+   "perplexity": "attached, no sources frame",
+   "errors": [
+    "answer did not contain a parseable JSON object"
+   ],
+   "ms": 131002
+  }
+ ],
+ "error": null
+}

@@ -1,0 +1,1626 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "playwright.config.ts",
+      "--list"
+    ],
+    "configFile": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/playwright.config.ts",
+    "rootDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": [
+          "/mobile\\.spec\\.ts/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/mobile\\.spec\\.ts/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "name": "desktop",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "snapshotDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": {},
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 240000,
+        "use": {
+          "baseURL": "https://sb-1z9qy0mx48sk.vercel.run",
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox",
+              "--disable-dev-shm-usage"
+            ]
+          },
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "desktop"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "name": "mobile",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "snapshotDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6ac74d6595268adc215dd5d1/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 240000,
+        "use": {
+          "baseURL": "https://sb-1z9qy0mx48sk.vercel.run",
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox",
+              "--disable-dev-shm-usage"
+            ]
+          },
+          "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Mobile Safari/537.36",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "screen": {
+            "width": 412,
+            "height": 915
+          },
+          "deviceScaleFactor": 2.625,
+          "isMobile": true,
+          "hasTouch": true,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "mobile"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "a11y.spec.ts",
+      "file": "a11y.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Accessibility (axe, WCAG 2.0/2.1 A+AA)",
+          "file": "a11y.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "onboarding: no serious/critical violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-416dc7e1f8af6bf77f07",
+              "file": "a11y.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "overview: no serious/critical violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-e0832c92454dc056c764",
+              "file": "a11y.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "company: no serious/critical violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-fbcc085acb112fecc40f",
+              "file": "a11y.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "news: no serious/critical violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-3759162ac35a4fe6581a",
+              "file": "a11y.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "settings: no serious/critical violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-1997be9fc068e3d4b155",
+              "file": "a11y.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "chat: no serious/critical violations",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "aa3ad05f8c0e05077efb-7752aa95745f276454ea",
+              "file": "a11y.spec.ts",
+              "line": 6,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "chat.spec.ts",
+      "file": "chat.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Analyst chat — streaming",
+          "file": "chat.spec.ts",
+          "line": 8,
+          "column": 6,
+          "specs": [
+            {
+              "title": "answer streams incrementally via SSE with plugin activity and sources",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6dac514d5d837ca37b9e-d9767317ad9f38386509",
+              "file": "chat.spec.ts",
+              "line": 11,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "company.spec.ts",
+      "file": "company.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Company page",
+          "file": "company.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "renders Fervo Energy with breadcrumb back to overview",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "7a6d1e85e48433261853-e27e49dfafc18576e5e7",
+              "file": "company.spec.ts",
+              "line": 4,
+              "column": 7
+            },
+            {
+              "title": "unknown slug shows a not-found state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "7a6d1e85e48433261853-d85e748ce4d39e28720b",
+              "file": "company.spec.ts",
+              "line": 14,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "growth.spec.ts",
+      "file": "growth.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "GROWTH values grid",
+          "file": "growth.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "renders six values, all collapsed, with correct ARIA wiring",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-f77fdace29838be8e80c",
+              "file": "growth.spec.ts",
+              "line": 13,
+              "column": 7
+            },
+            {
+              "title": "click expands and reveals the description; click again collapses",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-7d2d4e415d7df050d9fc",
+              "file": "growth.spec.ts",
+              "line": 28,
+              "column": 7
+            },
+            {
+              "title": "keyboard: Enter toggles, arrows move focus between values",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-c0769b5c3d34efe04fb2",
+              "file": "growth.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "collapsed panel content is not reachable by Tab (inert)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-a5e3c9e2a8276d243f43",
+              "file": "growth.spec.ts",
+              "line": 71,
+              "column": 7
+            },
+            {
+              "title": "renders a letter tile and three labelled lines (Definition / What it looks like here / Example) per value",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-326206771e7e3872eec4",
+              "file": "growth.spec.ts",
+              "line": 79,
+              "column": 7
+            },
+            {
+              "title": "every value carries its own 'What it looks like here' line",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-04008cba37229f2777fa",
+              "file": "growth.spec.ts",
+              "line": 109,
+              "column": 7
+            },
+            {
+              "title": "reveals G-R-O-W-T-H on viewport entry (data-revealed, staggered --i)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-236ba2c514d68fb6ec6e",
+              "file": "growth.spec.ts",
+              "line": 124,
+              "column": 7
+            },
+            {
+              "title": "hover / expanded / focus states are brand green on tile, card border and chevron; no old blue anywhere",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-59d6d29228c972dce2e6",
+              "file": "growth.spec.ts",
+              "line": 138,
+              "column": 7
+            },
+            {
+              "title": "Escape collapses the focused expanded tile and keeps focus on it",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-e5203bee038ccb668a42",
+              "file": "growth.spec.ts",
+              "line": 200,
+              "column": 7
+            },
+            {
+              "title": "lights up G→R→O→W→T→H once on first scroll-into-view (data-lit timer chain)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-669bd55c90fa2e2fc4a1",
+              "file": "growth.spec.ts",
+              "line": 211,
+              "column": 7
+            },
+            {
+              "title": "390px viewport: single column, no horizontal overflow, long names wrap",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-81239d81b421fed2bef3",
+              "file": "growth.spec.ts",
+              "line": 248,
+              "column": 7
+            },
+            {
+              "title": "still toggles under prefers-reduced-motion",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-ed8f7a0bf45758b89079",
+              "file": "growth.spec.ts",
+              "line": 261,
+              "column": 7
+            },
+            {
+              "title": "prefers-reduced-motion: no light-up (no data-lit after 2s) and no transitions on tile/chevron/panel",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-d103c7062094734df9c1",
+              "file": "growth.spec.ts",
+              "line": 278,
+              "column": 7
+            },
+            {
+              "title": "hover/focus/expanded tiles are brand green, never blue",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1f595333b79266d37cc2-d51685a20f31b4c89911",
+              "file": "growth.spec.ts",
+              "line": 298,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "images.spec.ts",
+      "file": "images.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Images render (naturalWidth > 0)",
+          "file": "images.spec.ts",
+          "line": 23,
+          "column": 6,
+          "specs": [
+            {
+              "title": "overview: B Capital logo and (when present) company logos",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "382f756c414be060b8fd-82b9945aa253891ac68a",
+              "file": "images.spec.ts",
+              "line": 24,
+              "column": 7
+            },
+            {
+              "title": "company page: Fervo logo and news-card images",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "382f756c414be060b8fd-b7dd9eed84b756b586a9",
+              "file": "images.spec.ts",
+              "line": 50,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "news.spec.ts",
+      "file": "news.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "News Pulse",
+          "file": "news.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "renders cards with external source links",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "8524236c51b2d678c46e-c449abad14db914723a4",
+              "file": "news.spec.ts",
+              "line": 4,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "onboarding.spec.ts",
+      "file": "onboarding.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Onboarding",
+          "file": "onboarding.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "renders the company picker with a live count",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-4ad4414f66e7b8675134",
+              "file": "onboarding.spec.ts",
+              "line": 4,
+              "column": 7
+            },
+            {
+              "title": "backend status badge shows live data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "fe534f0825407f213faa-c417f3a4ed38fb799844",
+              "file": "onboarding.spec.ts",
+              "line": 14,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "overview.spec.ts",
+      "file": "overview.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Portfolio Overview",
+          "file": "overview.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "live badge, treemap tiles and paginated table render",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6e2f4ad74dab265ac116-fcea5ee39002228302d7",
+              "file": "overview.spec.ts",
+              "line": 9,
+              "column": 7
+            },
+            {
+              "title": "search filters rows and show-all expands to 136",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6e2f4ad74dab265ac116-81465989e6b5b6998ef1",
+              "file": "overview.spec.ts",
+              "line": 18,
+              "column": 7
+            },
+            {
+              "title": "sort by score toggles row order",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6e2f4ad74dab265ac116-d095565b24306f676b07",
+              "file": "overview.spec.ts",
+              "line": 31,
+              "column": 7
+            },
+            {
+              "title": "row links navigate to the company page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6e2f4ad74dab265ac116-c61e8c62f633c9c71a2b",
+              "file": "overview.spec.ts",
+              "line": 41,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "qa-chat-timing.spec.ts",
+      "file": "qa-chat-timing.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "QA chat timing @ desktop",
+          "file": "qa-chat-timing.spec.ts",
+          "line": 209,
+          "column": 8,
+          "specs": [
+            {
+              "title": "two turns in one thread: timings, tool card, session reuse",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6c6546608d9a419477a4-ed1d520d031211539cb2",
+              "file": "qa-chat-timing.spec.ts",
+              "line": 211,
+              "column": 9
+            }
+          ]
+        },
+        {
+          "title": "QA chat timing @ mobile",
+          "file": "qa-chat-timing.spec.ts",
+          "line": 209,
+          "column": 8,
+          "specs": [
+            {
+              "title": "two turns in one thread: timings, tool card, session reuse",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "6c6546608d9a419477a4-596fc98b103b16533109",
+              "file": "qa-chat-timing.spec.ts",
+              "line": 211,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "qa-routes.spec.ts",
+      "file": "qa-routes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "QA routes @ desktop 1440x900",
+          "file": "qa-routes.spec.ts",
+          "line": 53,
+          "column": 8,
+          "specs": [
+            {
+              "title": "/onboarding",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-077b6eedc259b5c70f91",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/overview",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-62c1d833a5beb0337b1a",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/company/fervo-energy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-93f8330ae88d76f1a5da",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/company/perplexity-ai",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-0cb91a085519039789b3",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/news",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-007cf098fbf0a60eb5d6",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/settings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-adc280592ffc016eab3b",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/chat",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-47e95d6db648a981c68c",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/company/does-not-exist",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-3c3ee29dab543be4d817",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/onboarding with reduced motion: growth value expands",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-d53b98b1bc33d74c1518",
+              "file": "qa-routes.spec.ts",
+              "line": 128,
+              "column": 5
+            }
+          ]
+        },
+        {
+          "title": "QA routes @ mobile 390x844",
+          "file": "qa-routes.spec.ts",
+          "line": 53,
+          "column": 8,
+          "specs": [
+            {
+              "title": "/onboarding",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-aa69fd9dac0782a18ada",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/overview",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-cf9f1229cdb77deb6111",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/company/fervo-energy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-c035c51a6262ac61f5ae",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/company/perplexity-ai",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-4a04a31b95ecf8c10f71",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/news",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-eccd675b5a2c82a5d5ce",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/settings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-a8d8c44a1025e0a0c00f",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/chat",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-ddc8011c9006eed8d80f",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/company/does-not-exist",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-20d5aa04cb5bdc7f69a3",
+              "file": "qa-routes.spec.ts",
+              "line": 58,
+              "column": 7
+            },
+            {
+              "title": "/onboarding with reduced motion: growth value expands",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-0c659475a8a082afe8a9",
+              "file": "qa-routes.spec.ts",
+              "line": 128,
+              "column": 5
+            }
+          ]
+        },
+        {
+          "title": "Logo audit (browser) @ desktop",
+          "file": "qa-routes.spec.ts",
+          "line": 145,
+          "column": 6,
+          "specs": [
+            {
+              "title": "collect every company-logo / logo-img on /overview (paging ≤60 s)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d58fd4b27db1e5842acd-0f64d2f0321900d84bf7",
+              "file": "qa-routes.spec.ts",
+              "line": 147,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "settings.spec.ts",
+      "file": "settings.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Settings",
+          "file": "settings.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "shows user and backend inputs; model and plugin are fixed (DeepSeek Flash v4.1 · Perplexity only)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d877ffdf71ec720167ae-edfee1084ae1c0eb93b4",
+              "file": "settings.spec.ts",
+              "line": 4,
+              "column": 7
+            },
+            {
+              "title": "editing the user id persists to localStorage",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "d877ffdf71ec720167ae-75f7206edc7a6667c580",
+              "file": "settings.spec.ts",
+              "line": 23,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "mobile.spec.ts",
+      "file": "mobile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Mobile layout (Pixel 7, 390x844)",
+          "file": "mobile.spec.ts",
+          "line": 4,
+          "column": 6,
+          "specs": [
+            {
+              "title": "onboarding: no horizontal overflow, nav visible, no page errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile",
+                  "projectName": "mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e79c838550b25e92508e-a7f09a51699435258133",
+              "file": "mobile.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "overview: no horizontal overflow, nav visible, no page errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile",
+                  "projectName": "mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e79c838550b25e92508e-4e87ebed0bc7634752be",
+              "file": "mobile.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "company: no horizontal overflow, nav visible, no page errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile",
+                  "projectName": "mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e79c838550b25e92508e-fb3bb1c4f3d60ec8aec8",
+              "file": "mobile.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "news: no horizontal overflow, nav visible, no page errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile",
+                  "projectName": "mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e79c838550b25e92508e-66e97f513e64649e357f",
+              "file": "mobile.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "settings: no horizontal overflow, nav visible, no page errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile",
+                  "projectName": "mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e79c838550b25e92508e-632ce3e7907e34b29204",
+              "file": "mobile.spec.ts",
+              "line": 6,
+              "column": 9
+            },
+            {
+              "title": "chat: no horizontal overflow, nav visible, no page errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile",
+                  "projectName": "mobile",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e79c838550b25e92508e-30a0575d1169b99bf8ef",
+              "file": "mobile.spec.ts",
+              "line": 6,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-10T10:25:46.710Z",
+    "duration": 157.13,
+    "expected": 0,
+    "skipped": 61,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

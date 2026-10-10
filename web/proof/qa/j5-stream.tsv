@@ -1,0 +1,364 @@
+889	data: {"type":"RUN_STARTED","threadId":"qa-1791627717","runId":"c6ab5f7d-3a81-4298-aae2-fd2cb73aa755"}
+891	
+894	data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"connecting","elapsedMs":1,"endpointId":"predefined-deepseek-flash","endpointLabel":"DeepSeek Flash v4.1","reasoningMode":"medium","pluginIds":["plugin-1722260873","plugin-1741871229"],"pluginNames":["Perplexity","GPT Search"],"droppedPluginIds":[],"sessionKnown":false}}
+896	
+901	data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"creating-session","elapsedMs":1}}
+905	
+1012	data: {"type":"CUSTOM","name":"ondemand.session","value":{"sessionId":"6aca11c5f7979c7d562aef90","created":true,"viaHeader":false,"endpointId":"predefined-deepseek-flash","endpointLabel":"DeepSeek Flash v4.1","reasoningMode":"medium","pluginIds":["plugin-1722260873","plugin-1741871229"]}}
+1014	
+1016	data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"querying","elapsedMs":125,"sessionId":"6aca11c5f7979c7d562aef90"}}
+1017	
+1019	data: {"type":"CUSTOM","name":"ondemand.request","value":{"elapsedMs":125,"method":"POST","proxy":"/api/chat","upstream":"POST api.on-demand.io/chat/v1/sessions/{id}/query","body":{"endpointId":"predefined-deepseek-flash","endpointLabel":"DeepSeek Flash v4.1","reasoningMode":"medium","responseMode":"stream","pluginIds":["plugin-1722260873","plugin-1741871229"],"queryChars":60,"systemContextChars":0},"sessionId":"6aca11c5f7979c7d562aef90","sessionCreated":true}}
+1021	
+1444	data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"streaming","elapsedMs":558}}
+1445	
+2089	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"quietMs":643,"elapsedMs":1201}}
+2091	
+2388	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":1,"quietMs":943,"elapsedMs":1501}}
+2389	
+2598	data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"planning","elapsedMs":1711,"firstFrameMs":1711}}
+2599	
+2601	data: {"type":"TOOL_CALL_START","toolCallId":"8cb6ebee-0fc1-4c9e-a1c1-ea4be53cb89e","toolCallName":"Perplexity","parentMessageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e"}
+2602	
+2603	data: {"type":"TOOL_CALL_ARGS","toolCallId":"8cb6ebee-0fc1-4c9e-a1c1-ea4be53cb89e","delta":"{\"plugin\":\"Perplexity\",\"pluginId\":\"plugin-1722260873\",\"query\":\"In one sentence, what does Fervo Energy do? Cite one source.\",\"stepId\":\"\",\"endpointId\":\"predefined-deepseek-flash\",\"endpointLabel\":\"DeepSeek Flash v4.1\",\"reasoningMode\":\"medium\"}"}
+2605	
+2606	data: {"type":"TOOL_CALL_END","toolCallId":"8cb6ebee-0fc1-4c9e-a1c1-ea4be53cb89e"}
+2607	
+2609	data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"researching","elapsedMs":1711,"plugin":"Perplexity","pluginId":"plugin-1722260873","stepId":""}}
+2610	
+2611	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":false,"derived":true,"elapsedMs":1711}}
+2612	
+2614	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1711,"kind":"planning","delta":"The user asks: \"In one sentence","stepId":""}}
+2616	
+2617	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1719,"kind":"planning","delta":", what does Fervo Energy do? Cite","stepId":""}}
+2618	
+2651	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1765,"kind":"planning","delta":" one source.\" This needs a plugin","stepId":""}}
+2652	
+2688	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1802,"kind":"planning","delta":" to cite a source. Use gptSearch","stepId":""}}
+2689	
+2701	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1815,"kind":"planning","delta":" or perplexity. Manually selected","stepId":""}}
+2703	
+2730	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1843,"kind":"planning","delta":" plugins: gptSearch and perplex","stepId":""}}
+2732	
+2782	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1896,"kind":"planning","delta":"ity. This is a simple factual lookup","stepId":""}}
+2783	
+2795	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1909,"kind":"planning","delta":" with citation. One step.\n\nWhich","stepId":""}}
+2796	
+2822	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1936,"kind":"planning","delta":" plugin best? The request wants","stepId":""}}
+2824	
+2862	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1976,"kind":"planning","delta":" a one-sentence answer with one","stepId":""}}
+2863	
+2892	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2007,"kind":"planning","delta":" source. gptSearch provides inline","stepId":""}}
+2894	
+2951	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2066,"kind":"planning","delta":" citations. Perplexity returns","stepId":""}}
+2953	
+2955	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2066,"kind":"planning","delta":" sources. Either works. I'll include","stepId":""}}
+2956	
+2968	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2082,"kind":"planning","delta":" gptSearch as primary. Could include","stepId":""}}
+2970	
+2984	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2097,"kind":"planning","delta":" perplexity too but simplest is","stepId":""}}
+2985	
+2997	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2111,"kind":"planning","delta":" one step with gptSearch. Media","stepId":""}}
+2999	
+3038	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2152,"kind":"planning","delta":" tier — keep it minimal. I'll use","stepId":""}}
+3040	
+3083	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2193,"kind":"planning","delta":" gptSearch.\n\nPlan required: true","stepId":""}}
+3084	
+3121	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2235,"kind":"plan","delta":"{\n  \"title\": \"I'll look up what","stepId":""}}
+3122	
+3148	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2262,"kind":"plan","delta":" Fervo Energy does and cite one","stepId":""}}
+3149	
+3169	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2283,"kind":"plan","delta":" source.\",\n  \"objective\": \"Provide","stepId":""}}
+3170	
+3188	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2302,"kind":"plan","delta":" a one-sentence description of","stepId":""}}
+3190	
+3191	data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"planning","elapsedMs":2302,"statusType":"planning","statusMessage":"Provide a one-sentence description of"}}
+3193	
+3214	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2328,"kind":"plan","delta":" Fervo Energy's business with a","stepId":""}}
+3215	
+3225	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2339,"kind":"plan","delta":" single credible source citation","stepId":""}}
+3226	
+3253	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2368,"kind":"plan","delta":".\",\n  \"plan_required\": true,\n ","stepId":""}}
+3255	
+3284	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2398,"kind":"plan","delta":" \"plan_skip_reason\": \"\",\n  \"steps","stepId":""}}
+3285	
+3307	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2422,"kind":"plan","delta":"\": [\n    {\n      \"title\": \"Search","stepId":""}}
+3309	
+3338	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2452,"kind":"plan","delta":"ing Fervo Energy info\",\n      \"","stepId":""}}
+3339	
+3349	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2464,"kind":"plan","delta":"user_query\": \"In one sentence,","stepId":""}}
+3351	
+3376	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2491,"kind":"plan","delta":" what does Fervo Energy do? Provide","stepId":""}}
+3378	
+3428	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2542,"kind":"plan","delta":" one cited source.\",\n      \"ass","stepId":""}}
+3431	
+3433	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2545,"kind":"plan","delta":"istant_query\": \"\",\n      \"depends","stepId":""}}
+3434	
+3457	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2571,"kind":"plan","delta":"\": [],\n      \"plugins\": [\"gptSearch","stepId":""}}
+3458	
+3493	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2607,"kind":"planning","delta":", one step.","stepId":""}}
+3494	
+3496	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2607,"kind":"plan","delta":"\"]\n    }\n  ]\n}","stepId":""}}
+3498	
+3500	data: {"type":"CUSTOM","name":"ondemand.plan","value":{"elapsedMs":2607,"objective":"Provide a one-sentence description of Fervo Energy's business with a single credible source citation.","steps":[{"id":"1","title":"Searching Fervo Energy info","query":"In one sentence, what does Fervo Energy do? Provide one cited source.","plugins":["gptSearch"]}],"source":"planning_output"}}
+3501	
+3503	data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"planning","elapsedMs":2607,"statusType":"plan_created","statusMessage":"Provide a one-sentence description of Fervo Energy's business with a single credible source citation.","steps":1}}
+3505	
+4189	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"quietMs":696,"elapsedMs":3303}}
+4191	
+4489	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":1,"quietMs":996,"elapsedMs":3603}}
+4491	
+4789	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":2,"quietMs":1296,"elapsedMs":3903}}
+4790	
+5002	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":false,"derived":true,"elapsedMs":4117}}
+5004	
+5005	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4117,"kind":"step","delta":"The user wants a one-sentence description","stepId":"1"}}
+5007	
+5043	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4158,"kind":"step","delta":" of Fervo Energy with a cited source","stepId":"1"}}
+5045	
+5056	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4170,"kind":"step","delta":". I should use gptSearch plugin","stepId":"1"}}
+5057	
+5095	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4209,"kind":"step","delta":" to get real-time info with citations","stepId":"1"}}
+5097	
+5113	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4227,"kind":"step","delta":".\n\nLet me construct the plugin","stepId":"1"}}
+5114	
+5156	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4263,"kind":"step_output","delta":"{\"title\":\"Searching Fervo Energy","stepId":"1"}}
+5157	
+5193	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4307,"kind":"step_output","delta":" overview\",\"plugins\":[{\"plugin","stepId":"1"}}
+5194	
+5219	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4333,"kind":"step_output","delta":"Id\":\"plugin-1741871229\",\"name\":\"","stepId":"1"}}
+5220	
+5222	data: {"type":"TOOL_CALL_START","toolCallId":"b5b4fa4e-9a2d-499f-a185-ba144f319e76","toolCallName":"GPT Search","parentMessageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e"}
+5223	
+5225	data: {"type":"TOOL_CALL_ARGS","toolCallId":"b5b4fa4e-9a2d-499f-a185-ba144f319e76","delta":"{\"plugin\":\"GPT Search\",\"pluginId\":\"plugin-1741871229\",\"query\":\"In one sentence, what does Fervo Energy do? Cite one source.\",\"stepId\":\"1\",\"endpointId\":\"predefined-deepseek-flash\",\"endpointLabel\":\"DeepSeek Flash v4.1\",\"reasoningMode\":\"medium\"}"}
+5226	
+5228	data: {"type":"TOOL_CALL_END","toolCallId":"b5b4fa4e-9a2d-499f-a185-ba144f319e76"}
+5229	
+5231	data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"researching","elapsedMs":4333,"plugin":"GPT Search","pluginId":"plugin-1741871229","stepId":"1"}}
+5232	
+5242	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4356,"kind":"step_output","delta":"gptSearch\",\"description\":\"Accepts","stepId":"1"}}
+5243	
+5257	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4372,"kind":"step_output","delta":" a single query parameter and maps","stepId":"1"}}
+5259	
+5283	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4397,"kind":"step_output","delta":" it to the OpenAI Chat Complet","stepId":"1"}}
+5285	
+5296	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4411,"kind":"step_output","delta":"ions API using the search-enabled","stepId":"1"}}
+5298	
+5311	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4425,"kind":"step_output","delta":" gpt-5-search-api model. Responses","stepId":"1"}}
+5312	
+5337	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4451,"kind":"step_output","delta":" include inline web citations as","stepId":"1"}}
+5338	
+5353	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4466,"kind":"step_output","delta":" annotations of type `url_citation","stepId":"1"}}
+5354	
+5394	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4508,"kind":"step_output","delta":"`.\",\"api_request_parameters\":{\"","stepId":"1"}}
+5396	
+5537	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4651,"kind":"step_output","delta":"query\":\"In one sentence, what does","stepId":"1"}}
+5538	
+5540	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4654,"kind":"step_output","delta":" Fervo Energy do?\",\"messages\":[","stepId":"1"}}
+5541	
+5544	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4659,"kind":"step_output","delta":"{\"role\":\"user\",\"content\":\"In one","stepId":"1"}}
+5545	
+5550	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4664,"kind":"step_output","delta":" sentence, what does Fervo Energy","stepId":"1"}}
+5551	
+5554	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4669,"kind":"step_output","delta":" do? Provide one cited source.\"","stepId":"1"}}
+5555	
+5563	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4675,"kind":"step_output","delta":"}],\"model\":\"gpt-5-search-api\"}","stepId":"1"}}
+5565	
+5566	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4679,"kind":"step_output","delta":",\"all_parameters_hydrated\":true","stepId":"1"}}
+5567	
+5569	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4684,"kind":"step_output","delta":",\"dependencies\":[],\"identifier","stepId":"1"}}
+5570	
+5608	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4723,"kind":"step","delta":" call.","stepId":"1"}}
+5610	
+5611	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":4723,"kind":"step_output","delta":"\":\"rest_api\"}]}","stepId":"1"}}
+5612	
+5614	data: {"type":"CUSTOM","name":"ondemand.step","value":{"elapsedMs":4723,"phase":"start","stepId":"1","index":1,"label":"Searching Fervo Energy overview","query":null,"source":"step_output"}}
+5615	
+6291	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"quietMs":682,"elapsedMs":5405}}
+6292	
+6591	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":1,"quietMs":982,"elapsedMs":5705}}
+6593	
+6891	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":2,"quietMs":1282,"elapsedMs":6005}}
+6893	
+7191	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":3,"quietMs":1582,"elapsedMs":6305}}
+7192	
+7491	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":4,"quietMs":1882,"elapsedMs":6605}}
+7493	
+7792	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":5,"quietMs":2183,"elapsedMs":6906}}
+7793	
+8092	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":6,"quietMs":2483,"elapsedMs":7206}}
+8093	
+8393	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":7,"quietMs":2783,"elapsedMs":7506}}
+8394	
+8693	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":8,"quietMs":3083,"elapsedMs":7806}}
+8694	
+8992	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":9,"quietMs":3383,"elapsedMs":8106}}
+8993	
+9292	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":10,"quietMs":3683,"elapsedMs":8406}}
+9294	
+9592	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":11,"quietMs":3983,"elapsedMs":8706}}
+9593	
+9892	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":12,"quietMs":4283,"elapsedMs":9006}}
+9893	
+10192	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":13,"quietMs":4583,"elapsedMs":9306}}
+10194	
+10492	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":14,"quietMs":4883,"elapsedMs":9606}}
+10494	
+10796	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":15,"quietMs":5183,"elapsedMs":9906}}
+10798	
+10888	data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T10:22:07.869Z","elapsedMs":10002,"sinceLastFrameMs":5279}}
+10889	
+11094	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":16,"quietMs":5484,"elapsedMs":10207}}
+11095	
+11393	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":17,"quietMs":5784,"elapsedMs":10507}}
+11395	
+11694	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":18,"quietMs":6084,"elapsedMs":10807}}
+11695	
+11993	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":19,"quietMs":6384,"elapsedMs":11107}}
+11995	
+12293	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":20,"quietMs":6684,"elapsedMs":11407}}
+12294	
+12593	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":21,"quietMs":6984,"elapsedMs":11707}}
+12594	
+12905	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":22,"quietMs":7285,"elapsedMs":12008}}
+12907	
+13199	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":23,"quietMs":7585,"elapsedMs":12308}}
+13203	
+13524	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":24,"quietMs":7885,"elapsedMs":12608}}
+13526	
+13794	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":25,"quietMs":8185,"elapsedMs":12908}}
+13795	
+14096	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":26,"quietMs":8485,"elapsedMs":13208}}
+14098	
+14394	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":27,"quietMs":8786,"elapsedMs":13509}}
+14396	
+14696	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":28,"quietMs":9086,"elapsedMs":13810}}
+14697	
+14996	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":29,"quietMs":9387,"elapsedMs":14110}}
+14997	
+15297	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":30,"quietMs":9687,"elapsedMs":14410}}
+15298	
+15596	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":31,"quietMs":9987,"elapsedMs":14710}}
+15597	
+15897	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":32,"quietMs":10287,"elapsedMs":15010}}
+15899	
+16199	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":33,"quietMs":10587,"elapsedMs":15310}}
+16200	
+16496	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":34,"quietMs":10887,"elapsedMs":15610}}
+16498	
+16797	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":35,"quietMs":11187,"elapsedMs":15910}}
+16798	
+17096	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":36,"quietMs":11487,"elapsedMs":16210}}
+17097	
+17398	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":37,"quietMs":11787,"elapsedMs":16510}}
+17401	
+17697	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":38,"quietMs":12087,"elapsedMs":16810}}
+17698	
+17997	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":39,"quietMs":12388,"elapsedMs":17111}}
+17998	
+18297	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":40,"quietMs":12688,"elapsedMs":17411}}
+18299	
+18597	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":41,"quietMs":12988,"elapsedMs":17711}}
+18599	
+18897	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":42,"quietMs":13288,"elapsedMs":18011}}
+18899	
+19197	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":43,"quietMs":13588,"elapsedMs":18311}}
+19199	
+19499	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":44,"quietMs":13889,"elapsedMs":18612}}
+19501	
+19799	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":45,"quietMs":14189,"elapsedMs":18912}}
+19801	
+19859	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":false,"derived":true,"elapsedMs":18970}}
+19860	
+19861	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":18970,"kind":"fulfillment","delta":"We need answer in one sentence","stepId":"1"}}
+19863	
+19879	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":18994,"kind":"fulfillment","delta":", cite one source. Use provided","stepId":"1"}}
+19881	
+19894	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19008,"kind":"fulfillment","delta":" URL. Must not mention context","stepId":"1"}}
+19896	
+19961	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19075,"kind":"fulfillment","delta":". Keep concise. We need maybe \"","stepId":"1"}}
+19962	
+20000	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19114,"kind":"fulfillment","delta":"Fervo Energy develops, owns, and","stepId":"1"}}
+20001	
+20003	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19117,"kind":"fulfillment","delta":" operates enhanced geothermal systems","stepId":"1"}}
+20005	
+20041	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19155,"kind":"fulfillment","delta":" (EGS) using technologies like","stepId":"1"}}
+20043	
+20045	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19156,"kind":"fulfillment","delta":" horizontal drilling and fiber","stepId":"1"}}
+20050	
+20080	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19187,"kind":"fulfillment","delta":"-optic sensing to deliver reliable","stepId":"1"}}
+20084	
+20094	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19208,"kind":"fulfillment","delta":", carbon-free power around the","stepId":"1"}}
+20096	
+20107	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19221,"kind":"fulfillment","delta":" clock.\" Cite source URL.\n\nNeed","stepId":"1"}}
+20108	
+20147	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19261,"kind":"fulfillment","delta":" one sentence, cite source. Ensure","stepId":"1"}}
+20149	
+20186	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19300,"kind":"fulfillment","delta":" no extra. URL exactly provided","stepId":"1"}}
+20188	
+20213	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19327,"kind":"fulfillment","delta":". Use markdown link maybe. The","stepId":"1"}}
+20214	
+20238	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19352,"kind":"fulfillment","delta":" instruction says if URL placeholder","stepId":"1"}}
+20239	
+20292	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19406,"kind":"fulfillment","delta":" use exact. Here actual URL. We","stepId":"1"}}
+20294	
+20320	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19434,"kind":"fulfillment","delta":" can cite as source. Probably okay","stepId":"1"}}
+20322	
+20372	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19486,"kind":"fulfillment","delta":".\n\nNeed not repeat user query.","stepId":"1"}}
+20374	
+20386	data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":19500,"kind":"fulfillment","delta":" Don't mention context. Final.","stepId":"1"}}
+20388	
+20413	data: {"type":"TEXT_MESSAGE_START","messageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e","role":"assistant"}
+20414	
+20415	data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e","delta":"Fervo Energy develops, owns, and"}
+20417	
+20424	data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e","delta":" operates enhanced geothermal systems"}
+20425	
+20450	data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e","delta":" (EGS) using technologies like"}
+20452	
+20453	data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e","delta":" horizontal drilling and fiber"}
+20454	
+20464	data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e","delta":"-optic sensing to deliver reliable"}
+20465	
+20487	data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e","delta":", carbon-free power around the"}
+20488	
+20490	data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e","delta":" clock. ([sec.gov](https://www"}
+20491	
+20534	data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e","delta":".sec.gov/Archives/edgar/data/185"}
+20536	
+20558	data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e","delta":"3868/000162828026056457/R10.htm"}
+20559	
+20605	data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e","delta":"?utm_source=openai))"}
+20606	
+20617	data: {"type":"CUSTOM","name":"ondemand.metrics","value":{"elapsedMs":19731,"publicMetrics":{"inputTokens":1327,"outputTokens":202,"totalTokens":1529,"ragTimeSec":12.1,"fulfillmentTimeSec":7.02,"totalTimeSec":19.12},"firstTokenMs":19526,"pluginIds":["plugin-1722260873","plugin-1741871229"]}}
+20618	
+20892	data: {"type":"CUSTOM","name":"ondemand.heartbeat","value":{"t":"2026-10-10T10:22:17.869Z","elapsedMs":20002,"sinceLastFrameMs":271}}
+20893	
+21299	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"quietMs":682,"elapsedMs":20413}}
+21301	
+21599	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":1,"quietMs":982,"elapsedMs":20713}}
+21600	
+21900	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":2,"quietMs":1282,"elapsedMs":21013}}
+21901	
+22200	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":3,"quietMs":1583,"elapsedMs":21314}}
+22202	
+22504	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":4,"quietMs":1885,"elapsedMs":21616}}
+22506	
+22627	data: {"type":"TOOL_CALL_RESULT","messageId":"3da8fd02-4ebb-4880-a630-57451a6395c6","toolCallId":"8cb6ebee-0fc1-4c9e-a1c1-ea4be53cb89e","role":"tool","content":"{\"status\":\"error\",\"plugin\":\"Perplexity\",\"pluginId\":\"plugin-1722260873\",\"durationMs\":20029,\"sources\":0,\"message\":\"Perplexity returned no sources for this question\"}","isError":true,"error":"Perplexity returned no sources for this question"}
+22629	
+22631	data: {"type":"TOOL_CALL_RESULT","messageId":"4e19f4c0-6bf7-4181-9d13-6486423c9ea5","toolCallId":"b5b4fa4e-9a2d-499f-a185-ba144f319e76","role":"tool","content":"{\"status\":\"ok\",\"plugin\":\"GPT Search\",\"pluginId\":\"plugin-1741871229\",\"durationMs\":17407,\"sources\":0}"}
+22632	
+22634	data: {"type":"TEXT_MESSAGE_END","messageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e"}
+22635	
+22637	data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":false,"derived":true,"elapsedMs":21740}}
+22638	
+22640	data: {"type":"CUSTOM","name":"ondemand.step","value":{"elapsedMs":21740,"phase":"done","stepId":"1","index":1,"message":"answer written"}}
+22641	
+22643	data: {"type":"CUSTOM","name":"ondemand.sources","value":{"elapsedMs":21740,"messageId":"0d285695-17b8-48ac-bcb2-52f2d2aeb61e","pluginId":"plugin-1722260873","pluginName":"Perplexity","partial":false,"sources":[]}}
+22644	
+22646	data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"done","elapsedMs":21740,"chars":306,"sources":0,"firstTokenMs":19526}}
+22647	
+22648	data: {"type":"RUN_FINISHED","threadId":"qa-1791627717","runId":"c6ab5f7d-3a81-4298-aae2-fd2cb73aa755"}
+22650	
+22652	data: [DONE]
+22654	

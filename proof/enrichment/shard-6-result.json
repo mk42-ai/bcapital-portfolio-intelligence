@@ -1,0 +1,149 @@
+{
+ "shard": 6,
+ "job_id": "job-mv288ccg-a7ee",
+ "status": "done",
+ "started_at": "2026-10-10T10:03:40Z",
+ "finished_at": "2026-10-10T10:16:20Z",
+ "companies": [
+  "cadence",
+  "collinear-ai",
+  "evidation-health",
+  "fountain",
+  "heylibby",
+  "iru",
+  "labviva",
+  "meesho",
+  "nuvig",
+  "perimeter-81",
+  "remote",
+  "sonilo",
+  "turbine",
+  "zaihui"
+ ],
+ "completed": 14,
+ "total": 14,
+ "coverage_by_field": {
+  "description": 100,
+  "sector": 93,
+  "hq": 86,
+  "founded": 79,
+  "ceo": 79,
+  "founders": 79,
+  "headcount": 64,
+  "total_raised": 93,
+  "last_valuation": 64,
+  "funding_rounds": 100,
+  "key_products": 100,
+  "competitors": 64,
+  "recent_news": 100,
+  "risk_signals": 93,
+  "social_sentiment": 100
+ },
+ "per_company": [
+  {
+   "slug": "cadence",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 100149
+  },
+  {
+   "slug": "collinear-ai",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 113052
+  },
+  {
+   "slug": "evidation-health",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 83084
+  },
+  {
+   "slug": "fountain",
+   "coverage_pct": 100,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0dee95268adc215e0677\",\"messageId\":\"6aca0dee95268adc215e0679\",\"eventIndex\":325,\"eventType\":\"step_thinking\",\"stepId\":\"3\",\"status\":\"processing\",\"thinking\":{\"delta\":\" (\\\"Not enough credits\\\"), so gpt\"}}"
+   ],
+   "ms": 87586
+  },
+  {
+   "slug": "heylibby",
+   "coverage_pct": 67,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 94689
+  },
+  {
+   "slug": "iru",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 156955
+  },
+  {
+   "slug": "labviva",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 133385
+  },
+  {
+   "slug": "nuvig",
+   "coverage_pct": 53,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 79547
+  },
+  {
+   "slug": "meesho",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 149716
+  },
+  {
+   "slug": "remote",
+   "coverage_pct": 80,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0f78261cbe23404848b5\",\"messageId\":\"6aca0f7995268adc215e0798\",\"eventIndex\":248,\"eventType\":\"step_thinking\",\"stepId\":\"4\",\"status\":\"processing\",\"thinking\":{\"delta\":\" failed with \\\"Not enough credits\"}}"
+   ],
+   "ms": 80262
+  },
+  {
+   "slug": "sonilo",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 74599
+  },
+  {
+   "slug": "perimeter-81",
+   "coverage_pct": 93,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0f68f7979c7d562aeef5\",\"messageId\":\"6aca0f68f7979c7d562aeef6\",\"eventIndex\":491,\"eventType\":\"step_thinking\",\"stepId\":\"4\",\"status\":\"processing\",\"thinking\":{\"delta\":\" failed with \\\"Not enough credits\"}}"
+   ],
+   "ms": 172462
+  },
+  {
+   "slug": "turbine",
+   "coverage_pct": 80,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 58417
+  },
+  {
+   "slug": "zaihui",
+   "coverage_pct": 73,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 96193
+  }
+ ],
+ "error": null
+}

@@ -1,0 +1,139 @@
+{
+ "shard": 10,
+ "job_id": "job-mv288sry-7107",
+ "status": "done",
+ "started_at": "2026-10-10T10:04:02Z",
+ "finished_at": "2026-10-10T10:17:56Z",
+ "companies": [
+  "certn",
+  "deferred",
+  "figment",
+  "grace-investment-machine",
+  "icertis",
+  "karman-industries",
+  "lively",
+  "nektar-ai",
+  "overstory",
+  "positive-development",
+  "shipday",
+  "sugarfit",
+  "volastra"
+ ],
+ "completed": 13,
+ "total": 13,
+ "coverage_by_field": {
+  "description": 100,
+  "sector": 100,
+  "hq": 100,
+  "founded": 100,
+  "ceo": 62,
+  "founders": 69,
+  "headcount": 100,
+  "total_raised": 100,
+  "last_valuation": 77,
+  "funding_rounds": 100,
+  "key_products": 100,
+  "competitors": 62,
+  "recent_news": 100,
+  "risk_signals": 92,
+  "social_sentiment": 100
+ },
+ "per_company": [
+  {
+   "slug": "deferred",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 69114
+  },
+  {
+   "slug": "certn",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 90628
+  },
+  {
+   "slug": "grace-investment-machine",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 80229
+  },
+  {
+   "slug": "figment",
+   "coverage_pct": 80,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0dd7261cbe23404847ca\",\"messageId\":\"6aca0dd8261cbe23404847cb\",\"eventIndex\":442,\"eventType\":\"step_thinking\",\"stepId\":\"4\",\"status\":\"processing\",\"thinking\":{\"delta\":\" with \\\"Not enough credits\\\". So\"}}"
+   ],
+   "ms": 116272
+  },
+  {
+   "slug": "icertis",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 154211
+  },
+  {
+   "slug": "karman-industries",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 173524
+  },
+  {
+   "slug": "lively",
+   "coverage_pct": 80,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0ed7261cbe2340484840\",\"messageId\":\"6aca0ed8f7979c7d562aeea2\",\"eventIndex\":218,\"eventType\":\"step_thinking\",\"stepId\":\"2\",\"status\":\"processing\",\"thinking\":{\"delta\":\"not enough credits). I should use\"}}"
+   ],
+   "ms": 169089
+  },
+  {
+   "slug": "nektar-ai",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 137027
+  },
+  {
+   "slug": "overstory",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 77312
+  },
+  {
+   "slug": "positive-development",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 145454
+  },
+  {
+   "slug": "shipday",
+   "coverage_pct": 80,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 122495
+  },
+  {
+   "slug": "sugarfit",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 162719
+  },
+  {
+   "slug": "volastra",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 140308
+  }
+ ],
+ "error": null
+}

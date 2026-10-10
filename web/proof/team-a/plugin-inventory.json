@@ -1,0 +1,163 @@
+{
+  "probedAt": "2026-10-10T09:55Z",
+  "base": "https://api.on-demand.io",
+  "auth": "apikey header (never written here)",
+  "accountCompanyId": "6692b763e851d28a036ab30e",
+  "calls": {
+    "GET /plugin/v1/list": {
+      "raw": "{\"message\": \"Agent fetched successfully\", \"page\": 1, \"limit\": 100, \"data\": {\"total\": 0}}"
+    },
+    "GET /plugin/v1/list?page=1&limit=50": {
+      "raw": "{\"message\": \"Agent fetched successfully\", \"page\": 1, \"limit\": 50, \"data\": {\"total\": 0}}"
+    },
+    "GET /plugin/v1/list?status=all (undocumented; ignored)": {
+      "raw": "{\"message\": \"Agent fetched successfully\", \"page\": 1, \"limit\": 100, \"data\": {\"total\": 0}}"
+    },
+    "GET /plugin/v1/list?page=1&limit=50&type=chat": {
+      "raw": "{\"message\": \"Agent fetched successfully\", \"page\": 1, \"limit\": 50, \"data\": {\"total\": 0}}"
+    },
+    "GET /plugin/v1/search?limit=100&page=1": {
+      "meta": {
+        "total": 191,
+        "isComplete": false
+      },
+      "count": 99,
+      "first2": [
+        {
+          "id": "6628efaeeb5d83f69a6223b7",
+          "name": "Audio",
+          "identifier": "audio",
+          "category": "data_and_analytics",
+          "type": "file",
+          "source": "internal",
+          "status": "public",
+          "pluginId": "plugin-1713958830",
+          "chatSubType": "",
+          "isSubscribed": true,
+          "logoUrl": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1713958830__audio.png?<sas-signature-redacted>"
+        },
+        {
+          "id": "6628dee8808b4e32ea1c0d51",
+          "name": "Document",
+          "identifier": "document",
+          "category": "general",
+          "type": "file",
+          "source": "internal",
+          "status": "public",
+          "pluginId": "plugin-1713954536",
+          "chatSubType": "PRIMARYCHAT",
+          "isSubscribed": true,
+          "logoUrl": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1713954536__document.png?<sas-signature-redacted>"
+        }
+      ]
+    },
+    "GET /plugin/v1/search?limit=100&page=2": {
+      "meta": {
+        "total": 191,
+        "isComplete": false
+      },
+      "count": 91,
+      "first2": [
+        {
+          "id": "6893c1a19f869be5061d6b9f",
+          "name": "People Data Labs Agent",
+          "identifier": "rest_api",
+          "category": "data_and_analytics",
+          "type": "chat",
+          "source": "external",
+          "status": "public",
+          "pluginId": "plugin-1754513825",
+          "companyId": "675c8a2a7012f62396abeaf0",
+          "chatSubType": "PRIMARYCHAT",
+          "createdBy": "665d4873c98e9bc9e7158d11",
+          "isSubscribed": true,
+          "logoUrl": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1754513825__people-data-labs-agent.png?<sas-signature-redacted>"
+        },
+        {
+          "id": "667e58edfc36708f4a397432",
+          "name": "Hubspot CRM",
+          "identifier": "rest_api",
+          "category": "collaboration",
+          "type": "chat",
+          "source": "external",
+          "status": "public",
+          "pluginId": "plugin-1719556333",
+          "companyId": "665d4873c98e9bc9e7158d10",
+          "chatSubType": "PRIMARYCHAT",
+          "isSubscribed": true,
+          "logoUrl": "https://prodnewcdn-hfcfgzbngwbsfcep.a03.azurefd.net/logo/images/plugin-1719556333__hubspot-crm.png?<sas-signature-redacted>"
+        }
+      ]
+    },
+    "GET /plugin/v1/search?limit=100&page=3": {
+      "raw": "{\"message\": \"Search successful\", \"page\": 3, \"limit\": 100, \"data\": {\"total\": 191, \"isComplete\": false}}"
+    }
+  },
+  "searchAggregate": {
+    "itemsReturned": 190,
+    "uniqueIds": 190,
+    "declaredTotal": 191,
+    "byType": {
+      "chat": 182,
+      "file": 8
+    },
+    "chatSubscribed": 177,
+    "bySource": {
+      "external": 176,
+      "internal": 11,
+      "openapi": 3
+    },
+    "byStatus": {
+      "public": 189,
+      "pending": 1
+    },
+    "itemsWithCompanyId": 180,
+    "itemsWhoseCompanyIdIsThisAccount": 7,
+    "ownedByThisAccount": [
+      {
+        "pluginId": "plugin-1758893440",
+        "name": "F1 GP 2019 Agent",
+        "status": "public",
+        "createdBy": "6692b763e851d28a036ab30f"
+      },
+      {
+        "pluginId": "plugin-1758890369",
+        "name": "F1 Regulations 2026",
+        "status": "public",
+        "createdBy": "6692b763e851d28a036ab30f"
+      },
+      {
+        "pluginId": "plugin-1758891544",
+        "name": "F1 Steward Decision",
+        "status": "public",
+        "createdBy": "6692b763e851d28a036ab30f"
+      },
+      {
+        "pluginId": "plugin-1786974370",
+        "name": "MS Messaging Tool",
+        "status": "public",
+        "createdBy": "6692b763e851d28a036ab30f"
+      },
+      {
+        "pluginId": "plugin-1769925841",
+        "name": "Grok Video Generation Tool",
+        "status": "public",
+        "createdBy": "6692b763e851d28a036ab30f"
+      },
+      {
+        "pluginId": "plugin-1779386859",
+        "name": "Linkedin Candidate Search Tool",
+        "status": "public",
+        "createdBy": "6692b763e851d28a036ab30f"
+      },
+      {
+        "pluginId": "plugin-1778710944",
+        "name": "Linkedin Reachout",
+        "status": "public",
+        "createdBy": "6692b763e851d28a036ab30f"
+      }
+    ],
+    "pageLimitNote": "limit=100 is clamped: page 1 returns 99 and page 2 returns 91 (190 of a declared 191; isComplete:false on both). Page 3 is empty. /api/plugins therefore loops pages until a page returns 0 items or isComplete:true, dedupes by id, and keeps type===\"chat\" -> 182."
+  },
+  "finding": "/plugin/v1/list returns total 0 (every variant: bare, page/limit, status=all, type=chat) while /plugin/v1/search returns 190 items (182 chat + 8 file; declared total 191). `list` is the account-OWNED plugin inventory: plugins created/registered under the caller's own companyId/createdBy via POST /plugin/v1 (custom OpenAPI/REST plugins, AI-generated tools). This apikey's company (6692b763\u2026) has created none through that route, so list is honestly empty \u2014 the 7 search items whose companyId equals this account (F1 GP 2019 Agent, F1 Regulations 2026, F1 Steward Decision, MS Messaging Tool, Grok Video Generation Tool, Linkedin Candidate Search Tool, Linkedin Reachout) are 'external' marketplace registrations (status public, source external) that the search index attributes to the company but the list endpoint does not count (list appears to cover only non-public/private plugins owned by the company; all 7 are status public). `search` is the marketplace CATALOGUE: every public plugin any company published (176 external + 11 internal OnDemand plugins + 3 openapi) plus their per-account `isSubscribed` flag (177 of 182 chat plugins subscribed for this key). Consequence for the UI: 'installed' (= appears in /plugin/v1/list) is currently true for NO plugin on this account; 'suggested'/'connected'/'selected'/'invoked'/'blocked' are the states that actually occur. Perplexity (plugin-1722260873) is in search (companyId 675c8a2a\u2026, isSubscribed true) and NOT in list \u2014 it is a subscribed marketplace plugin, not an owned one."
+}

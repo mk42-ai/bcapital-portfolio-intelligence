@@ -2,16 +2,38 @@
 /* Colors that have a theme token use it (see src/lib/response-theme.ts); the remaining greys are shell-only. */
 .chat-shell {
   width: 100%;
-  height: calc(100dvh - 10rem);
-  min-height: 560px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   overflow: hidden;
 }
 
+/* Bounded thread: the container owns the height, the scroll area scrolls internally and the composer stays pinned — the page never grows with the thread. */
 .chat-shell .openui-agent-container {
   width: 100%;
-  height: 100%;
+  height: calc(100dvh - 190px);
+  min-height: 480px;
+}
+@media (max-width: 640px) {
+  .chat-shell .openui-agent-container {
+    height: calc(100dvh - 150px);
+    min-height: 0;
+  }
+}
+/* Empty thread: the compact welcome block sizes the shell — no blank canvas below it. */
+.chat-shell .openui-agent-container:has(.oiu-welcome) {
+  height: auto;
+  min-height: 0;
+}
+/* Mobile empty state: the welcome composer sits inside the container (no extra composer slot), so the block stays ~one screen tall. */
+@media (max-width: 640px) {
+  .chat-shell .openui-agent-container:has(.oiu-welcome) .openui-agent-welcome-screen { padding-bottom: 4px; gap: 10px; }
+  .chat-shell .openui-agent-container:has(.oiu-welcome) .openui-agent-composer-slot .openui-agent-thread-composer { padding-top: 4px; }
+  .oiu-welcome__starter-prompt { display: none; }
+}
+/* Collapse OpenUI's thread sidebar (threads list) on the empty state too — recent threads live in the welcome block. */
+.chat-shell .openui-agent-container:has(.oiu-welcome) .openui-agent-sidebar-container:not(.openui-agent-sidebar-container--collapsed) { width: 208px; }
+.chat-shell .openui-agent-container:has(.oiu-welcome) .openui-agent-thread-scroll-area {
+  display: none;
 }
 
 .chat-shell .openui-agent-sidebar-container {
@@ -63,8 +85,35 @@
 
 .chat-shell .openui-agent-welcome-screen {
   max-width: 816px;
-  padding: 24px 24px 80px;
-  gap: 32px;
+  padding: 16px 24px 8px;
+  gap: 16px;
+  flex: 0 0 auto;
+  height: auto;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+/* Compact welcome state (custom children of AgentInterface.Welcome) */
+.oiu-welcome { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+.oiu-welcome__title { margin: 0; font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: -0.4px; color: #111827; }
+.oiu-welcome__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.oiu-welcome__chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border: 1px solid #e5e7eb; border-radius: 9999px; background: #f9fafb; font-size: 12px; color: #374151; }
+.oiu-welcome__dot { width: 6px; height: 6px; border-radius: 9999px; background: var(--brand-green, #0AC985); }
+.oiu-welcome__chip-score { font-variant-numeric: tabular-nums; color: #6b7280; }
+.oiu-welcome__starters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.oiu-welcome__starter { display: flex; align-items: flex-start; gap: 8px; padding: 10px 12px; border: 1px solid #e5e7eb; border-radius: 10px; background: #ffffff; text-align: left; font-size: 12px; line-height: 1.35; color: #374151; cursor: pointer; transition: border-color 150ms ease, background-color 150ms ease; }
+.oiu-welcome__starter > svg { flex: none; margin-top: 1px; color: var(--brand-green-ink, #047857); }
+.oiu-welcome__starter strong { display: block; font-weight: 600; color: #111827; }
+.oiu-welcome__starter-prompt { display: block; margin-top: 2px; color: #6b7280; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.oiu-welcome__starter:not(:disabled):hover, .oiu-welcome__starter:focus-visible { border-color: var(--brand-green, #0AC985); background: var(--brand-green-soft, #ecfdf5); outline: none; }
+.oiu-welcome__starter:disabled { opacity: 0.6; cursor: default; }
+.oiu-welcome__recent ul { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.oiu-welcome__label { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7280; }
+.oiu-welcome__thread { width: 100%; padding: 6px 8px; border: 0; border-radius: 6px; background: transparent; text-align: left; font-size: 13px; color: #111827; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.oiu-welcome__thread:hover, .oiu-welcome__thread:focus-visible { background: #f3f4f6; outline: none; }
+@media (max-width: 640px) {
+  .oiu-welcome__starters { grid-template-columns: 1fr; }
+  .oiu-welcome__title { font-size: 20px; }
 }
 
 .chat-shell .openui-agent-welcome-screen__content {
@@ -176,7 +225,7 @@
 }
 
 .chat-shell .openui-agent-container--mobile .openui-agent-welcome-screen {
-  padding: 24px;
+  padding: 16px 16px 8px;
 }
 
 .chat-shell .openui-agent-container--mobile .openui-agent-welcome-screen__title {
@@ -214,7 +263,7 @@
 }
 
 /* --- B Capital additions (neutral light) --- */
-.oiu-assistant { display: flex; gap: 12px; align-items: flex-start; }
+.oiu-assistant { display: flex; gap: 12px; align-items: flex-start; content-visibility: auto; contain-intrinsic-size: auto 120px; }
 .oiu-assistant__avatar { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9999px; border: 1px solid #e5e7eb; background: #f9fafb; color: #111827; flex: none; margin-top: 2px; }
 .oiu-assistant__body { min-width: 0; flex: 1; }
 .oiu-sources { margin-top: 12px; border-top: 1px solid #e5e7eb; padding-top: 10px; }

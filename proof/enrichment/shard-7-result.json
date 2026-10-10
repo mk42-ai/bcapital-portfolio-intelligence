@@ -1,0 +1,139 @@
+{
+ "shard": 7,
+ "job_id": "job-mv288gog-d054",
+ "status": "done",
+ "started_at": "2026-10-10T10:03:46Z",
+ "finished_at": "2026-10-10T10:17:08Z",
+ "companies": [
+  "carrick",
+  "companycam",
+  "evommune",
+  "gable",
+  "hifibio",
+  "isaac-health",
+  "lambda",
+  "miotech",
+  "odeko",
+  "phenom-people",
+  "rona-therapeutics",
+  "spectrumedics",
+  "turno"
+ ],
+ "completed": 13,
+ "total": 13,
+ "coverage_by_field": {
+  "description": 92,
+  "sector": 92,
+  "hq": 85,
+  "founded": 85,
+  "ceo": 69,
+  "founders": 85,
+  "headcount": 85,
+  "total_raised": 77,
+  "last_valuation": 54,
+  "funding_rounds": 85,
+  "key_products": 92,
+  "competitors": 69,
+  "recent_news": 92,
+  "risk_signals": 69,
+  "social_sentiment": 85
+ },
+ "per_company": [
+  {
+   "slug": "carrick",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 85859
+  },
+  {
+   "slug": "companycam",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 102731
+  },
+  {
+   "slug": "evommune",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 126997
+  },
+  {
+   "slug": "gable",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 161652
+  },
+  {
+   "slug": "hifibio",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 129436
+  },
+  {
+   "slug": "isaac-health",
+   "coverage_pct": 60,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 117446
+  },
+  {
+   "slug": "lambda",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 141428
+  },
+  {
+   "slug": "miotech",
+   "coverage_pct": 60,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 134209
+  },
+  {
+   "slug": "odeko",
+   "coverage_pct": 0,
+   "perplexity": "attached, no sources frame",
+   "errors": [
+    "answer did not contain a parseable JSON object"
+   ],
+   "ms": 85887
+  },
+  {
+   "slug": "phenom-people",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 119548
+  },
+  {
+   "slug": "rona-therapeutics",
+   "coverage_pct": 100,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0fbc261cbe23404848d0\",\"messageId\":\"6aca0fbdf7979c7d562aef36\",\"eventIndex\":343,\"eventType\":\"step_thinking\",\"stepId\":\"3\",\"status\":\"processing\",\"thinking\":{\"delta\":\"red out with \\\"Not enough credits\"}}"
+   ],
+   "ms": 146288
+  },
+  {
+   "slug": "spectrumedics",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 159422
+  },
+  {
+   "slug": "turno",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 85483
+  }
+ ],
+ "error": null
+}

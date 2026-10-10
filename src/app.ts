@@ -7,6 +7,8 @@ import { getDb, persist, nowIso, schema } from "./db/client.js";
 import { config } from "./config.js";
 import { buildOpenApi } from "./openapi.js";
 import { labelFor, clampScore, normaliseEvidence, rollup } from "./sentiment.js";
+import { scorePortfolio, type CompanyInput, type SignalScore } from "./scoring.js";
+import { enrichShard, getProfile, profileCoverage, enrichCompany, ENRICH_PLUGINS } from "./enrich.js";
 import { refreshCompanies, lastRefreshRun, getRefreshState } from "./refresh.js";
 
 type Vars = { requestId: string };
@@ -278,6 +280,90 @@ inner.get("/refresh/status", async (c) => {
   const refreshMinutes = Number(process.env.REFRESH_CRON_MINUTES ?? 60);
   return c.json({ running: state.running, last_run: last ? { id: last.id, status: last.status, companies_touched: last.companiesTouched, news_upserted: last.newsUpserted, errors: last.errors, plugin_errors: (last.errors ?? []).filter((e) => /upstream plugin error/i.test(String(e))).length, started_at: last.receivedAt, finished_at: last.finishedAt, model: last.model } : null, last_result: state.last ? { ingest_run_id: state.last.ingest_run_id, with_images: state.last.with_images, dated: state.last.dated, companies: state.last.companies.map(({ session_id, ...x }) => x) } : null, scheduler: { enabled: refreshMinutes > 0, interval_minutes: refreshMinutes > 0 ? refreshMinutes : null, batch_limit: 40, next_scheduled_at: state.next_scheduled_at }, news_items_total: total, news_items_with_images: withImages, timestamp: nowIso() });
 });
+
+
+// ---------- Signal Score (evidence-weighted; src/scoring.ts) ----------
+let signalCache: { at: number; key: string; scores: SignalScore[] } | null = null;
+async function computeSignals(): Promise<SignalScore[]> {
+  const { db } = await getDb();
+  const stamp = db.get<{ t: string | null; n: number }>(sql`select max(updated_at) as t, count(*) as n from companies`);
+  const newsStamp = db.get<{ t: string | null; n: number }>(sql`select max(created_at) as t, count(*) as n from news_items`);
+  const key = `${stamp?.t}|${stamp?.n}|${newsStamp?.t}|${newsStamp?.n}`;
+  if (signalCache && signalCache.key === key && Date.now() - signalCache.at < 60_000) return signalCache.scores;
+  const companies = db.select().from(schema.companies).where(sql`${schema.companies.bCapitalRole} != 'firm'`).all();
+  const news = db.select({ slug: schema.newsItems.companySlug, url: schema.newsItems.url, title: schema.newsItems.title, source: schema.newsItems.source, publishedAt: schema.newsItems.publishedAt, sentiment: schema.newsItems.sentimentScore, kind: schema.newsItems.kind }).from(schema.newsItems).all();
+  const hist = db.select({ slug: schema.sentimentHistory.companySlug, score: schema.sentimentHistory.score, at: schema.sentimentHistory.recordedAt }).from(schema.sentimentHistory).orderBy(desc(schema.sentimentHistory.recordedAt)).all();
+  const newsBy = new Map<string, CompanyInput["items"]>(); for (const n of news) newsBy.set(n.slug, [...(newsBy.get(n.slug) ?? []), { url: n.url, title: n.title, source: n.source, published_at: n.publishedAt, sentiment: n.sentiment, kind: n.kind }]);
+  const histBy = new Map<string, CompanyInput["history"]>(); for (const h of hist) histBy.set(h.slug, [...(histBy.get(h.slug) ?? []), { score: h.score, recorded_at: h.at }]);
+  const inputs: CompanyInput[] = companies.map((c) => {
+    // Items without their own sentiment inherit the company's evidence-level sentiment only when the evidence quotes that URL; otherwise null.
+    const evUrls = new Set((c.sentiment.evidence ?? []).map((e) => e.url));
+    const items = (newsBy.get(c.slug) ?? []).map((it) => ({ ...it, sentiment: it.sentiment ?? (it.url && evUrls.has(it.url) ? c.sentiment.score : null) }));
+    return { slug: c.slug, name: c.name, sector: c.sector, website: c.website, items, history: histBy.get(c.slug) ?? [], current: c.sentiment.score };
+  });
+  const scores = scorePortfolio(inputs);
+  signalCache = { at: Date.now(), key, scores };
+  return scores;
+}
+inner.get("/signals", async (c) => {
+  const scores = await computeSignals();
+  const sector = c.req.query("sector");
+  const rows = sector ? scores.filter((s) => s.sector.toLowerCase() === sector.toLowerCase()) : scores;
+  const compact = rows.map(({ slug, sector: sec, score, confidence, percentile, label, factors, contributions, momentum, evidence, sparkline }) => ({ slug, sector: sec, score, confidence, percentile, label, factors, contributions, momentum, evidence, sparkline }));
+  const sectors: Record<string, { n: number; mean: number; p25: number; p75: number }> = {};
+  for (const sec of new Set(scores.map((s) => s.sector))) { const xs = scores.filter((s) => s.sector === sec).map((s) => s.score).sort((a, b) => a - b); sectors[sec] = { n: xs.length, mean: Math.round(xs.reduce((a, b) => a + b, 0) / xs.length), p25: xs[Math.floor(xs.length * 0.25)], p75: xs[Math.floor(xs.length * 0.75)] }; }
+  const all = scores.map((s) => s.score).sort((a, b) => a - b);
+  return c.json({ data: compact, portfolio: { n: all.length, mean: Math.round(all.reduce((a, b) => a + b, 0) / Math.max(1, all.length)), p25: all[Math.floor(all.length * 0.25)] ?? null, p75: all[Math.floor(all.length * 0.75)] ?? null, computed_at: scores[0]?.computed_at ?? nowIso(), method: scores[0]?.method ?? null }, sectors, timestamp: nowIso() });
+});
+inner.get("/companies/:slug/signal", async (c) => {
+  const row = await findCompany(c.req.param("slug"));
+  if (!row) return err(c, 404, "not_found", `No company with slug '${c.req.param("slug")}'`);
+  const scores = await computeSignals(); const s = scores.find((x) => x.slug === row.slug);
+  if (!s) return err(c, 404, "not_found", "No signal for this record (firm row)");
+  const sect = scores.filter((x) => x.sector === s.sector).map((x) => x.score).sort((a, b) => a - b);
+  const all = scores.map((x) => x.score).sort((a, b) => a - b);
+  const band = (xs: number[]) => ({ p25: xs[Math.floor(xs.length * 0.25)] ?? null, median: xs[Math.floor(xs.length * 0.5)] ?? null, p75: xs[Math.floor(xs.length * 0.75)] ?? null });
+  return c.json({ company: row.slug, name: row.name, data: s, bands: { portfolio: band(all), sector: band(sect) }, timestamp: nowIso() });
+});
+// ---------- enrichment profiles (src/enrich.ts) ----------
+inner.get("/companies/:slug/profile", async (c) => {
+  const row = await findCompany(c.req.param("slug"));
+  if (!row) return err(c, 404, "not_found", `No company with slug '${c.req.param("slug")}'`);
+  const p = await getProfile(row.slug);
+  if (!p) return c.json({ company: row.slug, name: row.name, data: null, enriched: false, timestamp: nowIso() });
+  return c.json({ company: row.slug, name: row.name, data: p, enriched: true, timestamp: nowIso() });
+});
+inner.get("/enrich/status", async (c) => c.json({ ...(await profileCoverage()), plugins: ENRICH_PLUGINS, timestamp: nowIso() }));
+inner.post("/enrich", async (c) => {
+  const denied = requireIngestSecret(c); if (denied) return denied;
+  if (!process.env.ONDEMAND_API_KEY) return err(c, 503, "resource_unavailable", "ONDEMAND_API_KEY is not configured on the server");
+  let body: any = {};
+  try { const raw = await c.req.text(); body = raw.trim() ? JSON.parse(raw) : {}; } catch { return err(c, 400, "invalid_request", "Body must be JSON: {slugs: string[], concurrency?: number}"); }
+  const slugs: string[] = Array.isArray(body?.slugs) ? body.slugs.map((s: unknown) => String(s).trim().toLowerCase()).filter(Boolean) : [];
+  if (!slugs.length) return err(c, 400, "invalid_request", "slugs[] is required");
+  if (slugs.length === 1 && body?.dry_run) { const row = await findCompany(slugs[0]); if (!row) return err(c, 404, "not_found", slugs[0]); const p = await enrichCompany(row, { write: false }); return c.json({ dry_run: true, profile: p, timestamp: nowIso() }); }
+  const conc = Math.max(1, Math.min(Number(body?.concurrency) || 2, 3));
+  if (body?.async) {
+    // Long shards outlive the proxy's request timeout: run in the background and expose progress at /enrich/jobs/:id.
+    const jobId = `job-${Date.now().toString(36)}-${crypto.randomBytes(2).toString("hex")}`;
+    const job: EnrichJob = { id: jobId, slugs: slugs.slice(0, 20), status: "running", started_at: nowIso(), finished_at: null, result: null, error: null };
+    enrichJobs.set(jobId, job);
+    enrichShard(job.slugs, conc).then((r) => { job.result = r; job.status = "done"; job.finished_at = nowIso(); }).catch((e) => { job.error = String((e as Error)?.message ?? e); job.status = "error"; job.finished_at = nowIso(); });
+    return c.json({ job_id: jobId, status: "running", slugs: job.slugs, poll: `/enrich/jobs/${jobId}`, timestamp: nowIso() }, 202);
+  }
+  const r = await enrichShard(slugs.slice(0, 20), conc);
+  return c.json({ ...r, timestamp: nowIso() });
+});
+type EnrichJob = { id: string; slugs: string[]; status: "running" | "done" | "error"; started_at: string; finished_at: string | null; result: Awaited<ReturnType<typeof enrichShard>> | null; error: string | null };
+const enrichJobs = new Map<string, EnrichJob>();
+inner.get("/enrich/jobs/:id", async (c) => {
+  const job = enrichJobs.get(c.req.param("id")); if (!job) return err(c, 404, "not_found", "unknown job");
+  const done = new Set(job.result?.results.map((r) => r.slug) ?? []);
+  const progress: { slug: string; enriched: boolean; coverage_pct: number | null }[] = [];
+  for (const s of job.slugs) { const p = await getProfile(s); progress.push({ slug: s, enriched: !!p && p.fetched_at >= job.started_at, coverage_pct: p && p.fetched_at >= job.started_at ? p.coverage_pct : null }); }
+  return c.json({ ...job, progress, completed: progress.filter((x) => x.enriched).length, total: job.slugs.length, timestamp: nowIso() }); void done;
+});
+inner.get("/enrich/jobs", async (c) => c.json({ data: [...enrichJobs.values()].map(({ result, ...j }) => ({ ...j, completed: result?.results.length ?? null })), timestamp: nowIso() }));
 
 inner.notFound((c) => err(c, 404, "not_found", `Route not found: ${c.req.method} ${new URL(c.req.url).pathname}`));
 inner.onError((e, c) => { console.error(e); return err(c, 500, "server_error", e.message); });

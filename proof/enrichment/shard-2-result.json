@@ -1,0 +1,149 @@
+{
+ "shard": 2,
+ "job_id": "job-mv27n1hz-94f7",
+ "status": "done",
+ "started_at": "2026-10-10T09:47:07Z",
+ "finished_at": "2026-10-10T10:00:47Z",
+ "companies": [
+  "bhanzu",
+  "chipagents",
+  "dream-labs",
+  "floor-nfts",
+  "graymatter-robotics",
+  "infrahub",
+  "khatabook",
+  "lumara-health",
+  "nest-genomics",
+  "payfazz",
+  "precision-neuro",
+  "sift-healthcare",
+  "synapticure",
+  "when"
+ ],
+ "completed": 14,
+ "total": 14,
+ "coverage_by_field": {
+  "description": 93,
+  "sector": 93,
+  "hq": 86,
+  "founded": 79,
+  "ceo": 64,
+  "founders": 64,
+  "headcount": 64,
+  "total_raised": 64,
+  "last_valuation": 64,
+  "funding_rounds": 86,
+  "key_products": 93,
+  "competitors": 71,
+  "recent_news": 79,
+  "risk_signals": 93,
+  "social_sentiment": 86
+ },
+ "per_company": [
+  {
+   "slug": "bhanzu",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 118765
+  },
+  {
+   "slug": "chipagents",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 125270
+  },
+  {
+   "slug": "dream-labs",
+   "coverage_pct": 53,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0a12f7979c7d562aec6c\",\"messageId\":\"6aca0a12f7979c7d562aec6e\",\"eventIndex\":285,\"eventType\":\"step_thinking\",\"stepId\":\"2\",\"status\":\"processing\",\"thinking\":{\"delta\":\" \\\"Not enough credits\\\". gptSearch\"}}"
+   ],
+   "ms": 76433
+  },
+  {
+   "slug": "graymatter-robotics",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 87329
+  },
+  {
+   "slug": "floor-nfts",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 162367
+  },
+  {
+   "slug": "infrahub",
+   "coverage_pct": 80,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 95966
+  },
+  {
+   "slug": "khatabook",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 149556
+  },
+  {
+   "slug": "lumara-health",
+   "coverage_pct": 40,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0b15261cbe23404846b0\",\"messageId\":\"6aca0b16261cbe23404846b1\",\"eventIndex\":337,\"eventType\":\"step_thinking\",\"stepId\":\"4\",\"status\":\"processing\",\"thinking\":{\"delta\":\" returned \\\"Not enough credits\\\"\"}}"
+   ],
+   "ms": 77257
+  },
+  {
+   "slug": "nest-genomics",
+   "coverage_pct": 0,
+   "perplexity": "attached, no sources frame",
+   "errors": [
+    "answer did not contain a parseable JSON object"
+   ],
+   "ms": 71687
+  },
+  {
+   "slug": "payfazz",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 104942
+  },
+  {
+   "slug": "precision-neuro",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 157878
+  },
+  {
+   "slug": "sift-healthcare",
+   "coverage_pct": 73,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 111196
+  },
+  {
+   "slug": "when",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 98238
+  },
+  {
+   "slug": "synapticure",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 153985
+  }
+ ],
+ "error": null
+}

@@ -14,7 +14,8 @@ test.describe("Settings", () => {
     await expect(page.locator("select#set-model")).toHaveCount(0);
     const list = page.getByTestId("plugin-list");
     await expect(list).toContainText("plugin-1722260873");
-    await expect(list).not.toContainText(/GPT Search|LinkedIn|Reddit|PitchBook|X Search/);
+    // Live directory (182 chat plugins, Perplexity locked on) replaces the old 5-plugin allow-list.
+    await expect(list.getByTestId("plugin-showing")).toContainText(/Showing \d+ of \d+/);
     const pplx = page.getByRole("switch", { name: /perplexity/i });
     await expect(pplx).toBeDisabled();
     await expect(pplx).toHaveAttribute("aria-checked", "true");

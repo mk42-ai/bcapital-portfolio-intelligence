@@ -1,0 +1,30 @@
+data: {"type":"RUN_STARTED","threadId":"qa-inj-1791627861","runId":"e181d3bf-9d1d-4e8e-bb39-42b357c7e626"}
+
+data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"connecting","elapsedMs":1,"endpointId":"predefined-deepseek-flash","endpointLabel":"DeepSeek Flash v4.1","reasoningMode":"medium","pluginIds":["plugin-1722260873"],"pluginNames":["Perplexity"],"droppedPluginIds":[],"sessionKnown":false}}
+
+data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"creating-session","elapsedMs":1}}
+
+data: {"type":"CUSTOM","name":"ondemand.session","value":{"sessionId":"6aca1255f7979c7d562aefce","created":true,"viaHeader":false,"endpointId":"predefined-deepseek-flash","endpointLabel":"DeepSeek Flash v4.1","reasoningMode":"medium","pluginIds":["plugin-1722260873"]}}
+
+data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"querying","elapsedMs":284,"sessionId":"6aca1255f7979c7d562aefce"}}
+
+data: {"type":"CUSTOM","name":"ondemand.request","value":{"elapsedMs":284,"method":"POST","proxy":"/api/chat","upstream":"POST api.on-demand.io/chat/v1/sessions/{id}/query","body":{"endpointId":"predefined-deepseek-flash","endpointLabel":"DeepSeek Flash v4.1","reasoningMode":"medium","responseMode":"stream","pluginIds":["plugin-1722260873"],"queryChars":83,"systemContextChars":0},"sessionId":"6aca1255f7979c7d562aefce","sessionCreated":true}}
+
+data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"streaming","elapsedMs":696}}
+
+data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"planning","elapsedMs":696,"firstFrameMs":696}}
+
+data: {"type":"TEXT_MESSAGE_START","messageId":"1dd3e765-ae5e-4c17-8498-ea677b307094","role":"assistant"}
+
+data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"1dd3e765-ae5e-4c17-8498-ea677b307094","delta":"This request can't be completed because it conflicts with our usage policies. Please rephrase it and try again."}
+
+data: {"type":"TEXT_MESSAGE_END","messageId":"1dd3e765-ae5e-4c17-8498-ea677b307094"}
+
+data: {"type":"CUSTOM","name":"ondemand.sources","value":{"elapsedMs":696,"messageId":"1dd3e765-ae5e-4c17-8498-ea677b307094","pluginId":"plugin-1722260873","pluginName":"Perplexity","partial":false,"sources":[]}}
+
+data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"done","elapsedMs":696,"chars":111,"sources":0,"firstTokenMs":696}}
+
+data: {"type":"RUN_FINISHED","threadId":"qa-inj-1791627861","runId":"e181d3bf-9d1d-4e8e-bb39-42b357c7e626"}
+
+data: [DONE]
+

@@ -13,7 +13,7 @@ const ITEMS = [
 export function Nav() {
   const path = usePathname();
   return (
-    <nav aria-label="Primary" className="flex items-center gap-1 overflow-x-auto lg:mt-8 lg:flex-col lg:items-stretch lg:gap-1.5">
+    <nav aria-label="Primary" className="flex items-center gap-1 overflow-x-auto lg:mt-4 lg:flex-col lg:items-stretch lg:gap-1.5">
       {ITEMS.map(({ href, label, icon: Icon, match }) => {
         const active = path === href || path.startsWith(match ?? href);
         return (

@@ -1,0 +1,108 @@
+data: {"type":"RUN_STARTED","threadId":"qa-other-1791627861","runId":"241c97c0-ab77-4a5e-953d-ee348f64a631"}
+
+data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"connecting","elapsedMs":1,"endpointId":"predefined-deepseek-flash","endpointLabel":"DeepSeek Flash v4.1","reasoningMode":"medium","pluginIds":["plugin-1722260873"],"pluginNames":["Perplexity"],"droppedPluginIds":[],"sessionKnown":false}}
+
+data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"creating-session","elapsedMs":1}}
+
+data: {"type":"CUSTOM","name":"ondemand.session","value":{"sessionId":"6aca1256f7979c7d562aefcf","created":true,"viaHeader":false,"endpointId":"predefined-deepseek-flash","endpointLabel":"DeepSeek Flash v4.1","reasoningMode":"medium","pluginIds":["plugin-1722260873"]}}
+
+data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"querying","elapsedMs":156,"sessionId":"6aca1256f7979c7d562aefcf"}}
+
+data: {"type":"CUSTOM","name":"ondemand.request","value":{"elapsedMs":156,"method":"POST","proxy":"/api/chat","upstream":"POST api.on-demand.io/chat/v1/sessions/{id}/query","body":{"endpointId":"predefined-deepseek-flash","endpointLabel":"DeepSeek Flash v4.1","reasoningMode":"medium","responseMode":"stream","pluginIds":["plugin-1722260873"],"queryChars":30,"systemContextChars":0},"sessionId":"6aca1256f7979c7d562aefcf","sessionCreated":true}}
+
+data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"streaming","elapsedMs":502}}
+
+data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"quietMs":706,"elapsedMs":1208}}
+
+data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"planning","elapsedMs":1507,"firstFrameMs":1507}}
+
+data: {"type":"TOOL_CALL_START","toolCallId":"5df179d4-720b-45da-b1cc-2a1b207aa6bc","toolCallName":"Perplexity","parentMessageId":"a8f9730c-24b7-444b-b139-988d5a696db8"}
+
+data: {"type":"TOOL_CALL_ARGS","toolCallId":"5df179d4-720b-45da-b1cc-2a1b207aa6bc","delta":"{\"plugin\":\"Perplexity\",\"pluginId\":\"plugin-1722260873\",\"query\":\"Reply with the single word OK.\",\"stepId\":\"\",\"endpointId\":\"predefined-deepseek-flash\",\"endpointLabel\":\"DeepSeek Flash v4.1\",\"reasoningMode\":\"medium\"}"}
+
+data: {"type":"TOOL_CALL_END","toolCallId":"5df179d4-720b-45da-b1cc-2a1b207aa6bc"}
+
+data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"researching","elapsedMs":1508,"plugin":"Perplexity","pluginId":"plugin-1722260873","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":false,"derived":true,"elapsedMs":1508}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1508,"kind":"planning","delta":"The user says \"Reply with the single","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1511,"kind":"planning","delta":" word OK.\" According to my rules","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1514,"kind":"planning","delta":", I must output the plan schema","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1523,"kind":"planning","delta":", and I must not answer the user","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1551,"kind":"planning","delta":" directly. But this is a meta/g","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1588,"kind":"planning","delta":"reeting-like message — no actionable","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1625,"kind":"planning","delta":" task. So plan_required: false","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1694,"kind":"planning","delta":".\n\nOutput JSON with title, objective","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1732,"kind":"planning","delta":" empty, plan_required false, plan","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1802,"kind":"plan","delta":"{\"title\": \"I'm acknowledging a","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1811,"kind":"plan","delta":" simple instruction with no task","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1839,"kind":"plan","delta":" to execute.\", \"objective\": \"\",","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1865,"kind":"plan","delta":" \"plan_required\": false, \"plan","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1890,"kind":"plan","delta":"_skip_reason\": \"The user's message","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1932,"kind":"plan","delta":" only asks for a one-word acknowledgement","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1967,"kind":"plan","delta":", which contains no actionable","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":1984,"kind":"plan","delta":" task requiring any plugin or agent","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2003,"kind":"planning","delta":"_skip_reason, steps empty.","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":2004,"kind":"plan","delta":" execution.\", \"steps\": []}","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"quietMs":705,"elapsedMs":2709}}
+
+data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":1,"quietMs":1006,"elapsedMs":3010}}
+
+data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":false,"derived":true,"elapsedMs":3068}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":3068,"kind":"fulfillment","delta":"We need answer only single word","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":3109,"kind":"fulfillment","delta":" OK. But need obey? User asks Reply","stepId":""}}
+
+data: {"type":"CUSTOM","name":"ondemand.thinking","value":{"elapsedMs":3160,"kind":"fulfillment","delta":" with single word OK. Just OK.","stepId":""}}
+
+data: {"type":"TEXT_MESSAGE_START","messageId":"a8f9730c-24b7-444b-b139-988d5a696db8","role":"assistant"}
+
+data: {"type":"TEXT_MESSAGE_CONTENT","messageId":"a8f9730c-24b7-444b-b139-988d5a696db8","delta":"OK"}
+
+data: {"type":"CUSTOM","name":"ondemand.metrics","value":{"elapsedMs":3172,"publicMetrics":{"inputTokens":982,"outputTokens":25,"totalTokens":1007,"ragTimeSec":1.64,"fulfillmentTimeSec":0.99,"totalTimeSec":2.63},"firstTokenMs":3163,"pluginIds":["plugin-1722260873"]}}
+
+data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"quietMs":739,"elapsedMs":3911}}
+
+data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":1,"quietMs":1039,"elapsedMs":4211}}
+
+data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":2,"quietMs":1339,"elapsedMs":4511}}
+
+data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":3,"quietMs":1639,"elapsedMs":4811}}
+
+data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":true,"derived":true,"tick":4,"quietMs":1939,"elapsedMs":5111}}
+
+data: {"type":"TOOL_CALL_RESULT","messageId":"cd84def6-72de-457e-bb8b-3c16f7fc430e","toolCallId":"5df179d4-720b-45da-b1cc-2a1b207aa6bc","role":"tool","content":"{\"status\":\"error\",\"plugin\":\"Perplexity\",\"pluginId\":\"plugin-1722260873\",\"durationMs\":3676,\"sources\":0,\"message\":\"Perplexity returned no sources for this question\"}","isError":true,"error":"Perplexity returned no sources for this question"}
+
+data: {"type":"TEXT_MESSAGE_END","messageId":"a8f9730c-24b7-444b-b139-988d5a696db8"}
+
+data: {"type":"CUSTOM","name":"ondemand.filler","value":{"on":false,"derived":true,"elapsedMs":5184}}
+
+data: {"type":"CUSTOM","name":"ondemand.sources","value":{"elapsedMs":5184,"messageId":"a8f9730c-24b7-444b-b139-988d5a696db8","pluginId":"plugin-1722260873","pluginName":"Perplexity","partial":false,"sources":[]}}
+
+data: {"type":"CUSTOM","name":"ondemand.status","value":{"phase":"done","elapsedMs":5184,"chars":2,"sources":0,"firstTokenMs":3163}}
+
+data: {"type":"RUN_FINISHED","threadId":"qa-other-1791627861","runId":"241c97c0-ab77-4a5e-953d-ee348f64a631"}
+
+data: [DONE]
+

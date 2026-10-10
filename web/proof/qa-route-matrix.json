@@ -10,18 +10,8 @@
     "errors": [],
     "growth": {
       "expanded": true,
-      "panelText": "We give first: time, introductions, candour — because founders' wins compound."
+      "panelText": "Definition\nWe give first: time, introductions, candour — because founders' wins compound.\nWhat it looks like here\nPortfo"
     }
-  },
-  {
-    "route": "/company/fervo-energy",
-    "viewport": 1440,
-    "reducedMotion": false,
-    "status": 200,
-    "consoleErrors": 0,
-    "pageErrors": 0,
-    "thirdPartyResourceErrors": 0,
-    "errors": []
   },
   {
     "route": "/overview",
@@ -39,6 +29,16 @@
     }
   },
   {
+    "route": "/company/fervo-energy",
+    "viewport": 1440,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": []
+  },
+  {
     "route": "/company/perplexity-ai",
     "viewport": 1440,
     "reducedMotion": false,
@@ -48,7 +48,7 @@
     "thirdPartyResourceErrors": 0,
     "errors": [],
     "heroLogo": {
-      "src": "https://sb-1z9qy0mx48sk.vercel.run/brand/logos/perplexity.svg",
+      "src": "https://sb-1xe432s1qrj3.vercel.run/brand/logos/perplexity.svg",
       "nw": 360
     }
   },
@@ -82,6 +82,21 @@
     "thirdPartyResourceErrors": 0,
     "errors": [],
     "notFoundUi": true
+  },
+  {
+    "route": "/news",
+    "viewport": 1440,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": [],
+    "newsImages": {
+      "total": 120,
+      "ok": 120,
+      "placeholders": 0
+    }
   },
   {
     "route": "/onboarding",
@@ -103,8 +118,18 @@
     "errors": [],
     "growth": {
       "expanded": true,
-      "panelText": "We give first: time, introductions, candour — because founders' wins compound."
+      "panelText": "Definition\nWe give first: time, introductions, candour — because founders' wins compound.\nWhat it looks like here\nPortfo"
     }
+  },
+  {
+    "route": "/company/fervo-energy",
+    "viewport": 390,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": []
   },
   {
     "route": "/overview",
@@ -122,16 +147,6 @@
     }
   },
   {
-    "route": "/company/fervo-energy",
-    "viewport": 390,
-    "reducedMotion": false,
-    "status": 200,
-    "consoleErrors": 0,
-    "pageErrors": 0,
-    "thirdPartyResourceErrors": 0,
-    "errors": []
-  },
-  {
     "route": "/company/perplexity-ai",
     "viewport": 390,
     "reducedMotion": false,
@@ -141,23 +156,8 @@
     "thirdPartyResourceErrors": 0,
     "errors": [],
     "heroLogo": {
-      "src": "https://sb-1z9qy0mx48sk.vercel.run/brand/logos/perplexity.svg",
+      "src": "https://sb-1xe432s1qrj3.vercel.run/brand/logos/perplexity.svg",
       "nw": 360
-    }
-  },
-  {
-    "route": "/news",
-    "viewport": 1440,
-    "reducedMotion": false,
-    "status": 200,
-    "consoleErrors": 0,
-    "pageErrors": 0,
-    "thirdPartyResourceErrors": 2,
-    "errors": [],
-    "newsImages": {
-      "total": 325,
-      "ok": 325,
-      "placeholders": 0
     }
   },
   {
@@ -181,6 +181,21 @@
     "errors": []
   },
   {
+    "route": "/news",
+    "viewport": 390,
+    "reducedMotion": false,
+    "status": 200,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "thirdPartyResourceErrors": 0,
+    "errors": [],
+    "newsImages": {
+      "total": 120,
+      "ok": 120,
+      "placeholders": 0
+    }
+  },
+  {
     "route": "/company/does-not-exist",
     "viewport": 390,
     "reducedMotion": false,
@@ -199,20 +214,5 @@
     "consoleErrors": 0,
     "pageErrors": 0,
     "errors": []
-  },
-  {
-    "route": "/news",
-    "viewport": 390,
-    "reducedMotion": false,
-    "status": 200,
-    "consoleErrors": 0,
-    "pageErrors": 0,
-    "thirdPartyResourceErrors": 2,
-    "errors": [],
-    "newsImages": {
-      "total": 325,
-      "ok": 325,
-      "placeholders": 0
-    }
   }
 ]

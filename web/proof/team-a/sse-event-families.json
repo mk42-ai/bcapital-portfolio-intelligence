@@ -1,0 +1,272 @@
+{
+  "tracedAt": "2026-10-10T09:51:05Z",
+  "sessionId": "6aca0a89261cbe2340484665",
+  "messageId": "6aca0a8a261cbe2340484666",
+  "request": {
+    "endpointId": "predefined-deepseek-flash",
+    "responseMode": "stream",
+    "reasoningMode": "medium",
+    "pluginIds": [
+      "plugin-1741871229",
+      "plugin-1751872652"
+    ],
+    "query": "Compare the latest funding news of Fervo Energy and Ormat Technologies and then summarise which one raised more recently."
+  },
+  "rawLog": "web/proof/team-a/sse-trace.raw.log (ms-since-request prefix per line, 777 lines)",
+  "totals": {
+    "frames": 259,
+    "streamMs": 28385,
+    "planSteps": 2,
+    "stepIdsSeen": [
+      "1",
+      "2"
+    ]
+  },
+  "sseEventNames": {
+    "thinking": {
+      "count": 183,
+      "firstSeenMs": 1501
+    },
+    "heartbeat": {
+      "count": 9,
+      "firstSeenMs": 3556
+    },
+    "message": {
+      "count": 67,
+      "firstSeenMs": 24160
+    }
+  },
+  "eventTypes": {
+    "planning_thinking": {
+      "count": 62,
+      "firstSeenMs": 1501
+    },
+    "planning_output": {
+      "count": 32,
+      "firstSeenMs": 3486
+    },
+    "heartbeat": {
+      "count": 9,
+      "firstSeenMs": 3556
+    },
+    "step_thinking": {
+      "count": 19,
+      "firstSeenMs": 5644
+    },
+    "step_output": {
+      "count": 56,
+      "firstSeenMs": 5763
+    },
+    "fulfillment_thinking": {
+      "count": 14,
+      "firstSeenMs": 23694
+    },
+    "fulfillment": {
+      "count": 65,
+      "firstSeenMs": 24160
+    },
+    "metricsLog": {
+      "count": 1,
+      "firstSeenMs": 26372
+    },
+    "[DONE]": {
+      "count": 1,
+      "firstSeenMs": 28385
+    }
+  },
+  "statusTypes": {},
+  "families": [
+    {
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": null,
+      "count": 62,
+      "firstSeenMs": 1501,
+      "lastSeenMs": 4142,
+      "stepIds": [],
+      "sample": "{\"sessionId\":\"6aca0a89261cbe2340484665\",\"messageId\":\"6aca0a8a261cbe2340484666\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants to compare the latest\"}}",
+      "inKnownList": true
+    },
+    {
+      "event": "thinking",
+      "eventType": "planning_output",
+      "statusType": null,
+      "count": 32,
+      "firstSeenMs": 3486,
+      "lastSeenMs": 4146,
+      "stepIds": [],
+      "sample": "{\"sessionId\":\"6aca0a89261cbe2340484665\",\"messageId\":\"6aca0a8a261cbe2340484666\",\"eventIndex\":61,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"{\\n  \\\"title\\\": \\\"I'll look up the\"}}",
+      "inKnownList": true
+    },
+    {
+      "event": "heartbeat",
+      "eventType": "heartbeat",
+      "statusType": null,
+      "count": 9,
+      "firstSeenMs": 3556,
+      "lastSeenMs": 27556,
+      "stepIds": [],
+      "sample": "{\"sessionId\":\"6aca0a89261cbe2340484665\",\"messageId\":\"6aca0a8a261cbe2340484666\",\"time\":\"2026-10-10T09:51:09Z\"}",
+      "inKnownList": true
+    },
+    {
+      "event": "thinking",
+      "eventType": "step_thinking",
+      "statusType": null,
+      "count": 19,
+      "firstSeenMs": 5644,
+      "lastSeenMs": 15641,
+      "stepIds": [
+        "1",
+        "2"
+      ],
+      "sample": "{\"sessionId\":\"6aca0a89261cbe2340484665\",\"messageId\":\"6aca0a8a261cbe2340484666\",\"eventIndex\":95,\"eventType\":\"step_thinking\",\"stepId\":\"1\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants the latest funding\"}}",
+      "inKnownList": true
+    },
+    {
+      "event": "thinking",
+      "eventType": "step_output",
+      "statusType": null,
+      "count": 56,
+      "firstSeenMs": 5763,
+      "lastSeenMs": 15645,
+      "stepIds": [
+        "1",
+        "2"
+      ],
+      "sample": "{\"sessionId\":\"6aca0a89261cbe2340484665\",\"messageId\":\"6aca0a8a261cbe2340484666\",\"eventIndex\":99,\"eventType\":\"step_output\",\"stepId\":\"1\",\"status\":\"processing\",\"output\":{\"delta\":\"{\\\"title\\\":\\\"Searching Fervo Energy\"}}",
+      "inKnownList": true
+    },
+    {
+      "event": "thinking",
+      "eventType": "fulfillment_thinking",
+      "statusType": null,
+      "count": 14,
+      "firstSeenMs": 23694,
+      "lastSeenMs": 26360,
+      "stepIds": [],
+      "sample": "{\"sessionId\":\"6aca0a89261cbe2340484665\",\"messageId\":\"6aca0a8a261cbe2340484666\",\"eventIndex\":170,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"Provide comparison and summary\"}}",
+      "inKnownList": true
+    },
+    {
+      "event": "message",
+      "eventType": "fulfillment",
+      "statusType": null,
+      "count": 65,
+      "firstSeenMs": 24160,
+      "lastSeenMs": 26363,
+      "stepIds": [],
+      "sample": "{\"sessionId\": \"6aca0a89261cbe2340484665\", \"messageId\": \"6aca0a8a261cbe2340484666\", \"answer\": \"## Fervo Energy vs. Ormat Technologies\", \"status\": \"processing\", \"eventIndex\":182, \"eventType\": \"fulfillment\"}",
+      "inKnownList": true
+    },
+    {
+      "event": "message",
+      "eventType": "metricsLog",
+      "statusType": null,
+      "count": 1,
+      "firstSeenMs": 26372,
+      "lastSeenMs": 26372,
+      "stepIds": [],
+      "sample": "{\"sessionId\":\"6aca0a89261cbe2340484665\",\"messageId\":\"6aca0a8a261cbe2340484666\",\"eventIndex\":249,\"eventType\":\"metricsLog\",\"status\":\"processing\",\"publicMetrics\":{\"inputTokens\":6485,\"outputTokens\":743,\"totalTokens\":7228,\"ragTimeSec\":22.47,\"fulfillmentTimeSec\":3.34,\"totalTimeSec\":25.81}}",
+      "inKnownList": true
+    },
+    {
+      "event": "message",
+      "eventType": "[DONE]",
+      "statusType": null,
+      "count": 1,
+      "firstSeenMs": 28385,
+      "lastSeenMs": 28385,
+      "stepIds": [],
+      "sample": "[DONE]",
+      "inKnownList": true
+    }
+  ],
+  "newFamiliesNotInKnownList": [],
+  "summarizeHistory": {
+    "summarize_history.initialized": false,
+    "summarize_history.completed": false,
+    "anyStatusLogFrame": false,
+    "anyBetweenStepSummarisationFrame": false,
+    "statement": "NO summarize_history.initialized/completed frame and NO other between-step summarisation frame appeared. The stream carries ZERO message/statusLog frames of any statusType (no plan_created, analyzing, agents_retrieved, executing, execution_completed, fulfilling, fulfillment_completed). The step 1 -> step 2 boundary is visible only as step_thinking/step_output stepId \"1\" (first 5644 ms) followed by step_thinking/step_output stepId \"2\"; the plan arrives only as planning_output JSON text. The bridge's derived Summarising checkpoint (STEP_BOUNDARY in eventMap.ts) therefore remains the only source of that UI state."
+  },
+  "observations": [
+    "plugin_sources (in the known list) did NOT appear in this run even though GPT Search answered with citations in the model prose; sources arrived only inline in fulfillment text. The adapter binding stays (observed in earlier sessions).",
+    "Both steps called plugin-1741871229 (gptSearch) only; plugin-1751872652 (postXSearch) was named in the plan but not called in step_output.",
+    "heartbeat frames carry sessionId/messageId/time and no eventType; the adapter maps them by SSE event name.",
+    "Terminal frame is event:message data:[DONE] at 28385 ms; metricsLog publicMetrics {inputTokens:6485,outputTokens:743,totalTokens:7228,ragTimeSec:22.47,fulfillmentTimeSec:3.34,totalTimeSec:25.81}."
+  ],
+  "eventMapRebindNeeded": false,
+  "eventMapChange": "dated comment block only (TRACE 2026-10-10 Agent 11) \u2014 no STATUS_TYPE/EVENT_TYPE/AGENT_SUBTYPE entry added or changed.",
+  "familyTable": [
+    {
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "count": 62,
+      "firstSeenMs": 1501,
+      "stepIds": []
+    },
+    {
+      "event": "thinking",
+      "eventType": "planning_output",
+      "count": 32,
+      "firstSeenMs": 3486,
+      "stepIds": []
+    },
+    {
+      "event": "heartbeat",
+      "eventType": "heartbeat",
+      "count": 9,
+      "firstSeenMs": 3556,
+      "stepIds": []
+    },
+    {
+      "event": "thinking",
+      "eventType": "step_thinking",
+      "count": 19,
+      "firstSeenMs": 5644,
+      "stepIds": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "event": "thinking",
+      "eventType": "step_output",
+      "count": 56,
+      "firstSeenMs": 5763,
+      "stepIds": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "event": "thinking",
+      "eventType": "fulfillment_thinking",
+      "count": 14,
+      "firstSeenMs": 23694,
+      "stepIds": []
+    },
+    {
+      "event": "message",
+      "eventType": "fulfillment",
+      "count": 65,
+      "firstSeenMs": 24160,
+      "stepIds": []
+    },
+    {
+      "event": "message",
+      "eventType": "metricsLog",
+      "count": 1,
+      "firstSeenMs": 26372,
+      "stepIds": []
+    },
+    {
+      "event": "message",
+      "eventType": "[DONE]",
+      "count": 1,
+      "firstSeenMs": 28385,
+      "stepIds": []
+    }
+  ]
+}

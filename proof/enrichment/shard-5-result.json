@@ -1,0 +1,151 @@
+{
+ "shard": 5,
+ "job_id": "job-mv27ne7t-1de3",
+ "status": "done",
+ "started_at": "2026-10-10T09:47:23Z",
+ "finished_at": "2026-10-10T09:59:18Z",
+ "companies": [
+  "buildops",
+  "coindcx",
+  "evenup",
+  "forest",
+  "havocai",
+  "inspace",
+  "labelbox",
+  "meditrust",
+  "numerion-labs",
+  "percent",
+  "reflection",
+  "solve-therapeutics",
+  "tinyhealth",
+  "yalo"
+ ],
+ "completed": 14,
+ "total": 14,
+ "coverage_by_field": {
+  "description": 100,
+  "sector": 100,
+  "hq": 100,
+  "founded": 100,
+  "ceo": 93,
+  "founders": 93,
+  "headcount": 93,
+  "total_raised": 71,
+  "last_valuation": 71,
+  "funding_rounds": 86,
+  "key_products": 100,
+  "competitors": 86,
+  "recent_news": 100,
+  "risk_signals": 100,
+  "social_sentiment": 93
+ },
+ "per_company": [
+  {
+   "slug": "coindcx",
+   "coverage_pct": 93,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca09ab261cbe23404845d5\",\"messageId\":\"6aca09ac95268adc215e044d\",\"eventIndex\":250,\"eventType\":\"step_thinking\",\"stepId\":\"2\",\"status\":\"processing\",\"thinking\":{\"delta\":\" with \\\"Not enough credits\\\". So\"}}"
+   ],
+   "ms": 81711
+  },
+  {
+   "slug": "buildops",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 87665
+  },
+  {
+   "slug": "evenup",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 74033
+  },
+  {
+   "slug": "forest",
+   "coverage_pct": 80,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 91220
+  },
+  {
+   "slug": "havocai",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 87185
+  },
+  {
+   "slug": "inspace",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 114215
+  },
+  {
+   "slug": "labelbox",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 85672
+  },
+  {
+   "slug": "meditrust",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 144364
+  },
+  {
+   "slug": "numerion-labs",
+   "coverage_pct": 93,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0af4f7979c7d562aecf6\",\"messageId\":\"6aca0af495268adc215e0538\",\"eventIndex\":511,\"eventType\":\"step_thinking\",\"stepId\":\"3\",\"status\":\"processing\",\"thinking\":{\"delta\":\" an error (\\\"Not enough credits\"}}"
+   ],
+   "ms": 174685
+  },
+  {
+   "slug": "percent",
+   "coverage_pct": 73,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0b61261cbe23404846ce\",\"messageId\":\"6aca0b61261cbe23404846d0\",\"eventIndex\":413,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"not enough credits) \u2014 should I\"}}"
+   ],
+   "ms": 69152
+  },
+  {
+   "slug": "solve-therapeutics",
+   "coverage_pct": 80,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0ba6f7979c7d562aed71\",\"messageId\":\"6aca0ba7261cbe23404846f8\",\"eventIndex\":425,\"eventType\":\"step_thinking\",\"stepId\":\"6\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ity errored \\\"Not enough credits\"}}"
+   ],
+   "ms": 96625
+  },
+  {
+   "slug": "reflection",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 138285
+  },
+  {
+   "slug": "tinyhealth",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 82112
+  },
+  {
+   "slug": "yalo",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 73658
+  }
+ ],
+ "error": null
+}

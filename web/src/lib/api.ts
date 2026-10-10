@@ -1,6 +1,6 @@
 import "server-only";
 import snapshot from "@/data/snapshot.json";
-import type { Company, CompanySentiment, NewsItem, PortfolioSentiment, IngestRun } from "./types";
+import type { Company, CompanySentiment, NewsItem, PortfolioSentiment, IngestRun, SignalScore, SignalBands, SignalsResponse } from "./types";
 
 /** Server-side data access. Live backend first (ISR 120 s); the committed snapshot (fetched 2026-10-09T13:14Z) is the offline fallback so
  *  every page still renders with 136 records if the ephemeral sandbox backend is down. The `source` is surfaced in the UI. */
@@ -40,6 +40,15 @@ export async function getPortfolio(): Promise<Sourced<PortfolioSentiment>> { ret
 export async function getRuns(): Promise<Sourced<IngestRun[]>> {
   const r = await get<{ data: IngestRun[] }>("/ingest/runs", () => ({ data: snap.runs }));
   return { ...r, data: r.data.data };
+}
+/** Evidence-weighted Signal Scores for the whole portfolio. No snapshot exists yet, so the offline fallback is an empty shape
+ *  (source 'snapshot') and the UI renders its "history builds daily" / em-dash states instead of simulated numbers. */
+export async function getSignals(): Promise<Sourced<SignalsResponse>> {
+  return get<SignalsResponse>("/signals", () => ({ data: [], portfolio: { n: 0, mean: 0, p25: 0, p75: 0, computed_at: null, method: "" }, sectors: {} }));
+}
+export async function getSignal(slug: string): Promise<Sourced<{ data: SignalScore; bands: SignalBands } | null>> {
+  const r = await get<{ data: SignalScore; bands: SignalBands } | null>(`/companies/${encodeURIComponent(slug)}/signal`, () => null);
+  return { ...r, data: r.data?.data ? { data: r.data.data, bands: r.data.bands } : null };
 }
 /** All news across the portfolio (for News Pulse): N parallel calls would be slow against the sandbox, so use the per-company latest_news
  *  embedded in /companies (always ≥ the news table for workflow-written items) merged with the snapshot news table. */

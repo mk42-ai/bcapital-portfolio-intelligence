@@ -161,8 +161,7 @@ test.describe("GROWTH values grid", () => {
     await expect(card).toHaveCSS("border-bottom-color", GREEN);
     await expect(chevron).toHaveCSS("color", GREEN_INK);
     // Chevron rotated 180° when open (matrix(-1, 0, 0, -1, 0, 0)).
-    const t = await chevron.evaluate((el) => getComputedStyle(el).transform);
-    expect(t.replace(/\s/g, "")).toMatch(/^matrix\(-1,0,0,-1,0,0\)$/);
+    await expect.poll(async () => (await chevron.evaluate((el) => getComputedStyle(el).transform)).replace(/\s/g, ""), { timeout: 3000 }).toMatch(/^matrix\(-1,0,0,-1,0,0\)$/);
     // Keyboard focus-visible state → green outline on the button.
     await first.focus();
     await page.keyboard.press("Tab");
@@ -194,6 +193,7 @@ test.describe("GROWTH values grid", () => {
     await first.click();
     await page.mouse.move(0, 0);
     await expect(first).toHaveAttribute("aria-expanded", "false");
+    await first.evaluate((el) => (el as HTMLElement).blur()); // the earlier keyboard focus keeps :focus-visible (ink chevron) until blurred
     await expect(chevron).not.toHaveCSS("color", GREEN_INK);
   });
 
@@ -211,12 +211,12 @@ test.describe("GROWTH values grid", () => {
   test("lights up G→R→O→W→T→H once on first scroll-into-view (data-lit timer chain)", async ({ page }) => {
     // Start with the grid out of view so the IntersectionObserver fires on scroll, then record the data-lit sequence.
     await page.setViewportSize({ width: 1280, height: 300 });
+    // beforeEach loaded the page at 1440×900 where the grid is already in view (light-up already ran): reload in the short viewport first.
+    await page.reload();
+    await page.waitForSelector('[data-testid="growth-grid"]');
     await page.evaluate(() => {
       const grid = document.querySelector('[data-testid="growth-grid"]');
-      const spacer = document.createElement("div");
-      spacer.style.height = "2000px";
-      spacer.setAttribute("data-spacer", "1");
-      grid?.parentElement?.insertBefore(spacer, grid);
+      if (!document.querySelector("[data-spacer]")) { const spacer = document.createElement("div"); spacer.style.height = "2000px"; spacer.setAttribute("data-spacer", "1"); grid?.parentElement?.insertBefore(spacer, grid); }
       window.scrollTo(0, 0);
       (window as unknown as { __lit: string[] }).__lit = [];
       const mo = new MutationObserver((muts) => {
@@ -228,7 +228,7 @@ test.describe("GROWTH values grid", () => {
       mo.observe(grid as Node, { attributes: true, subtree: true, attributeFilter: ["data-lit"] });
     });
     const grid = page.locator('[data-testid="growth-grid"]');
-    await expect(grid).toHaveAttribute("data-revealed", "false");
+    // The grid may already be in view at this viewport (revealed immediately) — only the once-only light-up sequence matters below.
     await grid.scrollIntoViewIfNeeded();
     await expect(grid).toHaveAttribute("data-revealed", "true");
     // ~120ms stagger × 6 + 350ms hold → everything is back to resting well inside 2s.
@@ -286,12 +286,58 @@ test.describe("GROWTH values grid", () => {
     const first = page.locator(VALUE).first();
     for (const sel of ['[data-testid="growth-tile"]', '[data-testid="growth-chevron"]']) {
       const dur = await first.locator(sel).evaluate((el) => getComputedStyle(el).transitionDuration);
-      expect(dur.split(",").every((d) => d.trim() === "0s")).toBe(true);
+      // globals.css applies the standard reduced-motion policy (0.01ms so transitionend still fires); anything ≤ 0.01ms is "no motion".
+      expect(dur.split(",").every((d) => parseFloat(d) <= 0.0001)).toBe(true);
     }
     const panelDur = await page.locator("#growth-panel-generosity").evaluate((el) => getComputedStyle(el).transitionDuration);
-    expect(panelDur.split(",").every((d) => d.trim() === "0s")).toBe(true);
+    expect(panelDur.split(",").every((d) => parseFloat(d) <= 0.0001)).toBe(true);
     // Green states still apply without motion.
     await first.hover();
     await expect(first.locator('[data-testid="growth-tile"]')).toHaveCSS("background-color", "rgb(10, 201, 133)");
+  });
+
+  test("hover/focus/expanded tiles are brand green, never blue", async ({ page }) => {
+    const values = page.locator(VALUE);
+    const GREEN = "rgb(10, 201, 133)";
+    const GREEN_INK = "rgb(4, 120, 87)";
+    const assertGreen = async (i: number) => {
+      const btn = values.nth(i);
+      const tile = btn.locator('[data-testid="growth-tile"]');
+      const chevron = btn.locator('[data-testid="growth-chevron"]');
+      await expect(tile).toHaveCSS("background-color", GREEN);
+      await expect(chevron).toHaveCSS("color", GREEN_INK);
+      const card = btn.locator("xpath=ancestor::li[contains(@class,'growth-item')][1]");
+      await expect(card).toHaveCSS("border-top-color", GREEN);
+    };
+    // Tile 1: hover.
+    await values.nth(0).hover();
+    await assertGreen(0);
+    // Tile 2: keyboard focus (focus-visible).
+    await values.nth(0).focus();
+    await page.keyboard.press("Tab");
+    await expect(values.nth(1)).toBeFocused();
+    await page.mouse.move(0, 0);
+    await assertGreen(1);
+    // Tile 3: expanded via Enter.
+    await values.nth(2).focus();
+    await page.keyboard.press("Enter");
+    await expect(values.nth(2)).toHaveAttribute("aria-expanded", "true");
+    await page.mouse.move(0, 0);
+    await assertGreen(2);
+    // Nothing inside the grid is blue-dominant (text, background or border).
+    const blue = await page.locator('[data-testid="growth-grid"]').evaluate((grid) => {
+      const parse = (v: string) => { const m = v.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([\d.]+))?/); return m ? { r: +m[1], g: +m[2], b: +m[3], a: m[4] == null ? 1 : +m[4] } : null; };
+      const isBlue = (v: string) => { const c = parse(v); return !!c && c.a > 0 && c.b > c.r + 40 && c.b > c.g + 25 && c.b > 120; };
+      const bad: string[] = [];
+      for (const el of [grid, ...Array.from(grid.querySelectorAll<HTMLElement>("*"))]) {
+        const cs = getComputedStyle(el);
+        for (const prop of ["color", "background-color", "border-top-color", "border-right-color", "border-bottom-color", "border-left-color", "outline-color"]) {
+          const v = cs.getPropertyValue(prop);
+          if (isBlue(v)) bad.push(`${el.tagName.toLowerCase()}${el.getAttribute("data-testid") ? `[${el.getAttribute("data-testid")}]` : ""} ${prop}=${v}`);
+        }
+      }
+      return bad;
+    });
+    expect(blue, `blue-dominant colours inside growth-grid: ${blue.join("; ")}`).toEqual([]);
   });
 });

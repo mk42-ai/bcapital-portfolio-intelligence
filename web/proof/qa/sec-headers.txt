@@ -1,0 +1,28 @@
+HTTP/2 200 
+date: Sat, 10 Oct 2026 10:24:21 GMT
+content-type: text/html; charset=utf-8
+content-length: 361026
+cache-control: s-maxage=60, stale-while-revalidate=31535940
+content-security-policy: frame-ancestors *;
+etag: "8umjxfa7vv7pvh"
+permissions-policy: camera=(), microphone=(), geolocation=()
+referrer-policy: strict-origin-when-cross-origin
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding
+x-content-type-options: nosniff
+x-nextjs-cache: HIT
+x-nextjs-prerender: 1
+x-nextjs-stale-time: 300
+server: Vercel
+x-vercel-id: iad1::6wj9z-1791627861083-2881ae2cbb30
+strict-transport-security: max-age=63072000
+x-vercel-internal-path-type: sandbox
+x-vercel-internal-metadata-state: origin_stale
+x-vercel-internal-cache-level: unknown
+x-vercel-internal-project-id: u
+x-vercel-internal-owner-id: u
+x-vercel-internal-deployment-id: u
+x-vercel-internal-proxy-pool: blue
+x-vercel-internal-request-cpu-ms: 0
+x-vercel-internal-proxy-cpu-load: 44
+x-vercel-internal-timing: vcoe_from_proxy=21
+

@@ -29,7 +29,7 @@ test.describe("Portfolio Overview", () => {
   });
 
   test("sort by score toggles row order", async ({ page }) => {
-    const sort = page.locator('[data-testid="sort-score"]');
+    const sort = page.locator('[data-testid="sort-signal"]');
     await expect(sort).toBeVisible();
     const firstBefore = await page.locator('[data-testid="company-table"] tbody tr').first().innerText();
     await sort.click();

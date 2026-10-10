@@ -1,0 +1,111 @@
+{
+  "note": "parseFrame() run on synthetic agent/ondemand_agent.* frames + a documented summarize_history.completed statusLog frame (transpiled eventMap.ts + sse-adapter.ts, 2026-10-10). These are NOT live frames — OnDemand did not emit any of them this session.",
+  "input": [
+    {
+      "event": "agent",
+      "data": {
+        "eventType": "ondemand_agent.require_creds",
+        "agent": {
+          "id": "a1",
+          "name": "Stock agent"
+        },
+        "data": {
+          "pluginId": "plugin-1716429542",
+          "service": "US Stock Fundamentals",
+          "fields": [
+            {
+              "key": "api_key",
+              "label": "API key",
+              "type": "password"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "event": "agent",
+      "data": {
+        "eventType": "ondemand_agent.awaiting_input",
+        "agent": {
+          "id": "a1"
+        },
+        "data": {
+          "prompt": "Which showtime?",
+          "inputType": "choice",
+          "options": [
+            "7pm",
+            "9pm"
+          ]
+        }
+      }
+    },
+    {
+      "event": "agent",
+      "data": {
+        "eventType": "ondemand_agent.awaiting_browser_action",
+        "agent": {
+          "id": "a1"
+        },
+        "data": {
+          "action": "payment",
+          "novncUrl": "https://novnc.example/x",
+          "message": "Pay in the live browser"
+        }
+      }
+    },
+    {
+      "event": "message",
+      "data": {
+        "eventType": "statusLog",
+        "currentStatusLog": {
+          "statusType": "summarize_history.completed",
+          "stepIndex": 1,
+          "summary": "Step 1 done"
+        }
+      }
+    }
+  ],
+  "output": [
+    {
+      "kind": "require_creds",
+      "pluginId": "plugin-1716429542",
+      "service": "US Stock Fundamentals",
+      "fields": [
+        {
+          "key": "api_key",
+          "label": "API key",
+          "type": "password"
+        }
+      ],
+      "agent": {
+        "id": "a1",
+        "name": "Stock agent"
+      }
+    },
+    {
+      "kind": "awaiting_input",
+      "prompt": "Which showtime?",
+      "options": [
+        "7pm",
+        "9pm"
+      ],
+      "agent": {
+        "id": "a1"
+      }
+    },
+    {
+      "kind": "awaiting_browser_action",
+      "action": "payment",
+      "message": "Pay in the live browser",
+      "url": "https://novnc.example/x",
+      "agent": {
+        "id": "a1"
+      }
+    },
+    {
+      "kind": "summary_done",
+      "index": 1,
+      "text": "Step 1 done"
+    }
+  ]
+}

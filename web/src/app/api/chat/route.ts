@@ -6,6 +6,7 @@ import {
 } from "@/lib/ondemand/config";
 import { parseFrame, type PluginRef, type UiEvent } from "@/lib/ondemand/sse-adapter";
 import { CLIENT_EVENT as CE } from "@/lib/ondemand/eventMap";
+import { markPluginBlocked, markPluginInvoked, clearPluginBlocked } from "@/lib/plugin-catalogue";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
@@ -174,6 +175,7 @@ export async function POST(req: NextRequest) {
       const toolStart = (pid: string, name?: string, stepId?: string, input?: string) => {
         if (tools.has(pid)) return;
         const id = crypto.randomUUID(); tools.set(pid, { id, name: name || pluginName(pid), open: true, stepId, startedAt: Date.now() });
+        markPluginInvoked(pid); // plugin-state `invoked` (plugin-catalogue.ts) — a tool card is open for this id in the current run
         const args = { plugin: name || pluginName(pid), pluginId: pid, query: (input || query).slice(0, 300), stepId: stepId ?? currentStepId ?? "", endpointId: ENDPOINT_ID, endpointLabel: ENDPOINT_LABEL, reasoningMode: REASONING_MODE };
         send({ type: "TOOL_CALL_START", toolCallId: id, toolCallName: name || pluginName(pid), parentMessageId: messageId });
         send({ type: "TOOL_CALL_ARGS", toolCallId: id, delta: JSON.stringify(args) });
@@ -198,8 +200,10 @@ export async function POST(req: NextRequest) {
         if (!m) return;
         const hit = m[0].replace(/\s+/g, " ").trim();
         const credits = /credits/i.test(hit);
-        pluginErr.current = { message: `${PLUGIN_NAME} (${PLUGIN_ID}) returned an upstream error: "${credits ? "Internal server error — Not enough credits" : hit}"${credits ? " (the OnDemand account's Perplexity credits are exhausted)" : ""}. No other plugin was substituted.`, raw };
+        const others = pluginIds.filter((id) => id !== PLUGIN_ID).map((id) => pluginName(id));
+        pluginErr.current = { message: `${PLUGIN_NAME} returned an upstream error: "${credits ? "Internal server error — Not enough credits" : hit}"${credits ? " (the OnDemand account's Perplexity credits are exhausted)" : ""}. No other plugin was substituted${others.length ? `; ${others.join(", ")} ${others.length === 1 ? "was" : "were"} also attached to this turn and any text below comes from ${others.length === 1 ? "it" : "them"} or the model's own knowledge` : ""}.`, raw };
         typedError("plugin_error", pluginErr.current.message, raw);
+        markPluginBlocked(PLUGIN_ID, pluginErr.current.message); // plugin-state `blocked` until a later run clears it (plugin-catalogue.ts)
         toolDone(PLUGIN_ID, "error", { message: pluginErr.current.message, raw: raw.slice(0, 1200) });
       };
       let thinkingBuf = ""; let planBuf = ""; let planEmitted = false; let objectiveSent = false; let stepBuf = ""; const stepEmittedFor = new Set<number>();
@@ -360,6 +364,7 @@ export async function POST(req: NextRequest) {
           send({ type: "RUN_FINISHED", threadId, runId });
         } else {
           for (const [pid, t] of tools) if (t.open) toolDone(pid, realSources.size || pid !== PLUGIN_ID ? "ok" : "error", realSources.size || pid !== PLUGIN_ID ? {} : { message: "Perplexity returned no sources for this question" });
+          if (realSources.size) clearPluginBlocked(PLUGIN_ID); // a clean run with real sources lifts a stale `blocked` state
           send({ type: "TEXT_MESSAGE_END", messageId });
           for (const [idx, d] of derivedSummary) if (!d.closed) { d.closed = true; custom(CE.summary, { phase: "done", index: idx, stepId: String(idx), derived: true, text: `${d.title} — ${d.n} source${d.n === 1 ? "" : "s"}${d.hosts.length ? ` from ${d.hosts.join(", ")}` : ""}.`, at: new Date().toISOString() }); }
           if (stepCounter > 0) custom(CE.step, { phase: "done", stepId: currentStepId, index: stepCounter, message: "answer written" });

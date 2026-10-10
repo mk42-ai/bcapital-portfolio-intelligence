@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCompany, getNews, getSentiment, listCompanies } from "@/lib/api";
+import { getCompany, getNews, getSentiment, getSignal, listCompanies } from "@/lib/api";
 import { CompanyThemeScope, Swatches } from "@/components/company/brand-theme";
 import { FundingTimeline } from "@/components/company/funding-timeline";
 import { NewsCard } from "@/components/company/news-cards";
 import { SentimentPanel } from "@/components/company/sentiment-panel";
+import { SignalPanel } from "@/components/company/signal-panel";
+import { SignalMini } from "@/components/charts/signal-bullet";
 import { EstimateBadge } from "@/components/overview/estimate-badge";
 import { StatusChips } from "@/components/overview/status-chips";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -30,7 +32,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
   const { slug } = await params;
   const c = await getCompany(slug); if (!c.data) notFound();
   const company = c.data;
-  const [news, sent] = await Promise.all([getNews(company.slug), getSentiment(company.slug)]);
+  const [news, sent, sig] = await Promise.all([getNews(company.slug), getSentiment(company.slug), getSignal(company.slug)]);
   const tier = company.brand_tokens.evidence_tier ?? "Missing";
   const wf = workflows.workflows.find((w) => w.id === sent.data?.history?.find((h) => h.workflow_id)?.workflow_id) ?? (company.is_focus ? workflows.workflows[0] : null);
   const lastScored = sent.data?.history?.find((h) => h.model && h.model !== "seed");
@@ -44,7 +46,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
           </div>
           <div className="min-w-0 flex-1">
             <p className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted"><span className="inline-block size-2.5 rounded-full border border-border" style={{ background: "var(--co-accent)" }} aria-hidden />{company.sector} · {company.region}</p>
-            <h1 className="font-display text-3xl font-semibold sm:text-4xl">{company.name}</h1>
+            <h1 className="flex flex-wrap items-center gap-3 font-display text-3xl font-semibold sm:text-4xl">{company.name}{sig.data && <span className="inline-flex items-center gap-1.5 font-sans text-sm font-medium text-muted" title={`Signal Score ${sig.data.data.score} / 100`}><SignalMini score={sig.data.data.score} confidence={sig.data.data.confidence} percentile={sig.data.data.percentile} label={sig.data.data.label} name={company.name} /><span className="tabular-nums">{sig.data.data.score}</span></span>}</h1>
             <p className="mt-1 text-sm text-muted">{company.status}{company.hq ? ` · ${company.hq}` : ""}{company.employees ? ` · ${company.employees.toLocaleString()} employees` : ""}</p>
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <Badge tone={TIER_TONE[tier] ?? "muted"}>evidence · {tier}</Badge>
@@ -74,7 +76,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
       </div>
 
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
-        <Card><CardHeader><CardTitle>Sentiment timeline</CardTitle><CardDescription>Scored by {workflows.model} from LinkedIn, Reddit, X and news evidence</CardDescription></CardHeader><CardContent>{sent.data ? <SentimentPanel s={sent.data} /> : <p className="text-sm text-muted">No sentiment yet.</p>}</CardContent></Card>
+        <Card><CardHeader><CardTitle>Signal Score &amp; sentiment timeline</CardTitle><CardDescription>Evidence-weighted Signal Score (0–100, z within portfolio + sector) above the daily {workflows.model} sentiment from LinkedIn, Reddit, X and news evidence</CardDescription></CardHeader><CardContent className="space-y-5">{sig.data ? <SignalPanel s={sig.data.data} bands={sig.data.bands} name={company.name} /> : <p className="text-sm text-muted">Signal Score unavailable (backend offline — no snapshot yet).</p>}{sent.data ? <div className="border-t border-border pt-4"><SentimentPanel s={sent.data} /></div> : <p className="text-sm text-muted">No sentiment yet.</p>}</CardContent></Card>
         <Card><CardHeader><CardTitle>Funding timeline</CardTitle><CardDescription>PitchBook-style: round · date · amount · post-money · lead · B Capital participation</CardDescription></CardHeader><CardContent><FundingTimeline company={company} /></CardContent></Card>
       </div>
 

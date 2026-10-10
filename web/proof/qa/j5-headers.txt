@@ -1,0 +1,25 @@
+HTTP/2 200 
+date: Sat, 10 Oct 2026 10:21:57 GMT
+content-type: text/event-stream; charset=utf-8
+cache-control: no-cache, no-transform
+content-encoding: identity
+content-security-policy: frame-ancestors *;
+permissions-policy: camera=(), microphone=(), geolocation=()
+referrer-policy: strict-origin-when-cross-origin
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+x-content-type-options: nosniff
+x-ondemand-model: predefined-deepseek-flash
+server: Vercel
+x-vercel-id: iad1::7sx2m-1791627717867-f36e8ae9a3b7
+strict-transport-security: max-age=63072000
+x-vercel-internal-path-type: sandbox
+x-vercel-internal-metadata-state: origin_stale
+x-vercel-internal-cache-level: unknown
+x-vercel-internal-project-id: u
+x-vercel-internal-owner-id: u
+x-vercel-internal-deployment-id: u
+x-vercel-internal-proxy-pool: blue
+x-vercel-internal-request-cpu-ms: 1
+x-vercel-internal-proxy-cpu-load: 55
+x-vercel-internal-timing: vcoe_from_proxy=15
+

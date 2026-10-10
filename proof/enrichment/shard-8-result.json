@@ -1,0 +1,139 @@
+{
+ "shard": 8,
+ "job_id": "job-mv288kum-7ff1",
+ "status": "done",
+ "started_at": "2026-10-10T10:03:52Z",
+ "finished_at": "2026-10-10T10:15:47Z",
+ "companies": [
+  "carro",
+  "curbwaste",
+  "extend",
+  "goodfire",
+  "hotspot-therapeutics",
+  "jetzero",
+  "levelten",
+  "mswipe",
+  "omnidian",
+  "picnichealth",
+  "seltz",
+  "star-catcher",
+  "unblocked-brands"
+ ],
+ "completed": 13,
+ "total": 13,
+ "coverage_by_field": {
+  "description": 92,
+  "sector": 85,
+  "hq": 92,
+  "founded": 85,
+  "ceo": 54,
+  "founders": 69,
+  "headcount": 85,
+  "total_raised": 77,
+  "last_valuation": 69,
+  "funding_rounds": 85,
+  "key_products": 92,
+  "competitors": 62,
+  "recent_news": 92,
+  "risk_signals": 77,
+  "social_sentiment": 92
+ },
+ "per_company": [
+  {
+   "slug": "curbwaste",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 91553
+  },
+  {
+   "slug": "carro",
+   "coverage_pct": 0,
+   "perplexity": "attached, no sources frame",
+   "errors": [
+    "answer did not contain a parseable JSON object"
+   ],
+   "ms": 131405
+  },
+  {
+   "slug": "extend",
+   "coverage_pct": 60,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 92948
+  },
+  {
+   "slug": "goodfire",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 137066
+  },
+  {
+   "slug": "hotspot-therapeutics",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 133291
+  },
+  {
+   "slug": "jetzero",
+   "coverage_pct": 80,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 89667
+  },
+  {
+   "slug": "levelten",
+   "coverage_pct": 60,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 87367
+  },
+  {
+   "slug": "mswipe",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 124648
+  },
+  {
+   "slug": "omnidian",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 123239
+  },
+  {
+   "slug": "picnichealth",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 89568
+  },
+  {
+   "slug": "star-catcher",
+   "coverage_pct": 100,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0fc4261cbe23404848da\",\"messageId\":\"6aca0fc5f7979c7d562aef39\",\"eventIndex\":579,\"eventType\":\"step_thinking\",\"stepId\":\"4\",\"status\":\"processing\",\"thinking\":{\"delta\":\" (\\\"Not enough credits\\\"). The available\"}}"
+   ],
+   "ms": 88397
+  },
+  {
+   "slug": "seltz",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 133271
+  },
+  {
+   "slug": "unblocked-brands",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 54608
+  }
+ ],
+ "error": null
+}

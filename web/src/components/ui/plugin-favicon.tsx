@@ -157,7 +157,6 @@ export function PluginChip({ id, meta, state, input, raw, onOpenRaw, size = 16, 
           className="absolute left-0 top-full z-50 mt-1.5 w-72 max-w-[80vw] rounded-md border border-border bg-surface-1 p-2.5 text-left text-xs shadow-lg"
         >
           <p className="flex items-center gap-1.5 font-semibold"><PluginFavicon id={id} meta={m} size={14} /><span className="truncate">{name}</span><span className="ml-auto font-mono text-[10px] text-muted" data-testid="plugin-chip-popover-state">{STATE_LABEL[state]}</span></p>
-          <p className="mt-0.5 font-mono text-[10px] text-muted">{id}</p>
           {input ? <p className="mt-1.5 whitespace-pre-wrap break-words text-foreground" data-testid="plugin-chip-popover-input">{input}</p> : <p className="mt-1.5 italic text-muted">no input recorded</p>}
           {raw && (
             <div className="mt-2">

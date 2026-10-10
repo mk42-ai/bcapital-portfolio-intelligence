@@ -135,3 +135,19 @@ and writes `proof/logo-resolution.json`; `apply-logos.ts` idempotently UPDATEs `
 record is never touched). `proof/image-coverage.json` (2026-10-10T00:06:55Z): **136 / 136 companies with a verified logo** — 110 existing URLs kept,
 20 from `og:image`, 6 favicons, `missing: []`. The frontend renders them through `<CompanyLogo/>` (overview table, picker, sidebar, news cards) with a
 Lucide fallback.
+
+## Enrichment pipeline (2026-10-10) — `src/enrich.ts`, `POST /enrich`, `GET /enrich/status`, `GET /companies/:slug/profile`
+
+Per company one OnDemand chat session (`externalUserId enrich-bot`, pluginIds = Perplexity `plugin-1722260873` pinned + GPT Search `plugin-1741871229` + LinkedIn Search `plugin-1718116202` + X Search Agent `plugin-1751872652` + Reddit Posts `plugin-1748003575` + US Stock Fundamental Analysis `plugin-1716429542`, all verified live against `/plugin/v1/search`), one structured-JSON query (`buildQuery`), stream parsed for `plugin_sources` + `fulfillment`, strict JSON extraction, then every field is `{value, source_url, published_date, fetched_at, plugin}`:
+
+* a value whose `source_url` did not appear in the stream (plugin_sources item or a URL inside the answer) is dropped and written as `unknown` with `reason` — never kept as a bare claim;
+* dates go through `plausibleDate` (no future, ≤3 years) then `dateFromUrl`;
+* funding rounds dedupe on date+amount, news on URL, competitors on name;
+* `recent_news` (≤5, dated, with per-item sentiment −1…+1) is upserted into `news_items` (`summary = via <plugin>`, `sentiment_score`) and merged into `companies.latest_news`; sourced `hq` / `headcount` (leading number only) update the company row;
+* Perplexity "Not enough credits" inside thinking deltas is recorded verbatim as `plugin_status.Perplexity = "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"`; the other plugins' answers are kept and labelled — nothing is substituted silently.
+
+`POST /enrich {slugs[], concurrency?, async?:true}` (X-Ingest-Secret) → with `async` returns `{job_id, poll}`; `GET /enrich/jobs/:id` reports per-slug progress; `GET /enrich/status` gives portfolio coverage per field. Run 2026-10-10 09:47–10:27Z: 10 shards × 13–14 companies, 136/136 profiles, average field coverage 86 %, Perplexity blocked on 22 runs (`proof/enrichment-coverage.json`, `proof/enrichment/shard-N-result.json`).
+
+## Signal Score — `src/scoring.ts`, `GET /signals`, `GET /companies/:slug/signal`
+
+Pure, unit-tested (`scripts/test-scoring.ts`): recency decay half-life 14 d × source-credibility weight → sentiment level shrunk toward the portfolio prior (K = 3 pseudo-observations) · 7 d − 30 d momentum · log1p volume · Wilson lower-bound confidence (z = 1.96) scaled by evidence mass; each factor z-scored within portfolio and sector (averaged), weights 0.45 / 0.25 / 0.15 / 0.15, `score = 50 + 15·z` clipped 0–100, percentile = rank of the composite, factor contributions = weight × z, top 3 contributing sources with dates. Replaces the semicircle gauge everywhere (Overview sector card + KPI tile + table column + movers, company detail panel, chat context list).

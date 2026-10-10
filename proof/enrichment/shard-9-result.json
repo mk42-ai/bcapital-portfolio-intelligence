@@ -1,0 +1,141 @@
+{
+ "shard": 9,
+ "job_id": "job-mv288oqp-37dd",
+ "status": "done",
+ "started_at": "2026-10-10T10:03:57Z",
+ "finished_at": "2026-10-10T10:16:28Z",
+ "companies": [
+  "centivo",
+  "dailyhunt",
+  "falconx",
+  "goose",
+  "hypersonix",
+  "judi-rx",
+  "linkmore",
+  "nalu",
+  "oro-labs",
+  "poolside",
+  "sharpa",
+  "starburst-data",
+  "vivacta"
+ ],
+ "completed": 13,
+ "total": 13,
+ "coverage_by_field": {
+  "description": 92,
+  "sector": 92,
+  "hq": 92,
+  "founded": 85,
+  "ceo": 69,
+  "founders": 77,
+  "headcount": 85,
+  "total_raised": 85,
+  "last_valuation": 77,
+  "funding_rounds": 92,
+  "key_products": 92,
+  "competitors": 69,
+  "recent_news": 92,
+  "risk_signals": 92,
+  "social_sentiment": 92
+ },
+ "per_company": [
+  {
+   "slug": "dailyhunt",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 97000
+  },
+  {
+   "slug": "centivo",
+   "coverage_pct": 100,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0d8d95268adc215e060c\",\"messageId\":\"6aca0d8e95268adc215e060f\",\"eventIndex\":341,\"eventType\":\"step_thinking\",\"stepId\":\"4\",\"status\":\"processing\",\"thinking\":{\"delta\":\"plexity had \\\"not enough credits\"}}"
+   ],
+   "ms": 103376
+  },
+  {
+   "slug": "goose",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 104452
+  },
+  {
+   "slug": "falconx",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 152919
+  },
+  {
+   "slug": "judi-rx",
+   "coverage_pct": 73,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 139440
+  },
+  {
+   "slug": "hypersonix",
+   "coverage_pct": 0,
+   "perplexity": "attached, no sources frame",
+   "errors": [
+    "answer did not contain a parseable JSON object"
+   ],
+   "ms": 191241
+  },
+  {
+   "slug": "nalu",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 65754
+  },
+  {
+   "slug": "linkmore",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 93105
+  },
+  {
+   "slug": "oro-labs",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 142726
+  },
+  {
+   "slug": "poolside",
+   "coverage_pct": 93,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0f6f261cbe23404848a1\",\"messageId\":\"6aca0f7095268adc215e0791\",\"eventIndex\":236,\"eventType\":\"step_thinking\",\"stepId\":\"2\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ity failed with \\\"Not enough credits\"}}"
+   ],
+   "ms": 144394
+  },
+  {
+   "slug": "sharpa",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 70239
+  },
+  {
+   "slug": "starburst-data",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 104800
+  },
+  {
+   "slug": "vivacta",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 73681
+  }
+ ],
+ "error": null
+}

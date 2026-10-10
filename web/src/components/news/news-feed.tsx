@@ -21,10 +21,12 @@ function sourcePlugin(n: Item): string {
 const sentBucket = (s: number | null) => s == null ? "unknown" : s <= -0.2 ? "negative" : s < 0.2 ? "neutral" : "positive";
 export function NewsFeed({ items, companies }: { items: Item[]; companies: Co[] }) {
   const [company, setCompany] = useState(""); const [sector, setSector] = useState(""); const [src, setSrc] = useState("all"); const [sent, setSent] = useState(""); const [q, setQ] = useState("");
+  const PAGE = 120; const [limit, setLimit] = useState(PAGE);
   const sectors = useMemo(() => [...new Set(items.map((i) => i.sector))].sort(), [items]);
   const filtered = useMemo(() => items.filter((n) => (!company || n.company_slug === company) && (!sector || n.sector === sector) && (src === "all" || sourcePlugin(n) === src) && (!sent || sentBucket(n.sentiment_score) === sent) && (!q || `${n.title} ${n.summary ?? ""} ${n.company_name}`.toLowerCase().includes(q.toLowerCase()))), [items, company, sector, src, sent, q]);
   const eagerIds = useMemo(() => new Set(filtered.slice(0, 8).map((n) => n.id)), [filtered]); // above-the-fold thumbs decode immediately
-  const groups = useMemo(() => { const m = new Map<string, Item[]>(); for (const n of filtered) { const k = dayKey(n.published_at); if (!m.has(k)) m.set(k, []); m.get(k)!.push(n); } return [...m.entries()].sort((a, b) => (a[0] === "Undated" ? 1 : b[0] === "Undated" ? -1 : b[0].localeCompare(a[0]))); }, [filtered]);
+  const shown = useMemo(() => filtered.slice(0, limit), [filtered, limit]);
+  const groups = useMemo(() => { const m = new Map<string, Item[]>(); for (const n of shown) { const k = dayKey(n.published_at); if (!m.has(k)) m.set(k, []); m.get(k)!.push(n); } return [...m.entries()].sort((a, b) => (a[0] === "Undated" ? 1 : b[0] === "Undated" ? -1 : b[0].localeCompare(a[0]))); }, [shown]);
   const movers = useMemo(() => [...companies].filter((c) => c.delta != null && c.delta !== 0).sort((a, b) => Math.abs(b.delta!) - Math.abs(a.delta!)).slice(0, 8), [companies]);
   const reset = () => { setCompany(""); setSector(""); setSrc("all"); setSent(""); setQ(""); };
   return (
@@ -49,6 +51,7 @@ export function NewsFeed({ items, companies }: { items: Item[]; companies: Co[] 
               </div>))}</div>
           </section>
         ))}
+        {filtered.length > shown.length && <p className="my-4 flex items-center gap-3 text-sm text-muted" role="status" data-testid="news-more">Showing {shown.length} of {filtered.length} items <Button size="sm" variant="secondary" onClick={() => setLimit((l) => l + PAGE)}>Show {Math.min(PAGE, filtered.length - shown.length)} more</Button><Button size="sm" variant="ghost" onClick={() => setLimit(filtered.length)}>Show all</Button></p>}
       </div>
       <aside aria-label="Sentiment deltas vs previous run" className="card h-fit p-4 lg:sticky lg:top-6">
         <h2 className="font-display text-lg font-semibold">Δ vs previous run</h2>

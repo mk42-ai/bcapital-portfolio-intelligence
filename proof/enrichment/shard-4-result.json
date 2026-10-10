@@ -1,0 +1,149 @@
+{
+ "shard": 4,
+ "job_id": "job-mv27n9gn-875a",
+ "status": "done",
+ "started_at": "2026-10-10T09:47:17Z",
+ "finished_at": "2026-10-10T10:00:46Z",
+ "companies": [
+  "brik",
+  "code-metal",
+  "eureka-robotics",
+  "flowgpt",
+  "gushwork",
+  "insilico-medicine",
+  "kopi-kenangan",
+  "macrolux",
+  "ninja-van",
+  "pendo",
+  "rapyd",
+  "solar-square",
+  "tacta",
+  "xingyun"
+ ],
+ "completed": 14,
+ "total": 14,
+ "coverage_by_field": {
+  "description": 100,
+  "sector": 93,
+  "hq": 100,
+  "founded": 93,
+  "ceo": 86,
+  "founders": 79,
+  "headcount": 100,
+  "total_raised": 93,
+  "last_valuation": 100,
+  "funding_rounds": 100,
+  "key_products": 100,
+  "competitors": 86,
+  "recent_news": 100,
+  "risk_signals": 100,
+  "social_sentiment": 100
+ },
+ "per_company": [
+  {
+   "slug": "brik",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 86235
+  },
+  {
+   "slug": "code-metal",
+   "coverage_pct": 80,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 138728
+  },
+  {
+   "slug": "eureka-robotics",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 109177
+  },
+  {
+   "slug": "flowgpt",
+   "coverage_pct": 100,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0a30261cbe234048462b\",\"messageId\":\"6aca0a3195268adc215e04b4\",\"eventIndex\":390,\"eventType\":\"step_thinking\",\"stepId\":\"3\",\"status\":\"processing\",\"thinking\":{\"delta\":\" \\\"Not enough credits\\\" so avoid\"}}"
+   ],
+   "ms": 122456
+  },
+  {
+   "slug": "gushwork",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 109618
+  },
+  {
+   "slug": "insilico-medicine",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 167057
+  },
+  {
+   "slug": "kopi-kenangan",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 129949
+  },
+  {
+   "slug": "macrolux",
+   "coverage_pct": 80,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 89696
+  },
+  {
+   "slug": "ninja-van",
+   "coverage_pct": 100,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0b58f7979c7d562aed2d\",\"messageId\":\"6aca0b59261cbe23404846c1\",\"eventIndex\":318,\"eventType\":\"step_thinking\",\"stepId\":\"3\",\"status\":\"processing\",\"thinking\":{\"delta\":\" with \\\"Not enough credits\\\", so\"}}"
+   ],
+   "ms": 110250
+  },
+  {
+   "slug": "pendo",
+   "coverage_pct": 73,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 69765
+  },
+  {
+   "slug": "rapyd",
+   "coverage_pct": 100,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0bc695268adc215e0582\",\"messageId\":\"6aca0bc7261cbe2340484700\",\"eventIndex\":805,\"eventType\":\"step_thinking\",\"stepId\":\"3\",\"status\":\"processing\",\"thinking\":{\"delta\":\" (failed - not enough credits),\"}}"
+   ],
+   "ms": 123979
+  },
+  {
+   "slug": "solar-square",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 124443
+  },
+  {
+   "slug": "tacta",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 55256
+  },
+  {
+   "slug": "xingyun",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 96493
+  }
+ ],
+ "error": null
+}

@@ -1,0 +1,1195 @@
+{
+ "summary": {
+  "companies": 136,
+  "shards": 10,
+  "avg_coverage_pct": 86,
+  "perplexity_blocked_companies": 22,
+  "coverage_by_field_portfolio": {
+   "description": 96,
+   "sector": 93,
+   "hq": 92,
+   "founded": 88,
+   "ceo": 74,
+   "founders": 77,
+   "headcount": 82,
+   "total_raised": 84,
+   "last_valuation": 72,
+   "funding_rounds": 91,
+   "key_products": 96,
+   "competitors": 70,
+   "recent_news": 95,
+   "risk_signals": 91,
+   "social_sentiment": 94
+  },
+  "plugins": [
+   "plugin-1722260873 Perplexity (pinned; BLOCKED BY EXTERNAL DEPENDENCY on 22/136 runs \u2014 Not enough credits)",
+   "plugin-1741871229 GPT Search",
+   "plugin-1718116202 LinkedIn Search",
+   "plugin-1751872652 X Search Agent",
+   "plugin-1748003575 Reddit Posts",
+   "plugin-1716429542 US Stock Fundamental Analysis"
+  ],
+  "model": "predefined-deepseek-flash",
+  "reasoning": "medium"
+ },
+ "shards": [
+  {
+   "shard": 1,
+   "job_id": "job-mv27mxdk-59ff",
+   "started_at": "2026-10-10T09:47:01Z",
+   "finished_at": "2026-10-10T09:59:55Z",
+   "companies": [
+    "perplexity-ai",
+    "apptronik",
+    "fervo-energy",
+    "flutterwave",
+    "writer",
+    "1au",
+    "6sense",
+    "aimotive",
+    "artbio",
+    "accacia",
+    "archimetis",
+    "aurora-yaocheng",
+    "axiom",
+    "baichuan"
+   ],
+   "completed": 14,
+   "total": 14,
+   "avg_coverage_pct": 87,
+   "perplexity_blocked": [
+    "writer",
+    "artbio"
+   ],
+   "coverage_by_field": {
+    "description": 93,
+    "sector": 93,
+    "hq": 93,
+    "founded": 93,
+    "ceo": 86,
+    "founders": 71,
+    "headcount": 86,
+    "total_raised": 86,
+    "last_valuation": 71,
+    "funding_rounds": 86,
+    "key_products": 93,
+    "competitors": 57,
+    "recent_news": 100,
+    "risk_signals": 100,
+    "social_sentiment": 100
+   },
+   "per_company": [
+    {
+     "slug": "apptronik",
+     "coverage_pct": 73,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "perplexity-ai",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "fervo-energy",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "flutterwave",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "writer",
+     "coverage_pct": 93,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "1au",
+     "coverage_pct": 53,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "6sense",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "aimotive",
+     "coverage_pct": 67,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "artbio",
+     "coverage_pct": 67,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "archimetis",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "accacia",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "aurora-yaocheng",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "axiom",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "baichuan",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    }
+   ]
+  },
+  {
+   "shard": 2,
+   "job_id": "job-mv27n1hz-94f7",
+   "started_at": "2026-10-10T09:47:07Z",
+   "finished_at": "2026-10-10T10:00:47Z",
+   "companies": [
+    "bhanzu",
+    "chipagents",
+    "dream-labs",
+    "floor-nfts",
+    "graymatter-robotics",
+    "infrahub",
+    "khatabook",
+    "lumara-health",
+    "nest-genomics",
+    "payfazz",
+    "precision-neuro",
+    "sift-healthcare",
+    "synapticure",
+    "when"
+   ],
+   "completed": 14,
+   "total": 14,
+   "avg_coverage_pct": 78,
+   "perplexity_blocked": [
+    "dream-labs",
+    "lumara-health"
+   ],
+   "coverage_by_field": {
+    "description": 93,
+    "sector": 93,
+    "hq": 86,
+    "founded": 79,
+    "ceo": 64,
+    "founders": 64,
+    "headcount": 64,
+    "total_raised": 64,
+    "last_valuation": 64,
+    "funding_rounds": 86,
+    "key_products": 93,
+    "competitors": 71,
+    "recent_news": 79,
+    "risk_signals": 93,
+    "social_sentiment": 86
+   },
+   "per_company": [
+    {
+     "slug": "bhanzu",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "chipagents",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "dream-labs",
+     "coverage_pct": 53,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "graymatter-robotics",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "floor-nfts",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "infrahub",
+     "coverage_pct": 80,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "khatabook",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "lumara-health",
+     "coverage_pct": 40,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "nest-genomics",
+     "coverage_pct": 0,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "payfazz",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "precision-neuro",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "sift-healthcare",
+     "coverage_pct": 73,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "when",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "synapticure",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    }
+   ]
+  },
+  {
+   "shard": 3,
+   "job_id": "job-mv27n5mq-d41d",
+   "started_at": "2026-10-10T09:47:12Z",
+   "finished_at": "2026-10-10T09:59:55Z",
+   "companies": [
+    "branch-international",
+    "cloudwise",
+    "eeroq",
+    "flourish-health",
+    "grit",
+    "innovaccer",
+    "knox",
+    "lunar-energy",
+    "neushen-therapeutics",
+    "palebluedot",
+    "profoundbio",
+    "silvercloud-health",
+    "trm-labs",
+    "wildfire"
+   ],
+   "completed": 14,
+   "total": 14,
+   "avg_coverage_pct": 84,
+   "perplexity_blocked": [
+    "innovaccer",
+    "neushen-therapeutics"
+   ],
+   "coverage_by_field": {
+    "description": 93,
+    "sector": 86,
+    "hq": 86,
+    "founded": 79,
+    "ceo": 79,
+    "founders": 79,
+    "headcount": 64,
+    "total_raised": 93,
+    "last_valuation": 71,
+    "funding_rounds": 93,
+    "key_products": 93,
+    "competitors": 71,
+    "recent_news": 93,
+    "risk_signals": 93,
+    "social_sentiment": 93
+   },
+   "per_company": [
+    {
+     "slug": "cloudwise",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "branch-international",
+     "coverage_pct": 73,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "eeroq",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "flourish-health",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "grit",
+     "coverage_pct": 73,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "knox",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "innovaccer",
+     "coverage_pct": 100,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "lunar-energy",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "neushen-therapeutics",
+     "coverage_pct": 100,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "palebluedot",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "profoundbio",
+     "coverage_pct": 80,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "silvercloud-health",
+     "coverage_pct": 80,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "trm-labs",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "wildfire",
+     "coverage_pct": 0,
+     "perplexity": "attached, no sources frame"
+    }
+   ]
+  },
+  {
+   "shard": 4,
+   "job_id": "job-mv27n9gn-875a",
+   "started_at": "2026-10-10T09:47:17Z",
+   "finished_at": "2026-10-10T10:00:46Z",
+   "companies": [
+    "brik",
+    "code-metal",
+    "eureka-robotics",
+    "flowgpt",
+    "gushwork",
+    "insilico-medicine",
+    "kopi-kenangan",
+    "macrolux",
+    "ninja-van",
+    "pendo",
+    "rapyd",
+    "solar-square",
+    "tacta",
+    "xingyun"
+   ],
+   "completed": 14,
+   "total": 14,
+   "avg_coverage_pct": 95,
+   "perplexity_blocked": [
+    "flowgpt",
+    "ninja-van",
+    "rapyd"
+   ],
+   "coverage_by_field": {
+    "description": 100,
+    "sector": 93,
+    "hq": 100,
+    "founded": 93,
+    "ceo": 86,
+    "founders": 79,
+    "headcount": 100,
+    "total_raised": 93,
+    "last_valuation": 100,
+    "funding_rounds": 100,
+    "key_products": 100,
+    "competitors": 86,
+    "recent_news": 100,
+    "risk_signals": 100,
+    "social_sentiment": 100
+   },
+   "per_company": [
+    {
+     "slug": "brik",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "code-metal",
+     "coverage_pct": 80,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "eureka-robotics",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "flowgpt",
+     "coverage_pct": 100,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "gushwork",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "insilico-medicine",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "kopi-kenangan",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "macrolux",
+     "coverage_pct": 80,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "ninja-van",
+     "coverage_pct": 100,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "pendo",
+     "coverage_pct": 73,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "rapyd",
+     "coverage_pct": 100,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "solar-square",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "tacta",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "xingyun",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    }
+   ]
+  },
+  {
+   "shard": 5,
+   "job_id": "job-mv27ne7t-1de3",
+   "started_at": "2026-10-10T09:47:23Z",
+   "finished_at": "2026-10-10T09:59:18Z",
+   "companies": [
+    "buildops",
+    "coindcx",
+    "evenup",
+    "forest",
+    "havocai",
+    "inspace",
+    "labelbox",
+    "meditrust",
+    "numerion-labs",
+    "percent",
+    "reflection",
+    "solve-therapeutics",
+    "tinyhealth",
+    "yalo"
+   ],
+   "completed": 14,
+   "total": 14,
+   "avg_coverage_pct": 92,
+   "perplexity_blocked": [
+    "coindcx",
+    "numerion-labs",
+    "percent",
+    "solve-therapeutics"
+   ],
+   "coverage_by_field": {
+    "description": 100,
+    "sector": 100,
+    "hq": 100,
+    "founded": 100,
+    "ceo": 93,
+    "founders": 93,
+    "headcount": 93,
+    "total_raised": 71,
+    "last_valuation": 71,
+    "funding_rounds": 86,
+    "key_products": 100,
+    "competitors": 86,
+    "recent_news": 100,
+    "risk_signals": 100,
+    "social_sentiment": 93
+   },
+   "per_company": [
+    {
+     "slug": "coindcx",
+     "coverage_pct": 93,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "buildops",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "evenup",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "forest",
+     "coverage_pct": 80,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "havocai",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "inspace",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "labelbox",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "meditrust",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "numerion-labs",
+     "coverage_pct": 93,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "percent",
+     "coverage_pct": 73,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "solve-therapeutics",
+     "coverage_pct": 80,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "reflection",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "tinyhealth",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "yalo",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    }
+   ]
+  },
+  {
+   "shard": 6,
+   "job_id": "job-mv288ccg-a7ee",
+   "started_at": "2026-10-10T10:03:40Z",
+   "finished_at": "2026-10-10T10:16:20Z",
+   "companies": [
+    "cadence",
+    "collinear-ai",
+    "evidation-health",
+    "fountain",
+    "heylibby",
+    "iru",
+    "labviva",
+    "meesho",
+    "nuvig",
+    "perimeter-81",
+    "remote",
+    "sonilo",
+    "turbine",
+    "zaihui"
+   ],
+   "completed": 14,
+   "total": 14,
+   "avg_coverage_pct": 86,
+   "perplexity_blocked": [
+    "fountain",
+    "remote",
+    "perimeter-81"
+   ],
+   "coverage_by_field": {
+    "description": 100,
+    "sector": 93,
+    "hq": 86,
+    "founded": 79,
+    "ceo": 79,
+    "founders": 79,
+    "headcount": 64,
+    "total_raised": 93,
+    "last_valuation": 64,
+    "funding_rounds": 100,
+    "key_products": 100,
+    "competitors": 64,
+    "recent_news": 100,
+    "risk_signals": 93,
+    "social_sentiment": 100
+   },
+   "per_company": [
+    {
+     "slug": "cadence",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "collinear-ai",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "evidation-health",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "fountain",
+     "coverage_pct": 100,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "heylibby",
+     "coverage_pct": 67,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "iru",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "labviva",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "nuvig",
+     "coverage_pct": 53,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "meesho",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "remote",
+     "coverage_pct": 80,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "sonilo",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "perimeter-81",
+     "coverage_pct": 93,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "turbine",
+     "coverage_pct": 80,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "zaihui",
+     "coverage_pct": 73,
+     "perplexity": "attached, no sources frame"
+    }
+   ]
+  },
+  {
+   "shard": 7,
+   "job_id": "job-mv288gog-d054",
+   "started_at": "2026-10-10T10:03:46Z",
+   "finished_at": "2026-10-10T10:17:08Z",
+   "companies": [
+    "carrick",
+    "companycam",
+    "evommune",
+    "gable",
+    "hifibio",
+    "isaac-health",
+    "lambda",
+    "miotech",
+    "odeko",
+    "phenom-people",
+    "rona-therapeutics",
+    "spectrumedics",
+    "turno"
+   ],
+   "completed": 13,
+   "total": 13,
+   "avg_coverage_pct": 81,
+   "perplexity_blocked": [
+    "rona-therapeutics"
+   ],
+   "coverage_by_field": {
+    "description": 92,
+    "sector": 92,
+    "hq": 85,
+    "founded": 85,
+    "ceo": 69,
+    "founders": 85,
+    "headcount": 85,
+    "total_raised": 77,
+    "last_valuation": 54,
+    "funding_rounds": 85,
+    "key_products": 92,
+    "competitors": 69,
+    "recent_news": 92,
+    "risk_signals": 69,
+    "social_sentiment": 85
+   },
+   "per_company": [
+    {
+     "slug": "carrick",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "companycam",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "evommune",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "gable",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "hifibio",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "isaac-health",
+     "coverage_pct": 60,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "lambda",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "miotech",
+     "coverage_pct": 60,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "odeko",
+     "coverage_pct": 0,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "phenom-people",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "rona-therapeutics",
+     "coverage_pct": 100,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "spectrumedics",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "turno",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    }
+   ]
+  },
+  {
+   "shard": 8,
+   "job_id": "job-mv288kum-7ff1",
+   "started_at": "2026-10-10T10:03:52Z",
+   "finished_at": "2026-10-10T10:15:47Z",
+   "companies": [
+    "carro",
+    "curbwaste",
+    "extend",
+    "goodfire",
+    "hotspot-therapeutics",
+    "jetzero",
+    "levelten",
+    "mswipe",
+    "omnidian",
+    "picnichealth",
+    "seltz",
+    "star-catcher",
+    "unblocked-brands"
+   ],
+   "completed": 13,
+   "total": 13,
+   "avg_coverage_pct": 81,
+   "perplexity_blocked": [
+    "star-catcher"
+   ],
+   "coverage_by_field": {
+    "description": 92,
+    "sector": 85,
+    "hq": 92,
+    "founded": 85,
+    "ceo": 54,
+    "founders": 69,
+    "headcount": 85,
+    "total_raised": 77,
+    "last_valuation": 69,
+    "funding_rounds": 85,
+    "key_products": 92,
+    "competitors": 62,
+    "recent_news": 92,
+    "risk_signals": 77,
+    "social_sentiment": 92
+   },
+   "per_company": [
+    {
+     "slug": "curbwaste",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "carro",
+     "coverage_pct": 0,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "extend",
+     "coverage_pct": 60,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "goodfire",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "hotspot-therapeutics",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "jetzero",
+     "coverage_pct": 80,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "levelten",
+     "coverage_pct": 60,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "mswipe",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "omnidian",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "picnichealth",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "star-catcher",
+     "coverage_pct": 100,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "seltz",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "unblocked-brands",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    }
+   ]
+  },
+  {
+   "shard": 9,
+   "job_id": "job-mv288oqp-37dd",
+   "started_at": "2026-10-10T10:03:57Z",
+   "finished_at": "2026-10-10T10:16:28Z",
+   "companies": [
+    "centivo",
+    "dailyhunt",
+    "falconx",
+    "goose",
+    "hypersonix",
+    "judi-rx",
+    "linkmore",
+    "nalu",
+    "oro-labs",
+    "poolside",
+    "sharpa",
+    "starburst-data",
+    "vivacta"
+   ],
+   "completed": 13,
+   "total": 13,
+   "avg_coverage_pct": 86,
+   "perplexity_blocked": [
+    "centivo",
+    "poolside"
+   ],
+   "coverage_by_field": {
+    "description": 92,
+    "sector": 92,
+    "hq": 92,
+    "founded": 85,
+    "ceo": 69,
+    "founders": 77,
+    "headcount": 85,
+    "total_raised": 85,
+    "last_valuation": 77,
+    "funding_rounds": 92,
+    "key_products": 92,
+    "competitors": 69,
+    "recent_news": 92,
+    "risk_signals": 92,
+    "social_sentiment": 92
+   },
+   "per_company": [
+    {
+     "slug": "dailyhunt",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "centivo",
+     "coverage_pct": 100,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "goose",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "falconx",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "judi-rx",
+     "coverage_pct": 73,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "hypersonix",
+     "coverage_pct": 0,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "nalu",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "linkmore",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "oro-labs",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "poolside",
+     "coverage_pct": 93,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "sharpa",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "starburst-data",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "vivacta",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    }
+   ]
+  },
+  {
+   "shard": 10,
+   "job_id": "job-mv288sry-7107",
+   "started_at": "2026-10-10T10:04:02Z",
+   "finished_at": "2026-10-10T10:17:56Z",
+   "companies": [
+    "certn",
+    "deferred",
+    "figment",
+    "grace-investment-machine",
+    "icertis",
+    "karman-industries",
+    "lively",
+    "nektar-ai",
+    "overstory",
+    "positive-development",
+    "shipday",
+    "sugarfit",
+    "volastra"
+   ],
+   "completed": 13,
+   "total": 13,
+   "avg_coverage_pct": 91,
+   "perplexity_blocked": [
+    "figment",
+    "lively"
+   ],
+   "coverage_by_field": {
+    "description": 100,
+    "sector": 100,
+    "hq": 100,
+    "founded": 100,
+    "ceo": 62,
+    "founders": 69,
+    "headcount": 100,
+    "total_raised": 100,
+    "last_valuation": 77,
+    "funding_rounds": 100,
+    "key_products": 100,
+    "competitors": 62,
+    "recent_news": 100,
+    "risk_signals": 92,
+    "social_sentiment": 100
+   },
+   "per_company": [
+    {
+     "slug": "deferred",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "certn",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "grace-investment-machine",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "figment",
+     "coverage_pct": 80,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "icertis",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "karman-industries",
+     "coverage_pct": 87,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "lively",
+     "coverage_pct": 80,
+     "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)"
+    },
+    {
+     "slug": "nektar-ai",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "overstory",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "positive-development",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "shipday",
+     "coverage_pct": 80,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "sugarfit",
+     "coverage_pct": 100,
+     "perplexity": "attached, no sources frame"
+    },
+    {
+     "slug": "volastra",
+     "coverage_pct": 93,
+     "perplexity": "attached, no sources frame"
+    }
+   ]
+  }
+ ]
+}

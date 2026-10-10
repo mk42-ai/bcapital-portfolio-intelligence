@@ -95,6 +95,19 @@ export const AGENT_SUBTYPE: Record<string, UiKind> = {
  * FIRST frame of step N+1 (`step_thinking` / `step_output`, stepId N+1). The bridge derives the Summarising checkpoint from that pair and marks
  * the frames it emits `derived: true`; the documented `summarize_history.*` pair above stays bound so a real frame takes over the moment it ships.
  */
+/**
+ * TRACE 2026-10-10 (Agent 11, Team A) — session 6aca0a89261cbe2340484665, one two-step query (Fervo Energy vs Ormat Technologies funding, then
+ * summarise), endpoint predefined-deepseek-flash, pluginIds [plugin-1741871229, plugin-1751872652], reasoningMode medium, 259 frames / 28.4 s.
+ * Raw stream: web/proof/team-a/sse-trace.raw.log · table: web/proof/team-a/sse-event-families.json.
+ *   event:thinking  → planning_thinking ×62 (first 1501 ms), planning_output ×32 (3486 ms), step_thinking ×19 (5644 ms, stepId 1→2),
+ *                     step_output ×56 (5763 ms, stepId 1→2), fulfillment_thinking ×14 (23694 ms)
+ *   event:message   → fulfillment ×65 (24160 ms), metricsLog ×1 (26372 ms), [DONE] (28385 ms)
+ *   event:heartbeat → ×9 (3556 ms; sessionId/messageId/time, no eventType)
+ *   statusType      → NONE. Zero message/statusLog frames: no summarize_history.initialized/completed, no plan_created, analyzing,
+ *                     agents_retrieved, executing, execution_completed, fulfilling or fulfillment_completed. No between-step summarisation frame of
+ *                     any name. plugin_sources did not occur in this run either (GPT Search returned citations only inline in the prose).
+ *   Verdict: every observed name is already bound above → NO rebind. STEP_BOUNDARY-derived "Summarising step N" stays the only source of that state.
+ */
 export const STEP_BOUNDARY = {
   endOfStep: "plugin_sources",                       // eventType that closes a step (carries stepId + stepTitle)
   startOfNextStep: ["step_thinking", "step_output"], // first eventTypes of the following step (stepId increments)

@@ -1,0 +1,147 @@
+{
+ "shard": 1,
+ "job_id": "job-mv27mxdk-59ff",
+ "status": "done",
+ "started_at": "2026-10-10T09:47:01Z",
+ "finished_at": "2026-10-10T09:59:55Z",
+ "companies": [
+  "perplexity-ai",
+  "apptronik",
+  "fervo-energy",
+  "flutterwave",
+  "writer",
+  "1au",
+  "6sense",
+  "aimotive",
+  "artbio",
+  "accacia",
+  "archimetis",
+  "aurora-yaocheng",
+  "axiom",
+  "baichuan"
+ ],
+ "completed": 14,
+ "total": 14,
+ "coverage_by_field": {
+  "description": 93,
+  "sector": 93,
+  "hq": 93,
+  "founded": 93,
+  "ceo": 86,
+  "founders": 71,
+  "headcount": 86,
+  "total_raised": 86,
+  "last_valuation": 71,
+  "funding_rounds": 86,
+  "key_products": 93,
+  "competitors": 57,
+  "recent_news": 100,
+  "risk_signals": 100,
+  "social_sentiment": 100
+ },
+ "per_company": [
+  {
+   "slug": "apptronik",
+   "coverage_pct": 73,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 88690
+  },
+  {
+   "slug": "perplexity-ai",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 142082
+  },
+  {
+   "slug": "fervo-energy",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 84031
+  },
+  {
+   "slug": "flutterwave",
+   "coverage_pct": 87,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 85077
+  },
+  {
+   "slug": "writer",
+   "coverage_pct": 93,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0a4295268adc215e04ba\",\"messageId\":\"6aca0a4395268adc215e04bb\",\"eventIndex\":432,\"eventType\":\"step_thinking\",\"stepId\":\"3\",\"status\":\"processing\",\"thinking\":{\"delta\":\" failed with \\\"Not enough credits\"}}"
+   ],
+   "ms": 146143
+  },
+  {
+   "slug": "1au",
+   "coverage_pct": 53,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 95103
+  },
+  {
+   "slug": "6sense",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 128035
+  },
+  {
+   "slug": "aimotive",
+   "coverage_pct": 67,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 161622
+  },
+  {
+   "slug": "artbio",
+   "coverage_pct": 67,
+   "perplexity": "BLOCKED BY EXTERNAL DEPENDENCY (Not enough credits)",
+   "errors": [
+    "Perplexity: upstream error frame: {\"sessionId\":\"6aca0b54f7979c7d562aed26\",\"messageId\":\"6aca0b5595268adc215e054e\",\"eventIndex\":472,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"\\\",\\\"message\\\":\\\"Not enough credits\"}}"
+   ],
+   "ms": 90636
+  },
+  {
+   "slug": "archimetis",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 55357
+  },
+  {
+   "slug": "accacia",
+   "coverage_pct": 93,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 160195
+  },
+  {
+   "slug": "aurora-yaocheng",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 86766
+  },
+  {
+   "slug": "axiom",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 125448
+  },
+  {
+   "slug": "baichuan",
+   "coverage_pct": 100,
+   "perplexity": "attached, no sources frame",
+   "errors": [],
+   "ms": 94238
+  }
+ ],
+ "error": null
+}

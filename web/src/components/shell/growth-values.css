@@ -158,8 +158,9 @@
   .growth-tile,
   .growth-chevron,
   .growth-panel {
-    transition: none;
-    animation: none;
+    transition: none !important; /* globals.css sets transition-duration: 0.01ms !important for everything; the GROWTH tiles are fully static (0s) */
+    transition-duration: 0s !important;
+    animation: none !important;
   }
   .growth-btn:hover .growth-tile,
   .growth-btn:focus-visible .growth-tile,

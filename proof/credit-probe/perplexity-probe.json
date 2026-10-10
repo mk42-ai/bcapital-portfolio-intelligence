@@ -1,0 +1,13 @@
+{
+  "probe_start_utc": "2026-10-10T09:34:33Z",
+  "probe_end_utc": "2026-10-10T09:34:47Z",
+  "session_id": "6aca06a995268adc215e03d2",
+  "frames": 232,
+  "plugin_sources_frames": 0,
+  "sources": 0,
+  "credit_error_frames": 1,
+  "status": "not_enough_credits",
+  "raw_error_frame": "{\"sessionId\":\"6aca06a995268adc215e03d2\",\"messageId\":\"6aca06aa95268adc215e03d3\",\"eventIndex\":108,\"eventType\":\"fulfillment_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ity error not enough credits. We\"}}",
+  "raw_first_sources_frame": null,
+  "answer_excerpt": "Because the real-time lookup failed with a credits error, I can only note from my knowledge that Apptronik\u2019s most recent funding news is its $350 million Series A announced in February 2025, led by B Capital and Capital Factory with Google participating (TechCrunch)."
+}

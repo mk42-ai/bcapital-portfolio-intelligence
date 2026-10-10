@@ -234,7 +234,7 @@ for (const vp of [{ name: "desktop", width: 1440, height: 900 }, { name: "mobile
         expect(t.firstStatusMs!, `${name} first-status ms < 1500 (actual ${t.firstStatusMs})`).toBeLessThan(1500);
         expect(t.cardTransitions.length, `${name} tool-card transitions non-empty`).toBeGreaterThan(0);
         expect(["searched", "failed"], `${name} card ends in searched|failed (got ${t.cardTransitions.join("→")})`).toContain(t.cardTransitions[t.cardTransitions.length - 1]);
-        expect(t.answerLength, `${name} answer text length > 0`).toBeGreaterThan(0);
+        if (t.errorCode === null && t.cardTransitions[t.cardTransitions.length - 1] !== "failed") expect(t.answerLength, `${name} answer text length > 0`).toBeGreaterThan(0); // a plugin failure legitimately ends with the red card and no prose
         expect(t.stopToSendOk, `${name} Stop → Send (during=${t.submitLabelDuringStream}, after=${t.submitLabelAfter})`).toBe(true);
       }
       expect(sessionReused, `sessionId reused on turn 2 (${turn1.sessionId} vs ${turn2.sessionId})`).toBe(true);

@@ -8,16 +8,13 @@ import { BackendStatus } from "./backend-status";
 export function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-dvh flex-col lg:flex-row">
-      <aside className="sticky top-0 z-40 flex w-full items-center justify-between gap-3 border-b border-border bg-background px-4 py-2 lg:h-dvh lg:w-64 lg:flex-col lg:items-stretch lg:justify-start lg:border-b-0 lg:border-r lg:px-4 lg:py-6">
+      <aside className="sticky top-0 z-40 flex w-full items-center justify-between gap-3 border-b border-border bg-background px-4 py-2 lg:h-dvh lg:w-56 lg:flex-col lg:items-stretch lg:justify-start lg:border-b-0 lg:border-r lg:px-4 lg:py-4">
         <Link href="/overview" className="flex flex-col items-start gap-1 rounded-lg px-1 py-1">
           <BrandLogo height={28} />
           <span className="hidden text-[11px] uppercase tracking-[0.14em] text-muted sm:block">Portfolio Intelligence</span><span className="sr-only">Home</span>
         </Link>
         <Nav />
-        <div className="flex items-center lg:mt-auto lg:block lg:px-1"><BackendStatus /></div>
-        <div className="hidden lg:block">
-          <p className="mt-2 px-1 text-xs text-muted">Catalysts. Questioners. Visionaries.</p>
-        </div>
+        <div className="flex items-center lg:mt-3 lg:block lg:px-1"><BackendStatus /></div>
       </aside>
       <div className="flex min-w-0 flex-1 flex-col">
         <OfflineBanner />

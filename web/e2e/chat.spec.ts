@@ -158,8 +158,9 @@ test.describe("Analyst chat — streaming", () => {
       console.log(`[chat-stream] plugin_error surfaced (card=${cardState}); sources assertion skipped`);
     }
     await expect(submit).toHaveAttribute("aria-label", "Send message", { timeout: 30_000 });
-    const finalText = await page.locator(".oiu-assistant").last().innerText();
-    expect(finalText.length).toBeGreaterThan(40);
+    const finalText = await page.locator(".oiu-assistant").last().innerText().catch(() => "");
+    if (pluginErrorCode === null && cardState !== "failed") expect(finalText.length).toBeGreaterThan(40);
+    else expect(await page.locator('[data-testid="chat-error"], [data-testid="plugin-error-card"], [data-testid="plugin-activity"][data-state="failed"]').count(), "honest error card shown when the plugin failed (no fabricated prose required)").toBeGreaterThan(0);
     testInfo.annotations.push({ type: "answer-excerpt", description: finalText.slice(0, 300) });
   });
 });
