@@ -295,10 +295,11 @@
 @keyframes oiu-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .oiu-spin { animation: none; } }
 /* Error banner with retry (light, neutral, AA: #991b1b on #fef2f2 = 7.4:1) */
-.oiu-error { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 10px; padding: 10px 12px; max-height: 220px; overflow: auto; border: 1px solid #fecaca; border-radius: 8px; background: #fef2f2; color: #991b1b; font-size: 13px; }
+.oiu-error { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 10px; padding: 10px 12px; max-height: 220px; overflow: auto; border: 1px solid #e5e7eb; border-radius: 8px; background: #ffffff; color: #111827; font-size: 13px; }
+.oiu-error > svg, .oiu-plugin-error > svg { color: #b91c1c; }
 .oiu-error__text { flex: 1 1 auto; min-width: 0; }
-.oiu-error__retry { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 4px 10px; border: 1px solid #991b1b; border-radius: 6px; background: #ffffff; color: #991b1b; font-size: 12px; font-weight: 600; cursor: pointer; }
-.oiu-error__retry:hover { background: #fee2e2; }
+.oiu-error__retry { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 4px 10px; border: 1px solid #d1d5db; border-radius: 6px; background: #ffffff; color: #111827; font-size: 12px; font-weight: 600; cursor: pointer; }
+.oiu-error__retry:hover { background: #f3f4f6; }
 .oiu-error__retry:focus-visible { outline: 2px solid #111827; outline-offset: 1px; }
 /* Hide OpenUI's own tool-call card/timeline chrome in case it is rendered next to ours */
 .chat-shell .openui-tool-call-timeline:empty { display: none; }
@@ -333,14 +334,17 @@
 .oiu-thinking--open .oiu-thinking__panel { grid-template-rows: 1fr; opacity: 1; }
 .oiu-thinking__inner { overflow: hidden; min-height: 0; }
 .oiu-thinking__pre { margin: 0; padding: 0 10px 8px; white-space: pre-wrap; overflow-wrap: anywhere; font: 11px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; color: #4b5563; max-height: 320px; overflow: auto; }
-.oiu-plugin-error { display: flex; align-items: flex-start; gap: 8px; margin: 0 0 10px; padding: 8px 10px; border: 1px solid #fca5a5; border-radius: 8px; background: #fef2f2; color: #991b1b; font-size: 12px; line-height: 1.4; }
+.oiu-plugin-error { display: flex; align-items: flex-start; gap: 8px; margin: 0 0 10px; padding: 8px 10px; border: 1px solid #e5e7eb; border-radius: 8px; background: #ffffff; color: #111827; font-size: 12px; line-height: 1.4; }
+.oiu-plugin-status { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 8px; padding: 0; color: #6b7280; font-size: 12px; line-height: 1.4; }
+.oiu-plugin-status a { color: #047857; text-decoration: underline; }
+.oiu-plugin-status__retry { display: inline-flex; align-items: center; gap: 4px; margin-left: 4px; border: 0; background: transparent; color: #047857; font: inherit; font-size: 12px; text-decoration: underline; cursor: pointer; }
 .oiu-activity--error .oiu-activity__icon { color: #b91c1c; }
 .oiu-activity--error .oiu-activity__detail { color: #991b1b; overflow-wrap: anywhere; }
 .oiu-activity--running .oiu-activity__icon { color: var(--brand-green-ink, #047857); }
 .oiu-sources--compact { margin-top: 6px; padding-top: 6px; }
 .oiu-sources--compact .oiu-sources__link { min-height: 24px; padding: 2px 6px; font-size: 11px; }
-.oiu-error__raw-toggle { margin-left: 6px; border: 0; background: transparent; color: #991b1b; font: inherit; font-size: 12px; text-decoration: underline; cursor: pointer; }
-.oiu-error__raw { margin: 6px 0 0; padding: 6px 8px; max-height: 160px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font: 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; background: #fff1f2; border: 1px solid #fecaca; border-radius: 6px; color: #7f1d1d; }
+.oiu-error__raw-toggle { margin-left: 6px; border: 0; background: transparent; color: #6b7280; font: inherit; font-size: 12px; text-decoration: underline; cursor: pointer; }
+.oiu-error__raw { margin: 6px 0 0; padding: 6px 8px; max-height: 160px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font: 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; color: #374151; }
 @media (prefers-reduced-motion: reduce) { .oiu-thinking__chev, .oiu-thinking__panel { transition: none; } }
 
 /* 2026-10-10 — streaming smoothness release: inline citation chips, reserved Sources rail, plan stepper, checkpoint cards, prompts, jump pill */
