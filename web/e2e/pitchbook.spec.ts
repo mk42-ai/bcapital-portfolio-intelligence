@@ -36,7 +36,10 @@ test.describe("PitchBook panel", () => {
     await expect(page.locator(COMPOSER).first()).toBeVisible();
     await expect(page.getByTestId("context-chip").first()).toBeVisible();
     const stored = await page.evaluate((k) => sessionStorage.getItem(k), CHIPS_KEY);
-    expect(stored).toContain("plugin-1777018662");
+    // The chip carries structured provenance; the plugin_id is the PitchBook plugin for investor chips and the enrichment plugin for
+    // FROM_ENRICHMENT facts (overview / last round) — either way the turn adds plugin-1777018662 (see context-chips.ts).
+    const chips = JSON.parse(stored ?? "[]") as { company: string; field: string; value: string; fetched_at: string | null }[];
+    expect(chips.length).toBeGreaterThan(0); expect(chips[0].company.length).toBeGreaterThan(0); expect(chips[0].field.length).toBeGreaterThan(0); expect(chips[0].value.length).toBeGreaterThan(0);
     // Removable, and removal empties the store.
     await page.getByTestId("context-chip-remove").first().click();
     await expect(page.getByTestId("context-chip")).toHaveCount(0);

@@ -70,8 +70,11 @@ function useAsk(variant: "page" | "rail") {
 const toChip = (company: string, f: Pick<Fact, "field" | "value" | "source" | "fetched" | "plugin">): ContextChip => ({ id: chipId(company, f.field, f.value), company, field: f.field, value: f.value, source: f.source, fetched_at: f.fetched, plugin_id: f.plugin ?? PITCHBOOK_PLUGIN_ID });
 
 function Provenance({ f }: { f: Pick<Fact, "source" | "published" | "fetched" | "plugin"> }) {
-  const dom = domainOf(f.source); const fr = freshness(f.fetched);
-  const title = [dom ? `source ${dom}` : null, f.published ? `published ${f.published}` : null, f.fetched ? `fetched ${relTime(f.fetched)}` : null, f.plugin ?? null].filter(Boolean).join(" · ") || "no provenance";
+  // Relative times are client-only (a server-computed "41 min ago" differs from the client's → React hydration #418): render them after mount.
+  const [now, setNow] = useState(0); useEffect(() => { setNow(Date.now()); }, []);
+  const dom = domainOf(f.source); const fr = now ? freshness(f.fetched, now) : "unknown";
+  const rel = (iso: string | null | undefined) => (now ? relTime(iso, now) : iso ? iso.slice(0, 10) : "—");
+  const title = [dom ? `source ${dom}` : null, f.published ? `published ${f.published}` : null, f.fetched ? `fetched ${rel(f.fetched)}` : null, f.plugin ?? null].filter(Boolean).join(" · ") || "no provenance";
   return (
     <details className="relative inline-flex" title={title} data-testid="pb-provenance" onClick={(e) => e.stopPropagation()}>
       <summary className="inline-flex cursor-pointer list-none items-center gap-1 rounded px-0.5 text-muted hover:text-foreground [&::-webkit-details-marker]:hidden" aria-label={`Provenance: ${title}`}>
@@ -80,7 +83,7 @@ function Provenance({ f }: { f: Pick<Fact, "source" | "published" | "fetched" | 
       <div className="absolute left-0 top-full z-20 mt-1 w-56 rounded-md border border-border bg-surface p-2 text-left text-[11px] leading-snug shadow-md">
         <p><span className="text-muted">source</span> · {dom ? (f.source ? <a href={f.source} target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:underline">{dom}</a> : dom) : "—"}</p>
         <p><span className="text-muted">published</span> · {f.published ?? "—"}</p>
-        <p><span className="text-muted">fetched</span> · {relTime(f.fetched)}{f.fetched ? <time dateTime={f.fetched} className="ml-1 text-muted">({f.fetched.slice(0, 10)})</time> : null}</p>
+        <p><span className="text-muted">fetched</span> · {rel(f.fetched)}{f.fetched ? <time dateTime={f.fetched} className="ml-1 text-muted">({f.fetched.slice(0, 10)})</time> : null}</p>
         <p className="text-muted">{f.plugin ?? PITCHBOOK_PLUGIN_NAME}</p>
       </div>
     </details>
@@ -216,7 +219,7 @@ export function PitchbookView({ slug, name, res, status, variant, profile }: Pit
         <p className="flex min-w-0 items-center gap-1.5 text-xs text-muted" data-testid="pb-header">
           <Landmark className="size-3.5 shrink-0" aria-hidden /><span className="font-medium text-foreground">{PITCHBOOK_PLUGIN_NAME}</span>
           <span className={cn("inline-block size-1.5 rounded-full", DOT[fr])} aria-hidden title={`fetched ${fetched ?? "—"}`} />
-          <span className="truncate">Updated {relTime(fetched, now || undefined)} · next pull {nextRun}</span>
+          <span className="truncate">Updated {now ? relTime(fetched, now) : fetched ? fetched.slice(0, 10) : "—"} · next pull {nextRun}</span>
         </p>
         <RunNow slug={slug} size={compact ? "xs" : "sm"} />
       </header>
