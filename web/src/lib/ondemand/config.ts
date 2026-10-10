@@ -20,10 +20,20 @@ export const ENDPOINT_LABEL = "DeepSeek Flash v4.1";
 /** Accepted by the live API (probe 2026-10-10, HTTP 200). Only documented examples are low/high; "medium" is the value this product uses. */
 export const REASONING_MODE = "medium";
 export const RESPONSE_MODE = "stream" as const;
-/** Perplexity — the ONLY plugin sent to OnDemand (session create + every query). */
+/** Perplexity — pinned, always sent first. Other plugins are sent ONLY when the user toggled them on (context.pluginIds), never substituted. */
 export const PLUGIN_ID = "plugin-1722260873";
 export const PLUGIN_NAME = "Perplexity";
 export const PLUGIN_IDS: readonly string[] = [PLUGIN_ID];
+/** Allow-list = the account's plugin catalogue (src/data/plugin-catalogue.json, from the live suggest-plugins API). */
+import catalogue from "@/data/plugin-catalogue.json";
+export const PLUGIN_CATALOGUE_IDS = new Set<string>((catalogue.plugins as { id: string }[]).map((p) => p.id));
+export const PLUGIN_NAMES: Record<string, string> = Object.fromEntries((catalogue.plugins as { id: string; name: string }[]).map((p) => [p.id, p.name]));
+/** Resolve the plugin list for one request: pinned Perplexity first, then every requested id that exists in the catalogue, in request order. */
+export const resolvePluginIds = (requested: unknown): { pluginIds: string[]; dropped: string[] } => {
+  const req = Array.isArray(requested) ? requested.map(String) : [];
+  const ok = req.filter((id) => PLUGIN_CATALOGUE_IDS.has(id) && id !== PLUGIN_ID);
+  return { pluginIds: [PLUGIN_ID, ...new Set(ok)], dropped: req.filter((id) => id !== PLUGIN_ID && !PLUGIN_CATALOGUE_IDS.has(id)) };
+};
 export const DEFAULT_EXTERNAL_USER_ID = process.env.NEXT_PUBLIC_DEFAULT_EXTERNAL_USER_ID || "INV-001";
 /** Cloudflare in front of api.on-demand.io returns 403 error 1010 ("browser_signature_banned") for bare/default user agents. */
 export const UPSTREAM_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0";
@@ -37,4 +47,4 @@ export const CHAT_SESSION_HEADER_WAIT_MS = Math.max(0, Number(process.env.ONDEMA
 /** Payload audit (default ON): /api/chat appends {request (key redacted), first 10 raw upstream events} per turn to <cwd>/proof/chat-payload-audit.json. */
 export const PAYLOAD_AUDIT = process.env.ONDEMAND_PAYLOAD_AUDIT !== "0";
 /** Upstream plugin failure signature — OnDemand never emits an error frame for it; it only appears inside *_thinking / answer deltas. */
-export const PLUGIN_ERROR_RE = /not enough credits|"error"\s*:\s*"internal server error"|tool returned an error|insufficient credits/i;
+export { PLUGIN_ERROR_RE } from "./sse-adapter";

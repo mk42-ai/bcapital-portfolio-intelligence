@@ -611,5 +611,140 @@
         "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9b4af95268adc215dfac9\",\"messageId\":\"6ac9b4b0f7979c7d562ae38c\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\": true with a Perplexity search\"}}"
       }
     ]
+  },
+  {
+    "at": "2026-10-10T05:15:16.234Z",
+    "threadId": "b35f50f3-6509-4589-af65-9feb5e27e688",
+    "runId": "17ca8c1c-6800-41fd-9d93-e48ecc2361bf",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873"
+    ],
+    "droppedPluginIds": [],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "contextMetadata": [
+          {
+            "key": "company:apptronik",
+            "valueChars": 954
+          },
+          {
+            "key": "company:fervo-energy",
+            "valueChars": 946
+          },
+          {
+            "key": "company:flutterwave",
+            "valueChars": 1130
+          },
+          {
+            "key": "company:perplexity-ai",
+            "valueChars": 892
+          },
+          {
+            "key": "company:writer",
+            "valueChars": 766
+          }
+        ]
+      },
+      "response": {
+        "status": 201,
+        "id": "6ac9c9e4261cbe2340483daf",
+        "message": "Chat session created successfully",
+        "elapsedMs": 366
+      }
+    },
+    "sessionId": "6ac9c9e4261cbe2340483daf",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6ac9c9e4261cbe2340483daf/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext 4046 chars> Which of my context companies moved most since the last sentiment run, and why?",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873"
+        ],
+        "reasoningMode": "medium"
+      }
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 1000
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 2677,
+      "firstTokenMs": 38565,
+      "totalMs": 47684,
+      "upstreamFrames": 587,
+      "answerChars": 6606,
+      "sources": 41,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 2677,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9c9e4261cbe2340483daf\",\"messageId\":\"6ac9c9e5261cbe2340483db0\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user asks: \\\"Which of my context\"}}"
+      },
+      {
+        "ms": 2680,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9c9e4261cbe2340483daf\",\"messageId\":\"6ac9c9e5261cbe2340483db0\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" companies moved most since the\"}}"
+      },
+      {
+        "ms": 2681,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9c9e4261cbe2340483daf\",\"messageId\":\"6ac9c9e5261cbe2340483db0\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" last sentiment run, and why?\\\"\\n\\n\"}}"
+      },
+      {
+        "ms": 2699,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9c9e4261cbe2340483daf\",\"messageId\":\"6ac9c9e5261cbe2340483db0\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"Key point: sentiment delta is null\"}}"
+      },
+      {
+        "ms": 2739,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9c9e4261cbe2340483daf\",\"messageId\":\"6ac9c9e5261cbe2340483db0\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" for all — no prior run. So no\"}}"
+      },
+      {
+        "ms": 2776,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9c9e4261cbe2340483daf\",\"messageId\":\"6ac9c9e5261cbe2340483db0\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" company \\\"moved\\\" in the sentiment\"}}"
+      },
+      {
+        "ms": 2818,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9c9e4261cbe2340483daf\",\"messageId\":\"6ac9c9e5261cbe2340483db0\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" sense. The rule says: don't invent\"}}"
+      },
+      {
+        "ms": 2861,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9c9e4261cbe2340483daf\",\"messageId\":\"6ac9c9e5261cbe2340483db0\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" movement. But also: for external\"}}"
+      },
+      {
+        "ms": 2890,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9c9e4261cbe2340483daf\",\"messageId\":\"6ac9c9e5261cbe2340483db0\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" facts — recent announcements —\"}}"
+      },
+      {
+        "ms": 2927,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6ac9c9e4261cbe2340483daf\",\"messageId\":\"6ac9c9e5261cbe2340483db0\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" run Perplexity.\\n\\nThe portfolio\"}}"
+      }
+    ]
   }
 ]

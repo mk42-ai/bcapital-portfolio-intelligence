@@ -2,7 +2,9 @@ import { NextRequest } from "next/server";
 import {
   ONDEMAND_BASE_URL, serverApiKey, ENDPOINT_ID, ENDPOINT_LABEL, REASONING_MODE, RESPONSE_MODE, PLUGIN_ID, PLUGIN_NAME, PLUGIN_IDS,
   DEFAULT_EXTERNAL_USER_ID, UPSTREAM_USER_AGENT, CHAT_FIRST_BYTE_MS, CHAT_TOTAL_MS, CHAT_HEARTBEAT_MS, CHAT_SESSION_HEADER_WAIT_MS, PAYLOAD_AUDIT, PLUGIN_ERROR_RE,
+  PLUGIN_NAMES, resolvePluginIds,
 } from "@/lib/ondemand/config";
+import { parseFrame, type PluginRef, type UiEvent } from "@/lib/ondemand/sse-adapter";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
@@ -41,7 +43,7 @@ export const maxDuration = 300;
  * Audit: PAYLOAD_AUDIT (default on) appends {request (key redacted), first 10 raw upstream events, timings} per turn to <cwd>/proof/chat-payload-audit.json.
  */
 type InMsg = { role?: string; content?: unknown };
-type Ctx = { sessionId?: string; externalUserId?: string; systemContext?: string; sessionContext?: { key: string; value: string }[] };
+type Ctx = { sessionId?: string; externalUserId?: string; systemContext?: string; sessionContext?: { key: string; value: string }[]; pluginIds?: string[] };
 const enc = new TextEncoder();
 const frame = (obj: unknown) => enc.encode(`data: ${JSON.stringify(obj)}\n\n`);
 const DONE = enc.encode("data: [DONE]\n\n");
@@ -84,12 +86,13 @@ export async function POST(req: NextRequest) {
   const lastUser = [...msgs].reverse().find((m) => m?.role === "user");
   const query = textOf(lastUser?.content).trim();
   if (!query) return jsonError("no user message", 400);
-  const pluginIds = [...PLUGIN_IDS];
+  // Explicit plugin list: pinned Perplexity + exactly the ids the user toggled on (catalogue allow-list). Nothing is ever substituted.
+  const { pluginIds, dropped: droppedPluginIds } = resolvePluginIds(ctx.pluginIds ?? PLUGIN_IDS);
   const externalUserId = typeof ctx.externalUserId === "string" && ctx.externalUserId ? ctx.externalUserId.slice(0, 64) : DEFAULT_EXTERNAL_USER_ID;
   const H: Record<string, string> = { apikey: key, "content-type": "application/json", "user-agent": UPSTREAM_USER_AGENT };
   const runId = crypto.randomUUID(); const messageId = crypto.randomUUID(); const threadId = body.threadId ?? crypto.randomUUID();
   const isFirstTurn = msgs.filter((m) => m?.role === "user").length <= 1;
-  const audit: Record<string, unknown> = { at: new Date(t0).toISOString(), threadId, runId, endpointId: ENDPOINT_ID, endpointLabel: ENDPOINT_LABEL, reasoningMode: REASONING_MODE, responseMode: RESPONSE_MODE, pluginIds };
+  const audit: Record<string, unknown> = { at: new Date(t0).toISOString(), threadId, runId, endpointId: ENDPOINT_ID, endpointLabel: ENDPOINT_LABEL, reasoningMode: REASONING_MODE, responseMode: RESPONSE_MODE, pluginIds, requestedPluginIds: ctx.pluginIds ?? null, droppedPluginIds };
   const rawFirst: { ms: number; raw: string }[] = []; let rawCount = 0;
 
   // One AbortController fans in: client disconnect (req.signal) + our own deadlines.
@@ -145,46 +148,39 @@ export async function POST(req: NextRequest) {
 
       // Immediate frames — flushed before any upstream await (first visible event well under 400 ms).
       send({ type: "RUN_STARTED", threadId, runId });
-      status("connecting", { endpointId: ENDPOINT_ID, endpointLabel: ENDPOINT_LABEL, reasoningMode: REASONING_MODE, pluginIds, sessionKnown: sessionFromHeaderPath });
+      status("connecting", { endpointId: ENDPOINT_ID, endpointLabel: ENDPOINT_LABEL, reasoningMode: REASONING_MODE, pluginIds, pluginNames: pluginIds.map((id) => PLUGIN_NAMES[id] ?? id), droppedPluginIds, sessionKnown: sessionFromHeaderPath });
 
       let text = "", textStarted = false, buf = "";
-      let toolId = ""; let toolOpen = false; let firstTokenAt = 0; let firstFrameAt = 0;
+      let firstTokenAt = 0; let firstFrameAt = 0; let stepCounter = 0; let currentStepId = ""; let summaryIndex = 0;
       const realSources = new Map<string, Src>();
       const pluginErr: { current: { message: string; raw: string } | null } = { current: null };
       const startText = () => { if (!textStarted) { textStarted = true; send({ type: "TEXT_MESSAGE_START", messageId, role: "assistant" }); } };
-      const toolStart = () => {
-        if (toolId) return;
-        toolId = crypto.randomUUID(); toolOpen = true;
-        const args = { plugin: PLUGIN_NAME, pluginId: PLUGIN_ID, query: query.slice(0, 300), endpointId: ENDPOINT_ID, endpointLabel: ENDPOINT_LABEL, reasoningMode: REASONING_MODE };
-        send({ type: "TOOL_CALL_START", toolCallId: toolId, toolCallName: PLUGIN_NAME, parentMessageId: messageId });
-        send({ type: "TOOL_CALL_ARGS", toolCallId: toolId, delta: JSON.stringify(args) });
-        send({ type: "TOOL_CALL_END", toolCallId: toolId });
-        status("researching", { plugin: PLUGIN_NAME, pluginId: PLUGIN_ID });
+      const custom = (name: string, value: Record<string, unknown>) => { send({ type: "CUSTOM", name, value: { elapsedMs: Date.now() - t0, ...value } }); lastSentAt = Date.now(); };
+      // ---- tool cards: one per plugin id (pinned Perplexity opens on the first planning frame; others open when the plan/agents name them)
+      type Tool = { id: string; name: string; open: boolean; stepId?: string; startedAt: number };
+      const tools = new Map<string, Tool>();
+      const pluginName = (id: string) => PLUGIN_NAMES[id] ?? id;
+      const toolStart = (pid: string, name?: string, stepId?: string, input?: string) => {
+        if (tools.has(pid)) return;
+        const id = crypto.randomUUID(); tools.set(pid, { id, name: name || pluginName(pid), open: true, stepId, startedAt: Date.now() });
+        const args = { plugin: name || pluginName(pid), pluginId: pid, query: (input || query).slice(0, 300), stepId: stepId ?? currentStepId ?? "", endpointId: ENDPOINT_ID, endpointLabel: ENDPOINT_LABEL, reasoningMode: REASONING_MODE };
+        send({ type: "TOOL_CALL_START", toolCallId: id, toolCallName: name || pluginName(pid), parentMessageId: messageId });
+        send({ type: "TOOL_CALL_ARGS", toolCallId: id, delta: JSON.stringify(args) });
+        send({ type: "TOOL_CALL_END", toolCallId: id });
+        status("researching", { plugin: name || pluginName(pid), pluginId: pid, stepId: stepId ?? currentStepId });
         lastSentAt = Date.now();
       };
-      const toolDone = (st: "ok" | "error", extra: Record<string, unknown> = {}) => {
-        if (!toolId) toolStart();
-        if (!toolOpen) return; toolOpen = false;
-        const content = JSON.stringify({ status: st, plugin: PLUGIN_NAME, pluginId: PLUGIN_ID, sources: realSources.size, ...extra });
-        send({ type: "TOOL_CALL_RESULT", messageId: crypto.randomUUID(), toolCallId: toolId, role: "tool", content, ...(st === "error" ? { isError: true, error: String(extra.message ?? "plugin failed") } : {}) });
+      const toolDone = (pid: string, st: "ok" | "error", extra: Record<string, unknown> = {}) => {
+        if (!tools.has(pid)) toolStart(pid);
+        const t = tools.get(pid)!; if (!t.open) return; t.open = false;
+        const content = JSON.stringify({ status: st, plugin: t.name, pluginId: pid, durationMs: Date.now() - t.startedAt, sources: realSources.size, ...extra });
+        send({ type: "TOOL_CALL_RESULT", messageId: crypto.randomUUID(), toolCallId: t.id, role: "tool", content, ...(st === "error" ? { isError: true, error: String(extra.message ?? "plugin failed") } : {}) });
+        lastSentAt = Date.now();
       };
-      const emitSources = (partial: boolean) => send({ type: "CUSTOM", name: "ondemand.sources", value: { messageId, pluginId: PLUGIN_ID, pluginName: PLUGIN_NAME, partial, sources: [...realSources.values()].slice(0, 20) } });
-      const collectSources = (j: Record<string, unknown>) => {
-        const s = j.sources as { pluginId?: string; pluginName?: string; items?: { title?: string; url?: string; domain?: string; imageUrl?: string }[] } | undefined;
-        if (!s || !Array.isArray(s.items)) return;
-        for (const it of s.items) {
-          if (!it?.url || realSources.has(it.url)) continue;
-          let host = it.domain || ""; if (!host) { try { host = new URL(it.url).hostname.replace(/^www\./, ""); } catch { host = it.url; } }
-          realSources.set(it.url, { url: it.url, title: (it.title || host).slice(0, 160), sourceName: host, ...(it.imageUrl && /^https?:\/\//.test(it.imageUrl) ? { imageUrl: it.imageUrl } : {}) });
-        }
-        emitSources(true);
-        // The plugin has returned its citations → the Perplexity card is done, before the answer starts.
-        toolDone("ok", { items: s.items.length });
-        status("answering", { sources: realSources.size });
-      };
-      const typedError = (code: string, message: string, raw: string) => {
-        send({ type: "CUSTOM", name: "ondemand.error", value: { code, message, raw: raw.slice(0, 2000), elapsedMs: Date.now() - t0 } });
-      };
+      const allToolsDone = (st: "ok" | "error", extra: Record<string, unknown> = {}) => { for (const pid of tools.keys()) toolDone(pid, st, extra); };
+      const refsToIds = (refs: PluginRef[]) => refs.map((r) => (/^plugin-\d+$/.test(r.id) ? r.id : pluginIds.find((id) => pluginName(id).toLowerCase() === r.name.toLowerCase()) ?? r.id));
+      const emitSources = (partial: boolean, pid?: string) => custom("ondemand.sources", { messageId, pluginId: pid ?? PLUGIN_ID, pluginName: pluginName(pid ?? PLUGIN_ID), partial, sources: [...realSources.values()].slice(0, 25) });
+      const typedError = (code: string, message: string, raw: string) => custom("ondemand.error", { code, message, raw: raw.slice(0, 2000) });
       const detectPluginError = (haystack: string, raw: string) => {
         if (pluginErr.current) return;
         const m = PLUGIN_ERROR_RE.exec(haystack);
@@ -193,48 +189,71 @@ export async function POST(req: NextRequest) {
         const credits = /credits/i.test(hit);
         pluginErr.current = { message: `${PLUGIN_NAME} (${PLUGIN_ID}) returned an upstream error: "${credits ? "Internal server error — Not enough credits" : hit}"${credits ? " (the OnDemand account's Perplexity credits are exhausted)" : ""}. No other plugin was substituted.`, raw };
         typedError("plugin_error", pluginErr.current.message, raw);
-        toolDone("error", { message: pluginErr.current.message });
+        toolDone(PLUGIN_ID, "error", { message: pluginErr.current.message, raw: raw.slice(0, 1200) });
       };
       let thinkingBuf = "";
 
-      const handle = (ev: string, data: string): boolean => {
-        if (data === "[DONE]") return true;
-        if (data.startsWith("[ERROR]")) {
-          const raw = data.slice(7).replace(/^:/, "");
-          let msg = raw; let code = "upstream_error";
-          try { const j = JSON.parse(raw) as { message?: string; errorCode?: string }; msg = j.message ?? raw; code = j.errorCode ?? code; } catch { /* plain text */ }
-          throw new UpstreamError(`OnDemand error frame: ${msg}`, 502, code);
+      /** Translate one typed UI event into AG-UI frames. Returns true on the terminal [DONE]. */
+      const dispatch = (u: UiEvent, raw: string): boolean => {
+        switch (u.kind) {
+          case "done": return true;
+          case "heartbeat": return false;
+          case "error": throw new UpstreamError(`OnDemand error frame: ${u.message}`, 502, u.code);
+          case "metrics": custom("ondemand.metrics", { publicMetrics: u.publicMetrics, firstTokenMs: firstTokenAt ? firstTokenAt - t0 : null, pluginIds }); return false;
+          case "plugins_suggested": custom("ondemand.plugins", { phase: u.phase, plugins: u.plugins }); if (u.phase === "initialized") status("planning", { statusType: "plugin_suggestion.initialized", statusMessage: "Finding plugins" }); return false;
+          case "plan": custom("ondemand.plan", { objective: u.objective ?? null, steps: u.steps }); status("planning", { statusType: "plan_created", statusMessage: u.objective ?? "Execution plan created", steps: u.steps.length }); return false;
+          case "step_start": {
+            stepCounter += 1; currentStepId = u.stepId || String(stepCounter);
+            custom("ondemand.step", { phase: "start", stepId: currentStepId, index: stepCounter, label: u.label, query: u.query ?? null });
+            // Optimistic checkpoint card for every step after the first (filled by summarize_history.completed when the agent emits it).
+            if (stepCounter > 1) { summaryIndex = stepCounter - 1; custom("ondemand.summary", { phase: "start", index: summaryIndex, stepId: currentStepId, optimistic: true }); }
+            return false;
+          }
+          case "agents_retrieved": for (const pid of refsToIds(u.plugins)) toolStart(pid, u.plugins.find((p) => p.id === pid)?.name, u.stepId); custom("ondemand.agents", { phase: "retrieved", stepId: u.stepId ?? currentStepId, plugins: u.plugins }); return false;
+          case "executing": for (const pid of refsToIds(u.plugins)) toolStart(pid, u.plugins.find((p) => p.id === pid)?.name, u.stepId); custom("ondemand.agents", { phase: "executing", stepId: u.stepId ?? currentStepId, plugins: u.plugins }); status("researching", { statusType: "executing", stepId: u.stepId ?? currentStepId, plugins: u.plugins.length }); return false;
+          case "execution_done": {
+            const ids = refsToIds(u.plugins); const targets = ids.length ? ids : [...tools.keys()].filter((k) => tools.get(k)!.open);
+            for (const pid of targets) { if (u.ok) toolDone(pid, "ok", { message: u.message || undefined }); else { typedError("execution_failed", `${pluginName(pid)}: ${u.message || "execution failed"}`, raw); toolDone(pid, "error", { message: u.message || "execution failed", raw: raw.slice(0, 1200) }); } }
+            custom("ondemand.step", { phase: u.ok ? "done" : "failed", stepId: u.stepId ?? currentStepId, index: stepCounter, message: u.message });
+            return false;
+          }
+          case "summary_start": summaryIndex = u.index || summaryIndex || stepCounter; custom("ondemand.summary", { phase: "start", index: summaryIndex, stepId: u.stepId ?? currentStepId, optimistic: false }); return false;
+          case "summary_done": custom("ondemand.summary", { phase: "done", index: u.index || summaryIndex || stepCounter, stepId: u.stepId ?? currentStepId, text: u.text, at: new Date().toISOString() }); return false;
+          case "thinking": {
+            if (u.channel === "planning" || u.channel === "plan" || u.channel === "step" || u.channel === "step_output") toolStart(PLUGIN_ID, PLUGIN_NAME, u.stepId);
+            if (u.delta) { custom("ondemand.thinking", { kind: u.channel, delta: u.delta, stepId: u.stepId ?? currentStepId }); thinkingBuf = (thinkingBuf + u.delta).slice(-800); detectPluginError(thinkingBuf, raw); }
+            if (u.channel === "step_output" && u.delta) {
+              // The step JSON names the plugins it will call: open a card per named plugin as soon as its id appears.
+              for (const m of thinkingBuf.matchAll(/"pluginId"\s*:\s*"(plugin-\d+)"/g)) if (pluginIds.includes(m[1])) toolStart(m[1], undefined, u.stepId);
+            }
+            return false;
+          }
+          case "sources": {
+            for (const c of u.items) if (!realSources.has(c.url)) realSources.set(c.url, c);
+            const pid = u.pluginId && pluginIds.includes(u.pluginId) ? u.pluginId : PLUGIN_ID;
+            emitSources(true, pid);
+            toolDone(pid, "ok", { items: u.items.length });
+            status("answering", { sources: realSources.size });
+            return false;
+          }
+          case "answer": {
+            if (!firstTokenAt && u.delta) firstTokenAt = Date.now();
+            startText(); text += u.delta; send({ type: "TEXT_MESSAGE_CONTENT", messageId, delta: u.delta }); lastSentAt = Date.now();
+            detectPluginError(text.slice(-600), raw);
+            return false;
+          }
+          case "answer_complete": custom("ondemand.answer_complete", { chars: u.text.length }); return false;
+          case "clarification": custom("ondemand.clarification", { messageId: u.messageId ?? null, queries: u.queries }); status("awaiting-input", { statusType: "clarification_request" }); return false;
+          case "require_creds": custom("ondemand.require_creds", { pluginId: u.pluginId ?? null, service: u.service ?? null, fields: u.fields, agent: u.agent ?? null }); status("awaiting-input", { statusType: "require_creds" }); return false;
+          case "awaiting_input": custom("ondemand.awaiting_input", { prompt: u.prompt, options: u.options ?? [], agent: u.agent ?? null }); status("awaiting-input", { statusType: "awaiting_input" }); return false;
+          case "awaiting_browser_action": custom("ondemand.awaiting_browser_action", { action: u.action ?? null, message: u.message ?? null, url: u.url ?? null, agent: u.agent ?? null }); status("awaiting-input", { statusType: "awaiting_browser_action" }); return false;
+          case "filler": custom("ondemand.filler", { on: u.on }); return false;
+          case "agent": custom("ondemand.agent", { subtype: u.subtype, agent: u.agent ?? null, data: u.data ?? null }); return false;
+          case "status": status(u.statusType === "fulfilling" ? "answering" : "planning", { statusType: u.statusType, statusMessage: u.message, stepQuery: u.stepQuery ?? null }); return false;
+          case "unknown": custom("ondemand.unknown", { eventType: u.eventType }); return false;
         }
-        let j: Record<string, unknown>; try { j = JSON.parse(data) as Record<string, unknown>; } catch { return false; }
-        const et = String(j.eventType ?? ev ?? "");
-        if (et === "heartbeat" || (ev === "heartbeat" && !j.eventType)) return false;
-        if (et === "metricsLog") { send({ type: "CUSTOM", name: "ondemand.metrics", value: { publicMetrics: j.publicMetrics ?? null, firstTokenMs: firstTokenAt ? firstTokenAt - t0 : null, elapsedMs: Date.now() - t0 } }); return false; }
-        if (et === "statusLog") { const cs = (j.currentStatusLog ?? {}) as { statusType?: string; statusMessage?: string }; status("planning", { statusType: cs.statusType, statusMessage: cs.statusMessage }); return false; }
-        if (et === "error" || typeof j.error === "string" || (typeof j.message === "string" && typeof j.errorCode === "string")) {
-          throw new UpstreamError(String((j.error as string) ?? j.message ?? "OnDemand reported an error"), 502, String(j.errorCode ?? "upstream_error"));
-        }
-        if (et === "plugin_sources") { collectSources(j); lastSentAt = Date.now(); return false; }
-        if (et === "fulfillment" && typeof j.answer === "string") {
-          if (!firstTokenAt && j.answer) { firstTokenAt = Date.now();  }
-          startText(); text += j.answer; send({ type: "TEXT_MESSAGE_CONTENT", messageId, delta: j.answer }); lastSentAt = Date.now();
-          detectPluginError(text.slice(-600), data);
-          return false;
-        }
-        if (et.endsWith("_thinking")) {
-          const kind = et.replace(/_thinking$/, "");
-          const delta = String((j.thinking as { delta?: string } | undefined)?.delta ?? "");
-          if (kind === "planning" || kind === "step") toolStart();
-          if (delta) { send({ type: "CUSTOM", name: "ondemand.thinking", value: { kind, delta } }); thinkingBuf = (thinkingBuf + delta).slice(-800); detectPluginError(thinkingBuf, data); }
-          return false;
-        }
-        if (et === "planning_output" || et === "step_output") {
-          toolStart();
-          const delta = String((j.output as { delta?: string } | undefined)?.delta ?? "");
-          if (delta) { send({ type: "CUSTOM", name: "ondemand.thinking", value: { kind: et === "planning_output" ? "plan" : "step", delta } }); thinkingBuf = (thinkingBuf + delta).slice(-800); detectPluginError(thinkingBuf, data); }
-          return false;
-        }
-        return false;
       };
+      const handle = (ev: string, data: string): boolean => dispatch(parseFrame(ev, data), data);
 
       try {
         // Resolve the session inside the stream when the header fast-path did not win the race.
@@ -289,7 +308,7 @@ export async function POST(req: NextRequest) {
           status("done", { chars: text.length, sources: 0, firstTokenMs: firstTokenAt ? firstTokenAt - t0 : null, pluginError: pluginErr.current.message });
           send({ type: "RUN_FINISHED", threadId, runId });
         } else {
-          if (toolOpen) toolDone(realSources.size ? "ok" : "error", realSources.size ? {} : { message: "Perplexity returned no sources for this question" });
+          for (const [pid, t] of tools) if (t.open) toolDone(pid, realSources.size || pid !== PLUGIN_ID ? "ok" : "error", realSources.size || pid !== PLUGIN_ID ? {} : { message: "Perplexity returned no sources for this question" });
           send({ type: "TEXT_MESSAGE_END", messageId });
           emitSources(false);
           status("done", { chars: text.length, sources: realSources.size, firstTokenMs: firstTokenAt ? firstTokenAt - t0 : null });
@@ -305,7 +324,7 @@ export async function POST(req: NextRequest) {
             : err instanceof UpstreamError ? err.message : `Upstream fetch failed: ${err.message || "stream failed"}`;
           const code = timedOut ? "timeout" : err instanceof UpstreamError ? err.code : "fetch_failed";
           if (!(err instanceof UpstreamError && err.code === "upstream_http")) typedError(code, message, String(err.message ?? ""));
-          toolDone("error", { message });
+          allToolsDone("error", { message });
           if (textStarted) send({ type: "TEXT_MESSAGE_END", messageId });
           send({ type: "RUN_ERROR", message, code });
           audit.error = { code, message };
