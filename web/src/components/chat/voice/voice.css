@@ -13,28 +13,48 @@
 
 .voice-panel { display: flex; align-items: center; gap: 12px; max-width: calc(768px + 2 * var(--openui-space-m-l, 20px)); width: 100%; margin: 0 auto 8px; padding: 8px 12px; box-sizing: border-box; border: 1px solid #d1fae5; border-radius: 14px; background: #ffffff; box-shadow: 0 6px 18px -12px rgba(4, 120, 87, .35); }
 .voice-panel[hidden] { display: none; }
-.voice-orb { position: relative; flex: 0 0 auto; width: 44px; height: 44px; }
-.voice-orb svg { display: block; width: 44px; height: 44px; overflow: visible; }
-.voice-orb__core { fill: var(--brand-green, #0AC985); transform-origin: 50% 50%; transform: scale(calc(.85 + var(--voice-level, 0) * .5)); transition: transform .08s linear; }
-.voice-orb__ring { fill: none; stroke: var(--brand-green, #0AC985); stroke-width: 1.5; transform-origin: 50% 50%; opacity: .55; }
-.voice-orb[data-state="idle"] .voice-orb__core { fill: #a7f3d0; transform: scale(.8); }
-.voice-orb[data-state="idle"] .voice-orb__ring { opacity: .25; }
-.voice-orb[data-state="listening"] .voice-orb__ring--1 { transform: scale(calc(1 + var(--voice-level, 0) * .6)); }
-.voice-orb[data-state="listening"] .voice-orb__ring--2 { transform: scale(calc(1.15 + var(--voice-level, 0) * 1.1)); opacity: .3; }
-.voice-orb[data-state="thinking"] .voice-orb__ring--1 { animation: voice-orbit 1.4s linear infinite; stroke-dasharray: 20 40; }
-.voice-orb[data-state="thinking"] .voice-orb__ring--2 { animation: voice-orbit 2.2s linear infinite reverse; stroke-dasharray: 12 50; opacity: .35; }
-.voice-orb[data-state="speaking"] .voice-orb__ring--1 { animation: voice-pulse 1.1s ease-in-out infinite; }
-.voice-orb[data-state="speaking"] .voice-orb__ring--2 { animation: voice-pulse 1.1s ease-in-out .35s infinite; opacity: .3; }
-.voice-orb[data-state="error"] .voice-orb__core { fill: #fcd34d; }
-.voice-orb[data-state="error"] .voice-orb__ring { stroke: #f59e0b; }
-.voice-orb__poster { display: none; width: 44px; height: 44px; border-radius: 999px; object-fit: cover; }
+/* ── Voice orb (Agent 5) ─────────────────────────────────────────────────────────────────────────────────────────
+   The poster illustration is the orb; the SVG ring layer carries motion. Sizes via --orb-size (44 px panel, 28 px mic). */
+.voice-orb { position: relative; flex: 0 0 auto; width: var(--orb-size, 44px); height: var(--orb-size, 44px); border-radius: 999px; }
+.voice-orb img.voice-orb__poster { display: block; position: relative; z-index: 1; width: 100%; height: 100%; border-radius: 999px; object-fit: contain; pointer-events: none; user-select: none; transition: filter .2s ease, opacity .2s ease; }
+.voice-orb__rings { position: absolute; inset: 0; z-index: 2; display: block; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.voice-orb__ring { fill: none; stroke: var(--brand-green, #0AC985); stroke-width: 1.5; stroke-linecap: round; transform-origin: 50% 50%; transform-box: fill-box; opacity: 0; }
+/* idle → still poster, rings hidden */
+.voice-orb[data-state="idle"] .voice-orb__ring { opacity: 0; }
+/* listening → brand-green ring pulse scaled by --voice-level (0..1); works without motion as a level meter */
+.voice-orb[data-state="listening"] .voice-orb__ring--1 { opacity: calc(.35 + var(--voice-level, 0) * .45); transform: scale(calc(1 + var(--voice-level, 0) * .35)); }
+.voice-orb[data-state="listening"] .voice-orb__ring--2 { opacity: calc(.12 + var(--voice-level, 0) * .3); transform: scale(calc(1.08 + var(--voice-level, 0) * .6)); stroke: var(--brand-green-ink, #047857); }
+/* thinking → dotted ring (rotation only under no-preference) */
+.voice-orb[data-state="thinking"] .voice-orb__ring--1 { opacity: .7; stroke-dasharray: 2 6; }
+.voice-orb[data-state="thinking"] .voice-orb__ring--2 { opacity: .3; stroke-dasharray: 1 7; stroke: var(--brand-green-ink, #047857); }
+/* speaking → soft breathing (static halo under reduce) */
+.voice-orb[data-state="speaking"] .voice-orb__ring--1 { opacity: .5; }
+.voice-orb[data-state="speaking"] .voice-orb__ring--2 { opacity: .2; }
+/* error → idle poster, muted */
+.voice-orb[data-state="error"] img.voice-orb__poster { filter: grayscale(.85) saturate(.6); opacity: .7; }
+.voice-orb[data-state="error"] .voice-orb__ring { opacity: 0; }
+/* 28 px inside the mic button: thinner strokes, no outer ring */
+.voice-orb[data-size="sm"] .voice-orb__ring { stroke-width: 2; }
+.voice-orb[data-size="sm"] .voice-orb__ring--2 { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .voice-orb__ring { transition: transform .08s linear, opacity .12s linear; }
+  .voice-orb[data-state="thinking"] .voice-orb__ring--1 { animation: voice-orbit 6s linear infinite; }
+  .voice-orb[data-state="thinking"] .voice-orb__ring--2 { animation: voice-orbit 10s linear infinite reverse; }
+  .voice-orb[data-state="speaking"] img.voice-orb__poster { animation: voice-breathe 2.4s ease-in-out infinite; }
+  .voice-orb[data-state="speaking"] .voice-orb__ring--1 { animation: voice-pulse 2.4s ease-in-out infinite; }
+  .voice-orb[data-state="speaking"] .voice-orb__ring--2 { animation: voice-pulse 2.4s ease-in-out .4s infinite; }
+}
 @keyframes voice-orbit { to { transform: rotate(360deg); } }
-@keyframes voice-pulse { 0%, 100% { transform: scale(1); opacity: .55; } 50% { transform: scale(1.3); opacity: .15; } }
+@keyframes voice-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes voice-pulse { 0%, 100% { transform: scale(1); opacity: .5; } 50% { transform: scale(1.12); opacity: .15; } }
 @media (prefers-reduced-motion: reduce) {
-  .voice-orb svg { display: none; } .voice-orb__poster { display: block; }
-  .voice-orb__core, .voice-orb__ring, .voice-mic { transition: none; animation: none !important; }
+  /* poster only */
+  .voice-orb__rings { display: none; }
+  .voice-orb img.voice-orb__poster { transition: none; animation: none !important; }
+  .voice-mic { transition: none; animation: none !important; }
   .voice-mic .oiu-spin { animation: none; }
 }
+.voice-orb[data-reduced-motion="true"] .voice-orb__rings { display: none; }
 .voice-panel__body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
 .voice-caption { margin: 0; font-size: 13px; line-height: 1.35; color: #111827; min-height: 18px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .voice-caption[data-kind="interim"] { color: #6b7280; font-style: italic; }
