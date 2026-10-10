@@ -10,10 +10,17 @@
 .oiu-att__paperclip { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 10px; border: 1px solid #e3e3e3; border-radius: 999px; background: #fff; color: #4b5563; font: inherit; font-size: 12.5px; font-weight: 500; cursor: pointer; transition: border-color 120ms ease, color 120ms ease, background-color 120ms ease; }
 .oiu-att__paperclip:hover, .oiu-att__paperclip:focus-visible { border-color: var(--brand-green, #0ac985); color: var(--brand-green-ink, #047857); background: var(--brand-green-soft, #e6faf3); outline: none; }
 .oiu-att__paperclip-label { line-height: 1; }
+/* Collapsed when the paperclip is in the action bar and there is nothing to show */
+.oiu-att--bare { min-height: 0; padding: 0; gap: 0; }
+
+/* Icon-only paperclip for the composer action bar (same row as textarea / mic / send) */
+.oiu-att__attach-btn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 999px; background: transparent; color: #6b7280; cursor: pointer; flex: none; transition: color 120ms ease, background-color 120ms ease; }
+.oiu-att__attach-btn:hover, .oiu-att__attach-btn:focus-visible { color: var(--brand-green-ink, #047857); background: var(--brand-green-soft, #e6faf3); outline: none; }
+.oiu-att__attach-btn:focus-visible { box-shadow: 0 0 0 2px var(--brand-green, #0ac985); }
 
 .oiu-att__drop { display: flex; align-items: center; gap: 12px; flex: 1 1 100%; padding: 10px 14px; border: 1.5px dashed var(--brand-green, #0ac985); border-radius: 14px; background: var(--brand-green-soft, #e6faf3); color: var(--brand-green-ink, #047857); font-size: 13px; font-weight: 500; pointer-events: none; }
 .oiu-att__drop p { margin: 0; }
-.oiu-att__drop-img { width: 64px; height: 64px; object-fit: contain; flex: none; }
+.oiu-att__drop-img { width: 64px; height: 64px; object-fit: contain; flex: none; background: transparent; }
 .oiu-att__drop-inline { margin: 0; font-size: 12.5px; font-weight: 600; color: var(--brand-green-ink, #047857); pointer-events: none; }
 
 .oiu-att__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; flex: 1 1 auto; min-width: 0; }

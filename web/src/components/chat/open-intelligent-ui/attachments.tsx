@@ -4,8 +4,11 @@
  * attachment chips shown under the user bubble. State lives in a module store (useSyncExternalStore) so chat-shell's fetch wrapper can
  * read the ready attachments synchronously and attach `{mediaId,name,kind,extractedChars}` to `context.attachments`.
  * The bar portals itself into OpenUI's `.openui-agent-composer-slot` (found via MutationObserver), above the composer input.
+ * `<AttachButton />` is the paperclip alone — mount it inside the composer action bar (same row as textarea/mic/send); while it is mounted
+ * the bar shows chips + drop overlay only (module flag `attachButtonMounted`). The single hidden file input always lives in the bar.
  */
 import "./attachments.css";
+import { ASSET } from "@/lib/assets";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type DragEvent as ReactDragEvent } from "react";
 import { createPortal } from "react-dom";
 import { AlertCircle, Check, FileSpreadsheet, FileText, Image as ImageIcon, Loader2, Music, Paperclip, RotateCcw, X } from "lucide-react";
@@ -202,11 +205,39 @@ function useComposerHost() {
 
 const hasFiles = (e: DragEvent | ReactDragEvent) => Array.from(e.dataTransfer?.types ?? []).includes("Files");
 
+/** True while at least one <AttachButton /> is mounted (then AttachmentBar renders chips only, no paperclip). Live ES-module binding. */
+export let attachButtonMounted = false;
+let attachButtonCount = 0;
+export const isAttachButtonMounted = () => attachButtonMounted;
+/** The single hidden file input (owned by AttachmentBar); AttachButton opens it so Playwright/a11y see exactly one `attachment-input`. */
+let pickerInput: HTMLInputElement | null = null;
+export function openFilePicker() {
+  if (pickerInput) { pickerInput.click(); return; }
+  // Fallback when the bar is not mounted yet: a throw-away input that feeds the same store.
+  const el = document.createElement("input"); el.type = "file"; el.multiple = true; el.accept = ACCEPT_ATTR; el.style.display = "none";
+  el.onchange = () => { if (el.files?.length) attachmentsStore.add(el.files); el.remove(); };
+  document.body.appendChild(el); el.click();
+}
+
+/** Paperclip for the composer action bar (portal target: `.openui-agent-thread-composer__action-bar`). Icon-only, brand-green hover. */
+export function AttachButton({ className = "" }: { className?: string }) {
+  useEffect(() => {
+    attachButtonCount += 1; attachButtonMounted = true; emit();
+    return () => { attachButtonCount = Math.max(0, attachButtonCount - 1); attachButtonMounted = attachButtonCount > 0; emit(); };
+  }, []);
+  return (
+    <button type="button" className={`oiu-att__attach-btn${className ? ` ${className}` : ""}`} aria-label="Attach a file" title={`Attach a file — ${DROP_HINT}`} data-testid="attachment-button" onClick={openFilePicker}>
+      <Paperclip className="size-4" aria-hidden />
+    </button>
+  );
+}
+
 export function AttachmentBar() {
   const st = useAttachments();
   const { host, slot } = useComposerHost();
   const inputRef = useRef<HTMLInputElement>(null);
   const depth = useRef(0);
+  useEffect(() => { pickerInput = inputRef.current; return () => { if (pickerInput === inputRef.current) pickerInput = null; }; }, [host]);
   const pick = useCallback((list: FileList | File[] | null) => { if (list && list.length) attachmentsStore.add(list); }, []);
 
   // Drag-and-drop over the WHOLE composer area + paste (clipboard files) while focus is inside the composer.
@@ -228,16 +259,20 @@ export function AttachmentBar() {
   if (!host) return null;
   const empty = st.items.length === 0;
   const ready = st.items.filter((a) => a.status === "ready").length;
+  const inlineClip = !attachButtonMounted; // paperclip lives in the action bar when <AttachButton /> is mounted (Agent 23's composer row)
+  const bare = !inlineClip && empty && !st.dragging; // nothing visible → collapse the row (no stray whitespace above the input)
   return createPortal(
-    <div className={`oiu-att${st.dragging ? " oiu-att--over" : ""}${empty ? " oiu-att--empty" : ""}`} data-testid="attachment-bar" data-count={st.items.length} data-ready={ready}>
+    <div className={`oiu-att${st.dragging ? " oiu-att--over" : ""}${empty ? " oiu-att--empty" : ""}${bare ? " oiu-att--bare" : ""}`} data-testid="attachment-bar" data-count={st.items.length} data-ready={ready} data-inline-clip={inlineClip ? "1" : "0"}>
       <input ref={inputRef} type="file" multiple accept={ACCEPT_ATTR} className="oiu-att__input" data-testid="attachment-input" tabIndex={-1} aria-hidden onChange={(e) => { pick(e.currentTarget.files); e.currentTarget.value = ""; }} />
-      <button type="button" className="oiu-att__paperclip" aria-label="Attach a file" title={`Attach a file — ${DROP_HINT}`} data-testid="attachment-button" onClick={() => inputRef.current?.click()}>
-        <Paperclip className="size-4" aria-hidden />{empty && <span className="oiu-att__paperclip-label">Attach</span>}
-      </button>
+      {inlineClip && (
+        <button type="button" className="oiu-att__paperclip" aria-label="Attach a file" title={`Attach a file — ${DROP_HINT}`} data-testid="attachment-button" onClick={() => inputRef.current?.click()}>
+          <Paperclip className="size-4" aria-hidden />{empty && <span className="oiu-att__paperclip-label">Attach</span>}
+        </button>
+      )}
       {st.dragging && empty && (
         <div className="oiu-att__drop" data-testid="attachment-dropzone-empty">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/fallbacks/dropzone.webp" alt="" width={64} height={64} className="oiu-att__drop-img" />
+          <img src={ASSET.dropzone} alt="" width={64} height={64} decoding="async" className="oiu-att__drop-img" data-testid="attachment-dropzone-img" />
           <p>{DROP_HINT}</p>
         </div>
       )}
