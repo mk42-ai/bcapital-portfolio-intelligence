@@ -275,7 +275,8 @@
 .oiu-sources__meta .oiu-sources__host { font-weight: 500; color: #4b5563; }
 
 /* 2026-10-10 — DeepSeek Flash v4.1 · Perplexity-only release: provenance badge, thinking trace, typed error card, compact in-card sources */
-.oiu-badge { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin: 10px 0 0; font-size: 11px; color: #5f6b7a; }
+.oiu-badge { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin: 10px 0 0; font-size: 11px; color: #5f6b7a; min-height: 18px; }
+.oiu-assistant--streaming .oiu-badge { margin: 0 0 8px; }
 .oiu-badge code { font-size: 10.5px; background: #f3f4f6; padding: 1px 4px; border-radius: 4px; color: #374151; }
 .oiu-badge__sep { color: #9ca3af; }
 .oiu-thinking { margin: 0 0 10px; border: 1px solid #e5e7eb; border-radius: 8px; background: #fafafa; font-size: 12px; color: #4b5563; }
@@ -316,7 +317,8 @@
 .oiu-cite__host { font-size: 10.5px; color: #6b7280; }
 @keyframes oiu-chip-in { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
 /* Sources rail: reserved min-height while live so the first chip never pushes the composer; items slide in. */
-.oiu-sources--live { min-height: 64px; }
+.oiu-sources--live { min-height: 64px; margin: 0 0 10px; border-top: 0; border-bottom: 1px solid #e5e7eb; padding: 0 0 8px; }
+.oiu-activity__elapsed { display: inline-block; min-width: 14ch; }
 .oiu-sources__item--in { animation: oiu-src-in 180ms ease both; }
 @keyframes oiu-src-in { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: none; } }
 .oiu-sources__num { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 9px; background: #f3f4f6; color: #374151; font-size: 10.5px; font-weight: 600; flex: none; }

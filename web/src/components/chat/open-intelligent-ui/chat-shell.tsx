@@ -411,9 +411,10 @@ const PluginTimeline: ToolCallTimelineComponent = ({ activities, steps, isLast, 
       <div className="oiu-assistant oiu-assistant--streaming" aria-live="polite" aria-busy="true" data-testid="assistant-streaming">
         <div className="oiu-assistant__avatar" aria-hidden><Bot className="size-4" strokeWidth={2} /></div>
         <div className="oiu-assistant__body">
-          <CitedMarkdown text={liveText} known={st.error?.code === "plugin_error" ? [] : st.sources} streaming onCites={setLiveCites} />
-          <SourceList sources={railSources} live />
+          {/* Rail + live badge sit ABOVE the growing text so streaming never pushes a layout box that is already painted (CLS ≈ 0). */}
           <AnswerBadge meta={{ pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, totalMs: null, metrics: null }} live />
+          <SourceList sources={railSources} live />
+          <CitedMarkdown text={liveText} known={st.error?.code === "plugin_error" ? [] : st.sources} streaming onCites={setLiveCites} />
         </div>
       </div>
     )}
@@ -543,7 +544,7 @@ export function ChatShell({ companies, fetchedAt }: { companies: CoCtx[]; fetche
   const pluginLabel = selectedPlugins.map((id) => catalogueName(id)).join(", ");
   return (
     <div className="chat-shell" data-testid="chat-shell">
-      <AgentInterface llm={llm} storage={storage} agentName="Portfolio analyst" theme={{ mode: "light", lightTheme: responseTheme }} starters={starters} starterVariant="short" components={{ AssistantMessage, ToolCallTimeline: PluginTimeline }} scrollVariant="user-message-anchor">
+      <AgentInterface llm={llm} storage={storage} agentName="Portfolio analyst" theme={{ mode: "light", lightTheme: responseTheme }} starters={starters} starterVariant="short" components={{ AssistantMessage, ToolCallTimeline: PluginTimeline }} scrollVariant="always">
         <AgentInterface.Welcome title="Ask the portfolio" />
         <Persistence sessionRef={sessionRef} />
         <PendingRow />
