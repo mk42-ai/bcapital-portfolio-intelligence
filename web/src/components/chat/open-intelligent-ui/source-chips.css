@@ -1,0 +1,18 @@
+/* Compact publisher-first source row (Agent 10). One 32 px row: 24 px chips + 4 px vertical padding; the live rail reserves the same 32 px. */
+.oiu-srcrow { box-sizing: border-box; min-height: 32px; margin: 0 0 8px; padding: 4px 0; }
+.oiu-srcrow__list { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: nowrap; align-items: center; gap: 8px; min-width: 0; overflow: hidden; }
+.oiu-srcrow--expanded .oiu-srcrow__list { flex-wrap: wrap; row-gap: 8px; }
+.oiu-srcrow__item { display: flex; min-width: 0; flex: 0 1 auto; }
+.oiu-srcrow__chip {
+  box-sizing: border-box; display: inline-flex; align-items: center; gap: 6px; height: 24px; max-width: 200px; padding: 0 10px 0 6px;
+  border: 1px solid #e5e7eb; border-radius: 999px; background: #ffffff; color: #374151; font-size: 12px; font-weight: 500; line-height: 1; font-family: inherit;
+  text-decoration: none; white-space: nowrap; cursor: pointer; transition: border-color 120ms ease, background-color 120ms ease, color 120ms ease;
+}
+.oiu-srcrow__chip:hover { border-color: #0AC985; background: #E6FAF3; color: #047857; }
+.oiu-srcrow__chip:focus-visible { outline: 2px solid #0AC985; outline-offset: 1px; border-color: #0AC985; }
+.oiu-srcrow__favicon { width: 14px; height: 14px; border-radius: 3px; flex: none; }
+.oiu-srcrow__host { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.oiu-srcrow__more { padding: 0 10px; font-weight: 600; color: #047857; border-color: #d1d5db; }
+.oiu-srcrow__more[aria-expanded="true"] { background: #E6FAF3; border-color: #0AC985; }
+.oiu-srcrow--compact { margin-bottom: 4px; }
+@media (prefers-reduced-motion: reduce) { .oiu-srcrow__chip { transition: none; } }
