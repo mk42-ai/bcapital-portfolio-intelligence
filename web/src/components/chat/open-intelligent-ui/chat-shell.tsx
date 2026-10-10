@@ -434,12 +434,18 @@ function ScrollAnchor() {
     const find = () => document.querySelector<HTMLElement>(".chat-shell .openui-agent-thread-scroll-area");
     el.current = find(); if (!el.current) return;
     const node = el.current;
-    const onScroll = () => { const gap = node.scrollHeight - node.scrollTop - node.clientHeight; atBottom.current = gap < 80; setAway((a) => (a !== !atBottom.current ? !atBottom.current : a)); };
+    const onScroll = () => { const gap = node.scrollHeight - node.scrollTop - node.clientHeight; atBottom.current = gap < 120; setAway((a) => (a !== !atBottom.current ? !atBottom.current : a)); };
     node.addEventListener("scroll", onScroll, { passive: true }); onScroll();
     return () => node.removeEventListener("scroll", onScroll);
   }, [isRunning]);
-  // Passive: OpenUI (scrollVariant="always") owns the follow-to-bottom scroll; this component only tracks whether the user left the bottom. Re-evaluated per store flush.
-  useEffect(() => { const node = el.current; if (!node || !isRunning) return; const gap = node.scrollHeight - node.scrollTop - node.clientHeight; atBottom.current = gap < 80; }, [st.version, isRunning]);
+  // Follow-to-bottom with an INSTANT scrollTop write (OpenUI's own smooth scrollTo lags behind fast growth on narrow viewports and leaves a
+  // 100–300 px gap). Only while the user has not scrolled away (gap < 120 px); a programmatic scroll never counts as a layout shift.
+  useEffect(() => {
+    const node = el.current; if (!node || !isRunning) return;
+    const gap = node.scrollHeight - node.scrollTop - node.clientHeight;
+    if (atBottom.current && gap > 2) node.scrollTop = node.scrollHeight;
+    else atBottom.current = gap < 120;
+  }, [st.version, isRunning]);
   if (!away || !isRunning) return null;
   return <button type="button" className="oiu-jump" data-testid="jump-to-latest" onClick={() => { const node = el.current; if (node) { node.scrollTo({ top: node.scrollHeight, behavior: "smooth" }); atBottom.current = true; setAway(false); } }}><ArrowDown className="size-3.5" aria-hidden /> Jump to latest</button>;
 }

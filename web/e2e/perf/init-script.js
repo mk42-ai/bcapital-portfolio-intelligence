@@ -116,6 +116,8 @@
   // (e) scroll sampler every 250 ms
   const isScrollable = (el) => { if (!el || el === document.body) return false; const cs = getComputedStyle(el); return /(auto|scroll)/.test(cs.overflowY) && el.scrollHeight > el.clientHeight + 1; };
   const findScroller = () => {
+    const sa = document.querySelector('.chat-shell .openui-agent-thread-scroll-area');
+    if (sa && isScrollable(sa)) return sa; // OpenUI's real thread scroller (the page itself never scrolls on /chat)
     const t = document.querySelector('.openui-agent-thread');
     if (t && isScrollable(t)) return t;
     let el = document.querySelector('.oiu-assistant') || t;
