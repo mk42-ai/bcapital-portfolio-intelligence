@@ -5,7 +5,7 @@ import { LayoutDashboard, Newspaper, MessageSquare, Settings, Building2 } from "
 import { cn } from "@/lib/utils";
 const ITEMS = [
   { href: "/overview", label: "Overview", icon: LayoutDashboard },
-  { href: "/company/perplexity-ai", label: "Companies", icon: Building2, match: "/company" },
+  { href: "/companies", label: "Companies", icon: Building2, match: "/compan" },
   { href: "/news", label: "News Pulse", icon: Newspaper },
   { href: "/chat", label: "Chat", icon: MessageSquare },
   { href: "/settings", label: "Settings", icon: Settings },
