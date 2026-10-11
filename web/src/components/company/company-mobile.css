@@ -1,0 +1,130 @@
+/* a38 — /company/[slug] at ≤640px (Pixel 7 390×844). CSS-only; scoped to the CompanyThemeScope root
+   ([data-accent-source]) so nothing leaks to other routes. Neutrals + brand green only (no blue). */
+@media (max-width: 640px) {
+  [data-accent-source] {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  /* Header band: full-bleed against the 16px main gutter, square corners, tighter padding. */
+  [data-accent-source] > header {
+    margin-left: -16px;
+    margin-right: -16px;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    background: var(--surface-2, #f7f8f9);
+  }
+  [data-accent-source] > header > div {
+    padding: 16px;
+    gap: 12px;
+    align-items: center;
+  }
+  [data-accent-source] > header > div > div:first-child {
+    width: 56px;
+    height: 56px;
+    padding: 6px;
+  }
+  [data-accent-source] > header h1 {
+    font-size: 24px;
+    line-height: 1.15;
+    gap: 8px;
+    overflow-wrap: anywhere;
+  }
+  [data-accent-source] > header p,
+  [data-accent-source] > header .chip {
+    overflow-wrap: anywhere;
+  }
+  [data-accent-source] > header .chip {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Breadcrumb + data-source line wrap cleanly. */
+  [data-accent-source] > nav[aria-label="Breadcrumb"],
+  [data-accent-source] > p {
+    overflow-wrap: anywhere;
+  }
+  [data-accent-source] > p code {
+    overflow-wrap: anywhere;
+    word-break: break-all;
+  }
+
+  /* Cards: single column; grid children never force width. */
+  [data-accent-source] > div.grid,
+  [data-accent-source] .grid.md\:grid-cols-2 {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  [data-accent-source] > div.grid > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* KPI tiles 2×2: palette swatches and the B Capital position figures. */
+  [data-accent-source] ul[aria-label^="Palette swatches"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px;
+  }
+  [data-accent-source] ul[aria-label^="Palette swatches"] .font-mono {
+    font-size: 11px;
+  }
+
+  /* Signal factor rows: label on top, bar + value beneath (narrow-safe). */
+  [data-testid="signal-panel"] li.grid {
+    grid-template-columns: minmax(0, 1fr) 3.25rem;
+    row-gap: 4px;
+  }
+  [data-testid="signal-panel"] li.grid > span:first-child {
+    grid-column: 1 / -1;
+  }
+
+  /* Deal (funding) timeline: vertical with a 16px gutter. */
+  [data-accent-source] ol.relative.border-l,
+  [data-accent-source] ul.relative.border-l {
+    margin-left: 6px;
+  }
+  [data-accent-source] ol.relative.border-l > li,
+  [data-accent-source] ul.relative.border-l > li {
+    margin-left: 16px;
+    margin-bottom: 16px;
+  }
+  [data-accent-source] ol.relative.border-l > li > *,
+  [data-accent-source] ul.relative.border-l > li > * {
+    overflow-wrap: anywhere;
+  }
+
+  /* Tables / wide content scroll inside their container instead of the page. */
+  [data-accent-source] table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  [data-accent-source] .table-scroll,
+  [data-accent-source] pre,
+  [data-accent-source] [data-testid="pitchbook-card"] > div:last-child {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  [data-accent-source] svg {
+    max-width: 100%;
+  }
+
+  /* News cards: single column, long URLs break. */
+  [data-accent-source] article.card {
+    max-width: 100%;
+  }
+  [data-accent-source] article.card a {
+    overflow-wrap: anywhere;
+  }
+
+  /* Tap targets: 44px for chips and links that act as buttons. */
+  [data-accent-source] a.chip,
+  [data-accent-source] button,
+  [data-accent-source] summary {
+    min-height: 40px;
+  }
+}

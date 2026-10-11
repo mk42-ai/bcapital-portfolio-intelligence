@@ -1,0 +1,25 @@
+{
+  "widths": {
+    "sw": 390,
+    "iw": 390
+  },
+  "rows": 14,
+  "maxRow": 73,
+  "targets": [
+    {
+      "id": "companies-search",
+      "w": 358,
+      "h": 44
+    },
+    {
+      "id": "companies-sector",
+      "w": 175,
+      "h": 44
+    },
+    {
+      "id": "companies-sort",
+      "w": 175,
+      "h": 44
+    }
+  ]
+}

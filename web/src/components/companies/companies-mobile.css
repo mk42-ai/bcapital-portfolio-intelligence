@@ -1,0 +1,85 @@
+/* a38 — /companies at ≤640px (Pixel 7 390×844). CSS-only: no JSX changes in companies-list.tsx.
+   Colours: neutrals + brand green tokens only (no blue). */
+@media (max-width: 640px) {
+  /* Sticky toolbar → two rows: search full-width, then controls + count. */
+  [data-testid="companies-filter-bar"] {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  [data-testid="companies-filter-bar"] > div {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 8px;
+    row-gap: 8px;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+  }
+  /* Row 1: search spans the full width, 44px target. */
+  [data-testid="companies-filter-bar"] > div > div:has(> [data-testid="companies-search"]) {
+    grid-column: 1 / -1;
+    max-width: none;
+    width: 100%;
+  }
+  [data-testid="companies-search"] {
+    height: 44px;
+    min-height: 44px;
+    font-size: 16px; /* prevents iOS zoom-on-focus */
+  }
+  /* Row 2: sector + sort controls (44px targets), count right-aligned. */
+  [data-testid="companies-sector"],
+  [data-testid="companies-sort"] {
+    height: 44px;
+    min-height: 44px;
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 28px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  [data-testid="companies-count"] {
+    grid-column: 1 / -1;
+    justify-self: end;
+    margin-left: 0;
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  /* A–Z rail stays hidden on mobile (search is the jump mechanism). */
+  [data-testid="companies-az"] {
+    display: none !important;
+  }
+
+  /* Rows: 72px with the signal + news bar under the name. */
+  [data-testid="company-row"] > [role="gridcell"] {
+    min-height: 72px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    column-gap: 10px;
+  }
+  [data-testid="company-row"] [data-testid="company-row-link"] {
+    font-size: 15px;
+    line-height: 1.25;
+  }
+  [data-testid="company-row"] > [role="gridcell"] > .min-w-0 > p {
+    line-height: 1.25;
+  }
+
+  /* Guard: the list region never scrolls sideways. */
+  [data-testid="companies-list"] {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+  [data-testid="companies-filter-bar"] + [data-testid="companies-list"] [data-testid="company-row"] {
+    max-width: 100%;
+  }
+}
