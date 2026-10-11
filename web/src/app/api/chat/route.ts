@@ -220,6 +220,12 @@ export async function POST(req: NextRequest) {
       const startText = () => { if (!textStarted) { textStarted = true; send({ type: "TEXT_MESSAGE_START", messageId, role: "assistant" }); } };
       const fillerOff = () => { if (fillerOn) { fillerOn = false; stallTicks = 0; send({ type: "CUSTOM", name: CE.filler, value: { on: false, derived: true, elapsedMs: Date.now() - t0 } }); } };
       const custom = (name: string, value: Record<string, unknown>) => { if (name !== CE.filler && name !== CE.heartbeat) fillerOff(); send({ type: "CUSTOM", name, value: { elapsedMs: Date.now() - t0, ...value } }); lastSentAt = Date.now(); };
+      // a3 — SINGLE SOURCE OF TRUTH for "Working…": stall / bridge / "Summarising step N" states are carried ONLY by ondemand.filler frames
+      // (consumed by the anchored RunStatusHeader via filler/fillerTick). They are NEVER emitted as an ondemand.status statusMessage, so no
+      // consumer can turn them into an interleaved "Working…" step row between the Working rows and the Outputs/answer.
+      const WORKING_RE = /^(working\b|summari[sz]ing step\b)/i;
+      const fillerBridge = (reason: string, extra: Record<string, unknown> = {}) => { fillerOn = true; send({ type: "CUSTOM", name: CE.filler, value: { on: true, derived: true, bridge: true, reason, tick: stallTicks, elapsedMs: Date.now() - t0, ...extra } }); lastSentAt = Date.now(); };
+      const isWorkingText = (m: unknown): m is string => typeof m === "string" && WORKING_RE.test(m.trim());
       // ---- artifacts: agent file_written / artifact_ready frames + the report PDF are persisted (backend /artifacts + OnDemand Media API)
       const origin = originFrom(req);
       const artifactJobs: Promise<void>[] = [];
@@ -388,7 +394,8 @@ export async function POST(req: NextRequest) {
               derivedSummary.set(sIdx, { title: u.stepTitle ?? `Step ${sIdx}`, hosts, n: u.items.length, closed: false });
               custom(CE.summary, { phase: "start", index: sIdx, stepId: String(sIdx), derived: true, source: "plugin_sources", stepTitle: u.stepTitle ?? null });
               custom(CE.step, { phase: "done", stepId: String(sIdx), index: sIdx, message: `${u.items.length} sources`, derived: true });
-              status("planning", { statusType: "summarising", statusMessage: `Summarising step ${sIdx}`, stepId: String(sIdx) });
+              // a3: the checkpoint is a filler (header) state, not a status row — see fillerBridge.
+              fillerBridge("summarising", { stepId: String(sIdx), stepIndex: sIdx, stepTitle: u.stepTitle ?? null });
             } else {
               status("answering", { sources: realSources.size });
             }
@@ -407,7 +414,7 @@ export async function POST(req: NextRequest) {
           case "awaiting_browser_action": custom(CE.awaitingBrowserAction, { action: u.action ?? null, message: u.message ?? null, url: u.url ?? null, agent: u.agent ?? null }); status("awaiting-input", { statusType: "awaiting_browser_action" }); return false;
           case "filler": custom(CE.filler, { on: u.on }); return false;
           case "agent": custom(CE.agent, { subtype: u.subtype, agent: u.agent ?? null, data: u.data ?? null }); if (u.subtype === "file_written" || u.subtype === "artifact_ready") fromAgentEvent(u.subtype, u.data); return false;
-          case "status": status(u.statusType === "fulfilling" ? "answering" : "planning", { statusType: u.statusType, statusMessage: u.message, stepQuery: u.stepQuery ?? null }); return false;
+          case "status": if (isWorkingText(u.message)) { fillerBridge("upstream_status", { statusType: u.statusType, stepQuery: u.stepQuery ?? null }); return false; } status(u.statusType === "fulfilling" ? "answering" : "planning", { statusType: u.statusType, statusMessage: u.message, stepQuery: u.stepQuery ?? null }); return false;
           case "unknown": custom(CE.unknown, { eventType: u.eventType }); return false;
         }
       };
