@@ -7,7 +7,7 @@ import { primeSettings } from "./helpers";
  * 120-char title; runs on both viewports (desktop project + a 390×844 override inside the spec).
  * Run: cd web && BASE_URL=<frontend> node node_modules/@playwright/test/cli.js test e2e/title-ellipsis.spec.ts --workers=1
  */
-const LONG = "Which of my context companies moved most since the last scoring run, and create me a document on all of these companies and their news".slice(0, 120);
+const LONG = "Which of my context companies moved most since the last scoring run, and create me a document on all of these companies and their news and valuations".slice(0, 120).trim();
 const SHORT = "create me a document on all of these companies and their latest headlines please";
 const THREADS_KEY = "bcap.chat.threads.v2";
 
