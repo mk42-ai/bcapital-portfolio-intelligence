@@ -163,6 +163,9 @@ console.log("unit1: classifyThinkingDelta (prose vs planner payload) + pluginLab
   eq("continuation of a scaffolding line → payload", c("planning_thinking", "Plugin: perplexity, pluginId: plu", "gin-1722260873, identifier: rest_api."), "payload");
   eq("'api_request_parameters: {…}' line → payload", c("planning_thinking", "x\n\napi_request_parameters: {\"message\": \"In one sentence\"}", "\n\napi_request_parameters: {\"message\": \"In one sentence\"}"), "payload");
   eq("reasoning sentence mentioning the word plugin stays prose", c("planning_thinking", "Use the perplexity plugin. Keep it minimal — one step.", " Keep it minimal — one step."), "prose");
+  eq("'Format: plugins array with pluginId, …, api_request_parameters, …' line → payload", c("planning_thinking", "x\n\nFormat: plugins array with pluginId, name, description, api_request_parameters, all_parameters_hydrated, dependencies, identifier.", ", all_parameters_hydrated, dependencies, identifier."), "payload");
+  eq("single schema word in prose stays prose", c("planning_thinking", "Note the plugins schema mentions \"current\" array but the response schema shows \"plugins\".", " but the response schema shows \"plugins\"."), "prose");
+  eq("bare 'api_request_parameters' mid-sentence → payload", c("step_thinking", "I need to fill api_request_parameters with the query", " with the query"), "payload");
   eq("title line stays prose", c("planning_thinking", "Title: \"Searching Fervo Energy's business\"", "Title: \"Searching Fervo Energy's business\""), "prose");
 }
 console.log(`\n${pass} passed, ${failures.length} failed`);
