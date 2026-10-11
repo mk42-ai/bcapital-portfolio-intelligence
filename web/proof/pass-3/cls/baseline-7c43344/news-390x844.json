@@ -1,0 +1,59 @@
+{
+  "route": "/news?skip=1",
+  "viewport": "390x844",
+  "network": "Fast 3G (CDP emulateNetworkConditions)",
+  "measuredAt": "2026-10-11T12:04:44.479Z",
+  "baseURL": "https://sb-1gizcktepfgc.vercel.run",
+  "cls": 0.0001,
+  "hard": 0.1,
+  "soft": 0.05,
+  "pass": true,
+  "softPass": true,
+  "loadMs": 8607,
+  "shifts": [
+    {
+      "t": 2379,
+      "value": 0.00008,
+      "hadRecentInput": false,
+      "sources": [
+        {
+          "selector": "#text",
+          "prev": [
+            16,
+            276,
+            358,
+            15
+          ],
+          "cur": [
+            16,
+            277,
+            358,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "t": 2447,
+      "value": 0.00006,
+      "hadRecentInput": false,
+      "sources": [
+        {
+          "selector": "h2#day-2026-10-10 > span.chip.border-border",
+          "prev": [
+            106,
+            753,
+            28,
+            24
+          ],
+          "cur": [
+            122,
+            753,
+            29,
+            24
+          ]
+        }
+      ]
+    }
+  ]
+}

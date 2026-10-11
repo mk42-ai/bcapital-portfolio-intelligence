@@ -1,0 +1,67 @@
+{
+  "route": "/company/fervo-energy?skip=1",
+  "viewport": "390x844",
+  "network": "Fast 3G (CDP emulateNetworkConditions)",
+  "measuredAt": "2026-10-11T12:04:24.329Z",
+  "baseURL": "https://sb-1gizcktepfgc.vercel.run",
+  "cls": 0.0007,
+  "hard": 0.1,
+  "soft": 0.05,
+  "pass": true,
+  "softPass": true,
+  "loadMs": 7513,
+  "shifts": [
+    {
+      "t": 2945,
+      "value": 0.00066,
+      "hadRecentInput": false,
+      "sources": [
+        {
+          "selector": "#text",
+          "prev": [
+            16,
+            494,
+            358,
+            32
+          ],
+          "cur": [
+            16,
+            495,
+            358,
+            32
+          ]
+        },
+        {
+          "selector": "#text",
+          "prev": [
+            141,
+            246,
+            208,
+            37
+          ],
+          "cur": [
+            141,
+            247,
+            208,
+            37
+          ]
+        },
+        {
+          "selector": "#text",
+          "prev": [
+            16,
+            478,
+            358,
+            15
+          ],
+          "cur": [
+            16,
+            479,
+            358,
+            15
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "route": "/artifacts?skip=1",
+  "viewport": "390x844",
+  "network": "Fast 3G (CDP emulateNetworkConditions)",
+  "measuredAt": "2026-10-11T12:05:00.748Z",
+  "baseURL": "https://sb-1gizcktepfgc.vercel.run",
+  "cls": 0,
+  "hard": 0.1,
+  "soft": 0.05,
+  "pass": true,
+  "softPass": true,
+  "loadMs": 7892,
+  "shifts": [
+    {
+      "t": 1581,
+      "value": 0,
+      "hadRecentInput": false,
+      "sources": [
+        {
+          "selector": "button[data-testid=artifact-filter-video] > span.art-chip-n",
+          "prev": [
+            348,
+            205,
+            6,
+            17
+          ],
+          "cur": [
+            351,
+            205,
+            7,
+            17
+          ]
+        }
+      ]
+    }
+  ]
+}

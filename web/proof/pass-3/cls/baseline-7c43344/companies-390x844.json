@@ -1,0 +1,52 @@
+{
+  "route": "/companies?skip=1",
+  "viewport": "390x844",
+  "network": "Fast 3G (CDP emulateNetworkConditions)",
+  "measuredAt": "2026-10-11T12:04:08.545Z",
+  "baseURL": "https://sb-1gizcktepfgc.vercel.run",
+  "cls": 0.0002,
+  "hard": 0.1,
+  "soft": 0.05,
+  "pass": true,
+  "softPass": true,
+  "loadMs": 5647,
+  "shifts": [
+    {
+      "t": 1564,
+      "value": 0.00024,
+      "hadRecentInput": false,
+      "sources": [
+        {
+          "selector": "#text",
+          "prev": [
+            16,
+            216,
+            358,
+            15
+          ],
+          "cur": [
+            16,
+            217,
+            358,
+            15
+          ]
+        },
+        {
+          "selector": "p[data-testid=companies-count]",
+          "prev": [
+            245,
+            369,
+            129,
+            20
+          ],
+          "cur": [
+            238,
+            369,
+            136,
+            20
+          ]
+        }
+      ]
+    }
+  ]
+}
