@@ -70,6 +70,7 @@ export function InspectorDrawer({ companies }: { companies: InspectorCompany[] }
           <Section icon={Building2} title="Company context (1–5)" testId="inspector-context">
             <CompanyPicker compact options={companies} value={s.companies} onChange={(v) => set({ companies: v.slice(0, 5) })} max={5} />
             <ul className="mt-2 space-y-1 text-xs text-muted">{ctx.map((c) => <li key={c.slug} className="flex items-center justify-between gap-2"><span className="inline-flex min-w-0 items-center gap-1.5 truncate"><CompanyLogo name={c.name} src={c.logo_url} size={16} />{c.name}</span><span className="inline-flex shrink-0 items-center gap-1.5 tabular-nums">{c.signal != null && <SignalMini score={c.signal} confidence={c.signal_confidence ?? 0} percentile={c.signal_percentile} name={c.name} />}{c.news} news</span></li>)}</ul>
+            {ctx.length >= 2 && <a href={`/compare?slugs=${ctx.map((c) => c.slug).join(",")}`} data-testid="inspector-compare-link" className="mt-2 inline-block text-xs font-semibold text-[var(--brand-green-ink)] underline-offset-4 hover:underline">Compare selected →</a>}
           </Section>
           <Section icon={Puzzle} title="Model & plugins" testId="inspector-plugins">
             <p className="mb-2 text-xs text-muted" data-testid="sidebar-model">{MODEL_LABEL} · reasoning {REASONING_MODE}</p>

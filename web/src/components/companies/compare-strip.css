@@ -1,0 +1,33 @@
+/* a32 — /compare side-by-side strip. Light-only; brand green is the only accent (no blue hue). */
+.compare-strip { --compare-head-h: 124px; --compare-row-h: 48px; --compare-col-w: 220px; display: flex; align-items: flex-start; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); overflow: hidden; }
+.compare-gutter { flex: 0 0 112px; border-right: 1px solid var(--border); background: var(--surface-2); }
+.compare-gutter-head { height: var(--compare-head-h); border-bottom: 1px solid var(--border); }
+.compare-row-label { height: var(--compare-row-h); display: flex; align-items: center; padding: 0 12px; font-size: 12px; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--border); }
+.compare-row-label:last-child { border-bottom: 0; }
+.compare-cols { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(var(--compare-col-w), 1fr); flex: 1 1 auto; min-width: 0; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.compare-col { min-width: 0; border-right: 1px solid var(--border); }
+.compare-col:last-child { border-right: 0; }
+.compare-head { height: var(--compare-head-h); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 6px; padding: 12px 14px; border-bottom: 1px solid var(--border); }
+.compare-name { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; font-weight: 600; color: var(--foreground, #1F2937); text-decoration: none; }
+.compare-name:hover, .compare-name:focus-visible { color: var(--brand-green-ink); text-decoration: underline; text-underline-offset: 3px; }
+.compare-sector { display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 1px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; line-height: 18px; }
+.compare-cell { height: var(--compare-row-h); display: flex; align-items: center; gap: 8px; padding: 0 14px; border-bottom: 1px solid var(--border); font-size: 14px; font-variant-numeric: tabular-nums; }
+.compare-cell:last-child { border-bottom: 0; }
+.compare-val { font-weight: 600; color: var(--foreground, #1F2937); }
+.compare-val--text { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.compare-val--best { color: var(--brand-green-ink); }
+.compare-delta { display: inline-flex; align-items: center; gap: 2px; font-size: 12px; color: var(--muted); }
+.compare-delta--up { color: var(--brand-green-ink); }
+.compare-delta--down { color: #B42318; }
+.compare-delta--first { font-style: italic; }
+.compare-mobile-label { display: none; }
+@media (max-width: 480px) {
+  .compare-strip { --compare-col-w: 160px; --compare-row-h: 56px; }
+  .compare-gutter { display: none; }
+  .compare-cols { scroll-snap-type: x mandatory; scroll-padding-inline: 0; }
+  .compare-col { scroll-snap-align: start; width: 160px; }
+  .compare-cell { flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; padding: 0 12px; }
+  .compare-mobile-label { display: block; order: -1; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  .compare-head { padding: 10px 12px; }
+}
+/* end a32 */
