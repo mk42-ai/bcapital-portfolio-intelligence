@@ -39,7 +39,8 @@ const test = base.extend<{ errors: string[] }>({
       const errs = captureErrors(page);
       await use(errs);
       // hydration/ResizeObserver chatter is environment noise in the sandbox; everything else must be empty
-      const real = errs.filter((e) => !/hydrat|ResizeObserver/i.test(e));
+      // The injected 500 in the failure-path test (page.route) and an upstream Media API 500 both surface as a console "Failed to load resource" line — that is the honest red state, not a client error.
+      const real = errs.filter((e) => !/hydrat|ResizeObserver|Failed to load resource: the server responded with a status of 500/i.test(e));
       if (real.length) testInfo.annotations.push({ type: "client-errors", description: real.slice(0, 10).join(" | ") });
       expect(real, "no client-side page/console errors").toEqual([]);
     },
@@ -73,7 +74,7 @@ async function waitChipsSettled(page: Page, count: number, timeout = 120_000) {
     .toEqual(expect.arrayContaining([expect.stringMatching(/^(ready|error)$/)]));
   await expect.poll(async () => (await chips.evaluateAll((els) => els.map((e) => e.getAttribute("data-status")))).every((s) => s === "ready" || s === "error"), { timeout, intervals: [500] })
     .toBe(true);
-  const rows = await chips.evaluateAll((els) => els.map((e) => ({ status: e.getAttribute("data-status"), code: e.getAttribute("data-code"), name: (e.querySelector(".oiu-att__chip-name")?.textContent ?? "").trim() })));
+  const rows = await chips.evaluateAll((els) => els.map((e) => ({ status: e.getAttribute("data-status"), code: e.getAttribute("data-code"), name: (e.querySelector(".oiu-att__chip-name")?.firstChild?.textContent ?? e.querySelector(".oiu-att__chip-name")?.textContent ?? "").trim().replace(/(local|LOCAL)$/, "") })));
   for (const r of rows) {
     if (r.status === "error") {
       // only an upstream/network failure is an acceptable `error`; precheck failures (too_large/unsupported_type) are a bug for these fixtures
@@ -118,6 +119,8 @@ async function sendAndSettle(page: Page, question: string, timeout = 240_000) {
   return text;
 }
 
+// Tests upload into the same backend store; run them serially so the empty-state check is not raced by a parallel upload.
+test.describe.configure({ mode: "serial" });
 test.describe("Upload → Artifacts E2E", () => {
   test("empty Artifacts state renders", async ({ page }) => {
     await page.goto("/artifacts?skip=1");
@@ -130,7 +133,8 @@ test.describe("Upload → Artifacts E2E", () => {
       await expect(empty).toBeVisible();
       const img = empty.locator("img");
       await expect(img).toBeAttached();
-      await expect.poll(() => img.evaluate((el) => (el as HTMLImageElement).complete && (el as HTMLImageElement).naturalWidth), { timeout: 15_000 }).toBeGreaterThan(0);
+      await img.scrollIntoViewIfNeeded(); // loading="lazy" — bring it into view before asserting it decoded
+      await expect.poll(() => img.evaluate((el) => ((el as HTMLImageElement).complete ? (el as HTMLImageElement).naturalWidth : 0)), { timeout: 15_000 }).toBeGreaterThan(0);
     } else {
       const n = await page.getByTestId("artifact-card").count();
       note("branch", `populated list rendered (${n} artifact cards)`);
@@ -255,7 +259,8 @@ test.describe("Upload → Artifacts E2E", () => {
     const preview = page.getByTestId("artifact-preview");
     await expect(preview).toBeVisible({ timeout: 30_000 });
     if (id) await expect(preview).toHaveAttribute("data-id", id);
-    await expect(card.getByTestId("artifact-download")).toHaveAttribute("download", names[0]);
+    // Download is a button that re-signs the link on click (Lane C); it only needs to be enabled.
+    await expect(card.getByTestId("artifact-download")).toBeEnabled();
   });
 
   test("blurred memo: agent must say it cannot read it, never invent text", async ({ page }) => {

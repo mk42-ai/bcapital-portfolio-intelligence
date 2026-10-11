@@ -1,0 +1,607 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/node_modules/.bin/playwright",
+      "test",
+      "e2e/upload-artifacts.spec.ts",
+      "--project=desktop",
+      "--reporter=json"
+    ],
+    "configFile": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/playwright.config.ts",
+    "rootDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": [
+          "/mobile\\.spec\\.ts/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/mobile\\.spec\\.ts/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile-ux",
+        "name": "mobile-ux",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/run-ux\\.spec\\.ts/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "desktop",
+        "testDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e",
+        "snapshotDir": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e",
+        "testIgnore": {},
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 240000,
+        "use": {
+          "baseURL": "http://127.0.0.1:3100",
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox",
+              "--disable-dev-shm-usage",
+              "--use-fake-ui-for-media-stream",
+              "--use-fake-device-for-media-stream"
+            ]
+          },
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "desktop"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "upload-artifacts.spec.ts",
+      "file": "upload-artifacts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Upload → Artifacts E2E",
+          "file": "upload-artifacts.spec.ts",
+          "line": 124,
+          "column": 6,
+          "specs": [
+            {
+              "title": "empty Artifacts state renders",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e/upload-artifacts.spec.ts",
+                        "line": 0,
+                        "column": 0
+                      }
+                    },
+                    {
+                      "type": "branch",
+                      "description": "populated list rendered (54 artifact cards)"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1284,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T07:42:59.010Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e/upload-artifacts.spec.ts",
+                            "line": 0,
+                            "column": 0
+                          }
+                        },
+                        {
+                          "type": "branch",
+                          "description": "populated list rendered (54 artifact cards)"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9b0bea8732496e9549d7-648082561258ede12cba",
+              "file": "upload-artifacts.spec.ts",
+              "line": 125,
+              "column": 3
+            },
+            {
+              "title": "API: each fixture uploads via /api/media and is listed by /api/artifacts as an upload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 420000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e/upload-artifacts.spec.ts",
+                        "line": 0,
+                        "column": 0
+                      }
+                    },
+                    {
+                      "type": "uploaded",
+                      "description": "geothermal-plant.png=local-art6788e61e9d53(failed), bar-chart.png=local-art85ff0e5adb7a(failed), blurred-memo.png=local-art0b836d823b27(failed), OnDemand-Outputs-Panel-Spec.pdf=local-4336d37ddc3e50e87693745f(failed), compendium.docx=local-f51d37b146a3a49c48587745(failed)"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6353,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[upload-artifacts] geothermal-plant.png: media.id=local-art6788e61e9d53 kind=image extractedChars=0 grounded=local artifact=art_6788e61e9d53 note=OnDemand media create failed (HTTP 500) — stored in Artifacts only\n"
+                        },
+                        {
+                          "text": "[upload-artifacts] bar-chart.png: media.id=local-art85ff0e5adb7a kind=image extractedChars=0 grounded=local artifact=art_85ff0e5adb7a note=OnDemand media create failed (HTTP 500) — stored in Artifacts only\n"
+                        },
+                        {
+                          "text": "[upload-artifacts] blurred-memo.png: media.id=local-art0b836d823b27 kind=image extractedChars=0 grounded=local artifact=art_0b836d823b27 note=OnDemand media create failed (HTTP 500) — stored in Artifacts only\n"
+                        },
+                        {
+                          "text": "[upload-artifacts] OnDemand-Outputs-Panel-Spec.pdf: media.id=local-4336d37ddc3e50e87693745f kind=document extractedChars=0 grounded=local artifact=art_bae65b55623d note=OnDemand rejected the file (HTTP 500): errors.server_error — text extracted locally (0 chars), file stored in Artifacts\n"
+                        },
+                        {
+                          "text": "[upload-artifacts] compendium.docx: status=200 ok=true media.id=local-f51d37b146a3a49c48587745\n"
+                        },
+                        {
+                          "text": "[upload-artifacts] listed geothermal-plant.png: id=art_6788e61e9d53 kind=image source=upload mediaStatus=failed\n"
+                        },
+                        {
+                          "text": "[upload-artifacts] listed bar-chart.png: id=art_85ff0e5adb7a kind=image source=upload mediaStatus=failed\n"
+                        },
+                        {
+                          "text": "[upload-artifacts] listed blurred-memo.png: id=art_0b836d823b27 kind=image source=upload mediaStatus=failed\n"
+                        },
+                        {
+                          "text": "[upload-artifacts] listed OnDemand-Outputs-Panel-Spec.pdf: id=art_bae65b55623d kind=document source=upload mediaStatus=failed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "compendium.docx (soft, 180 s)",
+                          "duration": 1914
+                        }
+                      ],
+                      "startTime": "2026-10-11T07:43:00.746Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e/upload-artifacts.spec.ts",
+                            "line": 0,
+                            "column": 0
+                          }
+                        },
+                        {
+                          "type": "uploaded",
+                          "description": "geothermal-plant.png=local-art6788e61e9d53(failed), bar-chart.png=local-art85ff0e5adb7a(failed), blurred-memo.png=local-art0b836d823b27(failed), OnDemand-Outputs-Panel-Spec.pdf=local-4336d37ddc3e50e87693745f(failed), compendium.docx=local-f51d37b146a3a49c48587745(failed)"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9b0bea8732496e9549d7-42ec150866df012eadf5",
+              "file": "upload-artifacts.spec.ts",
+              "line": 146,
+              "column": 3
+            },
+            {
+              "title": "UI: pick → progress → processed → chip → sent → cited → Artifacts → reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 600000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e/upload-artifacts.spec.ts",
+                        "line": 0,
+                        "column": 0
+                      }
+                    },
+                    {
+                      "type": "first-status",
+                      "description": "uploading,uploading"
+                    },
+                    {
+                      "type": "answer",
+                      "description": "16106 ms · 858 chars · Two descriptions, based on the only information available about each file (both were uploaded but no text or image content could be extracted, so these descriptions rely on the file names and type alone):\n\nA geothermal power plant image — the file [attachment: geothermal-plant.png] is a PNG image wh"
+                    },
+                    {
+                      "type": "artifacts-surface",
+                      "description": "no inline-artifacts for an upload-only turn — checking the Artifacts toggle badge"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 22515,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[upload-artifacts] chips: geothermal-plant.png=ready bar-chart.png=ready\n"
+                        },
+                        {
+                          "text": "[upload-artifacts] answer (858 chars, 16106 ms): Two descriptions, based on the only information available about each file (both were uploaded but no text or image content could be extracted, so these descriptions rely on the file names and type alone):\n\nA geothermal power plant image — the file [attachment: geothermal-plant.png] is a PNG image wh\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T07:43:07.112Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e/upload-artifacts.spec.ts",
+                            "line": 0,
+                            "column": 0
+                          }
+                        },
+                        {
+                          "type": "first-status",
+                          "description": "uploading,uploading"
+                        },
+                        {
+                          "type": "answer",
+                          "description": "16106 ms · 858 chars · Two descriptions, based on the only information available about each file (both were uploaded but no text or image content could be extracted, so these descriptions rely on the file names and type alone):\n\nA geothermal power plant image — the file [attachment: geothermal-plant.png] is a PNG image wh"
+                        },
+                        {
+                          "type": "artifacts-surface",
+                          "description": "no inline-artifacts for an upload-only turn — checking the Artifacts toggle badge"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9b0bea8732496e9549d7-105b9a9264aac09b3213",
+              "file": "upload-artifacts.spec.ts",
+              "line": 198,
+              "column": 3
+            },
+            {
+              "title": "blurred memo: agent must say it cannot read it, never invent text",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 480000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e/upload-artifacts.spec.ts",
+                        "line": 0,
+                        "column": 0
+                      }
+                    },
+                    {
+                      "type": "answer",
+                      "description": "14103 ms · 730 chars · No transcription can be produced: the attached image carries no machine-readable text — extraction returned nothing, so there is no memo text to reproduce verbatim [attachment: blurred-memo.png].\n\nWhat I can confirm about the file itself:\n\nName: blurred-memo.png\nDelivery: uploaded to this OnDemand s"
+                    },
+                    {
+                      "type": "memo-answer",
+                      "description": "No transcription can be produced: the attached image carries no machine-readable text — extraction returned nothing, so there is no memo text to reproduce verbatim [attachment: blurred-memo.png].\n\nWhat I can confirm about the file itself:\n\nName: blurred-memo.png\nDelivery: uploaded to this OnDemand s"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 17567,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[upload-artifacts] answer (730 chars, 14103 ms): No transcription can be produced: the attached image carries no machine-readable text — extraction returned nothing, so there is no memo text to reproduce verbatim [attachment: blurred-memo.png].\n\nWhat I can confirm about the file itself:\n\nName: blurred-memo.png\nDelivery: uploaded to this OnDemand s\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T07:43:29.641Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e/upload-artifacts.spec.ts",
+                            "line": 0,
+                            "column": 0
+                          }
+                        },
+                        {
+                          "type": "answer",
+                          "description": "14103 ms · 730 chars · No transcription can be produced: the attached image carries no machine-readable text — extraction returned nothing, so there is no memo text to reproduce verbatim [attachment: blurred-memo.png].\n\nWhat I can confirm about the file itself:\n\nName: blurred-memo.png\nDelivery: uploaded to this OnDemand s"
+                        },
+                        {
+                          "type": "memo-answer",
+                          "description": "No transcription can be produced: the attached image carries no machine-readable text — extraction returned nothing, so there is no memo text to reproduce verbatim [attachment: blurred-memo.png].\n\nWhat I can confirm about the file itself:\n\nName: blurred-memo.png\nDelivery: uploaded to this OnDemand s"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9b0bea8732496e9549d7-dfde8654de6597349d20",
+              "file": "upload-artifacts.spec.ts",
+              "line": 266,
+              "column": 3
+            },
+            {
+              "title": "failure path shows red state + retry",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e/upload-artifacts.spec.ts",
+                        "line": 0,
+                        "column": 0
+                      }
+                    },
+                    {
+                      "type": "error-colors",
+                      "description": "rgb(254, 202, 202) | rgb(254, 202, 202) | rgb(22, 24, 27) | rgb(185, 28, 28)"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3345,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[upload-artifacts] retry → status=ready code=\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T07:43:47.222Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e/upload-artifacts.spec.ts",
+                            "line": 0,
+                            "column": 0
+                          }
+                        },
+                        {
+                          "type": "error-colors",
+                          "description": "rgb(254, 202, 202) | rgb(254, 202, 202) | rgb(22, 24, 27) | rgb(185, 28, 28)"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9b0bea8732496e9549d7-2408fc91c187fb9aca6d",
+              "file": "upload-artifacts.spec.ts",
+              "line": 285,
+              "column": 3
+            }
+          ],
+          "suites": [
+            {
+              "title": "mobile 390×844",
+              "file": "upload-artifacts.spec.ts",
+              "line": 336,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "upload chip and Artifacts page have no horizontal overflow",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 240000,
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e/upload-artifacts.spec.ts",
+                            "line": 0,
+                            "column": 0
+                          }
+                        }
+                      ],
+                      "expectedStatus": "passed",
+                      "projectId": "desktop",
+                      "projectName": "desktop",
+                      "results": [
+                        {
+                          "workerIndex": 0,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 4335,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-10-11T07:43:50.581Z",
+                          "annotations": [
+                            {
+                              "type": "serial",
+                              "location": {
+                                "file": "/tmp/terminal-work/work/6692b763e851d28a036ab30e/6acb29f8f7979c7d562b0479/bcapital-portfolio-intelligence/web/e2e/upload-artifacts.spec.ts",
+                                "line": 0,
+                                "column": 0
+                              }
+                            }
+                          ],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "9b0bea8732496e9549d7-054d55f4c85ab4893b7c",
+                  "file": "upload-artifacts.spec.ts",
+                  "line": 339,
+                  "column": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-11T07:42:58.547Z",
+    "duration": 56519.355,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

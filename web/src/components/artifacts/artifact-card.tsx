@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
-import { Download, ExternalLink, Eye, Trash2 } from "lucide-react";
+import { Download, ExternalLink, Eye, Trash2, PanelRight } from "lucide-react";
 import { artifactsPanel, artifactsStore } from "@/lib/artifacts/store";
 import { formatBytes, relativeTime, type Artifact } from "@/lib/artifacts/types";
 import { ArtifactIcon, iconFor, kindBadge } from "./artifact-icon";
@@ -84,7 +84,9 @@ export function ArtifactCard({ artifact: a, compact = false, selected = false, o
         {state === "ok" && a.mediaStatus === "failed" && !compact && <span className="art-card-status is-failed" role="status">{a.mediaMessage || "Saving to OnDemand media failed — stored in the backend"}</span>}
         <div className="art-card-actions">
           {!compact && <button type="button" className="art-btn" onClick={preview} data-testid="artifact-preview-btn" disabled={!a.contentUrl}><Eye aria-hidden />Preview</button>}
-          <button type="button" className="art-btn" onClick={() => act("open")} data-testid="artifact-open" disabled={!canOpen || busy === "open"} title="Open (fresh signed url)"><ExternalLink aria-hidden />{busy === "open" ? "Opening…" : "Open"}</button>
+          {/* Documents open side-by-side with the chat (video plays there too; images contain-fit) — the pane re-signs the link on open. */}
+          <button type="button" className="art-btn" onClick={() => { openArtifactInPane({ id: a.id, name: a.name, kind: a.kind, mime: a.mime, contentUrl: a.contentUrl, poster: a.kind === "video" ? a.thumbnailUrl : null, size: a.sizeBytes }); }} data-testid="artifact-open-pane" disabled={!canOpen} title="Open beside the chat"><PanelRight aria-hidden />Open</button>
+          <button type="button" className="art-btn" onClick={() => act("open")} data-testid="artifact-open" disabled={!canOpen || busy === "open"} title="Open in a new tab (fresh signed url)"><ExternalLink aria-hidden />{busy === "open" ? "Opening…" : "Tab"}</button>
           <button type="button" className="art-btn" onClick={() => act("download")} data-testid="artifact-download" disabled={!canOpen || busy === "download"} title="Download (fresh signed url)"><Download aria-hidden />{busy === "download" ? "…" : "Download"}</button>
           {!compact && <button type="button" className="art-btn is-danger" data-testid="artifact-delete" onClick={async () => { if (await confirmDeleteArtifact(a)) onDeleted?.(a); }}><Trash2 aria-hidden />Delete</button>}
         </div>

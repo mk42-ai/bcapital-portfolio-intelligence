@@ -4,6 +4,7 @@ import { OnboardingGate } from "./onboarding-gate";
 import { BackendStatus } from "./backend-status";
 import { PageFrame } from "./page-frame";
 import { ArtifactsPanel } from "@/components/artifacts/artifacts-panel";
+import { SidePaneOutsideChat } from "@/components/media/side-pane-outside-chat";
 
 /**
  * App frame: ONE primary rail (NavRail, ≤224 px, collapses to icons) + the main column. The window stays the scroll container for
@@ -19,6 +20,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       </div>
       <OnboardingGate />
       <ArtifactsPanel />
+      <SidePaneOutsideChat />
     </div>
   );
 }
