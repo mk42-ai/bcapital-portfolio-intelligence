@@ -610,7 +610,7 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
         onToggleOutputs={oStats.has ? () => setOutputsOpen((o) => !o) : undefined} outputsOpen={outputsOpen} />
       {/* 1 — Thinking, pinned at the top (ONE per turn, never moves) */}
       {(r.thinking || r.live) && (
-        <ThinkingBlock text={thinkingShown} kinds={r.thinkingKinds} plan={r.plan} answerStarted={r.answerStarted} live={r.live} collapsed={r.answerStarted || !r.live} elapsedMs={r.meta?.firstTokenMs ?? r.elapsedMs} />
+        <ThinkingBlock text={thinkingShown} kinds={r.thinkingKinds} plan={r.plan} answerStarted={r.answerStarted} live={r.live} collapsed={r.answerStarted || !r.live} elapsedMs={r.meta?.firstTokenMs ?? r.elapsedMs} portfolioToolStarted={r.tools.some((t) => t.pluginId === PORTFOLIO_PLUGIN)} />
       )}
       {/* 2 — Plan checklist */}
       {(r.plan || (r.live && !r.answerStarted)) && <PlanStepper plan={r.plan} reserve={r.live} />}
@@ -665,23 +665,37 @@ function thinkingPhases(kinds: string[], plan: RunData["plan"], answerStarted: b
   if (kinds.some((k) => k.startsWith("fulfillment")) || answerStarted) out.push("Answer");
   return out;
 }
-/** Thinking block pinned at the top of the turn: streams the FULL text in a fixed-height scrollable body (auto-follows the tail), collapses to a
- *  one-line summary ("Thought for N s · Planning · Step 1 · Answer") on the first answer token, re-expandable by click. Never truncates. */
-function ThinkingBlock({ text, kinds, plan, answerStarted, live, collapsed, elapsedMs }: { text: string; kinds: string[]; plan: RunData["plan"]; answerStarted: boolean; live: boolean; collapsed: boolean; elapsedMs: number }) {
-  const [open, setOpen] = useState<boolean | null>(null);
+/** a2: Portfolio Plugin id — the first tool row with this pluginId auto-expands the Thinking block (once per run). */
+const PORTFOLIO_PLUGIN = "plugin-1791713636";
+/** Thinking block pinned at the top of the turn. Starts COLLAPSED (one-line head: spinner/brain · "Thinking" · phase chips · last prose line) even
+ *  while live; auto-expands exactly once when the first Portfolio Plugin tool row appears; a manual click wins for the rest of the run (no further
+ *  auto open/close); state resets when a new live turn starts. Open body = fixed-height scrollable (auto-follows the tail); closed body = unmounted (0 px).
+ *  Never truncates. */
+function ThinkingBlock({ text, kinds, plan, answerStarted, live, collapsed, elapsedMs, portfolioToolStarted }: { text: string; kinds: string[]; plan: RunData["plan"]; answerStarted: boolean; live: boolean; collapsed: boolean; elapsedMs: number; portfolioToolStarted: boolean }) {
+  const [open, setOpen] = useState<boolean | null>(null); // manual override (null = automatic)
+  const [auto, setAuto] = useState(false); // currently auto-expanded by the Portfolio Plugin start
+  const manualRef = useRef(false); // user toggled → automatic changes stop for this run
+  const autoDoneRef = useRef(false); // auto-expansion already happened once this run
+  const prevLiveRef = useRef(live);
   const bodyRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => { if (collapsed) setOpen(null); }, [collapsed]); // first answer token → collapse even if the user had expanded it while streaming
+  // New turn (live false→true): forget the manual + auto decisions of the previous run.
+  useEffect(() => { if (live && !prevLiveRef.current) { manualRef.current = false; autoDoneRef.current = false; setAuto(false); setOpen(null); } prevLiveRef.current = live; }, [live]);
+  // Auto-expand exactly once when the first Portfolio Plugin tool row appears — unless the user already toggled manually.
+  useEffect(() => { if (live && !collapsed && portfolioToolStarted && !autoDoneRef.current && !manualRef.current) { autoDoneRef.current = true; setAuto(true); } }, [live, collapsed, portfolioToolStarted]);
+  // First answer token → collapse again (automatic mode only; a manual toggle is never overridden).
+  useEffect(() => { if (collapsed && !manualRef.current) { setAuto(false); setOpen(null); } }, [collapsed]);
   const streaming = live && !collapsed;
-  const isOpen = open ?? !collapsed;
+  const isOpen = open ?? (auto && streaming);
   // Follow the tail while streaming (scrollTop, not layout — the body height is fixed so nothing below it moves).
   useEffect(() => { const el = bodyRef.current; if (el && streaming && isOpen) el.scrollTop = el.scrollHeight; }, [text, streaming, isOpen]);
   const phases = thinkingPhases(kinds, plan, answerStarted);
   const secs = Math.max(1, Math.round(elapsedMs / 1000));
   // unit1: the header tail shows the last PROSE line only (never a JSON / truncation-marker fragment that slipped through)
   const lastLine = streaming ? lastProseLine(text) : "";
+  const toggle = () => { manualRef.current = true; setOpen(!isOpen); };
   return (
-    <section className={`oiu-think${isOpen ? " oiu-think--open" : ""}${streaming ? " oiu-think--live" : ""}`} data-testid="thinking-block" data-state={streaming ? "streaming" : isOpen ? "expanded" : "collapsed"} data-chars={text.length} data-phases={phases.join(",")}>
-      <button type="button" className="oiu-think__head" aria-expanded={isOpen} onClick={() => setOpen(!isOpen)}>
+    <section className={`oiu-think${isOpen ? " oiu-think--open" : ""}${streaming ? " oiu-think--live" : ""}`} data-testid="thinking-block" data-state={streaming ? "streaming" : isOpen ? "expanded" : "collapsed"} data-auto-expanded={auto && isOpen ? "true" : "false"} data-manual={manualRef.current ? "true" : "false"} data-chars={text.length} data-phases={phases.join(",")}>
+      <button type="button" className="oiu-think__head" aria-expanded={isOpen} onClick={toggle}>
         {streaming ? <Loader2 className="size-3.5 oiu-spin" aria-hidden /> : <Brain className="size-3.5" aria-hidden />}
         <span className="oiu-think__title">{streaming ? "Thinking" : `Thought for ${secs} s`}</span>
         {phases.length > 0 && <span className="oiu-think__phases" data-testid="thinking-phases">{phases.map((p) => <span key={p} className="oiu-think__phase" data-phase={p}>{p}</span>)}</span>}

@@ -633,3 +633,10 @@
 /* Run footer timing badge: wraps instead of clipping on narrow viewports. */
 .oiu-badge { flex-wrap: wrap; row-gap: 2px; }
 /* end unit2 */
+/* a2 */
+/* Thinking block: collapsed by default (head only, body unmounted = 0 px); auto-expands once on Portfolio Plugin start; manual toggle wins. */
+.oiu-think:not(.oiu-think--open) .oiu-think__body { display: none; height: 0; margin: 0; }
+.oiu-think__head:focus-visible { outline: 2px solid #047857; outline-offset: -2px; border-radius: 10px; }
+.oiu-think--live:not(.oiu-think--open) .oiu-think__tail { color: #374151; }
+@media (prefers-reduced-motion: reduce) { .oiu-think .oiu-thinking__chev { transition: none; } }
+/* end a2 */
