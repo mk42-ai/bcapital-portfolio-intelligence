@@ -668,6 +668,8 @@ inner.get("/artifacts/:id/signed-url", async (c) => {
   try {
     const m = await fetchOnDemandMedia(r.mediaId, r.mediaExternalUserId ?? "INV-001");
     if (!m) return fallback(`OnDemand media ${r.mediaId} not found in the account's media list — served from the portfolio backend`);
+    // Media registered by URL keeps OUR 2-hour blob relay as its url (no SAS at all) — that link dies; the backend copy is the durable one.
+    if (/\/api\/media\/blob\//.test(m.url) && !/[?&](sig|se)=/.test(m.url)) return fallback(`OnDemand media ${r.mediaId} points at the expired upload relay — served from the portfolio backend`);
     return c.json({ data: { id: r.id, media_id: r.mediaId, url: m.url, source_url: m.sourceUrl ?? r.mediaSourceUrl ?? null, expires_at: m.expiresAt, source: "ondemand", media_message: null } }, 200, { "cache-control": "no-store" });
   } catch (e) {
     return fallback(`OnDemand media lookup failed: ${String((e as Error)?.message ?? e).slice(0, 160)} — served from the portfolio backend`);
