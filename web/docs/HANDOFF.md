@@ -38,8 +38,9 @@ flowchart LR
 ## 2. URLs and IDs
 | Item | Value |
 |---|---|
-| Frontend live preview | **https://sb-1mw4ywgyt3fa.vercel.run** (sandbox `sbx_TT3hknRhFFNvTUeEMnnM0SL8VfRD`, rebuilt in place 2026-10-11 with the run-view/Artifacts tree, build `BU5EKaXnFNqd_acjxYGKT`, `.env` → backend sb-mo128rkf6h2c). Earlier builds: `EPGmsmeD6b33kTtqO4RqT`, `T4VH1e7Xf6_annLS_Afn5`. |
-| Backend base URL (live) | **https://sb-mo128rkf6h2c.vercel.run** — sandbox `sbx_NynLlEHwFgGz8Ib0NliA2X6CO9Mj` (created 2026-10-11T02:10Z, 5 h timeout; `npm ci` + `npm run build` + `npm test` 12/12 + `node dist/server.js`; `/health` news_total 2104; contract test 16/16). Previous: https://sb-4wg000bgek46.vercel.run (`sbx_WQqT9XI7aAAqzjIk3tv8dGuvUYXf`, old tree, no /artifacts). |
+| Frontend live preview | **https://sb-485hwxjqqz7l.vercel.run** (sandbox `sbx_tgkU2TfsATcmyo4SiAWP4azShxfe`, port 3000, built from `375484e` on 2026-10-11T07:3xZ; replaces sb-1mw4ywgyt3fa which answered HTTP 410). Previous rows kept below for history. |
+| Frontend (previous) | https://sb-1mw4ywgyt3fa.vercel.run — expired (410) on 2026-10-11T06:45Z |
+| Backend base URL (live) | **https://sb-22j0v0grzslt.vercel.run** — same sandbox `sbx_tgkU2TfsATcmyo4SiAWP4azShxfe`, port 4000, `npm ci && npm run build && node dist/server.js` from `375484e`; `/health` 200 (`db_record_count` 136, `news_total` 2100, last ingest `ing-2026-10-11T071024Z-cf03d9`), `/openapi.json` 3.1.0 with 21 paths incl. `/news/summary` and `/artifacts/{id}/signed-url`. Replaces sb-4wg000bgek46 / sb-mo128rkf6h2c (410). |
 | Backend durable target | https://serverless.on-demand.io/apps/bcap-portfolio-intel — **OnDemand serverless endpoint provisioning failed** 3× (image built OK: app `6ac8de2d1f7d82eff69ac0d9`, runs chfbs…chfbv; endpoints `initializing → failed`, `containerAppEnv` never assigned). The 7 workflows already deliver to this URL; nothing changes once it comes up. |
 | Repo | https://github.com/mk42-ai/bcapital-portfolio-intelligence (`web/` = this app) |
 | Portfolio Plugin ID | **null** — `POST /plugin/v1` returned `400 {"message":"schema is required"}` for 20 payload shapes incl. the documented one; MCP `plugin_v1_plugin_create` returned an empty body; `ai_generated_tool` timed out (Cloudflare 524) ×3. Registration body ready in `../scripts/register-plugin.ts`; UI shows "registration pending" and reads `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` / `src/data/run-meta.json` at runtime. |
@@ -762,3 +763,34 @@ Restored the already-generated assets (artifact icon set, upload states, earlier
 | `docs/reference/ondemand/OnDemand-Run-UX-Before-After.pdf` | reference-doc | 4035732 | `08208434f523e8e8e40b1454f0d8e1866c7da9e5e94ef82a804da0d45df8c848` |
 | `docs/reference/ondemand/OnDemand_Agent_Videos_Supporting_Document.pdf` | reference-doc | 162509 | `fff80c527e64778b4c6217b3fc54019a633131114ff36006e38d948557e8a057` |
 | `docs/reference/ondemand/submit-query-v1-sse-reference.pdf` | reference-doc | 4591 | `5836c2a1ca29b86c02f9ed70d7803e04f82291bbe90143205f8d409b6a052002` |
+
+## 16. Seven-lane parallel build (2026-10-11, after 6305876 → `375484e`)
+
+| Lane | Scope | Status | Commits | Window (UTC) |
+|---|---|---|---|---|
+| A | `web/docs/stream-contract.md` — SSE event → UI block map, media endpoints (live schemas), persistence rule | green | `d728542` | 06:59–07:03 |
+| B | Run view: run header + live timer, uncapped pinned Thinking with phase chips, Working/Data-gap rules, footer timings, rail plan removed | green | `145d1ed`, `d07d2c8` | 06:59–07:07 |
+| C | Artifacts: per-type icon set, `media_source_url` (unsigned) + expiry + plugins persisted, `GET /artifacts/{id}/signed-url` re-sign, `/artifacts` filters | green | `d4f8a00`, `7b545d4` | 07:00–07:09 |
+| D | `web/e2e/upload-journeys.spec.ts` (PDF, DOCX, 3 images incl. unreadable memo, failure/retry, persistence) | partial — 8/10 pass; 2 fail only on "re-open thread after reload" (app gap) | `56a4716`, `5ec6d10` | 07:01–07:17 |
+| E | Media: stream thumbnails + lightbox, video poster/play → side pane, document side-by-side pane | green | `4004122`, `d2e7e16` | 07:02–07:06 |
+| F | Data: one `newsTotal()` (2 100), sentiment pass 2 (0 null deltas), plugin registration attempt (failed, logged), data-source badge | partial — F3 registration rejected upstream | `f9651d9`, `636bff8`, `063c628` | 07:03–07:17 |
+| G | QA harness: SSE recorder, state screenshots 1440/390, brand audit, smoothness; baseline + final runs | green | `567d7a4`, `beac857` | 07:04–07:23 |
+
+Gates on `375484e`: root `tsc` 0 · web `tsc` 0 · `next build` exit 0 · secret scan 0 (no tracked `.env`, no key values, no token patterns, no SAS
+signatures in source) · `scripts/test.ts` all passed · `test:eventmap` 49/49. Deployment: ONE fresh sandbox `sbx_tgkU2TfsATcmyo4SiAWP4azShxfe`
+hosting the API on :4000 (https://sb-22j0v0grzslt.vercel.run) and Next on :3000 (https://sb-485hwxjqqz7l.vercel.run); all six routes 200 with
+0 console / 0 page errors at 1440×900 (`web/proof/qa-final/final/console-errors.json`).
+
+Stream contract summary (full text in `web/docs/stream-contract.md`): per assistant turn, top-to-bottom — run header → Thinking (pinned, no cap)
+→ plan checklist → Working row(s) immediately before each action → between-step summary cards → interactive cards → streamed answer with
+citation chips + one red Data-gap sentence on failure → collapsed sources strip → Artifacts card (on `file_written`/`artifact_ready`/bridge
+report, BEFORE `[DONE]`) → footer timings. `heartbeat` keeps the timer alive until `[DONE]`.
+
+Storage rule: artifacts persist `media_id` + UNSIGNED `media_source_url` (+ `media_url_expires_at`, `media_external_user_id`, `media_plugins`);
+a signed URL is never stored (stripped server-side in `POST /artifacts`). Open/Download call `/artifacts/{id}/signed-url`, which looks the media
+object up again via `GET /media/v1/public/file` and returns a fresh `url` (`source:"ondemand"`) or the backend blob (`source:"backend"`) — never a
+500 for a known artifact. Finding: media registered by URL comes back from fetch-media with `url == sourceUrl == our 2 h relay URL` (no SAS), so
+today every re-sign resolves to the backend copy; if OnDemand starts returning SAS URLs the code picks them up unchanged.
+
+Still open: Portfolio Plugin id (`POST /plugin/v1` rejects every schema encoding — see `proof/data-lane/plugin-registration-2026-10-11.log.txt`);
+thread re-open after a hard reload on `/chat`; no video artifact exists to exercise the video side pane end-to-end.

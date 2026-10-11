@@ -5,6 +5,7 @@ import { Download, ExternalLink, Eye, Trash2 } from "lucide-react";
 import { artifactsPanel, artifactsStore } from "@/lib/artifacts/store";
 import { formatBytes, relativeTime, type Artifact } from "@/lib/artifacts/types";
 import { ArtifactIcon, iconFor, kindBadge } from "./artifact-icon";
+import { openArtifactInPane } from "@/components/media/side-pane-store";
 import "./artifacts.css";
 
 /** Same-origin fallback href (inline previews and the no-JS path keep using it). */
@@ -22,14 +23,20 @@ export async function confirmDeleteArtifact(a: Artifact): Promise<boolean> {
  */
 export async function openArtifact(a: Artifact, mode: "open" | "download"): Promise<string> {
   const fallback = mode === "download" ? downloadHref(a) : a.contentUrl;
+  // "Open" = side-by-side preview next to the chat (documents/images/videos never navigate the app away; the pane has "Open in new tab" +
+  // Download, both re-signed). Only "Download" leaves the page — through an <a download>, never window.location (a blocked popup must not
+  // replace the chat with a PDF viewer; found by the QA harness at 1440×900).
+  if (mode === "open") {
+    openArtifactInPane({ id: a.id, name: a.name, mime: a.mime, kind: a.kind, contentUrl: a.contentUrl, size: a.sizeBytes });
+    return a.contentUrl;
+  }
   if (a.pending || !a.contentUrl.startsWith("/api/artifacts/")) { if (typeof window !== "undefined") window.open(fallback, "_blank", "noopener"); return fallback; }
-  const win = typeof window !== "undefined" ? window.open("about:blank", "_blank", "noopener") : null;
-  const res = await artifactsStore.signedUrl(a.id, mode === "download");
+  const res = await artifactsStore.signedUrl(a.id, true);
   const url = res.url || fallback;
-  if (win && !win.closed) win.location.replace(url);
-  else if (typeof window !== "undefined") {
-    if (mode === "download" && res.source === "backend") { const el = document.createElement("a"); el.href = url; el.download = a.name; el.rel = "noopener"; document.body.appendChild(el); el.click(); el.remove(); }
-    else window.location.assign(url);
+  if (typeof window !== "undefined") {
+    const el = document.createElement("a"); el.href = url; el.rel = "noopener";
+    if (res.source === "backend" || url.startsWith("/")) el.download = a.name; else el.target = "_blank";
+    document.body.appendChild(el); el.click(); el.remove();
   }
   return url;
 }

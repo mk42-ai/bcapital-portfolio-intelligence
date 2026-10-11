@@ -1,5 +1,71 @@
 # Changelog
 
+## 2026-10-11 — seven-lane parallel build (run view · artifacts · media · uploads · data · QA), merged at `375484e`
+
+Orchestrated as seven time-boxed lanes on separate branches (`lane/a`…`lane/g`), each pushed as soon as it was green, then merged into `main`
+(plus the parallel session's `ecc4325`/`aea689a`/`33bbacc`/`df35047`/`ef17c05`). Gates on the merged tree: root `tsc --noEmit` 0 errors,
+web `tsc --noEmit` 0 errors, `next build` exit 0, secret scan 0 hits, `scripts/test.ts` all passed, `test:eventmap` 49/49.
+
+### Added
+- **Lane A — `web/docs/stream-contract.md`**: every submit-query v1 SSE event (thinking ×5, statusLog ×15 incl. `summarize_history.*`,
+  `plugin_sources`, `fulfillment`, `metricsLog`, `clarification_request`, every `ondemand_agent.*` subtype, heartbeat, `[DONE]`, `[ERROR]`) mapped to
+  its bridge CUSTOM frame, UI block (positions 1–10) and data-testid; media create/fetch/delete schemas copied from the LIVE OpenAPI fragments
+  (`docs/reference/doc-*.json`, fetched 2026-10-11T06:55Z); persistence rule = `mediaId` + UNSIGNED `sourceUrl`, re-sign on open via fetch media.
+- **Lane B — run view** (`chat-shell.tsx`, `shell.css`, `run-rail.tsx`): run header (`run-header`: model · reasoning · plugin chips · live `run-timer`
+  driven by `startedAt` + interval, so heartbeat-only stretches still tick; frozen at `finishedAt`), Thinking pinned at top with NO character cap
+  (12 000 / 4 000 / 6 000-char slices removed; persisted copy capped at 200 000), phase chips Planning / Step n / Answer (`thinking-phases`,
+  `data-phases`), fixed-height auto-scrolling body (240 px, 160 px ≤640 px), collapses to "Thought for N s" on the first answer token and never
+  moves; ONE thinking block per turn (PendingRow hides once the live RunView mounts); Working rows keep ≥1 favicon, `OutputsCard` never shows an
+  empty `{}`; live red `data-gap` sentence (#EF4444) as soon as a call fails; footer timings `run-footer` (first event · first token · total ·
+  tokens) rendered live once the answer is done; duplicate plan removed from the "This run" rail.
+- **Lane C — Artifacts**: backend columns `media_source_url` (query string stripped server-side — a signed SAS URL is never persisted),
+  `media_url_expires_at`, `media_external_user_id`, `media_plugins` (idempotent boot `ALTER TABLE`), `GET /artifacts/{id}/signed-url`
+  (OnDemand fetch-media lookup, 10-min cache, honest `source:"backend"` fallback — always 200 for a known artifact), web proxy
+  `/api/artifacts/[id]/signed-url`, Open/Download re-sign first; full saved icon set via pure `iconFor()` (pdf · document · spreadsheet ·
+  presentation · image · video · audio · chart · code · json · archive · link · generic, upload idle/progress/success/failed; webp `<picture>` with
+  PNG fallback); `/artifacts` header mark + empty state (`artifacts-empty`), filters by type / thread / date, media badge green only when
+  `mediaStatus=stored`. Chat + media relays now pass the unsigned sourceUrl/expiry/externalUserId/plugins through `saveArtifact`.
+- **Lane D — `web/e2e/upload-journeys.spec.ts`**: PDF + DOCX + 3 image fixtures (geothermal-plant, bar-chart, blurred-memo — the memo MUST be
+  declared unreadable; regex-asserted, no invented contents), failure state (`.exe`, empty file) + mocked-503 retry → recovery, /artifacts
+  persistence after reload, latency log. Proof under `web/proof/upload-journeys/`.
+- **Lane E — media** (`web/src/components/media/*`, `media.css`): fixed-aspect stream thumbnails (`image-thumb`) → lightbox (+ "Open in side
+  pane", Download); videos render a poster + play button only (lazy canvas poster, no `<video controls>` and no autoplay in the stream) and play in
+  the side pane; `SidePane` (`side-pane`) next to the chat (460–520 px ≥1024 px, full-screen sheet below) with PDF `<object>`, text/markdown/csv,
+  sandboxed html, honest "Preview not available" for docx/xlsx/pptx; `openSidePane()` / `openArtifactInPane()` API.
+- **Lane F — data**: ONE `newsTotal()` definition (rows of listed companies, orphans excluded, de-duplicated by `(company_slug, url)`) used by
+  `/health`, `/companies`, `/news/count`, new `GET /news/summary`, `/refresh/status` and the frontend (News Pulse lede, Overview KPI tile, company
+  page); measured live: raw Σ 2 104 → 4 duplicate (slug,url) pairs → **2 100** (seed DB de-duplicated and committed; the 1 849 figure was a
+  transient fallback render and is no longer reachable). Sentiment pass 2 (`rule:news-mean-v1`, ingest `ing-2026-10-11T071024Z-cf03d9`) written
+  back for the 131 companies that still had `delta = null` → **0 null deltas of 136**; focus deltas: Fervo −0.25, Flutterwave +0.04, Apptronik
+  +0.24, WRITER +0.42, Perplexity +0.69. Data-source badge unified (`data-source-badge` live | partial (amber) | snapshot; global
+  `backend-status` now `no-store`, 4 s timeout).
+- **Lane G — QA harness** (`web/scripts/record-sse.mjs`, `brand-audit.mjs`, `qa-summary.mjs`, `web/e2e/qa-final.spec.ts`, projects `qa-final`
+  1440×900 + `qa-final-mobile` 390×844): full SSE recording to `[DONE]`, artifact-chain check, state screenshots, console errors per route, brand
+  audit, smoothness score. Baseline (6305876) + final (375484e) runs under `web/proof/qa-final/`.
+
+### Changed
+- Brand audit rule: a colour fails when hue ∈ [190, 260], saturation > 0.15 **and chroma > 0.15** — the brand charcoal `#1F2937` and tailwind
+  grey inks are neutral (chroma 0.09), every real blue (`#1d4ed8`, `#3898EC`, `#000D5E`) still fails. A portfolio company's own accent dot on
+  its page is excluded like its palette swatches (`data-hue-audit-ignore`).
+
+### Measured on the final deployment (frontend https://sb-485hwxjqqz7l.vercel.run · backend https://sb-22j0v0grzslt.vercel.run, 375484e)
+- Report SSE: first event 110 ms · first token 30,974 ms · total 39,035 ms · heartbeats 3 · `[DONE]` seen;
+  artifact `creating@37869 ms → ready@39033 ms` (frame 520) **before** `RUN_FINISHED` (frame 522) and `[DONE]` (frame 523);
+  `/api/artifacts` lists `write-a-short-portfolio-report-on-report.pdf` (16478 B, mediaStatus stored, mediaId 6acb3d18cf3ee6ce347391ea); `/content` 200 + `%PDF`;
+  `/signed-url` 200 `source=backend` (the OnDemand media object points at the 2 h upload relay, so the durable copy is the backend blob).
+- News SSE: first event 26 ms · first token 16,336 ms · total 20,551 ms.
+- Routes `/overview /company/1au /news /chat /artifacts /settings`: HTTP 200, 0 console errors, 0 page errors at 1440×900.
+
+### Still open (documented, not faked)
+- **Portfolio Plugin registration** — `portfolio_plugin_id` stays `null`. 23 REST variants of `POST /plugin/v1` + 2 MCP `plugin_create` calls:
+  string `schema` → `{"message":"schema is required","errorCode":"invalid_request"}`; object `schema` → `json: cannot unmarshal object into Go
+  struct field PluginAction.action.schema of type string`; `identifier=rest` → `invalid agent identifier`; AI tool generator → `context deadline
+  exceeded`. `GET /plugin/v1/list` total 0. Log: `proof/data-lane/plugin-registration-2026-10-11.log.txt`. Frontend already orders the plugin
+  first once `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` is set.
+- Re-opening a thread after a full page reload on `/chat` is not reliable in the UI (thread list hydration) — the user bubble's attachment chips
+  therefore cannot be asserted after reload; `/artifacts` persistence after reload passes.
+- `video-side-pane` screenshot: no video artifact is produced by any current flow (honest n/a).
+
 ## 2026-10-11 — asset restore (icons · upload states · fixtures · reference docs)
 
 ### Added
