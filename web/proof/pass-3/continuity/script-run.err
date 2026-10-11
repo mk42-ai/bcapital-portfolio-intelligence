@@ -1,0 +1,5 @@
+[continuity 2026-10-11T11:57:39.699Z] thread cont-1791719859699 base https://sb-1gizcktepfgc.vercel.run
+[continuity 2026-10-11T11:57:39.871Z] turn-1 HTTP 200 headers at 170 ms; x-ondemand-session null
+[continuity 2026-10-11T11:58:00.367Z] turn-1 {"doneSeen":true,"totalMs":20666,"maxGapMs":870,"hang":false,"session":{"sessionId":"6acb79b420a8b245e6aab146","created":true,"viaHeader":false},"heartbeats":2,"textChars":4890}
+[continuity 2026-10-11T11:58:00.566Z] turn-2 HTTP 200 headers at 198 ms; x-ondemand-session 6acb79b420a8b245e6aab146
+[continuity 2026-10-11T11:58:47.725Z] turn-2 {"doneSeen":true,"totalMs":47356,"maxGapMs":864,"hang":false,"session":{"sessionId":"6acb79b420a8b245e6aab146","created":false,"viaHeader":true},"heartbeats":4,"textChars":7433}
