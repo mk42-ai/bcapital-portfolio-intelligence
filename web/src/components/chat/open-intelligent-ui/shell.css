@@ -536,3 +536,11 @@
   .oiu-think--live .oiu-think__tail { display: block; flex: 1 1 0; width: 0; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: clip; font-weight: 400; color: #4b5563; font-size: 11.5px; line-height: 17px; height: 17px; contain: strict; }
   .oiu-think--live .oiu-think__kinds { display: none; }
 }
+
+/* lane E: side pane layout */
+/* .chat-row wraps the chat canvas + <SidePane /> (web/src/components/media/side-pane.tsx) in one full-height flex row; the canvas shrinks,
+   the composer stays pinned because .chat-main is already viewport-pinned and .chat-row inherits min-height:0. */
+.chat-main > .chat-row { display: flex; flex-direction: row; flex: 1 1 auto; min-height: 0; height: 100%; width: 100%; overflow: hidden; }
+.chat-main > .chat-row > .chat-canvas { flex: 1 1 auto; min-width: 0; height: 100%; }
+.chat-main > .chat-row > .mp-pane { height: 100%; }
+/* end lane E */
