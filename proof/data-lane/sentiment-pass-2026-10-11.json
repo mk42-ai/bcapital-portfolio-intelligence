@@ -1,0 +1,1342 @@
+{
+  "generated_at": "2026-10-11T10:08:12.173Z",
+  "corpus": "stored news_items only \u2014 the owner's step-2 web search returned ZERO sources for all five company queries; no articles fabricated",
+  "runs": {
+    "local": {
+      "base": "http://localhost:4795",
+      "ingest_run_id": "ing-2026-10-11T100803Z-42fde1",
+      "run_at": "2026-10-11T10:08:03.634Z",
+      "status": 200,
+      "companies_scored": 137,
+      "rules": {
+        "R1": 129,
+        "R2": 0,
+        "R3": 8
+      },
+      "null_delta_before": 1,
+      "null_delta_after": 0,
+      "companies_seen_after": 137
+    },
+    "live": {
+      "base": "https://sb-23wo7xiys7fz.vercel.run",
+      "ingest_run_id": "ing-2026-10-11T100811Z-ffd690",
+      "run_at": "2026-10-11T10:08:11.568Z",
+      "status": 200,
+      "companies_scored": 137,
+      "rules": {
+        "R1": 129,
+        "R2": 0,
+        "R3": 8
+      },
+      "null_delta_before": 1,
+      "null_delta_after": 0,
+      "companies_seen_after": 137
+    }
+  },
+  "null_delta_before_slugs": [
+    "b-capital"
+  ],
+  "focus": [
+    {
+      "company": "aimotive",
+      "score": 0.56,
+      "delta": 0,
+      "prior_score": 0.56,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "scored_at_live": "2026-10-11T10:08:11Z",
+      "scored_at_local": "2026-10-11T10:08:03Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "company": "apptronik",
+      "score": 0.54,
+      "delta": 0,
+      "prior_score": 0.54,
+      "prior_run_at": "2026-10-11T00:46:31Z",
+      "scored_at_live": "2026-10-11T10:08:11Z",
+      "scored_at_local": "2026-10-11T10:08:03Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "company": "fervo-energy",
+      "score": 0.35,
+      "delta": 0,
+      "prior_score": 0.35,
+      "prior_run_at": "2026-10-11T00:46:31Z",
+      "scored_at_live": "2026-10-11T10:08:11Z",
+      "scored_at_local": "2026-10-11T10:08:03Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "company": "flutterwave",
+      "score": 0.44,
+      "delta": 0,
+      "prior_score": 0.44,
+      "prior_run_at": "2026-10-11T00:46:31Z",
+      "scored_at_live": "2026-10-11T10:08:11Z",
+      "scored_at_local": "2026-10-11T10:08:03Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "company": "writer",
+      "score": 0.52,
+      "delta": 0,
+      "prior_score": 0.52,
+      "prior_run_at": "2026-10-11T00:46:31Z",
+      "scored_at_live": "2026-10-11T10:08:11Z",
+      "scored_at_local": "2026-10-11T10:08:03Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "company": "perplexity-ai",
+      "score": 0.34,
+      "delta": 0,
+      "prior_score": 0.34,
+      "prior_run_at": "2026-10-11T00:46:31Z",
+      "scored_at_live": "2026-10-11T10:08:11Z",
+      "scored_at_local": "2026-10-11T10:08:03Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    }
+  ],
+  "all_companies_live": [
+    {
+      "slug": "1au",
+      "score": 0.2,
+      "expected_delta": 0,
+      "prior_score": 0.2,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 3
+    },
+    {
+      "slug": "6sense",
+      "score": 0.48,
+      "expected_delta": 0,
+      "prior_score": 0.48,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "accacia",
+      "score": 0.62,
+      "expected_delta": 0,
+      "prior_score": 0.62,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "aimotive",
+      "score": 0.56,
+      "expected_delta": 0,
+      "prior_score": 0.56,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "apptronik",
+      "score": 0.54,
+      "expected_delta": 0,
+      "prior_score": 0.54,
+      "prior_run_at": "2026-10-11T00:46:31Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "archimetis",
+      "score": 0.58,
+      "expected_delta": 0,
+      "prior_score": 0.58,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "artbio",
+      "score": 0.4,
+      "expected_delta": 0,
+      "prior_score": 0.4,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "aurora-yaocheng",
+      "score": 0.5667,
+      "expected_delta": 0,
+      "prior_score": 0.5667,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 3
+    },
+    {
+      "slug": "axiom",
+      "score": 0.55,
+      "expected_delta": 0,
+      "prior_score": 0.55,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "b-capital",
+      "score": 0.2,
+      "expected_delta": 0,
+      "prior_score": 0.2,
+      "prior_run_at": "2026-10-09T12:24:23Z",
+      "rule": "R3 carry (no scored news)",
+      "items_used": 0
+    },
+    {
+      "slug": "baichuan",
+      "score": -0.12,
+      "expected_delta": 0,
+      "prior_score": -0.12,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "bhanzu",
+      "score": -0.625,
+      "expected_delta": 0,
+      "prior_score": -0.625,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "branch-international",
+      "score": 0.0667,
+      "expected_delta": 0,
+      "prior_score": 0.0667,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 3
+    },
+    {
+      "slug": "brik",
+      "score": 0.4,
+      "expected_delta": 0,
+      "prior_score": 0.4,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 2
+    },
+    {
+      "slug": "buildops",
+      "score": 0.68,
+      "expected_delta": 0,
+      "prior_score": 0.68,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "cadence",
+      "score": 0.65,
+      "expected_delta": 0,
+      "prior_score": 0.65,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "carrick",
+      "score": 0.575,
+      "expected_delta": 0,
+      "prior_score": 0.575,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "carro",
+      "score": 0,
+      "expected_delta": 0,
+      "prior_score": 0,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R3 carry (no scored news)",
+      "items_used": 0
+    },
+    {
+      "slug": "centivo",
+      "score": 0.38,
+      "expected_delta": 0,
+      "prior_score": 0.38,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "certn",
+      "score": 0.58,
+      "expected_delta": 0,
+      "prior_score": 0.58,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "chipagents",
+      "score": 0.8,
+      "expected_delta": 0,
+      "prior_score": 0.8,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 1
+    },
+    {
+      "slug": "cloudwise",
+      "score": 0.55,
+      "expected_delta": 0,
+      "prior_score": 0.55,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 2
+    },
+    {
+      "slug": "code-metal",
+      "score": 0.64,
+      "expected_delta": 0,
+      "prior_score": 0.64,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "coindcx",
+      "score": 0.24,
+      "expected_delta": 0,
+      "prior_score": 0.24,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "collinear-ai",
+      "score": 0.32,
+      "expected_delta": 0,
+      "prior_score": 0.32,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "companycam",
+      "score": 0.425,
+      "expected_delta": 0,
+      "prior_score": 0.425,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "curbwaste",
+      "score": 0.62,
+      "expected_delta": 0,
+      "prior_score": 0.62,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "dailyhunt",
+      "score": -0.3,
+      "expected_delta": 0,
+      "prior_score": -0.3,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "deferred",
+      "score": 0.58,
+      "expected_delta": 0,
+      "prior_score": 0.58,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "dream-labs",
+      "score": 0.65,
+      "expected_delta": 0,
+      "prior_score": 0.65,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 2
+    },
+    {
+      "slug": "eeroq",
+      "score": 0.8,
+      "expected_delta": 0,
+      "prior_score": 0.8,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "eureka-robotics",
+      "score": 0.7,
+      "expected_delta": 0,
+      "prior_score": 0.7,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "evenup",
+      "score": 0.72,
+      "expected_delta": 0,
+      "prior_score": 0.72,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "evidation-health",
+      "score": 0.4,
+      "expected_delta": 0,
+      "prior_score": 0.4,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "evommune",
+      "score": 0.26,
+      "expected_delta": 0,
+      "prior_score": 0.26,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "extend",
+      "score": 0.46,
+      "expected_delta": 0,
+      "prior_score": 0.46,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "falconx",
+      "score": 0.58,
+      "expected_delta": 0,
+      "prior_score": 0.58,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "fervo-energy",
+      "score": 0.35,
+      "expected_delta": 0,
+      "prior_score": 0.35,
+      "prior_run_at": "2026-10-11T00:46:31Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "figment",
+      "score": 0.65,
+      "expected_delta": 0,
+      "prior_score": 0.65,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "floor-nfts",
+      "score": 0.325,
+      "expected_delta": 0,
+      "prior_score": 0.325,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "flourish-health",
+      "score": 0.76,
+      "expected_delta": 0,
+      "prior_score": 0.76,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "flowgpt",
+      "score": 0.16,
+      "expected_delta": 0,
+      "prior_score": 0.16,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "flutterwave",
+      "score": 0.44,
+      "expected_delta": 0,
+      "prior_score": 0.44,
+      "prior_run_at": "2026-10-11T00:46:31Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "forest",
+      "score": 0.65,
+      "expected_delta": 0,
+      "prior_score": 0.65,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 2
+    },
+    {
+      "slug": "fountain",
+      "score": 0.46,
+      "expected_delta": 0,
+      "prior_score": 0.46,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "gable",
+      "score": 0.72,
+      "expected_delta": 0,
+      "prior_score": 0.72,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "goodfire",
+      "score": 0.6,
+      "expected_delta": 0,
+      "prior_score": 0.6,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "goose",
+      "score": 0.38,
+      "expected_delta": 0,
+      "prior_score": 0.38,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "grace-investment-machine",
+      "score": 0.44,
+      "expected_delta": 0,
+      "prior_score": 0.44,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "graymatter-robotics",
+      "score": 0.56,
+      "expected_delta": 0,
+      "prior_score": 0.56,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "grit",
+      "score": 0.45,
+      "expected_delta": 0,
+      "prior_score": 0.45,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 2
+    },
+    {
+      "slug": "gushwork",
+      "score": 0.4,
+      "expected_delta": 0,
+      "prior_score": 0.4,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "havocai",
+      "score": 0.72,
+      "expected_delta": 0,
+      "prior_score": 0.72,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "heylibby",
+      "score": 0.56,
+      "expected_delta": 0,
+      "prior_score": 0.56,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "hifibio",
+      "score": 0.65,
+      "expected_delta": 0,
+      "prior_score": 0.65,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 2
+    },
+    {
+      "slug": "hotspot-therapeutics",
+      "score": 0.58,
+      "expected_delta": 0,
+      "prior_score": 0.58,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "hypersonix",
+      "score": 0,
+      "expected_delta": 0,
+      "prior_score": 0,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R3 carry (no scored news)",
+      "items_used": 0
+    },
+    {
+      "slug": "icertis",
+      "score": 0.24,
+      "expected_delta": 0,
+      "prior_score": 0.24,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "infrahub",
+      "score": 0,
+      "expected_delta": 0,
+      "prior_score": 0,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R3 carry (no scored news)",
+      "items_used": 0
+    },
+    {
+      "slug": "innovaccer",
+      "score": 0.02,
+      "expected_delta": 0,
+      "prior_score": 0.02,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "insilico-medicine",
+      "score": 0.82,
+      "expected_delta": 0,
+      "prior_score": 0.82,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "inspace",
+      "score": 0.72,
+      "expected_delta": 0,
+      "prior_score": 0.72,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "iru",
+      "score": 0.36,
+      "expected_delta": 0,
+      "prior_score": 0.36,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "isaac-health",
+      "score": 0.74,
+      "expected_delta": 0,
+      "prior_score": 0.74,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "jetzero",
+      "score": 0.62,
+      "expected_delta": 0,
+      "prior_score": 0.62,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "judi-rx",
+      "score": 0.52,
+      "expected_delta": 0,
+      "prior_score": 0.52,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "karman-industries",
+      "score": 0.7,
+      "expected_delta": 0,
+      "prior_score": 0.7,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "khatabook",
+      "score": 0.42,
+      "expected_delta": 0,
+      "prior_score": 0.42,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "knox",
+      "score": 0.5,
+      "expected_delta": 0,
+      "prior_score": 0.5,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "kopi-kenangan",
+      "score": 0.46,
+      "expected_delta": 0,
+      "prior_score": 0.46,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "labelbox",
+      "score": 0.4,
+      "expected_delta": 0,
+      "prior_score": 0.4,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "labviva",
+      "score": 0.68,
+      "expected_delta": 0,
+      "prior_score": 0.68,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "lambda",
+      "score": 0.32,
+      "expected_delta": 0,
+      "prior_score": 0.32,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "levelten",
+      "score": 0.72,
+      "expected_delta": 0,
+      "prior_score": 0.72,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "linkmore",
+      "score": 0.8,
+      "expected_delta": 0,
+      "prior_score": 0.8,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "lively",
+      "score": 0.42,
+      "expected_delta": 0,
+      "prior_score": 0.42,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "lumara-health",
+      "score": 0,
+      "expected_delta": 0,
+      "prior_score": 0,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R3 carry (no scored news)",
+      "items_used": 0
+    },
+    {
+      "slug": "lunar-energy",
+      "score": 0.68,
+      "expected_delta": 0,
+      "prior_score": 0.68,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "macrolux",
+      "score": 0.54,
+      "expected_delta": 0,
+      "prior_score": 0.54,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "meditrust",
+      "score": 0.52,
+      "expected_delta": 0,
+      "prior_score": 0.52,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "meesho",
+      "score": 0.48,
+      "expected_delta": 0,
+      "prior_score": 0.48,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "miotech",
+      "score": 0.58,
+      "expected_delta": 0,
+      "prior_score": 0.58,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "mswipe",
+      "score": 0.4,
+      "expected_delta": 0,
+      "prior_score": 0.4,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "nalu",
+      "score": 0.72,
+      "expected_delta": 0,
+      "prior_score": 0.72,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "nektar-ai",
+      "score": 0.5,
+      "expected_delta": 0,
+      "prior_score": 0.5,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "nest-genomics",
+      "score": 0,
+      "expected_delta": 0,
+      "prior_score": 0,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R3 carry (no scored news)",
+      "items_used": 0
+    },
+    {
+      "slug": "neushen-therapeutics",
+      "score": 0.65,
+      "expected_delta": 0,
+      "prior_score": 0.65,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "ninja-van",
+      "score": -0.54,
+      "expected_delta": 0,
+      "prior_score": -0.54,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "numerion-labs",
+      "score": 0.24,
+      "expected_delta": 0,
+      "prior_score": 0.24,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "nuvig",
+      "score": -0.12,
+      "expected_delta": 0,
+      "prior_score": -0.12,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "odeko",
+      "score": 0,
+      "expected_delta": 0,
+      "prior_score": 0,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R3 carry (no scored news)",
+      "items_used": 0
+    },
+    {
+      "slug": "omnidian",
+      "score": 0.3,
+      "expected_delta": 0,
+      "prior_score": 0.3,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "oro-labs",
+      "score": 0.72,
+      "expected_delta": 0,
+      "prior_score": 0.72,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "overstory",
+      "score": 0.72,
+      "expected_delta": 0,
+      "prior_score": 0.72,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "palebluedot",
+      "score": 0.4,
+      "expected_delta": 0,
+      "prior_score": 0.4,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "payfazz",
+      "score": 0.4,
+      "expected_delta": 0,
+      "prior_score": 0.4,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "pendo",
+      "score": 0.04,
+      "expected_delta": 0,
+      "prior_score": 0.04,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "percent",
+      "score": 0.32,
+      "expected_delta": 0,
+      "prior_score": 0.32,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "perimeter-81",
+      "score": 0.1,
+      "expected_delta": 0,
+      "prior_score": 0.1,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 2
+    },
+    {
+      "slug": "perplexity-ai",
+      "score": 0.34,
+      "expected_delta": 0,
+      "prior_score": 0.34,
+      "prior_run_at": "2026-10-11T00:46:31Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "phenom-people",
+      "score": 0.44,
+      "expected_delta": 0,
+      "prior_score": 0.44,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "picnichealth",
+      "score": 0.46,
+      "expected_delta": 0,
+      "prior_score": 0.46,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "poolside",
+      "score": 0.02,
+      "expected_delta": 0,
+      "prior_score": 0.02,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "positive-development",
+      "score": 0.58,
+      "expected_delta": 0,
+      "prior_score": 0.58,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "precision-neuro",
+      "score": 0.63,
+      "expected_delta": 0,
+      "prior_score": 0.63,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "profoundbio",
+      "score": 0.24,
+      "expected_delta": 0,
+      "prior_score": 0.24,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "rapyd",
+      "score": -0.04,
+      "expected_delta": 0,
+      "prior_score": -0.04,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "reflection",
+      "score": 0.5,
+      "expected_delta": 0,
+      "prior_score": 0.5,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "remote",
+      "score": 0.66,
+      "expected_delta": 0,
+      "prior_score": 0.66,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "rona-therapeutics",
+      "score": 0.575,
+      "expected_delta": 0,
+      "prior_score": 0.575,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "seltz",
+      "score": 0.74,
+      "expected_delta": 0,
+      "prior_score": 0.74,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "sharpa",
+      "score": 0.7,
+      "expected_delta": 0,
+      "prior_score": 0.7,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "shipday",
+      "score": 0.52,
+      "expected_delta": 0,
+      "prior_score": 0.52,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "sift-healthcare",
+      "score": 0.02,
+      "expected_delta": 0,
+      "prior_score": 0.02,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "silvercloud-health",
+      "score": 0.4,
+      "expected_delta": 0,
+      "prior_score": 0.4,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "solar-square",
+      "score": 0.64,
+      "expected_delta": 0,
+      "prior_score": 0.64,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "solve-therapeutics",
+      "score": 0.5,
+      "expected_delta": 0,
+      "prior_score": 0.5,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "sonilo",
+      "score": 0.62,
+      "expected_delta": 0,
+      "prior_score": 0.62,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "spectrumedics",
+      "score": 0.56,
+      "expected_delta": 0,
+      "prior_score": 0.56,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "star-catcher",
+      "score": 0.58,
+      "expected_delta": 0,
+      "prior_score": 0.58,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "starburst-data",
+      "score": 0.64,
+      "expected_delta": 0,
+      "prior_score": 0.64,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "sugarfit",
+      "score": 0.375,
+      "expected_delta": 0,
+      "prior_score": 0.375,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "synapticure",
+      "score": 0.84,
+      "expected_delta": 0,
+      "prior_score": 0.84,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "tacta",
+      "score": 0.7333,
+      "expected_delta": 0,
+      "prior_score": 0.7333,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 3
+    },
+    {
+      "slug": "tinyhealth",
+      "score": 0.6,
+      "expected_delta": 0,
+      "prior_score": 0.6,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "trm-labs",
+      "score": 0.32,
+      "expected_delta": 0,
+      "prior_score": 0.32,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "turbine",
+      "score": 0.85,
+      "expected_delta": 0,
+      "prior_score": 0.85,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 2
+    },
+    {
+      "slug": "turno",
+      "score": 0.75,
+      "expected_delta": 0,
+      "prior_score": 0.75,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 2
+    },
+    {
+      "slug": "unblocked-brands",
+      "score": 0.65,
+      "expected_delta": 0,
+      "prior_score": 0.65,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 2
+    },
+    {
+      "slug": "vivacta",
+      "score": 0.85,
+      "expected_delta": 0,
+      "prior_score": 0.85,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 4
+    },
+    {
+      "slug": "volastra",
+      "score": 0.42,
+      "expected_delta": 0,
+      "prior_score": 0.42,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "when",
+      "score": 0.46,
+      "expected_delta": 0,
+      "prior_score": 0.46,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "wildfire",
+      "score": 0,
+      "expected_delta": 0,
+      "prior_score": 0,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R3 carry (no scored news)",
+      "items_used": 0
+    },
+    {
+      "slug": "writer",
+      "score": 0.52,
+      "expected_delta": 0,
+      "prior_score": 0.52,
+      "prior_run_at": "2026-10-11T00:46:31Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    },
+    {
+      "slug": "xingyun",
+      "score": 0.1,
+      "expected_delta": 0,
+      "prior_score": 0.1,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 3
+    },
+    {
+      "slug": "yalo",
+      "score": 0.5333,
+      "expected_delta": 0,
+      "prior_score": 0.5333,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 3
+    },
+    {
+      "slug": "zaihui",
+      "score": -0.04,
+      "expected_delta": 0,
+      "prior_score": -0.04,
+      "prior_run_at": "2026-10-11T07:10:24Z",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "items_used": 5
+    }
+  ]
+}
