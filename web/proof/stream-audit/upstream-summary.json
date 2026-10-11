@@ -1,0 +1,231 @@
+{
+  "recordedAt": "2026-10-11T08:23:15.704Z",
+  "source": "web/scripts/record-upstream-sse.mjs (raw upstream, no bridge)",
+  "sessionId": "6acb474320a8b245e6aaad9e",
+  "endpointId": "predefined-deepseek-flash",
+  "pluginIds": [
+    "plugin-1722260873"
+  ],
+  "reasoningMode": "medium",
+  "query": "Compare the latest news about Fervo Energy and Flutterwave this month, then summarise which has more positive momentum, with cited sources.",
+  "durationMs": 47957,
+  "rawLines": 2097,
+  "dataFrames": 699,
+  "answerChunks": 222,
+  "answerChars": 7155,
+  "planSteps": 3,
+  "stepsWithPluginSources": [
+    "1",
+    "2"
+  ],
+  "stepBoundaries": {
+    "1": {
+      "plugin_sources_ms": 17575,
+      "next_step_first_frame_ms": 18642,
+      "gap_ms": 1067
+    },
+    "2": {
+      "plugin_sources_ms": 27818,
+      "next_step_first_frame_ms": 29022,
+      "gap_ms": 1204
+    }
+  },
+  "firstSeenOrder": [
+    {
+      "ms": 2164,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": "processing",
+      "fields": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "status",
+        "thinking"
+      ]
+    },
+    {
+      "ms": 3745,
+      "event": "heartbeat",
+      "eventType": "",
+      "statusType": "",
+      "fields": [
+        "sessionId",
+        "messageId",
+        "time"
+      ]
+    },
+    {
+      "ms": 4780,
+      "event": "thinking",
+      "eventType": "planning_output",
+      "statusType": "processing",
+      "fields": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "status",
+        "output"
+      ]
+    },
+    {
+      "ms": 7025,
+      "event": "thinking",
+      "eventType": "step_thinking",
+      "statusType": "processing",
+      "fields": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "stepId",
+        "status",
+        "thinking"
+      ]
+    },
+    {
+      "ms": 7303,
+      "event": "thinking",
+      "eventType": "step_output",
+      "statusType": "processing",
+      "fields": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "stepId",
+        "status",
+        "output"
+      ]
+    },
+    {
+      "ms": 17575,
+      "event": "message",
+      "eventType": "plugin_sources",
+      "statusType": "processing",
+      "fields": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "stepId",
+        "stepTitle",
+        "status",
+        "sources"
+      ]
+    },
+    {
+      "ms": 37356,
+      "event": "thinking",
+      "eventType": "fulfillment_thinking",
+      "statusType": "processing",
+      "fields": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "status",
+        "thinking"
+      ]
+    },
+    {
+      "ms": 38741,
+      "event": "message",
+      "eventType": "fulfillment",
+      "statusType": "processing",
+      "fields": [
+        "sessionId",
+        "messageId",
+        "answer",
+        "status",
+        "eventIndex",
+        "eventType"
+      ]
+    },
+    {
+      "ms": 45946,
+      "event": "message",
+      "eventType": "metricsLog",
+      "statusType": "processing",
+      "fields": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "status",
+        "publicMetrics"
+      ]
+    },
+    {
+      "ms": 47957,
+      "event": "message",
+      "eventType": "[DONE]",
+      "statusType": "",
+      "fields": null
+    }
+  ],
+  "eventTypeCounts": {
+    "planning_thinking": 91,
+    "": 15,
+    "planning_output": 49,
+    "step_thinking": 109,
+    "step_output": 170,
+    "plugin_sources": 2,
+    "fulfillment_thinking": 39,
+    "fulfillment": 222,
+    "metricsLog": 1
+  },
+  "statusTypeCounts": {
+    "processing": 683
+  },
+  "statusLogFrames": 0,
+  "summarizeHistory": {
+    "initialized": 0,
+    "completed": 0,
+    "anyOtherSummarisationEventTypeOrStatusType": false,
+    "grepSummarMatches": 15,
+    "grepSummarMatchesAreOnlyLLMProseDeltas": true,
+    "grepSummarMatchEventTypes": [
+      "fulfillment_thinking",
+      "planning_output",
+      "planning_thinking",
+      "step_output"
+    ],
+    "summarize_history.completed_fields": null,
+    "finding": "No message/statusLog frame of any kind was received; no summarize_history.initialized/completed, no statusType other than the top-level status:'processing'. Every /summar/i hit is LLM prose inside thinking/output deltas. The bridge's 'Summarising step N' checkpoint is bridge-derived from plugin_sources(stepId N) -> first frame of stepId N+1 (gap ~1.2 s, see stepBoundaries)."
+  },
+  "fieldNamesObserved": {
+    "thinking": [
+      "sessionId",
+      "messageId",
+      "eventIndex",
+      "eventType",
+      "stepId?",
+      "status",
+      "thinking.delta"
+    ],
+    "output": [
+      "...",
+      "output.delta"
+    ],
+    "plugin_sources": [
+      "stepId",
+      "stepTitle",
+      "sources.{agentId,pluginId,pluginName,operationId,items[{title,url,domain,imageUrl}]}"
+    ],
+    "fulfillment": [
+      "answer"
+    ],
+    "metricsLog": [
+      "publicMetrics"
+    ],
+    "heartbeat": [
+      "sessionId",
+      "messageId",
+      "time"
+    ]
+  },
+  "eventMapVerdict": "all observed eventTypes already bound in EVENT_TYPE; STATUS_FIELDS untouched (no statusLog frame to compare against)."
+}

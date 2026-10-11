@@ -1,0 +1,532 @@
+{
+  "recordedAt": "2026-10-11T08:23:15.704Z",
+  "label": "multistep",
+  "endpointId": "predefined-deepseek-flash",
+  "pluginIds": [
+    "plugin-1722260873"
+  ],
+  "query": "Compare the latest news about Fervo Energy and Flutterwave this month, then summarise which has more positive momentum, with cited sources.",
+  "durationMs": 47957,
+  "rawLines": 2097,
+  "dataFrames": 699,
+  "answerChunks": 222,
+  "answerChars": 7155,
+  "firstSeenOrder": [
+    {
+      "ms": 2164,
+      "event": "thinking",
+      "eventType": "planning_thinking",
+      "statusType": "processing",
+      "keys": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "status",
+        "thinking"
+      ]
+    },
+    {
+      "ms": 3745,
+      "event": "heartbeat",
+      "eventType": "",
+      "statusType": "",
+      "keys": [
+        "sessionId",
+        "messageId",
+        "time"
+      ]
+    },
+    {
+      "ms": 4780,
+      "event": "thinking",
+      "eventType": "planning_output",
+      "statusType": "processing",
+      "keys": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "status",
+        "output"
+      ]
+    },
+    {
+      "ms": 7025,
+      "event": "thinking",
+      "eventType": "step_thinking",
+      "statusType": "processing",
+      "keys": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "stepId",
+        "status",
+        "thinking"
+      ]
+    },
+    {
+      "ms": 7303,
+      "event": "thinking",
+      "eventType": "step_output",
+      "statusType": "processing",
+      "keys": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "stepId",
+        "status",
+        "output"
+      ]
+    },
+    {
+      "ms": 17575,
+      "event": "message",
+      "eventType": "plugin_sources",
+      "statusType": "processing",
+      "keys": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "stepId",
+        "stepTitle",
+        "status",
+        "sources"
+      ]
+    },
+    {
+      "ms": 37356,
+      "event": "thinking",
+      "eventType": "fulfillment_thinking",
+      "statusType": "processing",
+      "keys": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "status",
+        "thinking"
+      ]
+    },
+    {
+      "ms": 38741,
+      "event": "message",
+      "eventType": "fulfillment",
+      "statusType": "processing",
+      "keys": [
+        "sessionId",
+        "messageId",
+        "answer",
+        "status",
+        "eventIndex",
+        "eventType"
+      ]
+    },
+    {
+      "ms": 45946,
+      "event": "message",
+      "eventType": "metricsLog",
+      "statusType": "processing",
+      "keys": [
+        "sessionId",
+        "messageId",
+        "eventIndex",
+        "eventType",
+        "status",
+        "publicMetrics"
+      ]
+    },
+    {
+      "ms": 47957,
+      "event": "message",
+      "eventType": "[DONE]",
+      "statusType": ""
+    }
+  ],
+  "eventTypeCounts": {
+    "planning_thinking": 91,
+    "": 15,
+    "planning_output": 49,
+    "step_thinking": 109,
+    "step_output": 170,
+    "plugin_sources": 2,
+    "fulfillment_thinking": 39,
+    "fulfillment": 222,
+    "metricsLog": 1
+  },
+  "statusTypeCounts": {
+    "processing": 683
+  },
+  "summarizeHistoryFrames": {
+    "initialized": 0,
+    "completed": 0,
+    "anyMatchingSummar": 15,
+    "frames": [
+      {
+        "ms": 2232,
+        "event": "thinking",
+        "eventType": "planning_thinking",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "thinking"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 4,
+          "eventType": "planning_thinking",
+          "status": "processing",
+          "thinking": {
+            "delta": " 2026), then a summary of which"
+          }
+        }
+      },
+      {
+        "ms": 2607,
+        "event": "thinking",
+        "eventType": "planning_thinking",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "thinking"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 19,
+          "eventType": "planning_thinking",
+          "status": "processing",
+          "thinking": {
+            "delta": " and summarize with cited sources"
+          }
+        }
+      },
+      {
+        "ms": 2754,
+        "event": "thinking",
+        "eventType": "planning_thinking",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "thinking"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 24,
+          "eventType": "planning_thinking",
+          "status": "processing",
+          "thinking": {
+            "delta": " 8 says no summarizing/analysis"
+          }
+        }
+      },
+      {
+        "ms": 3006,
+        "event": "thinking",
+        "eventType": "planning_thinking",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "thinking"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 26,
+          "eventType": "planning_thinking",
+          "status": "processing",
+          "thinking": {
+            "delta": " asks for a summary of which has"
+          }
+        }
+      },
+      {
+        "ms": 3015,
+        "event": "thinking",
+        "eventType": "planning_thinking",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "thinking"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 28,
+          "eventType": "planning_thinking",
+          "status": "processing",
+          "thinking": {
+            "delta": " sources. Rule 8 \"No summarizing"
+          }
+        }
+      },
+      {
+        "ms": 3019,
+        "event": "thinking",
+        "eventType": "planning_thinking",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "thinking"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 30,
+          "eventType": "planning_thinking",
+          "status": "processing",
+          "thinking": {
+            "delta": " standalone summarization steps"
+          }
+        }
+      },
+      {
+        "ms": 3028,
+        "event": "thinking",
+        "eventType": "planning_thinking",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "thinking"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 34,
+          "eventType": "planning_thinking",
+          "status": "processing",
+          "thinking": {
+            "delta": " guidance says avoid summarizing"
+          }
+        }
+      },
+      {
+        "ms": 3386,
+        "event": "thinking",
+        "eventType": "planning_thinking",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "thinking"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 45,
+          "eventType": "planning_thinking",
+          "status": "processing",
+          "thinking": {
+            "delta": ". Hmm.\n\nThe \"no summarizing/analysis"
+          }
+        }
+      },
+      {
+        "ms": 3392,
+        "event": "thinking",
+        "eventType": "planning_thinking",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "thinking"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 47,
+          "eventType": "planning_thinking",
+          "status": "processing",
+          "thinking": {
+            "delta": " is a comparison summary. I think"
+          }
+        }
+      },
+      {
+        "ms": 3578,
+        "event": "thinking",
+        "eventType": "planning_thinking",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "thinking"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 54,
+          "eventType": "planning_thinking",
+          "status": "processing",
+          "thinking": {
+            "delta": " summary with citations via perplex"
+          }
+        }
+      },
+      {
+        "ms": 4387,
+        "event": "thinking",
+        "eventType": "planning_thinking",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "thinking"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 80,
+          "eventType": "planning_thinking",
+          "status": "processing",
+          "thinking": {
+            "delta": " Compare momentum and summarize"
+          }
+        }
+      },
+      {
+        "ms": 4508,
+        "event": "thinking",
+        "eventType": "planning_thinking",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "thinking"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 83,
+          "eventType": "planning_thinking",
+          "status": "processing",
+          "thinking": {
+            "delta": "ative. But step 3 is \"summarizing"
+          }
+        }
+      },
+      {
+        "ms": 4859,
+        "event": "thinking",
+        "eventType": "planning_output",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "output"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 94,
+          "eventType": "planning_output",
+          "status": "processing",
+          "output": {
+            "delta": " sourced summary.\",\n  \"objective"
+          }
+        }
+      },
+      {
+        "ms": 35458,
+        "event": "thinking",
+        "eventType": "step_output",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "stepId",
+          "status",
+          "output"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 404,
+          "eventType": "step_output",
+          "stepId": "3",
+          "status": "processing",
+          "output": {
+            "delta": " and Lisa Su (shattered.io summary"
+          }
+        }
+      },
+      {
+        "ms": 37416,
+        "event": "thinking",
+        "eventType": "fulfillment_thinking",
+        "statusType": "processing",
+        "keys": [
+          "sessionId",
+          "messageId",
+          "eventIndex",
+          "eventType",
+          "status",
+          "thinking"
+        ],
+        "frame": {
+          "sessionId": "6acb474320a8b245e6aaad9e",
+          "messageId": "6acb474420a8b245e6aaada1",
+          "eventIndex": 424,
+          "eventType": "fulfillment_thinking",
+          "status": "processing",
+          "thinking": {
+            "delta": " and Flutterwave, then a summary"
+          }
+        }
+      }
+    ]
+  }
+}
