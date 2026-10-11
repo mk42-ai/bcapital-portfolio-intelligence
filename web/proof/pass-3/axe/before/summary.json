@@ -1,0 +1,231 @@
+{
+  "label": "before",
+  "generatedUtc": "2026-10-11T12:08:03.211Z",
+  "baseUrl": "https://sb-1gizcktepfgc.vercel.run",
+  "tags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21aa",
+    "wcag22aa",
+    "best-practice"
+  ],
+  "audits": 15,
+  "failing": 2,
+  "totals": {
+    "critical": 2,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 2
+  },
+  "matrix": [
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "total": 0,
+      "rules": [],
+      "fail": false
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "total": 0,
+      "rules": [],
+      "fail": false
+    },
+    {
+      "route": "/chat (after turn)",
+      "viewport": "1440x900",
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "total": 0,
+      "rules": [],
+      "fail": false
+    },
+    {
+      "route": "/chat?skip=1",
+      "viewport": "1440x900",
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "total": 0,
+      "rules": [],
+      "fail": false
+    },
+    {
+      "route": "/chat?skip=1",
+      "viewport": "390x844",
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "total": 0,
+      "rules": [],
+      "fail": false
+    },
+    {
+      "route": "/companies",
+      "viewport": "1440x900",
+      "critical": 1,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "total": 1,
+      "rules": [
+        "aria-required-children"
+      ],
+      "fail": true
+    },
+    {
+      "route": "/companies",
+      "viewport": "390x844",
+      "critical": 1,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "total": 1,
+      "rules": [
+        "aria-required-children"
+      ],
+      "fail": true
+    },
+    {
+      "route": "/company/fervo-energy",
+      "viewport": "1440x900",
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 1,
+      "total": 1,
+      "rules": [
+        "aria-allowed-role"
+      ],
+      "fail": false
+    },
+    {
+      "route": "/company/fervo-energy",
+      "viewport": "390x844",
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 1,
+      "total": 1,
+      "rules": [
+        "aria-allowed-role"
+      ],
+      "fail": false
+    },
+    {
+      "route": "/news",
+      "viewport": "1440x900",
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "total": 0,
+      "rules": [],
+      "fail": false
+    },
+    {
+      "route": "/news",
+      "viewport": "390x844",
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "total": 0,
+      "rules": [],
+      "fail": false
+    },
+    {
+      "route": "/overview",
+      "viewport": "1440x900",
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "total": 0,
+      "rules": [],
+      "fail": false
+    },
+    {
+      "route": "/overview",
+      "viewport": "390x844",
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "total": 0,
+      "rules": [],
+      "fail": false
+    },
+    {
+      "route": "/settings",
+      "viewport": "1440x900",
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "total": 0,
+      "rules": [],
+      "fail": false
+    },
+    {
+      "route": "/settings",
+      "viewport": "390x844",
+      "critical": 0,
+      "serious": 0,
+      "moderate": 0,
+      "minor": 0,
+      "total": 0,
+      "rules": [],
+      "fail": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "aria-required-children",
+      "impact": "critical",
+      "pages": 2,
+      "nodes": 2,
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-children?application=playwright",
+      "help": "Certain ARIA roles must contain particular children",
+      "targets": [
+        {
+          "target": ".\\[-webkit-overflow-scrolling\\:touch\\]",
+          "where": [
+            "/companies@1440x900",
+            "/companies@390x844"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aria-allowed-role",
+      "impact": "minor",
+      "pages": 2,
+      "nodes": 38,
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-allowed-role?application=playwright",
+      "help": "ARIA role should be appropriate for the element",
+      "targets": [
+        {
+          "target": "dl",
+          "where": [
+            "/company/fervo-energy@1440x900",
+            "/company/fervo-energy@390x844"
+          ]
+        }
+      ]
+    }
+  ]
+}

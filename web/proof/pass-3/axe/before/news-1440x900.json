@@ -1,0 +1,26 @@
+{
+  "label": "before",
+  "route": "/news",
+  "viewport": "1440x900",
+  "url": "https://sb-1gizcktepfgc.vercel.run/news",
+  "state": "initial",
+  "tags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21aa",
+    "wcag22aa",
+    "best-practice"
+  ],
+  "generatedUtc": "2026-10-11T12:06:19.120Z",
+  "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0,
+    "total": 0
+  },
+  "passes": 44,
+  "incomplete": 0,
+  "violations": [],
+  "fail": false
+}

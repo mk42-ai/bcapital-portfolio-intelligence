@@ -1,0 +1,26 @@
+{
+  "label": "before",
+  "route": "/chat",
+  "viewport": "1440x900",
+  "url": "https://sb-1gizcktepfgc.vercel.run/chat?skip=1",
+  "state": "after-turn",
+  "tags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21aa",
+    "wcag22aa",
+    "best-practice"
+  ],
+  "generatedUtc": "2026-10-11T12:07:59.865Z",
+  "counts": {
+    "critical": 0,
+    "serious": 0,
+    "moderate": 0,
+    "minor": 0,
+    "total": 0
+  },
+  "passes": 44,
+  "incomplete": 3,
+  "violations": [],
+  "fail": false
+}
