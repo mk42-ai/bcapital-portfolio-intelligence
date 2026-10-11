@@ -70,6 +70,10 @@
 .mp-pane-cta-ghost { background: transparent; color: #047857; }
 .mp-pane-cta-ghost:hover { background: #E6FAF3; color: #047857; }
 .mp-pane-fallback { position: absolute; inset: 0; }
+/* pdf.js pages inside the pane: scrollable column, light gutter */
+.mp-pane-pdf { flex: 1 1 auto; min-height: 0; overflow: auto; background: #F3F4F6; display: flex; flex-direction: column; }
+.mp-pane-pdf .art-pdf-pages { flex: 1 0 auto; }
+.mp-pane-pdf .art-pdf-fallback { margin: auto 12px; }
 
 @keyframes mp-fade { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {

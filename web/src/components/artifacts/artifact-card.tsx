@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useRef, useState } from "react";
-import { Download, ExternalLink, Eye, History, Trash2, PanelRight } from "lucide-react";
+import { Download, ExternalLink, Eye, Trash2, PanelRight } from "lucide-react";
 import { artifactsPanel, artifactsStore, type ArtifactProbe } from "@/lib/artifacts/store";
 import { artifactStatus, formatBytes, relativeTime, type Artifact, type ArtifactStatus, type ArtifactVersions } from "@/lib/artifacts/types";
 import { ArtifactIcon, iconFor, kindBadge } from "./artifact-icon";
@@ -75,15 +75,16 @@ const isPdf = (a: Artifact) => a.mime.toLowerCase().includes("pdf") || /\.pdf$/i
 
 /**
  * Preview snippet: one–two honest lines under the name. Text/markdown/csv/json → first 240 chars of /content (lazy, once the card scrolls into
- * view; one fetch per id, cached in the store, never for files > 2 MB); PDF → "PDF · N KB · page preview on open" (no pdf.js); video / audio
+ * view; one fetch per id, cached in the store, never for files > 2 MB); PDF → "Page preview on open" (the pane renders pdf.js pages); video / audio
  * → placeholder text; images keep the thumbnail. Nothing is rendered when the fetch fails — never fabricated content.
  */
 export function ArtifactSnippet({ a, probe }: { a: Artifact; probe: ArtifactProbe | undefined }) {
   let text: string | null = null; let kind: string = "none";
   if (a.pending) return null;
-  if (isPdf(a)) { text = `PDF${a.sizeBytes ? ` · ${formatBytes(a.sizeBytes)}` : ""} · page preview on open`; kind = "pdf"; }
+  // Size + age live ONLY in the meta line (`vN · 25 KB · 1m ago`) — the snippet never repeats them.
+  if (isPdf(a)) { text = "Page preview on open"; kind = "pdf"; }
   else if (a.kind === "video") { text = "Video · opens in the side pane"; kind = "video"; }
-  else if (a.kind === "audio") { text = `Audio clip${a.sizeBytes ? ` · ${formatBytes(a.sizeBytes)}` : ""}`; kind = "audio"; }
+  else if (a.kind === "audio") { text = "Audio clip · plays in the side pane"; kind = "audio"; }
   else if (isTextLike(a)) { text = probe?.text ?? null; kind = "text"; }
   if (!text) return null;
   return <p className="art-card-snippet" data-testid="artifact-snippet" data-snippet={kind} title={kind === "text" ? "First lines of the file" : undefined}>{text}</p>;
@@ -105,7 +106,7 @@ export function VersionHistory({ a, now, alwaysShow = false }: { a: Artifact; no
   return (
     <div className="art-versions">
       <button type="button" className={`art-versions-toggle${open ? " is-open" : ""}`} onClick={toggle} aria-expanded={open} aria-controls={listId} data-testid="artifact-versions-toggle" data-version={a.version} disabled={noEarlier} title={noEarlier ? "This is the only version" : `Show all ${a.version} versions`}>
-        <History aria-hidden /><span>v{a.version} · {noEarlier ? "no earlier versions" : "history"}</span>
+        <img src="/icons/version-history.png" alt="" width={24} height={24} className="art-versions-icon" loading="lazy" decoding="async" aria-hidden /><span>v{a.version} · {noEarlier ? "no earlier versions" : "history"}</span>
       </button>
       {open && (
         <div id={listId} className="art-versions-body">
@@ -163,7 +164,7 @@ export function ArtifactCard({ artifact: a, compact = false, selected = false, s
   const contentOk = probe === undefined ? null : probe.ok;
   const status = artifactStatus(a, contentOk);
   return (
-    <article ref={rootRef} className={`art-card art-root${compact ? " is-compact" : ""}`} data-testid="artifact-card" data-kind={a.kind} data-icon={icon} data-id={a.id} data-status={status} data-selected={selected ? "true" : "false"} aria-label={`${a.name}, ${badge}, v${a.version}, ${STATUS_LABEL[status]}, ${metaBits.join(", ")}`}>
+    <article ref={rootRef} className={`art-card art-root${compact ? " is-compact" : ""}`} data-testid="artifact-card" data-kind={a.kind} data-icon={icon} data-id={a.id} data-thread={a.threadId ?? undefined} data-status={status} data-selected={selected ? "true" : "false"} aria-label={`${a.name}, ${badge}, v${a.version}, ${STATUS_LABEL[status]}, ${metaBits.join(", ")}`}>
       <div className="art-thumb" aria-hidden={showThumb ? undefined : true}>
         {showThumb ? <img src={a.thumbnailUrl!} alt="" loading="lazy" decoding="async" onError={() => setThumbErr(true)} /> : <ArtifactIcon name={icon} size={compact ? 28 : 36} />}
       </div>
@@ -171,15 +172,16 @@ export function ArtifactCard({ artifact: a, compact = false, selected = false, s
         <div className="art-card-row">
           <p className="art-card-name" title={a.name}>{a.name}</p>
           <span className="art-badge art-badge-kind" data-testid="artifact-kind">{badge}</span>
-          <span className="art-badge art-badge-version" data-testid="artifact-version" data-version={a.version} title={`Version ${a.version}`}>v{a.version}</span>
           <StatusChip a={a} contentOk={contentOk} />
           {!compact && <span className={`art-badge art-badge-source is-${sourceLabel(a)}`} data-testid="artifact-source">{sourceLabel(a)}</span>}
         </div>
-        {!compact && <ArtifactSnippet a={a} probe={probe} />}
-        <p className="art-card-meta">
-          {metaBits.map((b, i) => <span key={i}>{i > 0 && <span className="art-dot" aria-hidden> · </span>}{b}</span>)}
-          {compact && <><span className="art-dot" aria-hidden> · </span><MediaBadge a={a} /></>}
+        {/* ONE meta line: [vN] · size · age (· media badge in the compact chat card). Size is never repeated by the snippet. */}
+        <p className="art-card-meta" data-testid="artifact-meta">
+          <span className="art-badge art-badge-version" data-testid="artifact-version" data-version={a.version} title={`Version ${a.version}`}>v{a.version}</span>
+          {metaBits.map((b, i) => <span key={i} className="art-meta-bit"><span className="art-dot" aria-hidden> · </span>{b}</span>)}
+          {compact && <span className="art-meta-bit"><span className="art-dot" aria-hidden> · </span><MediaBadge a={a} /></span>}
         </p>
+        {!compact && <ArtifactSnippet a={a} probe={probe} />}
         {!compact && <div className="art-card-badges"><MediaBadge a={a} />{a.threadId && <span className="art-badge" title={a.threadId}>Thread {a.threadId.slice(0, 8)}</span>}</div>}
         {state !== "ok" && <span className={`art-card-status${state === "failed" ? " is-failed" : ""}`} role="status">{state === "failed" ? (a.mediaMessage || "Saving failed") : "Saving…"}</span>}
         {state === "ok" && a.mediaStatus === "failed" && !compact && <span className="art-card-status is-failed" role="status">{a.mediaMessage || "Saving to OnDemand media failed — stored in the backend"}</span>}

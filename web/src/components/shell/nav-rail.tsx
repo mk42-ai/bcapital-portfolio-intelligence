@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { BrandLogo } from "@/components/brand/logo";
 import { Nav } from "./nav";
-import { ArtifactsToggle } from "@/components/artifacts/artifacts-panel";
 import { cn } from "@/lib/utils";
 
 const KEY = "bcap.nav.rail";
@@ -14,7 +13,7 @@ export const NAV_EXPANDED_PX = 224;
 export const NAV_COLLAPSED_PX = 56;
 
 /**
- * The ONE primary navigation rail (desktop): brand mark, five routes, backend status. Collapses to icon-only (56 px) with a toggle
+ * The ONE primary navigation rail (desktop): brand mark, six routes (Artifacts carries its count pill), backend status. Collapses to icon-only (56 px) with a toggle
  * and remembers the choice in localStorage; on /chat the rail starts collapsed so the thread gets the whole screen.
  * On < lg it renders as the sticky top bar. There is no second navigation anywhere (the chat shell's thread sidebar is removed).
  */
@@ -49,7 +48,7 @@ export function NavRail({ status }: { status?: React.ReactNode }) {
         </button>
       </div>
       <Nav collapsed={collapsed} />
-      {!onChat && <div className={cn("flex shrink-0 items-center lg:mt-2", collapsed ? "lg:justify-center" : "lg:px-1")}><ArtifactsToggle testId="artifacts-toggle-shell" /></div>}
+      {/* The artifact count lives INSIDE the Artifacts nav item (nav.tsx → nav-artifacts-count); no floating toggle in the rail. */}
       <div className={cn("flex items-center lg:mt-auto lg:block", collapsed ? "lg:hidden" : "lg:px-2")}>{status}</div>
     </aside>
   );
