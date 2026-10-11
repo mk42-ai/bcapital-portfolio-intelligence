@@ -403,7 +403,13 @@ export async function POST(req: NextRequest) {
             return false;
           }
           case "answer": {
-            if (!firstTokenAt && u.delta) firstTokenAt = Date.now();
+            if (!firstTokenAt && u.delta) {
+              firstTokenAt = Date.now();
+              // a13 finding: tool rows stayed "running" while the answer streamed because results were only emitted at stream close.
+              // The first fulfillment token means every plugin step has returned — close the open tool calls NOW (Perplexity with no
+              // real sources closes as an honest error, everything else as ok) so each Working row flips to its done/failed state.
+              for (const [pid, t] of tools) if (t.open) toolDone(pid, realSources.size || pid !== PLUGIN_ID ? "ok" : "error", realSources.size || pid !== PLUGIN_ID ? {} : { message: "Perplexity returned no sources for this question" });
+            }
             fillerOff(); startText(); text += u.delta; send({ type: "TEXT_MESSAGE_CONTENT", messageId, delta: u.delta }); lastSentAt = Date.now();
             detectPluginError(text.slice(-600), raw);
             return false;
