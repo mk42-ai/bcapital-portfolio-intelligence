@@ -40,7 +40,7 @@ const COMPARATORS: Record<SortKey, (a: CompanyListRow, b: CompanyListRow) => num
   news: (a, b) => (b.newsCount - a.newsCount) || byName(a, b),
   deal: (a, b) => { const da = dealTime(a), db = dealTime(b); if (da == null && db == null) return byName(a, b); if (da == null) return 1; if (db == null) return -1; return (db - da) || byName(a, b); },
 };
-const DESKTOP_ROW = 64, MOBILE_ROW = 84;
+const DESKTOP_ROW = 65, MOBILE_ROW = 85; // a36: min-h + 1px border-b → estimate matches the measured row
 const letterOf = (s: string) => { const ch = (s.trim()[0] ?? "#").toUpperCase(); return /[A-Z]/.test(ch) ? ch : "#"; };
 const readStore = (): Record<string, number> => { try { return JSON.parse(sessionStorage.getItem(SCROLL_KEY) ?? "{}") as Record<string, number>; } catch { return {}; } };
 
@@ -79,7 +79,7 @@ export function CompaniesList({ rows, total }: { rows: CompanyListRow[]; total: 
   }, []);
   useLayoutEffect(() => { const el = listRef.current; if (el) setMargin(Math.round(el.getBoundingClientRect().top + window.scrollY)); }, [visible.length, mobile]);
 
-  const virtualizer = useWindowVirtualizer({ count: visible.length, estimateSize: () => (mobile ? MOBILE_ROW : DESKTOP_ROW), overscan: 8, scrollMargin: margin, getItemKey: (i) => visible[i]?.slug ?? i });
+  const virtualizer = useWindowVirtualizer({ count: visible.length, estimateSize: () => (mobile ? MOBILE_ROW : DESKTOP_ROW), overscan: 4, scrollMargin: margin, getItemKey: (i) => visible[i]?.slug ?? i });
   useEffect(() => { virtualizer.measure(); }, [mobile, virtualizer]);
   const items = virtualizer.getVirtualItems();
   const lastVisible = visible.length > 0 && items.some((it) => it.index === visible.length - 1);

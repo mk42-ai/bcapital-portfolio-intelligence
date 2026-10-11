@@ -1,0 +1,275 @@
+{
+  "label": "before",
+  "base": "https://sb-1gizcktepfgc.vercel.run",
+  "at": "2026-10-11T12:02:58.297Z",
+  "viewport": "1440x900",
+  "cpu_throttle": 4,
+  "runs": 3,
+  "budget": {
+    "lcp_ms": 2500,
+    "tbt_ms": 200,
+    "cls": 0.1
+  },
+  "pass": false,
+  "pages": [
+    {
+      "path": "/companies?skip=1",
+      "median": {
+        "lcp_ms": 692,
+        "fcp_ms": 508,
+        "ttfb_ms": 110,
+        "tbt_ms": 558,
+        "cls": 0,
+        "transfer_bytes": 594657,
+        "document_bytes": 19437,
+        "document_decoded_bytes": 82119,
+        "cdp_encoded_bytes": 586879,
+        "load_ms": 872
+      },
+      "lcp_selector": [
+        "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm",
+        "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm",
+        "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm"
+      ],
+      "verdict": {
+        "lcp": true,
+        "tbt": false,
+        "cls": true,
+        "pass": false
+      },
+      "per_run": [
+        {
+          "lcp_ms": 928,
+          "lcp_selector": "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm",
+          "lcp_url": null,
+          "cls": 0.0685,
+          "shifts": [
+            {
+              "t": 886,
+              "v": 0.0685,
+              "src": [
+                "div[data-testid=main-column]>footer.border-t.border-border"
+              ]
+            }
+          ],
+          "tbt_ms": 442,
+          "longtasks": 4,
+          "fcp_ms": 420,
+          "ttfb_ms": 147,
+          "load_ms": 847,
+          "transfer_bytes": 594657,
+          "document_bytes": 19437,
+          "document_decoded_bytes": 82119,
+          "transfer_by_type": {
+            "link": 107745,
+            "script": 305157,
+            "other": 525,
+            "fetch": 40047,
+            "img": 121746
+          },
+          "requests": 65,
+          "images": 20,
+          "images_without_dims": 0,
+          "rows_rendered": 19,
+          "cdp_encoded_bytes": 582264,
+          "wall_ms": 3798,
+          "run": 1
+        },
+        {
+          "lcp_ms": 508,
+          "lcp_selector": "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm",
+          "lcp_url": null,
+          "cls": 0,
+          "shifts": [],
+          "tbt_ms": 558,
+          "longtasks": 6,
+          "fcp_ms": 508,
+          "ttfb_ms": 110,
+          "load_ms": 872,
+          "transfer_bytes": 594651,
+          "document_bytes": 19437,
+          "document_decoded_bytes": 82119,
+          "transfer_by_type": {
+            "link": 107745,
+            "script": 305157,
+            "other": 525,
+            "fetch": 40041,
+            "img": 121746
+          },
+          "requests": 65,
+          "images": 20,
+          "images_without_dims": 0,
+          "rows_rendered": 19,
+          "cdp_encoded_bytes": 586879,
+          "wall_ms": 3722,
+          "run": 2
+        },
+        {
+          "lcp_ms": 692,
+          "lcp_selector": "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm",
+          "lcp_url": null,
+          "cls": 0,
+          "shifts": [],
+          "tbt_ms": 585,
+          "longtasks": 7,
+          "fcp_ms": 692,
+          "ttfb_ms": 98,
+          "load_ms": 1141,
+          "transfer_bytes": 594663,
+          "document_bytes": 19436,
+          "document_decoded_bytes": 82119,
+          "transfer_by_type": {
+            "link": 107745,
+            "script": 305157,
+            "other": 525,
+            "fetch": 40054,
+            "img": 121746
+          },
+          "requests": 65,
+          "images": 20,
+          "images_without_dims": 0,
+          "rows_rendered": 19,
+          "cdp_encoded_bytes": 587251,
+          "wall_ms": 4018,
+          "run": 3
+        }
+      ]
+    },
+    {
+      "path": "/company/fervo-energy?skip=1",
+      "median": {
+        "lcp_ms": 1664,
+        "fcp_ms": 444,
+        "ttfb_ms": 174,
+        "tbt_ms": 647,
+        "cls": 0.0685,
+        "transfer_bytes": 862362,
+        "document_bytes": 73330,
+        "document_decoded_bytes": 290414,
+        "cdp_encoded_bytes": 916644,
+        "load_ms": 1744
+      },
+      "lcp_selector": [
+        "div>div.mt-5.grid>div.card.min-w-0>div.flex.flex-col>p.text-sm.text-muted",
+        "div>div.mt-5.grid>div.card.min-w-0>div.flex.flex-col>p.text-sm.text-muted",
+        "div>div.mt-5.grid>div.card.min-w-0>div.flex.flex-col>p.text-sm.text-muted"
+      ],
+      "verdict": {
+        "lcp": true,
+        "tbt": false,
+        "cls": true,
+        "pass": false
+      },
+      "per_run": [
+        {
+          "lcp_ms": 1664,
+          "lcp_selector": "div>div.mt-5.grid>div.card.min-w-0>div.flex.flex-col>p.text-sm.text-muted",
+          "lcp_url": null,
+          "cls": 0.0685,
+          "shifts": [
+            {
+              "t": 1609,
+              "v": 0.0685,
+              "src": [
+                "div[data-testid=main-column]>footer.border-t.border-border"
+              ]
+            }
+          ],
+          "tbt_ms": 587,
+          "longtasks": 4,
+          "fcp_ms": 444,
+          "ttfb_ms": 137,
+          "load_ms": 1818,
+          "transfer_bytes": 866061,
+          "document_bytes": 77033,
+          "document_decoded_bytes": 296173,
+          "transfer_by_type": {
+            "link": 493121,
+            "script": 288759,
+            "fetch": 6623,
+            "other": 525
+          },
+          "requests": 37,
+          "images": 39,
+          "images_without_dims": 0,
+          "rows_rendered": 0,
+          "cdp_encoded_bytes": 922086,
+          "wall_ms": 4678,
+          "run": 1
+        },
+        {
+          "lcp_ms": 1760,
+          "lcp_selector": "div>div.mt-5.grid>div.card.min-w-0>div.flex.flex-col>p.text-sm.text-muted",
+          "lcp_url": null,
+          "cls": 0.0685,
+          "shifts": [
+            {
+              "t": 1708,
+              "v": 0.0685,
+              "src": [
+                "div[data-testid=main-column]>footer.border-t.border-border"
+              ]
+            }
+          ],
+          "tbt_ms": 718,
+          "longtasks": 5,
+          "fcp_ms": 432,
+          "ttfb_ms": 174,
+          "load_ms": 1744,
+          "transfer_bytes": 862356,
+          "document_bytes": 73329,
+          "document_decoded_bytes": 290414,
+          "transfer_by_type": {
+            "link": 493121,
+            "script": 288759,
+            "other": 525,
+            "fetch": 6622
+          },
+          "requests": 37,
+          "images": 39,
+          "images_without_dims": 0,
+          "rows_rendered": 0,
+          "cdp_encoded_bytes": 913645,
+          "wall_ms": 4588,
+          "run": 2
+        },
+        {
+          "lcp_ms": 1652,
+          "lcp_selector": "div>div.mt-5.grid>div.card.min-w-0>div.flex.flex-col>p.text-sm.text-muted",
+          "lcp_url": null,
+          "cls": 0.0685,
+          "shifts": [
+            {
+              "t": 1594,
+              "v": 0.0685,
+              "src": [
+                "div[data-testid=main-column]>footer.border-t.border-border"
+              ]
+            }
+          ],
+          "tbt_ms": 647,
+          "longtasks": 4,
+          "fcp_ms": 556,
+          "ttfb_ms": 174,
+          "load_ms": 1726,
+          "transfer_bytes": 862362,
+          "document_bytes": 73330,
+          "document_decoded_bytes": 290414,
+          "transfer_by_type": {
+            "link": 493121,
+            "script": 288759,
+            "other": 525,
+            "fetch": 6627
+          },
+          "requests": 37,
+          "images": 39,
+          "images_without_dims": 0,
+          "rows_rendered": 0,
+          "cdp_encoded_bytes": 916644,
+          "wall_ms": 4564,
+          "run": 3
+        }
+      ]
+    }
+  ]
+}
