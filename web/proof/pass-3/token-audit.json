@@ -1,0 +1,3038 @@
+{
+  "generatedAt": "2026-10-11T12:06:17.915Z",
+  "scanned": {
+    "files": 161,
+    "root": "web/src",
+    "globs": [
+      "**/*.css",
+      "**/*.tsx",
+      "**/*.ts"
+    ]
+  },
+  "rule": "BLUE = HSL hue 190–260° AND saturation > 0.15 AND chroma (max−min) > 0.15 → violation (brand-audit.mjs / src/lib/hue-audit.ts). Tailwind families sky/blue/indigo/cyan are violations by construction.",
+  "summary": {
+    "distinctColours": 134,
+    "watchlist": 18,
+    "offTokenGreys": 44,
+    "violatingColours": 0,
+    "violatingTailwindClasses": 0,
+    "findings": 0
+  },
+  "colours": [
+    {
+      "value": "#ffffff",
+      "count": 84,
+      "files": [
+        "src/app/globals.css",
+        "src/app/layout.tsx",
+        "src/app/opengraph-image.tsx",
+        "src/components/artifacts/artifacts.css",
+        "src/components/charts/gauge.tsx",
+        "src/components/charts/heatmap-ssr.tsx",
+        "src/components/charts/treemap-ssr.tsx",
+        "src/components/chat/open-intelligent-ui/response-theme.ts",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/components/company/brand-theme.tsx",
+        "src/components/media/media.css",
+        "src/components/shell/growth-values.css",
+        "src/lib/color.ts",
+        "src/styles/tokens.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#0ac985",
+      "count": 56,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/response-theme.ts",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/components/media/media.css",
+        "src/components/shell/nav.tsx",
+        "src/components/ui/switch.tsx",
+        "src/styles/tokens.css"
+      ],
+      "hue": 159,
+      "sat": 0.905,
+      "chroma": 0.749,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#047857",
+      "count": 53,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/charts/signal-bullet.tsx",
+        "src/components/charts/treemap-ssr.tsx",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/response-theme.ts",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/components/media/media.css",
+        "src/lib/color.ts",
+        "src/styles/tokens.css"
+      ],
+      "hue": 163,
+      "sat": 0.935,
+      "chroma": 0.455,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#16181b",
+      "count": 47,
+      "files": [
+        "src/app/globals.css",
+        "src/app/opengraph-image.tsx",
+        "src/components/charts/heatmap-ssr.tsx",
+        "src/components/charts/treemap-ssr.tsx",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/response-theme.ts",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/components/company/brand-theme.tsx",
+        "src/lib/color.ts",
+        "src/styles/tokens.css"
+      ],
+      "hue": 216,
+      "sat": 0.102,
+      "chroma": 0.02,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#e5e7eb",
+      "count": 46,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ],
+      "hue": 220,
+      "sat": 0.13,
+      "chroma": 0.024,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#1f2937",
+      "count": 35,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ],
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#e6faf3",
+      "count": 34,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/charts/signal-bullet.tsx",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/response-theme.ts",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/components/media/media.css",
+        "src/components/ui/badge.tsx",
+        "src/lib/data-source.ts",
+        "src/styles/tokens.css"
+      ],
+      "hue": 159,
+      "sat": 0.667,
+      "chroma": 0.078,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#6e7277",
+      "count": 26,
+      "files": [
+        "src/components/charts/treemap-ssr.tsx",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/styles/tokens.css"
+      ],
+      "hue": 213,
+      "sat": 0.039,
+      "chroma": 0.035,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#4b5563",
+      "count": 24,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ],
+      "hue": 215,
+      "sat": 0.138,
+      "chroma": 0.094,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#e4e6e9",
+      "count": 24,
+      "files": [
+        "src/components/charts/treemap-ssr.tsx",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/styles/tokens.css"
+      ],
+      "hue": 216,
+      "sat": 0.102,
+      "chroma": 0.02,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#b91c1c",
+      "count": 21,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/company/signal-panel.tsx",
+        "src/styles/tokens.css"
+      ],
+      "hue": 0,
+      "sat": 0.737,
+      "chroma": 0.616,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#3b3f45",
+      "count": 17,
+      "files": [
+        "src/components/charts/signal-bullet.tsx",
+        "src/components/charts/treemap-ssr.tsx",
+        "src/components/chat/open-intelligent-ui/response-theme.ts",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/styles/tokens.css"
+      ],
+      "hue": 216,
+      "sat": 0.078,
+      "chroma": 0.039,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fff",
+      "count": 17,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/ui/plugin-favicon.tsx"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#f9fafb",
+      "count": 15,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ],
+      "hue": 210,
+      "sat": 0.2,
+      "chroma": 0.008,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#4b4f55",
+      "count": 13,
+      "files": [
+        "src/components/charts/treemap-ssr.tsx",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/styles/tokens.css"
+      ],
+      "hue": 216,
+      "sat": 0.062,
+      "chroma": 0.039,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#a7f3d0",
+      "count": 13,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/charts/signal-bullet.tsx",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/components/ui/badge.tsx",
+        "src/lib/data-source.ts"
+      ],
+      "hue": 152,
+      "sat": 0.76,
+      "chroma": 0.298,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#f1f2f4",
+      "count": 13,
+      "files": [
+        "src/components/charts/heatmap-ssr.tsx",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/response-theme.ts",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/styles/tokens.css"
+      ],
+      "hue": 220,
+      "sat": 0.12,
+      "chroma": 0.012,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#6b7280",
+      "count": 12,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 220,
+      "sat": 0.089,
+      "chroma": 0.082,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#c9ccd1",
+      "count": 12,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/styles/tokens.css"
+      ],
+      "hue": 217,
+      "sat": 0.08,
+      "chroma": 0.031,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#f7f8f9",
+      "count": 11,
+      "files": [
+        "src/components/charts/treemap-ssr.tsx",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/styles/tokens.css"
+      ],
+      "hue": 210,
+      "sat": 0.143,
+      "chroma": 0.008,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fecaca",
+      "count": 11,
+      "files": [
+        "src/app/docs/interactive-ui/page.tsx",
+        "src/components/artifacts/artifacts.css",
+        "src/components/charts/signal-bullet.tsx",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/ui/badge.tsx"
+      ],
+      "hue": 0,
+      "sat": 0.963,
+      "chroma": 0.204,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#111827",
+      "count": 10,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/media/media.css"
+      ],
+      "hue": 221,
+      "sat": 0.393,
+      "chroma": 0.086,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#f3f4f6",
+      "count": 10,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ],
+      "hue": 220,
+      "sat": 0.143,
+      "chroma": 0.012,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#5c6168",
+      "count": 9,
+      "files": [
+        "src/app/opengraph-image.tsx",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/styles/tokens.css"
+      ],
+      "hue": 215,
+      "sat": 0.061,
+      "chroma": 0.047,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#991b1b",
+      "count": 9,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/styles/tokens.css"
+      ],
+      "hue": 0,
+      "sat": 0.7,
+      "chroma": 0.494,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#9ea2a8",
+      "count": 9,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/shell/backend-status.tsx",
+        "src/styles/tokens.css"
+      ],
+      "hue": 216,
+      "sat": 0.054,
+      "chroma": 0.039,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#9ca3af",
+      "count": 8,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css",
+        "src/components/ui/plugin-favicon.tsx"
+      ],
+      "hue": 218,
+      "sat": 0.106,
+      "chroma": 0.075,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#ef4444",
+      "count": 8,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ],
+      "hue": 0,
+      "sat": 0.842,
+      "chroma": 0.671,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fef2f2",
+      "count": 8,
+      "files": [
+        "src/app/docs/interactive-ui/page.tsx",
+        "src/components/artifacts/artifacts.css",
+        "src/components/charts/signal-bullet.tsx",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/ui/badge.tsx"
+      ],
+      "hue": 0,
+      "sat": 0.857,
+      "chroma": 0.047,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#202327",
+      "count": 6,
+      "files": [
+        "src/components/charts/treemap-ssr.tsx",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/ui/button.tsx",
+        "src/styles/tokens.css"
+      ],
+      "hue": 214,
+      "sat": 0.099,
+      "chroma": 0.027,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#b45309",
+      "count": 6,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/lib/data-source.ts"
+      ],
+      "hue": 26,
+      "sat": 0.905,
+      "chroma": 0.671,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fafafa",
+      "count": 5,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#0d0d0d",
+      "count": 4,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#eff0f2",
+      "count": 4,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 220,
+      "sat": 0.103,
+      "chroma": 0.012,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fffbeb",
+      "count": 4,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/charts/signal-bullet.tsx",
+        "src/components/chat/voice/voice.css",
+        "src/lib/data-source.ts"
+      ],
+      "hue": 48,
+      "sat": 1,
+      "chroma": 0.078,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#065f46",
+      "count": 3,
+      "files": [
+        "src/components/ui/badge.tsx",
+        "src/lib/data-source.ts",
+        "src/styles/tokens.css"
+      ],
+      "hue": 163,
+      "sat": 0.881,
+      "chroma": 0.349,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#8a8f96",
+      "count": 3,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 215,
+      "sat": 0.054,
+      "chroma": 0.047,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#8f8f8f",
+      "count": 3,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#9a9ea4",
+      "count": 3,
+      "files": [
+        "src/components/charts/signal-bullet.tsx",
+        "src/components/charts/treemap-ssr.tsx",
+        "src/components/company/signal-panel.tsx"
+      ],
+      "hue": 216,
+      "sat": 0.052,
+      "chroma": 0.039,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#cfd2d6",
+      "count": 3,
+      "files": [
+        "src/components/charts/heatmap-ssr.tsx",
+        "src/components/charts/signal-bullet.tsx"
+      ],
+      "hue": 214,
+      "sat": 0.079,
+      "chroma": 0.027,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#f7f7f8",
+      "count": 3,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 240,
+      "sat": 0.067,
+      "chroma": 0.004,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fcd34d",
+      "count": 3,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/voice/voice.css",
+        "src/lib/data-source.ts"
+      ],
+      "hue": 46,
+      "sat": 0.967,
+      "chroma": 0.686,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fde68a",
+      "count": 3,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/charts/signal-bullet.tsx"
+      ],
+      "hue": 48,
+      "sat": 0.966,
+      "chroma": 0.451,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fee2e2",
+      "count": 3,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0.933,
+      "chroma": 0.11,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fff5f5",
+      "count": 3,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 1,
+      "chroma": 0.039,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#000000",
+      "count": 2,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/media/media.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#008764",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 164,
+      "sat": 1,
+      "chroma": 0.529,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#0b0f17",
+      "count": 2,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ],
+      "hue": 220,
+      "sat": 0.353,
+      "chroma": 0.047,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#15803d",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/shell/backend-status.tsx"
+      ],
+      "hue": 142,
+      "sat": 0.718,
+      "chroma": 0.42,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#1f29371a",
+      "count": 2,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ],
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "alpha": 0.102,
+      "violation": false
+    },
+    {
+      "value": "#374151",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 217,
+      "sat": 0.191,
+      "chroma": 0.102,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#92400e",
+      "count": 2,
+      "files": [
+        "src/components/charts/signal-bullet.tsx",
+        "src/components/chat/open-intelligent-ui/attachments.css"
+      ],
+      "hue": 23,
+      "sat": 0.825,
+      "chroma": 0.518,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#b4b4b4",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#bfeedc",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css"
+      ],
+      "hue": 157,
+      "sat": 0.58,
+      "chroma": 0.184,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#cecece",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#d1d5db",
+      "count": 2,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 216,
+      "sat": 0.122,
+      "chroma": 0.039,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#d9dbdf",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 220,
+      "sat": 0.086,
+      "chroma": 0.024,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#e5e5e5",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#e7e7e7",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#f3f4f5",
+      "count": 2,
+      "files": [
+        "src/components/charts/signal-bullet.tsx",
+        "src/components/company/signal-panel.tsx"
+      ],
+      "hue": 210,
+      "sat": 0.091,
+      "chroma": 0.008,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#f59e0b",
+      "count": 2,
+      "files": [
+        "src/components/chat/voice/voice.css"
+      ],
+      "hue": 38,
+      "sat": 0.921,
+      "chroma": 0.918,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fca5a5",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0.935,
+      "chroma": 0.341,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#ffffff33",
+      "count": 2,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/media/media.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.2,
+      "violation": false
+    },
+    {
+      "value": "rgb(0 0 0 / 4%)",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.04,
+      "violation": false
+    },
+    {
+      "value": "rgb(10,201,133)",
+      "count": 2,
+      "files": [
+        "src/components/charts/signal-bullet.tsx",
+        "src/components/company/signal-panel.tsx"
+      ],
+      "hue": 159,
+      "sat": 0.905,
+      "chroma": 0.749,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "rgba(0, 0, 0, .25)",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.25,
+      "violation": false
+    },
+    {
+      "value": "rgba(0, 0, 0, .3)",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.3,
+      "violation": false
+    },
+    {
+      "value": "rgba(10, 201, 133, .25)",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css"
+      ],
+      "hue": 159,
+      "sat": 0.905,
+      "chroma": 0.749,
+      "alpha": 0.25,
+      "violation": false
+    },
+    {
+      "value": "#000000f2",
+      "count": 1,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.949,
+      "violation": false
+    },
+    {
+      "value": "#00805d",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 164,
+      "sat": 1,
+      "chroma": 0.502,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#089a66",
+      "count": 1,
+      "files": [
+        "src/styles/tokens.css"
+      ],
+      "hue": 159,
+      "sat": 0.901,
+      "chroma": 0.573,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#0b0f1766",
+      "count": 1,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ],
+      "hue": 220,
+      "sat": 0.353,
+      "chroma": 0.047,
+      "alpha": 0.4,
+      "violation": false
+    },
+    {
+      "value": "#11182700",
+      "count": 1,
+      "files": [
+        "src/components/media/media.css"
+      ],
+      "hue": 221,
+      "sat": 0.393,
+      "chroma": 0.086,
+      "alpha": 0,
+      "violation": false
+    },
+    {
+      "value": "#1118271a",
+      "count": 1,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ],
+      "hue": 221,
+      "sat": 0.393,
+      "chroma": 0.086,
+      "alpha": 0.102,
+      "violation": false
+    },
+    {
+      "value": "#11182799",
+      "count": 1,
+      "files": [
+        "src/components/media/media.css"
+      ],
+      "hue": 221,
+      "sat": 0.393,
+      "chroma": 0.086,
+      "alpha": 0.6,
+      "violation": false
+    },
+    {
+      "value": "#111827b3",
+      "count": 1,
+      "files": [
+        "src/components/media/media.css"
+      ],
+      "hue": 221,
+      "sat": 0.393,
+      "chroma": 0.086,
+      "alpha": 0.702,
+      "violation": false
+    },
+    {
+      "value": "#111827cc",
+      "count": 1,
+      "files": [
+        "src/components/media/media.css"
+      ],
+      "hue": 221,
+      "sat": 0.393,
+      "chroma": 0.086,
+      "alpha": 0.8,
+      "violation": false
+    },
+    {
+      "value": "#111827e6",
+      "count": 1,
+      "files": [
+        "src/components/media/media.css"
+      ],
+      "hue": 221,
+      "sat": 0.393,
+      "chroma": 0.086,
+      "alpha": 0.902,
+      "violation": false
+    },
+    {
+      "value": "#141414f2",
+      "count": 1,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.949,
+      "violation": false
+    },
+    {
+      "value": "#16a34a",
+      "count": 1,
+      "files": [
+        "src/components/ui/plugin-favicon.tsx"
+      ],
+      "hue": 142,
+      "sat": 0.762,
+      "chroma": 0.553,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#1f293714",
+      "count": 1,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ],
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "alpha": 0.078,
+      "violation": false
+    },
+    {
+      "value": "#1f29371f",
+      "count": 1,
+      "files": [
+        "src/components/media/media.css"
+      ],
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "alpha": 0.122,
+      "violation": false
+    },
+    {
+      "value": "#1f293733",
+      "count": 1,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ],
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "alpha": 0.2,
+      "violation": false
+    },
+    {
+      "value": "#1f293799",
+      "count": 1,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ],
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "alpha": 0.6,
+      "violation": false
+    },
+    {
+      "value": "#1f2937b3",
+      "count": 1,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ],
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "alpha": 0.702,
+      "violation": false
+    },
+    {
+      "value": "#1f2937f5",
+      "count": 1,
+      "files": [
+        "src/components/media/media.css"
+      ],
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "alpha": 0.961,
+      "violation": false
+    },
+    {
+      "value": "#2f2f2f",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#303030",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#454545",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#666b73",
+      "count": 1,
+      "files": [
+        "src/components/charts/heatmap-ssr.tsx"
+      ],
+      "hue": 217,
+      "sat": 0.06,
+      "chroma": 0.051,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#676767",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#7f1d1d",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0.628,
+      "chroma": 0.384,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#946200",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 40,
+      "sat": 1,
+      "chroma": 0.58,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#b7377c",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 328,
+      "sat": 0.538,
+      "chroma": 0.502,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#c1322c",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 2,
+      "sat": 0.629,
+      "chroma": 0.584,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#c4c4c4",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#c7f5e4",
+      "count": 1,
+      "files": [
+        "src/app/globals.css"
+      ],
+      "hue": 158,
+      "sat": 0.697,
+      "chroma": 0.18,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#d1fae5",
+      "count": 1,
+      "files": [
+        "src/components/chat/voice/voice.css"
+      ],
+      "hue": 149,
+      "sat": 0.804,
+      "chroma": 0.161,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#d5d5d5",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#d9d9d9",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#dadada",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#dc2626",
+      "count": 1,
+      "files": [
+        "src/components/ui/plugin-favicon.tsx"
+      ],
+      "hue": 0,
+      "sat": 0.722,
+      "chroma": 0.714,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#e02e2a",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 1,
+      "sat": 0.746,
+      "chroma": 0.714,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#e2ab23",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 43,
+      "sat": 0.767,
+      "chroma": 0.749,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#e3e3e3",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#e6e8eb",
+      "count": 1,
+      "files": [
+        "src/components/charts/signal-bullet.tsx"
+      ],
+      "hue": 216,
+      "sat": 0.111,
+      "chroma": 0.02,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#e9eaec",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 220,
+      "sat": 0.073,
+      "chroma": 0.012,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#ebebeb",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#ececec",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#ecfdf5",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 152,
+      "sat": 0.81,
+      "chroma": 0.067,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#edf9f2",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 145,
+      "sat": 0.5,
+      "chroma": 0.047,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#eeeeee",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#eeeeef",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 240,
+      "sat": 0.03,
+      "chroma": 0.004,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#f0fdf9",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 162,
+      "sat": 0.765,
+      "chroma": 0.051,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#f4f4f4",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#f7f7f7",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fef3c7",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css"
+      ],
+      "hue": 48,
+      "sat": 0.965,
+      "chroma": 0.216,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fff0ee",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 7,
+      "sat": 1,
+      "chroma": 0.067,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fff0f6",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 336,
+      "sat": 1,
+      "chroma": 0.059,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fff1f2",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 356,
+      "sat": 1,
+      "chroma": 0.055,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fff7f7",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css"
+      ],
+      "hue": 0,
+      "sat": 1,
+      "chroma": 0.031,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "#fff8e7",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 42,
+      "sat": 1,
+      "chroma": 0.094,
+      "alpha": 1,
+      "violation": false
+    },
+    {
+      "value": "rgb(0 0 0 / 10%)",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.1,
+      "violation": false
+    },
+    {
+      "value": "rgb(0 0 0 / 12%)",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.12,
+      "violation": false
+    },
+    {
+      "value": "rgb(0 0 0 / 3%)",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.03,
+      "violation": false
+    },
+    {
+      "value": "rgb(0 0 0 / 40%)",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.4,
+      "violation": false
+    },
+    {
+      "value": "rgb(0 0 0 / 5%)",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.05,
+      "violation": false
+    },
+    {
+      "value": "rgb(0 0 0 / 6%)",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.06,
+      "violation": false
+    },
+    {
+      "value": "rgb(10 201 133 / 25%)",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.css"
+      ],
+      "hue": 159,
+      "sat": 0.905,
+      "chroma": 0.749,
+      "alpha": 0.25,
+      "violation": false
+    },
+    {
+      "value": "rgba(0, 0, 0, .35)",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.35,
+      "violation": false
+    },
+    {
+      "value": "rgba(10, 201, 133, .18)",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 159,
+      "sat": 0.905,
+      "chroma": 0.749,
+      "alpha": 0.18,
+      "violation": false
+    },
+    {
+      "value": "rgba(255, 255, 255, .92)",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ],
+      "hue": 0,
+      "sat": 0,
+      "chroma": 0,
+      "alpha": 0.92,
+      "violation": false
+    },
+    {
+      "value": "rgba(4, 120, 87, .35)",
+      "count": 1,
+      "files": [
+        "src/components/chat/voice/voice.css"
+      ],
+      "hue": 163,
+      "sat": 0.935,
+      "chroma": 0.455,
+      "alpha": 0.35,
+      "violation": false
+    },
+    {
+      "value": "rgba(4, 120, 87, 0.35)",
+      "count": 1,
+      "files": [
+        "src/components/shell/growth-values.css"
+      ],
+      "hue": 163,
+      "sat": 0.935,
+      "chroma": 0.455,
+      "alpha": 0.35,
+      "violation": false
+    }
+  ],
+  "tailwindColourClasses": [],
+  "radii": [
+    {
+      "value": "8px",
+      "count": 32,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "999px",
+      "count": 26,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css"
+      ]
+    },
+    {
+      "value": "rounded-md",
+      "count": 25,
+      "files": [
+        "src/app/globals.css",
+        "src/app/layout.tsx",
+        "src/app/overview/page.tsx",
+        "src/components/charts/hbar.tsx",
+        "src/components/charts/heatmap-ssr.tsx",
+        "src/components/chat/company-picker.tsx",
+        "src/components/chat/inspector-drawer.tsx",
+        "src/components/chat/plugin-panel.tsx",
+        "src/components/chat/run-rail.tsx",
+        "src/components/chat/why-interactive.tsx",
+        "src/components/companies/companies-list.tsx",
+        "src/components/company/pitchbook-facts.tsx",
+        "src/components/shell/growth-values.tsx",
+        "src/components/shell/nav-rail.tsx",
+        "src/components/shell/settings-form.tsx",
+        "src/components/ui/button.tsx",
+        "src/components/ui/logo-img.tsx",
+        "src/components/ui/plugin-favicon.tsx"
+      ]
+    },
+    {
+      "value": "rounded-lg",
+      "count": 22,
+      "files": [
+        "src/app/company/[slug]/page.tsx",
+        "src/app/docs/interactive-ui/page.tsx",
+        "src/app/globals.css",
+        "src/app/overview/page.tsx",
+        "src/components/chat/company-picker.tsx",
+        "src/components/chat/inspector-drawer.tsx",
+        "src/components/company/brand-theme.tsx",
+        "src/components/company/news-thumb.tsx",
+        "src/components/company/sentiment-panel.tsx",
+        "src/components/company/signal-panel.tsx",
+        "src/components/shell/growth-values.tsx",
+        "src/components/shell/nav-rail.tsx",
+        "src/components/shell/nav.tsx",
+        "src/components/ui/button.tsx",
+        "src/components/ui/input.tsx",
+        "src/components/ui/tooltip.tsx"
+      ]
+    },
+    {
+      "value": "rounded-full",
+      "count": 16,
+      "files": [
+        "src/app/company/[slug]/page.tsx",
+        "src/app/docs/interactive-ui/page.tsx",
+        "src/app/globals.css",
+        "src/components/chat/company-picker.tsx",
+        "src/components/chat/why-interactive.tsx",
+        "src/components/company/funding-timeline.tsx",
+        "src/components/overview/estimate-badge.tsx",
+        "src/components/overview/filters.tsx",
+        "src/components/overview/status-chips.tsx",
+        "src/components/shell/backend-status.tsx",
+        "src/components/shell/nav.tsx",
+        "src/components/ui/empty-state.tsx",
+        "src/components/ui/plugin-favicon.tsx",
+        "src/components/ui/switch.tsx"
+      ]
+    },
+    {
+      "value": "10px",
+      "count": 14,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "50%",
+      "count": 14,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "6px",
+      "count": 14,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css"
+      ]
+    },
+    {
+      "value": "rounded",
+      "count": 13,
+      "files": [
+        "src/app/docs/interactive-ui/page.tsx",
+        "src/components/companies/companies-list.tsx",
+        "src/components/company/pitchbook-facts.tsx",
+        "src/components/overview/data-table.tsx",
+        "src/components/ui/company-logo.tsx",
+        "src/components/ui/plugin-favicon.tsx"
+      ]
+    },
+    {
+      "value": "4px",
+      "count": 9,
+      "files": [
+        "src/app/globals.css",
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "14px",
+      "count": 8,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "9px",
+      "count": 7,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "12px",
+      "count": 5,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css"
+      ]
+    },
+    {
+      "value": "3px",
+      "count": 4,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "22px",
+      "count": 3,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "9999px",
+      "count": 3,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "12px 12px 0 0",
+      "count": 2,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ]
+    },
+    {
+      "value": "16px",
+      "count": 2,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/attachments.css"
+      ]
+    },
+    {
+      "value": "rounded-[5px]",
+      "count": 2,
+      "files": [
+        "src/components/ui/plugin-favicon.tsx"
+      ]
+    },
+    {
+      "value": "rounded-2xl",
+      "count": 2,
+      "files": [
+        "src/app/company/[slug]/loading.tsx",
+        "src/app/overview/loading.tsx"
+      ]
+    },
+    {
+      "value": "rounded-xl",
+      "count": 2,
+      "files": [
+        "src/components/overview/data-table.tsx",
+        "src/components/ui/button.tsx"
+      ]
+    },
+    {
+      "value": "0",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "0 12px 12px 0",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.css"
+      ]
+    },
+    {
+      "value": "0 8px 8px 0",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "20px",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "24px",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "28px",
+      "count": 1,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ]
+    },
+    {
+      "value": "2px",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "30px",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "5px",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.css"
+      ]
+    },
+    {
+      "value": "rounded-[6px]",
+      "count": 1,
+      "files": [
+        "src/components/ui/plugin-favicon.tsx"
+      ]
+    },
+    {
+      "value": "rounded-none",
+      "count": 1,
+      "files": [
+        "src/components/chat/inspector-drawer.tsx"
+      ]
+    },
+    {
+      "value": "rounded-t-xl",
+      "count": 1,
+      "files": [
+        "src/components/chat/inspector-drawer.tsx"
+      ]
+    },
+    {
+      "value": "var(--openui-radius-2xl)",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.css"
+      ]
+    }
+  ],
+  "durations": [
+    {
+      "value": "160ms",
+      "count": 8,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "150ms",
+      "count": 7,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/shell/growth-values.css"
+      ]
+    },
+    {
+      "value": "200ms",
+      "count": 6,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css",
+        "src/components/shell/growth-values.css"
+      ]
+    },
+    {
+      "value": "1.2s",
+      "count": 4,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "120ms",
+      "count": 4,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "1s",
+      "count": 3,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css"
+      ]
+    },
+    {
+      "value": "0.01ms",
+      "count": 2,
+      "files": [
+        "src/app/globals.css"
+      ]
+    },
+    {
+      "value": "01ms",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.css"
+      ]
+    },
+    {
+      "value": "1.1s",
+      "count": 2,
+      "files": [
+        "src/components/chat/voice/voice.css"
+      ]
+    },
+    {
+      "value": "180ms",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/shell/growth-values.css"
+      ]
+    },
+    {
+      "value": "900ms",
+      "count": 2,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "0.9s",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css"
+      ]
+    },
+    {
+      "value": "08s",
+      "count": 1,
+      "files": [
+        "src/components/chat/voice/voice.css"
+      ]
+    },
+    {
+      "value": "0s",
+      "count": 1,
+      "files": [
+        "src/components/shell/growth-values.css"
+      ]
+    },
+    {
+      "value": "1.4s",
+      "count": 1,
+      "files": [
+        "src/components/chat/voice/voice.css"
+      ]
+    },
+    {
+      "value": "15s",
+      "count": 1,
+      "files": [
+        "src/components/chat/voice/voice.css"
+      ]
+    },
+    {
+      "value": "2.2s",
+      "count": 1,
+      "files": [
+        "src/components/chat/voice/voice.css"
+      ]
+    },
+    {
+      "value": "220ms",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "duration-200",
+      "count": 1,
+      "files": [
+        "src/components/chat/inspector-drawer.tsx"
+      ]
+    }
+  ],
+  "fontSizes": [
+    {
+      "value": "12px",
+      "count": 45,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "11px",
+      "count": 33,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/inspector-drawer.tsx",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/run-rail.tsx",
+        "src/components/chat/voice/voice.css",
+        "src/components/company/pitchbook-facts.tsx",
+        "src/components/company/signal-panel.tsx",
+        "src/components/shell/backend-status.tsx",
+        "src/components/shell/nav.tsx"
+      ]
+    },
+    {
+      "value": "13px",
+      "count": 25,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/voice/voice.css",
+        "src/components/media/media.css",
+        "src/components/overview/status-chips.tsx"
+      ]
+    },
+    {
+      "value": "10px",
+      "count": 19,
+      "files": [
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/plugin-panel.tsx",
+        "src/components/chat/run-rail.tsx",
+        "src/components/company/pitchbook-facts.tsx",
+        "src/components/ui/plugin-favicon.tsx"
+      ]
+    },
+    {
+      "value": "14px",
+      "count": 16,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "10.5px",
+      "count": 11,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/chat/run-rail.tsx"
+      ]
+    },
+    {
+      "value": "12.5px",
+      "count": 9,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "11.5px",
+      "count": 8,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "16px",
+      "count": 6,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "15px",
+      "count": 5,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "20px",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "19px",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.css"
+      ]
+    },
+    {
+      "value": "21px",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.css"
+      ]
+    },
+    {
+      "value": "22px",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "28px",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "30px",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    }
+  ],
+  "findings": [],
+  "watchlist": [
+    {
+      "value": "#1f2937",
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "count": 35,
+      "inTokens": false,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#f9fafb",
+      "hue": 210,
+      "sat": 0.2,
+      "chroma": 0.008,
+      "count": 15,
+      "inTokens": false,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#111827",
+      "hue": 221,
+      "sat": 0.393,
+      "chroma": 0.086,
+      "count": 10,
+      "inTokens": false,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#0b0f17",
+      "hue": 220,
+      "sat": 0.353,
+      "chroma": 0.047,
+      "count": 2,
+      "inTokens": false,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ]
+    },
+    {
+      "value": "#1f29371a",
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "count": 2,
+      "inTokens": false,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ]
+    },
+    {
+      "value": "#374151",
+      "hue": 217,
+      "sat": 0.191,
+      "chroma": 0.102,
+      "count": 2,
+      "inTokens": false,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#0b0f1766",
+      "hue": 220,
+      "sat": 0.353,
+      "chroma": 0.047,
+      "count": 1,
+      "inTokens": false,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ]
+    },
+    {
+      "value": "#1118271a",
+      "hue": 221,
+      "sat": 0.393,
+      "chroma": 0.086,
+      "count": 1,
+      "inTokens": false,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ]
+    },
+    {
+      "value": "#11182799",
+      "hue": 221,
+      "sat": 0.393,
+      "chroma": 0.086,
+      "count": 1,
+      "inTokens": false,
+      "files": [
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#111827b3",
+      "hue": 221,
+      "sat": 0.393,
+      "chroma": 0.086,
+      "count": 1,
+      "inTokens": false,
+      "files": [
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#111827cc",
+      "hue": 221,
+      "sat": 0.393,
+      "chroma": 0.086,
+      "count": 1,
+      "inTokens": false,
+      "files": [
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#111827e6",
+      "hue": 221,
+      "sat": 0.393,
+      "chroma": 0.086,
+      "count": 1,
+      "inTokens": false,
+      "files": [
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#1f293714",
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "count": 1,
+      "inTokens": false,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ]
+    },
+    {
+      "value": "#1f29371f",
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "count": 1,
+      "inTokens": false,
+      "files": [
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#1f293733",
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "count": 1,
+      "inTokens": false,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ]
+    },
+    {
+      "value": "#1f293799",
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "count": 1,
+      "inTokens": false,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ]
+    },
+    {
+      "value": "#1f2937b3",
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "count": 1,
+      "inTokens": false,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ]
+    },
+    {
+      "value": "#1f2937f5",
+      "hue": 215,
+      "sat": 0.279,
+      "chroma": 0.094,
+      "count": 1,
+      "inTokens": false,
+      "files": [
+        "src/components/media/media.css"
+      ]
+    }
+  ],
+  "offTokenGreys": [
+    {
+      "value": "#e5e7eb",
+      "count": 46,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/attachments.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#1f2937",
+      "count": 35,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#4b5563",
+      "count": 24,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#f9fafb",
+      "count": 15,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#6b7280",
+      "count": 12,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#111827",
+      "count": 10,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#f3f4f6",
+      "count": 10,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css"
+      ]
+    },
+    {
+      "value": "#9ca3af",
+      "count": 8,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css",
+        "src/components/media/media.css",
+        "src/components/ui/plugin-favicon.tsx"
+      ]
+    },
+    {
+      "value": "#fafafa",
+      "count": 5,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#0d0d0d",
+      "count": 4,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#eff0f2",
+      "count": 4,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#8a8f96",
+      "count": 3,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#8f8f8f",
+      "count": 3,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#9a9ea4",
+      "count": 3,
+      "files": [
+        "src/components/charts/signal-bullet.tsx",
+        "src/components/charts/treemap-ssr.tsx",
+        "src/components/company/signal-panel.tsx"
+      ]
+    },
+    {
+      "value": "#cfd2d6",
+      "count": 3,
+      "files": [
+        "src/components/charts/heatmap-ssr.tsx",
+        "src/components/charts/signal-bullet.tsx"
+      ]
+    },
+    {
+      "value": "#f7f7f8",
+      "count": 3,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#0b0f17",
+      "count": 2,
+      "files": [
+        "src/components/artifacts/artifacts.css"
+      ]
+    },
+    {
+      "value": "#374151",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#b4b4b4",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#cecece",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#d1d5db",
+      "count": 2,
+      "files": [
+        "src/components/artifacts/artifacts.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#d9dbdf",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#e5e5e5",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.css",
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#e7e7e7",
+      "count": 2,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#f3f4f5",
+      "count": 2,
+      "files": [
+        "src/components/charts/signal-bullet.tsx",
+        "src/components/company/signal-panel.tsx"
+      ]
+    },
+    {
+      "value": "#2f2f2f",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#303030",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.css"
+      ]
+    },
+    {
+      "value": "#454545",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#666b73",
+      "count": 1,
+      "files": [
+        "src/components/charts/heatmap-ssr.tsx"
+      ]
+    },
+    {
+      "value": "#676767",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#c4c4c4",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#d5d5d5",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#d9d9d9",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#dadada",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#e3e3e3",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#e6e8eb",
+      "count": 1,
+      "files": [
+        "src/components/charts/signal-bullet.tsx"
+      ]
+    },
+    {
+      "value": "#e9eaec",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#ebebeb",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#ececec",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#edf9f2",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#eeeeee",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    },
+    {
+      "value": "#eeeeef",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#f4f4f4",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/response-theme.ts"
+      ]
+    },
+    {
+      "value": "#f7f7f7",
+      "count": 1,
+      "files": [
+        "src/components/chat/open-intelligent-ui/shell.css"
+      ]
+    }
+  ],
+  "tokenContrast": {
+    "core": {
+      "#0AC985": 2.16,
+      "#047857": 5.48,
+      "#065f46": 7.68,
+      "#1F2937": 14.68,
+      "#16181b": 17.79,
+      "#5c6168": 6.24,
+      "#B45309": 5.02,
+      "#EF4444": 3.76,
+      "#b91c1c": 6.47,
+      "#047857 on #E6FAF3": 5.05,
+      "#ffffff on #047857": 5.48
+    },
+    "sectors": {
+      "emerald": {
+        "hex": "#0AC985",
+        "ink": "#047857",
+        "soft": "#E6FAF3",
+        "hue": 159,
+        "inkOnWhite": 5.48,
+        "inkOnSoft": 5.05,
+        "hexOnWhite": 2.16,
+        "blueGate": "pass"
+      },
+      "amber": {
+        "hex": "#F59E0B",
+        "ink": "#B45309",
+        "soft": "#FEF3C7",
+        "hue": 38,
+        "inkOnWhite": 5.02,
+        "inkOnSoft": 4.51,
+        "hexOnWhite": 2.15,
+        "blueGate": "pass"
+      },
+      "plum": {
+        "hex": "#A855F7",
+        "ink": "#6B21A8",
+        "soft": "#F3E8FF",
+        "hue": 271,
+        "inkOnWhite": 8.72,
+        "inkOnSoft": 7.39,
+        "hexOnWhite": 3.96,
+        "blueGate": "pass"
+      },
+      "coral": {
+        "hex": "#FB7185",
+        "ink": "#BE123C",
+        "soft": "#FFE4E6",
+        "hue": 351,
+        "inkOnWhite": 6.29,
+        "inkOnSoft": 5.24,
+        "hexOnWhite": 2.69,
+        "blueGate": "pass"
+      },
+      "teal": {
+        "hex": "#14B8A6",
+        "ink": "#0F766E",
+        "soft": "#CCFBF1",
+        "hue": 173,
+        "inkOnWhite": 5.47,
+        "inkOnSoft": 4.86,
+        "hexOnWhite": 2.49,
+        "blueGate": "pass"
+      },
+      "olive": {
+        "hex": "#84CC16",
+        "ink": "#4D7C0F",
+        "soft": "#ECFCCB",
+        "hue": 84,
+        "inkOnWhite": 4.99,
+        "inkOnSoft": 4.6,
+        "hexOnWhite": 1.98,
+        "blueGate": "pass"
+      },
+      "rose": {
+        "hex": "#F472B6",
+        "ink": "#9D174D",
+        "soft": "#FCE7F3",
+        "hue": 329,
+        "inkOnWhite": 7.88,
+        "inkOnSoft": 6.71,
+        "hexOnWhite": 2.65,
+        "blueGate": "pass"
+      },
+      "slate-warm": {
+        "hex": "#9EA2A8",
+        "ink": "#3B3F45",
+        "soft": "#F1F2F4",
+        "hue": 216,
+        "inkOnWhite": 10.59,
+        "inkOnSoft": 9.45,
+        "hexOnWhite": 2.56,
+        "blueGate": "pass"
+      }
+    }
+  }
+}
