@@ -163,9 +163,10 @@ export function CompaniesList({ rows, total }: { rows: CompanyListRow[]; total: 
             <select id="companies-sector" data-testid="companies-sector" className="sr-only" tabIndex={-1} value={sector} onChange={(e) => setSector(e.target.value)}><option value="">All sectors</option>{sectors.map((s) => <option key={s} value={s}>{s}</option>)}</select>
           </div>
         </div>
+        {/* a35 axe: the live region must not be a direct child of role="grid" (aria-required-children) */}
+        <p className="sr-only" aria-live="polite" aria-atomic="true" data-testid="companies-live">{focusIdx != null ? `Row ${focusIdx + 1} of ${visible.length}` : ""}</p>
         <div data-testid="companies-list" data-view={view} data-total={total} data-visible={visible.length} data-last-visible={lastVisible ? "true" : undefined} role="grid" aria-label="Portfolio companies" aria-rowcount={visible.length} aria-colcount={1}
           className="relative [-webkit-overflow-scrolling:touch] [overscroll-behavior-y:auto]" onKeyDown={onKeyDown}>
-          <p className="sr-only" aria-live="polite" aria-atomic="true" data-testid="companies-live">{focusIdx != null ? `Row ${focusIdx + 1} of ${visible.length}` : ""}</p>
           <div ref={listRef} style={{ height: virtualizer.getTotalSize(), position: "relative", width: "100%" }}>
             {items.map((it) => { const c = visible[it.index]; const isLast = it.index === visible.length - 1; return (
               <div key={it.key} data-index={it.index} ref={virtualizer.measureElement} data-testid="company-row" role="row" aria-rowindex={it.index + 1} data-last={isLast ? "true" : undefined}
