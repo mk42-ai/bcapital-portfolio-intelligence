@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { Command, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { BrandLogo } from "@/components/brand/logo";
 import { Nav } from "./nav";
 import { cn } from "@/lib/utils";
@@ -48,6 +48,11 @@ export function NavRail({ status }: { status?: React.ReactNode }) {
         </button>
       </div>
       <Nav collapsed={collapsed} />
+      {/* a22: ⌘K hint — opens the company switcher (command-k.tsx) via the bcap:cmdk window event. */}
+      <button type="button" data-testid="cmdk-hint" onClick={() => window.dispatchEvent(new Event("bcap:cmdk"))} aria-label="Switch company (Ctrl or Cmd + K)" title="Switch company (⌘K / Ctrl+K)"
+        className={cn("mt-1 hidden items-center gap-2 rounded-md px-2 py-1.5 text-xs text-muted hover:bg-surface-2 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring lg:inline-flex", collapsed && "lg:justify-center lg:px-0")}>
+        <Command className="size-4 shrink-0" aria-hidden /><span className={cn(collapsed && "lg:sr-only")}>Switch company <kbd className="ml-1 rounded border border-border-strong bg-surface-2 px-1 font-mono text-[10px]">⌘K</kbd></span>
+      </button>
       {/* The artifact count lives INSIDE the Artifacts nav item (nav.tsx → nav-artifacts-count); no floating toggle in the rail. */}
       <div className={cn("flex items-center lg:mt-auto lg:block", collapsed ? "lg:hidden" : "lg:px-2")}>{status}</div>
     </aside>
