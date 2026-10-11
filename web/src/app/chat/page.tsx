@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { listCompanies, getSignals } from "@/lib/api";
 import { ChatShell } from "@/components/chat/open-intelligent-ui/chat-shell";
 import { InspectorDrawer, InspectorToggle } from "@/components/chat/inspector-drawer";
+import { SidePane } from "@/components/media/side-pane";
 export const metadata: Metadata = { title: "Chat", description: "Analyst chat over the B Capital portfolio — ask about any portfolio company; answers stream with sources." };
 export const revalidate = 120;
 /**
@@ -16,9 +17,13 @@ export default async function ChatPage() {
   const logos = new Map(cs.data.map((c) => [c.slug, c.logo_url]));
   const inspectorCompanies = companies.map((c) => ({ slug: c.slug, name: c.name, sector: c.sector, logo_url: logos.get(c.slug) ?? null, score: c.sentiment.score, news: c.news_count, signal: sigBy.get(c.slug)?.score ?? null, signal_confidence: sigBy.get(c.slug)?.confidence ?? null, signal_percentile: sigBy.get(c.slug)?.percentile ?? null }));
   return (
-    <div className="chat-canvas" data-testid="chat-canvas" data-source={cs.source}>
-      <ChatShell companies={companies} fetchedAt={cs.fetched_at} topBarRight={<InspectorToggle />} />
-      <InspectorDrawer companies={inspectorCompanies} />
+    <div className="chat-row" data-testid="chat-row">
+      <div className="chat-canvas" data-testid="chat-canvas" data-source={cs.source}>
+        <ChatShell companies={companies} fetchedAt={cs.fetched_at} topBarRight={<InspectorToggle />} />
+        <InspectorDrawer companies={inspectorCompanies} />
+      </div>
+      {/* Lane E: document / video / image preview beside the thread (full-screen sheet <1024px). Opened via openSidePane() / openArtifactInPane(). */}
+      <SidePane />
     </div>
   );
 }

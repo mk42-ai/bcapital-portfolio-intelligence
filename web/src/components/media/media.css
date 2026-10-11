@@ -1,0 +1,79 @@
+/* Lane E — media components (stream thumbnails, lightbox, video poster, side pane). Classes prefixed mp-. Brand: charcoal #1F2937, green #0AC985, red #EF4444 (errors only). No blue hues. */
+.mp-root { --mp-border: #E5E7EB; --mp-text: #111827; --mp-muted: #4B5563; --mp-surface: #FFFFFF; --mp-surface-2: #F9FAFB; --mp-charcoal: #1F2937; --mp-charcoal-deep: #111827; --mp-green: #0AC985; --mp-green-ink: #047857; --mp-danger: #EF4444; }
+.mp-root button:focus-visible, .mp-root a:focus-visible, .mp-root [tabindex]:focus-visible { outline: 2px solid #0AC985; outline-offset: 2px; }
+
+/* ---- Image thumbnails in the stream ---- */
+.mp-root.mp-grid { display: flex; flex-wrap: wrap; gap: 8px; grid-template-columns: none; }
+.mp-grid .mp-thumb { position: relative; display: block; flex: 0 1 auto; width: auto; max-width: 100%; padding: 0; margin: 0; border: 1px solid #E5E7EB; border-radius: 10px; overflow: hidden; background: #F9FAFB; cursor: zoom-in; aspect-ratio: 4 / 3; height: 180px; max-height: 180px; }
+.mp-grid[data-cols="1"] .mp-thumb { aspect-ratio: 16 / 9; }
+.mp-grid .mp-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 200ms ease; }
+.mp-grid .mp-thumb:hover img { transform: scale(1.02); }
+.mp-thumb-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 4px 8px; background: #111827b3; color: #FFFFFF; font-size: 12px; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 640px) { .mp-grid .mp-thumb { height: 120px; max-height: 120px; } }
+
+/* ---- Lightbox ---- */
+.mp-lightbox { position: fixed; inset: 0; z-index: 120; display: flex; flex-direction: column; background: #1F2937f5; color: #FFFFFF; animation: mp-fade 160ms ease-out; }
+.mp-lightbox-bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; min-height: 44px; }
+.mp-lightbox-counter { font-size: 14px; font-variant-numeric: tabular-nums; }
+.mp-lightbox-stage { position: relative; flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 0 56px; background: #1F2937; }
+.mp-lightbox-stage img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.mp-lightbox-caption { padding: 12px 16px 20px; text-align: center; font-size: 14px; color: #E5E7EB; }
+.mp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 44px; height: 44px; padding: 0 12px; border: 1px solid #FFFFFF33; border-radius: 22px; background: #11182799; color: #FFFFFF; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; }
+.mp-btn:hover { background: #0AC985; border-color: #0AC985; color: #111827; }
+.mp-btn:disabled { opacity: .4; cursor: default; }
+.mp-btn-icon { padding: 0; width: 44px; }
+.mp-btn-label { display: none; }
+@media (min-width: 640px) { .mp-btn-label { display: inline; } }
+.mp-nav-prev, .mp-nav-next { position: absolute; top: 50%; transform: translateY(-50%); }
+.mp-nav-prev { left: 8px; } .mp-nav-next { right: 8px; }
+@media (max-width: 640px) { .mp-lightbox-stage { padding: 0 8px; } .mp-nav-prev, .mp-nav-next { top: auto; bottom: 8px; transform: none; } }
+
+/* ---- Video poster in the stream ---- */
+.mp-video { position: relative; display: block; width: 100%; max-width: 560px; padding: 0; margin: 0; border: 1px solid #E5E7EB; border-radius: 10px; overflow: hidden; background: #1F2937; cursor: pointer; aspect-ratio: 16 / 9; color: #FFFFFF; text-align: left; }
+.mp-video-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.mp-video-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #9CA3AF; background: #1F2937; }
+.mp-video-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; border: 3px solid #0AC985; background: #111827cc; color: #FFFFFF; cursor: pointer; transition: transform 160ms ease, background 160ms ease; }
+.mp-video:hover .mp-video-play, .mp-video-play:hover { background: #0AC985; color: #111827; transform: translate(-50%, -50%) scale(1.06); }
+.mp-video-play svg { margin-left: 4px; }
+.mp-video-title { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: linear-gradient(to top, #111827e6, #11182700); font-size: 13px; font-weight: 600; color: #FFFFFF; }
+.mp-video-title span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ---- Side pane (desktop: right column; <1024px: full-screen sheet) ---- */
+.chat-row { display: flex; flex-direction: row; flex: 1 1 auto; min-height: 0; width: 100%; }
+.chat-row > .chat-canvas { flex: 1 1 auto; min-width: 0; }
+.mp-pane { display: flex; flex-direction: column; min-height: 0; background: #FFFFFF; color: #111827; }
+@media (min-width: 1024px) { .mp-pane-back { display: none; } .mp-pane { flex: 0 0 460px; width: 460px; max-width: 520px; min-width: 420px; height: 100%; border-left: 1px solid #E5E7EB; } }
+@media (min-width: 1440px) { .mp-pane { flex-basis: 520px; width: 520px; } }
+@media (max-width: 1023.98px) { .mp-pane { position: fixed; inset: 0; z-index: 130; width: auto; height: 100dvh; } }
+.mp-pane-head { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 8px 6px 12px; border-bottom: 1px solid #E5E7EB; background: #FFFFFF; }
+.mp-pane-icon { display: inline-flex; width: 28px; height: 28px; align-items: center; justify-content: center; border-radius: 8px; background: #E6FAF3; color: #047857; flex: 0 0 auto; }
+.mp-pane-title { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mp-pane-actions { display: inline-flex; align-items: center; gap: 2px; }
+.mp-icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 0; border-radius: 8px; background: transparent; color: #4B5563; cursor: pointer; text-decoration: none; }
+.mp-icon-btn:hover { background: #E6FAF3; color: #047857; }
+@media (max-width: 1023.98px) { .mp-icon-btn { width: 44px; height: 44px; } }
+.mp-pane-body { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; background: #1F2937; }
+.mp-pane-body[data-light] { background: #F9FAFB; }
+.mp-pane-stage { flex: 1 1 auto; min-height: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.mp-pane-stage img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.mp-pane-stage video { width: 100%; max-height: 100%; background: #000000; outline: none; }
+.mp-pane-frame { flex: 1 1 auto; min-height: 0; width: 100%; height: 100%; border: 0; background: #FFFFFF; }
+.mp-pane-pre { flex: 1 1 auto; min-height: 0; margin: 0; padding: 12px 14px; overflow: auto; font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; color: #111827; background: #FFFFFF; white-space: pre-wrap; word-break: break-word; }
+.mp-pane-caption { padding: 8px 12px; font-size: 13px; color: #E5E7EB; background: #1F2937; }
+.mp-pane-empty { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 24px; text-align: center; color: #4B5563; font-size: 14px; }
+.mp-pane-empty strong { color: #111827; font-size: 15px; word-break: break-word; }
+.mp-pane-empty .mp-pane-icon { width: 56px; height: 56px; border-radius: 14px; }
+.mp-pane-empty .mp-pane-icon svg { width: 28px; height: 28px; }
+.mp-pane-empty[data-error] { color: #EF4444; }
+.mp-pane-cta { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border-radius: 10px; border: 1px solid #0AC985; background: #0AC985; color: #111827; font-size: 13px; font-weight: 600; text-decoration: none; cursor: pointer; }
+.mp-pane-cta:hover { background: #047857; border-color: #047857; color: #FFFFFF; }
+.mp-pane-cta-ghost { background: transparent; color: #047857; }
+.mp-pane-cta-ghost:hover { background: #E6FAF3; color: #047857; }
+.mp-pane-fallback { position: absolute; inset: 0; }
+
+@keyframes mp-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .mp-lightbox { animation: none; }
+  .mp-thumb img, .mp-video-play { transition: none; }
+  .mp-grid .mp-thumb:hover img { transform: none; }
+}

@@ -565,3 +565,11 @@
   .oiu-run__footer .oiu-badge { font-size: 10.5px; min-height: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .oiu-run__timer .oiu-spin { animation: none; } }
+
+/* lane E: side pane layout */
+/* .chat-row wraps the chat canvas + <SidePane /> (web/src/components/media/side-pane.tsx) in one full-height flex row; the canvas shrinks,
+   the composer stays pinned because .chat-main is already viewport-pinned and .chat-row inherits min-height:0. */
+.chat-main > .chat-row { display: flex; flex-direction: row; flex: 1 1 auto; min-height: 0; height: 100%; width: 100%; overflow: hidden; }
+.chat-main > .chat-row > .chat-canvas { flex: 1 1 auto; min-width: 0; height: 100%; }
+.chat-main > .chat-row > .mp-pane { height: 100%; }
+/* end lane E */
