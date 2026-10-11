@@ -23,7 +23,10 @@ export function PagedTable({ rows, caption, pageSize = 25 }: { rows: TableRow[];
         <div className="relative w-full max-w-sm"><Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted" aria-hidden /><Input id="table-search" type="search" data-testid="table-search" placeholder="Search name, sector, region, role…" className="pl-9" value={q} onChange={(e) => { setQ(e.target.value); setN(pageSize); }} /></div>
         {q && <Button size="sm" variant="ghost" onClick={() => setQ("")}>Clear search</Button>}
       </div>
-      <DataTable rows={visible.slice(0, n)} caption={caption} sort={sort} onSort={onSort} />
+      {/* a26: below-the-fold table — skip layout/paint until scrolled near; intrinsic size ≈ header + rows so the scrollbar/footer do not jump */}
+      <div className="[content-visibility:auto]" style={{ containIntrinsicSize: `auto ${64 + Math.min(n, visible.length) * 44}px` }}>
+        <DataTable rows={visible.slice(0, n)} caption={caption} sort={sort} onSort={onSort} />
+      </div>
       <p className="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted" role="status" data-testid="table-status">
         Showing {Math.min(n, visible.length)} of {visible.length} rows{q && ` matching “${q}”`}
         {n < visible.length && <><Button size="sm" variant="secondary" data-testid="table-show-all" onClick={() => setN(visible.length)}>Show all {visible.length}</Button><Button size="sm" variant="ghost" data-testid="table-next" onClick={() => setN(n + pageSize)}>Next {pageSize}</Button></>}

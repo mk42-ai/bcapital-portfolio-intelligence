@@ -1,0 +1,130 @@
+{
+  "label": "before",
+  "base": "https://sb-1gizcktepfgc.vercel.run",
+  "path": "/overview?skip=1",
+  "at": "2026-10-11T12:00:18.766Z",
+  "viewport": "1440x900",
+  "cpu_throttle": 4,
+  "runs": 3,
+  "budget": {
+    "lcp_ms": 2500,
+    "tbt_ms": 200,
+    "cls": 0.1
+  },
+  "median": {
+    "lcp_ms": 1308,
+    "fcp_ms": 424,
+    "ttfb_ms": 202,
+    "tbt_ms": 134,
+    "cls": 0.0685,
+    "transfer_bytes": 369413,
+    "cdp_encoded_bytes": 367080,
+    "load_ms": 1482
+  },
+  "lcp_selector": [
+    "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm",
+    "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm",
+    "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm"
+  ],
+  "verdict": {
+    "lcp": true,
+    "tbt": true,
+    "cls": true,
+    "pass": true
+  },
+  "per_run": [
+    {
+      "lcp_ms": 1956,
+      "lcp_selector": "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm",
+      "lcp_url": null,
+      "cls": 0.0685,
+      "shifts": [
+        {
+          "t": 1878,
+          "v": 0.0685,
+          "src": [
+            "div[data-testid=main-column]>footer.border-t.border-border"
+          ]
+        }
+      ],
+      "tbt_ms": 127,
+      "longtasks": 2,
+      "fcp_ms": 832,
+      "ttfb_ms": 573,
+      "load_ms": 2110,
+      "transfer_bytes": 369413,
+      "transfer_by_type": {
+        "link": 107745,
+        "script": 175899,
+        "other": 525,
+        "fetch": 4871
+      },
+      "requests": 27,
+      "cdp_encoded_bytes": 367911,
+      "wall_ms": 4952,
+      "run": 1
+    },
+    {
+      "lcp_ms": 1304,
+      "lcp_selector": "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm",
+      "lcp_url": null,
+      "cls": 0.0685,
+      "shifts": [
+        {
+          "t": 1245,
+          "v": 0.0685,
+          "src": [
+            "div[data-testid=main-column]>footer.border-t.border-border"
+          ]
+        }
+      ],
+      "tbt_ms": 134,
+      "longtasks": 1,
+      "fcp_ms": 424,
+      "ttfb_ms": 183,
+      "load_ms": 1422,
+      "transfer_bytes": 369414,
+      "transfer_by_type": {
+        "link": 107745,
+        "script": 175899,
+        "other": 525,
+        "fetch": 4870
+      },
+      "requests": 27,
+      "cdp_encoded_bytes": 367080,
+      "wall_ms": 4258,
+      "run": 2
+    },
+    {
+      "lcp_ms": 1308,
+      "lcp_selector": "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm",
+      "lcp_url": null,
+      "cls": 0.0685,
+      "shifts": [
+        {
+          "t": 1252,
+          "v": 0.0685,
+          "src": [
+            "div[data-testid=main-column]>footer.border-t.border-border"
+          ]
+        }
+      ],
+      "tbt_ms": 186,
+      "longtasks": 1,
+      "fcp_ms": 376,
+      "ttfb_ms": 202,
+      "load_ms": 1482,
+      "transfer_bytes": 369413,
+      "transfer_by_type": {
+        "link": 107745,
+        "script": 175899,
+        "other": 525,
+        "fetch": 4873
+      },
+      "requests": 27,
+      "cdp_encoded_bytes": 365806,
+      "wall_ms": 4308,
+      "run": 3
+    }
+  ]
+}

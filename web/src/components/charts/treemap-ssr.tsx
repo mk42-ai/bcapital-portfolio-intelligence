@@ -14,7 +14,7 @@ export function TreemapSSR({ data, mode, width = 960, height = 440 }: { data: Tr
   const leaves = root.leaves();
   return (
     <figure className="m-0">
-      <svg viewBox={`0 0 ${width} ${height}`} width="100%" role="group" aria-label={`Treemap of ${leaves.length} portfolio companies grouped by ${mode}; tile size is the estimated B Capital ticket. Each tile is a link to the company page.`} style={{ fontFamily: "var(--font-body)" }}>
+      <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height} role="group" aria-label={`Treemap of ${leaves.length} portfolio companies grouped by ${mode}; tile size is the estimated B Capital ticket. Each tile is a link to the company page.`} style={{ fontFamily: "var(--font-body)", width: "100%", height: "auto", aspectRatio: `${width} / ${height}` }}>
         {groups.map((g, gi) => {
           const color = PALETTE[gi % PALETTE.length];
           return (

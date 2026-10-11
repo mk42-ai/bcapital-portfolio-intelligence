@@ -5,7 +5,7 @@ const ramp = (v: number) => { const t = Math.max(0, Math.min(1, v / 100)); /* tw
 export function HeatmapSSR({ rows }: { rows: HeatRow[] }) {
   const cols = rows[0]?.data.map((d) => d.x) ?? [];
   return (
-    <div className="min-w-0 max-w-full overflow-x-auto" tabIndex={0} aria-label="KPI heatmap, scrollable">
+    <div className="min-w-0 max-w-full overflow-x-auto" tabIndex={0} aria-label="KPI heatmap, scrollable" style={{ minHeight: rows.length ? rows.length * 32 + 48 : undefined }}>
       <table className="w-full min-w-[320px] border-separate border-spacing-1 text-xs">
         <caption className="sr-only">KPI heatmap: rows are companies, columns are sentiment, news volume and funding recency, each scaled 0 to 100.</caption>
         <thead><tr><th scope="col" className="sr-only">Company</th>{cols.map((c) => <th key={c} scope="col" className="pb-1 text-center font-medium text-muted">{c}</th>)}</tr></thead>
