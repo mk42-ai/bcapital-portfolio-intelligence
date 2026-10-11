@@ -537,7 +537,8 @@ const hasParams = (p: Record<string, unknown> | null | undefined): p is Record<s
 const outputStats = (raw: StepOutput[], plannerPayload?: PlannerPayload | null) => {
   const outputs = raw.map((o) => ({ ...o, plugins: o.plugins.filter((pl) => hasParams(pl.params)) })).filter((o) => o.plugins.length > 0);
   const payload = hasPayload(plannerPayload) ? plannerPayload : null;
-  return { outputs, payload, calls: outputs.reduce((n, o) => n + o.plugins.length, 0), has: outputs.length > 0 || !!payload };
+  // a6: the planner payload lives only behind the developer reveal, so the Outputs chip counts real step calls only.
+  return { outputs, payload, calls: outputs.reduce((n, o) => n + o.plugins.length, 0), has: outputs.length > 0 };
 };
 function OutputsCard({ outputs: raw, plannerPayload }: { outputs: StepOutput[]; plannerPayload?: PlannerPayload | null }) {
   // Skip plugin entries with null/empty params and hide the card when no step has a real call — never an empty `{}` box.
