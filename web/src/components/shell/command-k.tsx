@@ -19,18 +19,9 @@ const QUICK: QuickRoute[] = [
   { href: "/artifacts", label: "Artifacts", icon: Archive },
 ];
 
-/* ---- sector colour: prefer the shared helper (a19) when it lands, else this identical local map. No blue hues (190–260°). ---- */
-const SECTOR_FALLBACK: Record<string, string> = {
-  technology: "#047857",
-  healthcare: "#9d174d",
-  "energy & resilience": "#b45309",
-  opportunistic: "#7e22ce",
-  "venture capital (firm)": "#3b3f45",
-};
-function sectorColor(sector: string | null | undefined): string {
-  return SECTOR_FALLBACK[(sector ?? "").trim().toLowerCase()] ?? "#3b3f45";
-}
-// MERGE HINT (a19): when web/src/lib/sector-color.ts lands, replace the function above with `import { sectorColor } from "@/lib/sector-color";`.
+/* ---- sector colour: the shared hue-audited tokens (a18) — ink colour for monograms/pills. ---- */
+import { sectorColor as sharedSectorColor } from "@/lib/sector-color";
+function sectorColor(sector: string | null | undefined): string { return sharedSectorColor(sector).ink; }
 
 /* ---- module-scope cache: fetched once per page load ---- */
 let cache: Row[] | null = null;
