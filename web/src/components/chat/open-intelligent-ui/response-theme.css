@@ -192,3 +192,15 @@
 .openui-response :is(.openui-radio-group-clear, .openui-checkbox-group-clear) > label:has(.openui-radio-item-description, .openui-checkbox-item-description):has([aria-checked="true"]) { background: var(--iui-surface); color: var(--iui-ink); }
 .openui-response .openui-radio-item-description,
 .openui-response .openui-checkbox-item-description { font-size: 14px; line-height: 21px; color: var(--iui-muted); }
+
+/* a10 */
+/* Brand green as TEXT inside rendered responses → AA ink; #0AC985 remains the focus-ring / fill colour only. */
+.openui-response :is(a, .openui-link, .openui-badge-success, .openui-text-success, .openui-status-success, [data-tone="success"], [data-status="success"]) { color: var(--brand-green-ink, #047857); }
+.openui-response :is(.openui-badge-success, [data-tone="success"]) { background: var(--brand-green-soft, #E6FAF3); }
+.openui-response :is(details > summary, [role="button"][aria-expanded], button[aria-expanded]) { cursor: pointer; }
+.openui-response :is(details > summary, [aria-expanded]):focus-visible { outline: 2px solid #0AC985; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .openui-response :is(.oiu-spin, [class*="spin"], [class*="shimmer"], [class*="pulse"], [class*="count-up"], [class*="loader"]) { animation: none !important; }
+  .openui-response :is(details > summary, [aria-expanded], svg) { transition-duration: .01ms !important; }
+}
+/* end a10 */
