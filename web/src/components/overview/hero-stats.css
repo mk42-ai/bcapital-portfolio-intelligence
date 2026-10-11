@@ -1,0 +1,82 @@
+/* a17 — Overview hero verdict strip. White card, charcoal ink, brand-green ink for "up"; no blue. */
+.hero-stats {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  color: #1f2937;
+}
+.hero-stats-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 24px;
+  margin: 0;
+}
+.hero-stat {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 24px;
+  border-left: 1px solid #e5e7eb;
+}
+.hero-stat:first-child { padding-left: 0; border-left: 0; }
+.hero-stat-label {
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+.hero-stat-value {
+  margin: 6px 0 0;
+  font-family: var(--font-display, inherit);
+  font-size: 28px;
+  line-height: 32px;
+  min-height: 32px; /* height reserved: no layout shift while counting */
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  color: #1f2937;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hero-stat--primary .hero-stat-value {
+  font-size: 40px;
+  line-height: 44px;
+  min-height: 44px;
+  letter-spacing: -0.02em;
+}
+.hero-stat-sub {
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* state-only colour: sign of the delta */
+.hero-stat-delta { color: #6b7280; }
+.hero-stat-delta-num { font-weight: 600; }
+.hero-stat-delta[data-trend="up"] .hero-stat-delta-num { color: #047857; }
+.hero-stat-delta[data-trend="down"] .hero-stat-delta-num { color: #ef4444; }
+.hero-stat-delta[data-trend="flat"] .hero-stat-delta-num { color: #6b7280; }
+
+@media (max-width: 1024px) {
+  .hero-stats-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 16px; }
+  .hero-stat { padding-left: 16px; }
+}
+@media (max-width: 640px) {
+  .hero-stats { padding: 16px 20px; }
+  .hero-stats-grid { grid-template-columns: 1fr 1fr; gap: 16px 20px; }
+  .hero-stat { padding-left: 0; border-left: 0; }
+  .hero-stat:nth-child(even) { padding-left: 20px; border-left: 1px solid #e5e7eb; }
+  .hero-stat:nth-child(n + 3) { padding-top: 16px; border-top: 1px solid #e5e7eb; }
+  .hero-stat--primary .hero-stat-value { font-size: 36px; line-height: 40px; min-height: 40px; }
+}
+/* end a17 */
