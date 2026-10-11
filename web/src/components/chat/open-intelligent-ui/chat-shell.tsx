@@ -9,7 +9,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { AgentInterface, fetchLLM, agUIAdapter, useThread, useThreadList, type AssistantMessageComponent, type ToolCallTimelineComponent } from "@openuidev/react-ui";
 import type { Message, UserMessage } from "@openuidev/react-headless";
-import { AlertTriangle, ArrowDown, Paperclip, Wrench, Bot, Brain, Check, ChevronDown, Cpu, ExternalLink, KeyRound, ListChecks, Loader2, MessageSquareMore, Mic, Plus, RotateCcw, Search, ShieldCheck, Sparkles, X } from "lucide-react";
+import { AlertTriangle, ArrowDown, Paperclip, Wrench, Bot, Brain, Check, ChevronDown, ChevronRight, ExternalLink, FileTerminal, KeyRound, Loader2, MessageSquareMore, Mic, Plus, RotateCcw, Search, ShieldCheck, Sparkles, X } from "lucide-react";
 import { Chevron } from "@/components/ui/chevron";
 import { responseTheme } from "./response-theme";
 import { localThreadStorage, saveMessages, sessionFor, rememberSession, rememberSources, sourcesFor, sourcesKey, rememberMeta, metaFor, type StoredSource, type StoredMeta } from "./local-storage";
@@ -30,6 +30,7 @@ import { PluginFavicon, preloadPluginFavicons } from "@/components/ui/plugin-fav
 import { BrandIcon } from "@/components/ui/brand-icon";
 import { brandIconForOperation, brandIconForPlugin, brandIconForStarter } from "@/lib/brand-icons";
 import { RunStatusHeader } from "@/components/chat/run-status-header";
+import { BRAND_MARK_SRC } from "@/lib/plugin-icons";
 import { fmtScore } from "@/lib/format";
 import { VoiceDock } from "@/components/chat/voice/voice-dock";
 import { useVoiceOrigin } from "@/components/chat/voice/voice-origin";
@@ -380,21 +381,55 @@ function AnswerBadge({ meta, live }: { meta: Partial<StoredMeta> | null; live?: 
     </div>
   );
 }
-/** Compact run header above every assistant turn: model · reasoning level · plugin favicons · live timer (ticks from startedAt, freezes at totalMs). */
+/** Run header above every assistant turn — OnDemand ChatComponent header row: name · reasoning · task time (green) · tokens · logs chevron ·
+ *  outputs button. The live timer ticks from startedAt and freezes at totalMs. */
 const fmtElapsed = (ms: number) => (ms < 60_000 ? `${(ms / 1000).toFixed(1)} s` : `${Math.floor(ms / 60_000)}m ${Math.floor((ms % 60_000) / 1000)} s`);
-function RunHeader({ live, startedAt, totalMs, pluginIds }: { live: boolean; startedAt: number; totalMs: number | null; pluginIds: string[] }) {
+type RunHeaderProps = {
+  live: boolean; startedAt: number; totalMs: number | null; tokens?: number | null;
+  logsOpen?: boolean; onToggleLogs?: () => void;
+  outputs?: { label: string; open: boolean; onToggle: () => void } | null;
+};
+function RunHeader({ live, startedAt, totalMs, tokens, logsOpen, onToggleLogs, outputs }: RunHeaderProps) {
   const [now, setNow] = useState(() => Date.now());
   // Interval-driven (not frame-driven): the timer keeps ticking on heartbeat-only stretches until [DONE]/RUN_FINISHED.
   useEffect(() => { if (!live || totalMs != null) return; const id = setInterval(() => setNow(Date.now()), 250); return () => clearInterval(id); }, [live, totalMs]);
   const ms = totalMs != null ? totalMs : live && startedAt ? Math.max(0, now - startedAt) : 0;
-  const plugins = pluginIds.length ? pluginIds : [PLUGIN_ID];
   return (
     <div className="oiu-run__header" data-testid="run-header" data-live={live ? "true" : "false"} aria-label="Run">
-      <Cpu className="size-3" aria-hidden /><span className="oiu-run__model">{MODEL_LABEL}</span>
+      <span className="oiu-run__model">{MODEL_LABEL}</span>
       <span className="oiu-badge__sep">·</span><span className="oiu-run__reason">{REASONING_MODE}</span>
-      <span className="oiu-badge__sep">·</span>
-      <span className="oiu-run__plugins" aria-label="Plugins">{plugins.slice(0, 6).map((id) => <span key={id} className="oiu-run__plugin" title={id} data-plugin-id={id} aria-label={friendlyPlugin(id)}><PluginFavicon id={id} size={14} /><span className="oiu-run__plugin-label">{friendlyPlugin(id)}</span></span>)}</span>
-      {(live || totalMs != null) && <span className="oiu-run__timer" data-testid="run-timer" data-state={live && totalMs == null ? "running" : "frozen"} data-ms={Math.round(ms)}>{live && totalMs == null ? <Loader2 className="size-3 oiu-spin" aria-hidden /> : null}{fmtElapsed(ms)}</span>}
+      {(live || totalMs != null) && <span className="oiu-run__timer" data-testid="run-timer" data-state={live && totalMs == null ? "running" : "frozen"} data-ms={Math.round(ms)} title="Task time">{fmtElapsed(ms)}</span>}
+      {tokens != null && <span className="oiu-run__tokens">{tokens.toLocaleString()} tokens</span>}
+      {onToggleLogs && <button type="button" className="oiu-run__btn" data-testid="run-logs-toggle" aria-expanded={!!logsOpen} aria-label={logsOpen ? "Hide status logs" : "Show status logs"} onClick={onToggleLogs}><ChevronDown className={`size-4 oiu-run__logs-chev${logsOpen ? " oiu-run__logs-chev--open" : ""}`} aria-hidden /></button>}
+      {outputs && <button type="button" className="oiu-run__btn" data-testid="run-status-outputs" aria-expanded={outputs.open} aria-label={`Outputs · ${outputs.label}`} title={`Outputs · ${outputs.label}`} onClick={outputs.onToggle}><FileTerminal className="size-4" aria-hidden /></button>}
+    </div>
+  );
+}
+/** OnDemand-playground status glyphs (StatusAccordion): ring spinner while running, tick when done, cross when failed, hollow ring when pending. */
+type OdStatus = "loading" | "done" | "failed" | "pending" | "none";
+function OdStatusIcon({ status }: { status: OdStatus }) {
+  if (status === "none") return null;
+  return (
+    <span className={`od-acc__icon od-acc__icon--${status}`} aria-hidden>
+      {status === "loading" ? <StatusSpinner /> : status === "done" ? <Check className="size-3.5" /> : status === "failed" ? <X className="size-3.5" /> : <span className="oiu-ring oiu-ring--idle" />}
+    </span>
+  );
+}
+/** OnDemand-playground StatusAccordion: [status] title (shimmer while loading) · meta · › chevron; open content sits on a left guide rail. */
+function OdAccordion({ status, title, meta, collapsible = true, open, onToggle, children }: { status: OdStatus; title: ReactNode; meta?: string; collapsible?: boolean; open: boolean; onToggle?: (next: boolean) => void; children?: ReactNode }) {
+  const isOpen = !collapsible || open;
+  const head = (
+    <>
+      <OdStatusIcon status={status} />
+      <span className={`od-acc__title${status === "loading" ? " oiu-shimmer-text" : ""}`}>{title}</span>
+      {meta && <span className="od-acc__meta">{meta}</span>}
+      {collapsible && <ChevronRight className={`od-acc__chev${isOpen ? " od-acc__chev--open" : ""}`} aria-hidden />}
+    </>
+  );
+  return (
+    <div className={`od-acc od-acc--${status}`}>
+      {collapsible ? <button type="button" className="od-acc__head" aria-expanded={isOpen} onClick={() => onToggle?.(!isOpen)}>{head}</button> : <div className="od-acc__head">{head}</div>}
+      {children && isOpen && <div className={`od-acc__body${collapsible ? "" : " od-acc__body--flat"}`}>{children}</div>}
     </div>
   );
 }
@@ -414,27 +449,76 @@ function ThinkingTrace({ text, kinds, live }: { text: string; kinds?: string[]; 
     </div>
   );
 }
-/** Plan stepper (plan_created / step start / done / failed). a6: card title "Plan", objective ≤ 2 lines, numbered checklist with status dots;
- *  JSON-looking objectives are dropped and operationId titles made friendly client-side too (sanitizePlan guards the bridge; this is the backstop). */
-function PlanStepper({ plan, reserve }: { plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null; reserve?: boolean }) {
+/** Assign each tool call to the plan step it ran in: exact stepId first, else the first step that lists the same plugin, else (a call that
+ *  is still running — the bridge opens the first card before any step id is known) the running / first unfinished step. Calls that match
+ *  no step (or runs without a plan) stay in `rest` and render as standalone rows. Each call is shown exactly once. */
+const samePlugin = (a: string, b: string) => !!a && !!b && (a === b || friendlyPlugin(a).toLowerCase() === friendlyPlugin(b).toLowerCase());
+function assignTools(steps: PlanStep[], tools: ToolRow[]): { byStep: ToolRow[][]; rest: ToolRow[] } {
+  const byStep: ToolRow[][] = steps.map(() => []); const rest: ToolRow[] = [];
+  for (const t of tools) {
+    let i = t.stepId ? steps.findIndex((s) => s.id === t.stepId) : -1;
+    if (i < 0) i = steps.findIndex((s) => (s.plugins ?? []).some((p) => samePlugin(p, t.pluginId) || samePlugin(p, t.name)));
+    if (i < 0 && t.status === "running") { i = steps.findIndex((s) => s.state === "running"); if (i < 0) i = steps.findIndex((s) => s.state === "pending"); }
+    if (i < 0) rest.push(t); else byStep[i].push(t);
+  }
+  return { byStep, rest };
+}
+/** A step summary belongs to the plan step with the same stepId, else the same 1-based index (settled turns store index only). */
+const summaryFor = (summaries: StepSummary[], s: PlanStep, i: number) => summaries.find((x) => x.stepId && x.stepId === s.id) ?? summaries.find((x) => !x.stepId && x.index === i + 1);
+/** Static plugin chip for a plugin/operation the plan names but no tool call has reported yet (OD StepStatusLog chip). */
+function PlanPluginChip({ p, state }: { p: string; state: PlanStep["state"] }) {
+  const op = brandIconForOperation(p) ?? (/^plugin-\d+$/.test(p) ? null : brandIconForPlugin(null, p));
+  return (
+    <span className="od-chip" data-plugin={p}>
+      <span className="od-chip__logo" aria-hidden>{op ? <BrandIcon name={op} size={16} slot="plan-step" /> : /^plugin-\d+$/.test(p) ? <PluginFavicon id={p} size={16} /> : <Wrench className="size-3.5" />}</span>
+      <span className="od-chip__name">{friendlyPlugin(p)}</span>
+      <span className={`od-dot od-dot--${state}`} aria-hidden />
+    </span>
+  );
+}
+/** One plan step as an OnDemand StatusLogBlock row: status glyph · title · "N calls (running)" · chevron; open by default, content = the
+ *  step's tool calls (working-row chips), plugins the plan names, and the step summary. */
+function PlanStepRow({ s, tools, summary, live, answerStarted }: { s: PlanStep; tools: ToolRow[]; summary?: StepSummary; live: boolean; answerStarted: boolean }) {
+  const [open, setOpen] = useState(true); // OD: open by default; only the user closes it
+  // A step is running when the stream says so OR one of its calls is still in flight (step events can lag behind the tool card).
+  const callRunning = tools.some((t) => t.status === "running");
+  const running = (s.state === "running" || callRunning) && live && !answerStarted;
+  const status: OdStatus = s.state === "failed" ? "failed" : running ? "loading" : s.state === "done" || s.state === "running" || tools.length > 0 ? "done" : "pending";
+  const covered = (p: string) => tools.some((t) => samePlugin(p, t.pluginId) || samePlugin(p, t.name));
+  const chips = (s.plugins ?? []).filter((p) => !covered(p));
+  const calls = tools.length || (s.plugins ?? []).length;
+  const meta = calls ? `${calls} ${calls === 1 ? "call" : "calls"}${running ? " running" : ""}` : undefined;
+  const hasBody = tools.length > 0 || chips.length > 0 || !!summary;
+  return (
+    <div className="od-step" data-testid="plan-step" data-state={s.state}>
+      <OdAccordion status={status} title={s.title} meta={meta} collapsible={hasBody} open={open} onToggle={setOpen}>
+        {hasBody ? (<>
+          {(tools.length > 0 || chips.length > 0) && (
+            <div className="od-chips">
+              {tools.length > 0 && <ol className="od-calls" aria-label="Calls" data-testid="working-list">{tools.map((t) => <WorkingRow key={t.id} t={t} live={live} chip />)}</ol>}
+              {chips.map((p) => <PlanPluginChip key={p} p={p} state={s.state} />)}
+            </div>
+          )}
+          {summary && (
+            <p className="od-step__summary" data-testid="step-summary" data-index={summary.index} data-state={summary.state}>
+              {summary.state === "pending" ? <span className="oiu-shimmer-text">{LABEL.summarising(summary.index)}…</span> : summary.text || "No summary text was emitted for this step."}
+            </p>
+          )}
+        </>) : null}
+      </OdAccordion>
+    </div>
+  );
+}
+/** Plan + step log in the OnDemand-playground layout: the objective as a plain sentence (OD plan title), then one StatusAccordion row per
+ *  step. JSON-looking objectives are dropped and operationId titles made friendly (sanitizePlan guards the bridge; this is the backstop). */
+function PlanStepper({ plan, stepTools, summaries, live, answerStarted }: { plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null; stepTools: ToolRow[][]; summaries: StepSummary[]; live: boolean; answerStarted: boolean }) {
   const objective = plan ? sanitizeObjective(plan.objective) : "";
   const steps = plan ? plan.steps.map((s, i) => ({ ...s, title: friendlyStepTitle(s.title) || `Step ${i + 1}` })) : [];
-  if (!plan || (!objective && !steps.length)) {
-    // Reserved slot while the planner is still streaming its JSON: same box (border + min-height) the real stepper will occupy, so the
-    // plan arriving does not push the plugin cards / thinking trace / working band down (the 0.10 CLS spike at plan_created on mobile).
-    return reserve ? <section className="oiu-plan oiu-plan--reserved" data-testid="plan-stepper" data-state="pending" aria-label="Plan"><p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />Plan</p><div className="oiu-shimmer oiu-shimmer--plan" aria-hidden><span /><span /></div></section> : null;
-  }
+  if (!plan || (!objective && !steps.length)) return null; // OD shows nothing until the plan exists (the Thinking row carries the wait)
   return (
-    <section className="oiu-plan" data-testid="plan-stepper" data-state={plan.provisional ? "provisional" : "ready"} aria-label="Plan">
-      <p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />Plan{plan.provisional && <span className="oiu-plan__prov" title="Steps are still streaming in">drafting…</span>}</p>
-      {objective && <p className="oiu-plan__objective" data-testid="plan-objective">{objective}</p>}
-      {steps.length > 0 && <ol className="oiu-plan__steps">{steps.map((s, i) => (
-        <li key={s.id} className={`oiu-plan__step oiu-plan__step--${s.state}`} data-testid="plan-step" data-state={s.state}>
-          <span className={`oiu-plan__dot oiu-plan__dot--${s.state}`} aria-hidden>{s.state === "done" ? <Check className="size-2.5" strokeWidth={3} /> : s.state === "failed" ? <X className="size-2.5" strokeWidth={3} /> : null}</span>
-          <span className="oiu-plan__num" aria-hidden>{i + 1}.</span>
-          <span className="oiu-plan__label">{s.title}</span>
-          {s.plugins?.length ? <span className="oiu-plan__plugins">{s.plugins.map((p) => <span key={p} className="oiu-plan__plugin">{friendlyPlugin(p)}</span>)}</span> : null}
-        </li>))}</ol>}
+    <section className="od-steps" data-testid="plan-stepper" data-state={plan.provisional ? "provisional" : "ready"} aria-label="Plan">
+      {objective && <p className="od-plan-title" data-testid="plan-objective">{objective}</p>}
+      {steps.map((s, i) => <PlanStepRow key={s.id} s={s} tools={stepTools[i] ?? []} summary={summaryFor(summaries, s, i)} live={live} answerStarted={answerStarted} />)}
     </section>
   );
 }
@@ -550,12 +634,21 @@ function useElapsed(on: boolean, startedAt: number | undefined) {
   useEffect(() => { if (!on || !startedAt) return; setNow(Date.now()); const id = setInterval(() => setNow(Date.now()), 100); return () => clearInterval(id); }, [on, startedAt]);
   return on && startedAt ? Math.max(0, now - startedAt) : null;
 }
-function WorkingRow({ t, live }: { t: ToolRow; live: boolean }) {
+function WorkingRow({ t, live, chip }: { t: ToolRow; live: boolean; chip?: boolean }) {
   const name = friendlyPlugin(t.name || t.pluginId);
   const state = t.status === "failed" ? "failed" : t.status === "running" && live ? "running" : "done";
   const elapsed = useElapsed(state === "running", t.startedAt);
   const timing = state === "running" ? (elapsed != null ? `+${(elapsed / 1000).toFixed(1)} s` : "") : state === "failed" ? "failed" : LABEL.done(t.sources, t.durationMs);
   const second = state === "failed" && t.message ? t.message : t.query;
+  // Inside a plan step: OnDemand plugin chip [logo · name · timing · status dot]; same test hooks as the standalone row.
+  if (chip) return (
+    <li className={`od-chip od-call od-call--${state}`} data-testid="working-row" data-state={state} data-plugin={t.pluginId} title={second ? `${name} — ${second}` : name}>
+      <span className="od-chip__logo" data-testid="working-chips" data-plugin-id={t.pluginId}><PluginFavicon id={t.pluginId} size={20} /></span>
+      <span className="od-chip__name">{state === "failed" ? LABEL.failed(name) : name}</span>
+      {timing && <span className="od-chip__time" data-testid="working-timing">{timing}</span>}
+      <span className={`od-dot od-dot--${state}`} aria-hidden />
+    </li>
+  );
   return (
     <li className={`oiu-work oiu-work--${state}`} data-testid="working-row" data-state={state} data-plugin={t.pluginId}>
       <WorkingRing state={state} />
@@ -661,32 +754,45 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
   const stepsTotal = r.plan?.steps.length ?? 0; const stepsDone = r.plan?.steps.filter((st) => st.state === "done").length ?? 0;
   const oStats = outputStats(r.outputs, r.plannerPayload);
   const statusElapsed = r.totalMs ?? r.meta?.totalMs ?? r.elapsedMs;
+  // OnDemand layout: tool calls render as chips inside the plan step they ran in; summaries inside their step. Leftovers stay standalone.
+  const [logsOpen, setLogsOpen] = useState(true); // OD header chevron (isOpenLogs, default open)
+  const planSteps = r.plan?.steps ?? [];
+  const { byStep, rest: restTools } = assignTools(planSteps, r.tools);
+  const restSummaries = r.summaries.filter((x) => !planSteps.some((s, i) => summaryFor([x], s, i)));
+  const hasLogs = planSteps.length > 0 || r.tools.length > 0 || r.summaries.length > 0;
+  const tokens = typeof r.meta?.metrics?.totalTokens === "number" && Number.isFinite(r.meta.metrics.totalTokens) ? r.meta.metrics.totalTokens : null;
+  const outputsLabel = oStats.calls > 0 ? `${oStats.outputs.length} step${oStats.outputs.length === 1 ? "" : "s"} · ${oStats.calls} call${oStats.calls === 1 ? "" : "s"}` : "payload";
+  // OD FulfilmentThinking: "Writing the answer" while the model drafts (fulfillment reasoning) and before the first answer token.
+  const writing = r.live && !r.answerStarted && !r.error && r.thinkingKinds.some((k) => k.startsWith("fulfillment"));
   return (
     <div className="oiu-run" data-testid="run-view" data-live={r.live ? "true" : "false"}>
-      {/* 0 — Run header: model · reasoning · plugin chips · live timer */}
-      <RunHeader live={r.live} startedAt={r.startedAt} totalMs={r.totalMs} pluginIds={(r.meta?.pluginIds as string[] | undefined) ?? [PLUGIN_ID]} />
-      {/* 0b — a1: ONE status header anchored at the top (replaces the interleaved Working band + Outputs row) */}
+      {/* 0 — Run header (OD header row): model · reasoning · task time · tokens · logs chevron · outputs */}
+      <RunHeader live={r.live} startedAt={r.startedAt} totalMs={r.totalMs} tokens={tokens}
+        logsOpen={logsOpen} onToggleLogs={hasLogs ? () => setLogsOpen((o) => !o) : undefined}
+        outputs={oStats.has ? { label: outputsLabel, open: outputsOpen, onToggle: () => setOutputsOpen((o) => !o) } : null} />
+      {/* 0b — a1 status state machine, kept as a screen-reader live region (OD has no visible status band; the step rows show progress) */}
       <RunStatusHeader state={statusState} task={statusTask} icon={statusIcon} elapsedMs={statusElapsed} live={r.live && !r.answerDone} startedAt={r.startedAt}
-        stepsDone={stepsDone} stepsTotal={stepsTotal} outputSteps={oStats.outputs.length} calls={oStats.calls} hasOutputs={oStats.has}
-        onToggleOutputs={oStats.has ? () => setOutputsOpen((o) => !o) : undefined} outputsOpen={outputsOpen} />
+        stepsDone={stepsDone} stepsTotal={stepsTotal} outputSteps={oStats.outputs.length} calls={oStats.calls} hasOutputs={oStats.has} outputsOpen={outputsOpen} />
       {/* 1 — Thinking, pinned at the top (ONE per turn, never moves) */}
       {(r.thinking || r.live) && (
         <ThinkingBlock text={thinkingShown} kinds={r.thinkingKinds} plan={r.plan} answerStarted={r.answerStarted} live={r.live} collapsed={r.answerStarted || !r.live} elapsedMs={r.meta?.firstTokenMs ?? r.elapsedMs} portfolioToolStarted={r.tools.some((t) => t.pluginId === PORTFOLIO_PLUGIN)} />
       )}
-      {/* 2 — Plan checklist */}
-      {(r.plan || (r.live && !r.answerStarted)) && <PlanStepper plan={r.plan} reserve={r.live} />}
-      {/* 3 — Working rows (one per tool call; the "connecting" state is carried by RunStatusHeader, no skeleton row) */}
-      {r.tools.length > 0 && (
+      {/* 2 — Plan title + step log (OD StatusLogBlock); each step carries its own tool-call chips and summary */}
+      {logsOpen && r.plan && <PlanStepper plan={r.plan} stepTools={byStep} summaries={r.summaries} live={r.live} answerStarted={r.answerStarted} />}
+      {/* 3 — tool calls not tied to a plan step (or runs without a plan): standalone OD rows */}
+      {logsOpen && restTools.length > 0 && (
         <ol className="oiu-work-list" aria-label="Working" data-testid="working-list">
-          {r.tools.map((t) => <WorkingRow key={t.id} t={t} live={r.live} />)}
+          {restTools.map((t) => <WorkingRow key={t.id} t={t} live={r.live} />)}
         </ol>
       )}
-      {/* 4 — between-step summaries */}
-      {r.summaries.map((s) => <StepSummaryCard key={s.index} s={s} live={r.live} />)}
-      {/* 5 — outputs body, only when the header chip is open (default closed → no interleaved row) */}
+      {/* 4 — between-step summaries that match no plan step */}
+      {logsOpen && restSummaries.map((s) => <StepSummaryCard key={s.index} s={s} live={r.live} />)}
+      {/* 5 — outputs body, only when the header button is open (default closed → no interleaved row) */}
       {outputsOpen && <OutputsCard outputs={r.outputs} plannerPayload={r.plannerPayload} />}
       {/* 6 — interactive controls */}
       {r.live && r.prompt && <PromptCard prompt={r.prompt} sessionId={r.sessionId} onAnswer={onAnswer} />}
+      {/* 6b — OD "Writing the answer" */}
+      {writing && <div data-testid="writing-answer"><OdAccordion status="loading" title="Writing the answer" collapsible={false} open /></div>}
       {/* 7 — answer */}
       {(r.text || (r.live && r.answerStarted)) && (
         <div className="oiu-answer" data-testid="answer-block">
@@ -788,7 +894,7 @@ const AssistantMessage: AssistantMessageComponent = memo(function AssistantMessa
   };
   return (
     <div className="oiu-assistant" data-testid="assistant-message">
-      <div className="oiu-assistant__avatar" aria-hidden><Bot className="size-4" strokeWidth={2} /></div>
+      <div className="oiu-assistant__avatar" aria-hidden><img src={BRAND_MARK_SRC} alt="" width={18} height={18} /></div>
       <div className="oiu-assistant__body"><RunView r={r} onAnswer={(t) => { void processMessage({ role: "user", content: t }); }} /></div>
     </div>
   );
@@ -826,7 +932,7 @@ const PluginTimeline: ToolCallTimelineComponent = ({ steps, isLast }) => {
   return (
     <div className="oiu-assistant oiu-assistant--streaming" aria-live="polite" aria-busy="true" data-testid="assistant-streaming">
       <LiveRunMarker />
-      <div className="oiu-assistant__avatar" aria-hidden><Bot className="size-4" strokeWidth={2} /></div>
+      <div className="oiu-assistant__avatar" aria-hidden><StatusSpinner /></div>
       <div className="oiu-assistant__body"><RunView r={r} onAnswer={(text) => { setStream({ prompt: null }, true); void processMessage({ role: "user", content: text }); }} /></div>
     </div>
   );
@@ -895,7 +1001,8 @@ function PendingRow() {
   // so perceived latency is the first status frame (~0.3–0.7 s), not the first answer token (35–82 s observed upstream).
   return createPortal(
     <div className="oiu-run oiu-run--skeleton" data-testid="run-skeleton" data-phase={st.phase || "connecting"} data-first-status-ms={st.firstStatusMs ?? ""}>
-      <RunHeader live startedAt={st.startedAt} totalMs={null} pluginIds={st.pluginIds} />
+      <span className="oiu-assistant__avatar oiu-run__skel-avatar" aria-hidden><StatusSpinner /></span>
+      <RunHeader live startedAt={st.startedAt} totalMs={null} />
       {/* OnDemand-playground look: a one-line "Thinking" head; the reasoning rail only mounts once reasoning text exists (no empty box). */}
       <section className={`oiu-think oiu-think--live${st.thinking ? " oiu-think--open" : ""}`} data-testid="thinking-block" data-state="streaming" data-chars={st.thinking.length} data-phases={phases.join(",")}>
         <p className="oiu-think__head"><StatusSpinner /><span className="oiu-think__title oiu-shimmer-text">Thinking</span>{phases.length > 0 && <span className="oiu-think__phases">{phases.map((p) => <span key={p} className="oiu-think__phase" data-phase={p}>{p}</span>)}</span>}</p>

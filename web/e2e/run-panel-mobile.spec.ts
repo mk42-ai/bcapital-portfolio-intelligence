@@ -48,7 +48,8 @@ test.describe("a11 run panel @ 390×844", () => {
       expect.soft(m.rvScroll, `${label}: run-view scrollWidth`).toBeLessThanOrEqual(m.rvClient + 1);
       for (const h of m.rows) expect.soft(h, `${label}: working-row height`).toBeLessThanOrEqual(72);
       if (m.headerH != null) expect.soft(m.headerH, `${label}: run-header ≤ 2 lines`).toBeLessThanOrEqual(44);
-      if (m.statusH != null) expect.soft(m.statusH, `${label}: run-status-header 56px`).toBe(56);
+      // OD-style run panel (2026-10-11): run-status-header is a screen-reader-only live region (1px), progress shows in the step rows.
+      if (m.statusH != null) expect.soft(m.statusH, `${label}: run-status-header is visually hidden`).toBeLessThanOrEqual(1);
       return m;
     };
     await noOverflow("streaming");

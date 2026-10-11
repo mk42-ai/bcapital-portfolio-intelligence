@@ -843,7 +843,7 @@
 @keyframes oiu-text-shimmer { 0% { background-position: 100% 0; } 100% { background-position: 0% 0; } }
 /* Thinking: borderless accordion row (spinner · shimmering title · phases · chevron) + a left rail for the reasoning text */
 .chat-shell .oiu-think, .chat-shell .oiu-think--live { border: 0; border-radius: 0; background: transparent; overflow: visible; }
-.chat-shell .oiu-think__head { gap: 10px; padding: 4px 0; min-height: 28px; color: #5c6168; font-size: 13px; font-weight: 500; }
+.chat-shell .oiu-think__head { gap: 12px; padding: 4px 0; min-height: 28px; color: #5c6168; font-size: 13px; font-weight: 500; }
 .chat-shell .oiu-think__done { flex: none; color: #047857; }
 .chat-shell .oiu-think__head > .oiu-chevron { order: 1; margin-left: 0; width: 15px; height: 15px; }
 .chat-shell .oiu-think__head > .oiu-think__tail { order: 2; color: #5c6168; }
@@ -853,7 +853,7 @@
 .chat-shell .oiu-think__phase { height: auto; padding: 0; border: 0; border-radius: 0; background: transparent; color: #5c6168; font-size: 11.5px; font-weight: 400; line-height: 16px; }
 .chat-shell .oiu-think__phase + .oiu-think__phase::before { content: "·"; margin: 0 5px 0 1px; color: #9ea2a8; }
 .chat-shell .oiu-think--live .oiu-think__phase:last-child { color: #047857; }
-.chat-shell .oiu-think__body, .chat-shell .oiu-think--live .oiu-think__body { height: auto; max-height: 240px; margin: 2px 0 6px 6px; padding: 2px 0 2px 16px; border-left: 1px solid #e4e6e9; }
+.chat-shell .oiu-think__body, .chat-shell .oiu-think--live .oiu-think__body { height: auto; max-height: 240px; margin: 2px 0 6px 7px; padding: 2px 0 2px 19px; border-left: 1px solid #e4e6e9; }
 .chat-shell .oiu-think__pre { font-family: inherit; font-size: 13px; line-height: 1.6; color: #5c6168; }
 /* Step rows: borderless [status glyph][plugin chip][label + query][timing], OD StatusAccordion density */
 .chat-shell .oiu-work-list { gap: 2px; }
@@ -876,3 +876,78 @@
 }
 @media (prefers-reduced-motion: reduce) { .chat-shell .oiu-shimmer-text { animation: none; } }
 /* end od */
+
+/* od2 */
+/* OnDemand-playground message layout: header row (logo · name · task time · tokens · logs chevron · outputs), plan title sentence,
+   StatusAccordion step rows with plugin chips, "Writing the answer". The a1 status band becomes a screen-reader-only live region. */
+.chat-shell .oiu-run { position: relative; }
+.chat-shell .rsh { position: absolute; width: 1px; height: 1px; min-height: 0; max-height: none; margin: -1px; padding: 0; border: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+/* avatar = OD brand logo slot: spinner while live, B Capital mark when settled */
+.chat-shell .oiu-assistant__avatar { width: 28px; height: 20px; margin-top: 0; border: 0; border-radius: 0; background: transparent; color: #5c6168; }
+.chat-shell .oiu-assistant__avatar img { width: 18px; height: 18px; border-radius: 4px; }
+.chat-shell .oiu-run--skeleton { position: relative; }
+.chat-shell .oiu-run__skel-avatar { position: absolute; top: 0; left: -40px; display: grid; place-items: center; }
+/* header row */
+.chat-shell .oiu-run__header { gap: 8px; min-height: 20px; font-size: 13px; line-height: 20px; color: #5c6168; }
+.chat-shell .oiu-run__model { font-weight: 700; color: #16181b; }
+.chat-shell .oiu-run__reason { color: #5c6168; }
+.chat-shell .oiu-run__timer, .chat-shell .oiu-run__timer[data-state="running"] { margin-left: 4px; padding: 0; height: auto; min-width: 0; border-radius: 0; background: transparent; color: #047857; font-weight: 600; }
+.oiu-run__tokens { color: #5c6168; font-variant-numeric: tabular-nums; }
+.oiu-run__btn { display: inline-grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: #5c6168; cursor: pointer; }
+.oiu-run__btn:hover { background: #f1f2f4; color: #16181b; }
+.oiu-run__btn[aria-expanded="true"] { color: #047857; }
+.chat-shell .oiu-run__btn:focus-visible { outline: 2px solid #0AC985; outline-offset: 2px; }
+.oiu-run__logs-chev { transition: transform 300ms ease; }
+.oiu-run__logs-chev--open { transform: rotate(180deg); }
+/* StatusAccordion */
+.od-acc { width: 100%; min-width: 0; }
+.od-acc__head { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 28px; margin: 0; padding: 4px 0; border: 0; background: transparent; font: inherit; text-align: left; color: #5c6168; }
+button.od-acc__head { cursor: pointer; }
+.chat-shell button.od-acc__head:focus-visible { outline: 2px solid #0AC985; outline-offset: 2px; border-radius: 6px; }
+.od-acc__icon { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; flex: none; }
+.od-acc__icon--done { color: #047857; }
+.od-acc__icon--failed { color: #b91c1c; }
+.oiu-ring--idle { border-color: #c3c7cd; }
+.od-acc__title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13.5px; line-height: 20px; color: #202327; }
+.od-acc--pending .od-acc__title { color: #5c6168; }
+.od-acc--failed .od-acc__title { color: #b91c1c; }
+.od-acc__meta { flex: none; font-size: 12px; line-height: 16px; color: #5c6168; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.od-acc__chev { width: 16px; height: 16px; flex: none; color: #9ea2a8; transition: transform 300ms ease; }
+.od-acc__chev--open { transform: rotate(90deg); }
+.od-acc__body { margin: 2px 0 6px 7px; padding: 4px 0 4px 19px; border-left: 1px solid #e4e6e9; min-width: 0; }
+.od-acc__body--flat { border-left: 0; }
+/* plan title + steps */
+.od-steps { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.od-plan-title { margin: 2px 0 4px; font-size: 15px; line-height: 26px; color: #202327; overflow-wrap: anywhere; }
+.od-step { min-width: 0; }
+.od-step__summary { margin: 8px 0 0; font-size: 13px; line-height: 1.55; color: #5c6168; overflow-wrap: anywhere; }
+/* plugin chips (OD StepStatusLog): logo · name · timing · status dot */
+.od-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-width: 0; }
+.od-calls { display: contents; list-style: none; margin: 0; padding: 0; }
+.od-chip { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; min-width: 0; box-sizing: border-box; padding: 4px 8px 4px 4px; border-radius: 6px; background: rgba(207, 207, 207, 0.4); font-size: 13px; line-height: 20px; color: #202327; }
+.od-chip__logo { display: inline-grid; place-items: center; width: 20px; height: 20px; flex: none; overflow: hidden; border-radius: 6px; color: #5c6168; }
+.od-chip__logo img, .od-chip__logo svg { width: 20px; height: 20px; border-radius: 6px; }
+.od-chip__logo [data-testid="brand-icon"] { width: 16px; height: 16px; }
+.od-chip__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.od-call--failed .od-chip__name { color: #b91c1c; }
+.od-chip__time { flex: none; font-size: 12px; color: #5c6168; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.od-call--running .od-chip__time { color: #047857; }
+.od-dot { width: 6px; height: 6px; flex: none; border-radius: 999px; background: #9ea2a8; }
+.od-dot--running { background: #ca8a04; }
+.od-dot--done { background: #0AC985; }
+.od-dot--failed { background: #ef4444; }
+/* step summaries that match no plan step: same flat accordion look */
+.chat-shell .oiu-summary { margin: 0; min-height: 0; border: 0; border-radius: 0; background: transparent; font-size: 13px; }
+.chat-shell .oiu-summary__head { gap: 12px; padding: 4px 0; font-weight: 500; color: #202327; }
+.chat-shell .oiu-summary__inner p { padding: 0 0 6px 26px; color: #5c6168; }
+@media (max-width: 640px) {
+  /* header stays ≤ 2 × 20px lines inside the 44px cap: 20px buttons, compact gaps */
+  .chat-shell .oiu-run__header { font-size: 12px; column-gap: 6px; row-gap: 2px; }
+  .oiu-run__btn { width: 20px; height: 20px; }
+  .od-plan-title { font-size: 14px; line-height: 22px; }
+  .od-acc__title { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .od-chip__time { display: none; }
+}
+.chat-shell .oiu-work--skeleton .oiu-work__chips > :not(:first-child) { display: none; } /* one logo per 22px chip, never a stacked pile */
+@media (prefers-reduced-motion: reduce) { .chat-shell .od-acc__chev, .chat-shell .oiu-run__logs-chev { transition: none; } }
+/* end od2 */
