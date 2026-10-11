@@ -12,5 +12,5 @@
     { "id": null, "former_id_redacted": true, "name": "GPT Search", "purpose": "funding / valuation / exit verification", "status": "removed", "removed_at": "2026-10-10", "used_in": [] },
     { "id": null, "former_id_redacted": true, "name": "Pitchbook Investor Finder", "purpose": "PitchBook data (investor finder — not a company-lookup tool)", "status": "removed", "removed_at": "2026-10-10", "pitchbook_status": "pending", "used_in": [] }
   ],
-  "portfolio_plugin": { "name": "Portfolio Plugin", "id": null, "note": "filled in by scripts/register-plugin.ts after deployment" }
+  "portfolio_plugin": { "name": "Portfolio Plugin", "id": null, "portfolio_plugin_id": null, "status": "registration failed 2026-10-11 — POST /plugin/v1 400 'schema is required' for every string encoding of action.schema; object → 'json: cannot unmarshal object into Go struct field PluginAction.action.schema of type string'; MCP plugin_create empty; ai_generated_tool timeout. See proof/data-lane/plugin-registration-2026-10-11.log", "note": "filled in by scripts/register-plugin.ts once OnDemand accepts the schema; until then portfolio data is injected as systemContext by the chat bridge" }
 }

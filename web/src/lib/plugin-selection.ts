@@ -1,11 +1,13 @@
 "use client";
 import { useSyncExternalStore } from "react";
 import { PLUGIN_CATALOGUE, PINNED_PLUGIN_ID } from "./plugin-catalogue";
+import { PORTFOLIO_PLUGIN_ID } from "./plugins";
 
 export const PLUGIN_SELECTION_KEY = "bcap.chat.plugins.session.v1";
 
-const CATALOGUE_IDS = PLUGIN_CATALOGUE.map((p) => p.id);
-const DEFAULT_IDS = PLUGIN_CATALOGUE.filter((p) => p.defaultOn || p.pinned).map((p) => p.id);
+/** The registered Portfolio plugin (when NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID is set) is always known, always default-on and ordered right after the pinned id. */
+const CATALOGUE_IDS = [...(PORTFOLIO_PLUGIN_ID ? [PORTFOLIO_PLUGIN_ID] : []), ...PLUGIN_CATALOGUE.map((p) => p.id).filter((id) => id !== PORTFOLIO_PLUGIN_ID)];
+const DEFAULT_IDS = [...(PORTFOLIO_PLUGIN_ID ? [PORTFOLIO_PLUGIN_ID] : []), ...PLUGIN_CATALOGUE.filter((p) => p.defaultOn || p.pinned).map((p) => p.id)];
 
 /** Ordered set of ids a user may select: curated catalogue until the panel publishes the merged live list. */
 let KNOWN_IDS: string[] = [...CATALOGUE_IDS];
@@ -58,7 +60,7 @@ function subscribe(l: () => void) {
  * Ids previously stored in sessionStorage that are not in the new list are dropped; the pinned id always survives.
  */
 export function setKnownPluginIds(ids: string[]): void {
-  const next = [PINNED_PLUGIN_ID, ...ids.filter((id, i, a) => id !== PINNED_PLUGIN_ID && a.indexOf(id) === i)];
+  const next = [PINNED_PLUGIN_ID, ...(PORTFOLIO_PLUGIN_ID ? [PORTFOLIO_PLUGIN_ID] : []), ...ids.filter((id, i, a) => id !== PINNED_PLUGIN_ID && id !== PORTFOLIO_PLUGIN_ID && a.indexOf(id) === i)]; // portfolio plugin survives the live-merge
   if (next.length === KNOWN_IDS.length && next.every((v, i) => v === KNOWN_IDS[i])) return;
   KNOWN_IDS = next;
   if (typeof window === "undefined") return;
