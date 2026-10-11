@@ -6,6 +6,7 @@ import { Search, Newspaper } from "lucide-react";
 import { CompanyLogo } from "@/components/ui/company-logo";
 import { SignalMini } from "@/components/charts/signal-bullet";
 import { Input, Select } from "@/components/ui/input";
+import { EmptyState } from "@/components/ui/empty-state";
 import { fmtScore } from "@/lib/format";
 
 export type CompanyListRow = {
@@ -132,7 +133,7 @@ export function CompaniesList({ rows, total }: { rows: CompanyListRow[]; total: 
                 </div>
               </div>); })}
           </div>
-          {visible.length === 0 && <p className="py-10 text-center text-sm text-muted">No companies match these filters.</p>}
+          {visible.length === 0 && <EmptyState icon="no-results" compact className="my-4 border-dashed" title="No companies match" body="Try a shorter search or another sector." action={<button type="button" className="text-sm font-medium text-primary underline underline-offset-2 focus-visible:outline-3 focus-visible:outline-ring" onClick={() => { setQ(""); setSector(""); }}>Clear filters</button>} />}
         </div>
         <script type="application/json" data-testid="companies-data" dangerouslySetInnerHTML={{ __html: JSON.stringify(sortedNames).replace(/</g, "\\u003c") }} />
       </div>
