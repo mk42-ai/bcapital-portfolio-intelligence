@@ -64,7 +64,7 @@ export type Prompt =
   | { kind: "awaiting_browser_action"; action: string | null; message: string | null; url: string | null };
 type StreamState = {
   phase: StreamPhase; detail: string; startedAt: number; sessionId: string | null; version: number;
-  firstStatusMs: number | null; firstTokenMs: number | null; firstCitationMs: number | null; chunks: number; thinking: string; thinkingKinds: string[]; error: StreamError;
+  firstStatusMs: number | null; firstTokenMs: number | null; firstCitationMs: number | null; chunks: number; thinking: string; thinkingKinds: string[]; thinkingPhases: ThinkingPhase[]; heartbeatAt: number; error: StreamError;
   sources: Source[]; metrics: Record<string, number> | null; lastThreadId: string | null;
   pluginIds: string[]; suggested: { id: string; name: string; logoUrl?: string }[]; plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null;
   summaries: StepSummary[]; prompt: Prompt | null; filler: boolean; fillerTick: number; text: string; answerDone: boolean; integrity: { dupes: number; gaps: number; frames: number } | null;
@@ -75,8 +75,10 @@ type StreamState = {
 /** One Working row = one plugin/agent action (TOOL_CALL_START/ARGS/RESULT from the bridge). */
 export type ToolRow = { id: string; name: string; pluginId: string; query: string; stepId: string; status: "running" | "done" | "failed"; sources?: number; durationMs?: number; message?: string; raw?: string };
 export type LiveArtifact = { key: string; name: string; phase: "creating" | "ready" | "failed"; artifact?: Artifact; message?: string; media?: { status?: string; id?: string | null; message?: string | null } };
+/** Thinking is ONE block per turn, split into labelled phases (Planning / Step n / Answer) — never capped, never moved. */
+export type ThinkingPhase = { label: string; channel: string; stepId: string | null; text: string };
 export type StepOutput = { stepId: string; title: string; plugins: { pluginId: string; name: string; params: Record<string, unknown> | null }[]; at: number };
-const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null, artifacts: [], outputs: [], tools: [] };
+const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], thinkingPhases: [], heartbeatAt: 0, error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null, artifacts: [], outputs: [], tools: [] };
 let streamState: StreamState = IDLE;
 let pending: Partial<StreamState> | null = null; let rafId = 0;
 const liveSources = new Map<string, Source[]>();
@@ -118,7 +120,7 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
   const t0 = peek().startedAt || Date.now();
   const finalize = () => {
     const st = peek(); const key = sourcesKey(st.text);
-    const meta: StoredMeta = { model: MODEL_LABEL, modelId: MODEL_ID, reasoningMode: REASONING_MODE, pluginId: PLUGIN_ID, pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, firstCitationMs: st.firstCitationMs, totalMs: Date.now() - t0, chunks: st.chunks, metrics: st.metrics, thinking: st.thinking.slice(0, 6000), error: st.error ? { code: st.error.code, message: st.error.message } : null, at: new Date().toISOString(), summaries: st.summaries.map((s) => ({ index: s.index, text: s.text, doneAt: s.doneAt ?? null })), plan: st.plan, artifacts: st.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!), tools: st.tools, artifactFailures: st.artifacts.filter((a) => a.phase === "failed").map((a) => ({ name: a.name, message: a.message ?? "" })), outputs: st.outputs };
+    const meta: StoredMeta = { model: MODEL_LABEL, modelId: MODEL_ID, reasoningMode: REASONING_MODE, pluginId: PLUGIN_ID, pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, firstCitationMs: st.firstCitationMs, totalMs: Date.now() - t0, chunks: st.chunks, metrics: st.metrics, thinking: st.thinking, thinkingPhases: st.thinkingPhases, error: st.error ? { code: st.error.code, message: st.error.message } : null, at: new Date().toISOString(), summaries: st.summaries.map((s) => ({ index: s.index, text: s.text, doneAt: s.doneAt ?? null })), plan: st.plan, artifacts: st.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!), tools: st.tools, artifactFailures: st.artifacts.filter((a) => a.phase === "failed").map((a) => ({ name: a.name, message: a.message ?? "" })), outputs: st.outputs };
     liveMeta.set(key, meta); rememberMeta(key, meta);
     if (st.sources.length) { liveSources.set(key, st.sources); rememberSources(key, st.sources); }
   };
@@ -146,7 +148,15 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
             else setStream(extra);
             break;
           }
-          case CE.thinking: if (typeof v.delta === "string") { const kind = String(v.kind ?? "thinking"); setStream({ thinking: (st.thinking + v.delta).slice(-12000), thinkingKinds: st.thinkingKinds.includes(kind) ? st.thinkingKinds : [...st.thinkingKinds, kind], ...(st.phase === "connecting" ? { phase: "planning", detail: PHASE_LABEL.planning } : {}) }); } break;
+          case CE.thinking: if (typeof v.delta === "string") {
+            const kind = String(v.kind ?? "thinking"); const sid = v.stepId != null && v.stepId !== "" ? String(v.stepId) : null;
+            // Phase label per UX spec: Planning (planning_thinking/plan) · Step n (step_thinking/step_output) · Answer (fulfillment_thinking). No char cap.
+            const label = kind.startsWith("planning") || kind === "plan" ? "Planning" : kind === "fulfillment" ? "Answer" : `Step ${sid ?? Math.max(1, st.plan?.steps.filter((x) => x.state !== "pending").length ?? 1)}`;
+            const last = st.thinkingPhases[st.thinkingPhases.length - 1];
+            const phases = last && last.label === label ? [...st.thinkingPhases.slice(0, -1), { ...last, text: last.text + v.delta }] : [...st.thinkingPhases, { label, channel: kind, stepId: sid, text: v.delta }];
+            setStream({ thinking: st.thinking + v.delta, thinkingPhases: phases, thinkingKinds: st.thinkingKinds.includes(kind) ? st.thinkingKinds : [...st.thinkingKinds, kind], ...(st.phase === "connecting" ? { phase: "planning", detail: PHASE_LABEL.planning } : {}) });
+          } break;
+          case CE.heartbeat: setStream({ heartbeatAt: now - t0 }); break;
           case CE.sources: if (Array.isArray(v.sources)) { const items = (v.sources as Partial<Source>[]).filter((x): x is Source => typeof x.url === "string" && !!x.url).map((x) => ({ url: x.url, title: x.title || x.sourceName || x.url, sourceName: x.sourceName || x.title || x.url, ...(typeof x.imageUrl === "string" && /^https?:\/\//.test(x.imageUrl) ? { imageUrl: x.imageUrl } : {}) })); setStream({ sources: items, firstCitationMs: st.firstCitationMs ?? (items.length ? now - t0 : null) }); } break;
           case CE.metrics: if (v.publicMetrics && typeof v.publicMetrics === "object") setStream({ metrics: v.publicMetrics as Record<string, number> }); break;
           case CE.error: setStream({ error: { code: String(v.code ?? "error"), message: String(v.message ?? "Upstream error"), raw: typeof v.raw === "string" ? v.raw : undefined } }, true); break;
@@ -431,7 +441,7 @@ function PromptCard({ prompt, sessionId, onAnswer }: { prompt: Prompt; sessionId
  *  10. One "Data gap" sentence when a call failed (honest red state)
  * ---------------------------------------------------------------------------------------------------------------- */
 type RunData = {
-  live: boolean; answerDone?: boolean; phase: StreamPhase; detail: string; thinking: string; thinkingKinds: string[]; answerStarted: boolean;
+  live: boolean; answerDone?: boolean; phase: StreamPhase; detail: string; thinking: string; thinkingKinds: string[]; thinkingPhases: ThinkingPhase[]; answerStarted: boolean; pluginIds: string[];
   plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null; tools: ToolRow[]; summaries: StepSummary[]; outputs: StepOutput[];
   prompt: Prompt | null; sessionId: string | null; text: string; known: Source[]; sources: Source[]; artifacts: LiveArtifact[];
   error: { code: string; message: string; raw?: string } | null; meta: Partial<StoredMeta> | null; filler: boolean; fillerTick: number; elapsedMs: number;
@@ -454,7 +464,7 @@ function WorkingRow({ t, live }: { t: ToolRow; live: boolean }) {
       <span className="oiu-work__icon" aria-hidden>{state === "failed" ? <AlertTriangle className="size-3.5" /> : state === "running" ? <Loader2 className="size-3.5 oiu-spin" /> : <Check className="size-3.5" />}</span>
       <span className="oiu-work__chips" data-testid="working-chips"><PluginFavicon id={t.pluginId} size={16} /></span>
       <span className="oiu-work__text">
-        <span className="oiu-work__label">{state === "running" ? LABEL.searching(name) : state === "failed" ? LABEL.failed(name) : t.sources != null ? LABEL.searched(name, t.sources) : `${name} done`}{state === "done" && t.durationMs ? <span className="oiu-work__dur"> · {(t.durationMs / 1000).toFixed(1)} s</span> : null}</span>
+        <span className="oiu-work__label">{state === "running" ? LABEL.action(name) : state === "failed" ? LABEL.failed(name) : LABEL.done(t.sources, t.durationMs)}{state === "done" ? <span className="oiu-work__via"> · {name}</span> : null}</span>
         {t.query ? <span className="oiu-work__query">“{t.query.slice(0, 140)}{t.query.length > 140 ? "…" : ""}”</span> : null}
         {state === "failed" && t.message ? <span className="oiu-work__err">{t.message}</span> : null}
         {state === "failed" && t.raw ? <RawFrame raw={t.raw} /> : null}
@@ -507,7 +517,7 @@ function ArtifactRow({ a }: { a: LiveArtifact }) {
 }
 function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void }) {
   const [cites, setCites] = useState<Cite[]>([]);
-  const thinkingShown = useThrottled(r.thinking.length > 4000 ? r.thinking.slice(-4000) : r.thinking, 250);
+  const thinkingShown = useThrottled(r.thinking, 250); // full trace — the 4,000 / 6,000-char caps are gone (UX spec: one uncapped block per turn)
   const showSkeleton = r.live && r.tools.length === 0 && !r.answerStarted && r.phase !== "awaiting-input";
   const readyArts = r.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!);
   const media = useMemo(() => mediaFrom(r.text, readyArts), [r.text, readyArts.length]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -516,9 +526,11 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
   const gap = r.error ? r.error.message : failedTools.length ? `${failedTools.map((t) => t.name).join(", ")} failed: ${failedTools[0].message ?? "upstream error"}` : r.artifacts.find((a) => a.phase === "failed") ? `A file could not be saved: ${r.artifacts.find((a) => a.phase === "failed")!.message ?? "storage error"}` : "";
   return (
     <div className="oiu-run" data-testid="run-view" data-live={r.live ? "true" : "false"}>
-      {/* 1 — Thinking, pinned at the top */}
+      {/* 1 — Run header: model · reasoning · plugin chips · live timer (heartbeat keeps it alive until [DONE]) */}
+      <RunHeader live={r.live} pluginIds={r.pluginIds} elapsedMs={r.elapsedMs} phase={r.detail} />
+      {/* 2 — Thinking, pinned at the top: ONE block per turn, phase labels, uncapped, collapses to one line at the first answer token */}
       {(r.thinking || r.live) && (
-        <ThinkingBlock text={thinkingShown} kinds={r.thinkingKinds} live={r.live} collapsed={r.answerStarted || !r.live} elapsedMs={r.elapsedMs} />
+        <ThinkingBlock text={thinkingShown} phases={r.thinkingPhases} kinds={r.thinkingKinds} live={r.live} collapsed={r.answerStarted || !r.live} elapsedMs={r.elapsedMs} />
       )}
       {/* 2 — Plan checklist */}
       {(r.plan || (r.live && !r.answerStarted)) && <PlanStepper plan={r.plan} reserve={r.live} />}
@@ -552,25 +564,53 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
       {(!r.live || r.answerDone) && <CollapsedSources sources={railSources} live={r.live} />}
       {/* 10 — one Data gap sentence on failure */}
       {gap && !r.live && <p className="oiu-gap" role="alert" data-testid="data-gap"><AlertTriangle className="size-3.5" aria-hidden /> <strong>Data gap:</strong> {gap}</p>}
+      {/* 11 — footer: first event / first token / total / tokens */}
       {!r.live && r.meta && <AnswerBadge meta={r.meta} />}
     </div>
   );
 }
+/** Live timer that ticks every 500 ms while the run is live — the heartbeat frames (CE.heartbeat) keep the store alive until [DONE]. */
+function useLiveElapsed(live: boolean, elapsedMs: number) {
+  const [, force] = useState(0);
+  useEffect(() => { if (!live) return; const id = setInterval(() => force((n) => n + 1), 500); return () => clearInterval(id); }, [live]);
+  return elapsedMs;
+}
+/** Block 1 — run header: model · reasoning · plugin chips · live timer. One row, fixed height, identical live and settled. */
+function RunHeader({ live, pluginIds, elapsedMs, phase }: { live: boolean; pluginIds: string[]; elapsedMs: number; phase: string }) {
+  const ms = useLiveElapsed(live, elapsedMs);
+  const plugins = pluginIds.length ? pluginIds : [PLUGIN_ID];
+  return (
+    <header className={`oiu-runhead${live ? " oiu-runhead--live" : ""}`} data-testid="run-header" data-live={live ? "true" : "false"}>
+      <span className="oiu-runhead__model"><Cpu className="size-3" aria-hidden />{MODEL_LABEL}</span>
+      <span className="oiu-badge__sep">·</span><span className="oiu-runhead__reason">{REASONING_MODE}</span>
+      <span className="oiu-badge__sep">·</span>
+      <span className="oiu-runhead__plugins" data-testid="run-header-plugins">{plugins.slice(0, 6).map((id) => <span key={id} className="oiu-runhead__plugin" title={catalogueName(id)}><PluginFavicon id={id} size={14} /><span className="oiu-runhead__pname">{catalogueName(id)}</span></span>)}</span>
+      <span className="oiu-runhead__timer" data-testid="run-timer" aria-live="off">{live ? <Loader2 className="size-3 oiu-spin" aria-hidden /> : <Check className="size-3" aria-hidden />}{(Math.max(0, ms) / 1000).toFixed(live ? 1 : 1)} s{live && phase ? <span className="oiu-runhead__phase"> · {phase}</span> : null}</span>
+    </header>
+  );
+}
 /** Thinking block pinned at the top of the turn: shows the live tail while streaming, collapses once the answer starts. */
-function ThinkingBlock({ text, kinds, live, collapsed, elapsedMs }: { text: string; kinds: string[]; live: boolean; collapsed: boolean; elapsedMs: number }) {
+function ThinkingBlock({ text, phases, kinds, live, collapsed, elapsedMs }: { text: string; phases: ThinkingPhase[]; kinds: string[]; live: boolean; collapsed: boolean; elapsedMs: number }) {
   const [open, setOpen] = useState<boolean | null>(null);
   const isOpen = open ?? !collapsed;
   const lines = text.split("\n").filter(Boolean);
+  const current = phases.length ? phases[phases.length - 1].label : kinds.length ? (kinds[0].startsWith("planning") ? "Planning" : "Step 1") : "Planning";
   return (
     <section className={`oiu-think${isOpen ? " oiu-think--open" : ""}${live && !collapsed ? " oiu-think--live" : ""}`} data-testid="thinking-block" data-state={live && !collapsed ? "streaming" : "collapsed"} data-chars={text.length}>
       <button type="button" className="oiu-think__head" aria-expanded={isOpen} onClick={() => setOpen(!isOpen)}>
         {live && !collapsed ? <Loader2 className="size-3.5 oiu-spin" aria-hidden /> : <Brain className="size-3.5" aria-hidden />}
         <span>{live && !collapsed ? "Thinking" : `Thought for ${Math.max(1, Math.round(elapsedMs / 1000))} s`}</span>
+        {live && !collapsed && <span className="oiu-think__phase" data-testid="thinking-phase">{current}</span>}
         {live && !collapsed && lines.length > 0 && <span className="oiu-think__tail" aria-hidden>{lines[lines.length - 1].slice(-56)}</span>}
-        {kinds.length ? <span className="oiu-think__kinds">{kinds.map((k) => k.replace("_output", "").replace("step", "steps")).join(" · ")}</span> : null}
+        {(!live || collapsed) && phases.length > 0 ? <span className="oiu-think__kinds" data-testid="thinking-phases">{Array.from(new Set(phases.map((p) => p.label))).join(" · ")}</span> : null}
+        <span className="oiu-think__len" data-testid="thinking-chars">{text.length.toLocaleString()} chars</span>
         <ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden />
       </button>
-      {isOpen && <div className="oiu-think__body">{text ? <pre className="oiu-think__pre">{(live && !collapsed ? lines.slice(-4) : lines.slice(-200)).join("\n")}</pre> : <span className="oiu-shimmer" aria-hidden><span /><span /></span>}</div>}
+      {isOpen && <div className="oiu-think__body">{text ? (live && !collapsed
+        ? <pre className="oiu-think__pre">{lines.slice(-4).join("\n")}</pre>
+        : phases.length
+          ? <div className="oiu-think__phases">{phases.map((p, i) => <section key={i} className="oiu-think__ph" data-testid="thinking-phase-section" data-label={p.label}><p className="oiu-think__ph-label">{p.label}</p><pre className="oiu-think__pre">{p.text.trim()}</pre></section>)}</div>
+          : <pre className="oiu-think__pre">{text}</pre>) : <span className="oiu-shimmer" aria-hidden><span /><span /></span>}</div>}
     </section>
   );
 }
@@ -585,7 +625,7 @@ const AssistantMessage: AssistantMessageComponent = memo(function AssistantMessa
   // The live turn is drawn by PluginTimeline (OpenUI routes it there while tools are on the turn); this view is the settled replay.
   if (isStreaming) return <div className="oiu-assistant" data-testid="assistant-message"><div className="oiu-assistant__avatar" aria-hidden><Bot className="size-4" strokeWidth={2} /></div><div className="oiu-assistant__body"><CitedMarkdown text={content || "…"} known={[]} streaming onCites={undefined} /></div></div>;
   const r: RunData = {
-    live: false, phase: "idle", detail: "", thinking: meta?.thinking ?? "", thinkingKinds: [], answerStarted: true,
+    live: false, phase: "idle", detail: "", thinking: meta?.thinking ?? "", thinkingKinds: [], thinkingPhases: meta?.thinkingPhases ?? [], answerStarted: true, pluginIds: meta?.pluginIds ?? [PLUGIN_ID],
     plan: meta?.plan ? { objective: meta.plan.objective, steps: meta.plan.steps.map((s) => ({ ...s, state: s.state === "running" ? "done" : s.state })) } : null,
     tools: (meta?.tools ?? []).map((t) => ({ ...t, status: t.status === "running" ? "done" : t.status })),
     summaries: (meta?.summaries ?? []).map((s) => ({ index: s.index, stepId: "", state: "done" as const, text: s.text, optimistic: false, startedAt: 0, doneAt: s.doneAt ?? undefined })),
@@ -624,7 +664,7 @@ const PluginTimeline: ToolCallTimelineComponent = ({ steps, isLast }) => {
   const liveText = live ? steps.filter((s): s is Extract<typeof s, { type: "text" }> => s.type === "text").map((s) => s.text).join("\n\n") : "";
   if (!live) return null; // settled turns are drawn by AssistantMessage → RunView from the stored run meta (same order)
   const r: RunData = {
-    live: true, answerDone: st.answerDone, phase: st.phase, detail: st.detail, thinking: st.thinking, thinkingKinds: st.thinkingKinds, answerStarted: !!(liveText || st.text),
+    live: true, answerDone: st.answerDone, phase: st.phase, detail: st.detail, thinking: st.thinking, thinkingKinds: st.thinkingKinds, thinkingPhases: st.thinkingPhases, answerStarted: !!(liveText || st.text), pluginIds: st.pluginIds,
     plan: st.plan, tools: st.tools, summaries: st.summaries, outputs: st.outputs, prompt: st.prompt, sessionId: st.sessionId,
     text: liveText || st.text, known: st.error?.code === "plugin_error" ? [] : st.sources, sources: st.sources, artifacts: st.artifacts,
     error: st.error, meta: { pluginIds: st.pluginIds }, filler: st.filler, fillerTick: st.fillerTick, elapsedMs: st.startedAt ? Date.now() - st.startedAt : 0,

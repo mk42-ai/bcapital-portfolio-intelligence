@@ -163,4 +163,8 @@ export const LABEL = {
   searching: (plugin: string) => `Searching with ${plugin}`,
   searched: (plugin: string, n: number) => `${plugin} searched · ${n} source${n === 1 ? "" : "s"}`,
   failed: (plugin: string) => `${plugin} failed`,
+  /** Action-style label drawn BEFORE the action resolves (UX spec: "Searching the web", "Gathering news, prices and indicators"). */
+  action: (plugin: string) => (/perplexity|search|google|bing|tavily|exa|serp|web/i.test(plugin) ? "Searching the web" : /news/i.test(plugin) ? "Gathering the latest news" : /stock|market|price|finance|yahoo/i.test(plugin) ? "Gathering prices and indicators" : /linkedin|reddit|x search|twitter|social/i.test(plugin) ? "Reading social signals" : /pitchbook|crunchbase|investor/i.test(plugin) ? "Looking up deal data" : /mail|email|send/i.test(plugin) ? "Sending" : `Using ${plugin}`),
+  /** Done row: "8 sources · 18.2 s" (never an empty box). */
+  done: (sources: number | undefined, durationMs: number | undefined) => `${sources != null ? `${sources} source${sources === 1 ? "" : "s"}` : "done"}${durationMs ? ` · ${(durationMs / 1000).toFixed(1)} s` : ""}`,
 } as const;
