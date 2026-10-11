@@ -39,7 +39,7 @@ function EmptyGlyph() {
   const [missing, setMissing] = useState(false);
   if (missing) return <Newspaper className="nmf-empty__glyph" strokeWidth={1.5} aria-hidden />;
   // eslint-disable-next-line @next/next/no-img-element
-  return <img className="nmf-empty__glyph" src="/icons/empty/no-news.svg" alt="" width={48} height={48} loading="lazy" decoding="async" onError={() => setMissing(true)} />;
+  return <img className="nmf-empty__glyph" src="/brand/icons/icon-news-sentiment.png" data-testid="brand-icon" data-slot="empty-no-news" data-icon="news-sentiment" alt="" width={48} height={48} loading="lazy" decoding="async" onError={() => setMissing(true)} />;
 }
 
 export function NewsMiniFeed({ items, total }: { items: NewsMiniItem[]; total: number }) {

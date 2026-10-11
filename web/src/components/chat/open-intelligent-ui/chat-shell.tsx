@@ -27,6 +27,8 @@ export type PlannerPayload = { planning: string; steps: Record<string, string> }
 const EMPTY_PAYLOAD: PlannerPayload = { planning: "", steps: {} };
 export const hasPayload = (p: PlannerPayload | null | undefined): p is PlannerPayload => !!p && (p.planning.trim().length > 0 || Object.values(p.steps).some((t) => t.trim().length > 0));
 import { PluginFavicon, preloadPluginFavicons } from "@/components/ui/plugin-favicon";
+import { BrandIcon } from "@/components/ui/brand-icon";
+import { brandIconForOperation, brandIconForPlugin, brandIconForStarter } from "@/lib/brand-icons";
 import { RunStatusHeader } from "@/components/chat/run-status-header";
 import { fmtScore } from "@/lib/format";
 import { VoiceDock } from "@/components/chat/voice/voice-dock";
@@ -86,7 +88,7 @@ type StreamState = {
 /** One Working row = one plugin/agent action (TOOL_CALL_START/ARGS/RESULT from the bridge). */
 export type ToolRow = { id: string; name: string; pluginId: string; query: string; stepId: string; status: "running" | "done" | "failed"; sources?: number; durationMs?: number; message?: string; raw?: string; startedAt?: number; finishedAt?: number };
 export type LiveArtifact = { key: string; name: string; phase: "creating" | "ready" | "failed"; artifact?: Artifact; message?: string; media?: { status?: string; id?: string | null; message?: string | null } };
-export type StepOutput = { stepId: string; title: string; plugins: { pluginId: string; name: string; params: Record<string, unknown> | null }[]; at: number };
+export type StepOutput = { stepId: string; title: string; plugins: { pluginId: string; name: string; operationId?: string | null; params: Record<string, unknown> | null }[]; at: number };
 const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, finishedAt: null, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null, artifacts: [], outputs: [], tools: [], plannerPayload: EMPTY_PAYLOAD };
 let streamState: StreamState = IDLE;
 let pending: Partial<StreamState> | null = null; let rafId = 0;
@@ -580,7 +582,7 @@ function OutputsCard({ outputs: raw, plannerPayload }: { outputs: StepOutput[]; 
   return (
     <section className="oiu-outputs" data-testid="outputs-card" data-count={outputs.length} data-has-payload="false">
       <p className="oiu-outputs__head" aria-label={head}><Wrench className="size-3.5" aria-hidden /><span>{head}</span></p>
-      {outputs.length > 0 && <ol className="oiu-outputs__list">{outputs.map((o) => <li key={o.stepId} data-testid="output-step"><strong>{o.title}</strong>{o.plugins.map((pl, i) => <span key={i} className="oiu-outputs__call"><PluginFavicon id={pl.pluginId} size={14} /> <span title={pl.pluginId} data-plugin-id={pl.pluginId}>{friendlyPlugin(pl.name || pl.pluginId)}</span><code>{JSON.stringify(pl.params).slice(0, 160)}</code></span>)}</li>)}</ol>}
+      {outputs.length > 0 && <ol className="oiu-outputs__list">{outputs.map((o) => <li key={o.stepId} data-testid="output-step"><strong>{o.title}</strong>{o.plugins.map((pl, i) => <span key={i} className="oiu-outputs__call" data-operation-id={pl.operationId ?? undefined}><PluginFavicon id={pl.pluginId} size={14} />{brandIconForOperation(pl.operationId) && <BrandIcon name={brandIconForOperation(pl.operationId)!} size={14} slot="outputs-step" title={pl.operationId ?? undefined} />} <span title={pl.pluginId} data-plugin-id={pl.pluginId}>{friendlyPlugin(pl.name || pl.pluginId)}</span><code>{JSON.stringify(pl.params).slice(0, 160)}</code></span>)}</li>)}</ol>}
     </section>
   );
 }
@@ -649,6 +651,11 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
     : runningStep ? runningStep.title
     : r.answerStarted && r.live ? "Writing the answer"
     : r.plan?.objective || (r.detail && r.detail !== LABEL.working ? r.detail : r.live ? "Connecting to OnDemand" : "");
+  const statusIcon = statusState === "failed" ? null
+    : runningTool ? brandIconForPlugin(runningTool.pluginId, runningTool.name)
+    : runningStep ? (brandIconForOperation(runningStep.title) ?? brandIconForPlugin(null, runningStep.title))
+    : r.answerStarted && r.live ? "writer-compose"
+    : null;
   const stepsTotal = r.plan?.steps.length ?? 0; const stepsDone = r.plan?.steps.filter((st) => st.state === "done").length ?? 0;
   const oStats = outputStats(r.outputs, r.plannerPayload);
   const statusElapsed = r.totalMs ?? r.meta?.totalMs ?? r.elapsedMs;
@@ -657,7 +664,7 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
       {/* 0 — Run header: model · reasoning · plugin chips · live timer */}
       <RunHeader live={r.live} startedAt={r.startedAt} totalMs={r.totalMs} pluginIds={(r.meta?.pluginIds as string[] | undefined) ?? [PLUGIN_ID]} />
       {/* 0b — a1: ONE status header anchored at the top (replaces the interleaved Working band + Outputs row) */}
-      <RunStatusHeader state={statusState} task={statusTask} elapsedMs={statusElapsed} live={r.live && !r.answerDone} startedAt={r.startedAt}
+      <RunStatusHeader state={statusState} task={statusTask} icon={statusIcon} elapsedMs={statusElapsed} live={r.live && !r.answerDone} startedAt={r.startedAt}
         stepsDone={stepsDone} stepsTotal={stepsTotal} outputSteps={oStats.outputs.length} calls={oStats.calls} hasOutputs={oStats.has}
         onToggleOutputs={oStats.has ? () => setOutputsOpen((o) => !o) : undefined} outputsOpen={outputsOpen} />
       {/* 1 — Thinking, pinned at the top (ONE per turn, never moves) */}
@@ -993,7 +1000,7 @@ function ChatWelcome({ companies }: { companies: CoCtx[] }) {
       <div className="oiu-welcome__starters" data-testid="welcome-starters">
         {starters.slice(0, 3).map((st) => (
           <button key={st.prompt} type="button" className="oiu-welcome__starter" disabled={isRunning} onClick={() => { void processMessage({ role: "user", content: st.prompt }); }}>
-            <Sparkles className="size-3.5" aria-hidden /><span><strong>{st.displayText}</strong><span className="oiu-welcome__starter-prompt">{st.prompt}</span></span>
+            <BrandIcon name={brandIconForStarter(st.displayText)} size={18} slot="welcome-starter" /><span><strong>{st.displayText}</strong><span className="oiu-welcome__starter-prompt">{st.prompt}</span></span>
           </button>
         ))}
       </div>

@@ -1,6 +1,6 @@
 {
-  "$schema": "./icon-manifest.schema (informal) — see web/docs/ICONS.md",
-  "version": 1,
+  "$schema": "./icon-manifest.schema (informal) \u2014 see web/docs/ICONS.md",
+  "version": "1+brand-icons-2026-10-11",
   "generated_by": "web/scripts/icon-qa.py + a39",
   "palette": {
     "ink": "#1F2937",
@@ -13,13 +13,13 @@
     "linecap": "round",
     "linejoin": "round",
     "accent_elements": 1,
-    "forbidden_hues": "190–260° (sat>0.15, chroma>0.15)"
+    "forbidden_hues": "190\u2013260\u00b0 (sat>0.15, chroma>0.15)"
   },
   "icons": [
     {
       "name": "geothermal-rig",
       "kind": "glyph",
-      "role": "Fervo Energy — geothermal sector glyph (company list / company page)",
+      "role": "Fervo Energy \u2014 geothermal sector glyph (company list / company page)",
       "png_src": "/icons/glyphs-src/geothermal-rig.png",
       "svg": "/icons/glyphs/geothermal-rig.svg",
       "size": {
@@ -63,7 +63,7 @@
     {
       "name": "payments-card",
       "kind": "glyph",
-      "role": "Flutterwave — payments sector glyph",
+      "role": "Flutterwave \u2014 payments sector glyph",
       "png_src": "/icons/glyphs-src/payments-card.png",
       "svg": "/icons/glyphs/payments-card.svg",
       "size": {
@@ -106,7 +106,7 @@
     {
       "name": "robot-bust",
       "kind": "glyph",
-      "role": "Apptronik — humanoid robotics sector glyph",
+      "role": "Apptronik \u2014 humanoid robotics sector glyph",
       "png_src": "/icons/glyphs-src/robot-bust.png",
       "svg": "/icons/glyphs/robot-bust.svg",
       "size": {
@@ -149,7 +149,7 @@
     {
       "name": "search-bubble",
       "kind": "glyph",
-      "role": "Perplexity AI — answer-engine sector glyph",
+      "role": "Perplexity AI \u2014 answer-engine sector glyph",
       "png_src": "/icons/glyphs-src/search-bubble.png",
       "svg": "/icons/glyphs/search-bubble.svg",
       "size": {
@@ -192,7 +192,7 @@
     {
       "name": "pen-lines",
       "kind": "glyph",
-      "role": "WRITER — enterprise writing glyph",
+      "role": "WRITER \u2014 enterprise writing glyph",
       "png_src": "/icons/glyphs-src/pen-lines.png",
       "svg": "/icons/glyphs/pen-lines.svg",
       "size": {
@@ -235,7 +235,7 @@
     {
       "name": "car-radar",
       "kind": "glyph",
-      "role": "AIMotive — automotive AI / sensing glyph",
+      "role": "AIMotive \u2014 automotive AI / sensing glyph",
       "png_src": "/icons/glyphs-src/car-radar.png",
       "svg": "/icons/glyphs/car-radar.svg",
       "size": {
@@ -408,7 +408,7 @@
     {
       "name": "cmdk-key",
       "kind": "glyph",
-      "role": "Shell: ⌘K command palette hint",
+      "role": "Shell: \u2318K command palette hint",
       "png_src": "/icons/glyphs-src/cmdk-key.png",
       "svg": "/icons/glyphs/cmdk-key.svg",
       "size": {
@@ -455,7 +455,7 @@
       "role": "Artifacts: PDF/preview could not be rendered",
       "png_src": "/icons/preview-unavailable.png",
       "svg": "/icons/empty/preview-unavailable.svg",
-      "svg_status": "registered — authored by a24 (web/public/icons/empty/*.svg); not present in this branch",
+      "svg_status": "registered \u2014 authored by a24 (web/public/icons/empty/*.svg); not present in this branch",
       "size": {
         "png": [
           1024,
@@ -481,7 +481,7 @@
       "role": "Artifacts panel: no artifacts yet",
       "png_src": "/icons/empty-artifacts.png",
       "svg": "/icons/empty/empty-artifacts.svg",
-      "svg_status": "registered — authored by a24 (web/public/icons/empty/*.svg); not present in this branch",
+      "svg_status": "registered \u2014 authored by a24 (web/public/icons/empty/*.svg); not present in this branch",
       "size": {
         "png": [
           1024,
@@ -507,7 +507,7 @@
       "role": "Artifacts: open in new tab button",
       "png_src": "/icons/open-externally.png",
       "svg": "/icons/empty/open-externally.svg",
-      "svg_status": "registered — authored by a24 (web/public/icons/empty/*.svg); not present in this branch",
+      "svg_status": "registered \u2014 authored by a24 (web/public/icons/empty/*.svg); not present in this branch",
       "size": {
         "png": [
           1024,
@@ -533,7 +533,7 @@
       "role": "Artifact card: version history",
       "png_src": "/icons/version-history.png",
       "svg": "/icons/empty/version-history.svg",
-      "svg_status": "registered — authored by a24 (web/public/icons/empty/*.svg); not present in this branch",
+      "svg_status": "registered \u2014 authored by a24 (web/public/icons/empty/*.svg); not present in this branch",
       "size": {
         "png": [
           1024,
@@ -552,6 +552,256 @@
       "qa": null,
       "fallback_lucide": "History",
       "used_in": "artifact-card.tsx art-versions-icon"
+    },
+    {
+      "name": "icon-writer-compose",
+      "kind": "brand-icon",
+      "set": "2026-10-11 flat-line brand icons",
+      "role": "WRITER company glyph \u00b7 LP update starter \u00b7 write/compose tools",
+      "png": "/brand/icons/icon-writer-compose.png",
+      "size": {
+        "png": [
+          1024,
+          1024
+        ]
+      },
+      "stroke": {
+        "spec": "2px charcoal #1F2937 at 24px grid, drawn on a 1024 canvas"
+      },
+      "accent": {
+        "hex": "#0AC985",
+        "element": "pen tip"
+      },
+      "ink": "#1F2937",
+      "sha256": "a46f61f65f0d62db4753be5966f6bc3b6e3c9520a1d2e5a9d6d17320e7b0640f",
+      "bytes": 618463,
+      "registry": "web/src/lib/brand-icons.ts",
+      "component": "web/src/components/ui/brand-icon.tsx"
+    },
+    {
+      "name": "icon-research-search",
+      "kind": "brand-icon",
+      "set": "2026-10-11 flat-line brand icons",
+      "role": "Perplexity/GPT/Internet search plugins \u00b7 Latest-news starter \u00b7 no-results empty state",
+      "png": "/brand/icons/icon-research-search.png",
+      "size": {
+        "png": [
+          1024,
+          1024
+        ]
+      },
+      "stroke": {
+        "spec": "2px charcoal #1F2937 at 24px grid, drawn on a 1024 canvas"
+      },
+      "accent": {
+        "hex": "#0AC985",
+        "element": "lens dot"
+      },
+      "ink": "#1F2937",
+      "sha256": "fe288676710a9714a80400f571ce8bee781751cafe9ac9438308a8295c5480f1",
+      "bytes": 621917,
+      "registry": "web/src/lib/brand-icons.ts",
+      "component": "web/src/components/ui/brand-icon.tsx"
+    },
+    {
+      "name": "icon-compare",
+      "kind": "brand-icon",
+      "set": "2026-10-11 flat-line brand icons",
+      "role": "Compare starter \u00b7 /compare strip \u00b7 no-selection empty state \u00b7 PitchBook",
+      "png": "/brand/icons/icon-compare.png",
+      "size": {
+        "png": [
+          1024,
+          1024
+        ]
+      },
+      "stroke": {
+        "spec": "2px charcoal #1F2937 at 24px grid, drawn on a 1024 canvas"
+      },
+      "accent": {
+        "hex": "#0AC985",
+        "element": "divider"
+      },
+      "ink": "#1F2937",
+      "sha256": "e34dd0da73e3d13ea8c5f79fe823933aa912793318c64f099127923068a35c31",
+      "bytes": 606871,
+      "registry": "web/src/lib/brand-icons.ts",
+      "component": "web/src/components/ui/brand-icon.tsx"
+    },
+    {
+      "name": "icon-stock-market",
+      "kind": "brand-icon",
+      "set": "2026-10-11 flat-line brand icons",
+      "role": "US Stock plugins \u00b7 quarterly financials",
+      "png": "/brand/icons/icon-stock-market.png",
+      "size": {
+        "png": [
+          1024,
+          1024
+        ]
+      },
+      "stroke": {
+        "spec": "2px charcoal #1F2937 at 24px grid, drawn on a 1024 canvas"
+      },
+      "accent": {
+        "hex": "#0AC985",
+        "element": "trend arrow"
+      },
+      "ink": "#1F2937",
+      "sha256": "df7031a0e7a300f4239e417a8b2c205eb4e3d18e74e080a3cad8e083138049ff",
+      "bytes": 612738,
+      "registry": "web/src/lib/brand-icons.ts",
+      "component": "web/src/components/ui/brand-icon.tsx"
+    },
+    {
+      "name": "icon-fervo-geothermal",
+      "kind": "brand-icon",
+      "set": "2026-10-11 flat-line brand icons",
+      "role": "Fervo Energy company glyph",
+      "png": "/brand/icons/icon-fervo-geothermal.png",
+      "size": {
+        "png": [
+          1024,
+          1024
+        ]
+      },
+      "stroke": {
+        "spec": "2px charcoal #1F2937 at 24px grid, drawn on a 1024 canvas"
+      },
+      "accent": {
+        "hex": "#0AC985",
+        "element": "steam curl"
+      },
+      "ink": "#1F2937",
+      "sha256": "782a9b75ef0087ec4d80561c93de794ec05f63d013cba39ae43dc1c8dcc69025",
+      "bytes": 705124,
+      "registry": "web/src/lib/brand-icons.ts",
+      "component": "web/src/components/ui/brand-icon.tsx"
+    },
+    {
+      "name": "icon-portfolio-listing",
+      "kind": "brand-icon",
+      "set": "2026-10-11 flat-line brand icons",
+      "role": "Portfolio Plugin listPortfolioCompanies / company operations (run status row, Outputs rows)",
+      "png": "/brand/icons/icon-portfolio-listing.png",
+      "size": {
+        "png": [
+          1024,
+          1024
+        ]
+      },
+      "stroke": {
+        "spec": "2px charcoal #1F2937 at 24px grid, drawn on a 1024 canvas"
+      },
+      "accent": {
+        "hex": "#0AC985",
+        "element": "list marker"
+      },
+      "ink": "#1F2937",
+      "sha256": "90d83527eeaaee79cd91382b5e3b0946a3467b595472cce3a82a0e7210226614",
+      "bytes": 614928,
+      "registry": "web/src/lib/brand-icons.ts",
+      "component": "web/src/components/ui/brand-icon.tsx"
+    },
+    {
+      "name": "icon-agent",
+      "kind": "brand-icon",
+      "set": "2026-10-11 flat-line brand icons",
+      "role": "OnDemand agent / executePrompt rows \u00b7 Apptronik glyph \u00b7 no-plugins empty state",
+      "png": "/brand/icons/icon-agent.png",
+      "size": {
+        "png": [
+          1024,
+          1024
+        ]
+      },
+      "stroke": {
+        "spec": "2px charcoal #1F2937 at 24px grid, drawn on a 1024 canvas"
+      },
+      "accent": {
+        "hex": "#0AC985",
+        "element": "eye"
+      },
+      "ink": "#1F2937",
+      "sha256": "405f4c43126222ec6effc01292118e3b4140ff9696258656cd6a3d3c27107177",
+      "bytes": 632773,
+      "registry": "web/src/lib/brand-icons.ts",
+      "component": "web/src/components/ui/brand-icon.tsx"
+    },
+    {
+      "name": "icon-autonomous-mobility",
+      "kind": "brand-icon",
+      "set": "2026-10-11 flat-line brand icons",
+      "role": "AIMotive company glyph",
+      "png": "/brand/icons/icon-autonomous-mobility.png",
+      "size": {
+        "png": [
+          1024,
+          1024
+        ]
+      },
+      "stroke": {
+        "spec": "2px charcoal #1F2937 at 24px grid, drawn on a 1024 canvas"
+      },
+      "accent": {
+        "hex": "#0AC985",
+        "element": "radar arc"
+      },
+      "ink": "#1F2937",
+      "sha256": "73620c61dd9bf5d50d3cfb431a03f75049ab5e941fb9c3c26bfb5fe276802ed7",
+      "bytes": 669827,
+      "registry": "web/src/lib/brand-icons.ts",
+      "component": "web/src/components/ui/brand-icon.tsx"
+    },
+    {
+      "name": "icon-news-sentiment",
+      "kind": "brand-icon",
+      "set": "2026-10-11 flat-line brand icons",
+      "role": "getPortfolioCompanySentiment / news operations \u00b7 News Pulse \u00b7 no-news empty state",
+      "png": "/brand/icons/icon-news-sentiment.png",
+      "size": {
+        "png": [
+          1024,
+          1024
+        ]
+      },
+      "stroke": {
+        "spec": "2px charcoal #1F2937 at 24px grid, drawn on a 1024 canvas"
+      },
+      "accent": {
+        "hex": "#0AC985",
+        "element": "pulse line"
+      },
+      "ink": "#1F2937",
+      "sha256": "3ef9f3a30db3a9aee365fa64ed6b2d106d4b7848e175657d1d0e7d69e67b871b",
+      "bytes": 629392,
+      "registry": "web/src/lib/brand-icons.ts",
+      "component": "web/src/components/ui/brand-icon.tsx"
+    },
+    {
+      "name": "icon-payments-fintech",
+      "kind": "brand-icon",
+      "set": "2026-10-11 flat-line brand icons",
+      "role": "Flutterwave company glyph \u00b7 payments plugins",
+      "png": "/brand/icons/icon-payments-fintech.png",
+      "size": {
+        "png": [
+          1024,
+          1024
+        ]
+      },
+      "stroke": {
+        "spec": "2px charcoal #1F2937 at 24px grid, drawn on a 1024 canvas"
+      },
+      "accent": {
+        "hex": "#0AC985",
+        "element": "card chip"
+      },
+      "ink": "#1F2937",
+      "sha256": "e1b5c17533eeabc6b176b913553c3eb4dd3a3302e9104ad68cb626184be91846",
+      "bytes": 670199,
+      "registry": "web/src/lib/brand-icons.ts",
+      "component": "web/src/components/ui/brand-icon.tsx"
     }
   ]
 }

@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useEffect, useState, type ReactNode, type SyntheticEvent } from "react";
 import { ArrowDownRight, ArrowUpRight, Minus } from "lucide-react";
 import { resolveLogo } from "@/lib/local-logos";
+import { BrandIcon } from "@/components/ui/brand-icon";
+import { brandIconForCompany } from "@/lib/brand-icons";
 import { imageSrc } from "@/lib/img-proxy";
 import { fmtScore, fmtUsd } from "@/lib/format";
 import "./company-card.css";
@@ -106,7 +108,7 @@ export function CompanyCard({ row, maxNews, variant = "list", linkProps, childre
       <div className="company-card-main">
         <div className="company-card-title">
           <Link href={`/company/${row.slug}`} {...linkProps} className="company-card-link focus-visible:outline-3 focus-visible:outline-ring"><span data-testid="company-row-name">{row.name}</span></Link>
-          <span className="chip-sector" data-sector={row.sector} data-testid="company-card-sector">{row.sector}</span>
+          <span className="chip-sector" data-sector={row.sector} data-testid="company-card-sector">{brandIconForCompany(row.slug, row.sector) && <BrandIcon name={brandIconForCompany(row.slug, row.sector)!} size={14} slot="company-card" className="mr-1 align-[-3px]" />}{row.sector}</span>
         </div>
         <p className="company-card-sub">{sub || "—"}</p>
         <LastDeal row={row} />

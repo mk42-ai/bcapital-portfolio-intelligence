@@ -7,6 +7,8 @@
  * states: thinking → working → done | failed. Fixed 56px height (zero CLS); brand green only; reduced-motion → static dots.
  * The Outputs summary ("1 step · 1 call") lives here as a trailing chip that toggles the OutputsCard body rendered below.
  */
+import { BrandIcon } from "@/components/ui/brand-icon";
+import type { BrandIconName } from "@/lib/brand-icons";
 import "./run-status-header.css";
 import { useEffect, useState } from "react";
 import { AlertTriangle, Check, ChevronDown, Wrench } from "lucide-react";
@@ -36,6 +38,8 @@ export type RunStatusHeaderProps = {
   outputsOpen?: boolean;
   /** Force the chip even when calls === 0 (e.g. only a planner payload exists). */
   hasOutputs?: boolean;
+  /** Brand icon (2026-10-11 flat-line set) for the running tool/operation — the mini icon left of the task text. */
+  icon?: BrandIconName | null;
 };
 
 const DEFAULT_LABEL: Record<RunStatusState, string> = { thinking: "Thinking", working: "Working", done: "Done", failed: "Needs attention" };
@@ -63,7 +67,7 @@ export function RunStatusHeader(p: RunStatusHeaderProps) {
       </span>
       <span className="rsh__main">
         <span className="rsh__label" data-testid="run-status-label">{label}{progress && <span className="rsh__progress" title="Plan steps done"> {progress}</span>}</span>
-        {p.task ? <span className="rsh__task" data-testid="run-status-task" title={p.task}>{p.task}</span> : null}
+        {p.task ? <span className="rsh__task" data-testid="run-status-task" title={p.task}>{p.icon && <BrandIcon name={p.icon} size={14} slot="run-status" className="rsh__icon" />}{p.task}</span> : null}
       </span>
       {showChip && (
         <button type="button" className="rsh__chip" data-testid="run-status-outputs" aria-expanded={!!p.outputsOpen} aria-label={`Outputs · ${chipText}`} onClick={p.onToggleOutputs}>

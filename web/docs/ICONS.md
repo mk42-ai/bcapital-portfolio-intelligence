@@ -63,3 +63,28 @@ Reading: all ten PNGs are 1024², white (not transparent) background, charcoal i
 2. Author `public/icons/glyphs/<name>.svg` to the spec above (one `#0AC985` element).
 3. Add the entry to `src/lib/icons.ts` (`GLYPHS`) and to `public/icons/icon-manifest.json`.
 4. Verify: `python3 -c "import xml.etree.ElementTree as ET,glob;[ET.parse(f) for f in glob.glob('web/public/icons/glyphs/*.svg')]"` and `grep -c 0AC985 web/public/icons/glyphs/*.svg` → `1` each.
+
+## 2026-10-11 flat-line brand icon set (`/brand/icons/icon-*.png`)
+
+Ten 1024² PNGs (2px charcoal `#1F2937` strokes on a 24px grid, ONE `#0AC985` accent each) delivered after the glyph pass above. They are
+**shipped as-is** (PNG, rendered at 14–20 px with `object-fit: contain`) — unlike the glyph sources they are icon-weight artwork, so no
+re-vectorisation was needed. Registry: `src/lib/brand-icons.ts` (`BRAND_ICONS`, `brandIconPath`, `brandIconForPlugin`,
+`brandIconForOperation`, `brandIconForCompany`, `brandIconForStarter`, `EMPTY_STATE_BRAND_ICON`); component `src/components/ui/brand-icon.tsx`
+(`<BrandIcon name slot/>` → `img[data-testid="brand-icon"][data-icon][data-slot]`); manifest entries `kind: "brand-icon"` in
+`public/icons/icon-manifest.json` (sha256 per file); tests `npm run test:brand-icons` (62) + `test:plugin-icons` (28).
+
+| file | plugin / feature slot | where it renders |
+|---|---|---|
+| icon-writer-compose.png | WRITER · write/compose/draft tools | welcome starter "LP update draft", status row while "Writing the answer", company card/inspector (WRITER) |
+| icon-research-search.png | Perplexity, Internet, GPT Search, LinkedIn Search (name rule) | plugin favicon slots (status row, Working rows, Outputs rows, plugin panel, run header), "Latest Fervo news" starter, no-results empty state |
+| icon-compare.png | PitchBook Investor Finder · compare | "Compare two" starter, no-selection empty state, compare operations |
+| icon-stock-market.png | US Stock Fundamental / Technical, Quarterly financials | plugin favicon slots |
+| icon-fervo-geothermal.png | Fervo Energy | company card sector chip, inspector context list |
+| icon-portfolio-listing.png | Portfolio Plugin `listPortfolioCompanies` / company operations | Outputs step rows (`data-operation-id`), status row when that step runs |
+| icon-agent.png | OnDemand agent / `executePrompt` · Apptronik | plugin favicon fallback by name rule, inspector/company glyph, no-plugins empty state |
+| icon-autonomous-mobility.png | AIMotive | company card sector chip, inspector |
+| icon-news-sentiment.png | `getPortfolioCompanySentiment`, news operations · News Pulse | Outputs rows, status row, no-news empty state (overview mini-feed + EmptyState) |
+| icon-payments-fintech.png | Flutterwave · payments/fintech plugins | company card sector chip, inspector |
+
+Precedence in `pluginIconFor()`: B Capital mark (Portfolio Plugin) → shipped SVG (Perplexity, OnDemand) → **brand icon** (this set) →
+remote favicon chain → monogram. The Portfolio Plugin itself therefore still draws `/brand/b-capital-mark.png`.

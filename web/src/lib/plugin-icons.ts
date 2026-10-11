@@ -9,6 +9,8 @@
  * Tests: web/tests/unit/plugin-icons.test.ts (`npm run test:plugin-icons`).
  */
 
+import { brandIconForPlugin, brandIconPath } from "./brand-icons";
+
 export type PluginIconKind = "brand" | "local" | "remote" | "monogram";
 
 export type PluginIcon = {
@@ -65,6 +67,10 @@ export function pluginIconFor(id: string | undefined | null, name?: string | nul
   if (pid === "executePrompt" || ONDEMAND_RE.test(hay)) {
     return { kind: "local", src: ONDEMAND_ICON_SRC, alt: label || "OnDemand agent" };
   }
+  // 2026-10-11 brand icon set (/brand/icons/icon-*.png): every other catalogue tool that maps to a brand icon draws it locally
+  // (stock/market, search, compare, news …) instead of a third-party favicon — no network, no grey monogram.
+  const brandIcon = brandIconForPlugin(pid, name);
+  if (brandIcon) return { kind: "local", src: brandIconPath(brandIcon), alt: label };
   if (remoteSrc) return { kind: "remote", src: remoteSrc, alt: label };
   return monogramFor(label);
 }

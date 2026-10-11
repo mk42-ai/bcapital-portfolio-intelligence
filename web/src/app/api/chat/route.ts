@@ -367,10 +367,10 @@ export async function POST(req: NextRequest) {
               const parsed = tryParseJson(stepBuf);
               if (parsed && !stepEmittedFor.has(stepBuf.length)) {
                 stepEmittedFor.add(stepBuf.length);
-                const r = parsed as { title?: string; plugins?: { pluginId?: string; name?: string; api_request_parameters?: Record<string, unknown> }[] };
+                const r = parsed as { title?: string; plugins?: { pluginId?: string; name?: string; operationId?: string; identifier?: string; api_request_parameters?: Record<string, unknown> }[] };
                 stepCounter += 1; currentStepId = u.stepId || String(stepCounter);
                 custom(CE.step, { phase: "start", stepId: currentStepId, index: stepCounter, label: String(r.title ?? `Step ${stepCounter}`).slice(0, 120), query: null, source: "step_output" });
-                custom(CE.stepOutput, { stepId: currentStepId, title: String(r.title ?? `Step ${stepCounter}`).slice(0, 160), plugins: (r.plugins ?? []).map((pl) => ({ pluginId: String(pl.pluginId ?? ""), name: pl.name ? String(pl.name) : pluginName(String(pl.pluginId ?? "")), params: pl.api_request_parameters ?? null })), raw: stepBuf.slice(0, 2000) });
+                custom(CE.stepOutput, { stepId: currentStepId, title: String(r.title ?? `Step ${stepCounter}`).slice(0, 160), plugins: (r.plugins ?? []).map((pl) => ({ pluginId: String(pl.pluginId ?? ""), name: pl.name ? String(pl.name) : pluginName(String(pl.pluginId ?? "")), operationId: pl.operationId ? String(pl.operationId).slice(0, 80) : (pl.name && /^[A-Za-z_][A-Za-z0-9_]*$/.test(String(pl.name)) ? String(pl.name) : null), params: pl.api_request_parameters ?? null })), raw: stepBuf.slice(0, 2000) });
                 for (const pl of r.plugins ?? []) { const pid = String(pl.pluginId ?? ""); const input = pl.api_request_parameters ? String(Object.values(pl.api_request_parameters)[0] ?? "") : ""; if (pluginIds.includes(pid)) toolStart(pid, pl.name ? pluginName(pid) : undefined, currentStepId, input || undefined); }
                 stepBuf = "";
               }

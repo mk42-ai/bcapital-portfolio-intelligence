@@ -37,8 +37,8 @@ const odSvg = existsSync(pub(ONDEMAND_ICON_SRC)) ? readFileSync(pub(ONDEMAND_ICO
 check("ondemand.svg exists, 24×24, green #0AC985 ring", /viewBox="0 0 24 24"/.test(odSvg) && /#0AC985/i.test(odSvg) && /<circle/.test(odSvg) && /<rect[^>]*rx=/.test(odSvg));
 
 console.log("plugin-icons: everything else → remote chain, monogram fallback");
-const remote = pluginIconFor("plugin-1713924030", "Crunchbase", "https://cdn.example/cb.png");
-eq("remote src kept", remote, { kind: "remote", src: "https://cdn.example/cb.png", alt: "Crunchbase" });
+const remote = pluginIconFor("plugin-1716372717", "Tiktok", "https://cdn.example/cb.png"); // Tiktok: no brand icon → remote chain
+eq("remote src kept", remote, { kind: "remote", src: "https://cdn.example/cb.png", alt: "Tiktok" });
 const mono = pluginIconFor("plugin-424242", "Zeta Tools");
 eq("unknown without remote → monogram", mono.kind, "monogram");
 eq("monogram letter = first letter of name", mono.letter, "Z");
@@ -46,6 +46,15 @@ eq("monogram bg #F3F4F6", mono.bg, MONOGRAM_BG);
 eq("monogram from bare id strips plugin- prefix", pluginIconFor("plugin-77").letter, "7");
 eq("monogramLetter('') → ?", monogramLetter(""), "?");
 eq("isLocalIcon brand/local true, remote/monogram false", [isLocalIcon(portfolio), isLocalIcon(px), isLocalIcon(remote), isLocalIcon(mono)], [true, true, false, false]);
+
+console.log("plugin-icons: 2026-10-11 brand icon set → local /brand/icons/*.png for mapped tools");
+const stock = pluginIconFor("plugin-1716429542", "US Stock Fundamental Analysis", "https://cdn.example/x.png");
+eq("US Stock plugin → local stock-market icon (beats remote favicon)", stock, { kind: "local", src: "/brand/icons/icon-stock-market.png", alt: "US Stock Fundamental Analysis" });
+eq("GPT Search → research-search icon", pluginIconFor("plugin-1741871229", "GPT Search").src, "/brand/icons/icon-research-search.png");
+eq("PitchBook → compare icon", pluginIconFor("plugin-1777018662", "Pitchbook Investor Finder").src, "/brand/icons/icon-compare.png");
+eq("name rule: 'Market data' → stock-market", pluginIconFor("plugin-5", "Market data").src, "/brand/icons/icon-stock-market.png");
+check("every brand icon PNG exists and starts with the PNG magic", ["writer-compose","research-search","compare","stock-market","fervo-geothermal","portfolio-listing","agent","autonomous-mobility","news-sentiment","payments-fintech"].every((n) => { const f = pub(`/brand/icons/icon-${n}.png`); return existsSync(f) && readFileSync(f).subarray(1, 4).toString() === "PNG"; }));
+check("Portfolio Plugin still draws the B Capital mark, not a brand icon", pluginIconFor("plugin-1791713636", "Portfolio Plugin").src === BRAND_MARK_SRC);
 
 console.log(`\n${pass} passed, ${failures.length} failed`);
 if (failures.length) { console.log("Failures:\n  - " + failures.join("\n  - ")); process.exit(1); }

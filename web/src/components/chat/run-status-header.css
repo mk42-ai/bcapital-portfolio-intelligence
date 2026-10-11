@@ -47,3 +47,5 @@
 /* Outputs body head is now a static <p> (the toggle lives in the status chip) */
 p.oiu-outputs__head { margin: 0; cursor: default; }
 /* end a1 */
+/* brand icon (2026-10-11 flat-line set) left of the task text in the status row */
+.rsh__icon { display: inline-block; vertical-align: -3px; margin-right: 6px; border: 1px solid #e5e7eb; }

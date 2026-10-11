@@ -829,3 +829,6 @@
   .oiu-work__query { display: none; }
 }
 /* end a11 */
+/* brand icons (2026-10-11 flat-line set): Outputs step rows + welcome starters */
+.oiu-outputs__call [data-testid="brand-icon"] { margin-left: 2px; border: 1px solid #e5e7eb; vertical-align: -3px; }
+.oiu-welcome__starter > [data-testid="brand-icon"] { flex: none; margin-top: 1px; border: 1px solid #e5e7eb; }
