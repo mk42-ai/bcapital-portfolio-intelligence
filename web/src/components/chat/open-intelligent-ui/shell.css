@@ -633,3 +633,20 @@
 /* Run footer timing badge: wraps instead of clipping on narrow viewports. */
 .oiu-badge { flex-wrap: wrap; row-gap: 2px; }
 /* end unit2 */
+
+/* a8 — compact tools-vs-answer timing bar in the run footer (tools charcoal · answer brand green; no blue) */
+.oiu-run__footer .oiu-tbar { display: block; margin: 0; padding: 2px 0 0; min-height: 0; color: #6b7280; }
+.oiu-tbar__track { display: flex; width: 100%; height: 4px; border-radius: 2px; overflow: hidden; background: #f3f4f6; }
+.oiu-tbar__seg { display: block; height: 100%; min-width: 2px; flex: 0 0 auto; cursor: help; }
+.oiu-tbar__seg--tools { background: #1F2937; }
+.oiu-tbar__seg--answer { background: #0AC985; }
+.oiu-tbar__seg--live { background: repeating-linear-gradient(90deg, #0AC985 0 6px, #86efc3 6px 10px); }
+.oiu-tbar__caption { display: flex; flex-wrap: wrap; align-items: center; gap: 0 5px; row-gap: 2px; margin: 5px 0 0; font-size: 11px; line-height: 15px; color: #6b7280; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.oiu-tbar__item { display: inline-flex; align-items: center; gap: 5px; }
+@media (max-width: 640px) {
+  /* caption wraps to two lines on mobile instead of clipping */
+  .oiu-run__footer .oiu-tbar { font-size: 11px; }
+  .oiu-tbar__caption { white-space: normal; max-height: 32px; overflow: hidden; }
+  .oiu-tbar__item { white-space: nowrap; }
+}
+/* end a8 */

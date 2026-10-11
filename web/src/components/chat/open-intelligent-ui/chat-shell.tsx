@@ -121,15 +121,21 @@ const PHASE_LABEL: Record<string, string> = {
 type AgUiFrame = { seq?: number; type?: string; name?: string; value?: Record<string, unknown>; delta?: string; toolCallName?: string; toolCallId?: string; content?: string; isError?: boolean; error?: string; message?: string; code?: string };
 /** unit2 — tools vs answer time. toolsMs: first TOOL_CALL_START → last TOOL_CALL_RESULT (or first status → first token when tools exist but were never stamped); answerMs: first token → now (answer done). */
 export function splitRunTimings(st: Pick<StreamState, "tools" | "firstStatusMs" | "firstTokenMs">, t0: number, doneAt: number): { toolsMs: number | null; answerMs: number | null } {
+  // a8 — every input is guarded: non-finite/negative stamps are dropped, every result is clamped ≥ 0 (never NaN, never negative).
+  const fin = (n: unknown): n is number => typeof n === "number" && Number.isFinite(n);
+  const clamp = (n: number): number | null => (Number.isFinite(n) ? Math.max(0, n) : null);
+  const tools = Array.isArray(st.tools) ? st.tools : [];
+  const ftt = fin(st.firstTokenMs) ? Math.max(0, st.firstTokenMs) : null;
+  const fe = fin(st.firstStatusMs) ? Math.max(0, st.firstStatusMs) : 0;
   let toolsMs: number | null = null;
-  if (st.tools.length) {
-    const starts = st.tools.map((t) => t.startedAt).filter((n): n is number => typeof n === "number");
-    const ends = st.tools.map((t) => t.finishedAt).filter((n): n is number => typeof n === "number");
-    if (starts.length && ends.length) toolsMs = Math.max(0, Math.max(...ends) - Math.min(...starts));
-    else if (st.firstTokenMs != null) toolsMs = Math.max(0, st.firstTokenMs - (st.firstStatusMs ?? 0));
-    else { const sum = st.tools.reduce((a, t) => a + (t.durationMs ?? 0), 0); toolsMs = sum > 0 ? sum : null; }
+  if (tools.length) {
+    const starts = tools.map((t) => t.startedAt).filter(fin);
+    const ends = tools.map((t) => t.finishedAt).filter(fin);
+    if (starts.length && ends.length) toolsMs = clamp(Math.max(...ends) - Math.min(...starts)); // first TOOL_CALL_START → last TOOL_CALL_RESULT
+    else if (ftt != null) toolsMs = clamp(ftt - fe);
+    else { const sum = tools.reduce((a, t) => a + (fin(t.durationMs) ? Math.max(0, t.durationMs) : 0), 0); toolsMs = sum > 0 ? sum : null; }
   }
-  const answerMs = st.firstTokenMs != null ? Math.max(0, doneAt - t0 - st.firstTokenMs) : null;
+  const answerMs = ftt != null && fin(doneAt) && fin(t0) ? clamp(doneAt - t0 - ftt) : null; // first token → done
   return { toolsMs, answerMs };
 }
 /** Reads the cloned SSE body line-by-line (data: …) and updates the live store + localStorage; never throws into the UI path. */
@@ -330,22 +336,42 @@ function SourceList({ sources, compact, live, streamingNow }: { sources: Source[
     </nav>
   );
 }
-/** Run footer (timings): "first event X ms · tools Y s · first token Z ms · answer W s · total T s · N tokens". Model/reasoning/plugins live in the RunHeader above the turn. */
+/** a8 — Run footer: a COMPACT two-segment bar (tools charcoal · answer green, proportional to totalMs) + one muted caption line
+ *  "Tools 44.1 s · Answer 17.8 s · Total 61.9 s · 12,814 tokens". The verbose first-event / first-token values live in the dev disclosure
+ *  (run-rail.tsx) and stay on the badge as data-* attrs only. Model/reasoning/plugins live in the RunHeader above the turn. */
 const fmtSec = (ms: number) => `${(ms / 1000).toFixed(1)} s`;
+const finiteMs = (v: unknown): number | null => (typeof v === "number" && Number.isFinite(v) ? Math.max(0, v) : null);
 function AnswerBadge({ meta, live }: { meta: Partial<StoredMeta> | null; live?: boolean }) {
-  const ftt = meta?.firstTokenMs ?? null; const fe = meta?.firstStatusMs ?? null; const total = meta?.totalMs ?? null;
-  const tools = meta?.toolsMs ?? null; const answer = meta?.answerMs ?? (ftt != null && total != null ? Math.max(0, total - ftt) : null);
+  const ftt = finiteMs(meta?.firstTokenMs); const fe = finiteMs(meta?.firstStatusMs); const total = finiteMs(meta?.totalMs);
+  const hadTools = Array.isArray(meta?.tools) && meta.tools.length > 0;
+  const toolsRaw = finiteMs(meta?.toolsMs);
+  const tools = toolsRaw != null && (hadTools || toolsRaw > 0) ? toolsRaw : null; // no tools → the segment is omitted (single green bar)
+  const answer = finiteMs(meta?.answerMs) ?? (ftt != null && total != null ? Math.max(0, total - ftt) : null);
+  const streaming = !!live && answer == null;
+  const tokens = typeof meta?.metrics?.totalTokens === "number" && Number.isFinite(meta.metrics.totalTokens) ? meta.metrics.totalTokens : null;
+  // Segment widths: proportional to totalMs (fallback: tools+answer); the pair never exceeds 100 %.
+  const span = total ?? ((tools ?? 0) + (answer ?? 0));
+  const pct = (ms: number | null) => (ms == null || span <= 0 ? 0 : Math.min(100, Math.round((ms / span) * 1000) / 10));
+  const toolsPct = pct(tools); const answerPct = streaming ? Math.max(0, 100 - toolsPct) : Math.min(pct(answer), 100 - toolsPct);
+  const caption: string[] = [];
+  if (tools != null) caption.push(`Tools ${fmtSec(tools)}`);
+  if (streaming) caption.push("Answer streaming"); else if (answer != null) caption.push(`Answer ${fmtSec(answer)}`);
+  if (total != null && !streaming) caption.push(`Total ${fmtSec(total)}`);
+  if (tokens != null) caption.push(`${tokens.toLocaleString()} tokens`);
+  const hasBar = tools != null || answer != null || streaming;
   return (
     <div className="oiu-run__footer" data-testid="run-footer" data-footer="true">
-      <p className="oiu-badge" data-testid="answer-badge" data-first-token-ms={ftt ?? ""} data-first-event-ms={fe ?? ""} data-total-ms={total ?? ""} data-tools-ms={tools ?? ""} data-answer-ms={answer ?? ""} aria-label="Run timings">
-        <Cpu className="size-3" aria-hidden />
-        <span>{fe != null ? `first event ${fe.toLocaleString()} ms` : "first event …"}</span>
-        {tools != null && <><span className="oiu-badge__sep">·</span><span title="Plugin / tool time: first tool call → last tool result">tools {fmtSec(tools)}</span></>}
-        <span className="oiu-badge__sep">·</span><span title="Time until the first answer token (includes planning and tool time)">{ftt != null ? `first token ${ftt.toLocaleString()} ms` : live ? "first token …" : "first token n/a"}</span>
-        {answer != null && <><span className="oiu-badge__sep">·</span><span title="Answer writing time: first token → answer done">answer {fmtSec(answer)}</span></>}
-        {total != null && <><span className="oiu-badge__sep">·</span><span>total {fmtSec(total)}</span></>}
-        {meta?.metrics?.totalTokens != null && <><span className="oiu-badge__sep">·</span><span>{meta.metrics.totalTokens.toLocaleString()} tokens</span></>}
-      </p>
+      <div className="oiu-badge oiu-tbar" data-testid="answer-badge" data-first-token-ms={ftt ?? ""} data-first-event-ms={fe ?? ""} data-total-ms={total ?? ""} data-tools-ms={tools ?? ""} data-answer-ms={answer ?? ""} data-streaming={streaming ? "true" : undefined} aria-label={`Run timings: ${caption.join(", ") || "not available"}`}>
+        {hasBar && (
+          <div className="oiu-tbar__track" aria-hidden>
+            {tools != null && toolsPct > 0 && <span className="oiu-tbar__seg oiu-tbar__seg--tools" style={{ width: `${toolsPct}%` }} title={`Tools ${fmtSec(tools)} — plugin / tool time: first tool call → last tool result`} data-seg="tools" />}
+            {(answer != null || streaming) && answerPct > 0 && <span className={`oiu-tbar__seg oiu-tbar__seg--answer${streaming ? " oiu-tbar__seg--live" : ""}`} style={{ width: `${answerPct}%` }} title={streaming ? "Answer — streaming: first token → answer done" : `Answer ${fmtSec(answer!)} — answer writing time: first token → answer done`} data-seg="answer" />}
+          </div>
+        )}
+        <p className="oiu-tbar__caption">
+          {caption.length ? caption.map((c, i) => <span key={c} className="oiu-tbar__item">{i > 0 && <span className="oiu-badge__sep" aria-hidden>·</span>}{c}</span>) : <span className="oiu-tbar__item">Timings n/a</span>}
+        </p>
+      </div>
     </div>
   );
 }
