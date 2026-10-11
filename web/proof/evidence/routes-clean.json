@@ -1,122 +1,122 @@
 [
   {
-    "at": "2026-10-11T10:33:54.136Z",
+    "at": "2026-10-11T11:08:49.235Z",
     "route": "/overview",
     "viewport": "1440x900",
     "status": 200,
     "consoleErrors": [],
     "pageErrors": [],
     "settled": "networkidle",
-    "ms": 1999
+    "ms": 1885
   },
   {
-    "at": "2026-10-11T10:33:56.971Z",
+    "at": "2026-10-11T11:08:52.024Z",
     "route": "/companies",
     "viewport": "1440x900",
     "status": 200,
     "consoleErrors": [],
     "pageErrors": [],
     "settled": "networkidle",
-    "ms": 2290
+    "ms": 2254
   },
   {
-    "at": "2026-10-11T10:33:59.602Z",
+    "at": "2026-10-11T11:08:54.627Z",
     "route": "/news",
     "viewport": "1440x900",
     "status": 200,
     "consoleErrors": [],
     "pageErrors": [],
     "settled": "networkidle",
-    "ms": 2170
+    "ms": 2133
   },
   {
-    "at": "2026-10-11T10:34:01.933Z",
+    "at": "2026-10-11T11:08:56.879Z",
     "route": "/chat",
     "viewport": "1440x900",
     "status": 200,
     "consoleErrors": [],
     "pageErrors": [],
     "settled": "networkidle",
-    "ms": 1611
+    "ms": 1561
   },
   {
-    "at": "2026-10-11T10:34:04.710Z",
+    "at": "2026-10-11T11:08:59.556Z",
     "route": "/artifacts",
     "viewport": "1440x900",
     "status": 200,
     "consoleErrors": [],
     "pageErrors": [],
     "settled": "networkidle",
-    "ms": 1598
+    "ms": 1562
   },
   {
-    "at": "2026-10-11T10:34:08.274Z",
+    "at": "2026-10-11T11:09:03.304Z",
     "route": "/settings",
     "viewport": "1440x900",
     "status": 200,
     "consoleErrors": [],
     "pageErrors": [],
     "settled": "networkidle",
-    "ms": 3060
+    "ms": 3150
   },
   {
-    "at": "2026-10-11T10:37:39.625Z",
+    "at": "2026-10-11T11:12:55.640Z",
     "route": "/overview",
     "viewport": "390x844",
     "status": 200,
     "consoleErrors": [],
     "pageErrors": [],
     "settled": "networkidle",
-    "ms": 2300
+    "ms": 2341
   },
   {
-    "at": "2026-10-11T10:37:41.921Z",
+    "at": "2026-10-11T11:12:57.758Z",
     "route": "/companies",
     "viewport": "390x844",
     "status": 200,
     "consoleErrors": [],
     "pageErrors": [],
     "settled": "networkidle",
-    "ms": 1641
+    "ms": 1547
   },
   {
-    "at": "2026-10-11T10:37:44.785Z",
+    "at": "2026-10-11T11:13:00.535Z",
     "route": "/news",
     "viewport": "390x844",
     "status": 200,
     "consoleErrors": [],
     "pageErrors": [],
     "settled": "networkidle",
-    "ms": 2126
+    "ms": 2114
   },
   {
-    "at": "2026-10-11T10:37:47.283Z",
+    "at": "2026-10-11T11:13:02.799Z",
     "route": "/chat",
     "viewport": "390x844",
     "status": 200,
     "consoleErrors": [],
     "pageErrors": [],
     "settled": "networkidle",
-    "ms": 1759
+    "ms": 1524
   },
   {
-    "at": "2026-10-11T10:37:50.315Z",
+    "at": "2026-10-11T11:13:05.539Z",
     "route": "/artifacts",
     "viewport": "390x844",
     "status": 200,
     "consoleErrors": [],
     "pageErrors": [],
     "settled": "networkidle",
-    "ms": 1749
+    "ms": 1526
   },
   {
-    "at": "2026-10-11T10:37:53.879Z",
+    "at": "2026-10-11T11:13:09.261Z",
     "route": "/settings",
     "viewport": "390x844",
     "status": 200,
     "consoleErrors": [],
     "pageErrors": [],
     "settled": "networkidle",
-    "ms": 2936
+    "ms": 3099
   }
 ]
