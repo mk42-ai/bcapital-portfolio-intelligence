@@ -1,0 +1,637 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/tmp/wt/a35/web/node_modules/@playwright/test/cli.js",
+      "test",
+      "e2e/companies-acceptance.spec.ts",
+      "--project=desktop",
+      "--workers=1",
+      "--reporter=json"
+    ],
+    "configFile": "/tmp/wt/a35/web/playwright.config.ts",
+    "rootDir": "/tmp/wt/a35/web/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/wt/a35/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "/tmp/wt/a35/web/e2e",
+        "testIgnore": [
+          "/mobile\\.spec\\.ts|qa-final\\.spec\\.ts/"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/tmp/wt/a35/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "/tmp/wt/a35/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/mobile\\.spec\\.ts/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/tmp/wt/a35/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile-ux",
+        "name": "mobile-ux",
+        "testDir": "/tmp/wt/a35/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/run-ux\\.spec\\.ts/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/tmp/wt/a35/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "qa-final",
+        "name": "qa-final",
+        "testDir": "/tmp/wt/a35/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/qa-final\\.spec\\.ts/"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/tmp/wt/a35/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "qa-final-mobile",
+        "name": "qa-final-mobile",
+        "testDir": "/tmp/wt/a35/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/qa-final\\.spec\\.ts/"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/wt/a35/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "desktop",
+        "testDir": "/tmp/wt/a35/web/e2e",
+        "snapshotDir": "/tmp/wt/a35/web/e2e",
+        "testIgnore": {},
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 240000,
+        "use": {
+          "baseURL": "https://sb-1gizcktepfgc.vercel.run",
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox",
+              "--disable-dev-shm-usage",
+              "--use-fake-ui-for-media-stream",
+              "--use-fake-device-for-media-stream"
+            ]
+          },
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "desktop"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "companies-acceptance.spec.ts",
+      "file": "companies-acceptance.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "/companies acceptance (desktop 1440×900)",
+          "file": "companies-acceptance.spec.ts",
+          "line": 58,
+          "column": 8,
+          "specs": [
+            {
+              "title": "list, cards, chips, sort, keyboard, URL state, A–Z, axe, overflow",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [
+                    {
+                      "type": "list",
+                      "description": "data-total=136, rows in DOM at top=19, distinct rows rendered across scroll=39"
+                    },
+                    {
+                      "type": "logo",
+                      "description": "11/11 visible rows have a logo chip (img naturalWidth>0 or monogram fallback)"
+                    },
+                    {
+                      "type": "a27",
+                      "description": "company-card-sentiment not in baseline"
+                    },
+                    {
+                      "type": "a29",
+                      "description": "chip-sector not in baseline"
+                    },
+                    {
+                      "type": "a37",
+                      "description": "select → ?sector= URL state not in baseline"
+                    },
+                    {
+                      "type": "sort",
+                      "description": "options: name|sort: name, signal|sort: signal, sector|sort: sector"
+                    },
+                    {
+                      "type": "view",
+                      "description": "companies-view-grid not in baseline"
+                    },
+                    {
+                      "type": "az",
+                      "description": "clicked M → first visible row \"MediTrust\""
+                    },
+                    {
+                      "type": "overflow",
+                      "description": "{\"sw\":1440,\"cw\":1440,\"bsw\":1440}"
+                    },
+                    {
+                      "type": "axe",
+                      "description": "[{\"id\":\"aria-required-children\",\"impact\":\"critical\",\"nodes\":1}]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 6103,
+                      "error": {
+                        "message": "Error: a27: company-card-sentiment per visible row\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m11\u001b[39m\nReceived: \u001b[31m0\u001b[39m",
+                        "stack": "Error: a27: company-card-sentiment per visible row\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m11\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:110:82",
+                        "location": {
+                          "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                          "column": 82,
+                          "line": 110
+                        },
+                        "snippet": "  108 |       if (sentimentCount === 0) note(testInfo, \"a27\", \"company-card-sentiment not in baseline\");\n  109 |       else note(testInfo, \"a27\", `company-card-sentiment present on ${sentimentCount}/${rows.length} visible rows`);\n> 110 |       expect.soft(sentimentCount, \"a27: company-card-sentiment per visible row\").toBe(rows.length);\n      |                                                                                  ^\n  111 |\n  112 |       // ---------- a29: sector filter chips (soft) ----------\n  113 |       const chips = page.getByTestId(\"chip-sector\");"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 82,
+                            "line": 110
+                          },
+                          "message": "Error: a27: company-card-sentiment per visible row\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m11\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\n  108 |       if (sentimentCount === 0) note(testInfo, \"a27\", \"company-card-sentiment not in baseline\");\n  109 |       else note(testInfo, \"a27\", `company-card-sentiment present on ${sentimentCount}/${rows.length} visible rows`);\n> 110 |       expect.soft(sentimentCount, \"a27: company-card-sentiment per visible row\").toBe(rows.length);\n      |                                                                                  ^\n  111 |\n  112 |       // ---------- a29: sector filter chips (soft) ----------\n  113 |       const chips = page.getByTestId(\"chip-sector\");\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:110:82"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 64,
+                            "line": 120
+                          },
+                          "message": "Error: a29: chip-sector chips exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\n  118 |       if (chipCount === 0) {\n  119 |         note(testInfo, \"a29\", \"chip-sector not in baseline\");\n> 120 |         expect.soft(chipCount, \"a29: chip-sector chips exist\").toBeGreaterThan(0);\n      |                                                                ^\n  121 |       } else {\n  122 |         const chip = chips.first();\n  123 |         expect.soft(await chip.getAttribute(\"aria-pressed\"), \"a29: chip has aria-pressed\").not.toBeNull();\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:120:64"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 81,
+                            "line": 149
+                          },
+                          "message": "Error: a37: companies-sector select writes ?sector=\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m\n\n  147 |           const hasParam = new URL(page.url()).searchParams.get(\"sector\");\n  148 |           if (!hasParam) note(testInfo, \"a37\", \"select → ?sector= URL state not in baseline\");\n> 149 |           expect.soft(hasParam, \"a37: companies-sector select writes ?sector=\").toBeTruthy();\n      |                                                                                 ^\n  150 |           const numSel = Number(/Showing\\s+(\\d+)/.exec((await countEl.textContent()) ?? \"\")?.[1] ?? NaN);\n  151 |           expect(numSel, \"sector select reduces companies-count\").toBeLessThan(numBefore);\n  152 |           await sel.selectOption(\"\");\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:149:81"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 88,
+                            "line": 160
+                          },
+                          "message": "Error: sort offers delta\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  158 |       const sortOpts = await page.getByTestId(\"companies-sort\").locator(\"option\").evaluateAll((os) => os.map((o) => `${(o as HTMLOptionElement).value}|${o.textContent}`.toLowerCase()));\n  159 |       note(testInfo, \"sort\", `options: ${sortOpts.join(\", \")}`);\n> 160 |       expect.soft(sortOpts.some((o) => /delta|change|Δ/.test(o)), \"sort offers delta\").toBe(true);\n      |                                                                                        ^\n  161 |       expect.soft(sortOpts.some((o) => /news/.test(o)), \"sort offers news\").toBe(true);\n  162 |       expect.soft(sortOpts.some((o) => /deal/.test(o)), \"sort offers last deal\").toBe(true);\n  163 |\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:160:88"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 77,
+                            "line": 161
+                          },
+                          "message": "Error: sort offers news\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  159 |       note(testInfo, \"sort\", `options: ${sortOpts.join(\", \")}`);\n  160 |       expect.soft(sortOpts.some((o) => /delta|change|Δ/.test(o)), \"sort offers delta\").toBe(true);\n> 161 |       expect.soft(sortOpts.some((o) => /news/.test(o)), \"sort offers news\").toBe(true);\n      |                                                                             ^\n  162 |       expect.soft(sortOpts.some((o) => /deal/.test(o)), \"sort offers last deal\").toBe(true);\n  163 |\n  164 |       // ---------- view toggle (soft) ----------\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:161:77"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 82,
+                            "line": 162
+                          },
+                          "message": "Error: sort offers last deal\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  160 |       expect.soft(sortOpts.some((o) => /delta|change|Δ/.test(o)), \"sort offers delta\").toBe(true);\n  161 |       expect.soft(sortOpts.some((o) => /news/.test(o)), \"sort offers news\").toBe(true);\n> 162 |       expect.soft(sortOpts.some((o) => /deal/.test(o)), \"sort offers last deal\").toBe(true);\n      |                                                                                  ^\n  163 |\n  164 |       // ---------- view toggle (soft) ----------\n  165 |       const gridBtn = page.getByTestId(\"companies-view-grid\");\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:162:82"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 74,
+                            "line": 168
+                          },
+                          "message": "Error: companies-view-grid exists\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\n  166 |       if ((await gridBtn.count()) === 0) {\n  167 |         note(testInfo, \"view\", \"companies-view-grid not in baseline\");\n> 168 |         expect.soft(await gridBtn.count(), \"companies-view-grid exists\").toBeGreaterThan(0);\n      |                                                                          ^\n  169 |       } else {\n  170 |         const before = await list.getAttribute(\"data-view\");\n  171 |         await gridBtn.click();\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:168:74"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 11,
+                            "line": 242
+                          },
+                          "message": "Error: [\n {\n  \"id\": \"aria-required-children\",\n  \"impact\": \"critical\",\n  \"help\": \"Certain ARIA roles must contain particular children\",\n  \"nodes\": [\n   \"<div data-testid=\\\"companies-list\\\" data-total=\\\"136\\\" data-visible=\\\"136\\\" role=\\\"grid\\\" aria-label=\\\"Portfolio companies\\\" aria-rowcount=\\\"136\\\" aria-colcount=\\\"1\\\" class=\\\"relative [-webkit-overflow-scrolling:touch] [overscroll-behavior-y:auto]\\\">\"\n  ]\n }\n]\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 50\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure elements with an ARIA role that require child roles contain them\",\u001b[39m\n\u001b[31m+     \"help\": \"Certain ARIA roles must contain particular children\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/aria-required-children?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"aria-required-children\",\u001b[39m\n\u001b[31m+     \"impact\": \"critical\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"messageKey\": \"unallowed\",\u001b[39m\n\u001b[31m+               \"values\": \"p[aria-atomic]\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"aria-required-children\",\u001b[39m\n\u001b[31m+             \"impact\": \"critical\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has children which are not allowed: p[aria-atomic]\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<p class=\\\"sr-only\\\" aria-live=\\\"polite\\\" aria-atomic=\\\"true\\\" data-testid=\\\"companies-live\\\">Row 2 of 136</p>\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"p[aria-live=\\\"polite\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has children which are not allowed: p[aria-atomic]\",\u001b[39m\n\u001b[31m+         \"html\": \"<div data-testid=\\\"companies-list\\\" data-total=\\\"136\\\" data-visible=\\\"136\\\" role=\\\"grid\\\" aria-label=\\\"Portfolio companies\\\" aria-rowcount=\\\"136\\\" aria-colcount=\\\"1\\\" class=\\\"relative [-webkit-overflow-scrolling:touch] [overscroll-behavior-y:auto]\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"critical\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \".\\\\[-webkit-overflow-scrolling\\\\:touch\\\\]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.aria\",\u001b[39m\n\u001b[31m+       \"wcag2a\",\u001b[39m\n\u001b[31m+       \"wcag131\",\u001b[39m\n\u001b[31m+       \"EN-301-549\",\u001b[39m\n\u001b[31m+       \"EN-9.1.3.1\",\u001b[39m\n\u001b[31m+       \"RGAAv4\",\u001b[39m\n\u001b[31m+       \"RGAA-9.3.1\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  240 |           bad,\n  241 |           JSON.stringify(bad.map((v) => ({ id: v.id, impact: v.impact, help: v.help, nodes: v.nodes.slice(0, 3).map((n) => n.html) })), null, 1),\n> 242 |         ).toEqual([]);\n      |           ^\n  243 |       }\n  244 |\n  245 |       await shot(page, \"final\", vp);\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:242:11"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T12:04:07.334Z",
+                      "annotations": [
+                        {
+                          "type": "list",
+                          "description": "data-total=136, rows in DOM at top=19, distinct rows rendered across scroll=39"
+                        },
+                        {
+                          "type": "logo",
+                          "description": "11/11 visible rows have a logo chip (img naturalWidth>0 or monogram fallback)"
+                        },
+                        {
+                          "type": "a27",
+                          "description": "company-card-sentiment not in baseline"
+                        },
+                        {
+                          "type": "a29",
+                          "description": "chip-sector not in baseline"
+                        },
+                        {
+                          "type": "a37",
+                          "description": "select → ?sector= URL state not in baseline"
+                        },
+                        {
+                          "type": "sort",
+                          "description": "options: name|sort: name, signal|sort: signal, sector|sort: sector"
+                        },
+                        {
+                          "type": "view",
+                          "description": "companies-view-grid not in baseline"
+                        },
+                        {
+                          "type": "az",
+                          "description": "clicked M → first visible row \"MediTrust\""
+                        },
+                        {
+                          "type": "overflow",
+                          "description": "{\"sw\":1440,\"cw\":1440,\"bsw\":1440}"
+                        },
+                        {
+                          "type": "axe",
+                          "description": "[{\"id\":\"aria-required-children\",\"impact\":\"critical\",\"nodes\":1}]"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/a35/web/test-results/companies-acceptance--comp-ea99a--URL-state-A–Z-axe-overflow-desktop/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/tmp/wt/a35/web/test-results/companies-acceptance--comp-ea99a--URL-state-A–Z-axe-overflow-desktop/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/a35/web/test-results/companies-acceptance--comp-ea99a--URL-state-A–Z-axe-overflow-desktop/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                        "column": 82,
+                        "line": 110
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "7033441dc5a6c7508484-db6d033dc52259ae8a7d",
+              "file": "companies-acceptance.spec.ts",
+              "line": 61,
+              "column": 9
+            }
+          ]
+        },
+        {
+          "title": "/companies acceptance (mobile 390×844)",
+          "file": "companies-acceptance.spec.ts",
+          "line": 58,
+          "column": 8,
+          "specs": [
+            {
+              "title": "list, cards, chips, sort, keyboard, URL state, A–Z, axe, overflow",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 240000,
+                  "annotations": [
+                    {
+                      "type": "list",
+                      "description": "data-total=136, rows in DOM at top=14, distinct rows rendered across scroll=29"
+                    },
+                    {
+                      "type": "logo",
+                      "description": "6/6 visible rows have a logo chip (img naturalWidth>0 or monogram fallback)"
+                    },
+                    {
+                      "type": "a27",
+                      "description": "company-card-sentiment not in baseline"
+                    },
+                    {
+                      "type": "a29",
+                      "description": "chip-sector not in baseline"
+                    },
+                    {
+                      "type": "a37",
+                      "description": "select → ?sector= URL state not in baseline"
+                    },
+                    {
+                      "type": "sort",
+                      "description": "options: name|sort: name, signal|sort: signal, sector|sort: sector"
+                    },
+                    {
+                      "type": "view",
+                      "description": "companies-view-grid not in baseline"
+                    },
+                    {
+                      "type": "az",
+                      "description": "companies-az rail hidden at this viewport (lg:flex)"
+                    },
+                    {
+                      "type": "overflow",
+                      "description": "{\"sw\":390,\"cw\":390,\"bsw\":390}"
+                    },
+                    {
+                      "type": "axe",
+                      "description": "[{\"id\":\"aria-required-children\",\"impact\":\"critical\",\"nodes\":1}]"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 4841,
+                      "error": {
+                        "message": "Error: a27: company-card-sentiment per visible row\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m6\u001b[39m\nReceived: \u001b[31m0\u001b[39m",
+                        "stack": "Error: a27: company-card-sentiment per visible row\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m6\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:110:82",
+                        "location": {
+                          "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                          "column": 82,
+                          "line": 110
+                        },
+                        "snippet": "  108 |       if (sentimentCount === 0) note(testInfo, \"a27\", \"company-card-sentiment not in baseline\");\n  109 |       else note(testInfo, \"a27\", `company-card-sentiment present on ${sentimentCount}/${rows.length} visible rows`);\n> 110 |       expect.soft(sentimentCount, \"a27: company-card-sentiment per visible row\").toBe(rows.length);\n      |                                                                                  ^\n  111 |\n  112 |       // ---------- a29: sector filter chips (soft) ----------\n  113 |       const chips = page.getByTestId(\"chip-sector\");"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 82,
+                            "line": 110
+                          },
+                          "message": "Error: a27: company-card-sentiment per visible row\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m6\u001b[39m\nReceived: \u001b[31m0\u001b[39m\n\n  108 |       if (sentimentCount === 0) note(testInfo, \"a27\", \"company-card-sentiment not in baseline\");\n  109 |       else note(testInfo, \"a27\", `company-card-sentiment present on ${sentimentCount}/${rows.length} visible rows`);\n> 110 |       expect.soft(sentimentCount, \"a27: company-card-sentiment per visible row\").toBe(rows.length);\n      |                                                                                  ^\n  111 |\n  112 |       // ---------- a29: sector filter chips (soft) ----------\n  113 |       const chips = page.getByTestId(\"chip-sector\");\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:110:82"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 64,
+                            "line": 120
+                          },
+                          "message": "Error: a29: chip-sector chips exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\n  118 |       if (chipCount === 0) {\n  119 |         note(testInfo, \"a29\", \"chip-sector not in baseline\");\n> 120 |         expect.soft(chipCount, \"a29: chip-sector chips exist\").toBeGreaterThan(0);\n      |                                                                ^\n  121 |       } else {\n  122 |         const chip = chips.first();\n  123 |         expect.soft(await chip.getAttribute(\"aria-pressed\"), \"a29: chip has aria-pressed\").not.toBeNull();\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:120:64"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 81,
+                            "line": 149
+                          },
+                          "message": "Error: a37: companies-sector select writes ?sector=\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mnull\u001b[39m\n\n  147 |           const hasParam = new URL(page.url()).searchParams.get(\"sector\");\n  148 |           if (!hasParam) note(testInfo, \"a37\", \"select → ?sector= URL state not in baseline\");\n> 149 |           expect.soft(hasParam, \"a37: companies-sector select writes ?sector=\").toBeTruthy();\n      |                                                                                 ^\n  150 |           const numSel = Number(/Showing\\s+(\\d+)/.exec((await countEl.textContent()) ?? \"\")?.[1] ?? NaN);\n  151 |           expect(numSel, \"sector select reduces companies-count\").toBeLessThan(numBefore);\n  152 |           await sel.selectOption(\"\");\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:149:81"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 88,
+                            "line": 160
+                          },
+                          "message": "Error: sort offers delta\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  158 |       const sortOpts = await page.getByTestId(\"companies-sort\").locator(\"option\").evaluateAll((os) => os.map((o) => `${(o as HTMLOptionElement).value}|${o.textContent}`.toLowerCase()));\n  159 |       note(testInfo, \"sort\", `options: ${sortOpts.join(\", \")}`);\n> 160 |       expect.soft(sortOpts.some((o) => /delta|change|Δ/.test(o)), \"sort offers delta\").toBe(true);\n      |                                                                                        ^\n  161 |       expect.soft(sortOpts.some((o) => /news/.test(o)), \"sort offers news\").toBe(true);\n  162 |       expect.soft(sortOpts.some((o) => /deal/.test(o)), \"sort offers last deal\").toBe(true);\n  163 |\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:160:88"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 77,
+                            "line": 161
+                          },
+                          "message": "Error: sort offers news\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  159 |       note(testInfo, \"sort\", `options: ${sortOpts.join(\", \")}`);\n  160 |       expect.soft(sortOpts.some((o) => /delta|change|Δ/.test(o)), \"sort offers delta\").toBe(true);\n> 161 |       expect.soft(sortOpts.some((o) => /news/.test(o)), \"sort offers news\").toBe(true);\n      |                                                                             ^\n  162 |       expect.soft(sortOpts.some((o) => /deal/.test(o)), \"sort offers last deal\").toBe(true);\n  163 |\n  164 |       // ---------- view toggle (soft) ----------\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:161:77"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 82,
+                            "line": 162
+                          },
+                          "message": "Error: sort offers last deal\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  160 |       expect.soft(sortOpts.some((o) => /delta|change|Δ/.test(o)), \"sort offers delta\").toBe(true);\n  161 |       expect.soft(sortOpts.some((o) => /news/.test(o)), \"sort offers news\").toBe(true);\n> 162 |       expect.soft(sortOpts.some((o) => /deal/.test(o)), \"sort offers last deal\").toBe(true);\n      |                                                                                  ^\n  163 |\n  164 |       // ---------- view toggle (soft) ----------\n  165 |       const gridBtn = page.getByTestId(\"companies-view-grid\");\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:162:82"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 74,
+                            "line": 168
+                          },
+                          "message": "Error: companies-view-grid exists\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\n  166 |       if ((await gridBtn.count()) === 0) {\n  167 |         note(testInfo, \"view\", \"companies-view-grid not in baseline\");\n> 168 |         expect.soft(await gridBtn.count(), \"companies-view-grid exists\").toBeGreaterThan(0);\n      |                                                                          ^\n  169 |       } else {\n  170 |         const before = await list.getAttribute(\"data-view\");\n  171 |         await gridBtn.click();\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:168:74"
+                        },
+                        {
+                          "location": {
+                            "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                            "column": 11,
+                            "line": 242
+                          },
+                          "message": "Error: [\n {\n  \"id\": \"aria-required-children\",\n  \"impact\": \"critical\",\n  \"help\": \"Certain ARIA roles must contain particular children\",\n  \"nodes\": [\n   \"<div data-testid=\\\"companies-list\\\" data-total=\\\"136\\\" data-visible=\\\"136\\\" role=\\\"grid\\\" aria-label=\\\"Portfolio companies\\\" aria-rowcount=\\\"136\\\" aria-colcount=\\\"1\\\" class=\\\"relative [-webkit-overflow-scrolling:touch] [overscroll-behavior-y:auto]\\\">\"\n  ]\n }\n]\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 50\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure elements with an ARIA role that require child roles contain them\",\u001b[39m\n\u001b[31m+     \"help\": \"Certain ARIA roles must contain particular children\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/aria-required-children?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"aria-required-children\",\u001b[39m\n\u001b[31m+     \"impact\": \"critical\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"messageKey\": \"unallowed\",\u001b[39m\n\u001b[31m+               \"values\": \"p[aria-atomic]\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"aria-required-children\",\u001b[39m\n\u001b[31m+             \"impact\": \"critical\",\u001b[39m\n\u001b[31m+             \"message\": \"Element has children which are not allowed: p[aria-atomic]\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<p class=\\\"sr-only\\\" aria-live=\\\"polite\\\" aria-atomic=\\\"true\\\" data-testid=\\\"companies-live\\\">Row 2 of 136</p>\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"p[aria-live=\\\"polite\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   Element has children which are not allowed: p[aria-atomic]\",\u001b[39m\n\u001b[31m+         \"html\": \"<div data-testid=\\\"companies-list\\\" data-total=\\\"136\\\" data-visible=\\\"136\\\" role=\\\"grid\\\" aria-label=\\\"Portfolio companies\\\" aria-rowcount=\\\"136\\\" aria-colcount=\\\"1\\\" class=\\\"relative [-webkit-overflow-scrolling:touch] [overscroll-behavior-y:auto]\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"critical\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \".\\\\[-webkit-overflow-scrolling\\\\:touch\\\\]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.aria\",\u001b[39m\n\u001b[31m+       \"wcag2a\",\u001b[39m\n\u001b[31m+       \"wcag131\",\u001b[39m\n\u001b[31m+       \"EN-301-549\",\u001b[39m\n\u001b[31m+       \"EN-9.1.3.1\",\u001b[39m\n\u001b[31m+       \"RGAAv4\",\u001b[39m\n\u001b[31m+       \"RGAA-9.3.1\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  240 |           bad,\n  241 |           JSON.stringify(bad.map((v) => ({ id: v.id, impact: v.impact, help: v.help, nodes: v.nodes.slice(0, 3).map((n) => n.html) })), null, 1),\n> 242 |         ).toEqual([]);\n      |           ^\n  243 |       }\n  244 |\n  245 |       await shot(page, \"final\", vp);\n    at /tmp/wt/a35/web/e2e/companies-acceptance.spec.ts:242:11"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T12:04:15.034Z",
+                      "annotations": [
+                        {
+                          "type": "list",
+                          "description": "data-total=136, rows in DOM at top=14, distinct rows rendered across scroll=29"
+                        },
+                        {
+                          "type": "logo",
+                          "description": "6/6 visible rows have a logo chip (img naturalWidth>0 or monogram fallback)"
+                        },
+                        {
+                          "type": "a27",
+                          "description": "company-card-sentiment not in baseline"
+                        },
+                        {
+                          "type": "a29",
+                          "description": "chip-sector not in baseline"
+                        },
+                        {
+                          "type": "a37",
+                          "description": "select → ?sector= URL state not in baseline"
+                        },
+                        {
+                          "type": "sort",
+                          "description": "options: name|sort: name, signal|sort: signal, sector|sort: sector"
+                        },
+                        {
+                          "type": "view",
+                          "description": "companies-view-grid not in baseline"
+                        },
+                        {
+                          "type": "az",
+                          "description": "companies-az rail hidden at this viewport (lg:flex)"
+                        },
+                        {
+                          "type": "overflow",
+                          "description": "{\"sw\":390,\"cw\":390,\"bsw\":390}"
+                        },
+                        {
+                          "type": "axe",
+                          "description": "[{\"id\":\"aria-required-children\",\"impact\":\"critical\",\"nodes\":1}]"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/a35/web/test-results/companies-acceptance--comp-0a601--URL-state-A–Z-axe-overflow-desktop/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/tmp/wt/a35/web/test-results/companies-acceptance--comp-0a601--URL-state-A–Z-axe-overflow-desktop/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/a35/web/test-results/companies-acceptance--comp-0a601--URL-state-A–Z-axe-overflow-desktop/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/tmp/wt/a35/web/e2e/companies-acceptance.spec.ts",
+                        "column": 82,
+                        "line": 110
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "7033441dc5a6c7508484-5d80f4f795c32ff5399b",
+              "file": "companies-acceptance.spec.ts",
+              "line": 61,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-11T12:04:06.795Z",
+    "duration": 14072.991,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}
