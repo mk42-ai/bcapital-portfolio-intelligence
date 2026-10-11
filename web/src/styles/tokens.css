@@ -37,3 +37,59 @@
   --chart-1: #202327; --chart-2: #6e7277; --chart-3: #9ea2a8; --chart-4: #0AC985; --chart-5: #b91c1c; --chart-6: #c9ccd1;
   --sentiment-neg: #b91c1c; --sentiment-neu: #6e7277; --sentiment-pos: #202327;
 }
+
+/* a18 sector tokens */
+/* Sector colour tokens — mirrored by web/src/lib/sector-color.ts (SECTOR_PALETTE / sectorColor()). Hue-audited: no hue in 190–260°.
+   Each triple = fill · ink (text on white ≥4.5:1) · soft (tint; ink on soft ≥4.5:1):
+   emerald #0AC985 · #047857 (5.5:1) · #E6FAF3 (5.1:1)   plum  #A21CAF · #701A75 (10.0:1) · #FAE8FF (8.6:1)
+   amber   #F59E0B · #92400E (7.1:1) · #FEF3C7 (6.4:1)   coral #F97316 · #9A3412 (7.3:1)  · #FFEDD5 (6.4:1)
+   teal    #0D9488 · #115E59 (7.6:1) · #CCFBF1 (6.7:1)   olive #65A30D · #3F6212 (7.1:1)  · #ECFCCB (6.5:1)
+   rose    #E11D48 · #9F1239 (8.0:1) · #FFE4E6 (6.7:1)   slate #78716C · #44403C (10.3:1) · #F5F5F4 (9.4:1) */
+:root {
+  /* swatches (also the fallback pool for unknown sectors) */
+  --sector-emerald: #0AC985; --sector-emerald-ink: #047857; --sector-emerald-soft: #E6FAF3;
+  --sector-plum:    #A21CAF; --sector-plum-ink:    #701A75; --sector-plum-soft:    #FAE8FF;
+  --sector-amber:   #F59E0B; --sector-amber-ink:   #92400E; --sector-amber-soft:   #FEF3C7;
+  --sector-coral:   #F97316; --sector-coral-ink:   #9A3412; --sector-coral-soft:   #FFEDD5;
+  --sector-teal:    #0D9488; --sector-teal-ink:    #115E59; --sector-teal-soft:    #CCFBF1;
+  --sector-olive:   #65A30D; --sector-olive-ink:   #3F6212; --sector-olive-soft:   #ECFCCB;
+  --sector-rose:    #E11D48; --sector-rose-ink:    #9F1239; --sector-rose-soft:    #FFE4E6;
+  --sector-slate:   #78716C; --sector-slate-ink:   #44403C; --sector-slate-soft:   #F5F5F4;
+  /* sectors (slug = sectorSlug(name)) */
+  --sector-technology:          var(--sector-emerald); --sector-technology-ink:          var(--sector-emerald-ink); --sector-technology-soft:          var(--sector-emerald-soft);
+  --sector-healthcare:          var(--sector-plum);    --sector-healthcare-ink:          var(--sector-plum-ink);    --sector-healthcare-soft:          var(--sector-plum-soft);
+  --sector-energy-resilience:   var(--sector-amber);   --sector-energy-resilience-ink:   var(--sector-amber-ink);   --sector-energy-resilience-soft:   var(--sector-amber-soft);
+  --sector-opportunistic:       var(--sector-coral);   --sector-opportunistic-ink:       var(--sector-coral-ink);   --sector-opportunistic-soft:       var(--sector-coral-soft);
+  --sector-venture-capital-firm: var(--sector-teal);   --sector-venture-capital-firm-ink: var(--sector-teal-ink);   --sector-venture-capital-firm-soft: var(--sector-teal-soft);
+  --sector-other:               var(--sector-slate);   --sector-other-ink:               var(--sector-slate-ink);   --sector-other-soft:               var(--sector-slate-soft);
+}
+/* Sector chip utility: <span class="chip-sector" data-sector="Technology">Technology</span>. Unknown sectors fall back to the "other" set;
+   use sectorChipStyle() from sector-color.ts when the hashed fallback swatch is wanted instead. Border = fill at 40% (#…66). */
+.chip-sector {
+  display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.125rem 0.5rem; border-radius: 999px;
+  font-size: 0.75rem; line-height: 1rem; font-weight: 500; white-space: nowrap;
+  --_fill: var(--sector-other); --_ink: var(--sector-other-ink); --_soft: var(--sector-other-soft);
+  background: var(--_soft); color: var(--_ink);
+  border: 1px solid color-mix(in srgb, var(--_fill) 40%, transparent);
+}
+.chip-sector[data-sector="Technology"]            { --_fill: var(--sector-technology);           --_ink: var(--sector-technology-ink);           --_soft: var(--sector-technology-soft); }
+.chip-sector[data-sector="Healthcare"]            { --_fill: var(--sector-healthcare);           --_ink: var(--sector-healthcare-ink);           --_soft: var(--sector-healthcare-soft); }
+.chip-sector[data-sector="Energy & Resilience"]   { --_fill: var(--sector-energy-resilience);    --_ink: var(--sector-energy-resilience-ink);    --_soft: var(--sector-energy-resilience-soft); }
+.chip-sector[data-sector="Opportunistic"]         { --_fill: var(--sector-opportunistic);        --_ink: var(--sector-opportunistic-ink);        --_soft: var(--sector-opportunistic-soft); }
+.chip-sector[data-sector="Venture Capital (firm)"]{ --_fill: var(--sector-venture-capital-firm); --_ink: var(--sector-venture-capital-firm-ink); --_soft: var(--sector-venture-capital-firm-soft); }
+.chip-sector[data-sector="Other"]                 { --_fill: var(--sector-other);                --_ink: var(--sector-other-ink);                --_soft: var(--sector-other-soft); }
+/* slug variant for consumers that pass sectorColor().slug: data-sector-slug="energy-resilience" */
+.chip-sector[data-sector-slug="technology"]           { --_fill: var(--sector-technology);           --_ink: var(--sector-technology-ink);           --_soft: var(--sector-technology-soft); }
+.chip-sector[data-sector-slug="healthcare"]           { --_fill: var(--sector-healthcare);           --_ink: var(--sector-healthcare-ink);           --_soft: var(--sector-healthcare-soft); }
+.chip-sector[data-sector-slug="energy-resilience"]    { --_fill: var(--sector-energy-resilience);    --_ink: var(--sector-energy-resilience-ink);    --_soft: var(--sector-energy-resilience-soft); }
+.chip-sector[data-sector-slug="opportunistic"]        { --_fill: var(--sector-opportunistic);        --_ink: var(--sector-opportunistic-ink);        --_soft: var(--sector-opportunistic-soft); }
+.chip-sector[data-sector-slug="venture-capital-firm"] { --_fill: var(--sector-venture-capital-firm); --_ink: var(--sector-venture-capital-firm-ink); --_soft: var(--sector-venture-capital-firm-soft); }
+.chip-sector[data-sector-slug="emerald"] { --_fill: var(--sector-emerald); --_ink: var(--sector-emerald-ink); --_soft: var(--sector-emerald-soft); }
+.chip-sector[data-sector-slug="plum"]    { --_fill: var(--sector-plum);    --_ink: var(--sector-plum-ink);    --_soft: var(--sector-plum-soft); }
+.chip-sector[data-sector-slug="amber"]   { --_fill: var(--sector-amber);   --_ink: var(--sector-amber-ink);   --_soft: var(--sector-amber-soft); }
+.chip-sector[data-sector-slug="coral"]   { --_fill: var(--sector-coral);   --_ink: var(--sector-coral-ink);   --_soft: var(--sector-coral-soft); }
+.chip-sector[data-sector-slug="teal"]    { --_fill: var(--sector-teal);    --_ink: var(--sector-teal-ink);    --_soft: var(--sector-teal-soft); }
+.chip-sector[data-sector-slug="olive"]   { --_fill: var(--sector-olive);   --_ink: var(--sector-olive-ink);   --_soft: var(--sector-olive-soft); }
+.chip-sector[data-sector-slug="rose"]    { --_fill: var(--sector-rose);    --_ink: var(--sector-rose-ink);    --_soft: var(--sector-rose-soft); }
+.chip-sector[data-sector-slug="slate"], .chip-sector[data-sector-slug="other"] { --_fill: var(--sector-slate); --_ink: var(--sector-slate-ink); --_soft: var(--sector-slate-soft); }
+/* end a18 */
