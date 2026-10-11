@@ -6,7 +6,7 @@
  * Sending still goes through OpenUI's `processMessage` (same thread, same OnDemand session, same plugin selection, same plan rail).
  * The draft lives in composerStore so "Ask in chat" chips (PitchBook drawer / company page) land in THIS textarea.
  */
-import { useCallback, useEffect, useLayoutEffect, useRef, type KeyboardEvent } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, type KeyboardEvent, type ReactNode } from "react";
 import { useThread } from "@openuidev/react-ui";
 import { ArrowUp, Paperclip, Square } from "lucide-react";
 import { attachmentsStore, useAttachments, AttachmentChip, ACCEPT_ATTR, DROP_HINT } from "./attachments";
@@ -15,7 +15,8 @@ import { MODEL_LABEL } from "@/lib/plugins";
 
 const PLACEHOLDER = "Ask about any portfolio company…";
 
-export function AppComposer() {
+/** `footer` — optional node rendered under the hint (unit2: the live "Context: N companies" line). */
+export function AppComposer({ footer }: { footer?: ReactNode } = {}) {
   const processMessage = useThread((s) => s.processMessage);
   const cancelMessage = useThread((s) => s.cancelMessage);
   const isRunning = useThread((s) => s.isRunning);
@@ -76,6 +77,7 @@ export function AppComposer() {
         </button>
       </div>
       <p className="oiu-composer__hint" data-testid="composer-hint">{uploading ? "Waiting for the upload to finish…" : `${MODEL_LABEL} · Enter to send · Shift+Enter for a new line`}</p>
+      {footer}
       <p className="sr-only" role="status" aria-live="polite" data-testid="attachment-live">{att.live}</p>
     </div>
   );
