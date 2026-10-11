@@ -1,0 +1,136 @@
+{
+  "label": "before",
+  "baseURL": "https://sb-1gizcktepfgc.vercel.run",
+  "prompt": "In one sentence, what does Fervo Energy do?",
+  "files": [
+    "first-frame-390x844.png",
+    "first-working-row-390x844.png",
+    "answer-streaming-390x844.png",
+    "settled-390x844.png",
+    "settled-fullpage-390x844.png"
+  ],
+  "states": [
+    {
+      "state": "first-frame",
+      "at": "2026-10-11T11:58:21.005Z",
+      "tSinceSendMs": 3900,
+      "viewport": "390x844",
+      "runViewHeight": 604,
+      "workingRows": 1,
+      "workingRowHeights": [
+        73
+      ],
+      "workingRowStates": [
+        "running"
+      ],
+      "runStatusHeader": {
+        "exists": false,
+        "offsetTop": null
+      },
+      "thinkingBlockState": "streaming",
+      "childTestids": [
+        "run-header",
+        "thinking-block",
+        "plan-stepper",
+        "working-list",
+        "working-band",
+        "outputs-card"
+      ],
+      "answerChars": 0,
+      "runFooter": false,
+      "scrollHeight": 852
+    },
+    {
+      "state": "first-working-row",
+      "at": "2026-10-11T11:58:21.394Z",
+      "tSinceSendMs": 4289,
+      "viewport": "390x844",
+      "runViewHeight": 604,
+      "workingRows": 1,
+      "workingRowHeights": [
+        73
+      ],
+      "workingRowStates": [
+        "running"
+      ],
+      "runStatusHeader": {
+        "exists": false,
+        "offsetTop": null
+      },
+      "thinkingBlockState": "streaming",
+      "childTestids": [
+        "run-header",
+        "thinking-block",
+        "plan-stepper",
+        "working-list",
+        "working-band",
+        "outputs-card"
+      ],
+      "answerChars": 0,
+      "runFooter": false,
+      "scrollHeight": 852
+    },
+    {
+      "state": "answer-streaming",
+      "at": "2026-10-11T11:58:33.246Z",
+      "tSinceSendMs": 16141,
+      "viewport": "390x844",
+      "runViewHeight": 714,
+      "workingRows": 1,
+      "workingRowHeights": [
+        73
+      ],
+      "workingRowStates": [
+        "done"
+      ],
+      "runStatusHeader": {
+        "exists": false,
+        "offsetTop": null
+      },
+      "thinkingBlockState": "collapsed",
+      "childTestids": [
+        "run-header",
+        "thinking-block",
+        "plan-stepper",
+        "working-list",
+        "outputs-card",
+        "answer-block"
+      ],
+      "answerChars": 548,
+      "runFooter": false,
+      "scrollHeight": 852
+    },
+    {
+      "state": "settled",
+      "at": "2026-10-11T11:58:35.921Z",
+      "tSinceSendMs": 18816,
+      "viewport": "390x844",
+      "runViewHeight": 795,
+      "workingRows": 1,
+      "workingRowHeights": [
+        73
+      ],
+      "workingRowStates": [
+        "done"
+      ],
+      "runStatusHeader": {
+        "exists": false,
+        "offsetTop": null
+      },
+      "thinkingBlockState": "collapsed",
+      "childTestids": [
+        "run-header",
+        "thinking-block",
+        "plan-stepper",
+        "working-list",
+        "outputs-card",
+        "answer-block",
+        "sources-list",
+        "run-footer"
+      ],
+      "answerChars": 548,
+      "runFooter": true,
+      "scrollHeight": 852
+    }
+  ]
+}
