@@ -6,7 +6,7 @@ import {
   PLUGIN_NAMES, resolvePluginIds,
 } from "@/lib/ondemand/config";
 import { parseFrame, type PluginRef, type UiEvent } from "@/lib/ondemand/sse-adapter";
-import { CLIENT_EVENT as CE } from "@/lib/ondemand/eventMap";
+import { CLIENT_EVENT as CE, classifyThinkingDelta, thinkingPhaseOf } from "@/lib/ondemand/eventMap";
 import { markPluginBlocked, markPluginInvoked, clearPluginBlocked } from "@/lib/plugin-catalogue";
 import { saveArtifact } from "@/lib/artifacts/server";
 import { registerWithOnDemand, originFrom } from "@/lib/artifacts/media";
@@ -290,6 +290,7 @@ export async function POST(req: NextRequest) {
         markPluginBlocked(PLUGIN_ID, pluginErr.current.message); // plugin-state `blocked` until a later run clears it (plugin-catalogue.ts)
         toolDone(PLUGIN_ID, "error", { message: pluginErr.current.message, raw: raw.slice(0, 1200) });
       };
+      const classAcc = new Map<string, string>(); // unit1: per-channel window for classifyThinkingDelta
       let thinkingBuf = ""; let planBuf = ""; let planEmitted = false; let objectiveSent = false; let stepBuf = ""; const stepEmittedFor = new Set<number>();
       let planStepTotal = 0; let earlyPlanSteps = 0; const derivedSummary = new Map<number, { title: string; hosts: string[]; n: number; closed: boolean }>();
       const tryParseJson = (t: string): unknown => { const i = t.indexOf("{"); if (i < 0) return null; let depth = 0, inStr = false, esc = false; for (let k = i; k < t.length; k++) { const c = t[k]; if (inStr) { if (esc) esc = false; else if (c === "\\") esc = true; else if (c === '"') inStr = false; continue; } if (c === '"') inStr = true; else if (c === "{") depth++; else if (c === "}") { depth--; if (depth === 0) { try { return JSON.parse(t.slice(i, k + 1)); } catch { return null; } } } } return null; };
@@ -329,7 +330,15 @@ export async function POST(req: NextRequest) {
               const cur = u.channel === "fulfillment" ? Number.MAX_SAFE_INTEGER : Number(u.stepId) || 0;
               for (const [idx, d] of derivedSummary) if (!d.closed && cur > idx) { d.closed = true; custom(CE.summary, { phase: "done", index: idx, stepId: String(idx), derived: true, text: `${d.title} — ${d.n} source${d.n === 1 ? "" : "s"}${d.hosts.length ? ` from ${d.hosts.join(", ")}` : ""}.`, at: new Date().toISOString() }); }
             }
-            if (u.delta) { custom(CE.thinking, { kind: u.channel, delta: u.delta, stepId: u.stepId ?? currentStepId }); thinkingBuf = (thinkingBuf + u.delta).slice(-800); detectPluginError(thinkingBuf, raw); }
+            if (u.delta) {
+              thinkingBuf = (thinkingBuf + u.delta).slice(-800); detectPluginError(thinkingBuf, raw);
+              // unit1: planner / tool-definition JSON never reaches the Thinking block. planning_output + step_output are payload by definition;
+              // a *_thinking delta is classified (classifyThinkingDelta, eventMap.ts) so fenced JSON / "pluginId" spans go to the Outputs disclosure too.
+              const sid = u.stepId ?? currentStepId;
+              const acc = (classAcc.get(u.channel) ?? "") + u.delta; classAcc.set(u.channel, acc.slice(-6000));
+              if (classifyThinkingDelta(u.channel, acc, u.delta) === "payload") custom(CE.plannerPayload, { phase: thinkingPhaseOf(u.channel), stepId: sid, delta: u.delta, kind: u.channel });
+              else custom(CE.thinking, { kind: u.channel, delta: u.delta, stepId: sid });
+            }
             // This account's stream carries the plan only as planning_output JSON text (no statusLog plan_created frame): read it while it streams
             // (UX doc "Read while it streams: the objective becomes the opening sentence") and emit ondemand.plan once it parses.
             if (u.channel === "plan" && u.delta && !planEmitted) {

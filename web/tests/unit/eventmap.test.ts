@@ -5,7 +5,7 @@
  * Exits non-zero on any failure.
  */
 import { parseFrame, classifyClientFrame } from "../../src/lib/ondemand/sse-adapter";
-import { CLIENT_EVENT, MEDIA_EVENT, VOICE_PHASE, EVENT_TYPE, STATUS_TYPE, CLIENT_EVENT_VALUES_UNIQUE } from "../../src/lib/ondemand/eventMap";
+import { CLIENT_EVENT, MEDIA_EVENT, VOICE_PHASE, EVENT_TYPE, STATUS_TYPE, CLIENT_EVENT_VALUES_UNIQUE, classifyThinkingDelta, thinkingPhaseOf, pluginLabel, jsonDepth } from "../../src/lib/ondemand/eventMap";
 
 let pass = 0; const failures: string[] = [];
 const check = (name: string, ok: boolean, detail?: unknown) => { if (ok) { pass++; console.log(`  ok   ${name}`); } else { failures.push(name); console.log(`  FAIL ${name}${detail !== undefined ? ` → ${JSON.stringify(detail)}` : ""}`); } };
@@ -114,6 +114,45 @@ console.log("eventMap: 2026-10-11 raw upstream recording (web/proof/stream-audit
   check("prose 'summary' inside a step_output delta stays kind thinking (not summary_*)", st.kind === "thinking" && st.channel !== undefined, st);
   const summarise = parseFrame("message", J({ ...S3, eventType: "statusLog", currentStatusLog: { statusType: "summarize_history.completed", summary: "x" } }));
   check("documented summarize_history.completed binding still intact (documented-only, unobserved 2026-10-11)", summarise.kind === "summary_done" && summarise.text === "x", summarise);
+}
+
+console.log("unit1: classifyThinkingDelta (prose vs planner payload) + pluginLabel");
+{
+  const c = (kind: string, acc: string, delta?: string) => classifyThinkingDelta(kind, acc, delta);
+  eq("prose planning_thinking → prose", c("planning_thinking", "The user wants to compare the latest", "The user wants to compare the latest"), "prose");
+  eq("prose mentioning JSON/plugins stays prose", c("step_thinking", "I will use the Perplexity plugin and parse the json response.", "I will use the Perplexity plugin and parse the json response."), "prose");
+  eq("planning_output delta (plan JSON) → payload", c("planning_output", "{\n  \"title\": \"I'll look up the", "{\n  \"title\": \"I'll look up the"), "payload");
+  eq("step_output delta (tool definition JSON) → payload", c("step_output", "{\"title\":\"Searching Fervo Energy", "{\"title\":\"Searching Fervo Energy"), "payload");
+  eq("step_output prose-looking tail is STILL payload (channel rule)", c("step_output", "ing and returns relevant sources", "ing and returns relevant sources"), "payload");
+  eq("adapter channel 'plan' → payload", c("plan", "{\"objective\":", "{\"objective\":"), "payload");
+  eq("*_thinking delta starting with { → payload", c("step_thinking", "{\"pluginId\": \"plugin-1722260873\"", "{\"pluginId\": \"plugin-1722260873\""), "payload");
+  eq("*_thinking delta starting with [ → payload", c("step_thinking", "[{\"name\":", "[{\"name\":"), "payload");
+  eq("fenced ```json opener → payload", c("planning_thinking", "```json\n{", "```json\n{"), "payload");
+  eq("delta inside an open fence → payload", c("planning_thinking", "Here is the plan:\n```json\n{\"steps\": [", "{\"steps\": ["), "payload");
+  eq("delta after the fence closed → prose", c("planning_thinking", "```json\n{\"a\":1}\n```\nNow I will search.", "Now I will search."), "prose");
+  eq("\"api_request_parameters\" marker → payload", c("step_thinking", ' "api_request_parameters": {"query"', ' "api_request_parameters": {"query"'), "payload");
+  eq("\"operationId\" marker → payload", c("step_thinking", '"operationId": "search"', '"operationId": "search"'), "payload");
+  eq("truncation marker '… 2048 chars each' → payload", c("step_thinking", "… 2048 chars each", "… 2048 chars each"), "payload");
+  eq("delta continuing an unbalanced brace block → payload", c("step_thinking", "Plan:\n{\"plugins\": [{\"name\": \"perplexity\",\n \"description\": \"This endpoint allows query", " \"description\": \"This endpoint allows query"), "payload");
+  eq("delta after the brace block balanced → prose", c("step_thinking", "Plan:\n{\"plugins\": []}\nProceeding to search now.", "Proceeding to search now."), "prose");
+  eq("jsonDepth ignores braces in strings", jsonDepth('{"a": "}{"'), 1);
+  eq("thinkingPhaseOf planning_output → planning", thinkingPhaseOf("planning_output"), "planning");
+  eq("thinkingPhaseOf step_output → step", thinkingPhaseOf("step_output"), "step");
+  eq("CLIENT_EVENT.plannerPayload bound", CLIENT_EVENT.plannerPayload, "ondemand.planner_payload");
+  check("classifyClientFrame knows ondemand.planner_payload", classifyClientFrame({ type: "CUSTOM", name: CLIENT_EVENT.plannerPayload, value: { phase: "step", stepId: "1", delta: "{" } }) === "known");
+  eq("pluginLabel executePrompt", pluginLabel("executePrompt"), "OnDemand Agent");
+  eq("pluginLabel ondemand_agent", pluginLabel("ondemand_agent"), "OnDemand Agent");
+  eq("pluginLabel 'OnDemand Terminal Agent'", pluginLabel("OnDemand Terminal Agent"), "OnDemand Agent");
+  eq("pluginLabel perplexity", pluginLabel("perplexity"), "Web search (Perplexity)");
+  eq("pluginLabel plugin-1722260873", pluginLabel("plugin-1722260873"), "Web search (Perplexity)");
+  eq("pluginLabel linkedin", pluginLabel("linkedin"), "LinkedIn");
+  eq("pluginLabel reddit", pluginLabel("reddit"), "Reddit");
+  eq("pluginLabel x / twitter", [pluginLabel("x"), pluginLabel("twitter")], ["X search", "X search"]);
+  eq("pluginLabel gpt_search / google", [pluginLabel("gpt_search"), pluginLabel("google")], ["GPT search", "GPT search"]);
+  eq("pluginLabel pitchbook plugin-1777018662", pluginLabel("plugin-1777018662"), "PitchBook");
+  eq("pluginLabel media/document → Document reader", [pluginLabel("media_reader"), pluginLabel("document-extractor")], ["Document reader", "Document reader"]);
+  eq("pluginLabel fallback = catalogue name", pluginLabel("plugin-999", (id) => (id === "plugin-999" ? "Quarterly financial report data tool" : id)), "Quarterly financial report data tool");
+  eq("pluginLabel fallback = raw id", pluginLabel("plugin-424242"), "plugin-424242");
 }
 
 console.log(`\n${pass} passed, ${failures.length} failed`);

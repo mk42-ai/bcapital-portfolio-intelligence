@@ -596,3 +596,28 @@
   .oiu-run__footer, .oiu-run__footer .oiu-badge, .oiu-badge { flex-wrap: wrap; row-gap: 2px; }
   .oiu-summary, .oiu-outputs, .oiu-srcs, .oiu-artifacts, .oiu-prompt { max-width: 100%; min-width: 0; }
 }
+
+/* unit1 */
+/* Run-header plugin chips: favicon + friendly label (raw id in title/data-plugin-id). */
+.oiu-run__plugin { width: auto; height: 18px; padding: 0 6px 0 3px; gap: 4px; display: inline-flex; align-items: center; border-radius: 9px; }
+.oiu-run__plugin-label { font-size: 10.5px; font-weight: 600; color: #374151; white-space: nowrap; max-width: 14ch; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 640px) { .oiu-run__plugin { height: 16px; padding: 0 4px 0 2px; } .oiu-run__plugin-label { max-width: 9ch; font-size: 10px; } }
+/* Planner payload disclosure inside the Outputs card (collapsed by default; capped + scrollable when open). */
+.oiu-payload { margin: 0 10px 10px; border-top: 1px dashed #e5e7eb; padding-top: 6px; }
+.oiu-outputs__head + .oiu-payload { border-top: 0; padding-top: 0; }
+.oiu-payload__sum { display: flex; align-items: center; gap: 8px; cursor: pointer; list-style: none; font-weight: 600; color: #4b5563; font-size: 12px; padding: 4px 0; }
+.oiu-payload__sum::-webkit-details-marker { display: none; }
+.oiu-payload__sum::before { content: "▸"; font-size: 10px; color: #9ca3af; } .oiu-payload[open] > .oiu-payload__sum::before { content: "▾"; }
+.oiu-payload__meta { margin-left: auto; font-weight: 400; color: #6b7280; font-variant-numeric: tabular-nums; }
+.oiu-payload__body { display: flex; flex-direction: column; gap: 8px; max-height: 280px; overflow: auto; border: 1px solid #e5e7eb; border-radius: 8px; background: #f9fafb; padding: 8px; }
+.oiu-payload__sec { display: flex; flex-direction: column; gap: 3px; }
+.oiu-payload__label { font-size: 10.5px; font-weight: 700; letter-spacing: .02em; color: #047857; }
+.oiu-payload__pre { margin: 0; font-size: 10.5px; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; color: #1f2937; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+/* Jump-to-latest: stays ABSOLUTE in the scroll container's parent (out of flow — a flow sibling shrank the thread, CLS 0.23–0.81), but while the
+   pill is shown the scroll area carries `.oiu-jump-pad` (ScrollAnchor toggles it) so the last Working row scrolls ABOVE the pill instead of under it.
+   Translucent blurred backdrop + explicit pointer-events/z-index: it never covers an interactive row, on desktop or at 390 px. */
+.chat-shell .oiu-jump-pad { padding-bottom: 56px !important; scroll-padding-bottom: 56px; }
+.oiu-jump { bottom: 12px; pointer-events: auto; z-index: 6; background: rgba(255, 255, 255, .92); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); box-shadow: 0 4px 14px -6px rgba(0, 0, 0, .35), 0 0 0 1px rgba(10, 201, 133, .25) inset; }
+.oiu-jump:hover { background: #ffffff; border-color: #0AC985; }
+@media (max-width: 640px) { .oiu-jump { bottom: 8px; font-size: 11.5px; padding: 5px 10px; } .chat-shell .oiu-jump-pad { padding-bottom: 52px !important; } }
+/* end unit1 */

@@ -160,3 +160,7 @@ export function classifyClientFrame(frame: { type?: string; name?: string; value
   }
   return /^(TEXT_MESSAGE_|RUN_|TOOL_CALL_|STEP_|STATE_|MESSAGES_|RAW$)/.test(type) ? "known" : "unknown";
 }
+
+/* unit1 — additive: typed value of the CUSTOM `ondemand.planner_payload` frame (see CLIENT_EVENT.plannerPayload / classifyThinkingDelta). */
+export type PlannerPayloadFrame = { phase: "planning" | "step"; stepId: string; delta: string; kind?: string };
+export const isPlannerPayloadFrame = (v: unknown): v is PlannerPayloadFrame => !!v && typeof v === "object" && typeof (v as PlannerPayloadFrame).delta === "string" && ((v as PlannerPayloadFrame).phase === "planning" || (v as PlannerPayloadFrame).phase === "step");

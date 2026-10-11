@@ -18,6 +18,12 @@ import { PLUGIN_ID, PLUGIN_NAME, MODEL_ID, MODEL_LABEL, REASONING_MODE } from "@
 import { CLIENT_EVENT as CE, LABEL } from "@/lib/ondemand/eventMap";
 import { getSelectedPluginIds, usePluginSelection } from "@/lib/plugin-selection";
 import { pluginName as catalogueName, PLUGIN_CATALOGUE } from "@/lib/plugin-catalogue";
+import { pluginLabel as rawPluginLabel } from "@/lib/ondemand/eventMap";
+/** unit1: friendly plugin label (falls back to the catalogue name, then the raw id). */
+const friendlyPlugin = (idOrName: string | null | undefined) => rawPluginLabel(idOrName, catalogueName);
+export type PlannerPayload = { planning: string; steps: Record<string, string> };
+const EMPTY_PAYLOAD: PlannerPayload = { planning: "", steps: {} };
+const hasPayload = (p: PlannerPayload | null | undefined): p is PlannerPayload => !!p && (p.planning.trim().length > 0 || Object.values(p.steps).some((t) => t.trim().length > 0));
 import { PluginFavicon, preloadPluginFavicons } from "@/components/ui/plugin-favicon";
 import { fmtScore } from "@/lib/format";
 import { VoiceDock } from "@/components/chat/voice/voice-dock";
@@ -70,13 +76,13 @@ type StreamState = {
   summaries: StepSummary[]; prompt: Prompt | null; filler: boolean; fillerTick: number; text: string; answerDone: boolean; integrity: { dupes: number; gaps: number; frames: number } | null;
   request: Record<string, unknown> | null; agentLog: { subtype: string; at: number }[]; stepRaw: Record<string, string>;
   attachments: { mediaId: string; name: string; kind?: string; extractedChars?: number; grounded?: boolean }[] | null; voice: { phase: string; text?: string } | null;
-  artifacts: LiveArtifact[]; outputs: StepOutput[]; tools: ToolRow[];
+  artifacts: LiveArtifact[]; outputs: StepOutput[]; tools: ToolRow[]; plannerPayload: PlannerPayload;
 };
 /** One Working row = one plugin/agent action (TOOL_CALL_START/ARGS/RESULT from the bridge). */
 export type ToolRow = { id: string; name: string; pluginId: string; query: string; stepId: string; status: "running" | "done" | "failed"; sources?: number; durationMs?: number; message?: string; raw?: string };
 export type LiveArtifact = { key: string; name: string; phase: "creating" | "ready" | "failed"; artifact?: Artifact; message?: string; media?: { status?: string; id?: string | null; message?: string | null } };
 export type StepOutput = { stepId: string; title: string; plugins: { pluginId: string; name: string; params: Record<string, unknown> | null }[]; at: number };
-const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, finishedAt: null, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null, artifacts: [], outputs: [], tools: [] };
+const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, finishedAt: null, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null, artifacts: [], outputs: [], tools: [], plannerPayload: EMPTY_PAYLOAD };
 let streamState: StreamState = IDLE;
 let pending: Partial<StreamState> | null = null; let rafId = 0;
 const liveSources = new Map<string, Source[]>();
@@ -119,7 +125,7 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
   const finalize = () => {
     const st = peek(); const key = sourcesKey(st.text);
     // The live DOM never truncates the reasoning; ONLY the persisted (localStorage) copy is capped at 200,000 chars to stay inside the quota.
-    const meta: StoredMeta & { thinkingKinds?: string[] } = { model: MODEL_LABEL, modelId: MODEL_ID, reasoningMode: REASONING_MODE, pluginId: PLUGIN_ID, pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, firstCitationMs: st.firstCitationMs, totalMs: Date.now() - t0, chunks: st.chunks, metrics: st.metrics, thinking: st.thinking.slice(0, 200_000), thinkingKinds: st.thinkingKinds, error: st.error ? { code: st.error.code, message: st.error.message } : null, at: new Date().toISOString(), summaries: st.summaries.map((s) => ({ index: s.index, text: s.text, doneAt: s.doneAt ?? null })), plan: st.plan, artifacts: st.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!), tools: st.tools, artifactFailures: st.artifacts.filter((a) => a.phase === "failed").map((a) => ({ name: a.name, message: a.message ?? "" })), outputs: st.outputs };
+    const meta: StoredMeta & { thinkingKinds?: string[]; plannerPayload?: PlannerPayload } = { model: MODEL_LABEL, modelId: MODEL_ID, reasoningMode: REASONING_MODE, pluginId: PLUGIN_ID, pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, firstCitationMs: st.firstCitationMs, totalMs: Date.now() - t0, chunks: st.chunks, metrics: st.metrics, thinking: st.thinking.slice(0, 200_000), thinkingKinds: st.thinkingKinds, error: st.error ? { code: st.error.code, message: st.error.message } : null, at: new Date().toISOString(), summaries: st.summaries.map((s) => ({ index: s.index, text: s.text, doneAt: s.doneAt ?? null })), plan: st.plan, artifacts: st.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!), tools: st.tools, artifactFailures: st.artifacts.filter((a) => a.phase === "failed").map((a) => ({ name: a.name, message: a.message ?? "" })), outputs: st.outputs, plannerPayload: hasPayload(st.plannerPayload) ? { planning: st.plannerPayload.planning.slice(0, 60_000), steps: Object.fromEntries(Object.entries(st.plannerPayload.steps).map(([k, v]) => [k, v.slice(0, 60_000)])) } : undefined };
     liveMeta.set(key, meta); rememberMeta(key, meta);
     if (st.finishedAt == null) setStream({ finishedAt: Date.now() }, true); // freezes the run-header timer at totalMs
     if (st.sources.length) { liveSources.set(key, st.sources); rememberSources(key, st.sources); }
@@ -189,6 +195,7 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
             break;
           }
           case CE.stepOutput: setStream({ outputs: [...st.outputs.filter((o) => o.stepId !== String(v.stepId)), { stepId: String(v.stepId ?? ""), title: String(v.title ?? ""), plugins: Array.isArray(v.plugins) ? (v.plugins as StepOutput["plugins"]) : [], at: now - t0 }] }); break;
+          case CE.plannerPayload: if (typeof v.delta === "string") { const phase = v.phase === "planning" ? "planning" : "step"; const sid = String(v.stepId ?? "") || "0"; const cur = st.plannerPayload; const pk = typeof v.kind === "string" ? v.kind : phase === "planning" ? "plan" : "step_output"; setStream({ thinkingKinds: st.thinkingKinds.includes(pk) ? st.thinkingKinds : [...st.thinkingKinds, pk], /* phase chips unchanged: payload kinds still count */ plannerPayload: phase === "planning" ? { ...cur, planning: cur.planning + v.delta } : { ...cur, steps: { ...cur.steps, [sid]: (cur.steps[sid] ?? "") + v.delta } }, ...(st.phase === "connecting" ? { phase: "planning", detail: PHASE_LABEL.planning } : {}) }); } break;
           case CE.voice: if (typeof v.phase === "string") setStream({ voice: { phase: v.phase, ...(typeof v.text === "string" ? { text: v.text } : {}) } }); break;
         }
         break;
@@ -334,7 +341,7 @@ function RunHeader({ live, startedAt, totalMs, pluginIds }: { live: boolean; sta
       <Cpu className="size-3" aria-hidden /><span className="oiu-run__model">{MODEL_LABEL}</span>
       <span className="oiu-badge__sep">·</span><span className="oiu-run__reason">{REASONING_MODE}</span>
       <span className="oiu-badge__sep">·</span>
-      <span className="oiu-run__plugins" aria-label="Plugins">{plugins.slice(0, 6).map((id) => <span key={id} className="oiu-run__plugin" title={catalogueName(id)}><PluginFavicon id={id} size={14} /></span>)}</span>
+      <span className="oiu-run__plugins" aria-label="Plugins">{plugins.slice(0, 6).map((id) => <span key={id} className="oiu-run__plugin" title={id} data-plugin-id={id} aria-label={friendlyPlugin(id)}><PluginFavicon id={id} size={14} /><span className="oiu-run__plugin-label">{friendlyPlugin(id)}</span></span>)}</span>
       {(live || totalMs != null) && <span className="oiu-run__timer" data-testid="run-timer" data-state={live && totalMs == null ? "running" : "frozen"} data-ms={Math.round(ms)}>{live && totalMs == null ? <Loader2 className="size-3 oiu-spin" aria-hidden /> : null}{fmtElapsed(ms)}</span>}
     </div>
   );
@@ -452,7 +459,7 @@ function PromptCard({ prompt, sessionId, onAnswer }: { prompt: Prompt; sessionId
  * ---------------------------------------------------------------------------------------------------------------- */
 type RunData = {
   live: boolean; answerDone?: boolean; phase: StreamPhase; detail: string; thinking: string; thinkingKinds: string[]; answerStarted: boolean;
-  plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null; tools: ToolRow[]; summaries: StepSummary[]; outputs: StepOutput[];
+  plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null; tools: ToolRow[]; summaries: StepSummary[]; outputs: StepOutput[]; plannerPayload?: PlannerPayload | null;
   prompt: Prompt | null; sessionId: string | null; text: string; known: Source[]; sources: Source[]; artifacts: LiveArtifact[];
   error: { code: string; message: string; raw?: string } | null; meta: Partial<StoredMeta> | null; filler: boolean; fillerTick: number; elapsedMs: number;
   startedAt: number; totalMs: number | null;
@@ -468,14 +475,14 @@ function mediaFrom(text: string, arts: Artifact[]) {
 }
 /** Working row for one plugin/agent action. */
 function WorkingRow({ t, live }: { t: ToolRow; live: boolean }) {
-  const name = t.name || catalogueName(t.pluginId);
+  const name = friendlyPlugin(t.name || t.pluginId);
   const state = t.status === "failed" ? "failed" : t.status === "running" && live ? "running" : "done";
   return (
     <li className={`oiu-work oiu-work--${state}`} data-testid="working-row" data-state={state} data-plugin={t.pluginId}>
       <span className="oiu-work__icon" aria-hidden>{state === "failed" ? <AlertTriangle className="size-3.5" /> : state === "running" ? <Loader2 className="size-3.5 oiu-spin" /> : <Check className="size-3.5" />}</span>
-      <span className="oiu-work__chips" data-testid="working-chips"><PluginFavicon id={t.pluginId} size={16} /></span>
+      <span className="oiu-work__chips" data-testid="working-chips" title={t.pluginId} data-plugin-id={t.pluginId}><PluginFavicon id={t.pluginId} size={16} /></span>
       <span className="oiu-work__text">
-        <span className="oiu-work__label">{state === "running" ? LABEL.action(name) : state === "failed" ? LABEL.failed(name) : LABEL.done(t.sources, t.durationMs)}{state !== "failed" ? <span className="oiu-work__via"> · {name}</span> : null}</span>
+        <span className="oiu-work__label">{state === "running" ? LABEL.action(name) : state === "failed" ? LABEL.failed(name) : LABEL.done(t.sources, t.durationMs)}{state !== "failed" ? <span className="oiu-work__via" title={t.pluginId} data-plugin-id={t.pluginId}> · {name}</span> : null}</span>
         {t.query ? <span className="oiu-work__query">“{t.query.slice(0, 140)}{t.query.length > 140 ? "…" : ""}”</span> : null}
         {state === "failed" && t.message ? <span className="oiu-work__err">{t.message}</span> : null}
         {state === "failed" && t.raw ? <RawFrame raw={t.raw} /> : null}
@@ -489,22 +496,45 @@ function WorkingSkeleton({ detail, plugins }: { detail: string; plugins: string[
     <li className="oiu-work oiu-work--running oiu-work--skeleton" data-testid="working-row" data-state="queued">
       <span className="oiu-work__icon" aria-hidden><Loader2 className="size-3.5 oiu-spin" /></span>
       <span className="oiu-work__chips" data-testid="working-chips">{(plugins.length ? plugins : [PLUGIN_ID]).slice(0, 4).map((id) => <PluginFavicon key={id} id={id} size={16} />)}</span>
-      <span className="oiu-work__text"><span className="oiu-work__label">{detail || LABEL.searching(catalogueName(plugins[0] ?? PLUGIN_ID))}</span><span className="oiu-shimmer oiu-shimmer--row" aria-hidden><span /></span></span>
+      <span className="oiu-work__text"><span className="oiu-work__label">{detail || LABEL.searching(friendlyPlugin(plugins[0] ?? PLUGIN_ID))}</span><span className="oiu-shimmer oiu-shimmer--row" aria-hidden><span /></span></span>
     </li>
   );
 }
 const hasParams = (p: Record<string, unknown> | null | undefined): p is Record<string, unknown> => !!p && typeof p === "object" && Object.keys(p).length > 0;
-function OutputsCard({ outputs: raw }: { outputs: StepOutput[] }) {
+function OutputsCard({ outputs: raw, plannerPayload }: { outputs: StepOutput[]; plannerPayload?: PlannerPayload | null }) {
   const [open, setOpen] = useState(false);
   // Skip plugin entries with null/empty params and hide the card when no step has a real call — never an empty `{}` box.
   const outputs = raw.map((o) => ({ ...o, plugins: o.plugins.filter((pl) => hasParams(pl.params)) })).filter((o) => o.plugins.length > 0);
-  if (!outputs.length) return null;
+  const payload = hasPayload(plannerPayload) ? plannerPayload : null;
+  if (!outputs.length && !payload) return null; // unit1: renders when EITHER outputs or planner payload exist
   const calls = outputs.reduce((n, o) => n + o.plugins.length, 0);
+  const head = outputs.length ? `Outputs · ${outputs.length} step${outputs.length === 1 ? "" : "s"} · ${calls} call${calls === 1 ? "" : "s"}` : "Outputs · planner payload";
   return (
-    <section className="oiu-outputs" data-testid="outputs-card" data-count={outputs.length}>
-      <button type="button" className="oiu-outputs__head" aria-expanded={open} onClick={() => setOpen((o) => !o)}><Wrench className="size-3.5" aria-hidden /><span>Outputs · {outputs.length} step{outputs.length === 1 ? "" : "s"} · {calls} call{calls === 1 ? "" : "s"}</span><ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden /></button>
-      {open && <ol className="oiu-outputs__list">{outputs.map((o) => <li key={o.stepId} data-testid="output-step"><strong>{o.title}</strong>{o.plugins.map((pl, i) => <span key={i} className="oiu-outputs__call"><PluginFavicon id={pl.pluginId} size={14} /> {pl.name || catalogueName(pl.pluginId)}<code>{JSON.stringify(pl.params).slice(0, 160)}</code></span>)}</li>)}</ol>}
+    <section className="oiu-outputs" data-testid="outputs-card" data-count={outputs.length} data-has-payload={payload ? "true" : "false"}>
+      <button type="button" className="oiu-outputs__head" aria-expanded={open} onClick={() => setOpen((o) => !o)}><Wrench className="size-3.5" aria-hidden /><span>{head}</span><ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden /></button>
+      {open && outputs.length > 0 && <ol className="oiu-outputs__list">{outputs.map((o) => <li key={o.stepId} data-testid="output-step"><strong>{o.title}</strong>{o.plugins.map((pl, i) => <span key={i} className="oiu-outputs__call"><PluginFavicon id={pl.pluginId} size={14} /> <span title={pl.pluginId} data-plugin-id={pl.pluginId}>{friendlyPlugin(pl.name || pl.pluginId)}</span><code>{JSON.stringify(pl.params).slice(0, 160)}</code></span>)}</li>)}</ol>}
+      {payload && <PlannerPayloadDetails payload={payload} />}
     </section>
+  );
+}
+/** unit1: pretty-print a planner/tool-definition payload when it parses as JSON (first balanced object), else show the raw text. */
+function prettyPayload(text: string): string {
+  const t = text.trim().replace(/^```(?:json)?\s*/, "").replace(/```\s*$/, "");
+  try { return JSON.stringify(JSON.parse(t), null, 2); } catch { /* fall through */ }
+  const i = t.indexOf("{"); if (i >= 0) { let depth = 0, inStr = false, esc = false; for (let k = i; k < t.length; k++) { const c = t[k]; if (inStr) { if (esc) esc = false; else if (c === "\\") esc = true; else if (c === '"') inStr = false; continue; } if (c === '"') inStr = true; else if (c === "{") depth++; else if (c === "}") { depth--; if (depth === 0) { try { return `${JSON.stringify(JSON.parse(t.slice(i, k + 1)), null, 2)}${t.slice(k + 1).trim() ? `\n${t.slice(k + 1).trim()}` : ""}`; } catch { break; } } } } }
+  return t;
+}
+function PlannerPayloadDetails({ payload }: { payload: PlannerPayload }) {
+  const steps = Object.entries(payload.steps).filter(([, v]) => v.trim()).sort(([a], [b]) => Number(a) - Number(b));
+  const total = payload.planning.length + steps.reduce((n, [, v]) => n + v.length, 0);
+  return (
+    <details className="oiu-payload" data-testid="planner-payload" data-chars={total}>
+      <summary className="oiu-payload__sum"><span>Planner payload</span><span className="oiu-payload__meta">{payload.planning.trim() ? "plan" : ""}{payload.planning.trim() && steps.length ? " · " : ""}{steps.length ? `${steps.length} step${steps.length === 1 ? "" : "s"}` : ""} · {total.toLocaleString()} chars</span></summary>
+      <div className="oiu-payload__body">
+        {payload.planning.trim() ? <div className="oiu-payload__sec" data-phase="planning"><span className="oiu-payload__label">Plan</span><pre className="oiu-payload__pre">{prettyPayload(payload.planning)}</pre></div> : null}
+        {steps.map(([sid, txt]) => <div key={sid} className="oiu-payload__sec" data-phase="step" data-step={sid}><span className="oiu-payload__label">Step {sid}</span><pre className="oiu-payload__pre">{prettyPayload(txt)}</pre></div>)}
+      </div>
+    </details>
   );
 }
 function CollapsedSources({ sources, live }: { sources: Source[]; live: boolean }) {
@@ -560,7 +590,7 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
       {/* 4 — between-step summaries */}
       {r.summaries.map((s) => <StepSummaryCard key={s.index} s={s} live={r.live} />)}
       {/* 5 — outputs rail */}
-      <OutputsCard outputs={r.outputs} />
+      <OutputsCard outputs={r.outputs} plannerPayload={r.plannerPayload} />
       {/* 6 — interactive controls */}
       {r.live && r.prompt && <PromptCard prompt={r.prompt} sessionId={r.sessionId} onAnswer={onAnswer} />}
       {/* 7 — answer */}
@@ -585,6 +615,13 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
     </div>
   );
 }
+/** unit1: last non-empty line that does not look like planner JSON (brace/bracket lines, "pluginId", "chars each" markers, fences). */
+const PAYLOAD_LINE_RE = /^\s*[\[\]{}"`,]|"pluginId"|api_request_parameters|"operationId"|chars each|^\s*```/;
+function lastProseLine(text: string): string {
+  const lines = text.trimEnd().split("\n");
+  for (let i = lines.length - 1; i >= 0; i--) { const l = lines[i].trim(); if (l && !PAYLOAD_LINE_RE.test(l)) return l; }
+  return "";
+}
 /** Phase chips for the Thinking block: planning_* → Planning, step_* → Step 1…n (n = plan steps started so far), fulfillment_* → Answer. */
 function thinkingPhases(kinds: string[], plan: RunData["plan"], answerStarted: boolean): string[] {
   const out: string[] = [];
@@ -607,7 +644,8 @@ function ThinkingBlock({ text, kinds, plan, answerStarted, live, collapsed, elap
   useEffect(() => { const el = bodyRef.current; if (el && streaming && isOpen) el.scrollTop = el.scrollHeight; }, [text, streaming, isOpen]);
   const phases = thinkingPhases(kinds, plan, answerStarted);
   const secs = Math.max(1, Math.round(elapsedMs / 1000));
-  const lastLine = streaming ? text.trimEnd().split("\n").filter(Boolean).pop() ?? "" : "";
+  // unit1: the header tail shows the last PROSE line only (never a JSON / truncation-marker fragment that slipped through)
+  const lastLine = streaming ? lastProseLine(text) : "";
   return (
     <section className={`oiu-think${isOpen ? " oiu-think--open" : ""}${streaming ? " oiu-think--live" : ""}`} data-testid="thinking-block" data-state={streaming ? "streaming" : isOpen ? "expanded" : "collapsed"} data-chars={text.length} data-phases={phases.join(",")}>
       <button type="button" className="oiu-think__head" aria-expanded={isOpen} onClick={() => setOpen(!isOpen)}>
@@ -636,7 +674,7 @@ const AssistantMessage: AssistantMessageComponent = memo(function AssistantMessa
     plan: meta?.plan ? { objective: meta.plan.objective, steps: meta.plan.steps.map((s) => ({ ...s, state: s.state === "running" ? "done" : s.state })) } : null,
     tools: (meta?.tools ?? []).map((t) => ({ ...t, status: t.status === "running" ? "done" : t.status })),
     summaries: (meta?.summaries ?? []).map((s) => ({ index: s.index, stepId: "", state: "done" as const, text: s.text, optimistic: false, startedAt: 0, doneAt: s.doneAt ?? undefined })),
-    outputs: meta?.outputs ?? [], prompt: null, sessionId: null, text: content, known: meta?.error ? [] : known, sources: meta?.error ? [] : known,
+    outputs: meta?.outputs ?? [], plannerPayload: (meta as { plannerPayload?: PlannerPayload } | null)?.plannerPayload ?? null, prompt: null, sessionId: null, text: content, known: meta?.error ? [] : known, sources: meta?.error ? [] : known,
     artifacts: [...(meta?.artifacts ?? []).map((a) => ({ key: a.id, name: a.name, phase: "ready" as const, artifact: a })), ...(meta?.artifactFailures ?? []).map((f, i) => ({ key: `f${i}`, name: f.name, phase: "failed" as const, message: f.message }))],
     error: meta?.error ?? null, meta, filler: false, fillerTick: 0, elapsedMs: meta?.totalMs ?? 0, startedAt: 0, totalMs: meta?.totalMs ?? null,
   };
@@ -672,7 +710,7 @@ const PluginTimeline: ToolCallTimelineComponent = ({ steps, isLast }) => {
   if (!live) return null; // settled turns are drawn by AssistantMessage → RunView from the stored run meta (same order)
   const r: RunData = {
     live: true, answerDone: st.answerDone, phase: st.phase, detail: st.detail, thinking: st.thinking, thinkingKinds: st.thinkingKinds, answerStarted: !!(liveText || st.text),
-    plan: st.plan, tools: st.tools, summaries: st.summaries, outputs: st.outputs, prompt: st.prompt, sessionId: st.sessionId,
+    plan: st.plan, tools: st.tools, summaries: st.summaries, outputs: st.outputs, plannerPayload: st.plannerPayload, prompt: st.prompt, sessionId: st.sessionId,
     text: liveText || st.text, known: st.error?.code === "plugin_error" ? [] : st.sources, sources: st.sources, artifacts: st.artifacts,
     error: st.error, meta: { pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, metrics: st.metrics }, filler: st.filler, fillerTick: st.fillerTick, elapsedMs: st.startedAt ? Date.now() - st.startedAt : 0,
     startedAt: st.startedAt, totalMs: st.finishedAt != null && st.startedAt ? st.finishedAt - st.startedAt : null,
@@ -729,7 +767,10 @@ function ScrollAnchor() {
   // The "Jump to latest" pill is PORTALLED into the scroll container (absolute, out of flow). Rendering it as a sibling of the thread made
   // OpenUI's flex row shrink the whole thread by 128 px on every toggle — the single biggest layout shift in the recordings (CLS 0.23–0.81).
   const host = typeof document !== "undefined" ? el.current?.parentElement ?? null : null;
-  if (!away || !isRunning || !host) return null;
+  const padOn = away && isRunning;
+  // unit1: while the pill is shown, pad the scroll area so the last Working row can scroll above the pill (never hidden under it).
+  useEffect(() => { const node = el.current; if (!node) return; node.classList.toggle("oiu-jump-pad", padOn); return () => node.classList.remove("oiu-jump-pad"); }, [padOn]);
+  if (!padOn || !host) return null;
   return createPortal(<button type="button" className="oiu-jump" data-testid="jump-to-latest" onClick={() => { const node = el.current; if (node) { node.scrollTo({ top: node.scrollHeight, behavior: "smooth" }); atBottom.current = true; setAway(false); } }}><ArrowDown className="size-3.5" aria-hidden /> Jump to latest</button>, host);
 }
 
