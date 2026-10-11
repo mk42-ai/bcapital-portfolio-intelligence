@@ -1,0 +1,452 @@
+[
+  {
+    "id": "a1",
+    "group": "run panel",
+    "task": "RunStatusHeader anchored at the top of the run panel; interleaved Working band removed; Outputs folded into the header",
+    "owner_files_hint": "web/src/components/chat/run-status-header.tsx, run-status-header.css, chat-shell.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a2",
+    "group": "run panel",
+    "task": "Thinking collapsed by default, auto-expands when the Portfolio Plugin starts, manual toggle wins",
+    "owner_files_hint": "chat-shell.tsx, shell.css",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a3",
+    "group": "run panel",
+    "task": "Working header single-source invariant (bridge stall frames stay in filler) + spec",
+    "owner_files_hint": "web/e2e/run-panel-working-header.spec.ts, web/src/app/api/chat/route.ts, chat-shell.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a4",
+    "group": "run panel",
+    "task": "Uniform 56px step rows (status ring · plugin chip · label · timing) with zero-CLS reserve",
+    "owner_files_hint": "chat-shell.tsx, shell.css",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a5",
+    "group": "run panel",
+    "task": "PluginIcon map — B Capital mark for the Portfolio Plugin, local Perplexity/OnDemand SVGs, monogram fallback",
+    "owner_files_hint": "web/src/components/ui/plugin-favicon.tsx, web/public/plugins/*.svg",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a6",
+    "group": "run panel",
+    "task": "Checklist-only Plan card; planner JSON lives only behind the developer reveal",
+    "owner_files_hint": "chat-shell.tsx, route.ts, web/e2e/thinking-json-filter.spec.ts",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a7",
+    "group": "run panel",
+    "task": "SSE frame guard (dedupe / gap / stale), robust SSE line splitting, planner frame channels + unit tests",
+    "owner_files_hint": "web/src/lib/ondemand/frame-guard.ts, sse-adapter.ts, eventMap.ts, web/tests/unit/eventmap.test.ts",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a8",
+    "group": "run panel",
+    "task": "Compact tools-vs-answer timing bar; verbose timings behind the dev reveal",
+    "owner_files_hint": "chat-shell.tsx, shell.css, web/src/components/chat/run-rail.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a9",
+    "group": "run panel",
+    "task": "Scaffolding filter covers planner format-reasoning lines; one Chevron component across heads",
+    "owner_files_hint": "chat-shell.tsx, shell.css, web/src/components/ui/chevron.tsx, eventMap.ts",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a10",
+    "group": "run panel",
+    "task": "A11y: reduced-motion, green focus rings on run-panel toggles, AA contrast on mint surfaces",
+    "owner_files_hint": "web/src/app/globals.css, response-theme.css, shell.css, web/e2e/run-panel-a11y.spec.ts",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a11",
+    "group": "run panel",
+    "task": "390×844 run-panel layout — 64px rows, no horizontal overflow, wrapped header/footer + mobile spec",
+    "owner_files_hint": "shell.css, web/e2e/run-panel-mobile.spec.ts, web/proof/pass-3/mobile/*",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a12",
+    "group": "run panel",
+    "task": "Evidence suite (Playwright evidence config + T1…Tn screenshots of the run panel on desktop)",
+    "owner_files_hint": "web/playwright.evidence.config.ts, web/proof/evidence/*",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a13",
+    "group": "run panel",
+    "task": "Recorded bridge+upstream SSE fixture of a 2-plugin run and a replay harness",
+    "owner_files_hint": "web/scripts/replay-sse-fixture.mjs, web/tests/fixtures/sse/*",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a14",
+    "group": "run panel",
+    "task": "Visual run-panel state snapshots + layout metrics at 1440×900 / 390×844 (before/after sets)",
+    "owner_files_hint": "web/e2e/run-panel-visual.spec.ts, web/proof/pass-3/visual/*",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a15",
+    "group": "run panel",
+    "task": "Stream continuity check script + two-turn session spec (hang detection, heartbeat gaps, session reuse)",
+    "owner_files_hint": "web/e2e/session-continuity.spec.ts, web/proof/pass-3/continuity/*",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a16",
+    "group": "run panel",
+    "task": "Lighthouse route runner + performance budget (LCP ≤2.5s, TBT ≤200ms, CLS ≤0.1)",
+    "owner_files_hint": "web/scripts/lighthouse-routes.mjs, web/lighthouse-budget.json, web/proof/pass-3/*",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a17",
+    "group": "overview",
+    "task": "Hero verdict strip with reduced-motion-safe count-up",
+    "owner_files_hint": "web/src/components/overview/hero-stats.tsx, hero-stats.css, web/src/app/overview/page.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a18",
+    "group": "overview",
+    "task": "Sector colour tokens (emerald + AA tints, hue-audited, no blue) + sectorColor() helper + tests",
+    "owner_files_hint": "web/src/styles/tokens.css, web/src/lib/sector-color.ts, web/tests/unit/sector-color.test.ts",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a19",
+    "group": "overview",
+    "task": "Top movers since last run with delta arrows and sector pills",
+    "owner_files_hint": "web/src/components/overview/top-movers.tsx, top-movers.css, overview/page.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a20",
+    "group": "overview",
+    "task": "News Pulse mini-feed with publisher favicon chips",
+    "owner_files_hint": "web/src/components/overview/news-mini-feed.tsx, news-mini-feed.css, overview/page.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a21",
+    "group": "overview",
+    "task": "Bento grid + spacing/motion tokens + hover elevation",
+    "owner_files_hint": "web/src/components/overview/bento.css, web/src/components/ui/card.tsx, tokens.css, overview/page.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a22",
+    "group": "overview",
+    "task": "Cmd/Ctrl+K company switcher (logo chips, sector colour, keyboard nav)",
+    "owner_files_hint": "web/src/components/shell/command-k.tsx, command-k.css, nav-rail.tsx, shell.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a23",
+    "group": "overview",
+    "task": "Dependency-free SVG Sparkline + unit tests; inline in the sentiment panel",
+    "owner_files_hint": "web/src/components/charts/sparkline.tsx, web/src/components/company/sentiment-panel.tsx, web/tests/unit/sparkline.test.ts",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a24",
+    "group": "overview",
+    "task": "Empty-state icons (no-results / no-news / no-selection / offline) wired into empty + loading states",
+    "owner_files_hint": "web/public/icons/empty/*, docs/owner-evidence/pass-3/*.svg, web/src/components/ui/*",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a25",
+    "group": "overview",
+    "task": "Overview acceptance + axe spec (verdict row, movers, mini-feed, a11y, no overflow)",
+    "owner_files_hint": "web/e2e/overview-acceptance.spec.ts, web/proof/pass-3/overview/*",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a26",
+    "group": "overview",
+    "task": "Overview vitals runner (CPU 4×) + CLS-free SVG sizing / Suspense boundaries",
+    "owner_files_hint": "web/scripts/vitals-overview.mjs, web/proof/pass-3/perf/*, overview/page.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a27",
+    "group": "companies",
+    "task": "CompanyCard — logo chip, sector tag, sentiment pill with delta, last deal, news bar",
+    "owner_files_hint": "web/src/components/companies/company-card.tsx, company-card.css, companies-list.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a28",
+    "group": "companies",
+    "task": "Local company logos (fetch script + log) and local-logos map",
+    "owner_files_hint": "web/scripts/fetch-logos.mjs, web/public/logos/*, web/src/lib/local-logos.ts, docs/owner-evidence/pass-3/logo-fetch-log.md",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a29",
+    "group": "companies",
+    "task": "Grid/list toggle, coloured sector filter chips, sort by delta / news / last deal",
+    "owner_files_hint": "web/src/components/companies/companies-list.tsx, toolbar.css",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a30",
+    "group": "companies",
+    "task": "Company detail header with sector tint band, KPI row, tinted deal timeline",
+    "owner_files_hint": "web/src/components/company/detail-header.tsx, detail-header.css, funding-timeline.tsx, company/[slug]/page.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a31",
+    "group": "companies",
+    "task": "Sector-coloured chat context chips with clear remove affordance, counter in title, less copy",
+    "owner_files_hint": "web/src/components/chat/company-picker.tsx, company-picker.css, inspector-drawer.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a32",
+    "group": "companies",
+    "task": "/compare side-by-side strip for 2–5 selected companies",
+    "owner_files_hint": "web/src/app/compare/page.tsx, web/src/components/companies/compare-strip.tsx, compare-strip.css, inspector-drawer.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a33",
+    "group": "companies",
+    "task": "Keyboard a11y: roving tabindex + typeahead on companies, arrow nav on the rail, brand-green focus rings everywhere",
+    "owner_files_hint": "web/e2e/keyboard-nav.spec.ts, globals.css, companies-list.tsx, nav.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a34",
+    "group": "companies",
+    "task": "CLS-free skeleton loading states for company detail and news",
+    "owner_files_hint": "web/src/components/ui/skeleton.tsx, web/src/app/company/[slug]/loading.tsx, web/src/app/news/loading.tsx, web/e2e/cls-skeletons.spec.ts",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a35",
+    "group": "companies",
+    "task": "Companies acceptance spec (cards, toolbar, filters, a11y) with proof screenshots",
+    "owner_files_hint": "web/e2e/companies-acceptance.spec.ts, web/proof/pass-3/*",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a36",
+    "group": "companies",
+    "task": "CompanyLogo component (local logo → favicon → monogram fallback) wired into the companies page",
+    "owner_files_hint": "web/src/components/ui/company-logo.tsx, companies-list.tsx, web/src/app/companies/page.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a37",
+    "group": "companies",
+    "task": "Filter / sort / view / search state in the URL (shareable, back/forward safe) + tests",
+    "owner_files_hint": "web/src/lib/url-state.ts, companies-list.tsx, web/src/app/companies/page.tsx",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a38",
+    "group": "companies",
+    "task": "390×844 companies + company detail layout fixes + mobile spec",
+    "owner_files_hint": "web/src/app/companies/page.tsx, web/src/app/company/[slug]/page.tsx, web/e2e/companies-mobile.spec.ts",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a39",
+    "group": "shared/QA",
+    "task": "Icon QA — glyph PNG/SVG audit (sizes, transparency, no-blue) with machine-readable report",
+    "owner_files_hint": "web/scripts/icon-qa.py, web/public/icons/glyph-qa.json",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a40",
+    "group": "shared/QA",
+    "task": "Design-token audit (hue 190–260° blue ban, contrast, unused tokens) with report",
+    "owner_files_hint": "web/scripts/token-audit.mjs, web/proof/pass-3/*",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a41",
+    "group": "shared/QA",
+    "task": "One-shot gate script (tsc web+root, unit tests, lint, testid inventory) for the merge agent",
+    "owner_files_hint": "scripts/gate.sh, web/scripts/gate.mjs",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a42",
+    "group": "shared/QA",
+    "task": "<task per SUBAGENT PLAN — not visible from the t5/a42 worktree at scaffold time; merge agent to fill>",
+    "owner_files_hint": "<fill>",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a43",
+    "group": "shared/QA",
+    "task": "Secret scan (keys / .env / tokens) over the tree and git history with report",
+    "owner_files_hint": "scripts/secret-scan.sh, web/proof/pass-3/*",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a44",
+    "group": "shared/QA",
+    "task": "<task per SUBAGENT PLAN — not visible from the t5/a44 worktree at scaffold time; merge agent to fill>",
+    "owner_files_hint": "<fill>",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a45",
+    "group": "shared/QA",
+    "task": "<task per SUBAGENT PLAN — not visible from the t5/a45 worktree at scaffold time; merge agent to fill>",
+    "owner_files_hint": "<fill>",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a46",
+    "group": "shared/QA",
+    "task": "<task per SUBAGENT PLAN — not visible from the t5/a46 worktree at scaffold time; merge agent to fill>",
+    "owner_files_hint": "<fill>",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a47",
+    "group": "shared/QA",
+    "task": "Release scaffold: snapshot-zip script, pass-3 changelog draft, subagent ledger",
+    "owner_files_hint": "scripts/snapshot-zip.py, docs/pass-3/CHANGELOG-pass3.md, docs/pass-3/subagent-ledger.json",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a48",
+    "group": "shared/QA",
+    "task": "<task per SUBAGENT PLAN — not visible from the t5/a48 worktree at scaffold time; merge agent to fill>",
+    "owner_files_hint": "<fill>",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "a49",
+    "group": "shared/QA",
+    "task": "<task per SUBAGENT PLAN — not visible from the t5/a49 worktree at scaffold time; merge agent to fill>",
+    "owner_files_hint": "<fill>",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  },
+  {
+    "id": "merge",
+    "group": "merge agent",
+    "task": "Fold t5/a1…a49 into main, run gates, next build, deploy, fold CHANGELOG-pass3.md into CHANGELOG.md",
+    "owner_files_hint": "CHANGELOG.md, docs/pass-3/*",
+    "status": "pending",
+    "duration_min": null,
+    "commits": []
+  }
+]
