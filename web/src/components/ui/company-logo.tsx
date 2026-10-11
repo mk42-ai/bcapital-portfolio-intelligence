@@ -18,7 +18,7 @@ export function CompanyLogo({ name, src, slug, size = 20, className = "", eager 
   useEffect(() => { setFailed(false); }, [resolved]);
   const box = { width: size, height: size } as const;
   const loading = eager ? "eager" : "lazy";
-  const fetchPriority = eager ? "auto" : "low";
+  const fetchPriority = eager ? "high" : "low"; // a36: eager (above-the-fold hero / first rows) → high, every virtualized list row → lazy + low
   if (!resolved || failed) {
     if (name && name.trim()) return <LogoMonogram name={name} size={size} testId="company-logo-fallback" className={className} style={{ fontSize: Math.max(8, Math.round(size * 0.46)) }} />;
     return (
