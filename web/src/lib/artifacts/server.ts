@@ -1,5 +1,5 @@
 import "server-only";
-import { fromWire, kindFromMime, type Artifact, type ArtifactKind, type ArtifactMediaStatus, type ArtifactSource, type ArtifactWire } from "./types";
+import { fromWire, kindFromMime, unsignedUrl, type Artifact, type ArtifactKind, type ArtifactMediaStatus, type ArtifactSource, type ArtifactWire, type SignedUrlResult, type SignedUrlWire, signedFromWire } from "./types";
 
 /** Backend base + secret (server-only; the secret never reaches the browser). */
 export const artifactsBackend = (): string => (process.env.PORTFOLIO_API_URL ?? process.env.NEXT_PUBLIC_PORTFOLIO_API_URL ?? "https://sb-4wdkkmzv7w2z.vercel.run").replace(/\/$/, "");
@@ -10,6 +10,8 @@ export const toArtifact = (w: ArtifactWire): Artifact => fromWire(w);
 export type SaveArtifactInput = {
   bytes?: Uint8Array | ArrayBuffer | Buffer; url?: string; name: string; mime?: string; kind?: ArtifactKind; source?: ArtifactSource;
   mediaId?: string | null; mediaStatus?: ArtifactMediaStatus; mediaMessage?: string | null; threadId?: string | null; sessionId?: string | null; originEvent?: string | null;
+  /** Unsigned OnDemand sourceUrl — any query string is stripped here AND server-side; a signed url is never persisted. */
+  mediaSourceUrl?: string | null; mediaUrlExpiresAt?: string | null; mediaExternalUserId?: string | null; mediaPlugins?: string[] | null;
 };
 
 /** Persist an artifact via backend POST /artifacts (adds X-Ingest-Secret). Throws on failure. Used by /api/media and /api/chat in-process. */
@@ -21,6 +23,7 @@ export async function saveArtifact(input: SaveArtifactInput): Promise<Artifact> 
   const body: Record<string, unknown> = {
     name: input.name, mime, kind: input.kind ?? kindFromMime(mime, input.name), source: input.source ?? "generated",
     media_id: input.mediaId ?? null, media_status: input.mediaStatus ?? null, media_message: input.mediaMessage ?? null,
+    media_source_url: unsignedUrl(input.mediaSourceUrl), media_url_expires_at: input.mediaUrlExpiresAt ?? null, media_external_user_id: input.mediaExternalUserId ?? null, media_plugins: input.mediaPlugins ?? null,
     thread_id: input.threadId ?? null, session_id: input.sessionId ?? null, origin_event: input.originEvent ?? null,
   };
   if (input.bytes) {
@@ -49,4 +52,20 @@ export async function listArtifacts(q: { threadId?: string; kind?: string; limit
     const j = (await r.json()) as { data: ArtifactWire[] };
     return { data: (j.data ?? []).map(toArtifact), ok: true };
   } catch { return { data: [], ok: false }; }
+}
+
+/** Re-sign on open (server-side): backend GET /artifacts/:id/signed-url. Returns the same-origin content url on any failure. */
+export async function signedUrlFor(id: string, download = false): Promise<SignedUrlResult> {
+  const fallback: SignedUrlResult = { id, mediaId: null, url: `/api/artifacts/${encodeURIComponent(id)}/content${download ? "?download=1" : ""}`, sourceUrl: null, expiresAt: null, source: "backend", mediaMessage: null };
+  try {
+    const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 20000);
+    const r = await fetch(`${artifactsBackend()}/artifacts/${encodeURIComponent(id)}/signed-url${download ? "?download=1" : ""}`, { headers: { accept: "application/json" }, cache: "no-store", signal: ctl.signal });
+    clearTimeout(t);
+    if (!r.ok) return { ...fallback, mediaMessage: `Backend ${r.status}` };
+    const j = (await r.json()) as { data: SignedUrlWire };
+    const out = signedFromWire(j.data);
+    // The backend fallback url is absolute (backend origin); keep inline/same-origin semantics by routing it through the proxy.
+    if (out.source === "backend") out.url = fallback.url;
+    return out;
+  } catch (e) { return { ...fallback, mediaMessage: (e as Error).message }; }
 }

@@ -125,6 +125,10 @@ export const artifacts = sqliteTable(
     mediaId: text("media_id"),
     mediaStatus: text("media_status"), // stored | local | failed
     mediaMessage: text("media_message"),
+    mediaSourceUrl: text("media_source_url"), // UNSIGNED OnDemand sourceUrl (query string stripped — never a SAS token)
+    mediaUrlExpiresAt: text("media_url_expires_at"), // `se=` of the signed url seen at registration (informational; fresh urls come from /signed-url)
+    mediaExternalUserId: text("media_external_user_id"),
+    mediaPlugins: text("media_plugins"), // JSON array string
     threadId: text("thread_id"),
     sessionId: text("session_id"),
     originEvent: text("origin_event"),
@@ -140,6 +144,11 @@ export const ARTIFACTS_DDL = [
   `CREATE TABLE IF NOT EXISTS artifacts (id TEXT PRIMARY KEY NOT NULL, name TEXT NOT NULL, kind TEXT NOT NULL, mime TEXT NOT NULL, size_bytes INTEGER NOT NULL, version INTEGER NOT NULL DEFAULT 1, source TEXT NOT NULL DEFAULT 'upload', media_id TEXT, media_status TEXT, media_message TEXT, thread_id TEXT, session_id TEXT, origin_event TEXT, bytes BLOB NOT NULL, created_at TEXT NOT NULL, deleted_at TEXT)`,
   `CREATE INDEX IF NOT EXISTS artifacts_thread_idx ON artifacts (thread_id, created_at)`,
   `CREATE INDEX IF NOT EXISTS artifacts_name_idx ON artifacts (name, thread_id)`,
+  // Column additions (sql.js has no ADD COLUMN IF NOT EXISTS — client.ts tolerates "duplicate column" errors).
+  `ALTER TABLE artifacts ADD COLUMN media_source_url TEXT`,
+  `ALTER TABLE artifacts ADD COLUMN media_url_expires_at TEXT`,
+  `ALTER TABLE artifacts ADD COLUMN media_external_user_id TEXT`,
+  `ALTER TABLE artifacts ADD COLUMN media_plugins TEXT`,
 ];
 
 export type BrandTokens = { primary: string | null; secondary: string | null; background: string | null; text: string | null; fonts: string[]; evidence_tier?: string; [k: string]: unknown };

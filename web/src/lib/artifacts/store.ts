@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useSyncExternalStore } from "react";
-import { fromWire, kindFromMime, type Artifact, type ArtifactKind, type ArtifactWire } from "./types";
+import { fromWire, kindFromMime, type Artifact, type ArtifactKind, type ArtifactWire, type SignedUrlResult } from "./types";
 
 /** Client module store for artifacts. Persists the last list in localStorage so the panel paints instantly. */
 const LS_KEY = "bcap.artifacts.v1";
@@ -64,13 +64,25 @@ export const artifactsStore = {
     const existing = state.items.find((x) => x.id === id);
     const a: Artifact = {
       id, name: ev.name, kind, mime, sizeBytes: ev.size ?? existing?.sizeBytes ?? 0, version: existing?.version ?? 1, source: "agent",
-      mediaId: ev.mediaId ?? null, mediaStatus: ev.mediaId ? "stored" : null, mediaMessage: null, threadId: ev.threadId ?? null, sessionId: null,
+      mediaId: ev.mediaId ?? null, mediaStatus: ev.mediaId ? "stored" : null, mediaMessage: null, mediaSourceUrl: null, mediaUrlExpiresAt: null, mediaExternalUserId: null, mediaPlugins: null,
+      threadId: ev.threadId ?? null, sessionId: null,
       originEvent: "ondemand_agent.artifact_ready", contentUrl, thumbnailUrl: kind === "image" ? contentUrl : null,
       createdAt: existing?.createdAt ?? new Date().toISOString(), pending: !ev.artifactId,
     };
     artifactsStore.add(a);
     void artifactsStore.refresh();
     return a;
+  },
+  /** Re-sign on open: GET /api/artifacts/<id>/signed-url → fresh OnDemand signed url, or the same-origin content url (backend fallback). */
+  async signedUrl(id: string, download = false): Promise<SignedUrlResult> {
+    const fallback: SignedUrlResult = { id, mediaId: null, url: `/api/artifacts/${encodeURIComponent(id)}/content${download ? "?download=1" : ""}`, sourceUrl: null, expiresAt: null, source: "backend", mediaMessage: null };
+    if (id.startsWith("pending_")) return fallback;
+    try {
+      const r = await fetch(`/api/artifacts/${encodeURIComponent(id)}/signed-url${download ? "?download=1" : ""}`, { cache: "no-store", headers: { accept: "application/json" }, signal: AbortSignal.timeout(15000) });
+      if (!r.ok) return fallback;
+      const j = (await r.json()) as { data?: SignedUrlResult };
+      return j.data && typeof j.data.url === "string" && j.data.url ? j.data : fallback;
+    } catch { return fallback; }
   },
   /** DELETE /api/artifacts/<id>; optimistic removal, restored on failure. */
   async remove(id: string): Promise<boolean> {

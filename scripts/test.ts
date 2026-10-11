@@ -36,5 +36,18 @@ await t("pitchbook routes: list, slug, ingest validation, run fallback", async (
   expect(trunc.status === 200 && tj.written === 1 && tj.slugs[0] === "apptronik" && tj.salvaged?.truncated_records === 1, JSON.stringify(tj));
   const spec: any = await (await get("/openapi.json")).json(); for (const p of ["/pitchbook", "/pitchbook/{slug}", "/pitchbook/ingest", "/pitchbook/run"]) expect(!!spec.paths[p], `openapi missing ${p}`);
 });
+await t("artifacts: signed url never persisted; /signed-url falls back honestly", async () => {
+  const H = { "X-Ingest-Secret": "test-secret", "content-type": "application/json" };
+  const r = await get("/artifacts", { method: "POST", headers: H, body: JSON.stringify({ name: "t.txt", mime: "text/plain", content_base64: "aGk=", media_id: "abc", media_status: "stored", media_source_url: "https://x.blob.core.windows.net/c/y.pdf?se=2026-01-01T00%3A00%3A00Z&sig=zzz", media_plugins: ["plugin-1713962163"] }) });
+  const j: any = await r.json(); expect(r.status === 201, `status ${r.status}`);
+  expect(j.data.media_source_url === "https://x.blob.core.windows.net/c/y.pdf", `source url: ${j.data.media_source_url}`);
+  expect(!/sig=|se=/.test(JSON.stringify(j.data)), "signature leaked"); expect(j.data.media_url_expires_at === "2026-01-01T00:00:00Z", `expires ${j.data.media_url_expires_at}`);
+  expect(Array.isArray(j.data.media_plugins) && j.data.media_plugins[0] === "plugin-1713962163", "plugins");
+  const g: any = await (await get(`/artifacts/${j.data.id}`)).json(); expect(g.data.media_source_url === "https://x.blob.core.windows.net/c/y.pdf", "persisted unsigned");
+  const su = await get(`/artifacts/${j.data.id}/signed-url`); const sj: any = await su.json();
+  expect(su.status === 200 && sj.data.source === "backend" && /\/artifacts\/art_[0-9a-f]+\/content$/.test(sj.data.url) && typeof sj.data.media_message === "string", JSON.stringify(sj));
+  const spec: any = await (await get("/openapi.json")).json(); expect(!!spec.paths["/artifacts/{id}/signed-url"] && !!spec.components.schemas.Artifact.properties.media_source_url, "openapi");
+  expect((await get("/artifacts/art_nope/signed-url")).status === 404, "404 unknown");
+});
 console.log(failed ? `\n${failed} test(s) FAILED` : "\nall tests passed");
 process.exit(failed ? 1 : 0);
