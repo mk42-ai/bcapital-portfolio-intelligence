@@ -16,6 +16,7 @@
     "test:plan": "node ../node_modules/tsx/dist/cli.mjs tests/unit/plan.test.ts",
     "test:sse-replay": "node ../node_modules/tsx/dist/cli.mjs tests/unit/sse-replay.test.ts",
     "test:sector-color": "node ../node_modules/tsx/dist/cli.mjs tests/unit/sector-color.test.ts",
+    "test:sparkline": "node ../node_modules/tsx/dist/cli.mjs tests/unit/sparkline.test.ts",
     "qa:lighthouse": "node scripts/lighthouse.mjs",
     "test:e2e:live": "BASE_URL=https://sb-1z9qy0mx48sk.vercel.run playwright test",
     "logo:audit": "node scripts/logo-audit.mjs",
