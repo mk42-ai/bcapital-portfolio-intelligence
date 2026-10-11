@@ -3,6 +3,7 @@ import { OfflineBanner } from "./offline-banner";
 import { OnboardingGate } from "./onboarding-gate";
 import { BackendStatus } from "./backend-status";
 import { PageFrame } from "./page-frame";
+import { CommandK } from "./command-k";
 import { ArtifactsPanel } from "@/components/artifacts/artifacts-panel";
 import { SidePaneOutsideChat } from "@/components/media/side-pane-outside-chat";
 
@@ -21,6 +22,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <OnboardingGate />
       <ArtifactsPanel />
       <SidePaneOutsideChat />
+      <CommandK />
     </div>
   );
 }
