@@ -67,15 +67,15 @@ function FactRow({ company, label, field, f, compact, ask }: { company: string; 
   const q = factQuestion(company, label, f);
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => { if (e.target !== e.currentTarget) return; if (e.key === "Enter" || e.key === " ") { e.preventDefault(); ask(chip, q); } };
   return (
-    <div role="row" tabIndex={0} data-testid="pb-field" data-field={field} data-availability={f ? "known" : "unknown"} aria-label={`${label}: ${f?.value ?? "unknown"}. Press Enter to ask in chat.`}
+    <div role="group" tabIndex={0} data-testid="pb-field" data-field={field} data-availability={f ? "known" : "unknown"} aria-label={`${label}: ${f?.value ?? "unknown"}. Press Enter to ask in chat.`}
       onKeyDown={onKey} draggable={!!f} onDragStart={f ? (e) => setChipTransfer(e.dataTransfer, chip) : undefined}
       className={cn("group grid grid-cols-[6.5rem_minmax(0,1fr)_auto] items-start gap-x-2 rounded-md border border-transparent px-1.5 py-1 hover:border-border hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-[var(--brand-green-ink)]", compact ? "grid-cols-[5.5rem_minmax(0,1fr)_auto] text-[11px]" : "text-xs")}>
-      <dt role="cell" className="pt-px text-muted">{label}</dt>
-      <dd role="cell" className="flex min-w-0 items-start gap-1">
+      <dt className="pt-px text-muted">{label}</dt>
+      <dd className="flex min-w-0 items-start gap-1">
         <span data-testid="pb-value" className={cn("min-w-0 break-words font-medium tabular-nums", !f && "font-normal text-muted")} title={f?.value}>{f?.value ?? "—"}</span>
         {f && <Provenance source={f.source} fetched_at={f.fetched_at} plugin={f.plugin} />}
       </dd>
-      <dd role="cell" className="flex items-center">
+      <dd className="flex items-center">
         <button type="button" onClick={() => ask(chip, q)} data-testid="pb-ask" aria-label={`Ask in chat about ${label}`} title="Ask in chat" tabIndex={-1}
           className="inline-flex size-5 items-center justify-center rounded text-muted hover:bg-[var(--brand-green-soft)] hover:text-[var(--brand-green-ink)]"><MessageSquarePlus className="size-3.5" aria-hidden /></button>
       </dd>
@@ -153,7 +153,7 @@ export function PitchbookFacts({ entry, slug, name, variant, onAsk }: PitchbookF
         <span>· snapshot <time dateTime={entry.fetched_at ?? undefined}>{ymd(entry.fetched_at) ?? "—"}</time></span>
         <span>· next pull {nextPull(entry.next_run_utc)}</span>
       </p>
-      <dl role="table" aria-label="PitchBook facts" data-testid="pb-facts" className="space-y-0.5">
+      <dl aria-label="PitchBook facts" data-testid="pb-facts" className="space-y-0.5">
         {FACTS.map(({ key, label }) => <FactRow key={key} company={company} label={label} field={key} f={facts[key]} compact={compact} ask={ask} />)}
       </dl>
       <Investors company={company} entry={entry} compact={compact} ask={ask} />

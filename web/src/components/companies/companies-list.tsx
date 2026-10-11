@@ -173,7 +173,7 @@ export function CompaniesList({ rows, total, initialState }: { rows: CompanyList
         <p className="sr-only" aria-live="polite" aria-atomic="true" data-testid="companies-live">{focusIdx != null ? `Row ${focusIdx + 1} of ${visible.length}` : ""}</p>
         <div data-testid="companies-list" data-url-state={urlSerialized} data-view={view} data-total={total} data-visible={visible.length} data-last-visible={lastVisible ? "true" : undefined} role="grid" aria-label="Portfolio companies" aria-rowcount={visible.length} aria-colcount={1}
           className="relative [-webkit-overflow-scrolling:touch] [overscroll-behavior-y:auto]" onKeyDown={onKeyDown}>
-          <div ref={listRef} style={{ height: virtualizer.getTotalSize(), position: "relative", width: "100%" }}>
+          <div ref={listRef} role="rowgroup" style={{ height: virtualizer.getTotalSize(), position: "relative", width: "100%" }}>
             {items.map((it) => { const c = visible[it.index]; const isLast = it.index === visible.length - 1; return (
               <div key={it.key} data-index={it.index} ref={virtualizer.measureElement} data-testid="company-row" role="row" aria-rowindex={it.index + 1} data-last={isLast ? "true" : undefined}
                 style={{ position: "absolute", top: 0, left: 0, width: "100%", transform: `translateY(${it.start - virtualizer.options.scrollMargin}px)` }}
