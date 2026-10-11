@@ -93,3 +93,14 @@
 .chip-sector[data-sector-slug="rose"]    { --_fill: var(--sector-rose);    --_ink: var(--sector-rose-ink);    --_soft: var(--sector-rose-soft); }
 .chip-sector[data-sector-slug="slate"], .chip-sector[data-sector-slug="other"] { --_fill: var(--sector-slate); --_ink: var(--sector-slate-ink); --_soft: var(--sector-slate-soft); }
 /* end a18 */
+/* a21 spacing scale */
+:root {
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --radius-card: 12px;
+  --shadow-card: 0 1px 2px #1F29370d;
+  --shadow-card-hover: 0 8px 24px -12px #1F293733;
+  --motion-fast: 150ms;
+  --motion-ease: cubic-bezier(.2,.8,.2,1);
+}
+/* end a21 */

@@ -75,15 +75,15 @@ async function OverviewBody({ searchParams }: { searchParams: Promise<Record<str
       </Suspense>
       <p className="mb-4 text-sm text-muted" role="status">{filtered.length === all.length ? `Showing all ${all.length} companies` : `Showing ${filtered.length} of ${all.length} companies`}</p>
 
-      <div className="grid gap-5 xl:grid-cols-3">
-        <Card className="xl:col-span-2" id="treemap"><CardHeader><CardTitle>Sector / region treemap</CardTitle><CardDescription>Tile size = estimated B Capital ticket (flagged estimates, min $2M floor for visibility); click a tile to open the company.</CardDescription></CardHeader>
+      <div className="overview-bento grid gap-5 xl:grid-cols-3">
+        <Card className="xl:col-span-2" id="treemap" data-bento="treemap" elevate><CardHeader><CardTitle>Sector / region treemap</CardTitle><CardDescription>Tile size = estimated B Capital ticket (flagged estimates, min $2M floor for visibility); click a tile to open the company.</CardDescription></CardHeader>
           <CardContent>
             <div role="radiogroup" aria-label="Group treemap by" className="mb-3 inline-flex h-10 items-center rounded-lg bg-surface-2 p-1">
               {(["sector", "region"] as const).map((m) => { const p = new URLSearchParams(Object.entries(sp).filter(([k, v]) => v && k !== "e2e") as [string, string][]); p.set("group", m); return <a key={m} href={`/overview?${p.toString()}#treemap`} role="radio" aria-checked={groupBy === m} className={`inline-flex min-h-8 items-center rounded-md px-3 text-sm font-medium focus-visible:outline-3 focus-visible:outline-ring ${groupBy === m ? "bg-surface text-foreground shadow" : "text-muted"}`}>By {m}</a>; })}
             </div>
             {filtered.length ? <TreemapSSR data={group(groupBy)} mode={groupBy} /> : <p className="text-sm text-muted">No companies match these filters.</p>}
           </CardContent></Card>
-        <Card><CardHeader><CardTitle>Signal Score by sector</CardTitle><CardDescription>Sector mean of the evidence-weighted Signal Score, 0–100 · bar opacity = mean confidence · tick = sector median</CardDescription></CardHeader>
+        <Card data-bento="sector-signal" elevate><CardHeader><CardTitle>Signal Score by sector</CardTitle><CardDescription>Sector mean of the evidence-weighted Signal Score, 0–100 · bar opacity = mean confidence · tick = sector median</CardDescription></CardHeader>
           <CardContent className="grid grid-cols-1 gap-3 sm:grid-cols-3 xl:grid-cols-1">
             {(["Technology", "Healthcare", "Energy & Resilience"] as const).map((s) => { const r = sectorSig(s); const roll = sectorRoll(s); const Icon = SECTOR_ICON[s]; return (
               <div key={s} className="flex items-center gap-3 rounded-lg border border-border bg-surface p-3">
@@ -96,9 +96,9 @@ async function OverviewBody({ searchParams }: { searchParams: Promise<Record<str
       </div>
 
       <NewsMiniFeed items={news.data.slice(0, 8).map((n) => ({ title: n.title, url: n.url, source: n.source, published_at: n.published_at, company_name: n.company_name, company_slug: n.company_slug }))} total={news.total} />
-      <div className="mt-5 grid min-w-0 gap-5 xl:grid-cols-2">
-        <Card className="min-w-0"><CardHeader><CardTitle>KPI heatmap</CardTitle><CardDescription>Rows: focus companies + top movers (24). Columns scaled 0–100: sentiment, news volume, funding recency.</CardDescription></CardHeader><CardContent><HeatmapSSR rows={heatRows} /></CardContent></Card>
-        <Card className="min-w-0"><CardHeader><CardTitle>Estimated ownership & ticket</CardTitle><CardDescription>Every value is a flagged estimate — hover/focus the badge for <code>estimate_confidence</code> + <code>estimate_rationale</code>.</CardDescription></CardHeader>
+      <div className="overview-bento mt-5 grid min-w-0 gap-5 xl:grid-cols-2">
+        <Card className="min-w-0" data-bento="heatmap" elevate><CardHeader><CardTitle>KPI heatmap</CardTitle><CardDescription>Rows: focus companies + top movers (24). Columns scaled 0–100: sentiment, news volume, funding recency.</CardDescription></CardHeader><CardContent><HeatmapSSR rows={heatRows} /></CardContent></Card>
+        <Card className="min-w-0" data-bento="estimates" elevate><CardHeader><CardTitle>Estimated ownership & ticket</CardTitle><CardDescription>Every value is a flagged estimate — hover/focus the badge for <code>estimate_confidence</code> + <code>estimate_rationale</code>.</CardDescription></CardHeader>
           <CardContent>
             <HBar ariaLabel="Top 10 estimated B Capital ticket sizes in USD" data={est.map((c) => ({ name: c.name, value: c.estimated_ticket_size_usd ?? 0, color: c.estimate_confidence === "medium" ? "var(--chart-2)" : c.estimate_confidence === "high" ? "var(--chart-1)" : "var(--chart-3)" }))} format={(v) => fmtUsd(v)} />
             <ul className="mt-3 divide-y divide-border text-sm">
@@ -107,12 +107,12 @@ async function OverviewBody({ searchParams }: { searchParams: Promise<Record<str
           </CardContent></Card>
       </div>
 
-      <Card className="mt-5"><CardHeader><CardTitle>Status events</CardTitle><CardDescription>IPO · rebrand · acquired · unicorn · funding — from the status-change register (dates verified 2026-10-09).</CardDescription></CardHeader><CardContent><StatusChips items={chips} /></CardContent></Card>
+      <Card className="mt-5" elevate><CardHeader><CardTitle>Status events</CardTitle><CardDescription>IPO · rebrand · acquired · unicorn · funding — from the status-change register (dates verified 2026-10-09).</CardDescription></CardHeader><CardContent><StatusChips items={chips} /></CardContent></Card>
 
-      <Card className="mt-5"><CardHeader><CardTitle>Top movers</CardTitle><CardDescription>Largest sentiment deltas vs the previous workflow run</CardDescription></CardHeader>
+      <Card className="mt-5" data-bento="top-movers-row" elevate><CardHeader><CardTitle>Top movers</CardTitle><CardDescription>Largest sentiment deltas vs the previous workflow run</CardDescription></CardHeader>
         <CardContent><ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-5">{pf.data.top_movers.slice(0, 5).map((m) => <li key={m.slug} className="rounded-lg border border-border bg-surface-2 p-3"><Link href={`/company/${m.slug}`} className="font-medium underline-offset-2 hover:underline">{m.name}</Link><p className="mt-1 flex flex-wrap items-center gap-2 text-sm tabular-nums">{sigBy.get(m.slug) ? <SignalMini score={sigBy.get(m.slug)!.score} confidence={sigBy.get(m.slug)!.confidence} percentile={sigBy.get(m.slug)!.percentile} label={sigBy.get(m.slug)!.label} name={m.name} /> : null}<span>{sigBy.get(m.slug) ? sigBy.get(m.slug)!.score : fmtScore(m.score)}</span> <Badge tone={m.delta >= 0 ? "primary" : "danger"}>{fmtDelta(m.delta)}</Badge></p><p className="text-xs text-muted">{m.sector} · {m.label}</p></li>)}</ul></CardContent></Card>
 
-      <Card className="mt-5"><CardHeader><CardTitle>All companies ({rows.length})</CardTitle><CardDescription>Accessible table equivalent of the treemap and heatmap. Scroll horizontally on small screens. <Link href="/companies" data-testid="open-full-list" className="font-medium text-foreground underline underline-offset-2">Open the full list →</Link></CardDescription></CardHeader>
+      <Card className="mt-5" data-bento="table" elevate><CardHeader><CardTitle>All companies ({rows.length})</CardTitle><CardDescription>Accessible table equivalent of the treemap and heatmap. Scroll horizontally on small screens. <Link href="/companies" data-testid="open-full-list" className="font-medium text-foreground underline underline-offset-2">Open the full list →</Link></CardDescription></CardHeader>
         <CardContent><PagedTable rows={rows.sort((a, b) => a.name.localeCompare(b.name)).map((c) => ({ slug: c.slug, name: c.name, logo_url: c.logo_url, sector: c.sector, region: c.region, b_capital_role: c.b_capital_role, estimated_ticket_size_usd: c.estimated_ticket_size_usd, estimated_ownership_pct: c.estimated_ownership_pct, estimate_confidence: c.estimate_confidence, estimate_rationale: c.estimate_rationale, is_focus: c.is_focus, score: c.sentiment.score, delta: c.sentiment.delta ?? null, newsCount: c.newsCount, signal: sigBy.get(c.slug)?.score ?? null, signal_confidence: sigBy.get(c.slug)?.confidence ?? null, signal_percentile: sigBy.get(c.slug)?.percentile ?? null }))} caption="Portfolio companies with Signal Score, sentiment delta, news count and flagged estimates" /></CardContent></Card>
     </>
   );
