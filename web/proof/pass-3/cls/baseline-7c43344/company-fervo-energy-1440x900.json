@@ -1,0 +1,119 @@
+{
+  "route": "/company/fervo-energy?skip=1",
+  "viewport": "1440x900",
+  "network": "Fast 3G (CDP emulateNetworkConditions)",
+  "measuredAt": "2026-10-11T12:04:16.462Z",
+  "baseURL": "https://sb-1gizcktepfgc.vercel.run",
+  "cls": 0.001,
+  "hard": 0.1,
+  "soft": 0.05,
+  "pass": true,
+  "softPass": true,
+  "loadMs": 7595,
+  "shifts": [
+    {
+      "t": 2869,
+      "value": 0.00099,
+      "hadRecentInput": false,
+      "sources": [
+        {
+          "selector": "#text",
+          "prev": [
+            277,
+            763,
+            524,
+            37
+          ],
+          "cur": [
+            277,
+            764,
+            524,
+            37
+          ]
+        },
+        {
+          "selector": "#text",
+          "prev": [
+            256,
+            253,
+            1152,
+            15
+          ],
+          "cur": [
+            256,
+            254,
+            1152,
+            15
+          ]
+        },
+        {
+          "selector": "#text",
+          "prev": [
+            381,
+            145,
+            1002,
+            17
+          ],
+          "cur": [
+            381,
+            146,
+            1002,
+            17
+          ]
+        },
+        {
+          "selector": "#text",
+          "prev": [
+            256,
+            256,
+            1152,
+            14
+          ],
+          "cur": [
+            256,
+            256,
+            1152,
+            14
+          ]
+        },
+        {
+          "selector": "header.mb-6.rounded-lg > div.flex.flex-wrap > div.min-w-0.flex-1 > div.mt-3.flex > a.chip.border-border",
+          "prev": [
+            643,
+            177,
+            119,
+            24
+          ],
+          "cur": [
+            648,
+            177,
+            120,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "t": 3025,
+      "value": 0.00002,
+      "hadRecentInput": false,
+      "sources": [
+        {
+          "selector": "header.mb-6.rounded-lg > div.flex.flex-wrap > div.min-w-0.flex-1 > h1.flex.flex-wrap > span.inline-flex.items-center",
+          "prev": [
+            600,
+            111,
+            96,
+            20
+          ],
+          "cur": [
+            615,
+            111,
+            96,
+            20
+          ]
+        }
+      ]
+    }
+  ]
+}

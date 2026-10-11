@@ -1,0 +1,82 @@
+{
+  "route": "/artifacts?skip=1",
+  "viewport": "1440x900",
+  "network": "Fast 3G (CDP emulateNetworkConditions)",
+  "measuredAt": "2026-10-11T12:04:52.383Z",
+  "baseURL": "https://sb-1gizcktepfgc.vercel.run",
+  "cls": 0,
+  "hard": 0.1,
+  "soft": 0.05,
+  "pass": true,
+  "softPass": true,
+  "loadMs": 7673,
+  "shifts": [
+    {
+      "t": 1540,
+      "value": 0.00003,
+      "hadRecentInput": false,
+      "sources": [
+        {
+          "selector": "button[data-testid=artifact-filter-generated]",
+          "prev": [
+            795,
+            124,
+            104,
+            32
+          ],
+          "cur": [
+            801,
+            124,
+            104,
+            32
+          ]
+        },
+        {
+          "selector": "button[data-testid=artifact-filter-upload]",
+          "prev": [
+            698,
+            124,
+            89,
+            32
+          ],
+          "cur": [
+            703,
+            124,
+            90,
+            32
+          ]
+        },
+        {
+          "selector": "button[data-testid=artifact-filter-audio]",
+          "prev": [
+            615,
+            124,
+            75,
+            32
+          ],
+          "cur": [
+            619,
+            124,
+            75,
+            32
+          ]
+        },
+        {
+          "selector": "button[data-testid=artifact-filter-video] > span.art-chip-n",
+          "prev": [
+            588,
+            132,
+            6,
+            17
+          ],
+          "cur": [
+            591,
+            132,
+            7,
+            17
+          ]
+        }
+      ]
+    }
+  ]
+}
