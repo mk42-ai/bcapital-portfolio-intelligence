@@ -24,7 +24,7 @@ export type UiEvent =
   | { kind: "execution_done"; stepId?: string; ok: boolean; plugins: PluginRef[]; message: string }
   | { kind: "summary_start"; stepId?: string; index: number }
   | { kind: "summary_done"; stepId?: string; index: number; text: string }
-  | { kind: "thinking"; channel: "planning" | "step" | "fulfillment" | "plan" | "step_output"; delta: string; stepId?: string }
+  | { kind: "thinking"; channel: "planning" | "step" | "fulfillment" | "plan" | "step_output"; delta: string; stepId?: string; /** a7: true for planning_output / step_output planner JSON frames */ planner?: true; eventType?: string }
   | { kind: "sources"; pluginId?: string; pluginName?: string; items: Citation[]; stepId?: string; stepTitle?: string }
   | { kind: "answer"; delta: string }
   | { kind: "answer_complete"; text: string }
@@ -64,6 +64,9 @@ const pick = (r: Record<string, unknown>, keys: readonly string[]): unknown => {
 
 /** Parse one frame. `ev` = SSE event name (message|thinking|agent|heartbeat|""), `data` = the data payload (joined, trimmed). Every name lookup goes through eventMap.ts. */
 export function parseFrame(ev: string, data: string): UiEvent {
+  // a7: never throw — tolerate non-string / padded payloads, strip a UTF-8 BOM, trim.
+  data = (typeof data === "string" ? data : String(data ?? "")).replace(/^\uFEFF/, "").trim();
+  ev = typeof ev === "string" ? ev.trim() : "";
   if (data === TERMINAL.done) return { kind: "done" };
   if (data.startsWith(TERMINAL.errorPrefix)) {
     const raw = data.slice(TERMINAL.errorPrefix.length).replace(/^:/, "").trim();
@@ -72,9 +75,11 @@ export function parseFrame(ev: string, data: string): UiEvent {
     return { kind: "error", code, message, raw: data };
   }
   let j: Record<string, unknown>;
-  try { j = JSON.parse(data) as Record<string, unknown>; } catch { return { kind: "unknown", eventType: "unparseable", raw: { data: data.slice(0, 500) } }; }
+  try { const parsed: unknown = JSON.parse(data); j = asRecord(parsed); if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return { kind: "unknown", eventType: "unparseable", raw: { data: data.slice(0, 500) } }; } catch { return { kind: "unknown", eventType: "unparseable", raw: { data: data.slice(0, 500) } }; }
+  // a7: eventType may be nested (`{data:{eventType,…}}` envelope) — hoist the envelope so the tables below see the real frame.
+  if (!str(j.eventType, 80) && typeof asRecord(j.data).eventType === "string") j = { ...j, ...asRecord(j.data) };
   const et = str(j.eventType, 80);
-  if (ev === SSE_EVENT.heartbeat || (!et && typeof j.time === "string")) return { kind: "heartbeat", time: str(j.time, 40) };
+  if (ev === SSE_EVENT.heartbeat || EVENT_TYPE[et] === "heartbeat" || (!et && typeof j.time === "string")) return { kind: "heartbeat", time: str(j.time, 40) };
   if (EVENT_TYPE[et] === "error" || typeof j.error === "string" || (typeof j.message === "string" && typeof j.errorCode === "string")) {
     return { kind: "error", code: str(j.errorCode, 80) || "upstream_error", message: str(j.error ?? j.message, 1000) || "OnDemand reported an error", raw: data };
   }
@@ -101,7 +106,12 @@ export function parseFrame(ev: string, data: string): UiEvent {
   }
   // ---- thinking channel ----------------------------------------------------------------------------------
   const th = THINKING_CHANNEL[et];
-  if (th) return { kind: "thinking", channel: th.channel, delta: str(asRecord(j[th.field]).delta, 4000), stepId: str(j.stepId, 40) || undefined };
+  if (th) {
+    // a7: planner frames (planning_output / step_output) carry their text in `output.delta`; tolerate `thinking.delta` / top-level `delta` fallbacks.
+    const delta = str(asRecord(j[th.field]).delta, 4000) || str(asRecord(j.output).delta ?? asRecord(j.thinking).delta ?? j.delta, 4000);
+    const planner = th.field === "output";
+    return { kind: "thinking", channel: th.channel, delta, stepId: str(j.stepId, 40) || undefined, ...(planner ? { planner: true as const, eventType: et } : {}) };
+  }
   // ---- message channel -----------------------------------------------------------------------------------
   const mapped = EVENT_TYPE[et];
   if (mapped === "answer" && typeof j.answer === "string") return { kind: "answer", delta: j.answer };
