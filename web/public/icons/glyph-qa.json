@@ -1,0 +1,333 @@
+{
+  "spec": {
+    "size": 1024,
+    "ink": "#1F2937",
+    "accent": "#0AC985",
+    "stroke_px_at_24": [
+      1.6,
+      2.6
+    ],
+    "accent_components": 1,
+    "other_hue": false
+  },
+  "glyphs": [
+    {
+      "name": "car-radar",
+      "file": "web/public/icons/glyphs-src/car-radar.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "background_ratio": 0.9506,
+      "background_kind": "white",
+      "dominant_ink": "#202838",
+      "dominant_ink_distance_to_1F2937": 1.7,
+      "ink_is_charcoal": true,
+      "accent_share_pct": 11.0,
+      "accent_components": 1,
+      "single_accent": true,
+      "stroke_px_at_1024": 20,
+      "stroke_px_at_24": 0.47,
+      "ink_bbox": [
+        125,
+        347,
+        899,
+        654
+      ],
+      "stroke_px_at_24_reframed_to_20px_box": 0.52,
+      "other_hue": false,
+      "other_hue_pct_of_ink": 1.06,
+      "pass": false,
+      "failures": [
+        "stroke 0.47px@24 outside 1.6-2.6"
+      ]
+    },
+    {
+      "name": "cmdk-key",
+      "file": "web/public/icons/glyphs-src/cmdk-key.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "background_ratio": 0.9477,
+      "background_kind": "white",
+      "dominant_ink": "#182030",
+      "dominant_ink_distance_to_1F2937": 13.4,
+      "ink_is_charcoal": true,
+      "accent_share_pct": 11.87,
+      "accent_components": 2,
+      "single_accent": false,
+      "stroke_px_at_1024": 19.0,
+      "stroke_px_at_24": 0.45,
+      "ink_bbox": [
+        269,
+        256,
+        755,
+        766
+      ],
+      "stroke_px_at_24_reframed_to_20px_box": 0.75,
+      "other_hue": false,
+      "other_hue_pct_of_ink": 1.25,
+      "pass": false,
+      "failures": [
+        "stroke 0.45px@24 outside 1.6-2.6",
+        "accent components 2 != 1"
+      ]
+    },
+    {
+      "name": "compare-cards",
+      "file": "web/public/icons/glyphs-src/compare-cards.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "background_ratio": 0.9692,
+      "background_kind": "white",
+      "dominant_ink": "#102038",
+      "dominant_ink_distance_to_1F2937": 17.5,
+      "ink_is_charcoal": true,
+      "accent_share_pct": 11.11,
+      "accent_components": 2,
+      "single_accent": false,
+      "stroke_px_at_1024": 13.0,
+      "stroke_px_at_24": 0.3,
+      "ink_bbox": [
+        201,
+        314,
+        824,
+        694
+      ],
+      "stroke_px_at_24_reframed_to_20px_box": 0.42,
+      "other_hue": false,
+      "other_hue_pct_of_ink": 0.56,
+      "pass": false,
+      "failures": [
+        "stroke 0.3px@24 outside 1.6-2.6",
+        "accent components 2 != 1"
+      ]
+    },
+    {
+      "name": "geothermal-rig",
+      "file": "web/public/icons/glyphs-src/geothermal-rig.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "background_ratio": 0.9435,
+      "background_kind": "white",
+      "dominant_ink": "#203040",
+      "dominant_ink_distance_to_1F2937": 11.4,
+      "ink_is_charcoal": true,
+      "accent_share_pct": 5.44,
+      "accent_components": 6,
+      "single_accent": false,
+      "stroke_px_at_1024": 12,
+      "stroke_px_at_24": 0.28,
+      "ink_bbox": [
+        229,
+        161,
+        795,
+        862
+      ],
+      "stroke_px_at_24_reframed_to_20px_box": 0.34,
+      "other_hue": false,
+      "other_hue_pct_of_ink": 0.62,
+      "pass": false,
+      "failures": [
+        "stroke 0.28px@24 outside 1.6-2.6",
+        "accent components 6 != 1"
+      ]
+    },
+    {
+      "name": "news-pulse",
+      "file": "web/public/icons/glyphs-src/news-pulse.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "background_ratio": 0.9379,
+      "background_kind": "white",
+      "dominant_ink": "#182838",
+      "dominant_ink_distance_to_1F2937": 7.1,
+      "ink_is_charcoal": true,
+      "accent_share_pct": 7.82,
+      "accent_components": 1,
+      "single_accent": true,
+      "stroke_px_at_1024": 18.0,
+      "stroke_px_at_24": 0.42,
+      "ink_bbox": [
+        240,
+        258,
+        784,
+        734
+      ],
+      "stroke_px_at_24_reframed_to_20px_box": 0.66,
+      "other_hue": false,
+      "other_hue_pct_of_ink": 0.82,
+      "pass": false,
+      "failures": [
+        "stroke 0.42px@24 outside 1.6-2.6"
+      ]
+    },
+    {
+      "name": "payments-card",
+      "file": "web/public/icons/glyphs-src/payments-card.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "background_ratio": 0.9358,
+      "background_kind": "white",
+      "dominant_ink": "#182838",
+      "dominant_ink_distance_to_1F2937": 7.1,
+      "ink_is_charcoal": true,
+      "accent_share_pct": 5.82,
+      "accent_components": 1,
+      "single_accent": true,
+      "stroke_px_at_1024": 23,
+      "stroke_px_at_24": 0.54,
+      "ink_bbox": [
+        224,
+        194,
+        802,
+        810
+      ],
+      "stroke_px_at_24_reframed_to_20px_box": 0.75,
+      "other_hue": false,
+      "other_hue_pct_of_ink": 0.36,
+      "pass": false,
+      "failures": [
+        "stroke 0.54px@24 outside 1.6-2.6"
+      ]
+    },
+    {
+      "name": "pen-lines",
+      "file": "web/public/icons/glyphs-src/pen-lines.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "background_ratio": 0.9717,
+      "background_kind": "white",
+      "dominant_ink": "#182838",
+      "dominant_ink_distance_to_1F2937": 7.1,
+      "ink_is_charcoal": true,
+      "accent_share_pct": 3.53,
+      "accent_components": 1,
+      "single_accent": true,
+      "stroke_px_at_1024": 15.0,
+      "stroke_px_at_24": 0.35,
+      "ink_bbox": [
+        263,
+        342,
+        767,
+        678
+      ],
+      "stroke_px_at_24_reframed_to_20px_box": 0.6,
+      "other_hue": false,
+      "other_hue_pct_of_ink": 0.54,
+      "pass": false,
+      "failures": [
+        "stroke 0.35px@24 outside 1.6-2.6"
+      ]
+    },
+    {
+      "name": "robot-bust",
+      "file": "web/public/icons/glyphs-src/robot-bust.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "background_ratio": 0.9619,
+      "background_kind": "white",
+      "dominant_ink": "#202838",
+      "dominant_ink_distance_to_1F2937": 1.7,
+      "ink_is_charcoal": true,
+      "accent_share_pct": 4.52,
+      "accent_components": 1,
+      "single_accent": true,
+      "stroke_px_at_1024": 15.0,
+      "stroke_px_at_24": 0.35,
+      "ink_bbox": [
+        267,
+        224,
+        757,
+        802
+      ],
+      "stroke_px_at_24_reframed_to_20px_box": 0.52,
+      "other_hue": false,
+      "other_hue_pct_of_ink": 0.27,
+      "pass": false,
+      "failures": [
+        "stroke 0.35px@24 outside 1.6-2.6"
+      ]
+    },
+    {
+      "name": "search-bubble",
+      "file": "web/public/icons/glyphs-src/search-bubble.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "background_ratio": 0.9704,
+      "background_kind": "white",
+      "dominant_ink": "#202838",
+      "dominant_ink_distance_to_1F2937": 1.7,
+      "ink_is_charcoal": true,
+      "accent_share_pct": 8.53,
+      "accent_components": 1,
+      "single_accent": true,
+      "stroke_px_at_1024": 19.0,
+      "stroke_px_at_24": 0.45,
+      "ink_bbox": [
+        271,
+        303,
+        755,
+        694
+      ],
+      "stroke_px_at_24_reframed_to_20px_box": 0.79,
+      "other_hue": false,
+      "other_hue_pct_of_ink": 0.99,
+      "pass": false,
+      "failures": [
+        "stroke 0.45px@24 outside 1.6-2.6"
+      ]
+    },
+    {
+      "name": "trend-cross",
+      "file": "web/public/icons/glyphs-src/trend-cross.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "background_ratio": 0.9816,
+      "background_kind": "white",
+      "dominant_ink": "#182030",
+      "dominant_ink_distance_to_1F2937": 13.4,
+      "ink_is_charcoal": true,
+      "accent_share_pct": 9.91,
+      "accent_components": 1,
+      "single_accent": true,
+      "stroke_px_at_1024": 19.0,
+      "stroke_px_at_24": 0.45,
+      "ink_bbox": [
+        253,
+        298,
+        773,
+        699
+      ],
+      "stroke_px_at_24_reframed_to_20px_box": 0.73,
+      "other_hue": false,
+      "other_hue_pct_of_ink": 0.75,
+      "pass": false,
+      "failures": [
+        "stroke 0.45px@24 outside 1.6-2.6"
+      ]
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "pass": 0,
+    "fail": 10
+  }
+}
