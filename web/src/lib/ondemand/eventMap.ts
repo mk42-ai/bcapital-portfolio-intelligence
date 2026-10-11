@@ -32,7 +32,10 @@ export const EVENT_TYPE: Record<string, UiKind> = {
   plugin_sources: "sources",             // message/plugin_sources — sources.items[] (observed; not in the PDF)
   error: "error",
   statusLog: "status",                   // refined by STATUS_TYPE below
+  heartbeat: "heartbeat",                // a7: heartbeat frames that DO carry eventType (observed ones carry only sessionId/messageId/time)
 };
+/** a7: eventTypes whose delta is planner/tool-definition JSON (Outputs disclosure), not reasoning prose. */
+export const PLANNER_EVENT_TYPES = ["planning_output", "step_output"] as const;
 /** Which `eventType`s carry a reasoning delta and under which field + channel label. */
 export const THINKING_CHANNEL: Record<string, { field: "thinking" | "output"; channel: "planning" | "step" | "fulfillment" | "plan" | "step_output" }> = {
   planning_thinking: { field: "thinking", channel: "planning" },

@@ -5,6 +5,7 @@
  * Exits non-zero on any failure.
  */
 import { parseFrame, classifyClientFrame } from "../../src/lib/ondemand/sse-adapter";
+import { makeFrameGuard, splitSseLines, isTerminal, coalesceThinking } from "../../src/lib/ondemand/frame-guard";
 import { CLIENT_EVENT, MEDIA_EVENT, VOICE_PHASE, EVENT_TYPE, STATUS_TYPE, CLIENT_EVENT_VALUES_UNIQUE, classifyThinkingDelta, thinkingPhaseOf, pluginLabel, jsonDepth } from "../../src/lib/ondemand/eventMap";
 
 let pass = 0; const failures: string[] = [];
@@ -167,6 +168,68 @@ console.log("unit1: classifyThinkingDelta (prose vs planner payload) + pluginLab
   eq("single schema word in prose stays prose", c("planning_thinking", "Note the plugins schema mentions \"current\" array but the response schema shows \"plugins\".", " but the response schema shows \"plugins\"."), "prose");
   eq("bare 'api_request_parameters' mid-sentence → payload", c("step_thinking", "I need to fill api_request_parameters with the query", " with the query"), "payload");
   eq("title line stays prose", c("planning_thinking", "Title: \"Searching Fervo Energy's business\"", "Title: \"Searching Fervo Energy's business\""), "prose");
+}
+
+console.log("a7: frame guard (dedupe / gap / stale)");
+{
+  const g = makeFrameGuard();
+  eq("guard: first seq ok", g.accept(1), "ok");
+  eq("guard: next seq ok", g.accept(2), "ok");
+  eq("guard: exact duplicate seq → dup", g.accept(2), "dup");
+  eq("guard: seq jump 2→5 → gap", g.accept(5), "gap");
+  eq("guard: out-of-order 3 < 5 → stale", g.accept(3), "stale");
+  eq("guard: replayed stale seq is a dup", g.accept(3), "dup");
+  eq("guard: stats dup/gap/stale/missing", [g.stats.dup, g.stats.gap, g.stats.stale, g.stats.missing, g.stats.lastSeq], [2, 1, 1, 2, 5]);
+  const k = makeFrameGuard();
+  eq("guard: no seq, key dedupe", [k.accept(undefined, "m1:1"), k.accept(undefined, "m1:1"), k.accept(undefined, "m1:2")], ["ok", "dup", "ok"]);
+  g.reset();
+  eq("guard: reset clears state", [g.stats.total, g.accept(2)], [0, "ok"]);
+}
+console.log("a7: SSE line splitting");
+{
+  const crlf = splitSseLines("event: thinking\r\ndata: {\"a\":1}\r\n\r\nevent: message\r\ndata: [DONE]\r\n\r\n");
+  eq("split: CRLF → 2 frames with event names", crlf.frames.map((f) => [f.event, f.data]), [["thinking", "{\"a\":1}"], ["message", "[DONE]"]]);
+  eq("split: CRLF leaves empty rest", crlf.rest, "");
+  const multi = splitSseLines("data: line one\ndata: line two\ndata:\n\n");
+  eq("split: multi-line data joins with \\n", multi.frames[0]?.data, "line one\nline two\n");
+  const cmt = splitSseLines(": keep-alive\n: another\n\ndata: x\n\n");
+  eq("split: comment-only block ignored, data frame kept", cmt.frames.map((f) => f.data), ["x"]);
+  const partial = splitSseLines("data: done\n\ndata: {\"half\":");
+  eq("split: unterminated tail returned as rest", [partial.frames.length, partial.rest], [1, "data: {\"half\":"]);
+  const idr = splitSseLines("id: 7\nretry: 3000\nevent: heartbeat\ndata: {}\n\n");
+  eq("split: id/retry/event parsed", [idr.frames[0]?.id, idr.frames[0]?.retry, idr.frames[0]?.event], ["7", 3000, "heartbeat"]);
+  eq("split: lone CR line endings", splitSseLines("data: a\rdata: b\r\r").frames[0]?.data, "a\nb");
+}
+console.log("a7: terminal markers + coalesce");
+{
+  eq("isTerminal [DONE]", isTerminal("[DONE]"), "done");
+  eq("isTerminal [DONE] padded", isTerminal("  [DONE]\n"), "done");
+  eq("isTerminal [ERROR]: prefix", isTerminal("[ERROR]: {\"message\":\"boom\"}"), "error");
+  eq("isTerminal plain json → null", isTerminal("{\"eventType\":\"fulfillment\"}"), null);
+  const merged = coalesceThinking([{ channel: "planning", delta: "A" }, { channel: "planning", delta: "B" }, { channel: "step", stepId: "1", delta: "C" }, { channel: "step", stepId: "1", delta: "" }, { channel: "step", stepId: "1", delta: "D" }, { channel: "step", stepId: "2", delta: "E" }]);
+  eq("coalesce: consecutive same-channel merged, stepId respected", merged.map((m) => [m.channel, m.stepId ?? "", m.delta]), [["planning", "", "AB"], ["step", "1", "CD"], ["step", "2", "E"]]);
+}
+console.log("a7: parseFrame hardening");
+{
+  const bad = parseFrame("message", "{not json");
+  check("malformed JSON → unknown (never throws)", bad.kind === "unknown" && bad.eventType === "unparseable", bad);
+  const arr = parseFrame("message", "[1,2,3]");
+  check("JSON array payload → unknown", arr.kind === "unknown", arr);
+  check("[DONE] with whitespace/BOM → done", parseFrame("message", "\uFEFF [DONE] \n").kind === "done");
+  const err = parseFrame("message", "[ERROR]: {\"message\":\"quota\",\"errorCode\":\"E42\"}");
+  check("[ERROR]: json → error with code", err.kind === "error" && err.code === "E42" && err.message === "quota", err);
+  const nested = parseFrame("message", J({ data: { ...S, eventType: "fulfillment", answer: "hi" } }));
+  check("nested data.eventType envelope → answer", nested.kind === "answer" && nested.delta === "hi", nested);
+  const po = parseFrame("thinking", J({ ...S, eventType: "planning_output", output: { delta: "{\"steps\":[" } }));
+  check("planning_output → planner frame, channel plan", po.kind === "thinking" && po.channel === "plan" && po.planner === true && po.delta === "{\"steps\":[", po);
+  const so = parseFrame("thinking", J({ ...S, eventType: "step_output", stepId: "2", output: { delta: "{\"pluginId\"" } }));
+  check("step_output → planner frame, channel step_output, stepId 2", so.kind === "thinking" && so.channel === "step_output" && so.planner === true && so.stepId === "2", so);
+  const pt = parseFrame("thinking", J({ ...S, eventType: "planning_thinking", thinking: { delta: "hmm" } }));
+  check("planning_thinking is NOT a planner frame", pt.kind === "thinking" && pt.planner === undefined && pt.channel === "planning", pt);
+  const hb1 = parseFrame("heartbeat", J({ ...S, time: "2026-10-11T00:00:00Z" }));
+  const hb2 = parseFrame("message", J({ ...S, eventType: "heartbeat", time: "2026-10-11T00:00:01Z" }));
+  const hb3 = parseFrame("", J({ ...S, time: "2026-10-11T00:00:02Z" }));
+  check("heartbeat: event name / eventType / bare time all → heartbeat", hb1.kind === "heartbeat" && hb2.kind === "heartbeat" && hb2.time === "2026-10-11T00:00:01Z" && hb3.kind === "heartbeat", [hb1, hb2, hb3]);
 }
 console.log(`\n${pass} passed, ${failures.length} failed`);
 if (failures.length) { console.error("FAILED:", failures.join("; ")); process.exit(1); }
