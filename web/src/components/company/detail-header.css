@@ -1,0 +1,34 @@
+/* a30 — company detail header: sector tint band, KPI row. Light-only; sector tint set per instance via --dh-sector (no blue in the map). */
+.dh { position: relative; margin-bottom: 1.25rem; overflow: hidden; border: 1px solid var(--border); border-radius: 0.75rem; background: var(--surface, #fff); }
+.dh-band { height: 6px; width: 100%; background: var(--dh-sector, #78716c); }
+.dh-body { padding: 1.25rem 1.5rem 1.5rem; }
+.dh-top { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1rem 1.25rem; }
+.dh-logo { display: grid; width: 56px; height: 56px; flex: 0 0 56px; place-items: center; overflow: hidden; border: 1px solid var(--border); border-radius: 0.625rem; background: #fff; padding: 4px; }
+.dh-title { min-width: 0; flex: 1 1 16rem; }
+.dh-meta { margin-top: 0.25rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.dh-meta-2 { margin-top: 0.25rem; font-size: 0.875rem; color: var(--muted); }
+.dh-dot { display: inline-block; width: 10px; height: 10px; flex: 0 0 10px; border-radius: 9999px; border: 1px solid var(--border); background: var(--dh-sector); }
+.dh-source { margin-left: auto; display: flex; align-items: flex-start; font-size: 0.75rem; color: var(--muted); }
+
+.dh-kpis { margin-top: 1.25rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; }
+.dh-tile { display: flex; min-width: 0; flex-direction: column; gap: 0.2rem; border: 1px solid var(--border); border-left: 3px solid var(--dh-sector); border-radius: 0.5rem; background: var(--surface-2); padding: 0.75rem 0.875rem; }
+.dh-tile-label { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.dh-tile-icon { display: inline-flex; color: var(--muted-2); }
+.dh-tile-value { font-size: 1.375rem; font-weight: 600; line-height: 1.2; color: var(--foreground); font-variant-numeric: tabular-nums; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dh-tile-sub { font-size: 0.75rem; color: var(--muted); font-variant-numeric: tabular-nums; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dh-delta { display: inline-flex; align-items: center; gap: 0.2rem; }
+.dh-delta.is-up { color: #047857; }
+.dh-delta.is-down { color: #b91c1c; }
+
+@media (max-width: 640px) {
+  .dh { margin-left: -1rem; margin-right: -1rem; border-left: 0; border-right: 0; border-radius: 0; }
+  .dh-body { padding: 1rem 1rem 1.25rem; }
+  .dh-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+  .dh-source { margin-left: 0; width: 100%; }
+}
+
+/* Funding timeline — sector-tinted dots and rail (a30) */
+.ft-list { position: relative; margin-left: 0.75rem; border-left: 2px solid color-mix(in srgb, var(--dh-sector, #78716c) 35%, var(--border)); }
+.ft-item { position: relative; margin-bottom: 1.25rem; margin-left: 1.25rem; }
+.ft-dot { position: absolute; left: calc(-1.25rem - 11px); top: 2px; display: grid; width: 20px; height: 20px; place-items: center; border-radius: 9999px; border: 2px solid #fff; background: var(--dh-sector, #78716c); color: #fff; box-shadow: 0 0 0 1px color-mix(in srgb, var(--dh-sector, #78716c) 50%, transparent); }
+.ft-dot.is-passive { background: #fff; color: var(--muted-2); border-color: color-mix(in srgb, var(--dh-sector, #78716c) 60%, var(--border)); box-shadow: none; }

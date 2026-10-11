@@ -1,5 +1,7 @@
 import type { Company } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
+import { Handshake, Landmark, Rocket, CircleDollarSign } from "lucide-react";
+import { sectorFill, type LastDeal } from "@/components/company/detail-header";
 export type Round = { round: string; date: string; amount: string; post: string; lead: string; bcap: "lead" | "co-lead" | "participant" | null; source?: string };
 /** PitchBook-style timeline. Rounds for focus companies come from the intelligence JSON; for everyone else the single known B Capital event (if any) is shown and the rest is marked pending (PitchBook plugin deferred). */
 const ROUNDS: Record<string, Round[]> = {
@@ -13,15 +15,28 @@ const ROUNDS: Record<string, Round[]> = {
   "star-catcher": [{ round: "Seed", date: "—", amount: "—", post: "—", lead: "B Capital (co-lead)", bcap: "co-lead" }, { round: "Series A", date: "—", amount: "$65M", post: "—", lead: "B Capital", bcap: "lead" }],
   archimetis: [{ round: "Round", date: "2026-02", amount: "~$11.5M", post: "—", lead: "—", bcap: null }],
 };
+/** Most recent dated round for the detail-header "Last deal" tile (null when no round-level data). */
+export function lastDealFor(company: Pick<Company, "slug">): LastDeal {
+  const rounds = (ROUNDS[company.slug] ?? []).filter((r) => r.date && r.date !== "—");
+  if (!rounds.length) return null;
+  const r = [...rounds].sort((a, b) => b.date.localeCompare(a.date))[0];
+  return { round: r.round, amount: r.amount, date: r.date };
+}
+function roundIcon(r: Round) {
+  if (/ipo/i.test(r.round)) return <Landmark size={11} aria-hidden />;
+  if (r.bcap === "lead" || r.bcap === "co-lead") return <Handshake size={11} aria-hidden />;
+  if (/seed|series a\b/i.test(r.round)) return <Rocket size={11} aria-hidden />;
+  return <CircleDollarSign size={11} aria-hidden />;
+}
 export function FundingTimeline({ company }: { company: Company }) {
   const rounds = ROUNDS[company.slug] ?? [];
   return (
-    <div>
+    <div style={{ ["--dh-sector" as string]: sectorFill(company.sector) }}>
       {rounds.length ? (
-        <ol className="relative ml-3 border-l border-border">
+        <ol className="ft-list" role="list" data-testid="funding-timeline">
           {rounds.map((r, i) => (
-            <li key={i} className="mb-5 ml-5">
-              <span className="absolute -left-[7px] mt-1.5 size-3 rounded-full border-2 border-background" style={{ background: r.bcap ? "var(--primary)" : "var(--muted-2)" }} aria-hidden />
+            <li key={i} className="ft-item" role="listitem">
+              <span className={`ft-dot${r.bcap ? "" : " is-passive"}`} aria-hidden data-hue-audit-ignore="sector-tint">{roundIcon(r)}</span>
               <p className="flex flex-wrap items-center gap-2 text-sm font-semibold">{r.round}<time className="font-normal text-muted" dateTime={r.date}>{r.date}</time>{r.bcap && <Badge tone="primary">B Capital participated · {r.bcap}</Badge>}</p>
               <p className="text-sm text-muted">Amount {r.amount} · Post-money {r.post} · Lead {r.lead}</p>
             </li>
