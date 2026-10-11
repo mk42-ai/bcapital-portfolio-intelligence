@@ -44,7 +44,7 @@ function auditInBrowser(limit: number): Hit[] {
     if (max === min) return false;
     const l = (max + min) / 2, d = max - min; const s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
     let h: number; if (max === R) h = ((G - B) / d + (G < B ? 6 : 0)) * 60; else if (max === G) h = ((B - R) / d + 2) * 60; else h = ((R - G) / d + 4) * 60;
-    return h >= 190 && h <= 260 && s > 0.15;
+    return h >= 190 && h <= 260 && s > 0.15 && d > 0.15; // d = chroma gate: brand charcoal #1F2937 / grey inks are neutral (see src/lib/hue-audit.ts)
   };
   const describe = (el: Element) => {
     const parts: string[] = []; let node: Element | null = el;

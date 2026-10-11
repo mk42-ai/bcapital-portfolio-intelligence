@@ -47,7 +47,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
             <LogoImg src={resolveLogo({ slug: company.slug, name: company.name, logoUrl: company.logo_url })} name={company.name} alt={`${company.name} logo`} size={64} eager imgClassName="max-h-16" className="text-2xl" />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted"><span className="inline-block size-2.5 rounded-full border border-border" style={{ background: "var(--co-accent)" }} aria-hidden />{company.sector} · {company.region}</p>
+            <p className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted"><span className="inline-block size-2.5 rounded-full border border-border" style={{ background: "var(--co-accent)" }} aria-hidden data-hue-audit-ignore="company-brand-accent" />{company.sector} · {company.region}</p>
             <h1 className="flex flex-wrap items-center gap-3 font-display text-3xl font-semibold sm:text-4xl">{company.name}{sig.data && <span className="inline-flex items-center gap-1.5 font-sans text-sm font-medium text-muted" title={`Signal Score ${sig.data.data.score} / 100`}><SignalMini score={sig.data.data.score} confidence={sig.data.data.confidence} percentile={sig.data.data.percentile} label={sig.data.data.label} name={company.name} /><span className="tabular-nums">{sig.data.data.score}</span></span>}</h1>
             <p className="mt-1 text-sm text-muted">{company.status}{company.hq ? ` · ${company.hq}` : ""}{company.employees ? ` · ${company.employees.toLocaleString()} employees` : ""}</p>
             <div className="mt-3 flex flex-wrap items-center gap-2">

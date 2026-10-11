@@ -6,6 +6,9 @@
 export const BLUE_HUE_MIN = 190;
 export const BLUE_HUE_MAX = 260;
 export const BLUE_SAT_MIN = 0.15;
+/** Chroma gate (max−min of the 0–1 RGB channels). HSL saturation inflates for dark colours: the brand charcoal #1F2937 (chroma 0.094, hue 215°)
+ *  and tailwind gray-700/800/900 are NEUTRAL inks, while every real blue (#1d4ed8 chroma 0.73, #3898EC 0.70, #000D5E 0.37) stays above this gate. */
+export const BLUE_CHROMA_MIN = 0.15;
 
 export type HueAuditHit = { selector: string; prop: string; value: string };
 
@@ -48,12 +51,13 @@ export function rgbToHsl(r: number, g: number, b: number): [number, number, numb
   return [h, s, l];
 }
 
-/** true when the colour has a blue hue (190–260) with saturation > 0.15 and is not fully transparent. */
+/** true when the colour has a blue hue (190–260) with saturation > 0.15 AND chroma > 0.15 (charcoal/grey inks pass) and is not fully transparent. */
 export function isBlueHue(cssColor: string): boolean {
   const c = parseCssColor(cssColor);
   if (!c || c.a <= 0) return false;
   const [h, s] = rgbToHsl(c.r, c.g, c.b);
-  return h >= BLUE_HUE_MIN && h <= BLUE_HUE_MAX && s > BLUE_SAT_MIN;
+  const chroma = (Math.max(c.r, c.g, c.b) - Math.min(c.r, c.g, c.b)) / 255;
+  return h >= BLUE_HUE_MIN && h <= BLUE_HUE_MAX && s > BLUE_SAT_MIN && chroma > BLUE_CHROMA_MIN;
 }
 
 export const HUE_AUDIT_PROPS = ["color", "backgroundColor", "borderTopColor", "borderRightColor", "borderBottomColor", "borderLeftColor", "outlineColor", "fill", "stroke"] as const;
