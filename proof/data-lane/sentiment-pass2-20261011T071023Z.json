@@ -1,0 +1,1056 @@
+{
+  "at": "2026-10-11T07:10:24.583Z",
+  "base": "http://127.0.0.1:4780",
+  "status": 200,
+  "report": [
+    {
+      "slug": "1au",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 19,
+      "scored_items": 3,
+      "score": 0.2,
+      "label": "positive"
+    },
+    {
+      "slug": "6sense",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 13,
+      "scored_items": 5,
+      "score": 0.48,
+      "label": "positive"
+    },
+    {
+      "slug": "accacia",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 5,
+      "score": 0.62,
+      "label": "very positive"
+    },
+    {
+      "slug": "aimotive",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 19,
+      "scored_items": 5,
+      "score": 0.56,
+      "label": "positive"
+    },
+    {
+      "slug": "archimetis",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 13,
+      "scored_items": 5,
+      "score": 0.58,
+      "label": "positive"
+    },
+    {
+      "slug": "artbio",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 16,
+      "scored_items": 5,
+      "score": 0.4,
+      "label": "positive"
+    },
+    {
+      "slug": "aurora-yaocheng",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 3,
+      "score": 0.5667,
+      "label": "positive"
+    },
+    {
+      "slug": "axiom",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 4,
+      "score": 0.55,
+      "label": "positive"
+    },
+    {
+      "slug": "baichuan",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 18,
+      "scored_items": 5,
+      "score": -0.12,
+      "label": "neutral"
+    },
+    {
+      "slug": "bhanzu",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 4,
+      "score": -0.625,
+      "label": "very negative"
+    },
+    {
+      "slug": "branch-international",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 3,
+      "score": 0.0667,
+      "label": "neutral"
+    },
+    {
+      "slug": "brik",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 2,
+      "score": 0.4,
+      "label": "positive"
+    },
+    {
+      "slug": "buildops",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 17,
+      "scored_items": 5,
+      "score": 0.68,
+      "label": "very positive"
+    },
+    {
+      "slug": "cadence",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 10,
+      "scored_items": 4,
+      "score": 0.65,
+      "label": "very positive"
+    },
+    {
+      "slug": "carrick",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 4,
+      "score": 0.575,
+      "label": "positive"
+    },
+    {
+      "slug": "carro",
+      "rule": "R3 carry (no scored news)",
+      "latest_items": 8,
+      "scored_items": 0,
+      "score": 0,
+      "label": "neutral"
+    },
+    {
+      "slug": "centivo",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 15,
+      "scored_items": 5,
+      "score": 0.38,
+      "label": "positive"
+    },
+    {
+      "slug": "certn",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 5,
+      "score": 0.58,
+      "label": "positive"
+    },
+    {
+      "slug": "chipagents",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 14,
+      "scored_items": 1,
+      "score": 0.8,
+      "label": "very positive"
+    },
+    {
+      "slug": "cloudwise",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 2,
+      "score": 0.55,
+      "label": "positive"
+    },
+    {
+      "slug": "code-metal",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 5,
+      "score": 0.64,
+      "label": "very positive"
+    },
+    {
+      "slug": "coindcx",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 5,
+      "score": 0.24,
+      "label": "positive"
+    },
+    {
+      "slug": "collinear-ai",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 10,
+      "scored_items": 5,
+      "score": 0.32,
+      "label": "positive"
+    },
+    {
+      "slug": "companycam",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 15,
+      "scored_items": 4,
+      "score": 0.425,
+      "label": "positive"
+    },
+    {
+      "slug": "curbwaste",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 18,
+      "scored_items": 5,
+      "score": 0.62,
+      "label": "very positive"
+    },
+    {
+      "slug": "dailyhunt",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 5,
+      "score": -0.3,
+      "label": "negative"
+    },
+    {
+      "slug": "deferred",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 5,
+      "score": 0.58,
+      "label": "positive"
+    },
+    {
+      "slug": "dream-labs",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 2,
+      "score": 0.65,
+      "label": "very positive"
+    },
+    {
+      "slug": "eeroq",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 16,
+      "scored_items": 5,
+      "score": 0.8,
+      "label": "very positive"
+    },
+    {
+      "slug": "eureka-robotics",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 5,
+      "score": 0.7,
+      "label": "very positive"
+    },
+    {
+      "slug": "evenup",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 17,
+      "scored_items": 5,
+      "score": 0.72,
+      "label": "very positive"
+    },
+    {
+      "slug": "evidation-health",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 14,
+      "scored_items": 5,
+      "score": 0.4,
+      "label": "positive"
+    },
+    {
+      "slug": "evommune",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 17,
+      "scored_items": 5,
+      "score": 0.26,
+      "label": "positive"
+    },
+    {
+      "slug": "extend",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 8,
+      "scored_items": 5,
+      "score": 0.46,
+      "label": "positive"
+    },
+    {
+      "slug": "falconx",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 12,
+      "scored_items": 5,
+      "score": 0.58,
+      "label": "positive"
+    },
+    {
+      "slug": "figment",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 16,
+      "scored_items": 4,
+      "score": 0.65,
+      "label": "very positive"
+    },
+    {
+      "slug": "floor-nfts",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 4,
+      "score": 0.325,
+      "label": "positive"
+    },
+    {
+      "slug": "flourish-health",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 16,
+      "scored_items": 5,
+      "score": 0.76,
+      "label": "very positive"
+    },
+    {
+      "slug": "flowgpt",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 5,
+      "score": 0.16,
+      "label": "neutral"
+    },
+    {
+      "slug": "forest",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 2,
+      "score": 0.65,
+      "label": "very positive"
+    },
+    {
+      "slug": "fountain",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 5,
+      "score": 0.46,
+      "label": "positive"
+    },
+    {
+      "slug": "gable",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 10,
+      "scored_items": 5,
+      "score": 0.72,
+      "label": "very positive"
+    },
+    {
+      "slug": "goodfire",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 16,
+      "scored_items": 4,
+      "score": 0.6,
+      "label": "very positive"
+    },
+    {
+      "slug": "goose",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 15,
+      "scored_items": 5,
+      "score": 0.38,
+      "label": "positive"
+    },
+    {
+      "slug": "grace-investment-machine",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 13,
+      "scored_items": 5,
+      "score": 0.44,
+      "label": "positive"
+    },
+    {
+      "slug": "graymatter-robotics",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 18,
+      "scored_items": 5,
+      "score": 0.56,
+      "label": "positive"
+    },
+    {
+      "slug": "grit",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 2,
+      "score": 0.45,
+      "label": "positive"
+    },
+    {
+      "slug": "gushwork",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 13,
+      "scored_items": 5,
+      "score": 0.4,
+      "label": "positive"
+    },
+    {
+      "slug": "havocai",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 14,
+      "scored_items": 5,
+      "score": 0.72,
+      "label": "very positive"
+    },
+    {
+      "slug": "heylibby",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 5,
+      "score": 0.56,
+      "label": "positive"
+    },
+    {
+      "slug": "hifibio",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 8,
+      "scored_items": 2,
+      "score": 0.65,
+      "label": "very positive"
+    },
+    {
+      "slug": "hotspot-therapeutics",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 12,
+      "scored_items": 5,
+      "score": 0.58,
+      "label": "positive"
+    },
+    {
+      "slug": "hypersonix",
+      "rule": "R3 carry (no scored news)",
+      "latest_items": 5,
+      "scored_items": 0,
+      "score": 0,
+      "label": "neutral"
+    },
+    {
+      "slug": "icertis",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 14,
+      "scored_items": 5,
+      "score": 0.24,
+      "label": "positive"
+    },
+    {
+      "slug": "infrahub",
+      "rule": "R3 carry (no scored news)",
+      "latest_items": 19,
+      "scored_items": 0,
+      "score": 0,
+      "label": "neutral"
+    },
+    {
+      "slug": "innovaccer",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 16,
+      "scored_items": 5,
+      "score": 0.02,
+      "label": "neutral"
+    },
+    {
+      "slug": "insilico-medicine",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 5,
+      "score": 0.82,
+      "label": "very positive"
+    },
+    {
+      "slug": "inspace",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 19,
+      "scored_items": 5,
+      "score": 0.72,
+      "label": "very positive"
+    },
+    {
+      "slug": "iru",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 8,
+      "scored_items": 5,
+      "score": 0.36,
+      "label": "positive"
+    },
+    {
+      "slug": "isaac-health",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 14,
+      "scored_items": 5,
+      "score": 0.74,
+      "label": "very positive"
+    },
+    {
+      "slug": "jetzero",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 12,
+      "scored_items": 5,
+      "score": 0.62,
+      "label": "very positive"
+    },
+    {
+      "slug": "judi-rx",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 14,
+      "scored_items": 5,
+      "score": 0.52,
+      "label": "positive"
+    },
+    {
+      "slug": "karman-industries",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 9,
+      "scored_items": 5,
+      "score": 0.7,
+      "label": "very positive"
+    },
+    {
+      "slug": "khatabook",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 17,
+      "scored_items": 5,
+      "score": 0.42,
+      "label": "positive"
+    },
+    {
+      "slug": "knox",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 5,
+      "score": 0.5,
+      "label": "positive"
+    },
+    {
+      "slug": "kopi-kenangan",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 14,
+      "scored_items": 5,
+      "score": 0.46,
+      "label": "positive"
+    },
+    {
+      "slug": "labelbox",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 4,
+      "score": 0.4,
+      "label": "positive"
+    },
+    {
+      "slug": "labviva",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 5,
+      "score": 0.68,
+      "label": "very positive"
+    },
+    {
+      "slug": "lambda",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 15,
+      "scored_items": 5,
+      "score": 0.32,
+      "label": "positive"
+    },
+    {
+      "slug": "levelten",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 13,
+      "scored_items": 5,
+      "score": 0.72,
+      "label": "very positive"
+    },
+    {
+      "slug": "linkmore",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 15,
+      "scored_items": 5,
+      "score": 0.8,
+      "label": "very positive"
+    },
+    {
+      "slug": "lively",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 9,
+      "scored_items": 5,
+      "score": 0.42,
+      "label": "positive"
+    },
+    {
+      "slug": "lumara-health",
+      "rule": "R3 carry (no scored news)",
+      "latest_items": 9,
+      "scored_items": 0,
+      "score": 0,
+      "label": "neutral"
+    },
+    {
+      "slug": "lunar-energy",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 18,
+      "scored_items": 5,
+      "score": 0.68,
+      "label": "very positive"
+    },
+    {
+      "slug": "macrolux",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 16,
+      "scored_items": 5,
+      "score": 0.54,
+      "label": "positive"
+    },
+    {
+      "slug": "meditrust",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 5,
+      "score": 0.52,
+      "label": "positive"
+    },
+    {
+      "slug": "meesho",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 16,
+      "scored_items": 5,
+      "score": 0.48,
+      "label": "positive"
+    },
+    {
+      "slug": "miotech",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 13,
+      "scored_items": 5,
+      "score": 0.58,
+      "label": "positive"
+    },
+    {
+      "slug": "mswipe",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 12,
+      "scored_items": 5,
+      "score": 0.4,
+      "label": "positive"
+    },
+    {
+      "slug": "nalu",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 14,
+      "scored_items": 5,
+      "score": 0.72,
+      "label": "very positive"
+    },
+    {
+      "slug": "nektar-ai",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 15,
+      "scored_items": 4,
+      "score": 0.5,
+      "label": "positive"
+    },
+    {
+      "slug": "nest-genomics",
+      "rule": "R3 carry (no scored news)",
+      "latest_items": 8,
+      "scored_items": 0,
+      "score": 0,
+      "label": "neutral"
+    },
+    {
+      "slug": "neushen-therapeutics",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 4,
+      "score": 0.65,
+      "label": "very positive"
+    },
+    {
+      "slug": "ninja-van",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 5,
+      "score": -0.54,
+      "label": "negative"
+    },
+    {
+      "slug": "numerion-labs",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 12,
+      "scored_items": 5,
+      "score": 0.24,
+      "label": "positive"
+    },
+    {
+      "slug": "nuvig",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 13,
+      "scored_items": 5,
+      "score": -0.12,
+      "label": "neutral"
+    },
+    {
+      "slug": "odeko",
+      "rule": "R3 carry (no scored news)",
+      "latest_items": 9,
+      "scored_items": 0,
+      "score": 0,
+      "label": "neutral"
+    },
+    {
+      "slug": "omnidian",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 9,
+      "scored_items": 5,
+      "score": 0.3,
+      "label": "positive"
+    },
+    {
+      "slug": "oro-labs",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 12,
+      "scored_items": 5,
+      "score": 0.72,
+      "label": "very positive"
+    },
+    {
+      "slug": "overstory",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 10,
+      "scored_items": 5,
+      "score": 0.72,
+      "label": "very positive"
+    },
+    {
+      "slug": "palebluedot",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 16,
+      "scored_items": 4,
+      "score": 0.4,
+      "label": "positive"
+    },
+    {
+      "slug": "payfazz",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 5,
+      "score": 0.4,
+      "label": "positive"
+    },
+    {
+      "slug": "pendo",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 12,
+      "scored_items": 5,
+      "score": 0.04,
+      "label": "neutral"
+    },
+    {
+      "slug": "percent",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 15,
+      "scored_items": 5,
+      "score": 0.32,
+      "label": "positive"
+    },
+    {
+      "slug": "perimeter-81",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 9,
+      "scored_items": 2,
+      "score": 0.1,
+      "label": "neutral"
+    },
+    {
+      "slug": "phenom-people",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 13,
+      "scored_items": 5,
+      "score": 0.44,
+      "label": "positive"
+    },
+    {
+      "slug": "picnichealth",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 5,
+      "score": 0.46,
+      "label": "positive"
+    },
+    {
+      "slug": "poolside",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 13,
+      "scored_items": 5,
+      "score": 0.02,
+      "label": "neutral"
+    },
+    {
+      "slug": "positive-development",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 5,
+      "score": 0.58,
+      "label": "positive"
+    },
+    {
+      "slug": "precision-neuro",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 10,
+      "scored_items": 5,
+      "score": 0.63,
+      "label": "very positive"
+    },
+    {
+      "slug": "profoundbio",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 18,
+      "scored_items": 5,
+      "score": 0.24,
+      "label": "positive"
+    },
+    {
+      "slug": "rapyd",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 12,
+      "scored_items": 5,
+      "score": -0.04,
+      "label": "neutral"
+    },
+    {
+      "slug": "reflection",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 20,
+      "scored_items": 5,
+      "score": 0.5,
+      "label": "positive"
+    },
+    {
+      "slug": "remote",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 17,
+      "scored_items": 5,
+      "score": 0.66,
+      "label": "very positive"
+    },
+    {
+      "slug": "rona-therapeutics",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 9,
+      "scored_items": 4,
+      "score": 0.575,
+      "label": "positive"
+    },
+    {
+      "slug": "seltz",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 5,
+      "score": 0.74,
+      "label": "very positive"
+    },
+    {
+      "slug": "sharpa",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 17,
+      "scored_items": 5,
+      "score": 0.7,
+      "label": "very positive"
+    },
+    {
+      "slug": "shipday",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 16,
+      "scored_items": 5,
+      "score": 0.52,
+      "label": "positive"
+    },
+    {
+      "slug": "sift-healthcare",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 10,
+      "scored_items": 5,
+      "score": 0.02,
+      "label": "neutral"
+    },
+    {
+      "slug": "silvercloud-health",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 9,
+      "scored_items": 5,
+      "score": 0.4,
+      "label": "positive"
+    },
+    {
+      "slug": "solar-square",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 16,
+      "scored_items": 5,
+      "score": 0.64,
+      "label": "very positive"
+    },
+    {
+      "slug": "solve-therapeutics",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 9,
+      "scored_items": 5,
+      "score": 0.5,
+      "label": "positive"
+    },
+    {
+      "slug": "sonilo",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 5,
+      "score": 0.62,
+      "label": "very positive"
+    },
+    {
+      "slug": "spectrumedics",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 15,
+      "scored_items": 5,
+      "score": 0.56,
+      "label": "positive"
+    },
+    {
+      "slug": "star-catcher",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 5,
+      "score": 0.58,
+      "label": "positive"
+    },
+    {
+      "slug": "starburst-data",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 5,
+      "score": 0.64,
+      "label": "very positive"
+    },
+    {
+      "slug": "sugarfit",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 9,
+      "scored_items": 4,
+      "score": 0.375,
+      "label": "positive"
+    },
+    {
+      "slug": "synapticure",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 5,
+      "score": 0.84,
+      "label": "very positive"
+    },
+    {
+      "slug": "tacta",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 10,
+      "scored_items": 3,
+      "score": 0.7333,
+      "label": "very positive"
+    },
+    {
+      "slug": "tinyhealth",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 12,
+      "scored_items": 5,
+      "score": 0.6,
+      "label": "very positive"
+    },
+    {
+      "slug": "trm-labs",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 8,
+      "scored_items": 5,
+      "score": 0.32,
+      "label": "positive"
+    },
+    {
+      "slug": "turbine",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 9,
+      "scored_items": 2,
+      "score": 0.85,
+      "label": "very positive"
+    },
+    {
+      "slug": "turno",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 13,
+      "scored_items": 2,
+      "score": 0.75,
+      "label": "very positive"
+    },
+    {
+      "slug": "unblocked-brands",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 9,
+      "scored_items": 2,
+      "score": 0.65,
+      "label": "very positive"
+    },
+    {
+      "slug": "vivacta",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 14,
+      "scored_items": 4,
+      "score": 0.85,
+      "label": "very positive"
+    },
+    {
+      "slug": "volastra",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 7,
+      "scored_items": 5,
+      "score": 0.42,
+      "label": "positive"
+    },
+    {
+      "slug": "when",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 6,
+      "scored_items": 5,
+      "score": 0.46,
+      "label": "positive"
+    },
+    {
+      "slug": "wildfire",
+      "rule": "R3 carry (no scored news)",
+      "latest_items": 8,
+      "scored_items": 0,
+      "score": 0,
+      "label": "neutral"
+    },
+    {
+      "slug": "xingyun",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 12,
+      "scored_items": 3,
+      "score": 0.1,
+      "label": "neutral"
+    },
+    {
+      "slug": "yalo",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 11,
+      "scored_items": 3,
+      "score": 0.5333,
+      "label": "positive"
+    },
+    {
+      "slug": "zaihui",
+      "rule": "R1 news-mean (latest<=20, non-null sentiment_score)",
+      "latest_items": 16,
+      "scored_items": 5,
+      "score": -0.04,
+      "label": "neutral"
+    }
+  ],
+  "response": "{\"ingest_run_id\":\"ing-2026-10-11T071024Z-cf03d9\",\"companies_touched\":131,\"news_upserted\":0,\"sentiment_rows\":131,\"unmatched\":[],\"rollups_recomputed\":10,\"status\":\"ok\",\"received_at\":\"2026-10-11T07:10:24Z\",\"finished_at\":\"2026-10-11T07:10:24Z\"}"
+}

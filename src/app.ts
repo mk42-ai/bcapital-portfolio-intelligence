@@ -40,10 +40,28 @@ inner.use("*", async (c, next) => {
 
 const err = (c: any, status: number, errorCode: string, message: string) => c.json({ message, errorCode }, status as any);
 
-/** Real per-company news counts from news_items (Σ over /companies/{slug}/news = 2,104 on 2026-10-11) — never latest_news.length. */
+/** ONE news-count definition (source of truth for /health, /companies, /companies/{slug}, /news/count, /news/summary and the frontend):
+ *  news_total = count of news_items rows that belong to a listed company (orphans excluded), de-duplicated by (company_slug, url)
+ *  (url compared lower-cased/trimmed; rows without a url fall back to the title). Never latest_news.length, never a client-side re-sum. */
+export const NEWS_TOTAL_DEFINITION = "count(*) of news_items rows belonging to a listed company (orphans excluded), de-duplicated by (company_slug, url)";
+const NEWS_KEY = sql.raw("lower(trim(coalesce(nullif(n.url, ''), n.title)))");
 function newsCounts(db: any): Map<string, number> {
-  const rows = db.select({ slug: schema.newsItems.companySlug, n: sql<number>`count(*)` }).from(schema.newsItems).groupBy(schema.newsItems.companySlug).all() as { slug: string; n: number }[];
+  const rows = db.all(sql`select n.company_slug as slug, count(distinct ${NEWS_KEY}) as n from news_items n join companies c on c.slug = n.company_slug group by n.company_slug`) as { slug: string; n: number }[];
   return new Map(rows.map((r) => [r.slug, Number(r.n)]));
+}
+function newsTotal(db: any, counts?: Map<string, number>): number {
+  return [...(counts ?? newsCounts(db)).values()].reduce((a, b) => a + b, 0);
+}
+/** Full breakdown behind newsTotal(): raw rows, duplicates removed by the (company_slug,url) rule, orphan rows. */
+function newsSummary(db: any) {
+  const counts = newsCounts(db);
+  const total = newsTotal(db, counts);
+  const raw_rows = Number((db.get(sql`select count(*) as n from news_items`) as { n: number }).n);
+  const orphan_items = Number((db.get(sql`select count(*) as n from news_items where company_slug not in (select slug from companies)`) as { n: number }).n);
+  const slugs = db.select({ slug: schema.companies.slug }).from(schema.companies).orderBy(asc(schema.companies.slug)).all() as { slug: string }[];
+  const by_company: Record<string, number> = {};
+  for (const s of slugs) by_company[s.slug] = counts.get(s.slug) ?? 0;
+  return { total, by_company, companies: slugs.length, raw_rows, dedup_removed: raw_rows - orphan_items - total, orphan_items, definition: NEWS_TOTAL_DEFINITION };
 }
 function toApi(r: typeof schema.companies.$inferSelect, counts?: Map<string, number>) {
   return {
@@ -70,9 +88,8 @@ inner.get("/health", async (c) => {
   const { db } = await getDb();
   const total = db.get<{ n: number }>(sql`select count(*) as n from companies`)!.n;
   const spec = db.get<{ n: number }>(sql`select count(*) as n from companies where in_brand_matrix = 1 or slug = 'b-capital'`)!.n;
-  const newsTotal = db.get<{ n: number }>(sql`select count(*) as n from news_items`)!.n;
   const lastRun = db.select().from(schema.ingestRuns).orderBy(desc(schema.ingestRuns.receivedAt)).limit(1).get();
-  return c.json({ status: "ok", db_record_count: spec, db_record_count_total: total, news_total: newsTotal, last_ingest: lastRun ? { id: lastRun.id, source: lastRun.source, received_at: lastRun.receivedAt, status: lastRun.status } : null, model: config.ondemandDefaultModel, earliest_test_utc: config.earliestTestUtc || null, version: config.version, timestamp: nowIso() });
+  return c.json({ status: "ok", db_record_count: spec, db_record_count_total: total, news_total: newsTotal(db), news_total_definition: NEWS_TOTAL_DEFINITION, last_ingest: lastRun ? { id: lastRun.id, source: lastRun.source, received_at: lastRun.receivedAt, status: lastRun.status } : null, model: config.ondemandDefaultModel, earliest_test_utc: config.earliestTestUtc || null, version: config.version, timestamp: nowIso() });
 });
 inner.get("/openapi.json", (c) => c.json(buildOpenApi(serverUrl(c))));
 
@@ -93,8 +110,8 @@ inner.get("/companies", async (c) => {
   const total = db.select({ n: sql<number>`count(*)` }).from(schema.companies).where(where).get()!.n;
   const order = sort === "sentiment" ? desc(sql`json_extract(${schema.companies.sentiment}, '$.score')`) : sort === "updated_at" ? desc(schema.companies.updatedAt) : sort === "ticket" ? desc(schema.companies.estimatedTicketSizeUsd) : asc(schema.companies.name);
   const rows = db.select().from(schema.companies).where(where).orderBy(order).limit(limit).offset((page - 1) * limit).all();
-  const counts = newsCounts(db); const newsTotal = [...counts.values()].reduce((a, b) => a + b, 0);
-  return c.json({ data: rows.map((r) => toApi(r, counts)), news_total: newsTotal, pagination: { page, limit, total, total_pages: Math.max(1, Math.ceil(total / limit)) }, filters: { sector: sector ?? null, region: region ?? null, status: status ?? null, role: role ?? null, focus: focus === "true" }, timestamp: nowIso() });
+  const counts = newsCounts(db);
+  return c.json({ data: rows.map((r) => toApi(r, counts)), news_total: newsTotal(db, counts), news_total_definition: NEWS_TOTAL_DEFINITION, pagination: { page, limit, total, total_pages: Math.max(1, Math.ceil(total / limit)) }, filters: { sector: sector ?? null, region: region ?? null, status: status ?? null, role: role ?? null, focus: focus === "true" }, timestamp: nowIso() });
 });
 
 async function findCompany(slugOrName: string) {
@@ -286,7 +303,7 @@ inner.get("/refresh/status", async (c) => {
   const last = await lastRefreshRun();
   const { db } = await getDb();
   const withImages = db.get<{ n: number }>(sql`select count(*) as n from news_items where image_url is not null and image_url != ''`)!.n;
-  const total = db.get<{ n: number }>(sql`select count(*) as n from news_items`)!.n;
+  const total = newsTotal(db); // single definition (see NEWS_TOTAL_DEFINITION)
   const refreshMinutes = Number(process.env.REFRESH_CRON_MINUTES ?? 60);
   return c.json({ running: state.running, last_run: last ? { id: last.id, status: last.status, companies_touched: last.companiesTouched, news_upserted: last.newsUpserted, errors: last.errors, plugin_errors: (last.errors ?? []).filter((e) => /upstream plugin error/i.test(String(e))).length, started_at: last.receivedAt, finished_at: last.finishedAt, model: last.model } : null, last_result: state.last ? { ingest_run_id: state.last.ingest_run_id, with_images: state.last.with_images, dated: state.last.dated, companies: state.last.companies.map(({ session_id, ...x }) => x) } : null, scheduler: { enabled: refreshMinutes > 0, interval_minutes: refreshMinutes > 0 ? refreshMinutes : null, batch_limit: 40, next_scheduled_at: state.next_scheduled_at }, news_items_total: total, news_items_with_images: withImages, timestamp: nowIso() });
 });
@@ -461,12 +478,12 @@ inner.post("/pitchbook/run", async (c) => {
 // ---------- news count ----------
 inner.get("/news/count", async (c) => {
   const { db } = await getDb();
-  const rows = db.all<{ slug: string; n: number }>(sql`select c.slug as slug, count(n.id) as n from companies c left join news_items n on n.company_slug = c.slug group by c.slug order by c.slug`);
-  const orphan = db.get<{ n: number }>(sql`select count(*) as n from news_items where company_slug not in (select slug from companies)`)!.n;
-  const by_company: Record<string, number> = {};
-  for (const r of rows) by_company[r.slug] = Number(r.n);
-  const total = db.get<{ n: number }>(sql`select count(*) as n from news_items`)!.n;
-  return c.json({ total, by_company, companies: rows.length, orphan_items: orphan, timestamp: nowIso() });
+  const s = newsSummary(db);
+  return c.json({ total: s.total, by_company: s.by_company, companies: s.companies, orphan_items: s.orphan_items, dedup_removed: s.dedup_removed, definition: s.definition, timestamp: nowIso() });
+});
+inner.get("/news/summary", async (c) => {
+  const { db } = await getDb();
+  return c.json({ ...newsSummary(db), timestamp: nowIso() });
 });
 
 // ---------- artifacts ----------

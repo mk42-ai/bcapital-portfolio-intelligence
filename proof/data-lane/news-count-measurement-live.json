@@ -1,0 +1,24 @@
+{
+  "measured_at": "2026-10-11T07:04:17.451Z",
+  "base": "https://sb-51xmkpgnapk5.vercel.run",
+  "companies": 137,
+  "failed_fetches": [],
+  "health_news_total": 2104,
+  "news_count_total": 2104,
+  "news_count_orphans": 0,
+  "raw_sum": 2104,
+  "distinct_ids": 2104,
+  "distinct_urls": 2092,
+  "distinct_company_url_pairs": 2100,
+  "duplicates_removed_by_company_url": 4,
+  "duplicates_per_company": {
+    "b-capital": 1,
+    "fervo-energy": 1,
+    "flutterwave": 1,
+    "writer": 1
+  },
+  "sum_of_company_news_count_field": 2104,
+  "news_summary": {
+    "error": "Error: /news/summary → 404"
+  }
+}

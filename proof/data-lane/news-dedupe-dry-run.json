@@ -1,0 +1,41 @@
+{
+  "at": "2026-10-11T07:05:37.995Z",
+  "db": "/tmp/lane-f.sqlite",
+  "dry_run": true,
+  "rule": "keep earliest row per (company_slug, lower(trim(url|title))); drop orphan rows",
+  "before": 2104,
+  "removed_duplicates": 4,
+  "removed_orphans": 0,
+  "after": 2104,
+  "removed": [
+    {
+      "removed_id": "seed-b-capital-cai",
+      "kept_id": "seed-b-capital-ascent-iii",
+      "company_slug": "b-capital",
+      "url": "https://b.capital/",
+      "title": "Dr. Andrew Jackson named GP & Chief AI Officer"
+    },
+    {
+      "removed_id": "n-5c18adacb4af38c9",
+      "kept_id": "seed-fervo-energy-first-power-at-cape-station",
+      "company_slug": "fervo-energy",
+      "url": "https://finance.yahoo.com/energy/articles/fervo-hits-first-power-cape-120500060.html",
+      "title": "Fervo Hits First Power as Cape Station Geothermal Build Scales"
+    },
+    {
+      "removed_id": "seed-flutterwave-series-e-ii-extension-with-circle-ventur",
+      "kept_id": "seed-flutterwave-flutterwave-raises-262-75m-series-e-at-3",
+      "company_slug": "flutterwave",
+      "url": "https://seedtable.com/companies/flutterwave",
+      "title": "Series E-II extension with Circle Ventures"
+    },
+    {
+      "removed_id": "n-35165b8ad9ecf91f",
+      "kept_id": "seed-writer-writer-raises-200m-series-c-at-1-9b-valu",
+      "company_slug": "writer",
+      "url": "https://writer.com/blog/series-c-funding-writer-press-release/",
+      "title": "WRITER raises $200M Series C at $1.9B valuation"
+    }
+  ],
+  "orphan_ids": []
+}
