@@ -76,7 +76,7 @@ export function AppComposer({ footer }: { footer?: ReactNode } = {}) {
           {isRunning ? <Square className="size-3.5" fill="currentColor" aria-hidden /> : <ArrowUp className="size-4" aria-hidden />}
         </button>
       </div>
-      <p className="oiu-composer__hint" data-testid="composer-hint">{uploading ? "Waiting for the upload to finish…" : `${MODEL_LABEL} · Enter to send · Shift+Enter for a new line`}</p>
+      <p className="oiu-composer__hint" data-testid="composer-hint">{uploading ? "Waiting for the upload to finish…" : `${MODEL_LABEL} · Enter to send`}</p>
       {footer}
       <p className="sr-only" role="status" aria-live="polite" data-testid="attachment-live">{att.live}</p>
     </div>

@@ -1093,7 +1093,8 @@ ${txt}`; }
         <ContextChipsBar />
         <Suspense fallback={null}><AutoAsk /><ThreadDeepLink /></Suspense>
       </AgentInterface>
-      <p className="oiu-footer" data-testid="chat-footer" data-model-id={MODEL_ID} data-reasoning={REASONING_MODE}><ShieldCheck className="size-3.5" aria-hidden /> Answers stream from {MODEL_LABEL} with <span data-testid="footer-plugins">{pluginLabel}</span> — sources are cited inline.</p>
+      {/* a49: explainer sentence removed (duplicated the composer hint); keep the testids/data attributes for the plugin label. */}
+      <p className="oiu-footer" data-testid="chat-footer" data-model-id={MODEL_ID} data-reasoning={REASONING_MODE}><ShieldCheck className="size-3.5" aria-hidden /> {MODEL_LABEL} · <span data-testid="footer-plugins">{pluginLabel}</span></p>
     </div>
   );
 }
@@ -1109,7 +1110,7 @@ function ChatTopBar({ topBarRight }: { topBarRight?: ReactNode }) {
   return (
     <div className="oiu-topbar" data-testid="chat-topbar">
       <div className="oiu-topbar__left">
-        <h1 className="oiu-topbar__title" data-testid="chat-title" title={current?.title || "Analyst chat"} aria-label={current?.title || "Analyst chat"}><span className="oiu-thread-title" data-testid="thread-title" title={current?.title || "Analyst chat"}>{current?.title || "Analyst chat"}</span></h1>
+        <h1 className="oiu-topbar__title" data-testid="chat-title" title={current?.title || "Chat"} aria-label={current?.title || "Chat"}><span className="oiu-thread-title" data-testid="thread-title" title={current?.title || "Chat"}>{current?.title || "Chat"}</span></h1>
       </div>
       <div className="oiu-topbar__right">
         <button type="button" className="oiu-topbar__btn" data-testid="new-thread" onClick={() => { composerStore.clear(); switchToNewThread(); }} disabled={isRunning} title="New chat"><Plus className="size-3.5" aria-hidden /><span>New chat</span></button>

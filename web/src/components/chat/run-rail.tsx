@@ -1,6 +1,7 @@
 "use client";
 import { Card } from "@/components/ui/card";
 import { useStreamState, hasPayload, PlannerPayloadDetails } from "@/components/chat/open-intelligent-ui/chat-shell";
+import { WhyInteractive } from "@/components/chat/why-interactive";
 import { MODEL_ID, MODEL_LABEL, REASONING_MODE } from "@/lib/plugins";
 import { PluginChip } from "@/components/ui/plugin-favicon";
 import { pluginName } from "@/lib/plugin-catalogue";
@@ -40,6 +41,7 @@ export function RunRail() {
         </p>
         {st.integrity && (st.integrity.dupes > 0 || st.integrity.gaps > 0) && <p className="mt-1 text-[10px] text-muted" data-testid="rail-integrity">stream integrity: {st.integrity.dupes} duplicate frame{st.integrity.dupes === 1 ? "" : "s"} dropped · {st.integrity.gaps} gap{st.integrity.gaps === 1 ? "" : "s"}</p>}
         <p className="mt-1 font-mono text-[10px] text-muted" data-testid="dev-ids">model {MODEL_ID} · plugins {plugins.join(", ") || "—"}{st.attachments ? ` · attachments ${st.attachments.length}` : ""}{st.voice ? ` · voice ${st.voice.phase}` : ""}</p>
+        <WhyInteractive className="mt-2" />{/* a49: developer explainer lives only behind this reveal */}
         <pre className="mt-1 max-h-48 overflow-auto rounded-md border border-border bg-surface-2 p-2 text-[10.5px] leading-snug" data-testid="request-body">{st.request ? JSON.stringify(st.request.body, null, 2) : "No run yet — the raw SSE request frame appears here after the first message."}</pre>
         {/* a6: raw planner / tool-definition JSON — developer-only, so it lives here and nowhere else (the Plan card shows the checklist only). */}
         {hasPayload(st.plannerPayload) && <div className="mt-2 text-[11px]"><PlannerPayloadDetails payload={st.plannerPayload} /></div>}

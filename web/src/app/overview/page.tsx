@@ -60,7 +60,7 @@ async function OverviewBody({ searchParams }: { searchParams: Promise<Record<str
   return (
     <>
       
-      <PageHeader title="Portfolio Overview" lede={`${all.length} portfolio companies + the firm record (136 spec records). Sentiment scored daily at 06:00 UTC by ${workflows.model} across ${workflows.workflows.length} Flow Builder workflows.`} sources={[{ name: "companies", source: cs.source }, { name: "portfolio sentiment", source: pf.source }, { name: "ingest runs", source: runs.source }, { name: "news", source: news.source }, { name: "signals", source: sig.source }]} fetchedAt={cs.fetched_at} />
+      <PageHeader title="Overview" lede={`${all.length} companies · sentiment scored daily 06:00 UTC`} sources={[{ name: "companies", source: cs.source }, { name: "portfolio sentiment", source: pf.source }, { name: "ingest runs", source: runs.source }, { name: "news", source: news.source }, { name: "signals", source: sig.source }]} fetchedAt={cs.fetched_at} />
       <HeroStats sentimentMean={all.length ? all.reduce((a, c) => a + c.sentiment.score, 0) / all.length : null} sentimentDeltaMean={(() => { const ds = all.map((c) => c.sentiment.delta).filter((d): d is number => typeof d === "number"); return ds.length ? ds.reduce((a, d) => a + d, 0) / ds.length : null; })()} companies={all.length} newsTotal={news.total} lastRunAt={lastRun?.receivedAt ?? null} />
       <KpiTiles tiles={[
         { label: "Companies", value: String(all.length), sub: `${all.filter((c) => c.in_brand_matrix).length} in brand matrix` },

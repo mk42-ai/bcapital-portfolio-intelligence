@@ -8,7 +8,7 @@ import { Nav } from "./nav";
 import { cn } from "@/lib/utils";
 
 const KEY = "bcap.nav.rail";
-/** Expanded width (px). Hard cap from the owner: ≤ 224 px when expanded; 56 px icon-only when collapsed. */
+/** Expanded width (px), exposed as CSS var `--rail-w`. Hard cap from the owner: ≤ 224 px when expanded; 56 px (≤ 64) icon-only when collapsed, persisted in localStorage. */
 export const NAV_EXPANDED_PX = 224;
 export const NAV_COLLAPSED_PX = 56;
 
@@ -32,7 +32,7 @@ export function NavRail({ status }: { status?: React.ReactNode }) {
   return (
     <aside
       data-testid="nav-rail" data-collapsed={collapsed ? "true" : "false"} data-mounted={mounted ? "true" : "false"}
-      style={{ ["--nav-w" as string]: `${collapsed ? NAV_COLLAPSED_PX : NAV_EXPANDED_PX}px` }}
+      style={{ ["--rail-w" as string]: `${NAV_EXPANDED_PX}px`, ["--rail-w-collapsed" as string]: `${NAV_COLLAPSED_PX}px`, ["--nav-w" as string]: collapsed ? "var(--rail-w-collapsed)" : "var(--rail-w)" }}
       className={cn(
         "sticky top-0 z-40 flex w-full items-center justify-between gap-3 border-b border-border bg-background px-3 py-2",
         "lg:h-dvh lg:w-[var(--nav-w)] lg:shrink-0 lg:flex-col lg:items-stretch lg:justify-start lg:border-b-0 lg:border-r lg:px-2 lg:py-3 lg:transition-[width]",
@@ -42,10 +42,13 @@ export function NavRail({ status }: { status?: React.ReactNode }) {
         <Link href="/overview" className={cn("flex items-center gap-2 rounded-lg px-1 py-1", collapsed && "lg:hidden")} data-testid="brand-home">
           <BrandLogo height={24} /><span className="sr-only">Home</span>
         </Link>
-        <button type="button" onClick={toggle} data-testid="nav-toggle" aria-expanded={!collapsed} aria-label={collapsed ? "Expand navigation" : "Collapse navigation"} title={collapsed ? "Expand navigation" : "Collapse navigation"}
-          className="hidden size-8 shrink-0 items-center justify-center rounded-md text-muted hover:bg-surface-2 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring lg:inline-flex">
-          <Icon className="size-4" aria-hidden />
-        </button>
+        {/* `nav-toggle` (legacy testid, kept) wraps the actual button `rail-toggle`; both resolve to the same click target. */}
+        <span data-testid="nav-toggle" className="hidden shrink-0 lg:inline-flex">
+          <button type="button" onClick={toggle} data-testid="rail-toggle" aria-expanded={!collapsed} aria-label={collapsed ? "Expand navigation" : "Collapse navigation"} title={collapsed ? "Expand navigation" : "Collapse navigation"}
+            className="inline-flex size-8 shrink-0 items-center justify-center rounded-md text-muted hover:bg-surface-2 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring">
+            <Icon className="size-4" aria-hidden />
+          </button>
+        </span>
       </div>
       <Nav collapsed={collapsed} />
       {/* a22: ⌘K hint — opens the company switcher (command-k.tsx) via the bcap:cmdk window event. */}

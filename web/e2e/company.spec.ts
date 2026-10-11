@@ -8,7 +8,7 @@ test.describe("Company page", () => {
     await expect(crumb).toBeVisible();
     await crumb.click();
     await expect(page).toHaveURL(/\/overview/);
-    await expect(page.getByRole("heading", { level: 1, name: "Portfolio Overview" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Overview", exact: true })).toBeVisible();
   });
 
   test("unknown slug shows a not-found state", async ({ page }) => {
