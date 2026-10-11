@@ -101,5 +101,20 @@ console.log("sse-adapter: classifyClientFrame");
   eq("empty frame → unknown", classifyClientFrame({}), "unknown");
 }
 
+
+console.log("eventMap: 2026-10-11 raw upstream recording (web/proof/stream-audit/upstream-summary.json) — every observed eventType bound, no statusLog/summarize_history frame");
+{
+  const observedRaw = ["planning_thinking", "planning_output", "step_thinking", "step_output", "plugin_sources", "fulfillment_thinking", "fulfillment", "metricsLog"];
+  for (const et of observedRaw) check(`raw-upstream eventType ${et} bound in EVENT_TYPE`, et in EVENT_TYPE);
+  const S3 = { sessionId: "6acb474320a8b245e6aaad9e", messageId: "6acb474420a8b245e6aaada1", status: "processing" };
+  const ps = parseFrame("message", J({ ...S3, eventIndex: 174, eventType: "plugin_sources", stepId: "1", stepTitle: "Searching Fervo Energy news", sources: { agentId: "agent-1722260873", pluginId: "plugin-1722260873", pluginName: "Perplexity", operationId: "search", items: [{ title: "Fervo Energy", url: "https://www.fervoenergy.com/news", domain: "fervoenergy.com", imageUrl: "" }] } }));
+  check("raw plugin_sources (stepId 1, stepTitle) → sources with stepTitle + 1 item", ps.kind === "sources" && ps.stepTitle === "Searching Fervo Energy news" && ps.items.length === 1, ps);
+  // The recording carries NO statusLog frame: a frame with only the top-level status:"processing" must NOT be mistaken for a summary_start/done.
+  const st = parseFrame("thinking", J({ ...S3, eventIndex: 404, eventType: "step_output", stepId: "3", output: { delta: " and Lisa Su (shattered.io summary" } }));
+  check("prose 'summary' inside a step_output delta stays kind thinking (not summary_*)", st.kind === "thinking" && st.channel !== undefined, st);
+  const summarise = parseFrame("message", J({ ...S3, eventType: "statusLog", currentStatusLog: { statusType: "summarize_history.completed", summary: "x" } }));
+  check("documented summarize_history.completed binding still intact (documented-only, unobserved 2026-10-11)", summarise.kind === "summary_done" && summarise.text === "x", summarise);
+}
+
 console.log(`\n${pass} passed, ${failures.length} failed`);
 if (failures.length) { console.error("FAILED:", failures.join("; ")); process.exit(1); }

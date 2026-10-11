@@ -176,3 +176,21 @@ Rendering: `file_written` → an "Outputs" row (file written, pending). `artifac
 | `getreasoningmodes` | 400 | `{"message":"invalid request","error":"Invalid request sent to server"}` |
 | `getallendpointspublic` | 400 | `{"message":"invalid request","error":"Invalid request sent to server"}` |
 | `generateapikey` | 400 | `{"message":"invalid request","error":"Invalid request sent to server"}` |
+
+## 2026-10-11 raw upstream audit (turn3/stream)
+Recorded with `web/scripts/record-upstream-sse.mjs` **directly against `https://api.on-demand.io`** (no bridge): session `6acb474320a8b245e6aaad9e`, `POST /chat/v1/sessions/{id}/query` with `endpointId predefined-deepseek-flash`, `responseMode stream`, `reasoningMode medium`, `pluginIds [plugin-1722260873]`, query "Compare the latest news about Fervo Energy and Flutterwave this month, then summarise which has more positive momentum, with cited sources." → 3-step plan, 2,097 raw lines, 699 data frames, 47.96 s to `[DONE]`. Raw lines: `web/proof/stream-audit/upstream-multistep.sse`; index: `web/proof/stream-audit/upstream-summary.json`.
+
+| first-seen ms | `event:` | `eventType` | top-level `status` | fields |
+|---|---|---|---|---|
+| 2164 | thinking | `planning_thinking` ×91 | processing | sessionId, messageId, eventIndex, eventType, status, `thinking.delta` |
+| 3745 | heartbeat | — ×15 | — | sessionId, messageId, time |
+| 4780 | thinking | `planning_output` ×49 | processing | …, `output.delta` |
+| 7025 | thinking | `step_thinking` ×109 (stepId 1/2/3) | processing | …, stepId, `thinking.delta` |
+| 7303 | thinking | `step_output` ×170 (stepId 1/2/3) | processing | …, stepId, `output.delta` |
+| 17575 | message | `plugin_sources` ×2 (stepId 1, 2) | processing | stepId, stepTitle, `sources.{agentId,pluginId,pluginName,operationId,items[{title,url,domain,imageUrl}]}` |
+| 37356 | thinking | `fulfillment_thinking` ×39 | processing | `thinking.delta` |
+| 38741 | message | `fulfillment` ×222 | processing | `answer` |
+| 45946 | message | `metricsLog` ×1 | processing | `publicMetrics` |
+| 47957 | message | `[DONE]` | — | — |
+
+**Summarisation finding (verbatim):** statusTypes seen → **none**; the only status-like field is the top-level `status:"processing"` on every frame (683/683). **Zero `message/statusLog` frames**, therefore **no `summarize_history.initialized`, no `summarize_history.completed`**, and no other summarisation-looking `eventType`/`statusType`. `grep -i summar` hits 15 frames, all of them LLM prose inside `planning_thinking` / `planning_output` / `step_output` / `fulfillment_thinking` deltas (e.g. "then a summary of which"). Consequently the field names of a real `summarize_history.completed` frame (whether it carries summary text and under which key) **could not be observed** in this run; `STATUS_FIELDS.summaryText = ["summary","answer","statusMessage"]` stays as documented-only guesswork and was **not changed**. The step boundary is visible only as `plugin_sources(stepId N)` → first `step_thinking/step_output(stepId N+1)` (gap 1,067 ms and 1,204 ms in this run). The bridge's "Summarising step N" checkpoint is therefore **bridge-derived** (`derived:true`), exactly as the 2026-10-10 verdict above; this run confirms it with a third independent session. Comparison with the submit-query v1 reference: the reference lists `summarize_history.*` under `message/statusLog`; this account/endpoint never emits that family. `eventMap.ts` verdict: every observed `eventType` is already bound → no rebind; a regression assertion built from this recording was added to `web/tests/unit/eventmap.test.ts`.

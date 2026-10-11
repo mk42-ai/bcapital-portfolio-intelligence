@@ -1,0 +1,2097 @@
++  2164 event:thinking
++  2164 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":1,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"The user wants a comparison of"}}
++  2164 
++  2177 event:thinking
++  2177 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":2,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" the latest news about Fervo Energy"}}
++  2177 
++  2215 event:thinking
++  2215 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":3,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" and Flutterwave this month (October"}}
++  2215 
++  2232 event:thinking
++  2232 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":4,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" 2026), then a summary of which"}}
++  2232 
++  2276 event:thinking
++  2276 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":5,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" has more positive momentum, with"}}
++  2276 
++  2277 event:thinking
++  2278 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":6,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" cited sources.\n\nI should create"}}
++  2278 
++  2297 event:thinking
++  2297 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":7,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" a plan. The manually selected"}}
++  2297 
++  2324 event:thinking
++  2324 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":8,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" plugin is perplexity. I should"}}
++  2324 
++  2338 event:thinking
++  2338 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":9,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" use perplexity for news search"}}
++  2338 
++  2351 event:thinking
++  2352 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":10,"eventType":"planning_thinking","status":"processing","thinking":{"delta":". Possibly also parallel_search"}}
++  2352 
++  2392 event:thinking
++  2393 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":11,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" or others? Only perplexity is"}}
++  2393 
++  2418 event:thinking
++  2419 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":12,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" listed as available. Let me use"}}
++  2419 
++  2458 event:thinking
++  2458 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":13,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" perplexity for gathering news"}}
++  2458 
++  2486 event:thinking
++  2487 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":14,"eventType":"planning_thinking","status":"processing","thinking":{"delta":".\n\nPlan:\nStep 1: Gather latest"}}
++  2487 
++  2511 event:thinking
++  2511 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":15,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" news about Fervo Energy (this"}}
++  2511 
++  2539 event:thinking
++  2539 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":16,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" month) — perplexity\nStep 2: Gather"}}
++  2539 
++  2553 event:thinking
++  2553 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":17,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" latest news about Flutterwave"}}
++  2553 
++  2581 event:thinking
++  2581 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":18,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" — perplexity\nStep 3: Compare momentum"}}
++  2581 
++  2607 event:thinking
++  2607 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":19,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" and summarize with cited sources"}}
++  2607 
++  2632 event:thinking
++  2632 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":20,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" — perplexity\n\nActually I could"}}
++  2632 
++  2661 event:thinking
++  2661 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":21,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" merge but they're distinct entities"}}
++  2661 
++  2701 event:thinking
++  2701 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":22,"eventType":"planning_thinking","status":"processing","thinking":{"delta":", separate searches make sense"}}
++  2701 
++  2741 event:thinking
++  2741 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":23,"eventType":"planning_thinking","status":"processing","thinking":{"delta":". Then a synthesis step — but rule"}}
++  2741 
++  2754 event:thinking
++  2754 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":24,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" 8 says no summarizing/analysis"}}
++  2754 
++  3005 event:thinking
++  3005 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":25,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" steps... Hmm, but the user explicitly"}}
++  3005 
++  3006 event:thinking
++  3006 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":26,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" asks for a summary of which has"}}
++  3006 
++  3013 event:thinking
++  3013 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":27,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" more positive momentum with cited"}}
++  3013 
++  3015 event:thinking
++  3015 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":28,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" sources. Rule 8 \"No summarizing"}}
++  3015 
++  3017 event:thinking
++  3017 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":29,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"/analysis steps\" means don't add"}}
++  3017 
++  3019 event:thinking
++  3019 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":30,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" standalone summarization steps"}}
++  3019 
++  3022 event:thinking
++  3022 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":31,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" that don't produce a deliverable"}}
++  3022 
++  3024 event:thinking
++  3024 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":32,"eventType":"planning_thinking","status":"processing","thinking":{"delta":". Actually the comparison here"}}
++  3024 
++  3026 event:thinking
++  3026 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":33,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" is the deliverable. Hmm. But the"}}
++  3026 
++  3028 event:thinking
++  3028 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":34,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" guidance says avoid summarizing"}}
++  3028 
++  3030 event:thinking
++  3030 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":35,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" steps. Let me consider: combining"}}
++  3030 
++  3052 event:thinking
++  3052 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":36,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" news gathering for both into one"}}
++  3052 
++  3081 event:thinking
++  3081 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":37,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" perplexity call might be better"}}
++  3081 
++  3108 event:thinking
++  3108 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":38,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" for the comparison. \n\nI think"}}
++  3108 
++  3165 event:thinking
++  3165 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":39,"eventType":"planning_thinking","status":"processing","thinking":{"delta":": Step 1 — gather latest news on"}}
++  3165 
++  3189 event:thinking
++  3189 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":40,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" both companies (perplexity). Step"}}
++  3189 
++  3373 event:thinking
++  3373 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":41,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" 2 — compare momentum with cited"}}
++  3373 
++  3375 event:thinking
++  3375 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":42,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" sources (perplexity). That's "}}
++  3375 
++  3379 event:thinking
++  3379 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":43,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"2 steps. But maybe better to split"}}
++  3379 
++  3381 event:thinking
++  3381 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":44,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" by company for quality of sources"}}
++  3381 
++  3386 event:thinking
++  3386 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":45,"eventType":"planning_thinking","status":"processing","thinking":{"delta":". Hmm.\n\nThe \"no summarizing/analysis"}}
++  3386 
++  3388 event:thinking
++  3389 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":46,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"\" rule — but the deliverable itself"}}
++  3389 
++  3392 event:thinking
++  3392 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":47,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" is a comparison summary. I think"}}
++  3392 
++  3419 event:thinking
++  3419 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":48,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" a step comparing momentum is fine"}}
++  3419 
++  3449 event:thinking
++  3449 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":49,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" since it's the user's requested"}}
++  3449 
++  3472 event:thinking
++  3472 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":50,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" output. Actually, to be safe,"}}
++  3472 
++  3499 event:thinking
++  3499 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":51,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" I could combine: Step 1 gather"}}
++  3499 
++  3525 event:thinking
++  3525 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":52,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" news for both companies via perplex"}}
++  3525 
++  3555 event:thinking
++  3555 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":53,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"ity, Step 2 produce the comparison"}}
++  3555 
++  3578 event:thinking
++  3578 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":54,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" summary with citations via perplex"}}
++  3578 
++  3619 event:thinking
++  3619 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":55,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"ity. But rule 3 says merge related"}}
++  3619 
++  3646 event:thinking
++  3646 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":56,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" plugin calls, no duplicates. Two"}}
++  3646 
++  3673 event:thinking
++  3673 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":57,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" perplexity calls both about the"}}
++  3673 
++  3714 event:thinking
++  3714 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":58,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" same topic might be considered"}}
++  3714 
++  3742 event:thinking
++  3742 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":59,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" duplicate.\n\nI'll go with: Step"}}
++  3742 
++  3745 event:heartbeat
++  3745 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:22:31Z"}
++  3745 
++  3782 event:thinking
++  3782 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":60,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" 1: search latest news on both"}}
++  3782 
++  3810 event:thinking
++  3810 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":61,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" companies (perplexity). Step "}}
++  3810 
++  3844 event:thinking
++  3844 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":62,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"2: compare momentum and cite sources"}}
++  3844 
++  3863 event:thinking
++  3863 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":63,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" (perplexity). Hmm, risk of duplicate"}}
++  3863 
++  3891 event:thinking
++  3891 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":64,"eventType":"planning_thinking","status":"processing","thinking":{"delta":". Alternatively single step: gather"}}
++  3891 
++  3932 event:thinking
++  3932 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":65,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" news and compare — but plan needs"}}
++  3932 
++  3985 event:thinking
++  3986 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":66,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" \u003e1 step.\n\nI'll do two steps: one"}}
++  3986 
++  4012 event:thinking
++  4012 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":67,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" gathering news for both companies"}}
++  4012 
++  4052 event:thinking
++  4052 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":68,"eventType":"planning_thinking","status":"processing","thinking":{"delta":", one comparing momentum with cited"}}
++  4052 
++  4092 event:thinking
++  4092 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":69,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" sources. That's reasonable — the"}}
++  4092 
++  4131 event:thinking
++  4131 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":70,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" second produces the final comparison"}}
++  4131 
++  4144 event:thinking
++  4144 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":71,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" deliverable with source attribution"}}
++  4144 
++  4172 event:thinking
++  4172 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":72,"eventType":"planning_thinking","status":"processing","thinking":{"delta":", which is a distinct operation"}}
++  4172 
++  4218 event:thinking
++  4218 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":73,"eventType":"planning_thinking","status":"processing","thinking":{"delta":".\n\nActually, maybe splitting news"}}
++  4218 
++  4238 event:thinking
++  4238 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":74,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" gathering into company-specific"}}
++  4238 
++  4267 event:thinking
++  4267 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":75,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" steps gives better source coverage"}}
++  4267 
++  4295 event:thinking
++  4296 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":76,"eventType":"planning_thinking","status":"processing","thinking":{"delta":". Let me do:\nStep 1: Gather recent"}}
++  4296 
++  4321 event:thinking
++  4321 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":77,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" Fervo Energy news (perplexity"}}
++  4321 
++  4347 event:thinking
++  4347 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":78,"eventType":"planning_thinking","status":"processing","thinking":{"delta":")\nStep 2: Gather recent Flutter"}}
++  4347 
++  4375 event:thinking
++  4375 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":79,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"wave news (perplexity)\nStep 3:"}}
++  4375 
++  4387 event:thinking
++  4387 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":80,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" Compare momentum and summarize"}}
++  4387 
++  4419 event:thinking
++  4419 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":81,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" with cited sources (perplexity"}}
++  4419 
++  4456 event:thinking
++  4456 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":82,"eventType":"planning_thinking","status":"processing","thinking":{"delta":")\n\nThat's cleaner and non-duplic"}}
++  4456 
++  4508 event:thinking
++  4508 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":83,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"ative. But step 3 is \"summarizing"}}
++  4508 
++  4574 event:thinking
++  4574 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":84,"eventType":"planning_thinking","status":"processing","thinking":{"delta":"\" — hmm. It's the deliverable though"}}
++  4574 
++  4586 event:thinking
++  4586 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":85,"eventType":"planning_thinking","status":"processing","thinking":{"delta":". I'll keep it but frame it as"}}
++  4586 
++  4601 event:thinking
++  4601 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":86,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" \"Comparing momentum with cited"}}
++  4601 
++  4637 event:thinking
++  4638 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":87,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" sources\" — a direct fulfillment"}}
++  4638 
++  4669 event:thinking
++  4669 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":88,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" of the user's request.\n\nI'll go"}}
++  4669 
++  4683 event:thinking
++  4683 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":89,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" with 3 steps.\n\nNo user clarification"}}
++  4683 
++  4780 event:thinking
++  4780 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":90,"eventType":"planning_output","status":"processing","output":{"delta":"{\n  \"title\": \"I'll pull this month"}}
++  4780 
++  4791 event:thinking
++  4791 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":91,"eventType":"planning_output","status":"processing","output":{"delta":"'s latest news on Fervo Energy"}}
++  4791 
++  4818 event:thinking
++  4818 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":92,"eventType":"planning_output","status":"processing","output":{"delta":" and Flutterwave.\\nThen I'll compare"}}
++  4818 
++  4845 event:thinking
++  4845 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":93,"eventType":"planning_output","status":"processing","output":{"delta":" their momentum and give you a"}}
++  4845 
++  4859 event:thinking
++  4859 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":94,"eventType":"planning_output","status":"processing","output":{"delta":" sourced summary.\",\n  \"objective"}}
++  4859 
++  4887 event:thinking
++  4887 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":95,"eventType":"planning_output","status":"processing","output":{"delta":"\": \"Compare the latest October"}}
++  4887 
++  4913 event:thinking
++  4913 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":96,"eventType":"planning_output","status":"processing","output":{"delta":" news about Fervo Energy and Fl"}}
++  4913 
++  4940 event:thinking
++  4940 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":97,"eventType":"planning_output","status":"processing","output":{"delta":"utterwave, determine which shows"}}
++  4940 
++  4953 event:thinking
++  4953 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":98,"eventType":"planning_output","status":"processing","output":{"delta":" more positive momentum, and provide"}}
++  4953 
++  4979 event:thinking
++  4979 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":99,"eventType":"planning_output","status":"processing","output":{"delta":" cited sources.\",\n  \"plan_required"}}
++  4979 
++  5010 event:thinking
++  5010 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":100,"eventType":"planning_output","status":"processing","output":{"delta":"\": true,\n  \"plan_skip_reason\":"}}
++  5010 
++  5019 event:thinking
++  5019 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":101,"eventType":"planning_output","status":"processing","output":{"delta":" \"\",\n  \"steps\": [\n    {\n      \""}}
++  5019 
++  5047 event:thinking
++  5047 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":102,"eventType":"planning_output","status":"processing","output":{"delta":"title\": \"Gathering Fervo Energy"}}
++  5047 
++  5060 event:thinking
++  5060 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":103,"eventType":"planning_output","status":"processing","output":{"delta":" news\",\n      \"user_query\": \"Find"}}
++  5060 
++  5087 event:thinking
++  5087 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":104,"eventType":"planning_output","status":"processing","output":{"delta":" the latest news about Fervo Energy"}}
++  5087 
++  5135 event:thinking
++  5135 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":105,"eventType":"planning_output","status":"processing","output":{"delta":" from October 2026, including funding"}}
++  5135 
++  5243 event:thinking
++  5243 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":106,"eventType":"planning_output","status":"processing","output":{"delta":", projects, partnerships, and any"}}
++  5243 
++  5245 event:thinking
++  5245 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":107,"eventType":"planning_output","status":"processing","output":{"delta":" business developments. Provide"}}
++  5245 
++  5247 event:thinking
++  5247 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":108,"eventType":"planning_output","status":"processing","output":{"delta":" article titles, publication dates"}}
++  5247 
++  5249 event:thinking
++  5249 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":109,"eventType":"planning_output","status":"processing","output":{"delta":", and source URLs.\",\n      \"ass"}}
++  5249 
++  5252 event:thinking
++  5252 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":110,"eventType":"planning_output","status":"processing","output":{"delta":"istant_query\": \"\",\n      \"depends"}}
++  5252 
++  5314 event:thinking
++  5314 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":111,"eventType":"planning_output","status":"processing","output":{"delta":"\": [],\n      \"plugins\": [\"perplex"}}
++  5314 
++  5316 event:thinking
++  5316 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":112,"eventType":"planning_output","status":"processing","output":{"delta":"ity\"]\n    },\n    {\n      \"title"}}
++  5316 
++  5319 event:thinking
++  5319 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":113,"eventType":"planning_output","status":"processing","output":{"delta":"\": \"Gathering Flutterwave news"}}
++  5319 
++  5329 event:thinking
++  5329 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":114,"eventType":"planning_output","status":"processing","output":{"delta":"\",\n      \"user_query\": \"Find the"}}
++  5329 
++  5343 event:thinking
++  5343 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":115,"eventType":"planning_output","status":"processing","output":{"delta":" latest news about Flutterwave"}}
++  5343 
++  5357 event:thinking
++  5357 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":116,"eventType":"planning_output","status":"processing","output":{"delta":" from October 2026, including funding"}}
++  5357 
++  5371 event:thinking
++  5371 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":117,"eventType":"planning_output","status":"processing","output":{"delta":", expansion, partnerships, regulatory"}}
++  5371 
++  5383 event:thinking
++  5383 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":118,"eventType":"planning_output","status":"processing","output":{"delta":" developments, and any business"}}
++  5383 
++  5403 event:thinking
++  5403 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":119,"eventType":"planning_output","status":"processing","output":{"delta":" news. Provide article titles,"}}
++  5403 
++  5409 event:thinking
++  5410 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":120,"eventType":"planning_output","status":"processing","output":{"delta":" publication dates, and source"}}
++  5410 
++  5424 event:thinking
++  5424 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":121,"eventType":"planning_output","status":"processing","output":{"delta":" URLs.\",\n      \"assistant_query"}}
++  5424 
++  5449 event:thinking
++  5449 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":122,"eventType":"planning_output","status":"processing","output":{"delta":"\": \"\",\n      \"depends\": [],\n     "}}
++  5449 
++  5478 event:thinking
++  5478 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":123,"eventType":"planning_output","status":"processing","output":{"delta":" \"plugins\": [\"perplexity\"]\n   "}}
++  5478 
++  5489 event:thinking
++  5489 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":124,"eventType":"planning_output","status":"processing","output":{"delta":" },\n    {\n      \"title\": \"Comparing"}}
++  5489 
++  5520 event:thinking
++  5520 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":125,"eventType":"planning_output","status":"processing","output":{"delta":" momentum with citations\",\n     "}}
++  5520 
++  5544 event:thinking
++  5544 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":126,"eventType":"planning_output","status":"processing","output":{"delta":" \"user_query\": \"Based on the collected"}}
++  5544 
++  5600 event:thinking
++  5600 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":127,"eventType":"planning_output","status":"processing","output":{"delta":" October 2026 news, compare Ferv"}}
++  5600 
++  5611 event:thinking
++  5612 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":128,"eventType":"planning_output","status":"processing","output":{"delta":"o Energy's and Flutterwave's positive"}}
++  5612 
++  5652 event:thinking
++  5652 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":129,"eventType":"planning_output","status":"processing","output":{"delta":" momentum across funding, growth"}}
++  5652 
++  5682 event:thinking
++  5682 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":130,"eventType":"planning_output","status":"processing","output":{"delta":", partnerships, and market sentiment"}}
++  5682 
++  5705 event:thinking
++  5705 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":131,"eventType":"planning_output","status":"processing","output":{"delta":", and conclude which has stronger"}}
++  5705 
++  5746 event:thinking
++  5746 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":132,"eventType":"planning_output","status":"processing","output":{"delta":" positive momentum, citing the"}}
++  5746 
++  5785 event:thinking
++  5785 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":133,"eventType":"planning_output","status":"processing","output":{"delta":" specific sources used for each"}}
++  5785 
++  5799 event:thinking
++  5800 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":134,"eventType":"planning_output","status":"processing","output":{"delta":" point.\",\n      \"assistant_query"}}
++  5800 
++  5841 event:thinking
++  5841 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":135,"eventType":"planning_output","status":"processing","output":{"delta":"\": \"\",\n      \"depends\": [1, 2],\n"}}
++  5841 
++  5853 event:thinking
++  5853 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":136,"eventType":"planning_output","status":"processing","output":{"delta":"      \"plugins\": [\"perplexity\"]\n"}}
++  5853 
++  5873 event:thinking
++  5873 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":137,"eventType":"planning_thinking","status":"processing","thinking":{"delta":" needed.\n\nOutput JSON."}}
++  5873 
++  5879 event:thinking
++  5879 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":138,"eventType":"planning_output","status":"processing","output":{"delta":"    }\n  ]\n}"}}
++  5879 
++  5879 event:thinking
++  5879 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":139,"eventType":"planning_thinking","status":"processing","thinking":{"delta":""}}
++  5879 
++  5881 event:thinking
++  5881 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":140,"eventType":"planning_output","status":"processing","output":{"delta":""}}
++  5881 
++  6745 event:heartbeat
++  6745 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:22:34Z"}
++  6745 
++  7025 event:thinking
++  7025 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":141,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"The user wants latest news about"}}
++  7025 
++  7044 event:thinking
++  7044 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":142,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" Fervo Energy from October 202"}}
++  7044 
++  7061 event:thinking
++  7061 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":143,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"6. Use perplexity plugin since"}}
++  7061 
++  7101 event:thinking
++  7101 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":144,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" it's a search query for recent"}}
++  7101 
++  7129 event:thinking
++  7129 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":145,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" news with sources and URLs.\n\n"}}
++  7129 
++  7166 event:thinking
++  7166 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":146,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"Current date is 2026-10-11, so"}}
++  7166 
++  7200 event:thinking
++  7200 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":147,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" October 2026 is current month"}}
++  7200 
++  7233 event:thinking
++  7233 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":148,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":".\n\nI'll set up a perplexity call"}}
++  7233 
++  7275 event:thinking
++  7275 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":149,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":" in current with empty dependencies"}}
++  7275 
++  7303 event:thinking
++  7303 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":150,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":"{\n  \"title\": \"Searching Fervo Energy"}}
++  7303 
++  7328 event:thinking
++  7328 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":151,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" news\",\n  \"plugins\": [\n    {\n     "}}
++  7328 
++  7369 event:thinking
++  7369 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":152,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" \"pluginId\": \"plugin-172226087"}}
++  7369 
++  7396 event:thinking
++  7396 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":153,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":"3\",\n      \"name\": \"perplexity\",\n"}}
++  7396 
++  7414 event:thinking
++  7414 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":154,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":"      \"description\": \"This endpoint"}}
++  7414 
++  7423 event:thinking
++  7423 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":155,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" allows querying and returns relevant"}}
++  7423 
++  7484 event:thinking
++  7484 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":156,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" sources and images, ensuring that"}}
++  7484 
++  7489 event:thinking
++  7489 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":157,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" both content and image URLs are"}}
++  7489 
++  7505 event:thinking
++  7505 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":158,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" included in the response.\",\n     "}}
++  7505 
++  7533 event:thinking
++  7533 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":159,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" \"api_request_parameters\": {\n       "}}
++  7533 
++  7567 event:thinking
++  7567 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":160,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" \"message\": \"Find the latest news"}}
++  7567 
++  7589 event:thinking
++  7589 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":161,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" about Fervo Energy from October"}}
++  7589 
++  7596 event:thinking
++  7596 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":162,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" 2026, including funding rounds"}}
++  7596 
++  7636 event:thinking
++  7636 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":163,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":", projects, partnerships, and any"}}
++  7636 
++  7637 event:thinking
++  7637 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":164,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" business developments. Provide"}}
++  7637 
++  7664 event:thinking
++  7664 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":165,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" article titles, publication dates"}}
++  7664 
++  7681 event:thinking
++  7681 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":166,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":", and source URLs.\"\n      },\n     "}}
++  7681 
++  7709 event:thinking
++  7709 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":167,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" \"all_parameters_hydrated\": true"}}
++  7709 
++  7718 event:thinking
++  7718 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":168,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":",\n      \"dependencies\": [],\n     "}}
++  7718 
++  7746 event:thinking
++  7746 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":169,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":" \"identifier\": \"rest_api\"\n    }\n"}}
++  7746 
++  7746 event:thinking
++  7746 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":170,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":"."}}
++  7746 
++  7750 event:thinking
++  7750 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":171,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":"  ]\n}"}}
++  7750 
++  7750 event:thinking
++  7750 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":172,"eventType":"step_thinking","stepId":"1","status":"processing","thinking":{"delta":""}}
++  7750 
++  7750 event:thinking
++  7750 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":173,"eventType":"step_output","stepId":"1","status":"processing","output":{"delta":""}}
++  7750 
++  9745 event:heartbeat
++  9745 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:22:37Z"}
++  9745 
++ 12745 event:heartbeat
++ 12745 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:22:40Z"}
++ 12745 
++ 15745 event:heartbeat
++ 15745 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:22:43Z"}
++ 15745 
++ 17575 event:message
++ 17575 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":174,"eventType":"plugin_sources","stepId":"1","stepTitle":"Searching Fervo Energy news","status":"processing","sources":{"agentId":"agent-1722260873","pluginId":"plugin-1722260873","pluginName":"Perplexity","operationId":"perplexity","items":[{"title":"2026 Climate Tech Companies to Watch: Fervo Energy and its plan to streamline geothermal power | MIT Technology Review","url":"https://www.technologyreview.com/2026/10/06/1145252/fervo-energy-geothermal-power-streamline-plan/","domain":"technologyreview.com","imageUrl":"https://wp.technologyreview.com/wp-content/uploads/2026/10/New-Fervo-Energy-Power-Plant-and-Drilling-Rig.jpg"},{"title":"What's behind Fervo's half-billion-dollar Series E | Latitude Media","url":"https://www.latitudemedia.com/news/whats-behind-fervos-half-billion-dollar-series-e/","domain":"latitudemedia.com","imageUrl":"https://i0.wp.com/www.latitudemedia.com/wp-content/uploads/2025/12/Latitude-1920px-32-Image-2025-12-10T112307.163.jpg?fit=1024%2C683\u0026ssl=1"},{"title":"Fervo Energy Reports First Quarter 2026 Results - Fervo Energy","url":"https://fervoenergy.com/fervo-energy-reports-first-quarter-2026-results/","domain":"fervoenergy.com","imageUrl":"https://fervoenergy.com/wp-content/uploads/2026/08/ORC-2-and-3-east_8.4.26.png"},{"title":"Fervo Energy Secures Two U.S. Department of Energy Awards to Develop Next-Generation Geothermal in Idaho and Nevada - Fervo Energy","url":"https://fervoenergy.com/fervo-energy-secures-two-u-s-department-of-energy-awards-to-develop-next-generation-geothermal-in-idaho-and-nevada/","domain":"fervoenergy.com","imageUrl":"https://fervoenergy.com/wp-content/uploads/2026/09/image-48.png"},{"title":"Fervo Energy (Fervo) has announced that its flagship Cape Station geothermal development in Beaver County, Utah, has synchronized to the grid and is exporting electricity for the first time. This marks the","url":"https://www.instagram.com/p/Dd_1ryVCBkv/","domain":"instagram.com","imageUrl":"https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3994152861010621150"},{"title":"Fervo Energy Secures $206 Million In New Financing To Accelerate Cape Station Development - Fervo Energy","url":"https://fervoenergy.com/fervo-secures-new-financing-to-accelerate-development/","domain":"fervoenergy.com","imageUrl":"https://fervoenergy.com/wp-content/uploads/2025/06/cape-station-beaver-county.jpg"},{"title":"Fervo Hits First Power as Cape Station Geothermal Build Scales","url":"https://finance.yahoo.com/energy/articles/fervo-hits-first-power-cape-120500060.html","domain":"finance.yahoo.com","imageUrl":"https://s.yimg.com/lo/mysterio/api/fab9abe89a98a28be9d4b08ee1db40b6c2a183075b3ccc9e69958b8aaccb6fb7/lightyear_networkapi/resizefit_w960%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fzacks.com%2F76fd2c92c5a51f3b6550646bb7c51911.jpg"},{"title":"Fervo Energy Geothermal 2026, 400 MW Cape Station PPA - ENKI","url":"https://enkiai.com/geothermal/fervo-energy-data-center-ppa/","domain":"enkiai.com","imageUrl":"https://enkiai.com/wp-content/uploads/2026/06/cover_Fervo_Energy_Signs_Phased_PPAs_with_Big_Tech__Scal.jpg"},{"title":"Fervo Energy Ranked #1 on TIME's List of America's Top GreenTech Companies of 2026 - Fervo Energy","url":"https://fervoenergy.com/fervo-energy-ranked-1-on-times-list-of-americas-top-greentech-companies-of-2026/","domain":"fervoenergy.com","imageUrl":"https://fervoenergy.com/wp-content/uploads/2026/03/TIME-Americas-Top-GreenTech-Companies-2026.jpg"}]}}
++ 17575 
++ 18642 event:thinking
++ 18642 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":175,"eventType":"step_thinking","stepId":"2","status":"processing","thinking":{"delta":"The user wants the latest news"}}
++ 18642 
++ 18644 event:thinking
++ 18644 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":176,"eventType":"step_thinking","stepId":"2","status":"processing","thinking":{"delta":" about Flutterwave from October"}}
++ 18644 
++ 18647 event:thinking
++ 18647 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":177,"eventType":"step_thinking","stepId":"2","status":"processing","thinking":{"delta":" 2026. I should use the perplex"}}
++ 18647 
++ 18649 event:thinking
++ 18649 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":178,"eventType":"step_thinking","stepId":"2","status":"processing","thinking":{"delta":"ity plugin to search for this."}}
++ 18649 
++ 18659 event:thinking
++ 18659 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":179,"eventType":"step_thinking","stepId":"2","status":"processing","thinking":{"delta":" The previous perplexity call returned"}}
++ 18659 
++ 18702 event:thinking
++ 18702 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":180,"eventType":"step_thinking","stepId":"2","status":"processing","thinking":{"delta":" irrelevant Fervo Energy results"}}
++ 18702 
++ 18718 event:thinking
++ 18718 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":181,"eventType":"step_thinking","stepId":"2","status":"processing","thinking":{"delta":", so I need a new query focused"}}
++ 18718 
++ 18744 event:heartbeat
++ 18745 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:22:46Z"}
++ 18745 
++ 18746 event:thinking
++ 18746 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":182,"eventType":"step_thinking","stepId":"2","status":"processing","thinking":{"delta":" specifically on Flutterwave.\n\n"}}
++ 18746 
++ 18798 event:thinking
++ 18799 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":183,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":"{\"title\": \"Searching Flutterwave"}}
++ 18799 
++ 18824 event:thinking
++ 18824 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":184,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":" October 2026 news\", \"plugins\":"}}
++ 18824 
++ 18878 event:thinking
++ 18878 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":185,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":" [{\"pluginId\": \"plugin-172226087"}}
++ 18878 
++ 18889 event:thinking
++ 18889 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":186,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":"3\", \"name\": \"perplexity\", \"description"}}
++ 18889 
++ 19030 event:thinking
++ 19030 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":187,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":"\": \"This endpoint allows query"}}
++ 19030 
++ 19031 event:thinking
++ 19031 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":188,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":"ing and returns relevant sources"}}
++ 19031 
++ 19033 event:thinking
++ 19033 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":189,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":" and images, ensuring that both"}}
++ 19033 
++ 19041 event:thinking
++ 19041 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":190,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":" content and image URLs are included"}}
++ 19041 
++ 19042 event:thinking
++ 19042 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":191,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":" in the response.\", \"api_request"}}
++ 19042 
++ 19045 event:thinking
++ 19045 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":192,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":"_parameters\": {\"message\": \"Latest"}}
++ 19045 
++ 19057 event:thinking
++ 19057 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":193,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":" Flutterwave news from October"}}
++ 19057 
++ 19081 event:thinking
++ 19081 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":194,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":" 2026: funding rounds, expansion"}}
++ 19081 
++ 19107 event:thinking
++ 19107 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":195,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":" plans, partnerships, regulatory"}}
++ 19107 
++ 19135 event:thinking
++ 19135 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":196,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":" developments, licensing, and business"}}
++ 19135 
++ 19161 event:thinking
++ 19161 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":197,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":" news. Include article titles,"}}
++ 19161 
++ 19174 event:thinking
++ 19174 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":198,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":" publication dates, and source"}}
++ 19174 
++ 19188 event:thinking
++ 19188 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":199,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":" URLs.\"}, \"all_parameters_hydrated"}}
++ 19188 
++ 19215 event:thinking
++ 19215 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":200,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":"\": true, \"dependencies\": [], \""}}
++ 19215 
++ 19247 event:thinking
++ 19247 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":201,"eventType":"step_thinking","stepId":"2","status":"processing","thinking":{"delta":"Let me construct the query."}}
++ 19247 
++ 19247 event:thinking
++ 19247 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":202,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":"identifier\": \"rest_api\"}]}"}}
++ 19247 
++ 19253 event:thinking
++ 19253 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":203,"eventType":"step_thinking","stepId":"2","status":"processing","thinking":{"delta":""}}
++ 19253 
++ 19254 event:thinking
++ 19254 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":204,"eventType":"step_output","stepId":"2","status":"processing","output":{"delta":""}}
++ 19254 
++ 21745 event:heartbeat
++ 21745 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:22:49Z"}
++ 21745 
++ 24744 event:heartbeat
++ 24744 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:22:52Z"}
++ 24744 
++ 27745 event:heartbeat
++ 27745 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:22:55Z"}
++ 27745 
++ 27818 event:message
++ 27818 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":205,"eventType":"plugin_sources","stepId":"2","stepTitle":"Searching Flutterwave October 2026 news","status":"processing","sources":{"agentId":"agent-1722260873","pluginId":"plugin-1722260873","pluginName":"Perplexity","operationId":"perplexity","items":[{"title":"Flutterwave CEO Joins AI Advisory Board [2026]","url":"https://shattered.io/flutterwave-ceo-joins-ai-advisory-board-2026/","domain":"shattered.io","imageUrl":"https://shattered.io/wp-content/uploads/2026/10/flutterwave-ceo-joins-ai-advisory-board-2026-gen.jpg"},{"title":"PYMNTS | Flutterwave Valuation Hits $3.3 Billion Following Ripple Inv…","url":"https://www.pymnts.com/news/investment-tracker/2026/flutterwave-valuation-hits-3-3-billion-following-ripple-investment/","domain":"pymnts.com","imageUrl":"https://www.pymnts.com/wp-content/uploads/2026/06/Flutterwave.jpeg?w=457"},{"title":"We're thrilled to share that Flutterwave is joining Moonshot 2026 as a Platinum Sponsor! Flutterwave is the leading payments technology company that enables businesses across the world to expand thei","url":"https://www.facebook.com/TechCabal/posts/were-thrilled-to-share-that-flutterwave-is-joining-moonshot-2026-as-a-platinum-s/1705047248296897/","domain":"facebook.com","imageUrl":"https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=1705046561630299"},{"title":"Flutterwave Reaches $3.25 Billion Valuation After New Investment From Ripple - Empower Africa","url":"https://empowerafrica.com/flutterwave-reaches-3-25-billion-valuation-after-new-investment-from-ripple/","domain":"empowerafrica.com","imageUrl":"https://empowerafrica.com/wp-content/uploads/sites/2/2026/06/blue-1536x853-1.jpeg"},{"title":"Flutterwave Secures Investment from Circle Ventures as It Expands USDC Payments and Settlement Across Africa - Tech In Africa","url":"https://www.techinafrica.com/flutterwave-secures-investment-from-circle-ventures-as-it-expands-usdc-payments-and-settlement-across-africa/","domain":"techinafrica.com","imageUrl":"https://www.techinafrica.com/wp-content/uploads/2026/07/Flutterwave_x_Circle_Ventures.jpg"},{"title":"Flutterwave, A Payments Infrastructure Company With A Strong Presence In Africa, Is Valued At $3.2B Following Series E Funding Round","url":"https://finance.yahoo.com/markets/crypto/articles/flutterwave-payments-infrastructure-company-strong-130104659.html","domain":"finance.yahoo.com","imageUrl":"https://media.zenfs.com/en/afrotech_articles_589/17331534d005c6d0dad03ae1726362e8"},{"title":"Africa's fastest-growing unicorn startup Flutterwave reaches $3 billion valuation in latest funding round led by B Capital Group | Business Insider Africa","url":"https://africa.businessinsider.com/local/markets/africas-fastest-growing-unicorn-startup-flutterwave-reaches-dollar3-billion-valuation/v6pfjtb","domain":"africa.businessinsider.com","imageUrl":"https://ocdn.eu/images/pulscms/YmI7MDA_/1ebe48fcd178358f68b33a4c51e6db8c.jpg"},{"title":"Flutterwave Secures Circle Investment For Stablecoins | CIO Africa","url":"https://cioafrica.co/flutterwave-secures-circle-funding-for-stablecoin-expansion/","domain":"cioafrica.co","imageUrl":"https://cioafrica.co/wp-content/uploads/2026/01/flutterwave_2-scaled-1.jpg"},{"title":"Flutterwave Secures Strategic Investment from Ripple in $3.2 Billion Series E Round - TechAfrica News","url":"https://techafricanews.com/2026/06/16/flutterwave-secures-strategic-investment-from-ripple-in-3-2-billion-series-e-round/","domain":"techafricanews.com","imageUrl":"https://techafricanews.com/wp-content/uploads/2025/02/flutterwave-PR-6.jpg"}]}}
++ 27818 
++ 29022 event:thinking
++ 29022 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":206,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"The user wants a comparison based"}}
++ 29022 
++ 29072 event:thinking
++ 29072 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":207,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" on already-collected October "}}
++ 29072 
++ 29078 event:thinking
++ 29078 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":208,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"2026 news. I have all the data"}}
++ 29078 
++ 29102 event:thinking
++ 29102 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":209,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" I need from the Perplexity results"}}
++ 29102 
++ 29145 event:thinking
++ 29145 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":210,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":". This is an analysis/synthesis"}}
++ 29145 
++ 29182 event:thinking
++ 29182 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":211,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" task, not a search task. But the"}}
++ 29182 
++ 29210 event:thinking
++ 29210 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":212,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" rules say if plugins are selected"}}
++ 29210 
++ 29223 event:thinking
++ 29223 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":213,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":", at least one must be in current"}}
++ 29223 
++ 29275 event:thinking
++ 29275 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":214,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" array. However, I might not need"}}
++ 29275 
++ 29309 event:thinking
++ 29309 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":215,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" any plugins — I have all the info"}}
++ 29309 
++ 29328 event:thinking
++ 29328 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":216,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":". But the rules say \"If no plugins"}}
++ 29328 
++ 29343 event:thinking
++ 29343 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":217,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" are selected, describe the current"}}
++ 29343 
++ 29369 event:thinking
++ 29369 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":218,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" step without claiming execution"}}
++ 29369 
++ 29383 event:thinking
++ 29383 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":219,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":".\"\n\nWait, actually the task is"}}
++ 29383 
++ 29452 event:thinking
++ 29452 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":220,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" to compare based on \"the collected"}}
++ 29452 
++ 29454 event:thinking
++ 29454 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":221,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" October 2026 news\" — I already"}}
++ 29454 
++ 29519 event:thinking
++ 29519 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":222,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" have that. I could use llm_know"}}
++ 29519 
++ 29531 event:thinking
++ 29531 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":223,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"ledge to synthesize. But actually"}}
++ 29531 
++ 29559 event:thinking
++ 29559 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":224,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":", I have all the content. Let me"}}
++ 29559 
++ 29573 event:thinking
++ 29573 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":225,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" think about whether I need any"}}
++ 29573 
++ 29628 event:thinking
++ 29628 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":226,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" plugin.\n\nThe rules: \"use this"}}
++ 29628 
++ 29661 event:thinking
++ 29661 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":227,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" if none of the plugins are suitable"}}
++ 29661 
++ 29688 event:thinking
++ 29688 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":228,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" for the questions asked\" for ll"}}
++ 29688 
++ 29724 event:thinking
++ 29724 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":229,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"m_knowledge. Since I need to synthesize"}}
++ 29724 
++ 29755 event:thinking
++ 29755 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":230,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" an answer, llm_knowledge could"}}
++ 29755 
++ 29776 event:thinking
++ 29776 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":231,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" be suitable. But actually the"}}
++ 29776 
++ 29816 event:thinking
++ 29816 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":232,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" task says \"Based on the collected"}}
++ 29816 
++ 29918 event:thinking
++ 29918 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":233,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" October 2026 news\" — the data"}}
++ 29918 
++ 29918 event:thinking
++ 29918 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":234,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" is already collected. I could"}}
++ 29918 
++ 29920 event:thinking
++ 29920 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":235,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" just provide the answer directly"}}
++ 29920 
++ 29923 event:thinking
++ 29923 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":236,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":".\n\nHmm, but the format requires"}}
++ 29923 
++ 29924 event:thinking
++ 29924 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":237,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" a JSON output with plugins array"}}
++ 29924 
++ 29935 event:thinking
++ 29935 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":238,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":". The instruction says if no plugins"}}
++ 29935 
++ 29994 event:thinking
++ 29995 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":239,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" selected, plugins array... let"}}
++ 29995 
++ 30006 event:thinking
++ 30006 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":240,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" me re-read.\n\n\"No params = api"}}
++ 30006 
++ 30046 event:thinking
++ 30046 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":241,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"_request_parameters: {}, all_parameters"}}
++ 30046 
++ 30072 event:thinking
++ 30072 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":242,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"_hydrated: true\"\n\"If you select"}}
++ 30072 
++ 30102 event:thinking
++ 30102 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":243,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" any plugins, at least one MUST"}}
++ 30102 
++ 30121 event:thinking
++ 30121 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":244,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" be placed in the current array"}}
++ 30121 
++ 30164 event:thinking
++ 30164 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":245,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" with dependencies: []. The current"}}
++ 30164 
++ 30177 event:thinking
++ 30177 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":246,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" array must NEVER be empty when"}}
++ 30177 
++ 30202 event:thinking
++ 30202 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":247,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" plugins are selected.\"\n\nSo the"}}
++ 30202 
++ 30221 event:thinking
++ 30221 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":248,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" output schema is just a single"}}
++ 30221 
++ 30274 event:thinking
++ 30274 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":249,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" \"plugins\" array (not current/"}}
++ 30274 
++ 30291 event:thinking
++ 30291 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":250,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"remaining). Let me just provide"}}
++ 30291 
++ 30314 event:thinking
++ 30314 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":251,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" llm_knowledge with the synthesis"}}
++ 30314 
++ 30344 event:thinking
++ 30344 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":252,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" query, or provide no plugins.\n\n"}}
++ 30344 
++ 30358 event:thinking
++ 30358 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":253,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"Actually, the honest approach:"}}
++ 30358 
++ 30386 event:thinking
++ 30386 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":254,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" I have all the data needed. The"}}
++ 30386 
++ 30434 event:thinking
++ 30434 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":255,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" comparison can be made with ll"}}
++ 30434 
++ 30455 event:thinking
++ 30455 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":256,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"m_knowledge to synthesize. Let"}}
++ 30455 
++ 30483 event:thinking
++ 30483 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":257,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" me use llm_knowledge since it"}}
++ 30483 
++ 30519 event:thinking
++ 30519 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":258,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"'s for questions not needing search"}}
++ 30519 
++ 30532 event:thinking
++ 30532 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":259,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":".\n\nActually, let me reconsider"}}
++ 30532 
++ 30672 event:thinking
++ 30672 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":260,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":". The data is fully collected."}}
++ 30672 
++ 30680 event:thinking
++ 30680 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":261,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" The best is to select llm_know"}}
++ 30680 
++ 30682 event:thinking
++ 30682 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":262,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"ledge to produce the comparison"}}
++ 30682 
++ 30684 event:thinking
++ 30684 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":263,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":". That's a legitimate use.\n\nLet"}}
++ 30684 
++ 30686 event:thinking
++ 30686 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":264,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" me construct the query for ll"}}
++ 30686 
++ 30694 event:thinking
++ 30694 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":265,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"m_knowledge with the relevant parts"}}
++ 30694 
++ 30712 event:thinking
++ 30712 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":266,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":".\n\nActually, I think providing"}}
++ 30712 
++ 30744 event:heartbeat
++ 30744 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:22:58Z"}
++ 30744 
++ 30745 event:thinking
++ 30745 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":267,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" the answer directly would be best"}}
++ 30745 
++ 30761 event:thinking
++ 30761 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":268,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":", but the schema only allows plugins"}}
++ 30761 
++ 30817 event:thinking
++ 30817 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":269,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":". So I'll use llm_knowledge.\n\n"}}
++ 30817 
++ 30850 event:thinking
++ 30850 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":270,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"Let me build the title: \"Comparing"}}
++ 30850 
++ 30899 event:thinking
++ 30899 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":271,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" momentum across fintechs\" - action"}}
++ 30899 
++ 30940 event:thinking
++ 30940 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":272,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" verb ending in \"ing\", 3-4 words"}}
++ 30940 
++ 30965 event:thinking
++ 30965 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":273,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":". \"Comparing both companies' momentum"}}
++ 30965 
++ 30992 event:thinking
++ 30992 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":274,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"\" or \"Comparing geothermal and"}}
++ 30992 
++ 31021 event:thinking
++ 31021 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":275,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" fintech momentum\". Let's do \""}}
++ 31021 
++ 31049 event:thinking
++ 31049 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":276,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"Comparing Fervo and Flutterwave"}}
++ 31049 
++ 31076 event:thinking
++ 31076 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":277,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" momentum\".\n\nQuery: include the"}}
++ 31076 
++ 31156 event:thinking
++ 31156 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":278,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" comparison request and data.\n\n"}}
++ 31156 
++ 31157 event:thinking
++ 31158 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":279,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"Let me write the llm_knowledge"}}
++ 31158 
++ 31160 event:thinking
++ 31160 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":280,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" query with the relevant content"}}
++ 31160 
++ 31196 event:thinking
++ 31196 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":281,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":".\n\nI'll include the key facts:"}}
++ 31196 
++ 31263 event:thinking
++ 31263 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":282,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" Fervo — $462M Series E (Latitude"}}
++ 31263 
++ 31391 event:thinking
++ 31391 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":283,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" Media), $2.2B IPO, Google 3GW"}}
++ 31391 
++ 31400 event:thinking
++ 31400 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":284,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" framework, DoE $20M awards, first"}}
++ 31400 
++ 31419 event:thinking
++ 31419 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":285,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" power at Cape Station, #1 TIME"}}
++ 31419 
++ 31472 event:thinking
++ 31472 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":286,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" GreenTech, $7.2B backlog. Flutter"}}
++ 31472 
++ 31511 event:thinking
++ 31511 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":287,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"wave — $3.2-3.3B valuation via"}}
++ 31511 
++ 31551 event:thinking
++ 31551 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":288,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" Ripple Series E, Circle Ventures"}}
++ 31551 
++ 31563 event:thinking
++ 31563 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":289,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" investment, CEO joins AI advisory"}}
++ 31563 
++ 31618 event:thinking
++ 31618 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":290,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":" board, Moonshot 2026 sponsor.\n\n"}}
++ 31618 
++ 31658 event:thinking
++ 31658 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":291,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":"Then ask to compare and conclude"}}
++ 31658 
++ 31768 event:thinking
++ 31768 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":292,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"{\"title\":\"Comparing Fervo and Fl"}}
++ 31768 
++ 31770 event:thinking
++ 31770 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":293,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"utterwave momentum\",\"plugins\":["}}
++ 31770 
++ 31846 event:thinking
++ 31846 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":294,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"{\"pluginId\":\"\",\"name\":\"llm_know"}}
++ 31846 
++ 31849 event:thinking
++ 31849 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":295,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"ledge\",\"description\":\"use this"}}
++ 31849 
++ 31851 event:thinking
++ 31851 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":296,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" if none of the plugins are suitable"}}
++ 31851 
++ 31856 event:thinking
++ 31856 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":297,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" for the questions asked\",\"api"}}
++ 31856 
++ 31875 event:thinking
++ 31875 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":298,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"_request_parameters\":{\"query\":\""}}
++ 31875 
++ 31888 event:thinking
++ 31888 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":299,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"Based on the collected October"}}
++ 31888 
++ 31920 event:thinking
++ 31920 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":300,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" 2026 news, compare Fervo Energy"}}
++ 31920 
++ 31932 event:thinking
++ 31932 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":301,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"'s and Flutterwave's positive momentum"}}
++ 31932 
++ 31944 event:thinking
++ 31944 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":302,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" across funding, growth, partnerships"}}
++ 31944 
++ 31984 event:thinking
++ 31984 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":303,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":", and market sentiment, and conclude"}}
++ 31984 
++ 31989 event:thinking
++ 31989 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":304,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" which has stronger positive momentum"}}
++ 31989 
++ 32010 event:thinking
++ 32010 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":305,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":", citing the specific sources used"}}
++ 32010 
++ 32036 event:thinking
++ 32036 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":306,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" for each point.\\n\\nFERVO ENER"}}
++ 32036 
++ 32077 event:thinking
++ 32077 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":307,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"GY DATA (sources):\\n- Funding:"}}
++ 32077 
++ 32109 event:thinking
++ 32109 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":308,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Closed an oversubscribed $462"}}
++ 32109 
++ 32138 event:thinking
++ 32138 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":309,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" million Series E round led by"}}
++ 32138 
++ 32160 event:thinking
++ 32160 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":310,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" B Capital, with participation"}}
++ 32160 
++ 32185 event:thinking
++ 32185 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":311,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" from Google, Breakthrough Energy"}}
++ 32185 
++ 32212 event:thinking
++ 32212 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":312,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Ventures, and CalSTRS; total capital"}}
++ 32212 
++ 32254 event:thinking
++ 32254 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":313,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" raised since 2017 launch now $"}}
++ 32254 
++ 32298 event:thinking
++ 32298 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":314,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"1.5 billion (Latitude Media, '"}}
++ 32298 
++ 32328 event:thinking
++ 32328 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":315,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"What's behind Fervo's half-billion"}}
++ 32328 
++ 32340 event:thinking
++ 32340 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":316,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"-dollar Series E'). Also completed"}}
++ 32340 
++ 32403 event:thinking
++ 32403 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":317,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Nasdaq IPO on May 14, 2026 (t"}}
++ 32403 
++ 32475 event:thinking
++ 32475 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":318,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"icker FRVO), issuing 80.5 million"}}
++ 32475 
++ 32484 event:thinking
++ 32484 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":319,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Class A shares at $27.00, raising"}}
++ 32484 
++ 32515 event:thinking
++ 32515 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":320,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" ~$2.2 billion gross, described"}}
++ 32515 
++ 32538 event:thinking
++ 32538 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":321,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" as the largest primary energy"}}
++ 32538 
++ 32552 event:thinking
++ 32552 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":322,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" and power IPO in recent memory"}}
++ 32552 
++ 32607 event:thinking
++ 32607 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":323,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" (Fervo Energy First Quarter 202"}}
++ 32607 
++ 32617 event:thinking
++ 32617 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":324,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"6 Results). Earlier $206M financing"}}
++ 32617 
++ 32695 event:thinking
++ 32695 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":325,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" in June 2025 (Fervo press release"}}
++ 32695 
++ 32733 event:thinking
++ 32733 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":326,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":").\\n- Growth: Cape Station (500"}}
++ 32733 
++ 32773 event:thinking
++ 32773 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":327,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" MW Utah flagship) reached First"}}
++ 32773 
++ 32814 event:thinking
++ 32814 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":328,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Power on Sept 24, 2026, exporting"}}
++ 32814 
++ 32840 event:thinking
++ 32840 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":329,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" electricity to grid for the first"}}
++ 32840 
++ 32871 event:thinking
++ 32871 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":330,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" time — first utility-scale green"}}
++ 32871 
++ 32907 event:thinking
++ 32907 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":331,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"field EGS development to do so"}}
++ 32907 
++ 32971 event:thinking
++ 32971 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":332,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"; ~900 MW fully contracted offt"}}
++ 32971 
++ 33014 event:thinking
++ 33014 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":333,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"ake; Phase I ~100 MW (three ~33"}}
++ 33014 
++ 33366 event:thinking
++ 33366 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":334,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" MW GeoBlocks, GeoBlock 1 at First"}}
++ 33366 
++ 33393 event:thinking
++ 33393 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":335,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Power, Units 2 \u0026 3 expected early"}}
++ 33393 
++ 33399 event:thinking
++ 33399 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":336,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" 2027), Phase II ~400 MW by 202"}}
++ 33399 
++ 33402 event:thinking
++ 33402 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":337,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"8; ~4 GW planned capacity (Yahoo"}}
++ 33402 
++ 33425 event:thinking
++ 33425 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":338,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Finance/Zacks, 'Fervo Hits First"}}
++ 33425 
++ 33427 event:thinking
++ 33427 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":339,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Power as Cape Station Geothermal"}}
++ 33427 
++ 33429 event:thinking
++ 33429 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":340,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Build Scales'; Instagram/think"}}
++ 33429 
++ 33433 event:thinking
++ 33433 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":341,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"geoenergy; Fervo Q1 2026 results"}}
++ 33433 
++ 33438 event:thinking
++ 33438 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":342,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"). $7.2 billion contracted PPA"}}
++ 33438 
++ 33439 event:thinking
++ 33440 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":343,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" backlog, 658 MW of contracted"}}
++ 33440 
++ 33444 event:thinking
++ 33444 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":344,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" PPAs (ENKI; Fervo Q1 2026).\\n"}}
++ 33444 
++ 33461 event:thinking
++ 33461 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":345,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"- Partnerships: March 2026 Geothermal"}}
++ 33461 
++ 33471 event:thinking
++ 33471 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":346,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Framework Agreement with Google"}}
++ 33471 
++ 33495 event:thinking
++ 33495 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":347,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" to develop up to 3 GW through"}}
++ 33495 
++ 33518 event:thinking
++ 33518 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":348,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" 2033; September 2026 Google agreed"}}
++ 33518 
++ 33541 event:thinking
++ 33541 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":349,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" to purchase at least 396 MW from"}}
++ 33541 
++ 33610 event:thinking
++ 33610 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":350,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Cape Station; two U.S. Dept. of"}}
++ 33610 
++ 33622 event:thinking
++ 33622 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":351,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Energy awards totaling ~$20 million"}}
++ 33622 
++ 33697 event:thinking
++ 33697 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":352,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" for Idaho and Nevada EGS development"}}
++ 33697 
++ 33745 event:heartbeat
++ 33745 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:23:01Z"}
++ 33745 
++ 33748 event:thinking
++ 33748 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":353,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" in Sept 2026; offtakers incl."}}
++ 33748 
++ 33748 event:thinking
++ 33748 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":354,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Southern California Edison and"}}
++ 33748 
++ 33775 event:thinking
++ 33775 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":355,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Shell Energy (MIT Technology Review"}}
++ 33775 
++ 33806 event:thinking
++ 33806 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":356,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" 2026 Climate Tech Companies to"}}
++ 33806 
++ 33835 event:thinking
++ 33835 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":357,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Watch; Fervo DoE press release"}}
++ 33835 
++ 33865 event:thinking
++ 33865 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":358,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"; ENKI).\\n- Market sentiment: Rank"}}
++ 33865 
++ 33908 event:thinking
++ 33908 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":359,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"ed #1 on TIME's 2026 list of America"}}
++ 33908 
++ 33937 event:thinking
++ 33937 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":360,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"'s Top GreenTech Companies; named"}}
++ 33937 
++ 33962 event:thinking
++ 33962 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":361,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" to MIT Technology Review's 202"}}
++ 33962 
++ 33976 event:thinking
++ 33976 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":362,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"6 Climate Tech Companies to Watch"}}
++ 33976 
++ 34018 event:thinking
++ 34019 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":363,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"; described as 'poster child' of"}}
++ 34019 
++ 34043 event:thinking
++ 34043 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":364,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" enhanced geothermal (Fervo press"}}
++ 34043 
++ 34077 event:thinking
++ 34077 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":365,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" release; MIT Tech Review; Latitude"}}
++ 34077 
++ 34095 event:thinking
++ 34095 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":366,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Media).\\n\\nFLUTTERWAVE DATA ("}}
++ 34095 
++ 34123 event:thinking
++ 34123 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":367,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"sources):\\n- Funding: Completed"}}
++ 34123 
++ 34149 event:thinking
++ 34149 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":368,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Series E funding round valuing"}}
++ 34149 
++ 34221 event:thinking
++ 34221 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":369,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" it at $3.2 billion (or $3.3 billion"}}
++ 34221 
++ 34245 event:thinking
++ 34245 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":370,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" per CEO in Bloomberg interview"}}
++ 34245 
++ 34279 event:thinking
++ 34279 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":371,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":") with a strategic investment from"}}
++ 34279 
++ 34326 event:thinking
++ 34326 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":372,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Ripple; first disclosed round"}}
++ 34326 
++ 34369 event:thinking
++ 34369 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":373,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" since 2022's $250M Series D; also"}}
++ 34369 
++ 34382 event:thinking
++ 34382 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":374,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" a strategic investment from Circle"}}
++ 34382 
++ 34449 event:thinking
++ 34449 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":375,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Ventures (PYMNTS 'Flutterwave"}}
++ 34449 
++ 34453 event:thinking
++ 34453 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":376,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Valuation Hits $3.3 Billion Following"}}
++ 34453 
++ 34460 event:thinking
++ 34460 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":377,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Ripple Investment'; TechAfrica"}}
++ 34460 
++ 34490 event:thinking
++ 34490 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":378,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" News 'Flutterwave Secures Strategic"}}
++ 34490 
++ 34596 event:thinking
++ 34596 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":379,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Investment from Ripple in $3."}}
++ 34596 
++ 34598 event:thinking
++ 34598 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":380,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"2 Billion Series E Round'; Yahoo"}}
++ 34598 
++ 34611 event:thinking
++ 34611 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":381,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"/AfroTech; Tech In Africa/Circle"}}
++ 34611 
++ 34652 event:thinking
++ 34652 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":382,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Ventures).\\n- Growth: Operates"}}
++ 34652 
++ 34674 event:thinking
++ 34674 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":383,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" in 35 African countries, processed"}}
++ 34674 
++ 34711 event:thinking
++ 34711 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":384,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" $23 billion in transactions, accepts"}}
++ 34711 
++ 34732 event:thinking
++ 34732 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":385,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" 30+ currencies, 20M+ API calls"}}
++ 34732 
++ 34757 event:thinking
++ 34758 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":386,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"/day, 500,000 payments; expanding"}}
++ 34758 
++ 34815 event:thinking
++ 34815 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":387,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" stablecoin settlement (USDC/US"}}
++ 34815 
++ 34868 event:thinking
++ 34868 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":388,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"DT and RLUSD) across Africa; aims"}}
++ 34868 
++ 34912 event:thinking
++ 34912 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":389,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" to be default stablecoin gateway"}}
++ 34912 
++ 34956 event:thinking
++ 34956 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":390,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" for continent (Yahoo/AfroTech"}}
++ 34956 
++ 34989 event:thinking
++ 34989 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":391,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"; Tech In Africa; CIO Africa)."}}
++ 34989 
++ 35017 event:thinking
++ 35017 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":392,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"\\n- Partnerships: Ripple strategic"}}
++ 35017 
++ 35079 event:thinking
++ 35079 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":393,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" investment and RLUSD integration"}}
++ 35079 
++ 35166 event:thinking
++ 35166 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":394,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" plus XRP Ledger connection; Circle"}}
++ 35166 
++ 35170 event:thinking
++ 35170 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":395,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Ventures investment and Circle"}}
++ 35170 
++ 35177 event:thinking
++ 35177 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":396,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Payments Network; clients/users"}}
++ 35177 
++ 35217 event:thinking
++ 35218 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":397,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" include Microsoft, X, Uber (Tech"}}
++ 35218 
++ 35260 event:thinking
++ 35260 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":398,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"Africa News; Empower Africa; Tech"}}
++ 35260 
++ 35295 event:thinking
++ 35295 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":399,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" In Africa).\\n- Market sentiment"}}
++ 35295 
++ 35339 event:thinking
++ 35339 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":400,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":": CEO Olugbenga 'GB' Agboola named"}}
++ 35339 
++ 35371 event:thinking
++ 35371 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":401,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" to Founders Council of Semafor"}}
++ 35371 
++ 35403 event:thinking
++ 35403 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":402,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"'s Silicon Valley \u0026 The World Advisory"}}
++ 35403 
++ 35422 event:thinking
++ 35422 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":403,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Board, alongside Jensen Huang"}}
++ 35422 
++ 35458 event:thinking
++ 35458 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":404,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" and Lisa Su (shattered.io summary"}}
++ 35458 
++ 35488 event:thinking
++ 35488 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":405,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" of Daily Post Nigeria reporting"}}
++ 35488 
++ 35544 event:thinking
++ 35544 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":406,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":", Oct 8 2026); Flutterwave joined"}}
++ 35544 
++ 35586 event:thinking
++ 35586 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":407,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" Moonshot 2026 as Platinum Sponsor"}}
++ 35586 
++ 35626 event:thinking
++ 35626 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":408,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" (TechCabal).\\n\\nPlease produce"}}
++ 35626 
++ 35641 event:thinking
++ 35641 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":409,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" a structured comparison across"}}
++ 35641 
++ 35691 event:thinking
++ 35691 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":410,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" (1) funding, (2) growth, (3) partnerships"}}
++ 35691 
++ 35710 event:thinking
++ 35710 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":411,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":", and (4) market sentiment, citing"}}
++ 35710 
++ 35711 event:thinking
++ 35711 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":412,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" the specific source for each point"}}
++ 35711 
++ 35742 event:thinking
++ 35742 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":413,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":", and conclude which company has"}}
++ 35742 
++ 35754 event:thinking
++ 35754 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":414,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" stronger positive momentum in"}}
++ 35754 
++ 35792 event:thinking
++ 35792 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":415,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":" October 2026.\"},\"all_parameters"}}
++ 35792 
++ 35809 event:thinking
++ 35809 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":416,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"_hydrated\":true,\"dependencies\":"}}
++ 35809 
++ 35830 event:thinking
++ 35830 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":417,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"[],\"identifier\":\"llm_knowledge"}}
++ 35830 
++ 35854 event:thinking
++ 35854 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":418,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":".\n\nLet me write it."}}
++ 35854 
++ 35860 event:thinking
++ 35860 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":419,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":"\"}]}"}}
++ 35860 
++ 35861 event:thinking
++ 35862 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":420,"eventType":"step_thinking","stepId":"3","status":"processing","thinking":{"delta":""}}
++ 35862 
++ 35864 event:thinking
++ 35864 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":421,"eventType":"step_output","stepId":"3","status":"processing","output":{"delta":""}}
++ 35864 
++ 36745 event:heartbeat
++ 36745 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:23:04Z"}
++ 36745 
++ 37356 event:thinking
++ 37356 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":422,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"The user wants a comparison of"}}
++ 37356 
++ 37371 event:thinking
++ 37371 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":423,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" latest news about Fervo Energy"}}
++ 37371 
++ 37416 event:thinking
++ 37416 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":424,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" and Flutterwave, then a summary"}}
++ 37416 
++ 37422 event:thinking
++ 37422 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":425,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" of which has more positive momentum"}}
++ 37422 
++ 37436 event:thinking
++ 37436 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":426,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", with cited sources.\n\nLet me synthesize"}}
++ 37436 
++ 37462 event:thinking
++ 37462 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":427,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" from the provided information"}}
++ 37462 
++ 37499 event:thinking
++ 37499 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":428,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":".\n\nFervo Energy:\n- First Power"}}
++ 37499 
++ 37516 event:thinking
++ 37516 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":429,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" at Cape Station Sept 24, 2026"}}
++ 37516 
++ 37543 event:thinking
++ 37543 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":430,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" - first utility-scale greenfield"}}
++ 37543 
++ 37610 event:thinking
++ 37610 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":431,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" EGS to reach that stage\n- Q1 "}}
++ 37610 
++ 37636 event:thinking
++ 37636 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":432,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"2026 results: IPO on Nasdaq May"}}
++ 37636 
++ 37717 event:thinking
++ 37717 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":433,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 14, 2026, raised $2.2B\n- 658 MW"}}
++ 37717 
++ 37815 event:thinking
++ 37815 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":434,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" of contracted PPAs, 3 GW framework"}}
++ 37815 
++ 37817 event:thinking
++ 37817 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":435,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" with Google\n- Series E $462M ("}}
++ 37817 
++ 37826 event:thinking
++ 37826 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":436,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"though that was Dec 2025)\n- DOE"}}
++ 37826 
++ 37867 event:thinking
++ 37867 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":437,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" awards ~$20M for Idaho and Nevada"}}
++ 37867 
++ 37899 event:thinking
++ 37899 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":438,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"\n- Ranked #1 on TIME's GreenTech"}}
++ 37899 
++ 37921 event:thinking
++ 37921 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":439,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" companies 2026\n- Cape Station"}}
++ 37921 
++ 37961 event:thinking
++ 37961 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":440,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Phase I ~100MW, Phase II ~400"}}
++ 37961 
++ 38002 event:thinking
++ 38002 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":441,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"MW by 2028\n- 900 MW fully contracted"}}
++ 38002 
++ 38042 event:thinking
++ 38042 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":442,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" offtake\n\nFlutterwave:\n- CEO Ol"}}
++ 38042 
++ 38167 event:thinking
++ 38167 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":443,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"ugbenga Agboola named to Found"}}
++ 38167 
++ 38167 event:thinking
++ 38167 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":444,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"ers Council of Silicon Valley \u0026"}}
++ 38167 
++ 38169 event:thinking
++ 38169 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":445,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" The World Advisory Board (Oct"}}
++ 38169 
++ 38205 event:thinking
++ 38205 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":446,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" 8, 2026)\n- Ripple investment,"}}
++ 38205 
++ 38232 event:thinking
++ 38232 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":447,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" valuation $3.3B / $3.2B Series"}}
++ 38232 
++ 38273 event:thinking
++ 38273 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":448,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" E (June 2026)\n- Circle Ventures"}}
++ 38273 
++ 38299 event:thinking
++ 38299 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":449,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" investment for USDC expansion"}}
++ 38299 
++ 38367 event:thinking
++ 38367 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":450,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" (July 2026)\n- Moonshot 2026 Platinum"}}
++ 38367 
++ 38411 event:thinking
++ 38411 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":451,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Sponsor\n- 35 African countries"}}
++ 38411 
++ 38446 event:thinking
++ 38446 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":452,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":", $23B transactions processed\n\n"}}
++ 38446 
++ 38532 event:thinking
++ 38532 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":453,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"Note: some of these are dated June"}}
++ 38532 
++ 38537 event:thinking
++ 38537 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":454,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"/July 2026, while Fervo's are more"}}
++ 38537 
++ 38556 event:thinking
++ 38556 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":455,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" recent (Sept/Oct 2026). The \""}}
++ 38556 
++ 38582 event:thinking
++ 38582 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":456,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":"this month\" - Flutterwave's is"}}
++ 38582 
++ 38664 event:thinking
++ 38664 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":457,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Oct 8, Fervo's is Oct 6 (MIT Technology"}}
++ 38664 
++ 38677 event:thinking
++ 38677 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":458,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":" Review piece). Let me present"}}
++ 38677 
++ 38741 event:message
++ 38741 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "# Fervo Energy vs. Flutterwave", "status": "processing", "eventIndex":459, "eventType": "fulfillment"}
++ 38741 
++ 38763 event:message
++ 38763 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ": Recent News & Momentum\n\n## F", "status": "processing", "eventIndex":460, "eventType": "fulfillment"}
++ 38763 
++ 38806 event:message
++ 38806 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "ervo Energy\n\n**The standout item", "status": "processing", "eventIndex":461, "eventType": "fulfillment"}
++ 38806 
++ 38867 event:message
++ 38867 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " is a major operational milestone", "status": "processing", "eventIndex":462, "eventType": "fulfillment"}
++ 38867 
++ 38879 event:message
++ 38879 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ".** Fervo reached **First Power", "status": "processing", "eventIndex":463, "eventType": "fulfillment"}
++ 38879 
++ 38909 event:message
++ 38909 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " at Cape Station on Sept. 24, ", "status": "processing", "eventIndex":464, "eventType": "fulfillment"}
++ 38909 
++ 38947 event:message
++ 38947 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "2026**, putting the first operating", "status": "processing", "eventIndex":465, "eventType": "fulfillment"}
++ 38947 
++ 38960 event:message
++ 38960 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " megawatts from its flagship Utah", "status": "processing", "eventIndex":466, "eventType": "fulfillment"}
++ 38960 
++ 38987 event:message
++ 38987 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " development onto the grid. This", "status": "processing", "eventIndex":467, "eventType": "fulfillment"}
++ 38987 
++ 39015 event:message
++ 39015 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " marked the first utility-scale", "status": "processing", "eventIndex":468, "eventType": "fulfillment"}
++ 39015 
++ 39040 event:message
++ 39041 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " greenfield Enhanced Geothermal", "status": "processing", "eventIndex":469, "eventType": "fulfillment"}
++ 39041 
++ 39054 event:message
++ 39054 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Systems (EGS) development ever", "status": "processing", "eventIndex":470, "eventType": "fulfillment"}
++ 39054 
++ 39109 event:message
++ 39109 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " to reach that stage, moving the", "status": "processing", "eventIndex":471, "eventType": "fulfillment"}
++ 39109 
++ 39110 event:message
++ 39110 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " project from construction toward", "status": "processing", "eventIndex":472, "eventType": "fulfillment"}
++ 39110 
++ 39144 event:message
++ 39144 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " commercial operation. The development", "status": "processing", "eventIndex":473, "eventType": "fulfillment"}
++ 39144 
++ 39182 event:message
++ 39182 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " has approximately **900 MW of", "status": "processing", "eventIndex":474, "eventType": "fulfillment"}
++ 39182 
++ 39204 event:message
++ 39204 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " fully contracted offtake**.\nSource", "status": "processing", "eventIndex":475, "eventType": "fulfillment"}
++ 39204 
++ 39244 event:message
++ 39244 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ": [Fervo Hits First Power as Cape", "status": "processing", "eventIndex":476, "eventType": "fulfillment"}
++ 39244 
++ 39257 event:message
++ 39257 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Station Geothermal Build Scales", "status": "processing", "eventIndex":477, "eventType": "fulfillment"}
++ 39257 
++ 39284 event:message
++ 39284 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " (Yahoo Finance)](https://finance", "status": "processing", "eventIndex":478, "eventType": "fulfillment"}
++ 39284 
++ 39311 event:message
++ 39311 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ".yahoo.com/energy/articles/fer", "status": "processing", "eventIndex":479, "eventType": "fulfillment"}
++ 39311 
++ 39339 event:message
++ 39340 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "vo-hits-first-power-cape-120500", "status": "processing", "eventIndex":480, "eventType": "fulfillment"}
++ 39340 
++ 39364 event:message
++ 39364 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "060.html)\n\n**Strong financial and", "status": "processing", "eventIndex":481, "eventType": "fulfillment"}
++ 39364 
++ 39431 event:message
++ 39431 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " commercial footing.** In its first", "status": "processing", "eventIndex":482, "eventType": "fulfillment"}
++ 39431 
++ 39434 event:message
++ 39434 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-quarter 2026 results, Fervo reported", "status": "processing", "eventIndex":483, "eventType": "fulfillment"}
++ 39434 
++ 39488 event:message
++ 39488 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ":\n- A Nasdaq IPO (May 14, 2026", "status": "processing", "eventIndex":484, "eventType": "fulfillment"}
++ 39488 
++ 39528 event:message
++ 39528 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ") raising approximately **$2.2", "status": "processing", "eventIndex":485, "eventType": "fulfillment"}
++ 39528 
++ 39553 event:message
++ 39553 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " billion** in gross proceeds.\n", "status": "processing", "eventIndex":486, "eventType": "fulfillment"}
++ 39553 
++ 39581 event:message
++ 39581 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "- **658 MW of contracted power", "status": "processing", "eventIndex":487, "eventType": "fulfillment"}
++ 39581 
++ 39596 event:message
++ 39596 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " purchase agreements** plus a **", "status": "processing", "eventIndex":488, "eventType": "fulfillment"}
++ 39596 
++ 39621 event:message
++ 39621 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "3-gigawatt geothermal framework", "status": "processing", "eventIndex":489, "eventType": "fulfillment"}
++ 39621 
++ 39623 event:message
++ 39623 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " agreement with Google** through", "status": "processing", "eventIndex":490, "eventType": "fulfillment"}
++ 39623 
++ 39739 event:message
++ 39739 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " 2033.\n- Cape Station Phase I (~", "status": "processing", "eventIndex":491, "eventType": "fulfillment"}
++ 39739 
++ 39739 event:message
++ 39739 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "100 MW) on track for its Q4 202", "status": "processing", "eventIndex":492, "eventType": "fulfillment"}
++ 39739 
++ 39740 event:message
++ 39740 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "6 Commercial Operation Date, with", "status": "processing", "eventIndex":493, "eventType": "fulfillment"}
++ 39740 
++ 39744 event:heartbeat
++ 39744 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:23:07Z"}
++ 39744 
++ 39780 event:message
++ 39780 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Phase II (~400 MW) under construction", "status": "processing", "eventIndex":494, "eventType": "fulfillment"}
++ 39780 
++ 39783 event:message
++ 39783 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ".\nSource: [Fervo Energy Reports", "status": "processing", "eventIndex":495, "eventType": "fulfillment"}
++ 39783 
++ 39829 event:message
++ 39829 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " First Quarter 2026 Results](https", "status": "processing", "eventIndex":496, "eventType": "fulfillment"}
++ 39829 
++ 39832 event:message
++ 39832 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "://fervoenergy.com/fervo-energy", "status": "processing", "eventIndex":497, "eventType": "fulfillment"}
++ 39832 
++ 39834 event:message
++ 39834 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-reports-first-quarter-2026-res", "status": "processing", "eventIndex":498, "eventType": "fulfillment"}
++ 39834 
++ 39857 event:message
++ 39857 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "ults/)\n\n**Other positive signals", "status": "processing", "eventIndex":499, "eventType": "fulfillment"}
++ 39857 
++ 39881 event:message
++ 39881 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ".** Fervo secured **two U.S. Department", "status": "processing", "eventIndex":500, "eventType": "fulfillment"}
++ 39881 
++ 39892 event:message
++ 39892 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " of Energy awards totaling about", "status": "processing", "eventIndex":501, "eventType": "fulfillment"}
++ 39892 
++ 39925 event:message
++ 39925 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " $20 million** to develop next", "status": "processing", "eventIndex":502, "eventType": "fulfillment"}
++ 39925 
++ 39960 event:message
++ 39960 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-generation geothermal in Idaho", "status": "processing", "eventIndex":503, "eventType": "fulfillment"}
++ 39960 
++ 39972 event:message
++ 39972 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " and Nevada, and was **ranked #", "status": "processing", "eventIndex":504, "eventType": "fulfillment"}
++ 39972 
++ 40000 event:message
++ 40000 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "1 on TIME's 2026 list of America", "status": "processing", "eventIndex":505, "eventType": "fulfillment"}
++ 40000 
++ 40040 event:message
++ 40040 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "'s Top GreenTech Companies**.\n", "status": "processing", "eventIndex":506, "eventType": "fulfillment"}
++ 40040 
++ 40081 event:message
++ 40081 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "Sources: [Fervo Energy Secures", "status": "processing", "eventIndex":507, "eventType": "fulfillment"}
++ 40081 
++ 40109 event:message
++ 40109 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Two U.S. DOE Awards](https://", "status": "processing", "eventIndex":508, "eventType": "fulfillment"}
++ 40109 
++ 40136 event:message
++ 40136 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "fervoenergy.com/fervo-energy-se", "status": "processing", "eventIndex":509, "eventType": "fulfillment"}
++ 40136 
++ 40149 event:message
++ 40149 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "cures-two-u-s-department-of-energy", "status": "processing", "eventIndex":510, "eventType": "fulfillment"}
++ 40149 
++ 40163 event:message
++ 40163 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-awards-to-develop-next-generation", "status": "processing", "eventIndex":511, "eventType": "fulfillment"}
++ 40163 
++ 40190 event:message
++ 40190 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-geothermal-in-idaho-and-nevada", "status": "processing", "eventIndex":512, "eventType": "fulfillment"}
++ 40190 
++ 40234 event:message
++ 40234 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "/) | [Fervo Ranked #1 on TIME's", "status": "processing", "eventIndex":513, "eventType": "fulfillment"}
++ 40234 
++ 40259 event:message
++ 40259 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " GreenTech List](https://fervo", "status": "processing", "eventIndex":514, "eventType": "fulfillment"}
++ 40259 
++ 40271 event:message
++ 40271 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "energy.com/fervo-energy-ranked", "status": "processing", "eventIndex":515, "eventType": "fulfillment"}
++ 40271 
++ 40310 event:message
++ 40310 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-1-on-times-list-of-americas-top", "status": "processing", "eventIndex":516, "eventType": "fulfillment"}
++ 40310 
++ 40340 event:message
++ 40341 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-greentech-companies-of-2026/)\n\n", "status": "processing", "eventIndex":517, "eventType": "fulfillment"}
++ 40341 
++ 40394 event:message
++ 40394 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "**Momentum narrative.** Fervo is", "status": "processing", "eventIndex":518, "eventType": "fulfillment"}
++ 40394 
++ 40432 event:message
++ 40432 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " repeatedly described as riding", "status": "processing", "eventIndex":519, "eventType": "fulfillment"}
++ 40432 
++ 40489 event:message
++ 40489 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " surging AI/data-center demand", "status": "processing", "eventIndex":520, "eventType": "fulfillment"}
++ 40489 
++ 40555 event:message
++ 40555 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ", with a **3 GW Google agreement", "status": "processing", "eventIndex":521, "eventType": "fulfillment"}
++ 40555 
++ 40582 event:message
++ 40582 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "**, a **$7.2 billion contracted", "status": "processing", "eventIndex":522, "eventType": "fulfillment"}
++ 40582 
++ 40606 event:message
++ 40606 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " PPA backlog**, and buyers including", "status": "processing", "eventIndex":523, "eventType": "fulfillment"}
++ 40606 
++ 40623 event:message
++ 40623 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Southern California Edison and", "status": "processing", "eventIndex":524, "eventType": "fulfillment"}
++ 40623 
++ 40647 event:message
++ 40647 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Shell Energy.\nSource: [Fervo Energy", "status": "processing", "eventIndex":525, "eventType": "fulfillment"}
++ 40647 
++ 40703 event:message
++ 40703 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Geothermal 2026 (ENKI)](https", "status": "processing", "eventIndex":526, "eventType": "fulfillment"}
++ 40703 
++ 40730 event:message
++ 40730 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "://enkiai.com/geothermal/fervo", "status": "processing", "eventIndex":527, "eventType": "fulfillment"}
++ 40730 
++ 40745 event:message
++ 40745 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-energy-data-center-ppa/)\n\n---\n\n", "status": "processing", "eventIndex":528, "eventType": "fulfillment"}
++ 40745 
++ 40783 event:message
++ 40783 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "## Flutterwave\n\n**The most recent", "status": "processing", "eventIndex":529, "eventType": "fulfillment"}
++ 40783 
++ 40824 event:message
++ 40824 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " item is a leadership/advisory", "status": "processing", "eventIndex":530, "eventType": "fulfillment"}
++ 40824 
++ 40892 event:message
++ 40892 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " appointment.** Olugbenga \"GB\"", "status": "processing", "eventIndex":531, "eventType": "fulfillment"}
++ 40892 
++ 40918 event:message
++ 40918 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Agboola, founder and CEO of Fl", "status": "processing", "eventIndex":532, "eventType": "fulfillment"}
++ 40918 
++ 40945 event:message
++ 40945 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "utterwave, was **named to the Found", "status": "processing", "eventIndex":533, "eventType": "fulfillment"}
++ 40945 
++ 40985 event:message
++ 40985 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "ers Council of Semafor's Silicon", "status": "processing", "eventIndex":534, "eventType": "fulfillment"}
++ 40985 
++ 41000 event:message
++ 41000 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Valley & The World Advisory Board", "status": "processing", "eventIndex":535, "eventType": "fulfillment"}
++ 41000 
++ 41052 event:message
++ 41052 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "** (reported Oct. 8, 2026). He", "status": "processing", "eventIndex":536, "eventType": "fulfillment"}
++ 41052 
++ 41084 event:message
++ 41084 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " sits alongside Jensen Huang (", "status": "processing", "eventIndex":537, "eventType": "fulfillment"}
++ 41084 
++ 41120 event:message
++ 41120 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "Nvidia) and Lisa Su (AMD), who", "status": "processing", "eventIndex":538, "eventType": "fulfillment"}
++ 41120 
++ 41134 event:message
++ 41135 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " co-chair the board, plus leaders", "status": "processing", "eventIndex":539, "eventType": "fulfillment"}
++ 41135 
++ 41161 event:message
++ 41161 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " from OpenAI, Microsoft, and Alphabet", "status": "processing", "eventIndex":540, "eventType": "fulfillment"}
++ 41161 
++ 41188 event:message
++ 41188 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ". The expanded Global Advisory", "status": "processing", "eventIndex":541, "eventType": "fulfillment"}
++ 41188 
++ 41215 event:message
++ 41215 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Board counts more than 50 global", "status": "processing", "eventIndex":542, "eventType": "fulfillment"}
++ 41215 
++ 41255 event:message
++ 41256 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " figures.\nSource: [Flutterwave", "status": "processing", "eventIndex":543, "eventType": "fulfillment"}
++ 41256 
++ 41270 event:message
++ 41270 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " CEO Joins AI Advisory Board (", "status": "processing", "eventIndex":544, "eventType": "fulfillment"}
++ 41270 
++ 41298 event:message
++ 41298 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "Shattered.io)](https://shattered", "status": "processing", "eventIndex":545, "eventType": "fulfillment"}
++ 41298 
++ 41336 event:message
++ 41336 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ".io/flutterwave-ceo-joins-ai-ad", "status": "processing", "eventIndex":546, "eventType": "fulfillment"}
++ 41336 
++ 41375 event:message
++ 41375 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "visory-board-2026/)\n\n**Valuation", "status": "processing", "eventIndex":547, "eventType": "fulfillment"}
++ 41375 
++ 41404 event:message
++ 41404 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " lift from Ripple.** Ripple took", "status": "processing", "eventIndex":548, "eventType": "fulfillment"}
++ 41404 
++ 41432 event:message
++ 41432 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " an equity stake in Flutterwave", "status": "processing", "eventIndex":549, "eventType": "fulfillment"}
++ 41432 
++ 41459 event:message
++ 41459 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ", lifting its valuation to **$", "status": "processing", "eventIndex":550, "eventType": "fulfillment"}
++ 41459 
++ 41485 event:message
++ 41485 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "3.3 billion** (reported around", "status": "processing", "eventIndex":551, "eventType": "fulfillment"}
++ 41485 
++ 41541 event:message
++ 41541 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " June 16), described as a **$3", "status": "processing", "eventIndex":552, "eventType": "fulfillment"}
++ 41541 
++ 41566 event:message
++ 41566 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ".2 billion Series E round**. Fl", "status": "processing", "eventIndex":553, "eventType": "fulfillment"}
++ 41566 
++ 41606 event:message
++ 41606 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "utterwave will integrate Ripple", "status": "processing", "eventIndex":554, "eventType": "fulfillment"}
++ 41606 
++ 41619 event:message
++ 41619 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "'s **RLUSD stablecoin** and connect", "status": "processing", "eventIndex":555, "eventType": "fulfillment"}
++ 41619 
++ 41662 event:message
++ 41662 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Ripple's **XRP Ledger** to its", "status": "processing", "eventIndex":556, "eventType": "fulfillment"}
++ 41662 
++ 41674 event:message
++ 41674 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " payment network for cross-border", "status": "processing", "eventIndex":557, "eventType": "fulfillment"}
++ 41674 
++ 41700 event:message
++ 41700 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " settlement across Africa.\nSources", "status": "processing", "eventIndex":558, "eventType": "fulfillment"}
++ 41700 
++ 41728 event:message
++ 41728 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ": [Flutterwave Valuation Hits $", "status": "processing", "eventIndex":559, "eventType": "fulfillment"}
++ 41728 
++ 41755 event:message
++ 41755 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "3.3 Billion Following Ripple Investment", "status": "processing", "eventIndex":560, "eventType": "fulfillment"}
++ 41755 
++ 41782 event:message
++ 41782 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " (PYMNTS)](https://www.pymnts.com", "status": "processing", "eventIndex":561, "eventType": "fulfillment"}
++ 41782 
++ 41810 event:message
++ 41810 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "/news/investment-tracker/2026/fl", "status": "processing", "eventIndex":562, "eventType": "fulfillment"}
++ 41810 
++ 41837 event:message
++ 41837 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "utterwave-valuation-hits-3-3-b", "status": "processing", "eventIndex":563, "eventType": "fulfillment"}
++ 41837 
++ 41879 event:message
++ 41880 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "illion-following-ripple-invest", "status": "processing", "eventIndex":564, "eventType": "fulfillment"}
++ 41880 
++ 41882 event:message
++ 41882 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "ment/) | [Flutterwave Secures Strategic", "status": "processing", "eventIndex":565, "eventType": "fulfillment"}
++ 41882 
++ 41904 event:message
++ 41904 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Investment from Ripple in $3.", "status": "processing", "eventIndex":566, "eventType": "fulfillment"}
++ 41904 
++ 41916 event:message
++ 41916 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "2 Billion Series E Round (Tech", "status": "processing", "eventIndex":567, "eventType": "fulfillment"}
++ 41916 
++ 41943 event:message
++ 41943 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "Africa News)](https://techafrican", "status": "processing", "eventIndex":568, "eventType": "fulfillment"}
++ 41943 
++ 41971 event:message
++ 41971 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "ews.com/2026/06/16/flutterwave", "status": "processing", "eventIndex":569, "eventType": "fulfillment"}
++ 41971 
++ 41985 event:message
++ 41985 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-secures-strategic-investment-from", "status": "processing", "eventIndex":570, "eventType": "fulfillment"}
++ 41985 
++ 42035 event:message
++ 42035 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-ripple-in-3-2-billion-series-e", "status": "processing", "eventIndex":571, "eventType": "fulfillment"}
++ 42035 
++ 42040 event:message
++ 42040 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-round/)\n\n**Stablecoin expansion", "status": "processing", "eventIndex":572, "eventType": "fulfillment"}
++ 42040 
++ 42066 event:message
++ 42067 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ".** Flutterwave secured a strategic", "status": "processing", "eventIndex":573, "eventType": "fulfillment"}
++ 42067 
++ 42079 event:message
++ 42079 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " investment from **Circle Ventures", "status": "processing", "eventIndex":574, "eventType": "fulfillment"}
++ 42079 
++ 42120 event:message
++ 42120 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "** (Circle Internet Group, NYSE", "status": "processing", "eventIndex":575, "eventType": "fulfillment"}
++ 42120 
++ 42132 event:message
++ 42132 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ": CRCL) to embed **USDC settlement", "status": "processing", "eventIndex":576, "eventType": "fulfillment"}
++ 42132 
++ 42173 event:message
++ 42173 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "** into its payment flows, allowing", "status": "processing", "eventIndex":577, "eventType": "fulfillment"}
++ 42173 
++ 42200 event:message
++ 42200 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " merchants to collect locally and", "status": "processing", "eventIndex":578, "eventType": "fulfillment"}
++ 42200 
++ 42241 event:message
++ 42241 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " settle in USDC with near-instant", "status": "processing", "eventIndex":579, "eventType": "fulfillment"}
++ 42241 
++ 42267 event:message
++ 42267 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ", lower-cost settlement. Flutter", "status": "processing", "eventIndex":580, "eventType": "fulfillment"}
++ 42267 
++ 42295 event:message
++ 42295 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "wave positions itself as the \"", "status": "processing", "eventIndex":581, "eventType": "fulfillment"}
++ 42295 
++ 42322 event:message
++ 42322 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "default stablecoin gateway\" for", "status": "processing", "eventIndex":582, "eventType": "fulfillment"}
++ 42322 
++ 42377 event:message
++ 42377 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Africa, operating in **35 African", "status": "processing", "eventIndex":583, "eventType": "fulfillment"}
++ 42377 
++ 42389 event:message
++ 42389 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " countries** and having processed", "status": "processing", "eventIndex":584, "eventType": "fulfillment"}
++ 42389 
++ 42416 event:message
++ 42416 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " **$23 billion in transactions", "status": "processing", "eventIndex":585, "eventType": "fulfillment"}
++ 42416 
++ 42448 event:message
++ 42448 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "**.\nSources: [Flutterwave Secures", "status": "processing", "eventIndex":586, "eventType": "fulfillment"}
++ 42448 
++ 42457 event:message
++ 42457 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Investment from Circle Ventures", "status": "processing", "eventIndex":587, "eventType": "fulfillment"}
++ 42457 
++ 42475 event:message
++ 42475 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " (Tech In Africa)](https://www", "status": "processing", "eventIndex":588, "eventType": "fulfillment"}
++ 42475 
++ 42497 event:message
++ 42497 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ".techinafrica.com/flutterwave-se", "status": "processing", "eventIndex":589, "eventType": "fulfillment"}
++ 42497 
++ 42511 event:message
++ 42511 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "cures-investment-from-circle-vent", "status": "processing", "eventIndex":590, "eventType": "fulfillment"}
++ 42511 
++ 42586 event:message
++ 42586 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "ures-as-it-expands-usdc-payments", "status": "processing", "eventIndex":591, "eventType": "fulfillment"}
++ 42586 
++ 42588 event:message
++ 42588 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-and-settlement-across-africa/)", "status": "processing", "eventIndex":592, "eventType": "fulfillment"}
++ 42588 
++ 42590 event:message
++ 42590 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " | [Flutterwave Secures Circle", "status": "processing", "eventIndex":593, "eventType": "fulfillment"}
++ 42590 
++ 42685 event:message
++ 42685 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Investment For Stablecoins (CI", "status": "processing", "eventIndex":594, "eventType": "fulfillment"}
++ 42685 
++ 42687 event:message
++ 42687 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "O Africa)](https://cioafrica.co", "status": "processing", "eventIndex":595, "eventType": "fulfillment"}
++ 42687 
++ 42689 event:message
++ 42689 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "/flutterwave-secures-circle-fund", "status": "processing", "eventIndex":596, "eventType": "fulfillment"}
++ 42689 
++ 42692 event:message
++ 42692 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "ing-for-stablecoin-expansion/)", "status": "processing", "eventIndex":597, "eventType": "fulfillment"}
++ 42692 
++ 42733 event:message
++ 42733 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " | [Flutterwave Valued at $3.2", "status": "processing", "eventIndex":598, "eventType": "fulfillment"}
++ 42733 
++ 42744 event:heartbeat
++ 42744 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:23:10Z"}
++ 42744 
++ 42754 event:message
++ 42754 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "B Following Series E (Yahoo Finance", "status": "processing", "eventIndex":599, "eventType": "fulfillment"}
++ 42754 
++ 42767 event:message
++ 42767 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ")](https://finance.yahoo.com/m", "status": "processing", "eventIndex":600, "eventType": "fulfillment"}
++ 42767 
++ 42794 event:message
++ 42794 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "arkets/crypto/articles/flutter", "status": "processing", "eventIndex":601, "eventType": "fulfillment"}
++ 42794 
++ 42807 event:message
++ 42807 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "wave-payments-infrastructure-company", "status": "processing", "eventIndex":602, "eventType": "fulfillment"}
++ 42807 
++ 42848 event:message
++ 42848 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-strong-130104659.html)\n\n**Ecosystem", "status": "processing", "eventIndex":603, "eventType": "fulfillment"}
++ 42848 
++ 42862 event:message
++ 42862 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " presence.** Flutterwave joined", "status": "processing", "eventIndex":604, "eventType": "fulfillment"}
++ 42862 
++ 42901 event:message
++ 42901 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " **Moonshot 2026 as a Platinum", "status": "processing", "eventIndex":605, "eventType": "fulfillment"}
++ 42901 
++ 42949 event:message
++ 42949 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Sponsor**.\nSource: [TechCabal", "status": "processing", "eventIndex":606, "eventType": "fulfillment"}
++ 42949 
++ 42956 event:message
++ 42956 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " (Facebook)](https://www.facebook", "status": "processing", "eventIndex":607, "eventType": "fulfillment"}
++ 42956 
++ 42997 event:message
++ 42997 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ".com/TechCabal/posts/were-thrilled", "status": "processing", "eventIndex":608, "eventType": "fulfillment"}
++ 42997 
++ 43028 event:message
++ 43028 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-to-share-that-flutterwave-is-", "status": "processing", "eventIndex":609, "eventType": "fulfillment"}
++ 43028 
++ 43041 event:message
++ 43041 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "joining-moonshot-2026-as-a-platinum", "status": "processing", "eventIndex":610, "eventType": "fulfillment"}
++ 43041 
++ 43077 event:message
++ 43077 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-s/1705047248296897/)\n\n---\n\n##", "status": "processing", "eventIndex":611, "eventType": "fulfillment"}
++ 43077 
++ 43095 event:message
++ 43095 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Which Has More Positive Momentum", "status": "processing", "eventIndex":612, "eventType": "fulfillment"}
++ 43095 
++ 43119 event:message
++ 43119 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "?\n\n**Both companies show strong", "status": "processing", "eventIndex":613, "eventType": "fulfillment"}
++ 43119 
++ 43161 event:message
++ 43161 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " momentum, but they are at different", "status": "processing", "eventIndex":614, "eventType": "fulfillment"}
++ 43161 
++ 43201 event:message
++ 43201 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " stages and operating in different", "status": "processing", "eventIndex":615, "eventType": "fulfillment"}
++ 43201 
++ 43240 event:message
++ 43240 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " sectors.** On balance, **Ferv", "status": "processing", "eventIndex":616, "eventType": "fulfillment"}
++ 43240 
++ 43279 event:message
++ 43279 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "o Energy appears to have the edge", "status": "processing", "eventIndex":617, "eventType": "fulfillment"}
++ 43279 
++ 43374 event:message
++ 43374 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " in near-term \"hard\" momentum**,", "status": "processing", "eventIndex":618, "eventType": "fulfillment"}
++ 43374 
++ 43428 event:message
++ 43428 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " while Flutterwave's is more strategic", "status": "processing", "eventIndex":619, "eventType": "fulfillment"}
++ 43428 
++ 43482 event:message
++ 43482 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "/positional.\n\n**Why Fervo edges", "status": "processing", "eventIndex":620, "eventType": "fulfillment"}
++ 43482 
++ 43523 event:message
++ 43523 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " ahead:**\n- **Tangible operational", "status": "processing", "eventIndex":621, "eventType": "fulfillment"}
++ 43523 
++ 43570 event:message
++ 43570 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " milestone this period** \u2014 First", "status": "processing", "eventIndex":622, "eventType": "fulfillment"}
++ 43570 
++ 43617 event:message
++ 43617 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Power at Cape Station (Sept. ", "status": "processing", "eventIndex":623, "eventType": "fulfillment"}
++ 43617 
++ 43670 event:message
++ 43671 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "24) is a concrete, first-of-its", "status": "processing", "eventIndex":624, "eventType": "fulfillment"}
++ 43671 
++ 43698 event:message
++ 43698 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-kind achievement, not just a financial", "status": "processing", "eventIndex":625, "eventType": "fulfillment"}
++ 43698 
++ 43740 event:message
++ 43740 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " or advisory headline.\n- **Mass", "status": "processing", "eventIndex":626, "eventType": "fulfillment"}
++ 43740 
++ 43805 event:message
++ 43805 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "ive capital and contracted revenue", "status": "processing", "eventIndex":627, "eventType": "fulfillment"}
++ 43805 
++ 43847 event:message
++ 43847 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "** \u2014 a $2.2 billion IPO, 658 MW", "status": "processing", "eventIndex":628, "eventType": "fulfillment"}
++ 43847 
++ 43889 event:message
++ 43889 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " of contracted PPAs, a 3 GW Google", "status": "processing", "eventIndex":629, "eventType": "fulfillment"}
++ 43889 
++ 43914 event:message
++ 43914 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " framework, and roughly 900 MW", "status": "processing", "eventIndex":630, "eventType": "fulfillment"}
++ 43914 
++ 43928 event:message
++ 43928 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " of fully contracted offtake. This", "status": "processing", "eventIndex":631, "eventType": "fulfillment"}
++ 43928 
++ 43982 event:message
++ 43982 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " is fully funded, revenue-backed", "status": "processing", "eventIndex":632, "eventType": "fulfillment"}
++ 43982 
++ 44009 event:message
++ 44009 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " growth.\n- **External validation", "status": "processing", "eventIndex":633, "eventType": "fulfillment"}
++ 44009 
++ 44062 event:message
++ 44062 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " stacking up** \u2014 DOE awards (~", "status": "processing", "eventIndex":634, "eventType": "fulfillment"}
++ 44062 
++ 44103 event:message
++ 44103 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "$20M) and the #1 ranking on TIME", "status": "processing", "eventIndex":635, "eventType": "fulfillment"}
++ 44103 
++ 44133 event:message
++ 44133 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "'s GreenTech list came within the", "status": "processing", "eventIndex":636, "eventType": "fulfillment"}
++ 44133 
++ 44170 event:message
++ 44170 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " same window.\n- **Clear scale-up", "status": "processing", "eventIndex":637, "eventType": "fulfillment"}
++ 44170 
++ 44212 event:message
++ 44212 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " path** \u2014 Phase I (~100 MW) transitioning", "status": "processing", "eventIndex":638, "eventType": "fulfillment"}
++ 44212 
++ 44224 event:message
++ 44224 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " to commercial operation in Q4", "status": "processing", "eventIndex":639, "eventType": "fulfillment"}
++ 44224 
++ 44256 event:message
++ 44256 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " 2026, with Phase II (~400 MW)", "status": "processing", "eventIndex":640, "eventType": "fulfillment"}
++ 44256 
++ 44293 event:message
++ 44293 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " targeting 2028.\n\n**Why Flutter", "status": "processing", "eventIndex":641, "eventType": "fulfillment"}
++ 44293 
++ 44332 event:message
++ 44332 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "wave is strong but arguably more", "status": "processing", "eventIndex":642, "eventType": "fulfillment"}
++ 44332 
++ 44360 event:message
++ 44360 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " incremental:**\n- Its most recent", "status": "processing", "eventIndex":643, "eventType": "fulfillment"}
++ 44360 
++ 44402 event:message
++ 44402 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " month's news (the advisory board", "status": "processing", "eventIndex":644, "eventType": "fulfillment"}
++ 44402 
++ 44427 event:message
++ 44427 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " seat) is a **prestige/position", "status": "processing", "eventIndex":645, "eventType": "fulfillment"}
++ 44427 
++ 44472 event:message
++ 44472 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "ing win** rather than an operational", "status": "processing", "eventIndex":646, "eventType": "fulfillment"}
++ 44472 
++ 44500 event:message
++ 44500 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " or financial result.\n- Its valuation", "status": "processing", "eventIndex":647, "eventType": "fulfillment"}
++ 44500 
++ 44549 event:message
++ 44549 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "-boosting and expansion news (", "status": "processing", "eventIndex":648, "eventType": "fulfillment"}
++ 44549 
++ 44591 event:message
++ 44591 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "Ripple investment to $3.3B, Circle", "status": "processing", "eventIndex":649, "eventType": "fulfillment"}
++ 44591 
++ 44630 event:message
++ 44630 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " Ventures/USDC) was largely **", "status": "processing", "eventIndex":650, "eventType": "fulfillment"}
++ 44630 
++ 44657 event:message
++ 44657 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "mid-2026 (June\u2013July)**, and Fl", "status": "processing", "eventIndex":651, "eventType": "fulfillment"}
++ 44657 
++ 44720 event:message
++ 44720 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "utterwave already held a $3B+ valuation", "status": "processing", "eventIndex":652, "eventType": "fulfillment"}
++ 44720 
++ 44751 event:message
++ 44751 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " back in 2022.\n- Its momentum centers", "status": "processing", "eventIndex":653, "eventType": "fulfillment"}
++ 44751 
++ 44778 event:message
++ 44778 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " on **stablecoin strategy execution", "status": "processing", "eventIndex":654, "eventType": "fulfillment"}
++ 44778 
++ 44834 event:message
++ 44834 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "** (RLUSD, USDC, XRPL), which is", "status": "processing", "eventIndex":655, "eventType": "fulfillment"}
++ 44834 
++ 44873 event:message
++ 44873 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " strategically important but earlier", "status": "processing", "eventIndex":656, "eventType": "fulfillment"}
++ 44873 
++ 44941 event:message
++ 44941 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " in proving out scale.\n\n**Bottom", "status": "processing", "eventIndex":657, "eventType": "fulfillment"}
++ 44941 
++ 44967 event:message
++ 44968 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " line:** Flutterwave has solid", "status": "processing", "eventIndex":658, "eventType": "fulfillment"}
++ 44968 
++ 45021 event:message
++ 45021 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ", well-supported positive momentum", "status": "processing", "eventIndex":659, "eventType": "fulfillment"}
++ 45021 
++ 45049 event:message
++ 45049 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " built on strategic investments", "status": "processing", "eventIndex":660, "eventType": "fulfillment"}
++ 45049 
++ 45089 event:message
++ 45089 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " and a stablecoin pivot. However", "status": "processing", "eventIndex":661, "eventType": "fulfillment"}
++ 45089 
++ 45129 event:message
++ 45129 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ", **Fervo Energy shows more positive", "status": "processing", "eventIndex":662, "eventType": "fulfillment"}
++ 45129 
++ 45170 event:message
++ 45170 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " momentum overall** in this period", "status": "processing", "eventIndex":663, "eventType": "fulfillment"}
++ 45170 
++ 45196 event:message
++ 45196 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " because its news combines a landmark", "status": "processing", "eventIndex":664, "eventType": "fulfillment"}
++ 45196 
++ 45237 event:message
++ 45237 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " first-power operational achievement", "status": "processing", "eventIndex":665, "eventType": "fulfillment"}
++ 45237 
++ 45267 event:message
++ 45267 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ", multi-billion-dollar capitalization", "status": "processing", "eventIndex":666, "eventType": "fulfillment"}
++ 45267 
++ 45318 event:message
++ 45318 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ", contracted revenue at scale,", "status": "processing", "eventIndex":667, "eventType": "fulfillment"}
++ 45318 
++ 45365 event:message
++ 45365 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " and independent recognition \u2014", "status": "processing", "eventIndex":668, "eventType": "fulfillment"}
++ 45365 
++ 45387 event:message
++ 45387 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " a broader and more concrete set", "status": "processing", "eventIndex":669, "eventType": "fulfillment"}
++ 45387 
++ 45452 event:message
++ 45452 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " of wins than Flutterwave's mostly", "status": "processing", "eventIndex":670, "eventType": "fulfillment"}
++ 45452 
++ 45495 event:message
++ 45495 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " strategic and prestige-oriented", "status": "processing", "eventIndex":671, "eventType": "fulfillment"}
++ 45495 
++ 45549 event:message
++ 45549 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " headlines.\n\n*Note: Some Flutter", "status": "processing", "eventIndex":672, "eventType": "fulfillment"}
++ 45549 
++ 45602 event:message
++ 45602 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "wave items (Ripple/Circle) are", "status": "processing", "eventIndex":673, "eventType": "fulfillment"}
++ 45602 
++ 45633 event:message
++ 45634 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " dated June\u2013July 2026, while F", "status": "processing", "eventIndex":674, "eventType": "fulfillment"}
++ 45634 
++ 45687 event:message
++ 45687 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "ervo's headline items (First Power", "status": "processing", "eventIndex":675, "eventType": "fulfillment"}
++ 45687 
++ 45742 event:message
++ 45742 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ", TIME ranking, MIT recognition", "status": "processing", "eventIndex":676, "eventType": "fulfillment"}
++ 45742 
++ 45745 event:heartbeat
++ 45745 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","time":"2026-10-11T08:23:13Z"}
++ 45745 
++ 45782 event:message
++ 45782 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": ") fall in September\u2013October 202", "status": "processing", "eventIndex":677, "eventType": "fulfillment"}
++ 45782 
++ 45837 event:message
++ 45837 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "6, so the two companies' most-h", "status": "processing", "eventIndex":678, "eventType": "fulfillment"}
++ 45837 
++ 45891 event:message
++ 45891 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "yped items are not drawn from an", "status": "processing", "eventIndex":679, "eventType": "fulfillment"}
++ 45891 
++ 45929 event:thinking
++ 45929 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":680,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":".\n\nLet me write a comparison."}}
++ 45929 
++ 45929 event:thinking
++ 45929 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":681,"eventType":"fulfillment_thinking","status":"processing","thinking":{"delta":""}}
++ 45929 
++ 45929 event:message
++ 45929 data:{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": " identical news window.*", "status": "processing", "eventIndex":682, "eventType": "fulfillment"}
++ 45929 
++ 45946 event:message
++ 45946 data:{"sessionId":"6acb474320a8b245e6aaad9e","messageId":"6acb474420a8b245e6aaada1","eventIndex":683,"eventType":"metricsLog","status":"processing","publicMetrics":{"inputTokens":10787,"outputTokens":2098,"totalTokens":12885,"ragTimeSec":35.53,"fulfillmentTimeSec":9.67,"totalTimeSec":45.2}}
++ 45946 
++ 47957 event:message
++ 47957 data:[DONE]
++ 47957 

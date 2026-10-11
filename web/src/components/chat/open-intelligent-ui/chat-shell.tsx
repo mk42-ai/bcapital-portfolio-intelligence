@@ -416,7 +416,7 @@ function PromptCard({ prompt, sessionId, onAnswer }: { prompt: Prompt; sessionId
       <div className="oiu-prompt oiu-prompt--approve" data-testid="approval-card" role="group" aria-label="Approval needed">
         <p className="oiu-prompt__title"><ShieldCheck className="size-4" aria-hidden /> The agent wants to perform a browser action{prompt.action ? ` (${prompt.action})` : ""}</p>
         {prompt.message && <p className="oiu-prompt__text">{prompt.message}</p>}
-        <div className="oiu-prompt__actions">{prompt.url && <a className="oiu-prompt__btn oiu-prompt__btn--primary" href={prompt.url} target="_blank" rel="noopener noreferrer">Open live browser</a>}<button type="button" className="oiu-prompt__btn" onClick={() => { onAnswer("Done — I completed the browser action."); setDone("Approval sent."); }}>Done</button><button type="button" className="oiu-prompt__btn" onClick={() => { onAnswer("Cancel the browser action."); setDone("Cancelled."); }}>Cancel</button></div>
+        <div className="oiu-prompt__actions">{prompt.url && <a className="oiu-prompt__btn oiu-prompt__btn--primary" href={prompt.url} target="_blank" rel="noopener noreferrer">Open live browser</a>}<button type="button" className="oiu-prompt__btn" data-testid="browser-action-done" onClick={() => { onAnswer("Done — I completed the browser action."); setDone("Approval sent."); }}>I'm done</button><button type="button" className="oiu-prompt__btn" onClick={() => { onAnswer("Cancel the browser action."); setDone("Cancelled."); }}>Cancel</button></div>
       </div>
     );
   }
@@ -509,7 +509,7 @@ function OutputsCard({ outputs: raw }: { outputs: StepOutput[] }) {
 }
 function CollapsedSources({ sources, live }: { sources: Source[]; live: boolean }) {
   const [open, setOpen] = useState(false);
-  if (!sources.length) return live ? null : null;
+  if (!sources.length) return null; // never an empty strip
   return (
     <section className={`oiu-srcs${open ? " oiu-srcs--open" : ""}`} data-testid="sources-list" data-count={sources.length} aria-label="Sources">
       <button type="button" className="oiu-srcs__head" aria-expanded={open} data-testid="sources-toggle" onClick={() => setOpen((o) => !o)}>
@@ -569,17 +569,18 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
           <CitedMarkdown text={r.text} known={r.error?.code === "plugin_error" ? [] : r.known} streaming={r.live} onCites={setCites} />
         </div>
       )}
-      {/* 8 — inline media + artifacts */}
+      {/* 7b — inline media referenced by the answer (images / video) */}
       {media.images.length > 0 && <div className="oiu-media" data-testid="inline-images"><ImageGrid images={media.images} /></div>}
       {media.videos.map((v) => <div key={v.src} className="oiu-media" data-testid="inline-video"><VideoPlayer src={v.src} title={v.title} poster={v.poster} /></div>)}
-      {r.artifacts.length > 0 && <div className="oiu-artifacts" data-testid="inline-artifacts">{r.artifacts.map((a) => <ArtifactRow key={a.key} a={a} />)}</div>}
-      {/* 9 — numbered, collapsed Sources under the answer */}
+      {/* 8 — collapsed Sources strip directly under the answer (contract order: sources → Artifacts → footer) */}
       {/* Sources mount once the answer has finished streaming (live text growth would otherwise push this row on every token → CLS). */}
       {(!r.live || r.answerDone) && <CollapsedSources sources={railSources} live={r.live} />}
-      {/* 10 — one Data gap sentence on failure */}
+      {/* 9 — Artifacts card (only when the turn produced at least one artifact — never an empty box) */}
+      {r.artifacts.length > 0 && <div className="oiu-artifacts" data-testid="inline-artifacts">{r.artifacts.map((a) => <ArtifactRow key={a.key} a={a} />)}</div>}
+      {/* 9b — one Data gap sentence on failure */}
       {/* shown live too — the moment a tool fails or an error frame arrives, never a green check on a failed call */}
       {gap && <p className="oiu-gap" role="alert" data-testid="data-gap"><AlertTriangle className="size-3.5" aria-hidden /> <strong>Data gap:</strong> {gap}</p>}
-      {/* 11 — footer timings: settled turns, and live once the answer is done */}
+      {/* 10 — footer timings: settled turns, and live once the answer is done */}
       {((!r.live && r.meta) || (r.live && r.answerDone)) && <AnswerBadge meta={{ ...(r.meta ?? {}), totalMs: r.totalMs ?? r.meta?.totalMs ?? null }} live={r.live} />}
     </div>
   );
@@ -813,6 +814,11 @@ function ErrorBanner() {
 /** Persists streamed messages + remembers the OnDemand sessionId per thread (from the x-ondemand-session header / ondemand.session frame). */
 function Persistence({ sessionRef }: { sessionRef: React.MutableRefObject<Record<string, string>> }) {
   const messages = useThread((s) => s.messages); const selected = useThreadList((s) => s.selectedThreadId);
+  const loadThreads = useThreadList((s) => s.loadThreads);
+  // Thread-list hydration after a hard reload. The library only calls `loadThreads()` from its own ThreadList (sidebar) component, which this
+  // shell replaces with an empty slot — so without this call `threads` stays [] forever, ChatWelcome's "Recent threads" and the top-bar
+  // Threads menu render nothing although localStorage holds `bcap.chat.threads.v2`. Runs once on mount (storage is localStorage → instant).
+  useEffect(() => { loadThreads(); }, [loadThreads]);
   useEffect(() => { if (selected && messages.length) saveMessages(selected, messages); }, [messages, selected]);
   useEffect(() => { if (selected && sessionRef.current[selected]) rememberSession(selected, sessionRef.current[selected]); }, [selected, messages, sessionRef]);
   useEffect(() => { currentThreadId = selected ?? null; if (selected) attachmentsStore.hydrate(selected); }, [selected]);
@@ -829,6 +835,19 @@ function AutoAsk() {
     const t = setTimeout(() => { void processMessage({ role: "user", content: q }); }, 400);
     return () => clearTimeout(t);
   }, [q, isRunning, processMessage]);
+  return null;
+}
+
+/** Deep link: /chat?thread=<id> selects that thread on mount (once the list has hydrated), restoring its messages + attachment chips. */
+function ThreadDeepLink() {
+  const sp = useSearchParams(); const want = sp.get("thread")?.trim() ?? "";
+  const threads = useThreadList((s) => s.threads); const selectThread = useThreadList((s) => s.selectThread); const selectedId = useThreadList((s) => s.selectedThreadId);
+  const done = useRef(false);
+  useEffect(() => {
+    if (!want || done.current || selectedId === want) return;
+    if (!threads.some((t) => t.id === want)) return; // wait for loadThreads() → list hydrated
+    done.current = true; selectThread(want);
+  }, [want, threads, selectedId, selectThread]);
   return null;
 }
 
@@ -857,7 +876,7 @@ function ChatWelcome({ companies }: { companies: CoCtx[] }) {
       {recent.length > 0 && (
         <section className="oiu-welcome__recent" aria-label="Recent threads" data-testid="welcome-recent">
           <p className="oiu-welcome__label"><MessageSquareMore className="size-3.5" aria-hidden /> Recent threads</p>
-          <ul>{recent.map((t) => <li key={t.id}><button type="button" className="oiu-welcome__thread" onClick={() => selectThread(t.id)}>{t.title || "Untitled thread"}</button></li>)}</ul>
+          <ul>{recent.map((t) => <li key={t.id}><button type="button" className="oiu-welcome__thread" data-testid="welcome-thread" data-thread-id={t.id} onClick={() => selectThread(t.id)}>{t.title || "Untitled thread"}</button></li>)}</ul>
         </section>
       )}
     </div>
@@ -936,7 +955,7 @@ ${txt}`; }
         <ScrollAnchor />
         <ErrorBanner />
         <ContextChipsBar />
-        <Suspense fallback={null}><AutoAsk /></Suspense>
+        <Suspense fallback={null}><AutoAsk /><ThreadDeepLink /></Suspense>
       </AgentInterface>
       <p className="oiu-footer" data-testid="chat-footer" data-model-id={MODEL_ID} data-reasoning={REASONING_MODE}><ShieldCheck className="size-3.5" aria-hidden /> Answers stream from {MODEL_LABEL} with <span data-testid="footer-plugins">{pluginLabel}</span> — sources are cited inline.</p>
     </div>
@@ -962,7 +981,7 @@ function ChatTopBar({ topBarRight }: { topBarRight?: ReactNode }) {
           <summary className="oiu-topbar__btn" aria-label="Threads"><MessageSquareMore className="size-3.5" aria-hidden /><span>Threads{recent.length ? ` (${recent.length})` : ""}</span></summary>
           <ul className="oiu-threads__list" aria-label="Recent threads">
             {recent.length === 0 && <li className="oiu-threads__empty">No threads yet</li>}
-            {recent.map((t) => <li key={t.id}><button type="button" className={`oiu-threads__item${t.id === selectedId ? " oiu-threads__item--active" : ""}`} onClick={(e) => { selectThread(t.id); (e.currentTarget.closest("details") as HTMLDetailsElement | null)?.removeAttribute("open"); }}>{t.title || "Untitled thread"}</button></li>)}
+            {recent.map((t) => <li key={t.id}><button type="button" className={`oiu-threads__item${t.id === selectedId ? " oiu-threads__item--active" : ""}`} data-testid="threads-menu-item" data-thread-id={t.id} onClick={(e) => { selectThread(t.id); (e.currentTarget.closest("details") as HTMLDetailsElement | null)?.removeAttribute("open"); }}>{t.title || "Untitled thread"}</button></li>)}
           </ul>
         </details>
         <ArtifactsToggle className="oiu-topbar__btn" showLabel />

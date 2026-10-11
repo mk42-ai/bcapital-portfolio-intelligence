@@ -575,3 +575,24 @@
 /* end lane E */
 
 .oiu-work__via { font-weight: 400; color: #6b7280; }
+/* turn3/stream — long URLs / code never widen the column (any viewport) */
+.oiu-answer a, .oiu-answer code, .oiu-answer pre, .oiu-md a, .oiu-md code, .oiu-md pre { overflow-wrap: anywhere; word-break: break-word; }
+.oiu-answer pre, .oiu-md pre { white-space: pre-wrap; max-width: 100%; overflow-x: auto; }
+.oiu-srcs__favs img:nth-child(n + 6) { display: none; } /* strip shows at most 5 favicons + the count */
+/* turn3/stream — 390 px rail pass */
+@media (max-width: 640px) {
+  .oiu-run { min-width: 0; max-width: 100%; overflow-x: clip; }
+  .oiu-run__header { flex-wrap: wrap; line-height: 20px; }                                 /* ≤2 lines (40px max-height above) */
+  .oiu-work__chips img, .oiu-work__chips svg { width: 16px; height: 16px; }
+  .oiu-work__text { min-width: 0; }
+  .oiu-work__label { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; max-width: 100%; }
+  .oiu-work__query { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .oiu-work-list, .oiu-work { max-width: 100%; }
+  .oiu-srcs__head { flex-wrap: wrap; }
+  .oiu-prompt__actions { flex-direction: column; align-items: stretch; }
+  .oiu-prompt__btn, .oiu-prompt__actions .oiu-prompt__btn { width: 100%; text-align: center; min-height: 40px; }
+  .oiu-prompt__chips { flex-wrap: wrap; }
+  .oiu-prompt__input { width: 100%; box-sizing: border-box; }
+  .oiu-run__footer, .oiu-run__footer .oiu-badge, .oiu-badge { flex-wrap: wrap; row-gap: 2px; }
+  .oiu-summary, .oiu-outputs, .oiu-srcs, .oiu-artifacts, .oiu-prompt { max-width: 100%; min-width: 0; }
+}
