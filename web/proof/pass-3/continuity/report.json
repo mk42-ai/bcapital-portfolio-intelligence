@@ -1,0 +1,178 @@
+{
+  "label": "a15 stream-continuity",
+  "baseUrl": "https://sb-1gizcktepfgc.vercel.run",
+  "threadId": "cont-1791719859699",
+  "startedUtc": "2026-10-11T11:57:39.699Z",
+  "finishedUtc": "2026-10-11T11:58:47.725Z",
+  "thresholds": {
+    "gapMaxMs": 15000,
+    "hangMs": 45000,
+    "totalMs": 300000
+  },
+  "questions": [
+    "What is the latest news about Fervo Energy? Cite sources.",
+    "And Flutterwave?"
+  ],
+  "sessionId": {
+    "turn1": "6acb79b420a8b245e6aab146",
+    "turn2": "6acb79b420a8b245e6aab146",
+    "reused": true,
+    "turn2Created": false
+  },
+  "wallTimeMs": {
+    "turn1": 20666,
+    "turn2": 47356,
+    "total": 68022
+  },
+  "maxGapMs": {
+    "turn1": 870,
+    "turn2": 864
+  },
+  "hang": {
+    "turn1": false,
+    "turn2": false,
+    "lastFrameKind": {
+      "turn1": "[DONE]",
+      "turn2": "[DONE]"
+    }
+  },
+  "turn1": {
+    "name": "turn-1",
+    "threadId": "cont-1791719859699",
+    "httpStatus": 200,
+    "headersMs": 170,
+    "firstEventMs": 171,
+    "firstTokenMs": 14416,
+    "runFinishedMs": 20665,
+    "runErrorMs": null,
+    "doneMs": 20665,
+    "totalMs": 20666,
+    "doneSeen": true,
+    "runFinishedBeforeDone": true,
+    "frames": 284,
+    "counts": {
+      "RUN_STARTED": 1,
+      "CUSTOM": 126,
+      "TOOL_CALL_START": 1,
+      "TOOL_CALL_ARGS": 1,
+      "TOOL_CALL_END": 1,
+      "TOOL_CALL_RESULT": 1,
+      "TEXT_MESSAGE_START": 1,
+      "TEXT_MESSAGE_CONTENT": 149,
+      "TEXT_MESSAGE_END": 1,
+      "RUN_FINISHED": 1
+    },
+    "customCounts": {
+      "ondemand.status": 10,
+      "ondemand.session": 1,
+      "ondemand.request": 1,
+      "ondemand.filler": 40,
+      "ondemand.thinking": 27,
+      "ondemand.planner_payload": 37,
+      "ondemand.plan": 2,
+      "ondemand.step": 2,
+      "ondemand.step_output": 1,
+      "ondemand.heartbeat": 2,
+      "ondemand.sources": 2,
+      "ondemand.metrics": 1
+    },
+    "heartbeats": 2,
+    "textChars": 4890,
+    "session": {
+      "sessionId": "6acb79b420a8b245e6aab146",
+      "created": true,
+      "viaHeader": false
+    },
+    "error": null,
+    "clientError": null,
+    "hang": false,
+    "hangAfterMs": null,
+    "lastFrameKind": "[DONE]",
+    "lastFrameMs": 20665,
+    "maxGapMs": 870,
+    "maxGapAt": {
+      "ms": 13692,
+      "after": "CUSTOM:ondemand.status",
+      "before": "CUSTOM:ondemand.filler"
+    },
+    "gapsOverLimit": [],
+    "textPreview": "Fervo Energy has had a landmark stretch of news, headlined by its flagship project reaching first power and its IPO.\n\n**Landmark milestone — First Power at Cape Station**\nFervo announced that it achie"
+  },
+  "turn2": {
+    "name": "turn-2",
+    "threadId": "cont-1791719859699",
+    "httpStatus": 200,
+    "headersMs": 198,
+    "firstEventMs": 198,
+    "firstTokenMs": 39252,
+    "runFinishedMs": 47356,
+    "runErrorMs": null,
+    "doneMs": 47356,
+    "totalMs": 47356,
+    "doneSeen": true,
+    "runFinishedBeforeDone": true,
+    "frames": 704,
+    "counts": {
+      "RUN_STARTED": 1,
+      "CUSTOM": 466,
+      "TOOL_CALL_START": 1,
+      "TOOL_CALL_ARGS": 1,
+      "TOOL_CALL_END": 1,
+      "TOOL_CALL_RESULT": 1,
+      "TEXT_MESSAGE_START": 1,
+      "TEXT_MESSAGE_CONTENT": 229,
+      "TEXT_MESSAGE_END": 1,
+      "RUN_FINISHED": 1
+    },
+    "customCounts": {
+      "ondemand.status": 10,
+      "ondemand.session": 1,
+      "ondemand.request": 1,
+      "ondemand.filler": 90,
+      "ondemand.thinking": 246,
+      "ondemand.planner_payload": 99,
+      "ondemand.plan": 3,
+      "ondemand.step": 4,
+      "ondemand.step_output": 2,
+      "ondemand.heartbeat": 4,
+      "ondemand.sources": 3,
+      "ondemand.summary": 2,
+      "ondemand.metrics": 1
+    },
+    "heartbeats": 4,
+    "textChars": 7433,
+    "session": {
+      "sessionId": "6acb79b420a8b245e6aab146",
+      "created": false,
+      "viaHeader": true
+    },
+    "error": null,
+    "clientError": null,
+    "hang": false,
+    "hangAfterMs": null,
+    "lastFrameKind": "[DONE]",
+    "lastFrameMs": 47356,
+    "maxGapMs": 864,
+    "maxGapAt": {
+      "ms": 19113,
+      "after": "CUSTOM:ondemand.status",
+      "before": "CUSTOM:ondemand.filler"
+    },
+    "gapsOverLimit": [],
+    "textPreview": "Flutterwave's biggest recent news is a Ripple-backed Series E that reaffirmed its position as Africa's most valuable fintech, alongside a wave of licensing, acquisition and leadership recognition.\n\n**"
+  },
+  "checks": {
+    "turn1DoneSeen": true,
+    "turn1NoHang": true,
+    "turn1MaxGapUnder15s": true,
+    "turn1SessionFrame": true,
+    "turn2DoneSeen": true,
+    "turn2NoHang": true,
+    "turn2MaxGapUnder15s": true,
+    "turn2SessionReused": true,
+    "turn2RunFinishedBeforeDone": true,
+    "noErrorFrames": true
+  },
+  "failed": [],
+  "pass": true
+}
