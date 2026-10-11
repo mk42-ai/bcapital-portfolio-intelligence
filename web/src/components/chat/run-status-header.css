@@ -44,4 +44,6 @@
   .rsh__chip span { display: none; } /* icon-only chip on phones; aria-label keeps the text */
   .rsh__chip { padding: 0 6px; }
 }
+/* Outputs body head is now a static <p> (the toggle lives in the status chip) */
+p.oiu-outputs__head { margin: 0; cursor: default; }
 /* end a1 */
