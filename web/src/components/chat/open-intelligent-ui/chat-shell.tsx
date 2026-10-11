@@ -25,6 +25,7 @@ export type PlannerPayload = { planning: string; steps: Record<string, string> }
 const EMPTY_PAYLOAD: PlannerPayload = { planning: "", steps: {} };
 const hasPayload = (p: PlannerPayload | null | undefined): p is PlannerPayload => !!p && (p.planning.trim().length > 0 || Object.values(p.steps).some((t) => t.trim().length > 0));
 import { PluginFavicon, preloadPluginFavicons } from "@/components/ui/plugin-favicon";
+import { RunStatusHeader } from "@/components/chat/run-status-header";
 import { fmtScore } from "@/lib/format";
 import { VoiceDock } from "@/components/chat/voice/voice-dock";
 import { useVoiceOrigin } from "@/components/chat/voice/voice-origin";
@@ -511,29 +512,22 @@ function WorkingRow({ t, live }: { t: ToolRow; live: boolean }) {
     </li>
   );
 }
-/** Skeleton shown on the FIRST event, before any upstream frame: Thinking + Working placeholders (perceived latency ≈ 0). */
-function WorkingSkeleton({ detail, plugins }: { detail: string; plugins: string[] }) {
-  return (
-    <li className="oiu-work oiu-work--running oiu-work--skeleton" data-testid="working-row" data-state="queued">
-      <span className="oiu-work__icon" aria-hidden><Loader2 className="size-3.5 oiu-spin" /></span>
-      <span className="oiu-work__chips" data-testid="working-chips">{(plugins.length ? plugins : [PLUGIN_ID]).slice(0, 4).map((id) => <PluginFavicon key={id} id={id} size={16} />)}</span>
-      <span className="oiu-work__text"><span className="oiu-work__label">{detail || LABEL.searching(friendlyPlugin(plugins[0] ?? PLUGIN_ID))}</span><span className="oiu-shimmer oiu-shimmer--row" aria-hidden><span /></span></span>
-    </li>
-  );
-}
 const hasParams = (p: Record<string, unknown> | null | undefined): p is Record<string, unknown> => !!p && typeof p === "object" && Object.keys(p).length > 0;
-function OutputsCard({ outputs: raw, plannerPayload }: { outputs: StepOutput[]; plannerPayload?: PlannerPayload | null }) {
-  const [open, setOpen] = useState(false);
-  // Skip plugin entries with null/empty params and hide the card when no step has a real call — never an empty `{}` box.
+/** a1: Outputs body — summary chip lives in RunStatusHeader; this renders only when the chip is open (never an interleaved row). */
+const outputStats = (raw: StepOutput[], plannerPayload?: PlannerPayload | null) => {
   const outputs = raw.map((o) => ({ ...o, plugins: o.plugins.filter((pl) => hasParams(pl.params)) })).filter((o) => o.plugins.length > 0);
   const payload = hasPayload(plannerPayload) ? plannerPayload : null;
+  return { outputs, payload, calls: outputs.reduce((n, o) => n + o.plugins.length, 0), has: outputs.length > 0 || !!payload };
+};
+function OutputsCard({ outputs: raw, plannerPayload }: { outputs: StepOutput[]; plannerPayload?: PlannerPayload | null }) {
+  // Skip plugin entries with null/empty params and hide the card when no step has a real call — never an empty `{}` box.
+  const { outputs, payload, calls } = outputStats(raw, plannerPayload);
   if (!outputs.length && !payload) return null; // unit1: renders when EITHER outputs or planner payload exist
-  const calls = outputs.reduce((n, o) => n + o.plugins.length, 0);
   const head = outputs.length ? `Outputs · ${outputs.length} step${outputs.length === 1 ? "" : "s"} · ${calls} call${calls === 1 ? "" : "s"}` : "Outputs · planner payload";
   return (
     <section className="oiu-outputs" data-testid="outputs-card" data-count={outputs.length} data-has-payload={payload ? "true" : "false"}>
-      <button type="button" className="oiu-outputs__head" aria-expanded={open} onClick={() => setOpen((o) => !o)}><Wrench className="size-3.5" aria-hidden /><span>{head}</span><ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden /></button>
-      {open && outputs.length > 0 && <ol className="oiu-outputs__list">{outputs.map((o) => <li key={o.stepId} data-testid="output-step"><strong>{o.title}</strong>{o.plugins.map((pl, i) => <span key={i} className="oiu-outputs__call"><PluginFavicon id={pl.pluginId} size={14} /> <span title={pl.pluginId} data-plugin-id={pl.pluginId}>{friendlyPlugin(pl.name || pl.pluginId)}</span><code>{JSON.stringify(pl.params).slice(0, 160)}</code></span>)}</li>)}</ol>}
+      <p className="oiu-outputs__head" aria-label={head}><Wrench className="size-3.5" aria-hidden /><span>{head}</span></p>
+      {outputs.length > 0 && <ol className="oiu-outputs__list">{outputs.map((o) => <li key={o.stepId} data-testid="output-step"><strong>{o.title}</strong>{o.plugins.map((pl, i) => <span key={i} className="oiu-outputs__call"><PluginFavicon id={pl.pluginId} size={14} /> <span title={pl.pluginId} data-plugin-id={pl.pluginId}>{friendlyPlugin(pl.name || pl.pluginId)}</span><code>{JSON.stringify(pl.params).slice(0, 160)}</code></span>)}</li>)}</ol>}
       {payload && <PlannerPayloadDetails payload={payload} />}
     </section>
   );
@@ -582,36 +576,54 @@ function ArtifactRow({ a }: { a: LiveArtifact }) {
 }
 function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void }) {
   const [cites, setCites] = useState<Cite[]>([]);
+  const [outputsOpen, setOutputsOpen] = useState(false); // a1: Outputs body closed by default — summary chip sits in RunStatusHeader
   const thinkingShown = useThrottled(r.thinking, 250); // full body — no character cap (throttled re-render only)
-  const showSkeleton = r.live && r.tools.length === 0 && !r.answerStarted && r.phase !== "awaiting-input";
   const readyArts = r.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!);
   const media = useMemo(() => mediaFrom(r.text, readyArts), [r.text, readyArts.length]); // eslint-disable-line react-hooks/exhaustive-deps
   const railSources = r.error?.code === "plugin_error" ? [] : cites.length ? cites : r.sources;
   const failedTools = r.tools.filter((t) => t.status === "failed");
   const gap = r.error ? r.error.message : failedTools.length ? `${failedTools.map((t) => t.name).join(", ")} failed: ${failedTools[0].message ?? "upstream error"}` : r.artifacts.find((a) => a.phase === "failed") ? `A file could not be saved: ${r.artifacts.find((a) => a.phase === "failed")!.message ?? "storage error"}` : "";
+  // a1 — status state machine: thinking (no tool yet) → working (a tool is running / tools done but answer not started) → done | failed.
+  const runningTool = r.live ? r.tools.find((t) => t.status === "running") : undefined;
+  const runningStep = r.plan?.steps.find((st) => st.state === "running");
+  const statusState: "thinking" | "working" | "done" | "failed" =
+    r.error || (!r.live && failedTools.length) ? "failed"
+    : !r.live || (r.answerStarted && (r.answerDone || !r.live)) ? "done"
+    : r.answerStarted ? "working"
+    : r.tools.length > 0 || runningStep ? "working"
+    : "thinking";
+  const statusTask = statusState === "failed" ? gap
+    : runningTool ? `${LABEL.action(friendlyPlugin(runningTool.name || runningTool.pluginId))}${runningTool.query ? ` · ${runningTool.query.slice(0, 80)}` : ""}`
+    : runningStep ? runningStep.title
+    : r.answerStarted && r.live ? "Writing the answer"
+    : r.plan?.objective || (r.detail && r.detail !== LABEL.working ? r.detail : r.live ? "Connecting to OnDemand" : "");
+  const stepsTotal = r.plan?.steps.length ?? 0; const stepsDone = r.plan?.steps.filter((st) => st.state === "done").length ?? 0;
+  const oStats = outputStats(r.outputs, r.plannerPayload);
+  const statusElapsed = r.totalMs ?? r.meta?.totalMs ?? r.elapsedMs;
   return (
     <div className="oiu-run" data-testid="run-view" data-live={r.live ? "true" : "false"}>
       {/* 0 — Run header: model · reasoning · plugin chips · live timer */}
       <RunHeader live={r.live} startedAt={r.startedAt} totalMs={r.totalMs} pluginIds={(r.meta?.pluginIds as string[] | undefined) ?? [PLUGIN_ID]} />
+      {/* 0b — a1: ONE status header anchored at the top (replaces the interleaved Working band + Outputs row) */}
+      <RunStatusHeader state={statusState} task={statusTask} elapsedMs={statusElapsed} live={r.live && !r.answerDone} startedAt={r.startedAt}
+        stepsDone={stepsDone} stepsTotal={stepsTotal} outputSteps={oStats.outputs.length} calls={oStats.calls} hasOutputs={oStats.has}
+        onToggleOutputs={oStats.has ? () => setOutputsOpen((o) => !o) : undefined} outputsOpen={outputsOpen} />
       {/* 1 — Thinking, pinned at the top (ONE per turn, never moves) */}
       {(r.thinking || r.live) && (
         <ThinkingBlock text={thinkingShown} kinds={r.thinkingKinds} plan={r.plan} answerStarted={r.answerStarted} live={r.live} collapsed={r.answerStarted || !r.live} elapsedMs={r.meta?.firstTokenMs ?? r.elapsedMs} />
       )}
       {/* 2 — Plan checklist */}
       {(r.plan || (r.live && !r.answerStarted)) && <PlanStepper plan={r.plan} reserve={r.live} />}
-      {/* 3 — Working rows (before each action) */}
-      {(r.tools.length > 0 || showSkeleton) && (
+      {/* 3 — Working rows (one per tool call; the "connecting" state is carried by RunStatusHeader, no skeleton row) */}
+      {r.tools.length > 0 && (
         <ol className="oiu-work-list" aria-label="Working" data-testid="working-list">
           {r.tools.map((t) => <WorkingRow key={t.id} t={t} live={r.live} />)}
-          {showSkeleton && <WorkingSkeleton detail={r.detail} plugins={(r.meta?.pluginIds as string[] | undefined) ?? [PLUGIN_ID]} />}
         </ol>
       )}
-      {/* stall band sits directly under the Working rows so later cards (summaries, outputs) append BELOW it — nothing already painted moves */}
-      {r.live && !r.answerStarted && <WorkingBand on={r.filler} tick={r.fillerTick} phase={r.detail} />}
       {/* 4 — between-step summaries */}
       {r.summaries.map((s) => <StepSummaryCard key={s.index} s={s} live={r.live} />)}
-      {/* 5 — outputs rail */}
-      <OutputsCard outputs={r.outputs} plannerPayload={r.plannerPayload} />
+      {/* 5 — outputs body, only when the header chip is open (default closed → no interleaved row) */}
+      {outputsOpen && <OutputsCard outputs={r.outputs} plannerPayload={r.plannerPayload} />}
       {/* 6 — interactive controls */}
       {r.live && r.prompt && <PromptCard prompt={r.prompt} sessionId={r.sessionId} onAnswer={onAnswer} />}
       {/* 7 — answer */}
@@ -744,22 +756,6 @@ const PluginTimeline: ToolCallTimelineComponent = ({ steps, isLast }) => {
     </div>
   );
 };
-/** Reserved-height stage slot under the activity cards. While the bridge's stall watchdog reports >600 ms of silence it shows the animated
- *  "Working…" band (shimmer + elapsed ticker); otherwise the slot stays empty but keeps its height, so toggling it never shifts layout. */
-function WorkingBand({ on, tick, phase }: { on: boolean; tick: number; phase: string }) {
-  const [dots, setDots] = useState(0);
-  useEffect(() => { if (!on) return; const id = setInterval(() => setDots((d) => (d + 1) % 4), 400); return () => clearInterval(id); }, [on]);
-  return (
-    <div className={`oiu-slot oiu-slot--working${on ? " oiu-slot--on" : ""}`} data-testid="working-band" data-on={on ? "true" : "false"} data-tick={tick} role="status" aria-live="polite">
-      {on && (<>
-        <span className="oiu-working__pulse" aria-hidden><span /><span /><span /></span>
-        <span className="oiu-working__label">{LABEL.working.replace(/…$/, "")}{".".repeat(dots)}</span>
-        <span className="oiu-working__phase">{phase && phase !== LABEL.working ? phase : "still waiting on OnDemand"}</span>
-        <span className="oiu-working__tick" data-testid="stall-tick" aria-hidden>{tick > 0 ? `+${(tick * 0.3).toFixed(1)} s` : ""}</span>
-      </>)}
-    </div>
-  );
-}
 function RawFrame({ raw }: { raw: string }) {
   const [open, setOpen] = useState(false);
   return <span className="oiu-raw"><button type="button" className="oiu-error__raw-toggle" aria-expanded={open} onClick={() => setOpen((v) => !v)}>{open ? "hide raw frame" : "show raw frame"}</button>{open && <pre className="oiu-error__raw" data-testid="raw-frame">{raw}</pre>}</span>;
