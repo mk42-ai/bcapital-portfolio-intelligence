@@ -1,0 +1,138 @@
+{
+  "label": "suite-baseline",
+  "note": "REDUCED SET (grep routes-clean|chip-overlap|title-ellipsis|pdf-inline-render|thinking-json-filter) run on a CPU shared by ~50 agents; the merge agent runs the full evidence set after deploy.",
+  "startedUtc": "2026-10-11T12:07:12.978Z",
+  "finishedUtc": "2026-10-11T12:12:48.007Z",
+  "wallMs": 335020,
+  "capMin": 13,
+  "capped": false,
+  "partial": false,
+  "source": "results.json",
+  "exitCode": 0,
+  "ffmpegShim": "ok (/tmp/terminal-cfg-2839290357/cache/ms-playwright/ffmpeg-1013/ffmpeg-linux)",
+  "config": "playwright.evidence.config.ts",
+  "grep": "routes-clean|chip-overlap|title-ellipsis|pdf-inline-render|thinking-json-filter",
+  "project": null,
+  "baseUrl": "https://sb-1gizcktepfgc.vercel.run",
+  "apiUrl": "https://sb-3lo1xqgc9bdb.vercel.run",
+  "totals": {
+    "passed": 20,
+    "failed": 0,
+    "skipped": 12,
+    "flaky": 0,
+    "timedOut": 0,
+    "tests": 32
+  },
+  "rows": [
+    {
+      "spec": "chip-overlap.spec.ts",
+      "project": "evidence-desktop",
+      "passed": 0,
+      "failed": 0,
+      "skipped": 3,
+      "flaky": 0,
+      "timedOut": 0,
+      "durationMs": 46506,
+      "failures": []
+    },
+    {
+      "spec": "chip-overlap.spec.ts",
+      "project": "evidence-mobile",
+      "passed": 0,
+      "failed": 0,
+      "skipped": 3,
+      "flaky": 0,
+      "timedOut": 0,
+      "durationMs": 46791,
+      "failures": []
+    },
+    {
+      "spec": "pdf-inline-render.spec.ts",
+      "project": "evidence-desktop",
+      "passed": 0,
+      "failed": 0,
+      "skipped": 3,
+      "flaky": 0,
+      "timedOut": 0,
+      "durationMs": 41133,
+      "failures": []
+    },
+    {
+      "spec": "pdf-inline-render.spec.ts",
+      "project": "evidence-mobile",
+      "passed": 0,
+      "failed": 0,
+      "skipped": 3,
+      "flaky": 0,
+      "timedOut": 0,
+      "durationMs": 41415,
+      "failures": []
+    },
+    {
+      "spec": "routes-clean.spec.ts",
+      "project": "evidence-desktop",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "timedOut": 0,
+      "durationMs": 15973,
+      "failures": []
+    },
+    {
+      "spec": "routes-clean.spec.ts",
+      "project": "evidence-mobile",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "timedOut": 0,
+      "durationMs": 16913,
+      "failures": []
+    },
+    {
+      "spec": "thinking-json-filter.spec.ts",
+      "project": "evidence-desktop",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "timedOut": 0,
+      "durationMs": 45219,
+      "failures": []
+    },
+    {
+      "spec": "thinking-json-filter.spec.ts",
+      "project": "evidence-mobile",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "timedOut": 0,
+      "durationMs": 51418,
+      "failures": []
+    },
+    {
+      "spec": "title-ellipsis.spec.ts",
+      "project": "evidence-desktop",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "timedOut": 0,
+      "durationMs": 4829,
+      "failures": []
+    },
+    {
+      "spec": "title-ellipsis.spec.ts",
+      "project": "evidence-mobile",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "timedOut": 0,
+      "durationMs": 5253,
+      "failures": []
+    }
+  ]
+}

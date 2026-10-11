@@ -1,0 +1,2178 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/tmp/wt/a45/web/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "playwright.evidence.config.ts",
+      "--workers=1",
+      "--reporter=list,json",
+      "--grep",
+      "routes-clean|chip-overlap|title-ellipsis|pdf-inline-render|thinking-json-filter"
+    ],
+    "configFile": "/tmp/wt/a45/web/playwright.evidence.config.ts",
+    "rootDir": "/tmp/wt/a45/web/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/wt/a45/web/proof/evidence/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "evidence-desktop",
+        "name": "evidence-desktop",
+        "testDir": "/tmp/wt/a45/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/(evidence|upload-e2e|routes-clean|thinking-json-filter|thinking-pinned-working-row|title-ellipsis|context-sync|pdf-inline-render|chip-overlap)\\.spec\\.ts$/"
+        ],
+        "timeout": 300000
+      },
+      {
+        "outputDir": "/tmp/wt/a45/web/proof/evidence/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "evidence-mobile",
+        "name": "evidence-mobile",
+        "testDir": "/tmp/wt/a45/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/(evidence|upload-e2e|routes-clean|thinking-json-filter|thinking-pinned-working-row|title-ellipsis|context-sync|pdf-inline-render|chip-overlap)\\.spec\\.ts$/"
+        ],
+        "timeout": 300000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/wt/a45/web/proof/evidence/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "evidence-desktop",
+        "testDir": "/tmp/wt/a45/web/e2e",
+        "snapshotDir": "/tmp/wt/a45/web/e2e",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 300000,
+        "use": {
+          "baseURL": "https://sb-1gizcktepfgc.vercel.run",
+          "video": "on",
+          "trace": "on",
+          "screenshot": "on",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox",
+              "--disable-dev-shm-usage"
+            ]
+          },
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "evidence-desktop"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/wt/a45/web/proof/evidence/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "evidence-mobile",
+        "testDir": "/tmp/wt/a45/web/e2e",
+        "snapshotDir": "/tmp/wt/a45/web/e2e",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 300000,
+        "use": {
+          "baseURL": "https://sb-1gizcktepfgc.vercel.run",
+          "video": "on",
+          "trace": "on",
+          "screenshot": "on",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox",
+              "--disable-dev-shm-usage"
+            ]
+          },
+          "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Mobile Safari/537.36",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "screen": {
+            "width": 412,
+            "height": 915
+          },
+          "deviceScaleFactor": 2.625,
+          "isMobile": true,
+          "hasTouch": true,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "evidence-mobile"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "chip-overlap.spec.ts",
+      "file": "chip-overlap.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "artifact cards: no chip/meta/name overlap on /artifacts at 1440×900",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "no artifacts in this backend — nothing to measure",
+                  "location": {
+                    "file": "/tmp/wt/a45/web/e2e/chip-overlap.spec.ts",
+                    "line": 47,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 20686,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:07:14.291Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no artifacts in this backend — nothing to measure",
+                      "location": {
+                        "file": "/tmp/wt/a45/web/e2e/chip-overlap.spec.ts",
+                        "line": 47,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-artifact-card-860a7-ap-on-artifacts-at-1440×900-evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-artifact-card-860a7-ap-on-artifacts-at-1440×900-evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-artifact-card-860a7-ap-on-artifacts-at-1440×900-evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "daf86b3f5c12c761013a-bc60ce14607602fa5ed7",
+          "file": "chip-overlap.spec.ts",
+          "line": 37,
+          "column": 7
+        },
+        {
+          "title": "artifact cards: no chip/meta/name overlap on /artifacts at 390×844",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "no artifacts in this backend — nothing to measure",
+                  "location": {
+                    "file": "/tmp/wt/a45/web/e2e/chip-overlap.spec.ts",
+                    "line": 47,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 20396,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:07:35.660Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no artifacts in this backend — nothing to measure",
+                      "location": {
+                        "file": "/tmp/wt/a45/web/e2e/chip-overlap.spec.ts",
+                        "line": 47,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-artifact-card-a376a-lap-on-artifacts-at-390×844-evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-artifact-card-a376a-lap-on-artifacts-at-390×844-evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-artifact-card-a376a-lap-on-artifacts-at-390×844-evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "daf86b3f5c12c761013a-a81ff95ba35b2a9892ce",
+          "file": "chip-overlap.spec.ts",
+          "line": 37,
+          "column": 7
+        },
+        {
+          "title": "in-chat compact artifact card has no overlapping chips (when a thread with artifacts exists)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "no inline artifact card in the chat view for this backend — /artifacts is the hard assertion",
+                  "location": {
+                    "file": "/tmp/wt/a45/web/e2e/chip-overlap.spec.ts",
+                    "line": 83,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 5424,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:07:56.160Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no inline artifact card in the chat view for this backend — /artifacts is the hard assertion",
+                      "location": {
+                        "file": "/tmp/wt/a45/web/e2e/chip-overlap.spec.ts",
+                        "line": 83,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-in-chat-compa-f1017-read-with-artifacts-exists--evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-in-chat-compa-f1017-read-with-artifacts-exists--evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-in-chat-compa-f1017-read-with-artifacts-exists--evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "daf86b3f5c12c761013a-e4690a190ba19eaa0626",
+          "file": "chip-overlap.spec.ts",
+          "line": 71,
+          "column": 5
+        },
+        {
+          "title": "artifact cards: no chip/meta/name overlap on /artifacts at 1440×900",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "no artifacts in this backend — nothing to measure",
+                  "location": {
+                    "file": "/tmp/wt/a45/web/e2e/chip-overlap.spec.ts",
+                    "line": 47,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 20245,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:09:57.473Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no artifacts in this backend — nothing to measure",
+                      "location": {
+                        "file": "/tmp/wt/a45/web/e2e/chip-overlap.spec.ts",
+                        "line": 47,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-artifact-card-860a7-ap-on-artifacts-at-1440×900-evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-artifact-card-860a7-ap-on-artifacts-at-1440×900-evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-artifact-card-860a7-ap-on-artifacts-at-1440×900-evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "daf86b3f5c12c761013a-823f31d7de859fc2441a",
+          "file": "chip-overlap.spec.ts",
+          "line": 37,
+          "column": 7
+        },
+        {
+          "title": "artifact cards: no chip/meta/name overlap on /artifacts at 390×844",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "no artifacts in this backend — nothing to measure",
+                  "location": {
+                    "file": "/tmp/wt/a45/web/e2e/chip-overlap.spec.ts",
+                    "line": 47,
+                    "column": 10
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 21135,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:10:18.256Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no artifacts in this backend — nothing to measure",
+                      "location": {
+                        "file": "/tmp/wt/a45/web/e2e/chip-overlap.spec.ts",
+                        "line": 47,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-artifact-card-a376a-lap-on-artifacts-at-390×844-evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-artifact-card-a376a-lap-on-artifacts-at-390×844-evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-artifact-card-a376a-lap-on-artifacts-at-390×844-evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "daf86b3f5c12c761013a-041e5cdddf257a1a0407",
+          "file": "chip-overlap.spec.ts",
+          "line": 37,
+          "column": 7
+        },
+        {
+          "title": "in-chat compact artifact card has no overlapping chips (when a thread with artifacts exists)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "no inline artifact card in the chat view for this backend — /artifacts is the hard assertion",
+                  "location": {
+                    "file": "/tmp/wt/a45/web/e2e/chip-overlap.spec.ts",
+                    "line": 83,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 5411,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:10:39.499Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no inline artifact card in the chat view for this backend — /artifacts is the hard assertion",
+                      "location": {
+                        "file": "/tmp/wt/a45/web/e2e/chip-overlap.spec.ts",
+                        "line": 83,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-in-chat-compa-f1017-read-with-artifacts-exists--evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-in-chat-compa-f1017-read-with-artifacts-exists--evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/chip-overlap-in-chat-compa-f1017-read-with-artifacts-exists--evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "daf86b3f5c12c761013a-9cfb95684e1d0a1a9761",
+          "file": "chip-overlap.spec.ts",
+          "line": 71,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "pdf-inline-render.spec.ts",
+      "file": "pdf-inline-render.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "PDF artifact → side pane renders pdf.js pages (or the preview-unavailable fallback)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "no PDF artifact in this backend",
+                  "location": {
+                    "file": "/tmp/wt/a45/web/e2e/pdf-inline-render.spec.ts",
+                    "line": 52,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 20216,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:08:02.820Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no PDF artifact in this backend",
+                      "location": {
+                        "file": "/tmp/wt/a45/web/e2e/pdf-inline-render.spec.ts",
+                        "line": 52,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-PDF-arti-93347-eview-unavailable-fallback--evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-PDF-arti-93347-eview-unavailable-fallback--evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-PDF-arti-93347-eview-unavailable-fallback--evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "cc3fd16376a932d23e05-eb99b7c27bff93233aaf",
+          "file": "pdf-inline-render.spec.ts",
+          "line": 47,
+          "column": 5
+        },
+        {
+          "title": "PDF artifact → Artifacts preview pane renders pdf.js pages (or the fallback), one meta line, H1-style file name",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "no PDF artifact in this backend",
+                  "location": {
+                    "file": "/tmp/wt/a45/web/e2e/pdf-inline-render.spec.ts",
+                    "line": 71,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 20220,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:08:23.121Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no PDF artifact in this backend",
+                      "location": {
+                        "file": "/tmp/wt/a45/web/e2e/pdf-inline-render.spec.ts",
+                        "line": 71,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-PDF-arti-ac81c-eta-line-H1-style-file-name-evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-PDF-arti-ac81c-eta-line-H1-style-file-name-evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-PDF-arti-ac81c-eta-line-H1-style-file-name-evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "cc3fd16376a932d23e05-38e321a67a84541dae45",
+          "file": "pdf-inline-render.spec.ts",
+          "line": 66,
+          "column": 5
+        },
+        {
+          "title": "non-PDF office artifact in the side pane shows the preview-unavailable fallback (when one exists)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "no docx/xlsx/pptx artifact in this backend",
+                  "location": {
+                    "file": "/tmp/wt/a45/web/e2e/pdf-inline-render.spec.ts",
+                    "line": 96,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 697,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:08:43.439Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no docx/xlsx/pptx artifact in this backend",
+                      "location": {
+                        "file": "/tmp/wt/a45/web/e2e/pdf-inline-render.spec.ts",
+                        "line": 96,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-non-PDF--c14df-e-fallback-when-one-exists--evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-non-PDF--c14df-e-fallback-when-one-exists--evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-non-PDF--c14df-e-fallback-when-one-exists--evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "cc3fd16376a932d23e05-27078eaa21b57076a440",
+          "file": "pdf-inline-render.spec.ts",
+          "line": 89,
+          "column": 5
+        },
+        {
+          "title": "PDF artifact → side pane renders pdf.js pages (or the preview-unavailable fallback)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "no PDF artifact in this backend",
+                  "location": {
+                    "file": "/tmp/wt/a45/web/e2e/pdf-inline-render.spec.ts",
+                    "line": 52,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 20233,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:10:46.101Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no PDF artifact in this backend",
+                      "location": {
+                        "file": "/tmp/wt/a45/web/e2e/pdf-inline-render.spec.ts",
+                        "line": 52,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-PDF-arti-93347-eview-unavailable-fallback--evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-PDF-arti-93347-eview-unavailable-fallback--evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-PDF-arti-93347-eview-unavailable-fallback--evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "cc3fd16376a932d23e05-d663102b74aabfe49553",
+          "file": "pdf-inline-render.spec.ts",
+          "line": 47,
+          "column": 5
+        },
+        {
+          "title": "PDF artifact → Artifacts preview pane renders pdf.js pages (or the fallback), one meta line, H1-style file name",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "no PDF artifact in this backend",
+                  "location": {
+                    "file": "/tmp/wt/a45/web/e2e/pdf-inline-render.spec.ts",
+                    "line": 71,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 20366,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:11:06.436Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no PDF artifact in this backend",
+                      "location": {
+                        "file": "/tmp/wt/a45/web/e2e/pdf-inline-render.spec.ts",
+                        "line": 71,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-PDF-arti-ac81c-eta-line-H1-style-file-name-evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-PDF-arti-ac81c-eta-line-H1-style-file-name-evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-PDF-arti-ac81c-eta-line-H1-style-file-name-evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "cc3fd16376a932d23e05-ea4d9922334f6247d480",
+          "file": "pdf-inline-render.spec.ts",
+          "line": 66,
+          "column": 5
+        },
+        {
+          "title": "non-PDF office artifact in the side pane shows the preview-unavailable fallback (when one exists)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [
+                {
+                  "type": "skip",
+                  "description": "no docx/xlsx/pptx artifact in this backend",
+                  "location": {
+                    "file": "/tmp/wt/a45/web/e2e/pdf-inline-render.spec.ts",
+                    "line": 96,
+                    "column": 8
+                  }
+                }
+              ],
+              "expectedStatus": "skipped",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "skipped",
+                  "duration": 816,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:11:26.877Z",
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "no docx/xlsx/pptx artifact in this backend",
+                      "location": {
+                        "file": "/tmp/wt/a45/web/e2e/pdf-inline-render.spec.ts",
+                        "line": 96,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-non-PDF--c14df-e-fallback-when-one-exists--evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-non-PDF--c14df-e-fallback-when-one-exists--evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/pdf-inline-render-non-PDF--c14df-e-fallback-when-one-exists--evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "cc3fd16376a932d23e05-b305d7e481e31883cdd9",
+          "file": "pdf-inline-render.spec.ts",
+          "line": 89,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "routes-clean.spec.ts",
+      "file": "routes-clean.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "/overview → 200, 0 console errors, 0 page errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2677,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[2026-10-11T12:08:46.546Z] [evidence-desktop] /overview 1440x900 status=200 settled=networkidle console=0 page=0 2174ms\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:08:44.177Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--overview-→-200-0-console-errors-0-page-errors-evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--overview-→-200-0-console-errors-0-page-errors-evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--overview-→-200-0-console-errors-0-page-errors-evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65312282fed0073fe271-55592a0e61689ab71175",
+          "file": "routes-clean.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "/companies → 200, 0 console errors, 0 page errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2125,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[2026-10-11T12:08:48.798Z] [evidence-desktop] /companies 1440x900 status=200 settled=networkidle console=0 page=0 1719ms\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:08:46.928Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--companies-→-200-0-console-errors-0-page-errors-evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--companies-→-200-0-console-errors-0-page-errors-evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--companies-→-200-0-console-errors-0-page-errors-evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65312282fed0073fe271-c376a0f0e43eb365cbe0",
+          "file": "routes-clean.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "/news → 200, 0 console errors, 0 page errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2701,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[2026-10-11T12:08:51.484Z] [evidence-desktop] /news 1440x900 status=200 settled=networkidle console=0 page=0 2190ms\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:08:49.118Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--news-→-200-0-console-errors-0-page-errors-evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--news-→-200-0-console-errors-0-page-errors-evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--news-→-200-0-console-errors-0-page-errors-evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65312282fed0073fe271-9482afd18b3e854c4504",
+          "file": "routes-clean.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "/chat → 200, 0 console errors, 0 page errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2279,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[2026-10-11T12:08:53.712Z] [evidence-desktop] /chat 1440x900 status=200 settled=networkidle console=0 page=0 1579ms\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:08:51.969Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--chat-→-200-0-console-errors-0-page-errors-evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--chat-→-200-0-console-errors-0-page-errors-evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--chat-→-200-0-console-errors-0-page-errors-evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65312282fed0073fe271-ce6e2bf2418aa3d57b81",
+          "file": "routes-clean.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "/artifacts → 200, 0 console errors, 0 page errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1727,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[2026-10-11T12:08:56.223Z] [evidence-desktop] /artifacts 1440x900 status=200 settled=networkidle console=0 page=0 1358ms\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:08:54.699Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--artifacts-→-200-0-console-errors-0-page-errors-evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--artifacts-→-200-0-console-errors-0-page-errors-evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--artifacts-→-200-0-console-errors-0-page-errors-evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65312282fed0073fe271-e029d55f4004ecd3a581",
+          "file": "routes-clean.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "/settings → 200, 0 console errors, 0 page errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4464,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[2026-10-11T12:08:59.770Z] [evidence-desktop] /settings 1440x900 status=200 settled=networkidle console=0 page=0 3121ms\n"
+                    },
+                    {
+                      "text": "[2026-10-11T12:09:00.973Z] routes-clean rows=6 → /tmp/wt/a45/web/proof/evidence/routes-clean.json\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:08:56.494Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--settings-→-200-0-console-errors-0-page-errors-evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--settings-→-200-0-console-errors-0-page-errors-evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--settings-→-200-0-console-errors-0-page-errors-evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65312282fed0073fe271-97709faec85d463fe453",
+          "file": "routes-clean.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "/overview → 200, 0 console errors, 0 page errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3015,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[2026-10-11T12:11:30.400Z] [evidence-mobile] /overview 390x844 status=200 settled=networkidle console=0 page=0 2478ms\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:11:27.761Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--overview-→-200-0-console-errors-0-page-errors-evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--overview-→-200-0-console-errors-0-page-errors-evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--overview-→-200-0-console-errors-0-page-errors-evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65312282fed0073fe271-d7a35367fc9d413ebf9c",
+          "file": "routes-clean.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "/companies → 200, 0 console errors, 0 page errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2214,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[2026-10-11T12:11:32.675Z] [evidence-mobile] /companies 390x844 status=200 settled=networkidle console=0 page=0 1648ms\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:11:30.856Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--companies-→-200-0-console-errors-0-page-errors-evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--companies-→-200-0-console-errors-0-page-errors-evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--companies-→-200-0-console-errors-0-page-errors-evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65312282fed0073fe271-3c956c2dca75a3d34e06",
+          "file": "routes-clean.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "/news → 200, 0 console errors, 0 page errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2800,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[2026-10-11T12:11:35.478Z] [evidence-mobile] /news 390x844 status=200 settled=networkidle console=0 page=0 2181ms\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:11:33.139Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--news-→-200-0-console-errors-0-page-errors-evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--news-→-200-0-console-errors-0-page-errors-evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--news-→-200-0-console-errors-0-page-errors-evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65312282fed0073fe271-aeb5cc6f42b49fa3e372",
+          "file": "routes-clean.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "/chat → 200, 0 console errors, 0 page errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2371,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[2026-10-11T12:11:37.799Z] [evidence-mobile] /chat 390x844 status=200 settled=networkidle console=0 page=0 1541ms\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:11:36.098Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--chat-→-200-0-console-errors-0-page-errors-evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--chat-→-200-0-console-errors-0-page-errors-evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--chat-→-200-0-console-errors-0-page-errors-evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65312282fed0073fe271-456b4748c2b13db2e2db",
+          "file": "routes-clean.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "/artifacts → 200, 0 console errors, 0 page errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1859,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[2026-10-11T12:11:40.469Z] [evidence-mobile] /artifacts 390x844 status=200 settled=networkidle console=0 page=0 1378ms\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:11:38.927Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--artifacts-→-200-0-console-errors-0-page-errors-evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--artifacts-→-200-0-console-errors-0-page-errors-evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--artifacts-→-200-0-console-errors-0-page-errors-evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65312282fed0073fe271-eafcce25e1c2c0bac63d",
+          "file": "routes-clean.spec.ts",
+          "line": 36,
+          "column": 3
+        },
+        {
+          "title": "/settings → 200, 0 console errors, 0 page errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4654,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[2026-10-11T12:11:44.251Z] [evidence-mobile] /settings 390x844 status=200 settled=networkidle console=0 page=0 3187ms\n"
+                    },
+                    {
+                      "text": "[2026-10-11T12:11:45.546Z] routes-clean rows=6 → /tmp/wt/a45/web/proof/evidence/routes-clean.json\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:11:40.862Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--settings-→-200-0-console-errors-0-page-errors-evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--settings-→-200-0-console-errors-0-page-errors-evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/routes-clean--settings-→-200-0-console-errors-0-page-errors-evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65312282fed0073fe271-6b01bde361675f46108c",
+          "file": "routes-clean.spec.ts",
+          "line": 36,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "thinking-json-filter.spec.ts",
+      "file": "thinking-json-filter.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "desktop 1440×900",
+          "file": "thinking-json-filter.spec.ts",
+          "line": 50,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Thinking body has no planner JSON; Outputs card carries the planner-payload disclosure",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "evidence-desktop",
+                  "projectName": "evidence-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 21932,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T12:09:02.096Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/a45/web/proof/evidence/test-results/thinking-json-filter-deskt-de050--planner-payload-disclosure-evidence-desktop/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/a45/web/proof/evidence/test-results/thinking-json-filter-deskt-de050--planner-payload-disclosure-evidence-desktop/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/a45/web/proof/evidence/test-results/thinking-json-filter-deskt-de050--planner-payload-disclosure-evidence-desktop/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5a20cf3400a6aaa1b1e2-121b9a72ce7efc8fa5c9",
+              "file": "thinking-json-filter.spec.ts",
+              "line": 26,
+              "column": 7
+            },
+            {
+              "title": "Thinking body has no planner JSON; Outputs card carries the planner-payload disclosure",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "evidence-mobile",
+                  "projectName": "evidence-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 27954,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T12:11:46.639Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/a45/web/proof/evidence/test-results/thinking-json-filter-deskt-de050--planner-payload-disclosure-evidence-mobile/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/a45/web/proof/evidence/test-results/thinking-json-filter-deskt-de050--planner-payload-disclosure-evidence-mobile/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/a45/web/proof/evidence/test-results/thinking-json-filter-deskt-de050--planner-payload-disclosure-evidence-mobile/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5a20cf3400a6aaa1b1e2-90d9ad62ed86de7bd78f",
+              "file": "thinking-json-filter.spec.ts",
+              "line": 26,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "mobile 390×844",
+          "file": "thinking-json-filter.spec.ts",
+          "line": 51,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Thinking body has no planner JSON; Outputs card carries the planner-payload disclosure",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "evidence-desktop",
+                  "projectName": "evidence-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 23287,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T12:09:25.937Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/a45/web/proof/evidence/test-results/thinking-json-filter-mobil-b08e0--planner-payload-disclosure-evidence-desktop/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/a45/web/proof/evidence/test-results/thinking-json-filter-mobil-b08e0--planner-payload-disclosure-evidence-desktop/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/a45/web/proof/evidence/test-results/thinking-json-filter-mobil-b08e0--planner-payload-disclosure-evidence-desktop/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5a20cf3400a6aaa1b1e2-fcbb719f99cecb3a0424",
+              "file": "thinking-json-filter.spec.ts",
+              "line": 26,
+              "column": 7
+            },
+            {
+              "title": "Thinking body has no planner JSON; Outputs card carries the planner-payload disclosure",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "evidence-mobile",
+                  "projectName": "evidence-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 23464,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T12:12:16.424Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/a45/web/proof/evidence/test-results/thinking-json-filter-mobil-b08e0--planner-payload-disclosure-evidence-mobile/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/a45/web/proof/evidence/test-results/thinking-json-filter-mobil-b08e0--planner-payload-disclosure-evidence-mobile/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/a45/web/proof/evidence/test-results/thinking-json-filter-mobil-b08e0--planner-payload-disclosure-evidence-mobile/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5a20cf3400a6aaa1b1e2-2d07a4b81ddafa197934",
+              "file": "thinking-json-filter.spec.ts",
+              "line": 26,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "title-ellipsis.spec.ts",
+      "file": "title-ellipsis.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "thread titles ellipsise + carry the full title (desktop)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2611,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[title-ellipsis desktop] threads-menu-item {\"overflowOk\":false,\"textOverflow\":\"ellipsis\",\"whiteSpace\":\"nowrap\",\"outerTextOverflow\":\"ellipsis\",\"title\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"spanTitle\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"hasSpan\":true,\"text\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\"}\n"
+                    },
+                    {
+                      "text": "[title-ellipsis desktop] chat-title {\"overflowOk\":true,\"textOverflow\":\"ellipsis\",\"whiteSpace\":\"nowrap\",\"outerTextOverflow\":\"ellipsis\",\"title\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"spanTitle\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"hasSpan\":true,\"text\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\"}\n"
+                    },
+                    {
+                      "text": "[title-ellipsis desktop] welcome-thread {\"overflowOk\":false,\"textOverflow\":\"ellipsis\",\"whiteSpace\":\"nowrap\",\"outerTextOverflow\":\"ellipsis\",\"title\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"spanTitle\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"hasSpan\":true,\"text\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\"}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:09:51.245Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/title-ellipsis-thread-titl-5dc7e-rry-the-full-title-desktop--evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/title-ellipsis-thread-titl-5dc7e-rry-the-full-title-desktop--evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/title-ellipsis-thread-titl-5dc7e-rry-the-full-title-desktop--evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f63493d738836471cc3a-125581493c7e22cd3660",
+          "file": "title-ellipsis.spec.ts",
+          "line": 37,
+          "column": 7
+        },
+        {
+          "title": "thread titles ellipsise + carry the full title (mobile-390)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-desktop",
+              "projectName": "evidence-desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2218,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[title-ellipsis mobile-390] threads-menu-item {\"overflowOk\":false,\"textOverflow\":\"ellipsis\",\"whiteSpace\":\"nowrap\",\"outerTextOverflow\":\"ellipsis\",\"title\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"spanTitle\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"hasSpan\":true,\"text\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\"}\n"
+                    },
+                    {
+                      "text": "[title-ellipsis mobile-390] chat-title {\"overflowOk\":false,\"textOverflow\":\"ellipsis\",\"whiteSpace\":\"nowrap\",\"outerTextOverflow\":\"ellipsis\",\"title\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"spanTitle\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"hasSpan\":true,\"text\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\"}\n"
+                    },
+                    {
+                      "text": "[title-ellipsis mobile-390] welcome-thread {\"overflowOk\":false,\"textOverflow\":\"ellipsis\",\"whiteSpace\":\"nowrap\",\"outerTextOverflow\":\"ellipsis\",\"title\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"spanTitle\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"hasSpan\":true,\"text\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\"}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:09:54.301Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/title-ellipsis-thread-titl-6c07a--the-full-title-mobile-390--evidence-desktop/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/title-ellipsis-thread-titl-6c07a--the-full-title-mobile-390--evidence-desktop/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/title-ellipsis-thread-titl-6c07a--the-full-title-mobile-390--evidence-desktop/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f63493d738836471cc3a-8febe6fd14fdd00209f9",
+          "file": "title-ellipsis.spec.ts",
+          "line": 37,
+          "column": 7
+        },
+        {
+          "title": "thread titles ellipsise + carry the full title (desktop)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2769,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[title-ellipsis desktop] threads-menu-item {\"overflowOk\":false,\"textOverflow\":\"ellipsis\",\"whiteSpace\":\"nowrap\",\"outerTextOverflow\":\"ellipsis\",\"title\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"spanTitle\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"hasSpan\":true,\"text\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\"}\n"
+                    },
+                    {
+                      "text": "[title-ellipsis desktop] chat-title {\"overflowOk\":true,\"textOverflow\":\"ellipsis\",\"whiteSpace\":\"nowrap\",\"outerTextOverflow\":\"ellipsis\",\"title\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"spanTitle\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"hasSpan\":true,\"text\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\"}\n"
+                    },
+                    {
+                      "text": "[title-ellipsis desktop] welcome-thread {\"overflowOk\":false,\"textOverflow\":\"ellipsis\",\"whiteSpace\":\"nowrap\",\"outerTextOverflow\":\"ellipsis\",\"title\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"spanTitle\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"hasSpan\":true,\"text\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\"}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:12:41.701Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/title-ellipsis-thread-titl-5dc7e-rry-the-full-title-desktop--evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/title-ellipsis-thread-titl-5dc7e-rry-the-full-title-desktop--evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/title-ellipsis-thread-titl-5dc7e-rry-the-full-title-desktop--evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f63493d738836471cc3a-f2cd3cb4ea94d26019bc",
+          "file": "title-ellipsis.spec.ts",
+          "line": 37,
+          "column": 7
+        },
+        {
+          "title": "thread titles ellipsise + carry the full title (mobile-390)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "evidence-mobile",
+              "projectName": "evidence-mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2484,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[title-ellipsis mobile-390] threads-menu-item {\"overflowOk\":false,\"textOverflow\":\"ellipsis\",\"whiteSpace\":\"nowrap\",\"outerTextOverflow\":\"ellipsis\",\"title\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"spanTitle\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"hasSpan\":true,\"text\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\"}\n"
+                    },
+                    {
+                      "text": "[title-ellipsis mobile-390] chat-title {\"overflowOk\":false,\"textOverflow\":\"ellipsis\",\"whiteSpace\":\"nowrap\",\"outerTextOverflow\":\"ellipsis\",\"title\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"spanTitle\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"hasSpan\":true,\"text\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\"}\n"
+                    },
+                    {
+                      "text": "[title-ellipsis mobile-390] welcome-thread {\"overflowOk\":false,\"textOverflow\":\"ellipsis\",\"whiteSpace\":\"nowrap\",\"outerTextOverflow\":\"ellipsis\",\"title\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"spanTitle\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\",\"hasSpan\":true,\"text\":\"Which of my context companies moved most since the last scoring run, and create me a document on all of these companies\"}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T12:12:44.914Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/title-ellipsis-thread-titl-6c07a--the-full-title-mobile-390--evidence-mobile/test-finished-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/title-ellipsis-thread-titl-6c07a--the-full-title-mobile-390--evidence-mobile/video.webm"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/wt/a45/web/proof/evidence/test-results/title-ellipsis-thread-titl-6c07a--the-full-title-mobile-390--evidence-mobile/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f63493d738836471cc3a-d0df0c979428d0c7e82c",
+          "file": "title-ellipsis.spec.ts",
+          "line": 37,
+          "column": 7
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-11T12:07:13.686Z",
+    "duration": 334291.16699999996,
+    "expected": 20,
+    "skipped": 12,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
