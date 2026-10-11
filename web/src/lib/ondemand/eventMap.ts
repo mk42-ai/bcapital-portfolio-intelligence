@@ -174,6 +174,9 @@ export const LABEL = {
 export type ThinkingDeltaClass = "prose" | "payload";
 export type ThinkingPhase = "planning" | "step";
 const PAYLOAD_MARKER_RE = /"pluginId"|"api_request_parameters"|"operationId"|"agentId"\s*:|\bchars each\b|"user_query"\s*:|"steps"\s*:\s*\[/;
+/** Unquoted planner scaffolding inside *_thinking prose ("Plugin: perplexity, pluginId: plugin-…, identifier: rest_api." / "api_request_parameters: {…}"):
+ *  a whole LINE that is tool-definition bookkeeping, not reasoning. Matched against the delta and against the current (last) line of the accumulated text. */
+const PAYLOAD_LINE_RE = /(^|\n)\s*(?:plugin\s*:\s*[\w-]+\s*,\s*pluginid\s*:|pluginid\s*:\s*plugin-\d+|api_request_parameters\s*:|identifier\s*:\s*rest_api|operationid\s*:)/i;
 const PAYLOAD_OPEN_RE = /^\s*(?:```(?:json)?\s*)?[\[{]/;
 /** Net brace/bracket depth of `text` ignoring characters inside JSON strings (so prose inside a payload never closes it early). */
 export function jsonDepth(text: string): number {
@@ -199,6 +202,9 @@ export function classifyThinkingDelta(kind: string, accumulatedText: string, del
   const d = delta ?? accumulatedText;
   if (PAYLOAD_MARKER_RE.test(d)) return "payload";
   if (PAYLOAD_OPEN_RE.test(d)) return "payload";
+  if (PAYLOAD_LINE_RE.test(d)) return "payload";
+  // the delta continues a scaffolding line that started earlier ("Plugin: perplexity, pluginId: plu" + "gin-1722260873, identifier…")
+  if (delta != null) { const lastLine = accumulatedText.slice(accumulatedText.lastIndexOf("\n") + 1); if (PAYLOAD_LINE_RE.test("\n" + lastLine) && !/\n/.test(delta)) return "payload"; }
   const before = delta != null && accumulatedText.endsWith(delta) ? accumulatedText.slice(0, accumulatedText.length - delta.length) : "";
   if (before) {
     // inside an open fence → payload until the closing ``` arrives

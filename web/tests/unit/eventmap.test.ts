@@ -155,5 +155,15 @@ console.log("unit1: classifyThinkingDelta (prose vs planner payload) + pluginLab
   eq("pluginLabel fallback = raw id", pluginLabel("plugin-424242"), "plugin-424242");
 }
 
+
+{
+  const c = (kind: string, acc: string, delta?: string) => classifyThinkingDelta(kind, acc, delta);
+  // turn-4 regression (live run 10:31Z): unquoted scaffolding lines inside *_thinking prose are payload, surrounding reasoning stays prose
+  eq("unquoted 'Plugin: perplexity, pluginId: plugin-…' line → payload", c("planning_thinking", "One step plan.\n\nPlugin: perplexity, pluginId: plugin-1722260873, identifier: rest_api.", "\n\nPlugin: perplexity, pluginId: plugin-1722260873, identifier: rest_api."), "payload");
+  eq("continuation of a scaffolding line → payload", c("planning_thinking", "Plugin: perplexity, pluginId: plu", "gin-1722260873, identifier: rest_api."), "payload");
+  eq("'api_request_parameters: {…}' line → payload", c("planning_thinking", "x\n\napi_request_parameters: {\"message\": \"In one sentence\"}", "\n\napi_request_parameters: {\"message\": \"In one sentence\"}"), "payload");
+  eq("reasoning sentence mentioning the word plugin stays prose", c("planning_thinking", "Use the perplexity plugin. Keep it minimal — one step.", " Keep it minimal — one step."), "prose");
+  eq("title line stays prose", c("planning_thinking", "Title: \"Searching Fervo Energy's business\"", "Title: \"Searching Fervo Energy's business\""), "prose");
+}
 console.log(`\n${pass} passed, ${failures.length} failed`);
 if (failures.length) { console.error("FAILED:", failures.join("; ")); process.exit(1); }
