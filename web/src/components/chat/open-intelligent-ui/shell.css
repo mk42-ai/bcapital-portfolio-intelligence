@@ -832,3 +832,47 @@
 /* brand icons (2026-10-11 flat-line set): Outputs step rows + welcome starters */
 .oiu-outputs__call [data-testid="brand-icon"] { margin-left: 2px; border: 1px solid #e5e7eb; vertical-align: -3px; }
 .oiu-welcome__starter > [data-testid="brand-icon"] { flex: none; margin-top: 1px; border: 1px solid #e5e7eb; }
+
+/* od */
+/* OnDemand-playground run log look (ThinkingProcess + StatusAccordion step rows). CSS-only over the existing markup: every data-testid,
+   data-state, class and DOM order is unchanged. Neutral greys + brand green only (no blue); head text stays ≥4.5:1; the
+   shimmer is on the child title, never on .oiu-think__head itself. Scoped under .chat-shell so it wins over the a2/a4/a11 blocks. */
+.oiu-ring { display: inline-block; flex: none; box-sizing: border-box; width: 14px; height: 14px; border-radius: 999px; border: 1.5px solid #e4e6e9; border-top-color: #5c6168; }
+.chat-shell .oiu-shimmer-text { background-image: linear-gradient(90deg, #5c6168 0%, #5c6168 38%, #16181b 50%, #5c6168 62%, #5c6168 100%); background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: oiu-text-shimmer 1.6s linear infinite; }
+@keyframes oiu-text-shimmer { 0% { background-position: 100% 0; } 100% { background-position: 0% 0; } }
+/* Thinking: borderless accordion row (spinner · shimmering title · phases · chevron) + a left rail for the reasoning text */
+.chat-shell .oiu-think, .chat-shell .oiu-think--live { border: 0; border-radius: 0; background: transparent; overflow: visible; }
+.chat-shell .oiu-think__head { gap: 10px; padding: 4px 0; min-height: 28px; color: #5c6168; font-size: 13px; font-weight: 500; }
+.chat-shell .oiu-think__done { flex: none; color: #047857; }
+.chat-shell .oiu-think__head > .oiu-chevron { order: 1; margin-left: 0; width: 15px; height: 15px; }
+.chat-shell .oiu-think__head > .oiu-think__tail { order: 2; color: #5c6168; }
+.chat-shell .oiu-think .oiu-chevron[data-open="true"] { transform: rotate(0deg); }
+.chat-shell .oiu-think .oiu-chevron[data-open="false"] { transform: rotate(-90deg); }
+.chat-shell .oiu-think__phases { gap: 0; }
+.chat-shell .oiu-think__phase { height: auto; padding: 0; border: 0; border-radius: 0; background: transparent; color: #5c6168; font-size: 11.5px; font-weight: 400; line-height: 16px; }
+.chat-shell .oiu-think__phase + .oiu-think__phase::before { content: "·"; margin: 0 5px 0 1px; color: #9ea2a8; }
+.chat-shell .oiu-think--live .oiu-think__phase:last-child { color: #047857; }
+.chat-shell .oiu-think__body, .chat-shell .oiu-think--live .oiu-think__body { height: auto; max-height: 240px; margin: 2px 0 6px 6px; padding: 2px 0 2px 16px; border-left: 1px solid #e4e6e9; }
+.chat-shell .oiu-think__pre { font-family: inherit; font-size: 13px; line-height: 1.6; color: #5c6168; }
+/* Step rows: borderless [status glyph][plugin chip][label + query][timing], OD StatusAccordion density */
+.chat-shell .oiu-work-list { gap: 2px; }
+.chat-shell .oiu-work, .chat-shell .oiu-work--skeleton { grid-template-columns: 14px 22px minmax(0, 1fr) auto; column-gap: 10px; height: auto; min-height: 40px; max-height: 72px;
+  padding: 4px 0; border: 0; border-radius: 0; background: transparent; }
+.chat-shell .oiu-work--failed { border: 0; background: transparent; }
+.chat-shell .oiu-work__icon { width: 14px; height: 14px; margin: 0; }
+.chat-shell .oiu-work__ring { width: 14px; height: 14px; border: 1.5px solid #e4e6e9; }
+.chat-shell .oiu-work__ring--running::after { inset: -1.5px; border-width: 1.5px; border-top-color: #5c6168; }
+.chat-shell .oiu-work__ring--done, .chat-shell .oiu-work__ring--failed { border-color: transparent; background: transparent; }
+.chat-shell .oiu-work__ring-ico { width: 14px; height: 14px; stroke-width: 2.5; }
+.chat-shell .oiu-work__ring--done .oiu-work__ring-ico { color: #047857; }
+.chat-shell .oiu-work .oiu-work__chips { width: 22px; height: 22px; border: 0; border-radius: 6px; background: rgba(207, 207, 207, 0.4); }
+.chat-shell .oiu-work .oiu-work__chips img, .chat-shell .oiu-work .oiu-work__chips svg { width: 16px; height: 16px; }
+.chat-shell .oiu-work__label { font-weight: 500; }
+.chat-shell .oiu-work:not(.oiu-work--failed) .oiu-work__label:not(.oiu-shimmer-text) { color: #202327; }
+@media (max-width: 640px) {
+  .chat-shell .oiu-think__body, .chat-shell .oiu-think--live .oiu-think__body { max-height: 160px; }
+  .chat-shell .oiu-work, .chat-shell .oiu-work--skeleton { height: auto; min-height: 40px; max-height: 72px; padding: 4px 0; }
+}
+@media (prefers-reduced-motion: reduce) { .chat-shell .oiu-shimmer-text { animation: none; } }
+/* end od */

@@ -535,6 +535,8 @@ function mediaFrom(text: string, arts: Artifact[]) {
   for (const a of arts) { if (a.kind === "image") images.push({ src: a.contentUrl, alt: a.name, caption: a.name }); else if (a.kind === "video") videos.push({ src: a.contentUrl, title: a.name }); }
   return { images, videos };
 }
+/** OnDemand-playground status glyph: 14px neutral ring spinner (rotation comes from .oiu-spin, so reduced-motion rules still apply). */
+const StatusSpinner = () => <span className="oiu-ring oiu-spin" aria-hidden />;
 /** Working row for one plugin/agent action — a4: uniform 56px grid [ring][chip][label+query][timing]. */
 function WorkingRing({ state }: { state: "running" | "done" | "failed" | "queued" }) {
   return (
@@ -755,8 +757,8 @@ function ThinkingBlock({ text, kinds, plan, answerStarted, live, collapsed, elap
   return (
     <section className={`oiu-think${isOpen ? " oiu-think--open" : ""}${streaming ? " oiu-think--live" : ""}`} data-testid="thinking-block" data-state={streaming ? "streaming" : isOpen ? "expanded" : "collapsed"} data-auto-expanded={auto && isOpen ? "true" : "false"} data-manual={manualRef.current ? "true" : "false"} data-chars={text.length} data-phases={phases.join(",")}>
       <button type="button" className="oiu-think__head" aria-expanded={isOpen} onClick={toggle}>
-        {streaming ? <Loader2 className="size-3.5 oiu-spin" aria-hidden /> : <Brain className="size-3.5" aria-hidden />}
-        <span className="oiu-think__title">{streaming ? "Thinking" : `Thought for ${secs} s`}</span>
+        {streaming ? <StatusSpinner /> : <Check className="size-3.5 oiu-think__done" aria-hidden />}
+        <span className={`oiu-think__title${streaming ? " oiu-shimmer-text" : ""}`}>{streaming ? "Thinking" : `Thought for ${secs} s`}</span>
         {phases.length > 0 && <span className="oiu-think__phases" data-testid="thinking-phases">{phases.map((p) => <span key={p} className="oiu-think__phase" data-phase={p}>{p}</span>)}</span>}
         {streaming && lastLine && <span className="oiu-think__tail" aria-hidden>{lastLine.slice(-72)}</span>}
         <Chevron open={isOpen} />
@@ -894,15 +896,16 @@ function PendingRow() {
   return createPortal(
     <div className="oiu-run oiu-run--skeleton" data-testid="run-skeleton" data-phase={st.phase || "connecting"} data-first-status-ms={st.firstStatusMs ?? ""}>
       <RunHeader live startedAt={st.startedAt} totalMs={null} pluginIds={st.pluginIds} />
-      <section className="oiu-think oiu-think--live oiu-think--open" data-testid="thinking-block" data-state="streaming" data-chars={st.thinking.length} data-phases={phases.join(",")}>
-        <p className="oiu-think__head"><Loader2 className="size-3.5 oiu-spin" aria-hidden /><span className="oiu-think__title">Thinking</span>{phases.length > 0 && <span className="oiu-think__phases">{phases.map((p) => <span key={p} className="oiu-think__phase" data-phase={p}>{p}</span>)}</span>}</p>
-        <div className="oiu-think__body" ref={(el) => { if (el) el.scrollTop = el.scrollHeight; }}>{st.thinking ? <pre className="oiu-think__pre">{st.thinking}</pre> : <span className="oiu-shimmer" aria-hidden><span /><span /></span>}</div>
+      {/* OnDemand-playground look: a one-line "Thinking" head; the reasoning rail only mounts once reasoning text exists (no empty box). */}
+      <section className={`oiu-think oiu-think--live${st.thinking ? " oiu-think--open" : ""}`} data-testid="thinking-block" data-state="streaming" data-chars={st.thinking.length} data-phases={phases.join(",")}>
+        <p className="oiu-think__head"><StatusSpinner /><span className="oiu-think__title oiu-shimmer-text">Thinking</span>{phases.length > 0 && <span className="oiu-think__phases">{phases.map((p) => <span key={p} className="oiu-think__phase" data-phase={p}>{p}</span>)}</span>}</p>
+        {st.thinking && <div className="oiu-think__body" ref={(el) => { if (el) el.scrollTop = el.scrollHeight; }}><pre className="oiu-think__pre">{st.thinking}</pre></div>}
       </section>
       <ol className="oiu-work-list" aria-label="Working" data-testid="working-list">
         <li className="oiu-work oiu-work--running oiu-work--skeleton" data-testid="working-row" data-state="queued">
-          <span className="oiu-work__icon" aria-hidden><Loader2 className="size-3.5 oiu-spin" /></span>
+          <span className="oiu-work__icon" aria-hidden><StatusSpinner /></span>
           <span className="oiu-work__chips" data-testid="working-chips">{skelPlugins.map((id) => <PluginFavicon key={id} id={id} size={16} />)}</span>
-          <span className="oiu-work__text"><span className="oiu-work__label">{label}</span><span className="oiu-work__query" data-testid="pending-row" data-first-status-ms={st.firstStatusMs ?? ""}>{secs.toFixed(1)} s{st.firstStatusMs != null ? ` · first event ${st.firstStatusMs} ms` : ""}</span></span>
+          <span className="oiu-work__text"><span className="oiu-work__label oiu-shimmer-text">{label}</span><span className="oiu-work__query" data-testid="pending-row" data-first-status-ms={st.firstStatusMs ?? ""}>{secs.toFixed(1)} s{st.firstStatusMs != null ? ` · first event ${st.firstStatusMs} ms` : ""}</span></span>
         </li>
       </ol>
     </div>, host);

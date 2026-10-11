@@ -22,7 +22,8 @@ export const viewport: Viewport = { themeColor: "#ffffff", colorScheme: "light",
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`light ${display.variable} ${body.variable}`} style={{ colorScheme: "light" }}>
-      <body>
+      {/* Browser extensions (e.g. Grammarly: data-gr-ext-installed) add attributes to <body> before hydration; ignore those attribute diffs only. */}
+      <body suppressHydrationWarning>
         <a href="#main" className="sr-only sr-only-focusable fixed left-2 top-2 z-[100] rounded-md bg-primary px-3 py-2 text-primary-foreground">Skip to main content</a>
         <TooltipProvider delayDuration={150}>
           <Shell>{children}</Shell>
