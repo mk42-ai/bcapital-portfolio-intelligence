@@ -69,7 +69,11 @@ async function OverviewBody({ searchParams }: { searchParams: Promise<Record<str
         { label: "Portfolio Signal Score", value: sig.data.portfolio.n ? `${Math.round(sig.data.portfolio.mean)} / 100` : "—", sub: sig.data.portfolio.n ? `p25–p75 ${Math.round(sig.data.portfolio.p25)}–${Math.round(sig.data.portfolio.p75)} · ${sig.data.portfolio.n} scored` : `sentiment ${fmtScore(pf.data.portfolio?.avg_score ?? 0)} · signals offline` },
         { label: "Last workflow run", value: lastRun ? lastRun.receivedAt.slice(11, 16) + " UTC" : "—", sub: lastRun ? `${lastRun.workflowName ?? lastRun.source} · ${lastRun.receivedAt.slice(0, 10)}` : "no runs yet" },
       ]} />
+      {/* verdict → movement → news: Top movers (span 5) and News Pulse (span 7) share one bento row */}
+      <div className="overview-bento mt-5">
       <TopMovers movers={[...all].sort((a, b) => Math.abs(b.sentiment.delta ?? 0) - Math.abs(a.sentiment.delta ?? 0)).slice(0, 6).map((c) => ({ slug: c.slug, name: c.name, sector: c.sector, score: c.sentiment.score, delta: c.sentiment.delta ?? null, prior_run_at: c.sentiment.prior_run_at ?? null, logo_url: c.logo_url }))} lastRunAt={lastRun?.receivedAt ?? null} />
+      <NewsMiniFeed items={news.data.slice(0, 8).map((n) => ({ title: n.title, url: n.url, source: n.source, published_at: n.published_at, company_name: n.company_name, company_slug: n.company_slug }))} total={news.total} />
+      </div>
       <Suspense fallback={<Skeleton className="mb-6 h-24 w-full" />}>
         <Filters sectors={uniq(all.map((c) => c.sector))} regions={uniq(all.map((c) => c.region))} stages={uniq(all.map(stageOf))} statuses={["private", "public", "unicorn", "renamed", "merged"]} />
       </Suspense>
@@ -95,7 +99,6 @@ async function OverviewBody({ searchParams }: { searchParams: Promise<Record<str
           </CardContent></Card>
       </div>
 
-      <NewsMiniFeed items={news.data.slice(0, 8).map((n) => ({ title: n.title, url: n.url, source: n.source, published_at: n.published_at, company_name: n.company_name, company_slug: n.company_slug }))} total={news.total} />
       <div className="overview-bento mt-5 grid min-w-0 gap-5 xl:grid-cols-2">
         <Card className="min-w-0" data-bento="heatmap" elevate><CardHeader><CardTitle>KPI heatmap</CardTitle><CardDescription>Rows: focus companies + top movers (24). Columns scaled 0–100: sentiment, news volume, funding recency.</CardDescription></CardHeader><CardContent><HeatmapSSR rows={heatRows} /></CardContent></Card>
         <Card className="min-w-0" data-bento="estimates" elevate><CardHeader><CardTitle>Estimated ownership & ticket</CardTitle><CardDescription>Every value is a flagged estimate — hover/focus the badge for <code>estimate_confidence</code> + <code>estimate_rationale</code>.</CardDescription></CardHeader>
