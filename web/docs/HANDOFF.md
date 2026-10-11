@@ -812,3 +812,17 @@ Lanes ran as parallel subagents against origin/main and were checkpoint-committe
 | G | ui-validator at 1440×900 + 390×844 (chat live/settled/report, artifacts empty/page/side-pane, company PitchBook, news, overview), tsc 0/0, `next build` 0, secret scan 0, Playwright 6/6, no horizontal overflow at 390 px | `web/proof/run-ux/2026-10-11-recovery/` |
 
 Smoothness (measured, this run): desktop 9/10, mobile 9/10 — first skeleton < 300 ms, Thinking never moves, 0 console errors, 0 overflow; the remaining point is the 26–34 s upstream first-token wait that only the heartbeat timer and Working rows bridge.
+
+## 17. Turn-3 continuation (2026-10-11, `0b0a2fc` → `e51d6ec`)
+
+| Unit | Scope | Status | Commits | Window (UTC) |
+|---|---|---|---|---|
+| assets | asset bundle zip + repo mirror + manifest/README/ASSET_BUNDLE.md | green | `08d4e05` | 08:20–08:23 |
+| artifacts | status chip, snippet, version history, `GET /artifacts/{id}/versions` | green | `f7fed3a` | 08:20–08:28 |
+| stream | raw upstream SSE audit, run-view order 8→9, thread re-open + `?thread`, 390 px pass | green | `1b0a891`, `565549d` | 08:21–08:27 |
+| e2e | evidence suite (video/trace/HTML report) for doc/image upload, reload, download, previews | see `web/proof/evidence/README.md` | `turn3/e2e` | 08:22– |
+
+Deployment: same sandbox `sbx_tgkU2TfsATcmyo4SiAWP4azShxfe` updated in place (API `1.0.0-preview-e51d6ec`, Next BUILD_ID `M9OxWZim5FnYH8bTALVdn`,
+08:39Z). Still open: Portfolio Plugin id (upstream rejects every schema encoding — `proof/data-lane/plugin-registration-2026-10-11.log.txt`),
+no durable OnDemand serverless endpoint (sandboxes expire), video uploads are not in the relay allow-list (no mp4 in `ALLOWED`), so the video
+side pane is exercised only with poster/play rendering, not with a stored video artifact.

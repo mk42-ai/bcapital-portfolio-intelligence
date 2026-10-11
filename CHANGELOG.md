@@ -1,5 +1,35 @@
 # Changelog
 
+## 2026-10-11 — turn 3 continuation: artifacts card v2, stream audit, thread re-open, asset bundle, evidence suite (`e51d6ec` →)
+
+### Added
+- **Artifacts card v2** (`turn3/artifacts`, f7fed3a): `[type icon] name · [kind] [vN] [status chip] [input|generated]`; status chip
+  `artifact-status` = Verified (green, bytes in backend AND OnDemand media stored or generated output answering) · Processing (amber) ·
+  Stored locally (grey) · Failed (red); lazy **preview snippet** (`artifact-snippet`: first 240 chars for text/markdown/csv/json, honest
+  "PDF · N KB · page preview on open" / "Video · opens in the side pane" otherwise, ≤1 fetch per id, never >2 MB); **version history**
+  (`artifact-versions-toggle` → `artifact-version-row` with per-version Download) backed by new `GET /artifacts/{id}/versions`
+  (+ OpenAPI, + `scripts/test.ts` case, + web proxy `/api/artifacts/[id]/versions`); richer empty state with "Go to Chat".
+- **Raw upstream SSE audit** (`turn3/stream`, 1b0a891): `web/scripts/record-upstream-sse.mjs` recorded a 3-step run straight from
+  `api.on-demand.io` (699 data frames, 47.96 s to `[DONE]`): eventTypes planning_thinking/planning_output/step_thinking/step_output/
+  plugin_sources/fulfillment_thinking/fulfillment/metricsLog + 15 heartbeats — **zero `message/statusLog` frames, so `summarize_history.initialized`
+  / `.completed` were not observed**; the "Summarising step N" checkpoint is bridge-derived (step boundary = `plugin_sources(N)` → first frame of
+  step N+1). Documented in `docs/ONDEMAND_SSE_FRAMES.md` + 12 new eventmap assertions (60/60).
+- **Thread re-open after reload** fixed: OpenUI only called `loadThreads()` from its own sidebar (replaced by our shell) → `Persistence` now
+  loads threads on mount; `/chat?thread=<id>` deep link; new `web/e2e/thread-reopen.spec.ts` (1/1 passed against the deployed build).
+- **Run-view order** now exactly the contract: … answer → (8) collapsed sources strip → (9) Artifacts card → data gap → (10) footer;
+  `browser-action-done` button on the awaiting_browser_action card; 390 px pass (header ≤2 lines, Working label ellipsis, favicon strip ≤5,
+  stacked prompt buttons, `overflow-wrap:anywhere` on answer links/code).
+- **Asset bundle** (`turn3/assets`, 08d4e05): `web/public/assets/bundle/` (icons/file-types ×13, icons/upload-states ×4, charts ×2,
+  illustrations ×2, `manifest.json` with sha256 + measured palettes + roles, `README.md` icon spec) and `web/docs/ASSET_BUNDLE.md`;
+  the deliverable `ondemand-artifact-asset-bundle.zip` (14.6 MB) is built from the same files. All 17 icons already in
+  `web/public/icons/artifacts/` are byte-identical (sha256) to the bundle.
+
+### Verified on the redeployed sandbox (frontend https://sb-485hwxjqqz7l.vercel.run · backend https://sb-22j0v0grzslt.vercel.run, e51d6ec)
+- Gates: root `tsc` 0 · web `tsc` 0 · `next build` exit 0 · `scripts/test.ts` all passed · `test:eventmap` 60/60 · secret scan 0.
+- Routes `/overview /company/1au /news /chat /artifacts /settings` 200, 0 console / 0 page errors; `/artifacts` renders `artifact-status`,
+  `artifact-version`, `artifact-versions-toggle`, `artifact-download` at 1440×900 and 390×844 (ui-validator).
+- Live docs re-fetched 2026-10-11T08:17Z: the five reference PDFs/HTML and the five OpenAPI fragments are sha256-identical to the committed copies.
+
 ## 2026-10-11 — seven-lane parallel build (run view · artifacts · media · uploads · data · QA), merged at `375484e`
 
 Orchestrated as seven time-boxed lanes on separate branches (`lane/a`…`lane/g`), each pushed as soon as it was green, then merged into `main`
