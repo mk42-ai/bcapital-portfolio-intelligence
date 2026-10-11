@@ -1,0 +1,145 @@
+{
+  "schema": "gates/v1",
+  "startedAt": "2026-10-11T12:05:15.171Z",
+  "finishedAt": "2026-10-11T12:05:27.458Z",
+  "totalMs": 12287,
+  "node": "v22.23.3",
+  "git": {
+    "head": "7d691cc",
+    "branch": "t5/a41"
+  },
+  "flags": {
+    "build": false,
+    "unit": true,
+    "secrets": true
+  },
+  "ok": true,
+  "summary": {
+    "pass": 7,
+    "fail": 0,
+    "skipped": 2
+  },
+  "gates": [
+    {
+      "name": "tsc:root",
+      "status": "pass",
+      "hard": true,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "ms": 4531,
+      "startedAt": "2026-10-11T12:05:15.171Z",
+      "finishedAt": "2026-10-11T12:05:19.704Z",
+      "cwd": ".",
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.json --noEmit",
+      "outputTail": ""
+    },
+    {
+      "name": "tsc:web",
+      "status": "pass",
+      "hard": true,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "ms": 4623,
+      "startedAt": "2026-10-11T12:05:19.705Z",
+      "finishedAt": "2026-10-11T12:05:24.328Z",
+      "cwd": "web",
+      "command": "node node_modules/typescript/bin/tsc --noEmit",
+      "outputTail": ""
+    },
+    {
+      "name": "eslint",
+      "status": "skipped",
+      "hard": true,
+      "reason": "eslint is not installed in web/node_modules (no eslint / eslint-config-next package; install forbidden in this pass)",
+      "ms": 0,
+      "startedAt": "2026-10-11T12:05:24.329Z",
+      "finishedAt": "2026-10-11T12:05:24.329Z"
+    },
+    {
+      "name": "next:build",
+      "status": "skipped",
+      "hard": false,
+      "reason": "pass --build to run (≈3 min on 1 CPU; the merge agent runs it once)",
+      "ms": 0,
+      "startedAt": "2026-10-11T12:05:24.329Z",
+      "finishedAt": "2026-10-11T12:05:24.329Z"
+    },
+    {
+      "name": "unit:eventmap",
+      "status": "pass",
+      "hard": true,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "ms": 247,
+      "startedAt": "2026-10-11T12:05:24.329Z",
+      "finishedAt": "2026-10-11T12:05:24.576Z",
+      "cwd": "web",
+      "command": "sh -c node ../node_modules/tsx/dist/cli.mjs tests/unit/eventmap.test.ts",
+      "outputTail": "  ok   step_output prose-looking tail is STILL payload (channel rule)\n  ok   adapter channel 'plan' → payload\n  ok   *_thinking delta starting with { → payload\n  ok   *_thinking delta starting with [ → payload\n  ok   fenced ```json opener → payload\n  ok   delta inside an open fence → payload\n  ok   delta after the fence closed → prose\n  ok   \"api_request_parameters\" marker → payload\n  ok   \"operationId\" marker → payload\n  ok   truncation marker '… 2048 chars each' → payload\n  ok   delta continuing an unbalanced brace block → payload\n  ok   delta after the brace block balanced → prose\n  ok   jsonDepth ignores braces in strings\n  ok   thinkingPhaseOf planning_output → planning\n  ok   thinkingPhaseOf step_output → step\n  ok   CLIENT_EVENT.plannerPayload bound\n  ok   classifyClientFrame knows ondemand.planner_payload\n  ok   pluginLabel executePrompt\n  ok   pluginLabel ondemand_agent\n  ok   pluginLabel 'OnDemand Terminal Agent'\n  ok   pluginLabel perplexity\n  ok   pluginLabel plugin-1722260873\n  ok   pluginLabel linkedin\n  ok   pluginLabel reddit\n  ok   pluginLabel x / twitter\n  ok   pluginLabel gpt_search / google\n  ok   pluginLabel pitchbook plugin-1777018662\n  ok   pluginLabel media/document → Document reader\n  ok   pluginLabel fallback = catalogue name\n  ok   pluginLabel fallback = raw id\n  ok   unquoted 'Plugin: perplexity, pluginId: plugin-…' line → payload\n  ok   continuation of a scaffolding line → payload\n  ok   'api_request_parameters: {…}' line → payload\n  ok   reasoning sentence mentioning the word plugin stays prose\n  ok   'Format: plugins array with pluginId, …, api_request_parameters, …' line → payload\n  ok   single schema word in prose stays prose\n  ok   bare 'api_request_parameters' mid-sentence → payload\n  ok   title line stays prose\n\n102 passed, 0 failed"
+    },
+    {
+      "name": "unit:context",
+      "status": "pass",
+      "hard": true,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "ms": 255,
+      "startedAt": "2026-10-11T12:05:24.577Z",
+      "finishedAt": "2026-10-11T12:05:24.831Z",
+      "cwd": "web",
+      "command": "sh -c node ../node_modules/tsx/dist/cli.mjs tests/unit/context-payload.test.ts",
+      "outputTail": "context-payload: add/remove sync\n  ok   payload holds exactly the selected slugs in order\n  ok   removed company (Perplexity AI) is NOT in systemContext\n  ok   systemContext names every selected company\n  ok   sessionContext keys mirror the selection\n  ok   summary string\n  ok   re-selection reorders / swaps immediately (no stale set)\n  ok   AIMotive absent after removal\n  ok   unknown slug is skipped\n  ok   empty selection → empty systemContext\n  ok   empty selection → summary tells the user where to pick\n  ok   summary singular\ncontext-payload: score vs delta\n  ok   distinct field names present\n  ok   no legacy nested `sentiment` object in payload companies\n  ok   score kept separate from delta\n  ok   scored vs prior run keeps prior_run_at\n  ok   delta null → first run\n  ok   delta === score → first run (baseline 0)\n  ok   delta undefined → first run\n  ok   isFirstRun helper agrees\n  ok   systemContext explains score vs delta\n  ok   systemContext line says 'first run' for Fervo\n  ok   systemContext line carries +0.69 delta AND +0.56 score for AIMotive\n  ok   systemContext ≤ 6000 chars\n  ok   sessionContext value uses the distinct fields too\n\n24 passed, 0 failed"
+    },
+    {
+      "name": "unit:naming",
+      "status": "pass",
+      "hard": true,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "ms": 291,
+      "startedAt": "2026-10-11T12:05:24.832Z",
+      "finishedAt": "2026-10-11T12:05:25.123Z",
+      "cwd": "web",
+      "command": "sh -c node ../node_modules/tsx/dist/cli.mjs tests/unit/naming.test.ts",
+      "outputTail": "naming: H1-derived file names\n  ok   H1 → portfolio-summary-2026-10-11.pdf\n  ok   H1 with trailing hashes / emphasis\n  ok   H2 when there is no H1\n  ok   H1 wins over an earlier H2\n  ok   no heading → first sentence (≤ 8 words)\n  ok   stop words a/an/the/me/on/of/for stripped\n  ok   slug ≤ 48 chars\n  ok   ascii + lowercase + hyphens\n  ok   empty answer → report-<date>.pdf (never the prompt)\n  ok   bullets-only answer → report-<date>.pdf\n  ok   prompt typo never leaks into the name\n  ok   alias = the legacy prompt slug + -report.pdf\n  ok   date is UTC day of the run\n  ok   titleFromMarkdown: link + code cleaned\n\n14 passed, 0 failed"
+    },
+    {
+      "name": "unit:root",
+      "status": "pass",
+      "hard": true,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "ms": 1375,
+      "startedAt": "2026-10-11T12:05:25.123Z",
+      "finishedAt": "2026-10-11T12:05:26.498Z",
+      "cwd": ".",
+      "command": "node node_modules/tsx/dist/cli.mjs scripts/test.ts",
+      "outputTail": "ok   - health returns 136 spec records\nok   - companies pagination + filter\nok   - companies role filter validates\nok   - focus filter returns 5\nok   - company by slug + name fallback\nok   - status changes applied\nok   - every record has a flagged estimate rationale\nok   - news + sentiment + portfolio + search\nok   - openapi is 3.1 with all paths\nok   - ingest requires secret\nok   - ingest accepts strict + llm-text payload and computes deltas\nok   - pitchbook routes: list, slug, ingest validation, run fallback\nok   - artifacts: signed url never persisted; /signed-url falls back honestly\nok   - artifacts: /versions lists every row sharing (name, thread_id), newest first\n\nall tests passed"
+    },
+    {
+      "name": "secrets",
+      "status": "pass",
+      "hard": true,
+      "ms": 943,
+      "startedAt": "2026-10-11T12:05:26.499Z",
+      "finishedAt": "2026-10-11T12:05:27.443Z",
+      "findings": [],
+      "rules": [
+        "tracked-dotenv",
+        "github-token",
+        "github-pat",
+        "vercel-token",
+        "openai-anthropic-key",
+        "aws-access-key",
+        "ingest-secret-64hex",
+        "sas-sig"
+      ]
+    }
+  ]
+}
