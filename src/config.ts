@@ -1,7 +1,9 @@
 /** Runtime configuration — every value comes from the environment; nothing secret is hard-coded. */
 export const config = {
   port: Number(process.env.PORT ?? 3000),
-  basePath: (process.env.BASE_PATH ?? "").replace(/\/$/, ""), // e.g. /apps/bcap-portfolio-api on OnDemand serverless
+  // e.g. /apps/bcap-portfolio-api on OnDemand serverless; on Vercel the public rewrite mounts this service at /backend (vercel.json).
+  // Stripping is prefix-only, so unprefixed internal calls via the PORTFOLIO_API_URL binding still route.
+  basePath: (process.env.BASE_PATH ?? (process.env.VERCEL ? "/backend" : "")).replace(/\/$/, ""),
   publicBaseUrl: process.env.PUBLIC_BASE_URL ?? "", // absolute URL advertised in /openapi.json servers[]
   ingestSecret: process.env.INGEST_SECRET ?? "", // X-Ingest-Secret shared secret (generated at build, stored in env only)
   ondemandDefaultModel: process.env.ONDEMAND_DEFAULT_MODEL ?? "predefined-deepseek-flash", // DeepSeek Flash v4.1 (endpoint_name deepseek-v4.1-flash)

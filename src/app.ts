@@ -352,6 +352,19 @@ inner.post("/refresh", async (c) => {
   return c.json({ ingest_run_id: r.ingest_run_id, status: r.status, companies_touched: r.companies_touched, news_upserted: r.news_upserted, with_images: r.with_images, dated: r.dated, errors: r.errors, companies: r.companies, items: r.items, started_at: r.started_at, finished_at: r.finished_at });
 });
 
+/** Vercel Cron target (vercel.json crons → GET /backend/cron/refresh). Replaces src/server.ts's in-process timer, which does not run on
+ *  serverless. Vercel sends `Authorization: Bearer $CRON_SECRET`. Small batches (REFRESH_CRON_LIMIT, default 6 at concurrency 6 ≈ one
+ *  ~2-minute round) keep a tick inside the function's maxDuration; the stalest companies go first, so repeated ticks cycle the portfolio. */
+inner.get("/cron/refresh", async (c) => {
+  const cronSecret = process.env.CRON_SECRET ?? "";
+  if (!cronSecret) return err(c, 503, "resource_unavailable", "CRON_SECRET is not configured on the server");
+  if (!timingSafeEqual(c.req.header("authorization") ?? "", `Bearer ${cronSecret}`)) return err(c, 401, "unauthenticated", "Missing or invalid cron authorization");
+  if (!process.env.ONDEMAND_API_KEY) return err(c, 503, "resource_unavailable", "ONDEMAND_API_KEY is not configured on the server");
+  const limit = Number(process.env.REFRESH_CRON_LIMIT ?? 6);
+  const r = await refreshCompanies({ limit: Number.isFinite(limit) && limit > 0 ? limit : 6, concurrency: 6 });
+  return c.json({ ingest_run_id: r.ingest_run_id, status: r.status, companies_touched: r.companies_touched, news_upserted: r.news_upserted, with_images: r.with_images, errors: r.errors, started_at: r.started_at, finished_at: r.finished_at });
+});
+
 inner.get("/refresh/status", async (c) => {
   const state = getRefreshState();
   const last = await lastRefreshRun();
@@ -789,3 +802,6 @@ inner.delete("/artifacts/:id", async (c) => {
 
 inner.notFound((c) => err(c, 404, "not_found", `Route not found: ${c.req.method} ${new URL(c.req.url).pathname}`));
 inner.onError((e, c) => { console.error(e); return err(c, 500, "server_error", e.message); });
+
+/** Vercel `hono` service entrypoint (vercel.json services.app). Local/Docker runs keep using src/server.ts. */
+export default app;

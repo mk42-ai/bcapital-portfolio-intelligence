@@ -4,7 +4,9 @@
   "description": "B Capital Portfolio Intelligence — backend API (Hono + Drizzle ORM + SQLite via sql.js) fed by OnDemand Flow Builder workflows.",
   "type": "module",
   "main": "dist/server.js",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "seed:json": "python3 scripts/generate_seed.py data/brand-matrix.xlsx data/seed.json",
     "db:generate": "drizzle-kit generate",
@@ -21,6 +23,8 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.13.0",
+    "@vercel/blob": "^2.8.1",
+    "@vercel/functions": "^3.9.11",
     "drizzle-orm": "^0.45.4",
     "hono": "^4.13.13",
     "sql.js": "^1.14.2"

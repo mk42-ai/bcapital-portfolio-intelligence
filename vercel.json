@@ -3,19 +3,45 @@
   "services": {
     "app": {
       "root": ".",
-      "framework": "hono"
+      "framework": "hono",
+      "entrypoint": "src/app.ts",
+      "functions": {
+        "src/app.ts": {
+          "includeFiles": "{data/portfolio.sqlite,node_modules/sql.js/dist/sql-wasm.wasm}"
+        }
+      }
     },
     "web": {
       "root": "web",
-      "framework": "nextjs"
+      "framework": "nextjs",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "app",
+          "format": "url",
+          "env": "PORTFOLIO_API_URL"
+        }
+      ]
     }
   },
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/backend/(.*)",
       "destination": {
         "service": "app"
       }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "web"
+      }
+    }
+  ],
+  "crons": [
+    {
+      "path": "/backend/cron/refresh",
+      "schedule": "0 7 * * *"
     }
   ]
 }

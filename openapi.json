@@ -576,6 +576,161 @@
         }
       }
     },
+    "/news/reconciliation": {
+      "get": {
+        "operationId": "getNewsReconciliation",
+        "tags": [
+          "news"
+        ],
+        "summary": "Computed news reconciliation: raw rows (incl. orphans), de-dup by url and by title, 30-day / 7-day windows, no-url, per company + totals; reconciles the 2,104 / 182 / 150 figures",
+        "parameters": [
+          {
+            "name": "as_of",
+            "in": "query",
+            "required": false,
+            "description": "YYYY-MM-DD anchor for the 30d/7d windows (default today UTC)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reconciliation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "as_of": {
+                      "type": "string"
+                    },
+                    "companies": {
+                      "type": "integer"
+                    },
+                    "totals": {
+                      "type": "object"
+                    },
+                    "news_summary_total": {
+                      "type": "integer"
+                    },
+                    "legacy_latest_news": {
+                      "type": "object"
+                    },
+                    "owner_figures": {
+                      "type": "object"
+                    },
+                    "focus": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/NewsReconRow"
+                      }
+                    },
+                    "by_company": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/NewsReconRow"
+                      }
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sentiment/runs": {
+      "get": {
+        "operationId": "listSentimentRuns",
+        "tags": [
+          "sentiment"
+        ],
+        "summary": "Distinct sentiment ingest runs with row counts, null-delta counts and movers",
+        "responses": {
+          "200": {
+            "description": "Runs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ingest_run_id": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "sentiment_rows": {
+                            "type": "integer"
+                          },
+                          "companies": {
+                            "type": "integer"
+                          },
+                          "null_delta": {
+                            "type": "integer"
+                          },
+                          "moved": {
+                            "type": "integer"
+                          },
+                          "avg_score": {
+                            "type": [
+                              "number",
+                              "null"
+                            ]
+                          },
+                          "started_at": {
+                            "type": "string"
+                          },
+                          "finished_at": {
+                            "type": "string"
+                          },
+                          "model": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "workflow_name": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "source": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "runs": {
+                      "type": "integer"
+                    },
+                    "companies_with_null_delta_now": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/search": {
       "get": {
         "operationId": "search",
@@ -2075,6 +2230,72 @@
         }
       }
     },
+    "/artifacts/{id}/versions": {
+      "get": {
+        "operationId": "listArtifactVersions",
+        "tags": [
+          "artifacts"
+        ],
+        "summary": "Version history: all non-deleted artifacts sharing this artifact's (name, thread_id), newest version first",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Artifact id, e.g. art_0123456789ab"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Versions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "name",
+                    "thread_id",
+                    "latest_version"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ArtifactVersion"
+                      }
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "thread_id": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "latest_version": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown or deleted artifact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/artifacts/{id}/content": {
       "get": {
         "operationId": "getArtifactContent",
@@ -2383,6 +2604,45 @@
           }
         }
       },
+      "NewsReconRow": {
+        "type": "object",
+        "properties": {
+          "slug": {
+            "type": "string"
+          },
+          "raw": {
+            "type": "integer"
+          },
+          "dedup_url": {
+            "type": "integer"
+          },
+          "dedup_title": {
+            "type": "integer"
+          },
+          "summary_def": {
+            "type": "integer",
+            "description": "count under the /news/summary rule (url, falling back to title)"
+          },
+          "in_window_30d": {
+            "type": "integer"
+          },
+          "in_window_7d": {
+            "type": "integer"
+          },
+          "no_url": {
+            "type": "integer"
+          },
+          "no_date": {
+            "type": "integer"
+          },
+          "scored": {
+            "type": "integer"
+          },
+          "orphan": {
+            "type": "integer"
+          }
+        }
+      },
       "Evidence": {
         "type": "object",
         "required": [
@@ -2441,6 +2701,40 @@
               "null"
             ],
             "description": "score minus the previous recorded score"
+          },
+          "scored_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "recorded_at of the latest sentiment_history row"
+          },
+          "prior_run_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "recorded_at of the previous sentiment_history row (null when only one run exists)"
+          },
+          "prior_score": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "model": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ingest_run_id": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },
@@ -3019,6 +3313,58 @@
               "string",
               "null"
             ]
+          }
+        }
+      },
+      "ArtifactVersion": {
+        "type": "object",
+        "required": [
+          "id",
+          "version",
+          "size_bytes",
+          "created_at",
+          "source",
+          "content_url"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer"
+          },
+          "size_bytes": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "media_status": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "stored",
+              "local",
+              "failed",
+              null
+            ]
+          },
+          "media_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "upload",
+              "generated",
+              "agent"
+            ]
+          },
+          "content_url": {
+            "type": "string",
+            "format": "uri"
           }
         }
       },
