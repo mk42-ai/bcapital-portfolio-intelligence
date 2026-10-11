@@ -1,5 +1,43 @@
 # Changelog
 
+## 2026-10-11 — turn 4: run-view payload filter, answer-view fixes, pdf.js artifacts, data reconciliation, Portfolio Plugin registered (`c63fddb` → )
+
+### Added
+- **Run view** (`t4/u1`): planner tool-definition JSON (`{"pluginId"…, "api_request_parameters"…, "… 2048 chars each"}`) no longer streams
+  as Thinking — the bridge classifies every reasoning delta (`classifyThinkingDelta`) and routes payload spans to a new
+  `ondemand.planner_payload` frame rendered as a collapsed **"Planner payload"** disclosure inside Outputs (`planner-payload`); the Thinking
+  header tail shows the last *prose* line only. Friendly plugin labels (`pluginLabel`: "Web search (Perplexity)", "OnDemand Agent", "PitchBook",
+  …) with the raw id in `title`/`data-plugin-id`. "Jump to latest" pill gets a scroll-area pad + backdrop so it never covers a Working row.
+  Live before-state on main@04dd11d: 22 of 78 thinking deltas were JSON-looking (`web/proof/unit1/stream-before.summary.json`).
+- **Answer view** (`t4/u2`): thread titles ellipsise with a full-title tooltip (`thread-title`); the chat context payload is built at SEND time
+  from the live company-chip state (`web/src/lib/chat/context-payload.ts`, 24 unit assertions) with distinct `sentiment_score` /
+  `sentiment_delta_vs_prior_run` / `run_status: "first run"` fields and a `Context: N companies — …` line under the composer
+  (`context-line`); "Investor matches — 5 of 724 shown"; footer timings split into `tools Y s` vs `answer W s` (`data-tools-ms`,
+  `data-answer-ms`). `prior_run_at` is mapped from the backend into the chat context.
+- **Artifacts** (`t4/u3`): inline PDF rendering with **pdf.js 4.10.38** canvas pages (`pdf-pages`, worker at `/pdf.worker.min.mjs`) in both the
+  chat side pane and the /artifacts preview, with a fallback (preview-unavailable / open-externally icons + Open / Tab / Download); compact
+  card is a 2-row grid (no overlapping chips); one meta line `[vN] · size · age`; report filenames derived from the answer's H1
+  (`reportFileName` → `portfolio-summary-2026-10-11.pdf`, old prompt slug kept as `alias` on the SSE frame; 14 unit assertions);
+  `version-history.png` on the history toggle, `empty-artifacts.png` in the empty state; floating count badge merged into the Artifacts nav item
+  (`nav-artifacts-count`); bundle manifest/README/ASSET_BUNDLE.md updated in place (21 → 25 entries).
+- **Data** (`t4/u4`): `scripts/news-reconciliation.ts` + `GET /news/reconciliation` (raw / deduped(url) / deduped(title) / in-window 30d & 7d /
+  no-url, per company) and `GET /sentiment/runs`; `/companies` now exposes `sentiment.scored_at`, `prior_run_at`, `prior_score`, `model`,
+  `ingest_run_id`. Second sentiment pass (rule:news-mean-v1, stored corpus only — the step-2 web search returned ZERO sources, nothing
+  fabricated) run locally (seed DB committed, `ing-2026-10-11T100803Z-42fde1`) and against the live backend: 0 companies with a null delta.
+  **Portfolio Plugin registered**: `plugin-1791713636` / `agent-1791713636` "B Capital Portfolio Intelligence" via the AI tool generator
+  (the documented `POST /plugin/v1` path still answers HTTP 500 with an empty body for the live-derived 3.0.3 schema — log:
+  `proof/data-lane/plugin-registration-2026-10-11b.log.txt`); chat verification answered from live backend data; portfolio-internal questions
+  now route to it first (`resolvePluginIds(…, query)`). `MEDIA_ALLOW_VIDEO` flag (default off) for mp4/webm uploads, documented in
+  `web/.env.example` / `web/.env.test.example`.
+- **Tests** (`t4/u5` + units): `upload-e2e` (PDF + PNG → Artifacts tagged input, icons, counters +2/+1/+1/+2, download), `routes-clean`
+  (6 routes × 2 viewports, 0 console/page errors), `thinking-json-filter`, `thinking-pinned-working-row`, `title-ellipsis`, `context-sync`,
+  `pdf-inline-render`, `chip-overlap`; `playwright.evidence.config.ts` runs them all with video + trace.
+
+### Reconciliation (computed from the backend, as of 2026-10-11)
+2,104 = raw rows before de-dup (now 2,100 after `dedupe-news.ts`); 182 does **not** reproduce from `latest_news` (Σ = 2,037, capped 25/company)
+— it is the plugin-directory page count; 150 = 19 + 33 + 37 + 38 + 23 reproduces exactly under the `/news/summary` rule for the five focus
+companies. Full table: `proof/data-lane/news-reconciliation-2026-10-11.md`.
+
 ## 2026-10-11 — turn 3 continuation: artifacts card v2, stream audit, thread re-open, asset bundle, evidence suite (`e51d6ec` →)
 
 ### Added
