@@ -37,7 +37,7 @@ export const threadLabel = (id: string, titles: Record<string, string>) => title
 export function ArtifactsEmpty() {
   return (
     <div className="art-empty" data-testid="artifacts-empty">
-      <picture><source type="image/webp" srcSet="/assets/artifacts-ui/artifacts-empty-256.webp 1x, /assets/artifacts-ui/artifacts-empty-512.webp 2x" /><img src="/icons/artifacts/artifacts-empty.png" alt="" width={120} height={120} loading="lazy" decoding="async" /></picture>
+      <img src="/icons/empty-artifacts.png" alt="" width={120} height={120} loading="lazy" decoding="async" data-testid="artifacts-empty-icon" />
       <p>{EMPTY_TEXT}</p>
       <p className="art-empty-hint">{EMPTY_HINT}</p>
       <Link href="/chat" className="art-btn is-primary art-empty-cta" data-testid="artifacts-empty-cta"><MessageSquare aria-hidden />Go to Chat</Link>

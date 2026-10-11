@@ -15,9 +15,15 @@
       "in-progress",
       "success",
       "failed"
+    ],
+    "empty_state": [
+      "preview-unavailable",
+      "empty-artifacts",
+      "open-externally",
+      "version-history"
     ]
   },
-  "count": 21,
+  "count": 25,
   "assets": [
     {
       "name": "document",
@@ -942,6 +948,182 @@
       "sha256": "2b629fcb02cc9b08faab5c9954d237652fed2999e9a549af2df436ab7b6fdc0a",
       "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/XAEyMk3IDk.png?se=2026-10-17T23%3A21%3A08Z&sig=f3xsUvGKlR0k5AR4F7LiNWSzaOagyrGm%2Bp56gi8Fz8w%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T02%3A37%3A17Z&sv=2025-05-05",
       "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "preview-unavailable",
+      "file": "icons/empty-state/preview-unavailable.png",
+      "role": "empty-state icon",
+      "accent_element": "eye slash / green accent stroke",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1A2437",
+            "share": 0.2601
+          },
+          {
+            "hex": "#1D263A",
+            "share": 0.2257
+          },
+          {
+            "hex": "#66CFA8",
+            "share": 0.1854
+          },
+          {
+            "hex": "#1B2539",
+            "share": 0.1531
+          },
+          {
+            "hex": "#131D2F",
+            "share": 0.1233
+          },
+          {
+            "hex": "#434B5C",
+            "share": 0.0524
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 631686,
+      "sha256": "044dfb33dfd4ec7bff57252a5d792689ed89898026914e5c4bc255eaf57d1aab",
+      "source_url": "repo: web/public/icons/preview-unavailable.png (commit 04dd11d)",
+      "downloaded_at_utc": "2026-10-11T10:08:30Z"
+    },
+    {
+      "name": "empty-artifacts",
+      "file": "icons/empty-state/empty-artifacts.png",
+      "role": "empty-state icon",
+      "accent_element": "green accent on the empty tray",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1C2737",
+            "share": 0.2977
+          },
+          {
+            "hex": "#09C180",
+            "share": 0.2307
+          },
+          {
+            "hex": "#1E293A",
+            "share": 0.218
+          },
+          {
+            "hex": "#141F2E",
+            "share": 0.1154
+          },
+          {
+            "hex": "#43C79A",
+            "share": 0.0865
+          },
+          {
+            "hex": "#545D6A",
+            "share": 0.0517
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 609551,
+      "sha256": "f74131b605b1ec1dc4f74c3f94f69437995d2557feebbf14bc328f7893949b20",
+      "source_url": "repo: web/public/icons/empty-artifacts.png (commit 04dd11d)",
+      "downloaded_at_utc": "2026-10-11T10:08:30Z"
+    },
+    {
+      "name": "open-externally",
+      "file": "icons/empty-state/open-externally.png",
+      "role": "empty-state icon",
+      "accent_element": "green arrow (external)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#212B3B",
+            "share": 0.3821
+          },
+          {
+            "hex": "#202B3A",
+            "share": 0.1696
+          },
+          {
+            "hex": "#4FB994",
+            "share": 0.1426
+          },
+          {
+            "hex": "#182332",
+            "share": 0.1226
+          },
+          {
+            "hex": "#80DEBC",
+            "share": 0.1181
+          },
+          {
+            "hex": "#2E3847",
+            "share": 0.065
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 630107,
+      "sha256": "59c1ebbbdad879904a92c2da9bf6767d681661b6e6e043092d653077afdd0db1",
+      "source_url": "repo: web/public/icons/open-externally.png (commit 04dd11d)",
+      "downloaded_at_utc": "2026-10-11T10:08:30Z"
+    },
+    {
+      "name": "version-history",
+      "file": "icons/empty-state/version-history.png",
+      "role": "empty-state icon",
+      "accent_element": "green clock hand",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1A2537",
+            "share": 0.2717
+          },
+          {
+            "hex": "#172132",
+            "share": 0.2057
+          },
+          {
+            "hex": "#5FD1A5",
+            "share": 0.1738
+          },
+          {
+            "hex": "#182233",
+            "share": 0.1717
+          },
+          {
+            "hex": "#121C2C",
+            "share": 0.1286
+          },
+          {
+            "hex": "#577375",
+            "share": 0.0484
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 650746,
+      "sha256": "b2a81ec21702dc43ed7f8d0aff44c35cb753adce109c3adb611e7481bff5a3d4",
+      "source_url": "repo: web/public/icons/version-history.png (commit 04dd11d)",
+      "downloaded_at_utc": "2026-10-11T10:08:30Z"
     }
   ]
 }

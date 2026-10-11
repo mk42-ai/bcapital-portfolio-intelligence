@@ -1,11 +1,12 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
-import { Download } from "lucide-react";
 import type { Artifact } from "@/lib/artifacts/types";
 import { VideoPlayer } from "@/components/media/video-player";
 import { ArtifactIcon } from "./artifact-icon";
 import { openArtifact } from "./artifact-card";
+import { PdfPages, PreviewUnavailable } from "./pdf-pages";
+import { openArtifactInPane } from "@/components/media/side-pane-store";
 import "./artifacts.css";
 
 const isText = (m: string, n: string) => m.startsWith("text/plain") || m.includes("markdown") || m.includes("json") || m.includes("csv") || /\.(md|txt|csv|json|log)$/i.test(n);
@@ -23,18 +24,20 @@ function TextBody({ url }: { url: string }) {
   return <pre className="art-preview-pre">{text ?? "Loading…"}</pre>;
 }
 
-/** Inline preview by type: image → img, video → VideoPlayer, pdf → iframe, text/markdown → pre, html → sandboxed iframe, else icon + download. */
+/** Inline preview by type: image → img, video → VideoPlayer, pdf → pdf.js pages, text/markdown → pre, html → sandboxed iframe, else icon + download. */
 export function ArtifactPreview({ artifact: a, headerActions }: { artifact: Artifact; headerActions?: React.ReactNode }) {
   const m = a.mime.toLowerCase();
+  const fallbackActions = { onOpenPane: () => openArtifactInPane({ id: a.id, name: a.name, kind: a.kind, mime: a.mime, contentUrl: a.contentUrl, size: a.sizeBytes }), onTab: () => void openArtifact(a, "open"), onDownload: () => void openArtifact(a, "download") };
   let body: React.ReactNode;
   if (!a.contentUrl || a.pending) body = <div className="art-preview-fallback"><ArtifactIcon kind={a.kind} mime={a.mime} fileName={a.name} state={a.failed ? "failed" : "uploading"} size={64} /><p>{a.failed ? "This artifact could not be saved." : "Still saving — the preview appears once storage confirms."}</p></div>;
   else if (a.kind === "image" || m.startsWith("image/")) body = <img className="art-preview-img" src={a.contentUrl} alt={a.name} />;
   else if (a.kind === "video" || m.startsWith("video/")) body = <VideoPlayer src={a.contentUrl} title={a.name} />;
   else if (a.kind === "audio" || m.startsWith("audio/")) body = <audio controls preload="metadata" src={a.contentUrl}>Your browser cannot play this audio.</audio>;
-  else if (isPdf(m, a.name)) body = <iframe className="art-preview-frame" src={a.contentUrl} title={`Preview of ${a.name}`} />;
+  // PDF → pdf.js pages rendered to canvases (no browser plugin needed; the fallback has preview-unavailable + Open in pane / Tab / Download).
+  else if (isPdf(m, a.name)) body = <div className="art-preview-pdf" data-testid="artifact-preview-pdf"><PdfPages src={a.contentUrl} title={a.name} fallbackActions={fallbackActions} /></div>;
   else if (isHtml(m, a.name)) body = <iframe className="art-preview-frame" src={a.contentUrl} title={`Preview of ${a.name}`} sandbox="" referrerPolicy="no-referrer" />;
   else if (isText(m, a.name)) body = <TextBody url={a.contentUrl} />;
-  else body = <div className="art-preview-fallback"><ArtifactIcon kind={a.kind} mime={a.mime} fileName={a.name} source={a.source} size={64} /><p>No inline preview for this file type ({a.mime}).</p><button type="button" className="art-btn is-primary" onClick={() => void openArtifact(a, "download")} data-testid="artifact-download"><Download aria-hidden />Download</button></div>;
+  else body = <PreviewUnavailable title={a.name} message="Preview not available for this format — download or open in a new tab" actions={fallbackActions} />;
   return (
     <section className="art-preview art-root" data-testid="artifact-preview" data-id={a.id} aria-label={`Preview: ${a.name}`}>
       <div className="art-preview-head">

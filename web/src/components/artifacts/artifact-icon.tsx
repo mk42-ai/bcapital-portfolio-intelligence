@@ -35,14 +35,17 @@ export function iconFor(kind?: ArtifactKind | "upload" | string | null, mime?: s
   const m = (mime ?? "").toLowerCase().split(";")[0].trim();
   const n = (name ?? "").trim();
   const e = ext(n);
-  if (source === "link" || /^https?:\/\//i.test(n)) return "link";
+  if (source === "link" || /^https?:\/\//i.test(n) || ["url", "webloc", "desktop"].includes(e) || m === "text/uri-list" || m === "application/internet-shortcut") return "link";
   if (m === "application/pdf" || e === "pdf") return "pdf";
   if (/^application\/(zip|x-zip-compressed|x-tar|gzip|x-gzip|x-7z-compressed|x-rar-compressed|x-bzip2)$/.test(m) || ["zip", "tar", "gz", "tgz", "7z", "rar", "bz2"].includes(e)) return "archive";
   if (m.includes("spreadsheet") || m === "application/vnd.ms-excel" || m === "text/csv" || ["xlsx", "xls", "csv", "tsv", "ods"].includes(e)) return "spreadsheet";
   if (m.includes("presentation") || m === "application/vnd.ms-powerpoint" || ["pptx", "ppt", "odp", "key"].includes(e)) return "presentation";
   if (m === "application/json" || /\+json$/.test(m) || m.includes("yaml") || ["json", "yaml", "yml", "ndjson", "toml"].includes(e)) return "json";
   if (["ts", "tsx", "js", "jsx", "mjs", "cjs", "py", "sh", "bash", "html", "htm", "css", "scss", "sql", "go", "rs", "java", "rb"].includes(e) || /^(text\/(html|css|javascript|x-python|x-sh)|application\/(javascript|x-javascript|x-sh|xhtml\+xml))$/.test(m)) return "code";
-  const chartName = /chart|graph|plot/i.test(n);
+  // chart: "chart|graph|plot" in the name, or an SVG the agent/bridge generated under a report (generated/agent source) — uploads stay "image".
+  const generated = source === "generated" || source === "agent";
+  const isSvg = m === "image/svg+xml" || e === "svg";
+  const chartName = /chart|graph|plot/i.test(n) || (isSvg && generated);
   if (m.startsWith("image/") || kind === "image" || ["png", "jpg", "jpeg", "gif", "webp", "svg", "avif", "bmp", "tiff"].includes(e)) return chartName ? "chart" : "image";
   if (m.startsWith("video/") || kind === "video" || ["mp4", "webm", "mov", "m4v", "mkv"].includes(e)) return "video";
   if (m.startsWith("audio/") || kind === "audio" || ["mp3", "wav", "ogg", "m4a", "flac", "aac"].includes(e)) return "audio";

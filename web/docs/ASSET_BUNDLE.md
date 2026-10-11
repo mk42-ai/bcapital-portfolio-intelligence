@@ -66,3 +66,13 @@ Generated 2026-10-11T08:22:20Z — 21 PNG assets (13 file-type icons, 4 upload-s
 | bar-chart-original | `charts/bar-chart-original.png` | `71bc83aa837d329828c1cd0446e968d66677b2e140ce3083f29651e5ae6dc2e3` |
 | geothermal-a | `illustrations/geothermal-a.png` | `7bdb14e5323a8f2ba17a99ff081bc423fd13f5640827d9ecbed7cbb0bc9a7344` |
 | geothermal-b | `illustrations/geothermal-b.png` | `2b629fcb02cc9b08faab5c9954d237652fed2999e9a549af2df436ab7b6fdc0a` |
+| preview-unavailable | `icons/empty-state/preview-unavailable.png` | `044dfb33dfd4ec7bff57252a5d792689ed89898026914e5c4bc255eaf57d1aab` |
+| empty-artifacts | `icons/empty-state/empty-artifacts.png` | `f74131b605b1ec1dc4f74c3f94f69437995d2557feebbf14bc328f7893949b20` |
+| open-externally | `icons/empty-state/open-externally.png` | `59c1ebbbdad879904a92c2da9bf6767d681661b6e6e043092d653077afdd0db1` |
+| version-history | `icons/empty-state/version-history.png` | `b2a81ec21702dc43ed7f8d0aff44c35cb753adce109c3adb611e7481bff5a3d4` |
+
+### Empty-state icons (2026-10-11)
+
+`preview-unavailable`, `empty-artifacts`, `open-externally`, `version-history` — four 1024 px PNGs under `icons/empty-state/` (source:
+`web/public/icons/<name>.png`, commit 04dd11d). Manifest `count` is now 25. They drive the pdf.js / office preview fallback, the Artifacts
+empty state, the "Tab" (open externally) action and the version-history toggle. The zip was NOT regenerated for this addition.

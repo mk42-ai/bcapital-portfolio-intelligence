@@ -58,24 +58,28 @@
 @media (max-width: 1023px) { .art-page-preview { position: sticky; bottom: 0; max-height: 80dvh; overflow-y: auto; border-radius: 12px 12px 0 0; box-shadow: 0 -8px 24px #1F29371a; } }
 
 /* ---------- card ---------- */
-.art-card { display: flex; gap: 12px; align-items: flex-start; padding: 12px; border: 1px solid #E5E7EB; border-radius: 8px; background: #FFFFFF; color: #1F2937; }
+/* Grid, not flex-row: icon column | main column. Every child has min-width:0 so long names ellipsise instead of pushing badges into the meta row. */
+.art-card { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; padding: 12px; border: 1px solid #E5E7EB; border-radius: 8px; background: #FFFFFF; color: #1F2937; min-width: 0; }
+.art-card > * { min-width: 0; }
 .art-card[data-selected="true"] { border-color: #0AC985; box-shadow: 0 0 0 1px #0AC985; }
-.art-card.is-compact { max-width: 560px; align-items: center; gap: 10px; padding: 8px 10px; }
+/* Compact chat chip: 2-row grid — row 1 = name + badges (wrap), row 2 = meta (vN · size · age · media) — at EVERY width; nothing shares a line by force. */
+.art-card.is-compact { max-width: 560px; gap: 10px; padding: 8px 10px; grid-template-rows: auto; }
 .art-card.is-compact .art-thumb { width: 36px; height: 36px; border-radius: 6px; }
-.art-card.is-compact .art-card-main { gap: 2px; }
-.art-card.is-compact .art-card-row { flex-wrap: nowrap; }
-.art-card.is-compact .art-card-name { font-size: 13px; }
-.art-card.is-compact .art-card-actions { margin-top: 2px; }
+.art-card.is-compact .art-card-main { gap: 3px; }
+.art-card.is-compact .art-card-row { flex-wrap: wrap; row-gap: 4px; }
+.art-card.is-compact .art-card-name { font-size: 13px; flex: 1 1 120px; }
+.art-card.is-compact .art-card-actions { margin-top: 4px; }
 .art-card.is-compact .art-btn { height: 26px; padding: 0 8px; font-size: 12px; }
-@media (min-width: 640px) { .art-card.is-compact { flex-wrap: nowrap; } .art-card.is-compact .art-card-main { flex-direction: row; align-items: center; gap: 10px; } .art-card.is-compact .art-card-row { flex: 1; min-width: 0; } .art-card.is-compact .art-card-meta { flex: none; white-space: nowrap; } .art-card.is-compact .art-card-actions { margin: 0; flex: none; } }
 .art-thumb { flex: none; width: 48px; height: 48px; border-radius: 8px; border: 1px solid #E5E7EB; background: #F9FAFB; object-fit: cover; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .art-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .art-thumb .art-kind-icon { object-fit: contain; }
-.art-card-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-.art-card-row { display: flex; align-items: center; gap: 6px; min-width: 0; flex-wrap: wrap; }
-.art-card-name { margin: 0; flex: 1 1 auto; min-width: 0; font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.art-card-main { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.art-card-main > * { min-width: 0; }
+.art-card-row { display: flex; align-items: center; gap: 6px; min-width: 0; flex-wrap: wrap; row-gap: 4px; }
+.art-card-row > .art-badge { flex: none; white-space: nowrap; }
+.art-card-name { margin: 0; flex: 1 1 160px; min-width: 0; max-width: 100%; font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .art-card-badges { display: flex; flex-wrap: wrap; gap: 6px; }
-.art-badge { display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 7px; border-radius: 10px; border: 1px solid #E5E7EB; background: #F9FAFB; color: #4B5563; font-size: 11px; font-weight: 600; letter-spacing: .02em; white-space: nowrap; }
+.art-badge { display: inline-flex; flex: none; align-items: center; gap: 5px; height: 20px; padding: 0 7px; border-radius: 10px; border: 1px solid #E5E7EB; background: #F9FAFB; color: #4B5563; font-size: 11px; font-weight: 600; letter-spacing: .02em; white-space: nowrap; }
 .art-badge-kind { background: #1F2937; border-color: #1F2937; color: #FFFFFF; text-transform: uppercase; }
 .art-badge-source.is-input { background: #FFFFFF; }
 .art-badge-source.is-generated, .art-badge-source.is-agent { background: #E6FAF3; border-color: #A7F3D0; color: #047857; }
@@ -101,10 +105,12 @@
 .art-card-snippet { margin: 0; font-size: 12px; line-height: 1.45; color: #4B5563; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; }
 .art-card-snippet[data-snippet="text"] { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; }
 .art-card.is-compact .art-card-snippet { display: none; }
+.art-card-snippet[data-snippet="pdf"] { display: none; } /* the pane renders pdf.js pages — no need for a hint line */
 /* version history */
 .art-versions { margin-top: 6px; border-top: 1px dashed #E5E7EB; padding-top: 6px; }
 .art-versions-toggle { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 6px; margin-left: -6px; border: 0; border-radius: 6px; background: transparent; color: #4B5563; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
 .art-versions-toggle svg { width: 13px; height: 13px; }
+.art-versions-toggle .art-versions-icon { width: 24px; height: 24px; object-fit: contain; flex: none; }
 .art-versions-toggle:hover:not(:disabled) { background: #F3F4F6; color: #1F2937; }
 .art-versions-toggle.is-open { color: #047857; }
 .art-versions-toggle:disabled { cursor: default; color: #9CA3AF; font-weight: 500; }
@@ -119,7 +125,9 @@
 .art-dot { color: #9CA3AF; }
 .art-kind-icon-wrap { display: inline-flex; align-items: center; justify-content: center; flex: none; }
 .art-kind-icon { object-fit: contain; }
-.art-card-meta { margin: 0; font-size: 12px; color: #4B5563; }
+.art-card-meta { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 0; min-width: 0; font-size: 12px; line-height: 20px; color: #4B5563; }
+.art-card-meta .art-meta-bit { display: inline-flex; align-items: center; white-space: nowrap; }
+.art-card-meta .art-badge-version { margin-right: 0; }
 .art-card-status { font-size: 12px; color: var(--brand-green-ink, #047857); }
 .art-card-status.is-failed { color: #B91C1C; }
 .art-card-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
@@ -141,6 +149,23 @@
 .art-preview-fallback { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 32px 16px; border: 1px dashed #E5E7EB; border-radius: 8px; text-align: center; color: #4B5563; font-size: 14px; }
 .art-preview-fallback img { width: 64px; height: 64px; }
 .art-preview audio { width: 100%; }
+.art-btn .art-btn-icon-img { width: 14px; height: 14px; object-fit: contain; }
+/* pdf.js pages: one canvas per page, fitted to the container width; light grey gutter, white pages, charcoal captions */
+.art-preview-pdf { max-height: 70dvh; min-height: 240px; overflow: auto; border: 1px solid #E5E7EB; border-radius: 8px; background: #F3F4F6; }
+.art-pdf-pages { display: flex; flex-direction: column; gap: 12px; width: 100%; min-width: 0; padding: 8px; box-sizing: border-box; }
+.art-pdf-page { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.art-pdf-canvas { display: block; max-width: 100%; background: #FFFFFF; border: 1px solid #E5E7EB; box-shadow: 0 1px 3px #1F293714; }
+.art-pdf-caption { font-size: 11px; color: #6B7280; font-variant-numeric: tabular-nums; }
+.art-pdf-more { margin: 0; text-align: center; padding: 4px 0 8px; }
+.art-pdf-skeleton { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 8px 0; }
+.art-pdf-skeleton-page { width: 100%; max-width: 420px; aspect-ratio: 1 / 1.294; border-radius: 4px; background: linear-gradient(90deg, #F3F4F6 25%, #E5E7EB 50%, #F3F4F6 75%); background-size: 200% 100%; animation: art-shimmer 1.2s linear infinite; border: 1px solid #E5E7EB; }
+.art-pdf-skeleton-page.is-short { aspect-ratio: 1 / .4; }
+@keyframes art-shimmer { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .art-pdf-skeleton-page { animation: none; } }
+.art-pdf-fallback { background: #FFFFFF; margin: 8px; }
+.art-pdf-fallback-title { font-size: 14px; color: #1F2937; word-break: break-word; max-width: 100%; }
+.art-pdf-fallback-actions { justify-content: center; margin: 0; }
+.art-pdf-fallback p { margin: 0; }
 
 /* ---------- media: image grid ---------- */
 .media-grid { display: grid; gap: 8px; grid-template-columns: 1fr; }

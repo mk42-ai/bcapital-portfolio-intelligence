@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, Download, ExternalLink, FileSpreadsheet, FileText, FileType, Film, ImageIcon, Presentation, X } from "lucide-react";
 import { closeSidePane, useSidePane, type SidePaneItem } from "./side-pane-store";
+import { PdfPages, PreviewUnavailable } from "@/components/artifacts/pdf-pages";
 import "./media.css";
 
 type DocFormat = "pdf" | "office" | "text" | "html" | "unknown";
@@ -57,14 +58,12 @@ function TextBody({ item }: { item: SidePaneItem }) {
 }
 
 function PdfBody({ item }: { item: SidePaneItem }) {
-  const { Icon } = docFormat(item);
-  const url = `${item.src}${item.src.includes("#") ? "&" : "#"}toolbar=1`;
-  // <object> renders the PDF where the browser has a viewer (desktop Chrome/Firefox/Safari) and shows its fallback content where it doesn't
-  // (e.g. Android Chrome) — never a blank frame.
+  // pdf.js pages (canvas per page, DPR-aware, lazy) — works in every browser, including ones without a PDF plugin (Android Chrome). On any
+  // error <PdfPages> shows the preview-unavailable fallback with Tab / Download actions (the pane itself is already the "pane").
   return (
-    <object data={url} type="application/pdf" className="mp-pane-frame" aria-label={item.title} data-testid="side-pane-pdf">
-      <NoPreview item={item} Icon={Icon} label="PDF" message="This browser can't render PDFs inline — download or open in a new tab." />
-    </object>
+    <div className="mp-pane-pdf" data-testid="side-pane-pdf" aria-label={item.title}>
+      <PdfPages src={item.src} title={item.title} fallbackActions={{ tabHref: item.src, downloadHref: item.downloadUrl ?? item.src }} />
+    </div>
   );
 }
 
@@ -80,11 +79,16 @@ function Body({ item }: { item: SidePaneItem }) {
       <p className="mp-pane-caption" data-testid="side-pane-video-title">{item.title}</p>
     </>
   );
-  const { fmt, label, Icon } = docFormat(item);
+  const { fmt, label } = docFormat(item);
   if (fmt === "pdf") return <PdfBody item={item} />;
   if (fmt === "text") return <TextBody item={item} />;
   if (fmt === "html") return <iframe src={item.src} title={item.title} className="mp-pane-frame" sandbox="" data-testid="side-pane-html" />;
-  return <NoPreview item={item} Icon={Icon} label={label} message="Preview not available for this format — download or open in a new tab." />;
+  // docx / xlsx / pptx / unknown: same preview-unavailable icon + copy as the Artifacts page, with Tab / Download.
+  return (
+    <div className="mp-pane-pdf" data-testid="side-pane-no-preview" data-format={fmt} aria-label={`${label} · ${item.title}`}>
+      <PreviewUnavailable title={item.title} message="Preview not available for this format — download or open in a new tab" actions={{ tabHref: item.src, downloadHref: item.downloadUrl ?? item.src }} testId="preview-unavailable" />
+    </div>
+  );
 }
 
 /** Right-hand preview pane beside the chat (≥1024px) / full-screen sheet below. Mount once in /chat as a sibling of .chat-canvas inside .chat-row. */
