@@ -2,8 +2,9 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { faviconChain, pluginMeta, type PluginMeta } from "@/lib/plugin-catalogue";
+import { MONOGRAM_BG, MONOGRAM_INK, isLocalIcon, pluginIconFor } from "@/lib/plugin-icons";
 
-export type PluginFaviconSource = "logo" | "logo-base" | "s2" | "monogram";
+export type PluginFaviconSource = "logo" | "logo-base" | "s2" | "monogram" | "brand" | "local";
 export type PluginFaviconSize = 14 | 16 | 20 | 24;
 
 type Props = {
@@ -19,7 +20,10 @@ function sourceFor(url: string, m: PluginMeta | undefined): PluginFaviconSource 
   return "logo";
 }
 
-/** Plugin favicon: walks faviconChain (live logoUrl → logoUrlBase → Google s2) on error / 0-width; final fallback = inline serif monogram tile. */
+/**
+ * Plugin favicon. Resolution order (see `pluginIconFor`): brand mark (Portfolio Plugin) → shipped local svg (Perplexity, OnDemand)
+ * → remote faviconChain (live logoUrl → logoUrlBase → Google s2, advanced on error / 0-width) → monogram tile (charcoal on #F3F4F6).
+ */
 export function PluginFavicon({ id, meta, size = 20, className }: Props) {
   const m = meta ?? (id ? pluginMeta(id) : undefined);
   const name = m?.name ?? id ?? "?";
@@ -27,16 +31,30 @@ export function PluginFavicon({ id, meta, size = 20, className }: Props) {
   const chain = React.useMemo(() => (chainKey ? chainKey.split("\n") : []), [chainKey]);
   const [idx, setIdx] = React.useState(0);
   React.useEffect(() => { setIdx(0); }, [chainKey]);
-  const url = chain[idx];
-  const letter = (name.trim()[0] ?? "?").toUpperCase();
+  const icon = pluginIconFor(m?.id ?? id, m?.name, chain[0]);
   const px = { width: size, height: size };
+  const pluginId = m?.id ?? id;
 
+  if (isLocalIcon(icon) && icon.src) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={icon.src} alt="" title={name} width={size} height={size} loading="eager" decoding="async"
+        data-testid="plugin-favicon" data-source={icon.kind} data-icon-kind={icon.kind} data-plugin-id={pluginId}
+        className={cn("shrink-0 rounded-[5px] object-contain", className)}
+        style={px}
+      />
+    );
+  }
+
+  const url = icon.kind === "remote" ? chain[idx] : undefined;
   if (!url) {
+    const letter = icon.letter ?? (name.trim()[0] ?? "?").toUpperCase();
     return (
       <span
-        data-testid="plugin-favicon" data-source="monogram" data-plugin-id={m?.id ?? id} title={name} aria-hidden="true"
-        className={cn("inline-flex shrink-0 select-none items-center justify-center rounded-[5px] border border-border font-display leading-none text-foreground", className)}
-        style={{ ...px, background: "var(--surface-3)", fontSize: Math.round(size * 0.6), fontFamily: "var(--font-display, Georgia, 'Times New Roman', serif)" }}
+        data-testid="plugin-favicon" data-source="monogram" data-icon-kind="monogram" data-plugin-id={pluginId} title={name} aria-hidden="true"
+        className={cn("inline-flex shrink-0 select-none items-center justify-center rounded-[5px] border border-border font-display leading-none", className)}
+        style={{ ...px, background: MONOGRAM_BG, color: MONOGRAM_INK, fontSize: Math.round(size * 0.6), fontFamily: "var(--font-display, Georgia, 'Times New Roman', serif)" }}
       >{letter}</span>
     );
   }
@@ -48,10 +66,10 @@ export function PluginFavicon({ id, meta, size = 20, className }: Props) {
       key={url}
       src={url} alt="" title={name} width={size} height={size}
       loading={size <= 24 ? "eager" : "lazy"} decoding="async" fetchPriority={size <= 24 ? "auto" : "low"} referrerPolicy="no-referrer"
-      data-testid="plugin-favicon" data-source={sourceFor(url, m)} data-plugin-id={m?.id ?? id}
+      data-testid="plugin-favicon" data-source={sourceFor(url, m)} data-icon-kind="remote" data-plugin-id={pluginId}
       className={cn("shrink-0 rounded-[5px] bg-surface-2 object-contain", className)}
       style={px}
-      onError={advance} // network error, non-image body or decode failure → next hop
+      onError={advance} // network error, non-image body or decode failure → next hop (ends in the monogram tile)
       onLoad={(e) => { if (e.currentTarget.naturalWidth === 0) advance(); }}
     />
   );
@@ -64,6 +82,7 @@ export function preloadPluginFavicons(ids: readonly string[]): void {
   for (const id of ids) {
     const m = pluginMeta(id);
     if (!m) continue;
+    if (isLocalIcon(pluginIconFor(m.id, m.name))) continue; // brand / shipped svg — nothing to warm
     for (const url of faviconChain(m)) {
       if (preloaded.has(url)) continue;
       preloaded.add(url);
