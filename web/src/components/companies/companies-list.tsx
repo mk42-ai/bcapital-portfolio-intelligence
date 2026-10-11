@@ -7,12 +7,13 @@ import { CompanyLogo } from "@/components/ui/company-logo";
 import { SignalMini } from "@/components/charts/signal-bullet";
 import { Input, Select } from "@/components/ui/input";
 import { fmtScore } from "@/lib/format";
+import { parseCompaniesState, serializeCompaniesState, useUrlState, type CompaniesSort } from "@/lib/url-state";
 
 export type CompanyListRow = {
   slug: string; name: string; logo_url: string | null; sector: string; region: string; score: number; newsCount: number;
   signal: number | null; signal_confidence: number | null; signal_percentile: number | null;
 };
-type SortKey = "name" | "signal" | "sector";
+type SortKey = CompaniesSort;
 const SCROLL_KEY = "bcap.companies.scroll";
 const DESKTOP_ROW = 64, MOBILE_ROW = 84;
 const letterOf = (s: string) => { const ch = (s.trim()[0] ?? "#").toUpperCase(); return /[A-Z]/.test(ch) ? ch : "#"; };
@@ -24,10 +25,15 @@ const readStore = (): Record<string, number> => { try { return JSON.parse(sessio
  * keyboard focus (Arrow/Home/End/PageUp/PageDown), aria-rowcount/aria-rowindex + a live region, and per-filter scroll
  * restoration via sessionStorage.
  */
-export function CompaniesList({ rows, total }: { rows: CompanyListRow[]; total: number }) {
-  const [q, setQ] = useState("");
-  const [sector, setSector] = useState("");
-  const [sort, setSort] = useState<SortKey>("name");
+export function CompaniesList({ rows, total, initialState }: { rows: CompanyListRow[]; total: number; initialState?: string }) {
+  // a37: filter/sort/view/search state lives in the URL (?q=&sector=&sort=&view=&letter=) — shareable and back/forward safe.
+  // Initial values come from useSearchParams(); edits are written back with router.replace (debounced 150 ms, no scroll)
+  // and the state is re-read whenever the search params change (back/forward). Defaults are omitted → clean `/companies`.
+  const [urlState, setUrlState, urlSerialized] = useUrlState(parseCompaniesState, serializeCompaniesState, initialState);
+  const { q, sector, sort, view } = urlState;
+  const setQ = useCallback((v: string) => setUrlState({ q: v }), [setUrlState]);
+  const setSector = useCallback((v: string) => setUrlState({ sector: v }), [setUrlState]);
+  const setSort = useCallback((v: SortKey) => setUrlState({ sort: v }), [setUrlState]);
   const [mobile, setMobile] = useState(false);
   const [focusIdx, setFocusIdx] = useState<number | null>(null);
   const [margin, setMargin] = useState(0);
@@ -111,7 +117,7 @@ export function CompaniesList({ rows, total }: { rows: CompanyListRow[]; total: 
             <p className="ml-auto text-sm text-muted tabular-nums" role="status" data-testid="companies-count">Showing {visible.length} of {total}</p>
           </div>
         </div>
-        <div data-testid="companies-list" data-total={total} data-visible={visible.length} data-last-visible={lastVisible ? "true" : undefined} role="grid" aria-label="Portfolio companies" aria-rowcount={visible.length} aria-colcount={1}
+        <div data-testid="companies-list" data-url-state={urlSerialized} data-view={view} data-total={total} data-visible={visible.length} data-last-visible={lastVisible ? "true" : undefined} role="grid" aria-label="Portfolio companies" aria-rowcount={visible.length} aria-colcount={1}
           className="relative [-webkit-overflow-scrolling:touch] [overscroll-behavior-y:auto]" onKeyDown={onKeyDown}>
           <p className="sr-only" aria-live="polite" aria-atomic="true" data-testid="companies-live">{focusIdx != null ? `Row ${focusIdx + 1} of ${visible.length}` : ""}</p>
           <div ref={listRef} style={{ height: virtualizer.getTotalSize(), position: "relative", width: "100%" }}>

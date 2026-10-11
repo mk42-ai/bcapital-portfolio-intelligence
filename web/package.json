@@ -12,6 +12,7 @@
     "test:eventmap": "node ../node_modules/tsx/dist/cli.mjs tests/unit/eventmap.test.ts",
     "test:context": "node ../node_modules/tsx/dist/cli.mjs tests/unit/context-payload.test.ts",
     "test:naming": "node ../node_modules/tsx/dist/cli.mjs tests/unit/naming.test.ts",
+    "test:url-state": "node ../node_modules/tsx/dist/cli.mjs tests/unit/url-state.test.ts",
     "qa:lighthouse": "node scripts/lighthouse.mjs",
     "test:e2e:live": "BASE_URL=https://sb-1z9qy0mx48sk.vercel.run playwright test",
     "logo:audit": "node scripts/logo-audit.mjs",
