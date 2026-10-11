@@ -50,14 +50,14 @@ export const maxDuration = 300;
  */
 type InMsg = { role?: string; content?: unknown };
 /** Planner / step / answer prompt addenda — see docs/reference/event-ui-contract.md §4. Text only; no schema, key or event changes. */
-export const PROMPT_ADDENDA_FULL = `<run_style>
+const PROMPT_ADDENDA_FULL = `<run_style>
 Planner: write "objective" as one first-person sentence that starts with "I'll", at most 22 words, in plain words - no plugin names, operation ids, JSON or markdown. Start every step "user_query" with a short action-style label in square brackets (for example "[Gathering news, prices and indicators]", "[Searching the web]", "[Comparing funding momentum]") followed by the instruction unchanged.
 Step executor: keep a fixed key order per plugin call, short parameters first and long text last; never copy the [label] into a parameter.
 Answer: start with the result (the steps are already on screen), cite each external fact inline with a markdown link to the exact page it came from, and if any call failed end with exactly one sentence that starts with "Data gap:" naming what is missing - never claim a success that did not happen.
 </run_style>
 
 `;
-export const PROMPT_ADDENDA_SHORT = `<run_style>objective = one first-person "I'll..." sentence of at most 22 words, no plugin names/ids/JSON; each step user_query starts with a short [action label]; answer starts with the result, cites inline with markdown links, one "Data gap:" sentence on any failed call.</run_style>
+const PROMPT_ADDENDA_SHORT = `<run_style>objective = one first-person "I'll..." sentence of at most 22 words, no plugin names/ids/JSON; each step user_query starts with a short [action label]; answer starts with the result, cites inline with markdown links, one "Data gap:" sentence on any failed call.</run_style>
 
 `;
 type Ctx = { sessionId?: string; externalUserId?: string; systemContext?: string; sessionContext?: { key: string; value: string }[]; pluginIds?: string[]; attachments?: { mediaId: string; name?: string; kind?: string; extractedChars?: number }[] };
