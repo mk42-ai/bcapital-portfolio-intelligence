@@ -475,7 +475,7 @@ function WorkingRow({ t, live }: { t: ToolRow; live: boolean }) {
       <span className="oiu-work__icon" aria-hidden>{state === "failed" ? <AlertTriangle className="size-3.5" /> : state === "running" ? <Loader2 className="size-3.5 oiu-spin" /> : <Check className="size-3.5" />}</span>
       <span className="oiu-work__chips" data-testid="working-chips"><PluginFavicon id={t.pluginId} size={16} /></span>
       <span className="oiu-work__text">
-        <span className="oiu-work__label">{state === "running" ? LABEL.searching(name) : state === "failed" ? LABEL.failed(name) : t.sources != null ? LABEL.searched(name, t.sources) : `${name} done`}{state === "done" && t.durationMs ? <span className="oiu-work__dur"> · {(t.durationMs / 1000).toFixed(1)} s</span> : null}</span>
+        <span className="oiu-work__label">{state === "running" ? LABEL.action(name) : state === "failed" ? LABEL.failed(name) : LABEL.done(t.sources, t.durationMs)}{state !== "failed" ? <span className="oiu-work__via"> · {name}</span> : null}</span>
         {t.query ? <span className="oiu-work__query">“{t.query.slice(0, 140)}{t.query.length > 140 ? "…" : ""}”</span> : null}
         {state === "failed" && t.message ? <span className="oiu-work__err">{t.message}</span> : null}
         {state === "failed" && t.raw ? <RawFrame raw={t.raw} /> : null}

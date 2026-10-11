@@ -49,6 +49,17 @@ export const maxDuration = 300;
  * Audit: PAYLOAD_AUDIT (default on) appends {request (key redacted), first 10 raw upstream events, timings} per turn to <cwd>/proof/chat-payload-audit.json.
  */
 type InMsg = { role?: string; content?: unknown };
+/** Planner / step / answer prompt addenda — see docs/reference/event-ui-contract.md §4. Text only; no schema, key or event changes. */
+export const PROMPT_ADDENDA_FULL = `<run_style>
+Planner: write "objective" as one first-person sentence that starts with "I'll", at most 22 words, in plain words - no plugin names, operation ids, JSON or markdown. Start every step "user_query" with a short action-style label in square brackets (for example "[Gathering news, prices and indicators]", "[Searching the web]", "[Comparing funding momentum]") followed by the instruction unchanged.
+Step executor: keep a fixed key order per plugin call, short parameters first and long text last; never copy the [label] into a parameter.
+Answer: start with the result (the steps are already on screen), cite each external fact inline with a markdown link to the exact page it came from, and if any call failed end with exactly one sentence that starts with "Data gap:" naming what is missing - never claim a success that did not happen.
+</run_style>
+
+`;
+export const PROMPT_ADDENDA_SHORT = `<run_style>objective = one first-person "I'll..." sentence of at most 22 words, no plugin names/ids/JSON; each step user_query starts with a short [action label]; answer starts with the result, cites inline with markdown links, one "Data gap:" sentence on any failed call.</run_style>
+
+`;
 type Ctx = { sessionId?: string; externalUserId?: string; systemContext?: string; sessionContext?: { key: string; value: string }[]; pluginIds?: string[]; attachments?: { mediaId: string; name?: string; kind?: string; extractedChars?: number }[] };
 /** Per-attachment grounding cap (chars of extracted text prepended to the query). */
 const ATTACHMENT_TEXT_CHARS = 12_000;
@@ -126,6 +137,12 @@ export async function POST(req: NextRequest) {
   const H: Record<string, string> = { apikey: key, "content-type": "application/json", "user-agent": UPSTREAM_USER_AGENT };
   const runId = crypto.randomUUID(); const messageId = crypto.randomUUID(); const threadId = body.threadId ?? crypto.randomUUID();
   const isFirstTurn = msgs.filter((m) => m?.role === "user").length <= 1;
+  // Prompt addenda (OnDemand-Run-UX-Before-After, rollout step 2 - text only, same JSON): planner objective = ONE first-person sentence
+  // starting "I'll", <= 22 words, no plugin names / operation ids / JSON; every step user_query starts with a short action-style [label];
+  // step executor keeps a fixed key order and never copies the [label] into a parameter; the answer starts with the result, cites every
+  // external fact with a markdown link and closes with ONE "Data gap:" sentence when a call failed. Sent in full on the first turn and as
+  // a one-line reminder afterwards, prepended to the query because submit-query v1 exposes no separate planner/step/answer prompt slots.
+  const addenda = isFirstTurn ? PROMPT_ADDENDA_FULL : PROMPT_ADDENDA_SHORT;
   const audit: Record<string, unknown> = { at: new Date(t0).toISOString(), threadId, runId, endpointId: ENDPOINT_ID, endpointLabel: ENDPOINT_LABEL, reasoningMode: REASONING_MODE, responseMode: RESPONSE_MODE, pluginIds, requestedPluginIds: ctx.pluginIds ?? null, droppedPluginIds };
   const rawFirst: { ms: number; raw: string }[] = []; let rawCount = 0;
 
@@ -276,7 +293,9 @@ export async function POST(req: NextRequest) {
       let thinkingBuf = ""; let planBuf = ""; let planEmitted = false; let objectiveSent = false; let stepBuf = ""; const stepEmittedFor = new Set<number>();
       let planStepTotal = 0; let earlyPlanSteps = 0; const derivedSummary = new Map<number, { title: string; hosts: string[]; n: number; closed: boolean }>();
       const tryParseJson = (t: string): unknown => { const i = t.indexOf("{"); if (i < 0) return null; let depth = 0, inStr = false, esc = false; for (let k = i; k < t.length; k++) { const c = t[k]; if (inStr) { if (esc) esc = false; else if (c === "\\") esc = true; else if (c === '"') inStr = false; continue; } if (c === '"') inStr = true; else if (c === "{") depth++; else if (c === "}") { depth--; if (depth === 0) { try { return JSON.parse(t.slice(i, k + 1)); } catch { return null; } } } } return null; };
-      const planFromJson = (j: unknown): { objective?: string; steps: { id: string; title: string; query?: string; plugins?: string[] }[] } => { const r = (j && typeof j === "object" ? j : {}) as Record<string, unknown>; const steps = Array.isArray(r.steps) ? r.steps : []; return { objective: typeof r.objective === "string" ? r.objective.slice(0, 400) : typeof r.title === "string" ? r.title.slice(0, 400) : undefined, steps: steps.map((x, i) => { const o = (x && typeof x === "object" ? x : {}) as Record<string, unknown>; return { id: String(o.id ?? o.step_id ?? i + 1), title: String(o.title ?? o.user_query ?? `Step ${i + 1}`).slice(0, 160), query: typeof o.user_query === "string" ? o.user_query.slice(0, 600) : undefined, plugins: Array.isArray(o.plugins) ? o.plugins.map((p) => (typeof p === "string" ? p : String((p as Record<string, unknown>).name ?? (p as Record<string, unknown>).pluginId ?? ""))).filter(Boolean) : undefined }; }) }; };
+      // Objective -> one plain sentence (strip markdown/JSON noise, clamp near 22 words so the opening line never wraps into a paragraph).
+      const objectiveLine = (t: string) => { const w = t.replace(/[*_`#>]+/g, " ").replace(/\s+/g, " ").trim().split(" "); return (w.length > 26 ? `${w.slice(0, 24).join(" ")}...` : w.join(" ")).slice(0, 400); };
+      const planFromJson = (j: unknown): { objective?: string; steps: { id: string; title: string; query?: string; plugins?: string[] }[] } => { const r = (j && typeof j === "object" ? j : {}) as Record<string, unknown>; const steps = Array.isArray(r.steps) ? r.steps : []; return { objective: typeof r.objective === "string" ? objectiveLine(r.objective) : typeof r.title === "string" ? objectiveLine(r.title) : undefined, steps: steps.map((x, i) => { const o = (x && typeof x === "object" ? x : {}) as Record<string, unknown>; const uq = typeof o.user_query === "string" ? o.user_query : ""; const lm = /^\s*\[([^\]]{3,80})\]\s*([\s\S]*)$/.exec(uq); return { id: String(o.id ?? o.step_id ?? i + 1), title: String(lm ? lm[1] : (o.title ?? o.user_query ?? `Step ${i + 1}`)).slice(0, 160), query: uq ? (lm ? lm[2] : uq).slice(0, 600) : undefined, plugins: Array.isArray(o.plugins) ? o.plugins.map((p) => (typeof p === "string" ? p : String((p as Record<string, unknown>).name ?? (p as Record<string, unknown>).pluginId ?? ""))).filter(Boolean) : undefined }; }) }; };
 
       /** Translate one typed UI event into AG-UI frames. Returns true on the terminal [DONE]. */
       const dispatch = (u: UiEvent, raw: string): boolean => {
@@ -396,7 +415,7 @@ export async function POST(req: NextRequest) {
         status("querying", { sessionId });
         custom(CE.request, { method: "POST", proxy: "/api/chat", upstream: `POST ${ONDEMAND_BASE_URL.replace(/^https?:\/\//, "")}/chat/v1/sessions/{id}/query`, body: { endpointId: ENDPOINT_ID, endpointLabel: ENDPOINT_LABEL, reasoningMode: REASONING_MODE, responseMode: RESPONSE_MODE, pluginIds, queryChars: query.length, systemContextChars: isFirstTurn && ctx.systemContext ? String(ctx.systemContext).length : 0, attachments: attachments.map((a) => ({ mediaId: a.mediaId, name: a.name, chars: a.text.length })) }, sessionId, sessionCreated });
         if (attachments.length) custom(CE.attachments, { items: attachments.map((a) => ({ mediaId: a.mediaId, name: a.name, kind: a.kind, extractedChars: a.extractedChars, grounded: a.known })) });
-        const prefix = `${attachmentPrefix}${isFirstTurn && ctx.systemContext ? `${String(ctx.systemContext).slice(0, 6000)}\n\nQuestion: ` : attachmentPrefix ? "Question: " : ""}`;
+        const prefix = `${addenda}${attachmentPrefix}${isFirstTurn && ctx.systemContext ? `${String(ctx.systemContext).slice(0, 6000)}\n\nQuestion: ` : "Question: "}`;
         const qBody = { query: prefix + query, endpointId: ENDPOINT_ID, responseMode: RESPONSE_MODE, pluginIds, reasoningMode: REASONING_MODE };
         const qUrl = `${ONDEMAND_BASE_URL}/chat/v1/sessions/${sessionId}/query`;
         const qHeaders = { ...H, accept: "text/event-stream" };

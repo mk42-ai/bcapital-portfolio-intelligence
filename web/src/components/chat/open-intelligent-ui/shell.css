@@ -573,3 +573,5 @@
 .chat-main > .chat-row > .chat-canvas { flex: 1 1 auto; min-width: 0; height: 100%; }
 .chat-main > .chat-row > .mp-pane { height: 100%; }
 /* end lane E */
+
+.oiu-work__via { font-weight: 400; color: #6b7280; }
