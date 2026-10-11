@@ -29,6 +29,7 @@ export async function getDb(): Promise<{ db: SQLJsDatabase<typeof schema>; raw: 
   if (orm && sqlDb) return { db: orm, raw: sqlDb };
   const SQL = await initSqlJs({ locateFile: wasmLocate });
   sqlDb = fs.existsSync(DB_PATH) ? new SQL.Database(fs.readFileSync(DB_PATH)) : new SQL.Database();
+  for (const ddl of schema.ARTIFACTS_DDL) sqlDb.run(ddl); // boot-time migration for existing DB files
   orm = drizzle(sqlDb, { schema });
   return { db: orm, raw: sqlDb };
 }

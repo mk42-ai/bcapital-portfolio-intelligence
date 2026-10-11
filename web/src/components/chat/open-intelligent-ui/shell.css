@@ -2,8 +2,12 @@
 /* Colors that have a theme token use it (see response-theme.ts); the remaining greys are shell-only and hue-neutral (no blue). */
 
 /* ---- Full-width canvas: the chat owns the main column (nav rail ≤224 px on the left, nothing on the right) ---- */
-.chat-main { height: calc(100dvh - 49px); min-height: 480px; }           /* mobile: minus the sticky top nav bar */
-@media (min-width: 1024px) { .chat-main { height: 100dvh; } }
+.chat-main { height: calc(100dvh - 49px); max-height: calc(100dvh - 49px); min-height: 480px; flex: 0 0 auto !important; overflow: hidden; }           /* mobile: minus the sticky top nav bar */
+@media (min-width: 1024px) { .chat-main { height: 100dvh; max-height: 100dvh; } }
+/* 2026-10-11 CLS fix: chat-main is a flex:1 1 0% item of an indefinite-height column, so its `height` lost to content size while a run streamed —
+   the whole page grew (doc 900 → 2,192 px) and the composer slid off-screen, then snapped back at RUN_FINISHED (two 0.20 layout shifts).
+   Pin the column to the viewport so only the thread scroll-area scrolls. */
+.chat-shell .openui-agent-thread-chat-panel, .chat-shell .openui-agent-thread-wrapper, .chat-shell .openui-agent-thread-container { min-height: 0; }
 .chat-canvas { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; width: 100%; }
 .chat-shell { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; width: 100%; border: 0; border-radius: 0; overflow: hidden; background: #ffffff; }
 .chat-shell .openui-agent-container { width: 100%; height: auto; flex: 1 1 auto; min-height: 0; }
@@ -462,3 +466,73 @@
 .oiu-context-chip__x { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 999px; color: inherit; }
 .oiu-context-chip__x:hover { background: #ffffff; }
 .chat-shell .oiu-drop-active .oiu-composer__row { background: var(--brand-green-soft, #E6FAF3); border-color: var(--brand-green, #0AC985); }
+
+/* ===================================================================================================================
+ * 2026-10-11 — run view (Thinking top → Plan → Working → summaries → Outputs → prompts → Answer → media/artifacts → Sources → Data gap)
+ * Brand green #0AC985 (fills only), charcoal #1F2937 (ink). AA text uses #047857 for green labels.
+ * =================================================================================================================== */
+.oiu-run { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.oiu-think { border: 1px solid #e5e7eb; border-radius: 10px; background: #fafafa; font-size: 12.5px; color: #374151; overflow: hidden; }
+.oiu-think--live { border-color: #a7f3d0; background: #f0fdf9; }
+.oiu-think__head { display: flex; align-items: center; gap: 6px; width: 100%; margin: 0; padding: 7px 10px; border: 0; background: transparent; color: #1f2937; font: inherit; font-weight: 600; text-align: left; cursor: pointer; min-height: 32px; }
+.oiu-think__kinds { margin-left: 6px; font-weight: 400; color: #6b7280; font-size: 11.5px; }
+.oiu-think__head .oiu-thinking__chev { margin-left: auto; }
+.oiu-think--open .oiu-thinking__chev { transform: rotate(180deg); }
+.oiu-think__body { padding: 0 10px 8px; }
+.oiu-think__pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; color: #4b5563; max-height: 220px; overflow: auto; }
+.oiu-think--live .oiu-think__pre { max-height: 120px; mask-image: linear-gradient(to bottom, transparent 0, #000 24px); -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 24px); }
+.oiu-work-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.oiu-work { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border: 1px solid #e5e7eb; border-radius: 10px; background: #fff; font-size: 13px; color: #1f2937; min-height: 40px; }
+.oiu-work__icon { display: inline-grid; place-items: center; width: 20px; height: 20px; flex: none; color: #6b7280; margin-top: 1px; }
+.oiu-work--done .oiu-work__icon { color: #047857; }
+.oiu-work--failed { border-color: #fecaca; background: #fff5f5; }
+.oiu-work--failed .oiu-work__icon, .oiu-work__err { color: #b91c1c; }
+.oiu-work__chips { display: inline-flex; gap: 3px; flex: none; margin-top: 2px; }
+.oiu-work__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.oiu-work__label { font-weight: 600; }
+.oiu-work__dur { font-weight: 400; color: #6b7280; font-variant-numeric: tabular-nums; }
+.oiu-work__query { color: #6b7280; font-size: 12px; overflow-wrap: anywhere; }
+.oiu-work__err { font-size: 12px; }
+.oiu-work--skeleton .oiu-shimmer--row { width: 60%; }
+.oiu-outputs { border: 1px solid #e5e7eb; border-radius: 10px; font-size: 12.5px; }
+.oiu-outputs__head { display: flex; align-items: center; gap: 6px; width: 100%; padding: 7px 10px; border: 0; background: transparent; font: inherit; font-weight: 600; color: #1f2937; cursor: pointer; text-align: left; }
+.oiu-outputs__head .oiu-thinking__chev { margin-left: auto; }
+.oiu-outputs__list { margin: 0; padding: 0 12px 10px 28px; display: flex; flex-direction: column; gap: 6px; }
+.oiu-outputs__call { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; color: #4b5563; margin-top: 2px; }
+.oiu-outputs__call code { font-size: 10.5px; background: #f3f4f6; padding: 1px 4px; border-radius: 4px; overflow-wrap: anywhere; }
+.oiu-answer { min-width: 0; }
+.oiu-media { max-width: 640px; }
+.oiu-artifacts { display: flex; flex-direction: column; gap: 6px; max-width: 640px; }
+.oiu-artrow { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border: 1px dashed #d1d5db; border-radius: 10px; font-size: 13px; }
+.oiu-artrow--failed { border: 1px solid #fecaca; background: #fff5f5; }
+.oiu-artrow__meta { display: block; color: #6b7280; font-size: 12px; }
+.oiu-artrow--failed .oiu-artrow__meta { color: #b91c1c; }
+.oiu-srcs { border-top: 1px solid #e5e7eb; padding-top: 6px; }
+.oiu-srcs__head { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; min-height: 32px; border: 1px solid #e5e7eb; border-radius: 999px; background: #fff; font: inherit; font-size: 12.5px; font-weight: 600; color: #1f2937; cursor: pointer; }
+.oiu-srcs__favs { display: inline-flex; }
+.oiu-srcs__favs img { width: 14px; height: 14px; border-radius: 3px; margin-right: -3px; border: 1px solid #fff; background: #fff; }
+.oiu-srcs--open .oiu-thinking__chev { transform: rotate(180deg); }
+.oiu-srcs .oiu-sources { margin-top: 6px; border: 0; padding: 0; }
+.oiu-gap { display: flex; align-items: flex-start; gap: 6px; margin: 0; padding: 8px 10px; border: 1px solid #fecaca; background: #fff5f5; color: #991b1b; border-radius: 10px; font-size: 13px; }
+.oiu-run .oiu-badge { margin-top: 2px; }
+.oiu-run--skeleton { margin: 4px 0 0 40px; max-width: 760px; }
+.oiu-activity-list--reserved, .oiu-activity--pending { display: none; }
+@media (max-width: 640px) {
+  .oiu-run--skeleton { margin-left: 0; }
+  .oiu-work { padding: 7px 8px; font-size: 12.5px; }
+  .oiu-think__kinds { display: none; }
+  .oiu-media, .oiu-artifacts { max-width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .oiu-think--live .oiu-spin, .oiu-work .oiu-spin { animation: none; } }
+
+/* CLS: the live Thinking tail is a fixed 4-line ticker (76 px) so streaming reasoning never pushes Plan/Working down; collapses to its header after. */
+.oiu-think--live .oiu-think__body { height: 76px; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+.oiu-think--live .oiu-think__pre { max-height: none; }
+/* 390 px pass: a 2-line live Thinking ticker (the auto-collapse at the first answer token then moves the turn by ~40 px instead of ~128 px). */
+.oiu-think__tail { display: none; }
+/* 390 px: the live reasoning is a ONE-LINE ticker inside the header (no body), so the auto-collapse at the first answer token moves nothing. */
+@media (max-width: 640px) {
+  .oiu-think--live .oiu-think__body { display: none; }
+  .oiu-think--live .oiu-think__tail { display: block; flex: 1 1 0; width: 0; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: clip; font-weight: 400; color: #4b5563; font-size: 11.5px; line-height: 17px; height: 17px; contain: strict; }
+  .oiu-think--live .oiu-think__kinds { display: none; }
+}

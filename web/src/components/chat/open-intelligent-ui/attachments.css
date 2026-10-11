@@ -52,3 +52,8 @@
 
 /* "local" badge — the file was grounded from its own text because OnDemand media create answered HTTP 500 for plain-text uploads */
 .oiu-att__badge { display: inline-block; margin-left: 6px; padding: 0 5px; border-radius: 999px; font-size: 10px; line-height: 16px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: #92400e; background: #fef3c7; border: 1px solid #fcd34d; vertical-align: middle; }
+/* 2026-10-11 — upload states with the brand icon set + image thumbnails */
+.oiu-att__thumb { width: 28px; height: 28px; object-fit: cover; border-radius: 6px; border: 1px solid #e5e7eb; display: block; }
+.oiu-att__chip-icon img { display: block; }
+.oiu-att__sent-images { margin-top: 8px; max-width: 520px; }
+.oiu-composer__upload { display: inline-flex; }

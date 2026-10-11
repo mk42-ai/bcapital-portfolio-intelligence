@@ -38,8 +38,8 @@ flowchart LR
 ## 2. URLs and IDs
 | Item | Value |
 |---|---|
-| Frontend live preview | **https://sb-1mw4ywgyt3fa.vercel.run** (sandbox `sbx_TT3hknRhFFNvTUeEMnnM0SL8VfRD`, redeployed 2026-10-10T23:32Z after the previous sandboxes expired; build `T4VH1e7Xf6_annLS_Afn5`; redeploy = `sandbox create` + `npm ci` + `next build` + `next start -H 0.0.0.0 -p 3000` with web `.env` exported). Earlier: https://sb-2bqmt98kq4ql.vercel.run (2026-10-10 QA pass), https://sb-3umbne3uc2g2.vercel.run, https://sb-2yrz211gekox.vercel.run. |
-| Backend base URL (live) | **https://sb-4wg000bgek46.vercel.run** — sandbox `sbx_WQqT9XI7aAAqzjIk3tv8dGuvUYXf` (redeployed 2026-10-10T23:29Z from the committed tree: `npm ci` + `npm run build` + `node dist/server.js`, seed DB `data/portfolio.sqlite`; `/health` 200 `db_record_count` 136, `/openapi.json` 3.1.0, contract test 12/12). Earlier: https://sb-l72jsdzjb4nt.vercel.run, https://sb-3az18qgrrd3p.vercel.run, https://sb-1gek6bq0m1au.vercel.run `sbx_s2v1UAKFK3gFbzPBGdyxZoZfIuAC`. |
+| Frontend live preview | **https://sb-1mw4ywgyt3fa.vercel.run** (sandbox `sbx_TT3hknRhFFNvTUeEMnnM0SL8VfRD`, rebuilt in place 2026-10-11 with the run-view/Artifacts tree, build `BU5EKaXnFNqd_acjxYGKT`, `.env` → backend sb-mo128rkf6h2c). Earlier builds: `EPGmsmeD6b33kTtqO4RqT`, `T4VH1e7Xf6_annLS_Afn5`. |
+| Backend base URL (live) | **https://sb-mo128rkf6h2c.vercel.run** — sandbox `sbx_NynLlEHwFgGz8Ib0NliA2X6CO9Mj` (created 2026-10-11T02:10Z, 5 h timeout; `npm ci` + `npm run build` + `npm test` 12/12 + `node dist/server.js`; `/health` news_total 2104; contract test 16/16). Previous: https://sb-4wg000bgek46.vercel.run (`sbx_WQqT9XI7aAAqzjIk3tv8dGuvUYXf`, old tree, no /artifacts). |
 | Backend durable target | https://serverless.on-demand.io/apps/bcap-portfolio-intel — **OnDemand serverless endpoint provisioning failed** 3× (image built OK: app `6ac8de2d1f7d82eff69ac0d9`, runs chfbs…chfbv; endpoints `initializing → failed`, `containerAppEnv` never assigned). The 7 workflows already deliver to this URL; nothing changes once it comes up. |
 | Repo | https://github.com/mk42-ai/bcapital-portfolio-intelligence (`web/` = this app) |
 | Portfolio Plugin ID | **null** — `POST /plugin/v1` returned `400 {"message":"schema is required"}` for 20 payload shapes incl. the documented one; MCP `plugin_v1_plugin_create` returned an empty body; `ai_generated_tool` timed out (Cloudflare 524) ×3. Registration body ready in `../scripts/register-plugin.ts`; UI shows "registration pending" and reads `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID` / `src/data/run-meta.json` at runtime. |
@@ -688,3 +688,24 @@ Mobile CLS 0.47–0.73 at the live→final message swap (OpenUI remounts the ass
 | Voice | live TTS/STT verified (`web/proof/voice/probe.json`); orb dock states idle/listening/thinking/speaking/error; headless browsers without a device show "No microphone was found" (honest). |
 | Gates | tsc 0 (web + backend), `next build` 0, backend tests 12/12 + pitchbook 13/13 + eventmap 49/49, 0 API-key / INGEST_SECRET hits in `.next`, Playwright see `web/proof/qa/playwright-final.json`. |
 | Ledger | `agent-ledger.json` (30 entries) delivered with the run. |
+
+
+## 12. 2026-10-11 pass — Run UX step 1, Artifacts, media, open items
+Repo base `60120f4` (origin/main), edited in place; no re-scaffold.
+
+| Area | Where | Verified |
+|---|---|---|
+| Run view order (Thinking top → Plan → Working → summaries → Outputs → prompts → answer → media/artifacts → Sources collapsed → Data gap) | `chat-shell.tsx` `RunView` (live via `PluginTimeline`, settled via `AssistantMessage`, same component) | e2e DOM order `thinking-block → working-list → answer-block → inline-artifacts → sources-list`, desktop + 390 px, live |
+| First-event skeleton | `PendingRow` portal (Thinking + Working with plugin chips) | first skeleton 201–284 ms (upstream first token 34.9–82 s) |
+| Working rows | `WorkingRow` from `TOOL_CALL_START/ARGS/RESULT`; favicon chips; done = N sources · s; failed = red + raw frame | e2e: `data-state` done, chips visible, 0 empty `{}` boxes |
+| Artifacts | backend `/artifacts*` (SQLite BLOB ≤25 MB, versions), web `/api/artifacts*`, `ArtifactsPanel`, `/artifacts`, `ArtifactCard` inline | 5 uploads + report PDF listed in panel and route; content bytes == fixture bytes; `mediaStatus: stored` + OnDemand media id on live |
+| Uploads | composer chips (uploading/ready/error + retry), `ImageGrid` + `Lightbox` in the user bubble, `VideoPlayer` (poster, controls, expand) | e2e: 5/5 chips `ready` (`grounded: ondemand` live), lightbox ←/→/Esc |
+| 2,104 news | backend `news_count`/`news_total`; `getAllNews()` sums `/companies/{slug}/news` | News Pulse header "2,104 items across 137 companies" (ui-validator, live) |
+| Sentiment pass 2 | `scripts/sentiment-pass2.ts`, ingest run `ing-2026-10-11T004631Z-b4adfa` | live `/companies?focus=true` deltas: perplexity-ai +0.69, apptronik +0.24, fervo-energy −0.25, flutterwave +0.04, writer +0.42 |
+| Portfolio Plugin | `scripts/register-plugin.ts` | **still blocked**: 400 `schema is required` (2026-10-11T01:12:00Z); MCP create → empty body; register via console |
+
+**Smoothness score history (/10, measured — skeleton ≤1 s, stream-window CLS ≤0.05, ≤8 long tasks, DOM order, 0 console errors, artifact present):** `web/proof/run-ux/score-history.json`. Desktop report 8 → 8 → 10 …; mobile report 8 → 9 → 9 → 9 → 10; live iter8 had desktop upload 8 (`/artifacts` stale-cache CLS 0.14) → fixed → **iter10-live: 10/10 on all four runs** (desktop upload, desktop report, 390 upload, 390 report). Videos: `web/proof/run-ux/iter10-live/*.webm`; screenshots `iter10-live/run-ux-shots/`; full action log `web/proof/run-ux/TEST-LOG.md`.
+
+**Contract tests:** `scripts/contract-test.ts` 16/16 against https://sb-mo128rkf6h2c.vercel.run (`docs/contract-test-2026-10-11.txt`); backend `npm test` 12/12; `tests/unit/eventmap.test.ts` 49/49; web `tsc --noEmit` 0 errors; `next build` OK.
+
+**OnDemand endpoints used this pass** (full table: `docs/ONDEMAND_SSE_FRAMES.md`): `POST /chat/v1/sessions`, `POST /chat/v1/sessions/{id}/query` (`responseMode: stream`, `endpointId` DeepSeek Flash v4.1, reasoning medium), `GET /chat/v1/sessions/{id}/messages`, `POST /media/v1/public/file` (`responseMode: sync`, per-kind plugin id), `DELETE /media/v1/public/file/{id}`, `POST /services/v1/public/service/execute/{text_to_speech|speech_to_text}`, `POST /plugin/v1` (blocked), `GET /config/v1/public/docs/*` (docs study).

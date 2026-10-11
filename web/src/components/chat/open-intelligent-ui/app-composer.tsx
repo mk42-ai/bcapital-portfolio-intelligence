@@ -64,9 +64,9 @@ export function AppComposer() {
       {att.dragging && att.items.length === 0 && <p className="oiu-composer__drop" data-testid="attachment-dropzone-empty">{DROP_HINT}</p>}
       <div className="oiu-composer__row" data-testid="composer-row">
         <input ref={fileRef} type="file" multiple accept={ACCEPT_ATTR} className="oiu-att__input" data-testid="attachment-input" tabIndex={-1} aria-hidden onChange={(e) => { if (e.currentTarget.files?.length) attachmentsStore.add(e.currentTarget.files); e.currentTarget.value = ""; }} />
-        <button type="button" className="oiu-composer__btn oiu-composer__attach" data-testid="attachment-button" aria-label="Attach a file" title={`Attach a file — ${DROP_HINT}`} onClick={() => fileRef.current?.click()}>
+        <span data-testid="composer-upload" className="oiu-composer__upload"><button type="button" className="oiu-composer__btn oiu-composer__attach" data-testid="attachment-button" aria-label="Attach a file" title={`Attach a file — ${DROP_HINT}`} onClick={() => fileRef.current?.click()}>
           <Paperclip className="size-4" aria-hidden />
-        </button>
+        </button></span>
         <textarea ref={inputRef} className="oiu-composer__input" data-testid="composer-input" rows={1} value={draft} placeholder={PLACEHOLDER} aria-label="Message"
           onChange={(e) => composerStore.set(e.target.value)} onKeyDown={onKeyDown} disabled={isLoadingMessages} />
         <span ref={micSlot} className="oiu-composer__mic-slot" data-testid="composer-mic-slot" />

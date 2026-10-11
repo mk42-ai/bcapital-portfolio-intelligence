@@ -8,6 +8,9 @@ import {
 import { parseFrame, type PluginRef, type UiEvent } from "@/lib/ondemand/sse-adapter";
 import { CLIENT_EVENT as CE } from "@/lib/ondemand/eventMap";
 import { markPluginBlocked, markPluginInvoked, clearPluginBlocked } from "@/lib/plugin-catalogue";
+import { saveArtifact } from "@/lib/artifacts/server";
+import { registerWithOnDemand, originFrom } from "@/lib/artifacts/media";
+import { makeTextPdf } from "@/lib/artifacts/pdf";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
@@ -80,6 +83,25 @@ async function appendAudit(entry: Record<string, unknown>) {
   } catch { /* audit only */ }
 }
 const redactHeaders = (h: Record<string, string>) => Object.fromEntries(Object.entries(h).map(([k, v]) => [k, k.toLowerCase() === "apikey" ? "<redacted>" : v]));
+
+/** "portfolio report" / "write a report" / "make a PDF" style asks: the bridge files the finished answer as a PDF artifact. */
+const REPORT_RE = /\b(report|memo|brief(ing)?|one[- ]pager|pdf|document|write[- ]?up|lp update)\b/i;
+const slugName = (q: string) => (q.replace(/[^A-Za-z0-9 ]+/g, " ").trim().split(/\s+/).slice(0, 6).join("-").toLowerCase() || "report").slice(0, 60);
+/** Markdown answer → PDF sections (headings `#`, bullets `-`/`*`, citations kept as text). */
+function mdToSections(md: string): { heading: string; paragraphs: string[]; bullets?: string[] }[] {
+  const clean = (t: string) => t.replace(/\[(\d+|[^\]]{1,80})\]\((https?:[^)]+)\)/g, (_m, l, u) => (/^\d+$/.test(l) ? `[${l}]` : `${l} (${u})`)).replace(/[*_`]+/g, "").trim();
+  const out: { heading: string; paragraphs: string[]; bullets?: string[] }[] = []; let cur = { heading: "Summary", paragraphs: [] as string[], bullets: [] as string[] };
+  for (const raw of md.split(/\r?\n/)) {
+    const line = raw.trim(); if (!line || /^\|?\s*-{3,}/.test(line)) continue;
+    const h = /^#{1,4}\s+(.*)$/.exec(line);
+    if (h) { if (cur.paragraphs.length || cur.bullets.length) out.push(cur); cur = { heading: clean(h[1]).slice(0, 120), paragraphs: [], bullets: [] }; continue; }
+    const b = /^(?:[-*•]|\d+[.)])\s+(.*)$/.exec(line);
+    if (b) { cur.bullets.push(clean(b[1])); continue; }
+    cur.paragraphs.push(clean(line.replace(/^\|/, "").replace(/\|$/, "").replace(/\s*\|\s*/g, " · ")));
+  }
+  if (cur.paragraphs.length || cur.bullets.length) out.push(cur);
+  return out.length ? out : [{ heading: "Summary", paragraphs: [md.slice(0, 4000)] }];
+}
 
 export async function POST(req: NextRequest) {
   const t0 = Date.now();
@@ -180,6 +202,39 @@ export async function POST(req: NextRequest) {
       const startText = () => { if (!textStarted) { textStarted = true; send({ type: "TEXT_MESSAGE_START", messageId, role: "assistant" }); } };
       const fillerOff = () => { if (fillerOn) { fillerOn = false; stallTicks = 0; send({ type: "CUSTOM", name: CE.filler, value: { on: false, derived: true, elapsedMs: Date.now() - t0 } }); } };
       const custom = (name: string, value: Record<string, unknown>) => { if (name !== CE.filler && name !== CE.heartbeat) fillerOff(); send({ type: "CUSTOM", name, value: { elapsedMs: Date.now() - t0, ...value } }); lastSentAt = Date.now(); };
+      // ---- artifacts: agent file_written / artifact_ready frames + the report PDF are persisted (backend /artifacts + OnDemand Media API)
+      const origin = originFrom(req);
+      const artifactJobs: Promise<void>[] = [];
+      const seenArtifactKeys = new Set<string>();
+      const persistArtifact = (job: { key: string; name: string; mime: string; origin: string; bytes?: Uint8Array; url?: string; source: "generated" | "agent" }) => {
+        if (seenArtifactKeys.has(job.key)) return; seenArtifactKeys.add(job.key);
+        custom(CE.artifact, { phase: "creating", key: job.key, name: job.name, mime: job.mime, origin: job.origin });
+        artifactJobs.push((async () => {
+          try {
+            let bytes = job.bytes;
+            if (!bytes && job.url) { const r = await fetch(job.url, { signal: AbortSignal.timeout(30_000), cache: "no-store" }); if (!r.ok) throw new Error(`fetch ${job.url.slice(0, 80)} → HTTP ${r.status}`); bytes = new Uint8Array(await r.arrayBuffer()); }
+            if (!bytes) throw new Error("no file bytes or URL in the event");
+            const media = await registerWithOnDemand({ bytes, name: job.name, mime: job.mime, origin, sessionId: sessionId || null, externalUserId, key });
+            const art = await saveArtifact({ bytes, name: job.name, mime: job.mime, source: job.source, mediaId: media.mediaId, mediaStatus: media.mediaStatus, mediaMessage: media.mediaMessage, threadId, sessionId: sessionId || null, originEvent: job.origin });
+            custom(CE.artifact, { phase: "ready", key: job.key, name: job.name, artifact: art, media: { status: media.mediaStatus, id: media.mediaId, message: media.mediaMessage, ms: media.ms } });
+          } catch (e) {
+            custom(CE.artifact, { phase: "failed", key: job.key, name: job.name, message: String((e as Error)?.message ?? e).slice(0, 300) });
+          }
+        })());
+      };
+      const fromAgentEvent = (subtype: string, d: Record<string, unknown> | null | undefined) => {
+        if (!d) return;
+        const str = (...k: string[]) => { for (const x of k) { const v = d[x]; if (typeof v === "string" && v) return v; } return ""; };
+        const url = str("url", "fileUrl", "downloadUrl", "signedUrl", "publicUrl", "artifactUrl");
+        const path = str("path", "filePath", "file_path");
+        const name = (str("name", "fileName", "filename", "title") || path.split("/").pop() || url.split("?")[0].split("/").pop() || "artifact").slice(0, 180);
+        const mime = str("mime", "mimeType", "contentType", "content_type") || (/\.pdf$/i.test(name) ? "application/pdf" : /\.docx$/i.test(name) ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document" : /\.(png)$/i.test(name) ? "image/png" : /\.jpe?g$/i.test(name) ? "image/jpeg" : /\.mp4$/i.test(name) ? "video/mp4" : /\.md$/i.test(name) ? "text/markdown" : "application/octet-stream");
+        const content = typeof d.content === "string" ? d.content : "";
+        if (url && /^https?:\/\//.test(url)) persistArtifact({ key: `${subtype}:${url}`, name, mime, url, origin: `ondemand_agent.${subtype}`, source: "agent" });
+        else if (content) persistArtifact({ key: `${subtype}:${name}:${content.length}`, name, mime: mime === "application/octet-stream" ? "text/plain" : mime, bytes: new TextEncoder().encode(content), origin: `ondemand_agent.${subtype}`, source: "agent" });
+        else custom(CE.artifact, { phase: "failed", key: `${subtype}:${name}`, name, message: `ondemand_agent.${subtype} carried no url or content (path ${path || "n/a"}) — nothing to store` });
+      };
+      const wantsReport = REPORT_RE.test(query);
       // ---- tool cards: one per plugin id (pinned Perplexity opens on the first planning frame; others open when the plan/agents name them)
       type Tool = { id: string; name: string; open: boolean; stepId?: string; startedAt: number };
       const tools = new Map<string, Tool>();
@@ -277,6 +332,7 @@ export async function POST(req: NextRequest) {
                 const r = parsed as { title?: string; plugins?: { pluginId?: string; name?: string; api_request_parameters?: Record<string, unknown> }[] };
                 stepCounter += 1; currentStepId = u.stepId || String(stepCounter);
                 custom(CE.step, { phase: "start", stepId: currentStepId, index: stepCounter, label: String(r.title ?? `Step ${stepCounter}`).slice(0, 120), query: null, source: "step_output" });
+                custom(CE.stepOutput, { stepId: currentStepId, title: String(r.title ?? `Step ${stepCounter}`).slice(0, 160), plugins: (r.plugins ?? []).map((pl) => ({ pluginId: String(pl.pluginId ?? ""), name: pl.name ? String(pl.name) : pluginName(String(pl.pluginId ?? "")), params: pl.api_request_parameters ?? null })), raw: stepBuf.slice(0, 2000) });
                 for (const pl of r.plugins ?? []) { const pid = String(pl.pluginId ?? ""); const input = pl.api_request_parameters ? String(Object.values(pl.api_request_parameters)[0] ?? "") : ""; if (pluginIds.includes(pid)) toolStart(pid, pl.name ? pluginName(pid) : undefined, currentStepId, input || undefined); }
                 stepBuf = "";
               }
@@ -319,7 +375,7 @@ export async function POST(req: NextRequest) {
           case "awaiting_input": custom(CE.awaitingInput, { prompt: u.prompt, options: u.options ?? [], agent: u.agent ?? null }); status("awaiting-input", { statusType: "awaiting_input" }); return false;
           case "awaiting_browser_action": custom(CE.awaitingBrowserAction, { action: u.action ?? null, message: u.message ?? null, url: u.url ?? null, agent: u.agent ?? null }); status("awaiting-input", { statusType: "awaiting_browser_action" }); return false;
           case "filler": custom(CE.filler, { on: u.on }); return false;
-          case "agent": custom(CE.agent, { subtype: u.subtype, agent: u.agent ?? null, data: u.data ?? null }); return false;
+          case "agent": custom(CE.agent, { subtype: u.subtype, agent: u.agent ?? null, data: u.data ?? null }); if (u.subtype === "file_written" || u.subtype === "artifact_ready") fromAgentEvent(u.subtype, u.data); return false;
           case "status": status(u.statusType === "fulfilling" ? "answering" : "planning", { statusType: u.statusType, statusMessage: u.message, stepQuery: u.stepQuery ?? null }); return false;
           case "unknown": custom(CE.unknown, { eventType: u.eventType }); return false;
         }
@@ -387,6 +443,15 @@ export async function POST(req: NextRequest) {
           for (const [idx, d] of derivedSummary) if (!d.closed) { d.closed = true; custom(CE.summary, { phase: "done", index: idx, stepId: String(idx), derived: true, text: `${d.title} — ${d.n} source${d.n === 1 ? "" : "s"}${d.hosts.length ? ` from ${d.hosts.join(", ")}` : ""}.`, at: new Date().toISOString() }); }
           if (stepCounter > 0) custom(CE.step, { phase: "done", stepId: currentStepId, index: stepCounter, message: "answer written" });
           emitSources(false);
+          if (wantsReport && text.trim().length > 200) {
+            const title = query.replace(/\s+/g, " ").trim().slice(0, 110);
+            const srcList = [...realSources.values()].slice(0, 25);
+            const sections = mdToSections(text);
+            if (srcList.length) sections.push({ heading: "Sources", paragraphs: [], bullets: srcList.map((x, i) => `[${i + 1}] ${x.title || x.sourceName} — ${x.url}`) });
+            const bytes = makeTextPdf({ title: "B Capital Portfolio Report", subtitle: `${title} · generated ${new Date().toISOString().slice(0, 16).replace("T", " ")} UTC · ${ENDPOINT_LABEL} + ${pluginIds.map((id) => PLUGIN_NAMES[id] ?? id).join(", ")}`, sections, footer: "B Capital Portfolio Intelligence · generated by the analyst chat · verify figures against the cited sources" });
+            persistArtifact({ key: `report:${messageId}`, name: `${slugName(title)}-report.pdf`, mime: "application/pdf", bytes, origin: "bridge.report", source: "generated" });
+          }
+          if (artifactJobs.length) { status("filing", { statusMessage: `Saving ${artifactJobs.length} file${artifactJobs.length === 1 ? "" : "s"} to Artifacts` }); await Promise.allSettled(artifactJobs); }
           status("done", { chars: text.length, sources: realSources.size, firstTokenMs: firstTokenAt ? firstTokenAt - t0 : null });
           send({ type: "RUN_FINISHED", threadId, runId });
         }

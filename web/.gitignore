@@ -15,4 +15,5 @@ proof/perf/**/run.har
 proof/perf/**/run.webm
 
 # run-ux recorder output (delivered as run artifacts, never committed)
-artifacts/
+# (anchored: only web/artifacts/ scratch output — src/**/artifacts and public/icons/artifacts are the Artifacts feature)
+/artifacts/

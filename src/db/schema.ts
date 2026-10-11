@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer, real, index, uniqueIndex } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, real, blob, index, uniqueIndex } from "drizzle-orm/sqlite-core";
 
 /** One row per portfolio company (+ record 136 = the B Capital firm itself). JSON columns are stored as TEXT. */
 export const companies = sqliteTable(
@@ -110,6 +110,37 @@ export const ingestRuns = sqliteTable("ingest_runs", {
   receivedAt: text("received_at").notNull(),
   finishedAt: text("finished_at"),
 });
+
+/** Uploaded / generated artifacts (documents, images, video, audio). Bytes are stored inline as a BLOB (≤ 25 MB). */
+export const artifacts = sqliteTable(
+  "artifacts",
+  {
+    id: text("id").primaryKey(), // art_<12hex>
+    name: text("name").notNull(),
+    kind: text("kind").notNull(), // document | image | video | audio | file
+    mime: text("mime").notNull(),
+    sizeBytes: integer("size_bytes").notNull(),
+    version: integer("version").notNull().default(1),
+    source: text("source").notNull().default("upload"), // upload | generated | agent
+    mediaId: text("media_id"),
+    mediaStatus: text("media_status"), // stored | local | failed
+    mediaMessage: text("media_message"),
+    threadId: text("thread_id"),
+    sessionId: text("session_id"),
+    originEvent: text("origin_event"),
+    bytes: blob("bytes", { mode: "buffer" }).notNull(),
+    createdAt: text("created_at").notNull(),
+    deletedAt: text("deleted_at"),
+  },
+  (t) => [index("artifacts_thread_idx").on(t.threadId, t.createdAt), index("artifacts_name_idx").on(t.name, t.threadId)],
+);
+
+/** Idempotent DDL run at boot so existing DB files (incl. the committed data/portfolio.sqlite) gain the table. */
+export const ARTIFACTS_DDL = [
+  `CREATE TABLE IF NOT EXISTS artifacts (id TEXT PRIMARY KEY NOT NULL, name TEXT NOT NULL, kind TEXT NOT NULL, mime TEXT NOT NULL, size_bytes INTEGER NOT NULL, version INTEGER NOT NULL DEFAULT 1, source TEXT NOT NULL DEFAULT 'upload', media_id TEXT, media_status TEXT, media_message TEXT, thread_id TEXT, session_id TEXT, origin_event TEXT, bytes BLOB NOT NULL, created_at TEXT NOT NULL, deleted_at TEXT)`,
+  `CREATE INDEX IF NOT EXISTS artifacts_thread_idx ON artifacts (thread_id, created_at)`,
+  `CREATE INDEX IF NOT EXISTS artifacts_name_idx ON artifacts (name, thread_id)`,
+];
 
 export type BrandTokens = { primary: string | null; secondary: string | null; background: string | null; text: string | null; fonts: string[]; evidence_tier?: string; [k: string]: unknown };
 export type NewsItem = { id?: string; title: string; url?: string; source?: string; kind?: string; published_at?: string; summary?: string; image_url?: string; fetched_at?: string };

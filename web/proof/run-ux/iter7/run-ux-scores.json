@@ -1,0 +1,569 @@
+[
+  {
+    "at": "2026-10-11T02:08:02.241Z",
+    "project": "desktop",
+    "test": "upload: 3 images + PDF + DOCX are stored, retrievable and displayed in chat and Artifacts",
+    "iteration": 7,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "cls": 0.00013530521262002744,
+    "topShifts": [
+      {
+        "v": 0.00013530521262002744,
+        "t": 365,
+        "nodes": [
+          "button[artifacts-filter-document].art-chip {\"y0\":144,\"h0\":32,\"y1\":144,\"h1\":32}",
+          "button[artifacts-filter-upload].art-chip {\"y0\":144,\"h0\":32,\"y1\":144,\"h1\":32}",
+          "button[artifacts-filter-image].art-chip {\"y0\":144,\"h0\":32,\"y1\":144,\"h1\":32}",
+          "button[artifacts-filter-video].art-chip {\"y0\":144,\"h0\":32,\"y1\":144,\"h1\":32}"
+        ]
+      }
+    ],
+    "longTasks": 2,
+    "errors": []
+  },
+  {
+    "at": "2026-10-11T02:08:17.982Z",
+    "project": "mobile-ux",
+    "test": "upload: 3 images + PDF + DOCX are stored, retrievable and displayed in chat and Artifacts",
+    "iteration": 7,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "cls": 0,
+    "topShifts": [],
+    "longTasks": 2,
+    "errors": []
+  },
+  {
+    "at": "2026-10-11T02:08:24.221Z",
+    "project": "desktop",
+    "test": "report: Thinking top → Working before action → answer → Sources, PDF stored and listed in Artifacts",
+    "iteration": 7,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "firstSkeletonMs": 440,
+    "topShifts": [
+      {
+        "v": 0.029798283647869513,
+        "t": 1523,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      },
+      {
+        "v": 0.026159831064064644,
+        "t": 1558,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      },
+      {
+        "v": 0.025361572265625,
+        "t": 1576,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      },
+      {
+        "v": 0.01963710562414266,
+        "t": 27571,
+        "nodes": [
+          "section[plan-stepper].oiu-plan {\"y0\":274,\"h0\":124,\"y1\":198,\"h1\":124}",
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":533,\"h0\":76,\"y1\":405,\"h1\":78}",
+          "ol[working-list].oiu-work-list {\"y0\":416,\"h0\":58,\"y1\":340,\"h1\":58}",
+          "section[outputs-card].oiu-outputs {\"y0\":0,\"h0\":0,\"y1\":501,\"h1\":35}",
+          "span.oiu-think__kinds {\"y0\":164,\"h0\":17,\"y1\":164,\"h1\":17}"
+        ]
+      },
+      {
+        "v": 0.01790636132008745,
+        "t": 1510,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      },
+      {
+        "v": 0.008188648733549811,
+        "t": 1603,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      },
+      {
+        "v": 0.002812542866941015,
+        "t": 19103,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":521,\"h0\":35,\"y1\":624,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.00231443329903978,
+        "t": 1475,
+        "nodes": [
+          "a[nav-artifacts].flex.min-h-10 {\"y0\":244,\"h0\":40,\"y1\":244,\"h1\":40}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      }
+    ],
+    "streamShifts": [
+      {
+        "v": 0.00041802233367626884,
+        "t": 5265,
+        "nodes": [
+          "pre.oiu-think__pre {\"y0\":205,\"h0\":52,\"y1\":189,\"h1\":68}"
+        ]
+      },
+      {
+        "v": 0.002812542866941015,
+        "t": 19103,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":521,\"h0\":35,\"y1\":624,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.00009557184499314129,
+        "t": 20401,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":631,\"h0\":28,\"y1\":624,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.000014507780349794238,
+        "t": 25588,
+        "nodes": [
+          "? {\"y0\":633,\"h0\":15,\"y1\":633,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.01963710562414266,
+        "t": 27571,
+        "nodes": [
+          "section[plan-stepper].oiu-plan {\"y0\":274,\"h0\":124,\"y1\":198,\"h1\":124}",
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":533,\"h0\":76,\"y1\":405,\"h1\":78}",
+          "ol[working-list].oiu-work-list {\"y0\":416,\"h0\":58,\"y1\":340,\"h1\":58}",
+          "section[outputs-card].oiu-outputs {\"y0\":0,\"h0\":0,\"y1\":501,\"h1\":35}",
+          "span.oiu-think__kinds {\"y0\":164,\"h0\":17,\"y1\":164,\"h1\":17}"
+        ]
+      },
+      {
+        "v": 0.000007818930041152263,
+        "t": 27739,
+        "nodes": [
+          "span.oiu-caret {\"y0\":590,\"h0\":16,\"y1\":666,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000011316872427983539,
+        "t": 27853,
+        "nodes": [
+          "span.oiu-caret {\"y0\":640,\"h0\":16,\"y1\":750,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000006069958847736625,
+        "t": 28090,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":698,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000010493827160493827,
+        "t": 28583,
+        "nodes": [
+          "span.oiu-caret {\"y0\":640,\"h0\":16,\"y1\":742,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000008436213991769547,
+        "t": 28946,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":721,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.00000771604938271605,
+        "t": 29946,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":714,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000006069958847736625,
+        "t": 30546,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":698,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000005864197530864197,
+        "t": 30813,
+        "nodes": [
+          "span.oiu-caret {\"y0\":640,\"h0\":16,\"y1\":697,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.00033645190329218105,
+        "t": 35540,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":544,\"h0\":235,\"y1\":541,\"h1\":238}",
+          "section[outputs-card].oiu-outputs {\"y0\":501,\"h0\":35,\"y1\":498,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0007356350201474623,
+        "t": 35561,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":541,\"h0\":238,\"y1\":534,\"h1\":245}",
+          "section[outputs-card].oiu-outputs {\"y0\":498,\"h0\":35,\"y1\":492,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0018468283822016458,
+        "t": 35585,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":534,\"h0\":245,\"y1\":519,\"h1\":260}",
+          "section[outputs-card].oiu-outputs {\"y0\":492,\"h0\":35,\"y1\":476,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0006848624774948559,
+        "t": 35606,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":519,\"h0\":260,\"y1\":513,\"h1\":266}",
+          "section[outputs-card].oiu-outputs {\"y0\":476,\"h0\":35,\"y1\":470,\"h1\":35}"
+        ]
+      }
+    ],
+    "marks": [
+      {
+        "a": "send",
+        "t": 1935.4000000953674
+      },
+      {
+        "a": "stream finished",
+        "t": 35609.200000047684
+      }
+    ],
+    "postRunShifts": [
+      {
+        "v": 0.0005122845936213992,
+        "t": 35624,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":513,\"h0\":266,\"y1\":509,\"h1\":270}",
+          "section[outputs-card].oiu-outputs {\"y0\":470,\"h0\":35,\"y1\":466,\"h1\":35}"
+        ],
+        "afterMark": "stream finished"
+      },
+      {
+        "v": 0.0006644925090020577,
+        "t": 35646,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":509,\"h0\":270,\"y1\":503,\"h1\":276}",
+          "section[outputs-card].oiu-outputs {\"y0\":466,\"h0\":35,\"y1\":461,\"h1\":35}"
+        ],
+        "afterMark": "stream finished"
+      }
+    ],
+    "streamCls": 0.026645314241469483,
+    "cls": 0.13755122167432918,
+    "longTasks": 4,
+    "order": [
+      "thinking-block",
+      "working-row",
+      "plan-stepper",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "domOrder": [
+      "thinking-block",
+      "working-list",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "errors": []
+  },
+  {
+    "at": "2026-10-11T02:08:51.948Z",
+    "project": "mobile-ux",
+    "test": "report: Thinking top → Working before action → answer → Sources, PDF stored and listed in Artifacts",
+    "iteration": 7,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "firstSkeletonMs": 228,
+    "topShifts": [
+      {
+        "v": 0.014199709270013173,
+        "t": 1227,
+        "nodes": [
+          "div.openui-agent-welcome-screen {\"y0\":114,\"h0\":396,\"y1\":102,\"h1\":396}",
+          "div.openui-agent-thread-scroll-container {\"y0\":510,\"h0\":278,\"y1\":498,\"h1\":290}",
+          "div.openui-agent-thread-header__actions {\"y0\":73,\"h0\":32,\"y1\":63,\"h1\":32}"
+        ]
+      },
+      {
+        "v": 0.01159003616270973,
+        "t": 1338,
+        "nodes": [
+          "div.openui-agent-composer-slot {\"y0\":788,\"h0\":56,\"y1\":744,\"h1\":100}",
+          "::after. {\"y0\":716,\"h0\":28,\"y1\":672,\"h1\":72}"
+        ]
+      },
+      {
+        "v": 0.011246752468872367,
+        "t": 23752,
+        "nodes": [
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":480,\"h0\":96,\"y1\":428,\"h1\":96}",
+          "section[outputs-card].oiu-outputs {\"y0\":594,\"h0\":35,\"y1\":542,\"h1\":35}",
+          "span. {\"y0\":170,\"h0\":19,\"y1\":170,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":172,\"h0\":14,\"y1\":172,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.00801721918610578,
+        "t": 16274,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":505,\"h0\":35,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0005666081520734381,
+        "t": 17605,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":597,\"h0\":35,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0001886604965375026,
+        "t": 3603,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.00014398275892851489,
+        "t": 18370,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":185,\"h0\":17,\"y1\":185,\"h1\":17}",
+          "span. {\"y0\":184,\"h0\":19,\"y1\":184,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":186,\"h0\":14,\"y1\":186,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.00010643205539995818,
+        "t": 18120,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":185,\"h0\":17,\"y1\":185,\"h1\":17}",
+          "span. {\"y0\":184,\"h0\":19,\"y1\":184,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":186,\"h0\":14,\"y1\":186,\"h1\":14}"
+        ]
+      }
+    ],
+    "streamShifts": [
+      {
+        "v": 0.0001886604965375026,
+        "t": 3603,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.0000706091449785437,
+        "t": 4354,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.00005804394958530085,
+        "t": 4604,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.00801721918610578,
+        "t": 16274,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":505,\"h0\":35,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0005666081520734381,
+        "t": 17605,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":597,\"h0\":35,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.00010643205539995818,
+        "t": 18120,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":185,\"h0\":17,\"y1\":185,\"h1\":17}",
+          "span. {\"y0\":184,\"h0\":19,\"y1\":184,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":186,\"h0\":14,\"y1\":186,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.00014398275892851489,
+        "t": 18370,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":185,\"h0\":17,\"y1\":185,\"h1\":17}",
+          "span. {\"y0\":184,\"h0\":19,\"y1\":184,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":186,\"h0\":14,\"y1\":186,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 9.070913812496436e-7,
+        "t": 18623,
+        "nodes": [
+          "svg.[object.SVGAnimatedString] {\"y0\":186,\"h0\":14,\"y1\":186,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.0000974583299497385,
+        "t": 21840,
+        "nodes": [
+          "? {\"y0\":617,\"h0\":15,\"y1\":617,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.00009011802140764456,
+        "t": 23720,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":185,\"h0\":17,\"y1\":185,\"h1\":17}",
+          "span. {\"y0\":184,\"h0\":19,\"y1\":184,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":186,\"h0\":14,\"y1\":186,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.011246752468872367,
+        "t": 23752,
+        "nodes": [
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":480,\"h0\":96,\"y1\":428,\"h1\":96}",
+          "section[outputs-card].oiu-outputs {\"y0\":594,\"h0\":35,\"y1\":542,\"h1\":35}",
+          "span. {\"y0\":170,\"h0\":19,\"y1\":170,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":172,\"h0\":14,\"y1\":172,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.000056671613914263453,
+        "t": 23990,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      },
+      {
+        "v": 0.000069802841528544,
+        "t": 24204,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":723,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000023497986257133625,
+        "t": 26624,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":656,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.00006945728290711556,
+        "t": 28128,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      }
+    ],
+    "marks": [
+      {
+        "a": "send",
+        "t": 1346.7999999523163
+      },
+      {
+        "a": "stream finished",
+        "t": 32537.699999809265
+      }
+    ],
+    "postRunShifts": [],
+    "streamCls": 0.020806221379827097,
+    "cls": 0.046595966812549995,
+    "longTasks": 3,
+    "order": [
+      "thinking-block",
+      "working-row",
+      "plan-stepper",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "domOrder": [
+      "thinking-block",
+      "working-list",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "errors": []
+  }
+]

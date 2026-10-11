@@ -30,5 +30,11 @@ export default defineConfig({
       testMatch: /mobile\.spec\.ts/,
       use: { ...devices["Pixel 7"], viewport: { width: 390, height: 844 }, defaultBrowserType: "chromium" },
     },
+    {
+      // Run-UX e2e at 390 px (uploads, stream order, artifacts) — same spec as desktop, mobile viewport + touch.
+      name: "mobile-ux",
+      testMatch: /run-ux\.spec\.ts/,
+      use: { ...devices["Pixel 7"], viewport: { width: 390, height: 844 }, defaultBrowserType: "chromium" },
+    },
   ],
 });

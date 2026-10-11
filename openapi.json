@@ -34,6 +34,9 @@
       "name": "pitchbook"
     },
     {
+      "name": "artifacts"
+    },
+    {
       "name": "meta"
     }
   ],
@@ -61,6 +64,10 @@
                     },
                     "db_record_count_total": {
                       "type": "integer"
+                    },
+                    "news_total": {
+                      "type": "integer",
+                      "description": "count(*) of news_items in the DB"
                     },
                     "timestamp": {
                       "type": "string"
@@ -308,11 +315,11 @@
             "name": "limit",
             "in": "query",
             "required": false,
-            "description": "Max items",
+            "description": "Max items (default 20; max 1000 — use limit=1000 to get every item for a company, e.g. when summing news across the portfolio; or use GET /news/count)",
             "schema": {
               "type": "integer",
               "default": 20,
-              "maximum": 100
+              "maximum": 1000
             }
           },
           {
@@ -1336,6 +1343,579 @@
           }
         }
       }
+    },
+    "/news/count": {
+      "get": {
+        "operationId": "getNewsCount",
+        "tags": [
+          "companies"
+        ],
+        "summary": "Total news items in the DB and the per-company breakdown",
+        "responses": {
+          "200": {
+            "description": "Counts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "total",
+                    "by_company",
+                    "timestamp"
+                  ],
+                  "properties": {
+                    "total": {
+                      "type": "integer"
+                    },
+                    "by_company": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "integer"
+                      }
+                    },
+                    "companies": {
+                      "type": "integer"
+                    },
+                    "orphan_items": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/artifacts": {
+      "get": {
+        "operationId": "listArtifacts",
+        "tags": [
+          "artifacts"
+        ],
+        "summary": "List artifacts, newest first (deleted excluded)",
+        "parameters": [
+          {
+            "name": "thread_id",
+            "in": "query",
+            "required": false,
+            "description": "Filter by chat thread id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "required": false,
+            "description": "document | image | video | audio | file",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Max rows",
+            "schema": {
+              "type": "integer",
+              "default": 100,
+              "maximum": 500
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artifacts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "total",
+                    "timestamp"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Artifact"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createArtifact",
+        "tags": [
+          "artifacts"
+        ],
+        "summary": "Upload an artifact (multipart file, JSON base64 or JSON url to fetch); max 25 MB",
+        "description": "Requires X-Ingest-Secret. Same name + same thread_id ⇒ version = previous max + 1.",
+        "security": [
+          {
+            "ingestSecret": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "document",
+                      "image",
+                      "video",
+                      "audio",
+                      "file"
+                    ]
+                  },
+                  "source": {
+                    "type": "string",
+                    "enum": [
+                      "upload",
+                      "generated",
+                      "agent"
+                    ]
+                  },
+                  "media_id": {
+                    "type": "string"
+                  },
+                  "media_status": {
+                    "type": "string",
+                    "enum": [
+                      "stored",
+                      "local",
+                      "failed"
+                    ]
+                  },
+                  "media_message": {
+                    "type": "string"
+                  },
+                  "thread_id": {
+                    "type": "string"
+                  },
+                  "session_id": {
+                    "type": "string"
+                  },
+                  "origin_event": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "name",
+                      "content_base64"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "mime": {
+                        "type": "string"
+                      },
+                      "content_base64": {
+                        "type": "string",
+                        "description": "Base64 bytes (data: URL prefix tolerated)"
+                      },
+                      "kind": {
+                        "type": "string",
+                        "enum": [
+                          "document",
+                          "image",
+                          "video",
+                          "audio",
+                          "file"
+                        ]
+                      },
+                      "source": {
+                        "type": "string",
+                        "enum": [
+                          "upload",
+                          "generated",
+                          "agent"
+                        ]
+                      },
+                      "media_id": {
+                        "type": "string"
+                      },
+                      "media_status": {
+                        "type": "string",
+                        "enum": [
+                          "stored",
+                          "local",
+                          "failed"
+                        ]
+                      },
+                      "media_message": {
+                        "type": "string"
+                      },
+                      "thread_id": {
+                        "type": "string"
+                      },
+                      "session_id": {
+                        "type": "string"
+                      },
+                      "origin_event": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "name",
+                      "url"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "Server fetches this URL (≤ 25 MB)"
+                      },
+                      "mime": {
+                        "type": "string"
+                      },
+                      "kind": {
+                        "type": "string",
+                        "enum": [
+                          "document",
+                          "image",
+                          "video",
+                          "audio",
+                          "file"
+                        ]
+                      },
+                      "source": {
+                        "type": "string",
+                        "enum": [
+                          "upload",
+                          "generated",
+                          "agent"
+                        ]
+                      },
+                      "media_id": {
+                        "type": "string"
+                      },
+                      "media_status": {
+                        "type": "string",
+                        "enum": [
+                          "stored",
+                          "local",
+                          "failed"
+                        ]
+                      },
+                      "media_message": {
+                        "type": "string"
+                      },
+                      "thread_id": {
+                        "type": "string"
+                      },
+                      "session_id": {
+                        "type": "string"
+                      },
+                      "origin_event": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Artifact"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid X-Ingest-Secret",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Larger than 25 MB",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Unsupported content type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "url fetch failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/artifacts/{id}": {
+      "get": {
+        "operationId": "getArtifact",
+        "tags": [
+          "artifacts"
+        ],
+        "summary": "Artifact metadata",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Artifact id, e.g. art_0123456789ab"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artifact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/Artifact"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown or deleted artifact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteArtifact",
+        "tags": [
+          "artifacts"
+        ],
+        "summary": "Soft-delete an artifact (bytes dropped)",
+        "security": [
+          {
+            "ingestSecret": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Artifact id, e.g. art_0123456789ab"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "deleted_at"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "deleted_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing/invalid X-Ingest-Secret",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown or deleted artifact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/artifacts/{id}/content": {
+      "get": {
+        "operationId": "getArtifactContent",
+        "tags": [
+          "artifacts"
+        ],
+        "summary": "Raw bytes (content-type = mime; inline, or attachment with ?download=1)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Artifact id, e.g. art_0123456789ab"
+          },
+          {
+            "name": "download",
+            "in": "query",
+            "required": false,
+            "description": "1 ⇒ Content-Disposition: attachment",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "0",
+                "true",
+                "false"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Raw bytes",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown or deleted artifact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2076,6 +2656,122 @@
                 ]
               }
             }
+          }
+        }
+      },
+      "Artifact": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "mime",
+          "size_bytes",
+          "version",
+          "source",
+          "content_url",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "art_<12hex>"
+          },
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "document",
+              "image",
+              "video",
+              "audio",
+              "file"
+            ]
+          },
+          "mime": {
+            "type": "string"
+          },
+          "size_bytes": {
+            "type": "integer"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "1-based; same name + same thread_id ⇒ previous max + 1"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "upload",
+              "generated",
+              "agent"
+            ]
+          },
+          "media_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "OnDemand Media API id"
+          },
+          "media_status": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "stored",
+              "local",
+              "failed",
+              null
+            ]
+          },
+          "media_message": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "thread_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "session_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "origin_event": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "e.g. ondemand_agent.artifact_ready | bridge.report | upload"
+          },
+          "content_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "thumbnail_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deleted_at": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },

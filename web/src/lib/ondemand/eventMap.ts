@@ -83,6 +83,9 @@ export const AGENT_SUBTYPE: Record<string, UiKind> = {
   filler_end: "filler",
   thinking: "thinking",
   error: "error",
+  // file_written / artifact_ready / preview_ready stay generic `agent` frames here; the bridge (api/chat) reads their `data`
+  // ({name|fileName|filename, url|fileUrl|downloadUrl|signedUrl, path|filePath, mime|mimeType|contentType, size|sizeBytes}) and persists
+  // them as artifacts (backend /artifacts + OnDemand Media API), then streams CUSTOM ondemand.artifact.
   // generic (rendered in the Agent rail log): before_init, no_init, initiated, progress, completed, stopped, token_usage, tool_call,
   // tool_result, tool_details, terminal, skills_used, todo, subagent_status, code_generation_init, code_generated, file_written,
   // artifact_ready, preview_ready, sandbox_created, novnc_ready, novnc_ended, graphs_ready, graphs_ended
@@ -126,6 +129,8 @@ export const CLIENT_EVENT = {
   answerComplete: "ondemand.answer_complete", unknown: "ondemand.unknown", request: "ondemand.request",
   attachments: "ondemand.attachments",  // Media API: {items:[{mediaId,name,kind,extractedChars,grounded}]} emitted right after CE.request
   voice: "ondemand.voice",              // Voice: {phase: "transcript"|"tts_queued"|"tts_playing"|"tts_done"|"barge_in", text?}
+  artifact: "ondemand.artifact",        // Artifacts: {phase: "creating"|"ready"|"failed", key, name, kind?, artifact?, message?, origin}
+  stepOutput: "ondemand.step_output",   // Outputs rail: {stepId, title, plugins[{pluginId,name,params}], raw}
 } as const satisfies Record<string, `ondemand.${string}`>;
 /** Compile-time uniqueness guard: `_DuplicateClientEvent` is `never` while every CLIENT_EVENT value is distinct; a duplicate makes the line below fail tsc. */
 type _CE = typeof CLIENT_EVENT;

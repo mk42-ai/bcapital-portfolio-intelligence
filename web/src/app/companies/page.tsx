@@ -10,7 +10,7 @@ export default async function CompaniesPage() {
   const [cs, sig] = await Promise.all([listCompanies(), getSignals()]);
   const sigBy = new Map(sig.data.data.map((x) => [x.slug, x]));
   const rows = cs.data.filter((c) => c.b_capital_role !== "firm").map((c) => ({
-    slug: c.slug, name: c.name, logo_url: c.logo_url, sector: c.sector, region: c.region, score: c.sentiment.score, newsCount: c.latest_news?.length ?? 0,
+    slug: c.slug, name: c.name, logo_url: c.logo_url, sector: c.sector, region: c.region, score: c.sentiment.score, newsCount: c.news_count ?? c.latest_news?.length ?? 0,
     signal: sigBy.get(c.slug)?.score ?? null, signal_confidence: sigBy.get(c.slug)?.confidence ?? null, signal_percentile: sigBy.get(c.slug)?.percentile ?? null,
   }));
   return (

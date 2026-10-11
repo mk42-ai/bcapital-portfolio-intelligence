@@ -1,0 +1,122 @@
+[
+  {
+    "at": "2026-10-11T01:34:43.236Z",
+    "project": "desktop",
+    "test": "report: Thinking top → Working before action → answer → Sources, PDF stored and listed in Artifacts",
+    "iteration": 2,
+    "total": 8,
+    "parts": {
+      "skeleton": 2,
+      "cls": 0,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "firstSkeletonMs": 211,
+    "topShifts": [
+      {
+        "v": 0.20610493827160495,
+        "t": 36999,
+        "nodes": [
+          "div.openui-agent-composer-slot",
+          "::after.",
+          "p[chat-footer].oiu-footer"
+        ]
+      },
+      {
+        "v": 0.20610493827160495,
+        "t": 37007,
+        "nodes": [
+          "div.openui-agent-composer-slot",
+          "::after.",
+          "p[chat-footer].oiu-footer"
+        ]
+      },
+      {
+        "v": 0.05695094337411052,
+        "t": 1250,
+        "nodes": [
+          "div[main-column].flex.min-w-0",
+          "a[nav-overview].flex.min-h-10",
+          "a[nav-companies].flex.min-h-10",
+          "a[nav-news].flex.min-h-10",
+          "a[nav-chat].flex.min-h-10"
+        ]
+      },
+      {
+        "v": 0.04100219478737997,
+        "t": 28722,
+        "nodes": [
+          "section[plan-stepper].oiu-plan",
+          "div.openui-agent-composer-slot",
+          "section[step-summary].oiu-summary.oiu-summary--done",
+          "::after.",
+          "ol[working-list].oiu-work-list"
+        ]
+      },
+      {
+        "v": 0.019847192215363508,
+        "t": 17936,
+        "nodes": [
+          "::after.",
+          "div.openui-agent-composer-slot",
+          "section[sources-list].oiu-srcs",
+          "section[outputs-card].oiu-outputs",
+          "div[working-band].oiu-slot.oiu-slot--working"
+        ]
+      },
+      {
+        "v": 0.018439592308599106,
+        "t": 1325,
+        "nodes": [
+          "div[main-column].flex.min-w-0",
+          "a[nav-overview].flex.min-h-10",
+          "a[nav-companies].flex.min-h-10",
+          "a[nav-news].flex.min-h-10",
+          "a[nav-chat].flex.min-h-10"
+        ]
+      },
+      {
+        "v": 0.015801886949159807,
+        "t": 1267,
+        "nodes": [
+          "div[main-column].flex.min-w-0",
+          "a[nav-overview].flex.min-h-10",
+          "a[nav-companies].flex.min-h-10",
+          "a[nav-news].flex.min-h-10",
+          "a[nav-chat].flex.min-h-10"
+        ]
+      },
+      {
+        "v": 0.014474351771476338,
+        "t": 1213,
+        "nodes": [
+          "div[main-column].flex.min-w-0",
+          "a[nav-overview].flex.min-h-10",
+          "a[nav-companies].flex.min-h-10",
+          "a[nav-news].flex.min-h-10",
+          "a[nav-chat].flex.min-h-10"
+        ]
+      }
+    ],
+    "cls": 0.6233998268242562,
+    "longTasks": 3,
+    "order": [
+      "thinking-block",
+      "working-row",
+      "plan-stepper",
+      "sources-list",
+      "answer-block",
+      "inline-artifacts"
+    ],
+    "domOrder": [
+      "thinking-block",
+      "working-list",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "errors": []
+  }
+]

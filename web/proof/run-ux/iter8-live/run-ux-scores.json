@@ -1,0 +1,584 @@
+[
+  {
+    "at": "2026-10-11T02:16:22.620Z",
+    "project": "desktop",
+    "test": "report: Thinking top → Working before action → answer → Sources, PDF stored and listed in Artifacts",
+    "iteration": 8,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "firstSkeletonMs": 275,
+    "topShifts": [
+      {
+        "v": 0.09252663242669754,
+        "t": 1440,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}",
+          "div[composer].oiu-composer {\"y0\":775,\"h0\":99,\"y1\":775,\"h1\":99}",
+          "button[nav-toggle].hidden.size-8 {\"y0\":12,\"h0\":32,\"y1\":12,\"h1\":32}"
+        ]
+      },
+      {
+        "v": 0.018385322359396432,
+        "t": 19216,
+        "nodes": [
+          "section[plan-stepper].oiu-plan {\"y0\":274,\"h0\":124,\"y1\":198,\"h1\":124}",
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":533,\"h0\":58,\"y1\":405,\"h1\":60}",
+          "ol[working-list].oiu-work-list {\"y0\":416,\"h0\":58,\"y1\":340,\"h1\":58}",
+          "section[outputs-card].oiu-outputs {\"y0\":0,\"h0\":0,\"y1\":483,\"h1\":35}",
+          "span.oiu-think__kinds {\"y0\":164,\"h0\":17,\"y1\":164,\"h1\":17}"
+        ]
+      },
+      {
+        "v": 0.014559830226819703,
+        "t": 1424,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      },
+      {
+        "v": 0.0032596390335648145,
+        "t": 1256,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}"
+        ]
+      },
+      {
+        "v": 0.002812542866941015,
+        "t": 12862,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":521,\"h0\":35,\"y1\":624,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.00231443329903978,
+        "t": 1236,
+        "nodes": [
+          "a[nav-artifacts].flex.min-h-10 {\"y0\":244,\"h0\":40,\"y1\":244,\"h1\":40}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      },
+      {
+        "v": 0.0003413280178326475,
+        "t": 13896,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":636,\"h0\":10,\"y1\":611,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.000014507780349794238,
+        "t": 16950,
+        "nodes": [
+          "? {\"y0\":620,\"h0\":15,\"y1\":620,\"h1\":15}"
+        ]
+      }
+    ],
+    "streamShifts": [
+      {
+        "v": 0.000005298253440072017,
+        "t": 4605,
+        "nodes": [
+          "? {\"y0\":309,\"h0\":15,\"y1\":309,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.002812542866941015,
+        "t": 12862,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":521,\"h0\":35,\"y1\":624,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0003413280178326475,
+        "t": 13896,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":636,\"h0\":10,\"y1\":611,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.000014507780349794238,
+        "t": 16950,
+        "nodes": [
+          "? {\"y0\":620,\"h0\":15,\"y1\":620,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.018385322359396432,
+        "t": 19216,
+        "nodes": [
+          "section[plan-stepper].oiu-plan {\"y0\":274,\"h0\":124,\"y1\":198,\"h1\":124}",
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":533,\"h0\":58,\"y1\":405,\"h1\":60}",
+          "ol[working-list].oiu-work-list {\"y0\":416,\"h0\":58,\"y1\":340,\"h1\":58}",
+          "section[outputs-card].oiu-outputs {\"y0\":0,\"h0\":0,\"y1\":483,\"h1\":35}",
+          "span.oiu-think__kinds {\"y0\":164,\"h0\":17,\"y1\":164,\"h1\":17}"
+        ]
+      },
+      {
+        "v": 0.0000033950617283950617,
+        "t": 19351,
+        "nodes": [
+          "span.oiu-caret {\"y0\":572,\"h0\":16,\"y1\":605,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000007818930041152263,
+        "t": 19481,
+        "nodes": [
+          "span.oiu-caret {\"y0\":605,\"h0\":16,\"y1\":681,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000005246913580246914,
+        "t": 19606,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":690,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000007921810699588477,
+        "t": 19721,
+        "nodes": [
+          "span.oiu-caret {\"y0\":640,\"h0\":16,\"y1\":717,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.0000033950617283950617,
+        "t": 20326,
+        "nodes": [
+          "span.oiu-caret {\"y0\":640,\"h0\":16,\"y1\":673,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000005967078189300412,
+        "t": 20443,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":697,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000012757201646090535,
+        "t": 20692,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":763,\"h1\":16}"
+        ]
+      }
+    ],
+    "marks": [
+      {
+        "a": "send",
+        "t": 1858.3999998569489
+      },
+      {
+        "a": "stream finished",
+        "t": 24513.89999985695
+      }
+    ],
+    "postRunShifts": [],
+    "streamCls": 0.02160550133557313,
+    "cls": 0.13426603632169498,
+    "longTasks": 3,
+    "order": [
+      "thinking-block",
+      "working-row",
+      "plan-stepper",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "domOrder": [
+      "thinking-block",
+      "working-list",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "errors": []
+  },
+  {
+    "at": "2026-10-11T02:16:29.758Z",
+    "project": "desktop",
+    "test": "upload: 3 images + PDF + DOCX are stored, retrievable and displayed in chat and Artifacts",
+    "iteration": 8,
+    "total": 8,
+    "parts": {
+      "skeleton": 2,
+      "cls": 0,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "cls": 0.13996666666666666,
+    "topShifts": [
+      {
+        "v": 0.13996666666666666,
+        "t": 371,
+        "nodes": [
+          "li. {\"y0\":214,\"h0\":109,\"y1\":565,\"h1\":109}",
+          "li. {\"y0\":331,\"h0\":109,\"y1\":682,\"h1\":109}",
+          "li. {\"y0\":448,\"h0\":109,\"y1\":799,\"h1\":101}",
+          "li. {\"y0\":565,\"h0\":109,\"y1\":0,\"h1\":0}",
+          "li. {\"y0\":682,\"h0\":109,\"y1\":0,\"h1\":0}"
+        ]
+      }
+    ],
+    "longTasks": 0,
+    "errors": []
+  },
+  {
+    "at": "2026-10-11T02:16:46.108Z",
+    "project": "mobile-ux",
+    "test": "upload: 3 images + PDF + DOCX are stored, retrievable and displayed in chat and Artifacts",
+    "iteration": 8,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "cls": 0,
+    "topShifts": [],
+    "longTasks": 2,
+    "errors": []
+  },
+  {
+    "at": "2026-10-11T02:17:07.095Z",
+    "project": "mobile-ux",
+    "test": "report: Thinking top → Working before action → answer → Sources, PDF stored and listed in Artifacts",
+    "iteration": 8,
+    "total": 9,
+    "parts": {
+      "skeleton": 2,
+      "cls": 1,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "firstSkeletonMs": 235,
+    "topShifts": [
+      {
+        "v": 0.014199709270013173,
+        "t": 1283,
+        "nodes": [
+          "div.openui-agent-welcome-screen {\"y0\":114,\"h0\":396,\"y1\":102,\"h1\":396}",
+          "div.openui-agent-thread-scroll-container {\"y0\":510,\"h0\":278,\"y1\":498,\"h1\":290}",
+          "div.openui-agent-thread-header__actions {\"y0\":73,\"h0\":32,\"y1\":63,\"h1\":32}"
+        ]
+      },
+      {
+        "v": 0.014159183522728254,
+        "t": 4616,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.012729690070992138,
+        "t": 8149,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.012328826097047834,
+        "t": 27177,
+        "nodes": [
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":454,\"h0\":114,\"y1\":402,\"h1\":114}",
+          "section[outputs-card].oiu-outputs {\"y0\":586,\"h0\":35,\"y1\":534,\"h1\":35}",
+          "span. {\"y0\":144,\"h0\":19,\"y1\":144,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":146,\"h0\":14,\"y1\":146,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.01159003616270973,
+        "t": 1436,
+        "nodes": [
+          "div.openui-agent-composer-slot {\"y0\":788,\"h0\":56,\"y1\":744,\"h1\":100}",
+          "::after. {\"y0\":716,\"h0\":28,\"y1\":672,\"h1\":72}"
+        ]
+      },
+      {
+        "v": 0.00801721918610578,
+        "t": 18640,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":505,\"h0\":35,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0020912991794710535,
+        "t": 20018,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":579,\"h0\":35,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.00019940172284010023,
+        "t": 8398,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      }
+    ],
+    "streamShifts": [
+      {
+        "v": 0.00005257074871826548,
+        "t": 3367,
+        "nodes": [
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.00014260052444280114,
+        "t": 4118,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.0001624989417267219,
+        "t": 4366,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.014159183522728254,
+        "t": 4616,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.00016126788913788307,
+        "t": 4865,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.000001058273278124584,
+        "t": 5366,
+        "nodes": [
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.00007084154215037674,
+        "t": 7649,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.00007221444025406622,
+        "t": 7899,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.012729690070992138,
+        "t": 8149,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.00019940172284010023,
+        "t": 8398,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":266,\"h0\":17,\"y1\":266,\"h1\":17}",
+          "span. {\"y0\":265,\"h0\":19,\"y1\":265,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":267,\"h0\":14,\"y1\":267,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.00801721918610578,
+        "t": 18640,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":505,\"h0\":35,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0020912991794710535,
+        "t": 20018,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":579,\"h0\":35,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.00008849540320643845,
+        "t": 20781,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":167,\"h0\":17,\"y1\":167,\"h1\":17}",
+          "span. {\"y0\":166,\"h0\":19,\"y1\":166,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":168,\"h0\":14,\"y1\":168,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.00008849540320643845,
+        "t": 21031,
+        "nodes": [
+          "span.oiu-think__tail {\"y0\":167,\"h0\":17,\"y1\":167,\"h1\":17}",
+          "span. {\"y0\":166,\"h0\":19,\"y1\":166,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":168,\"h0\":14,\"y1\":168,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.0000974583299497385,
+        "t": 25684,
+        "nodes": [
+          "? {\"y0\":617,\"h0\":15,\"y1\":617,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.012328826097047834,
+        "t": 27177,
+        "nodes": [
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":454,\"h0\":114,\"y1\":402,\"h1\":114}",
+          "section[outputs-card].oiu-outputs {\"y0\":586,\"h0\":35,\"y1\":534,\"h1\":35}",
+          "span. {\"y0\":144,\"h0\":19,\"y1\":144,\"h1\":19}",
+          "svg.[object.SVGAnimatedString] {\"y0\":146,\"h0\":14,\"y1\":146,\"h1\":14}"
+        ]
+      },
+      {
+        "v": 0.0000639283449642606,
+        "t": 27416,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      },
+      {
+        "v": 0.00008569853811425204,
+        "t": 28299,
+        "nodes": [
+          "span.oiu-caret {\"y0\":623,\"h0\":16,\"y1\":747,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.00007533177947139898,
+        "t": 28515,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      },
+      {
+        "v": 0.0000590905242642625,
+        "t": 28965,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      },
+      {
+        "v": 0.00007602289671425585,
+        "t": 29398,
+        "nodes": [
+          "span.oiu-caret {\"y0\":623,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      },
+      {
+        "v": 0.00008638965535710892,
+        "t": 29617,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":747,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.00005321602769997909,
+        "t": 30281,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":699,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.00006842060704283027,
+        "t": 30501,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      },
+      {
+        "v": 0.00008770709760130482,
+        "t": 31167,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":753,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.00005321602769997909,
+        "t": 31397,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      }
+    ],
+    "marks": [
+      {
+        "a": "send",
+        "t": 1449.8999998569489
+      },
+      {
+        "a": "stream finished",
+        "t": 34464.200000047684
+      }
+    ],
+    "postRunShifts": [],
+    "streamCls": 0.05117214277418564,
+    "cls": 0.07696188820690854,
+    "longTasks": 3,
+    "order": [
+      "thinking-block",
+      "working-row",
+      "plan-stepper",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "domOrder": [
+      "thinking-block",
+      "working-list",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "errors": []
+  }
+]

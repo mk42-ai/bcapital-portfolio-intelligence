@@ -1,0 +1,36 @@
+[
+  {
+    "at": "2026-10-11T01:33:33.039Z",
+    "project": "desktop",
+    "test": "report: Thinking top → Working before action → answer → Sources, PDF stored and listed in Artifacts",
+    "iteration": 1,
+    "total": 8,
+    "parts": {
+      "skeleton": 2,
+      "cls": 0,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "firstSkeletonMs": 201,
+    "cls": 0.6278343198423032,
+    "longTasks": 5,
+    "order": [
+      "thinking-block",
+      "working-row",
+      "plan-stepper",
+      "sources-list",
+      "answer-block",
+      "inline-artifacts"
+    ],
+    "domOrder": [
+      "thinking-block",
+      "working-list",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "errors": []
+  }
+]

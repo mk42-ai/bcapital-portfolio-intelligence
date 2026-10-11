@@ -7,7 +7,7 @@ export type Company = {
   website: string | null; linkedin_url: string | null; hq: string | null; employees: number | null; logo_url: string | null; brand_tokens: BrandTokens;
   b_capital_fund: string | null; b_capital_role: "lead" | "co-lead" | "participant" | "unknown" | "firm"; b_capital_round: string | null;
   estimated_ticket_size_usd: number | null; estimated_ownership_pct: number | null; estimate_confidence: "high" | "medium" | "low"; estimate_rationale: string;
-  latest_news: NewsItem[]; sentiment: Sentiment; sources: string[]; screenshot_ref: string | null; anon_resolution: string | null; is_focus: boolean; in_brand_matrix: boolean; last_checked: string | null; updated_at: string;
+  latest_news: NewsItem[]; /** real count from news_items (backend), not latest_news.length */ news_count?: number; sentiment: Sentiment; sources: string[]; screenshot_ref: string | null; anon_resolution: string | null; is_focus: boolean; in_brand_matrix: boolean; last_checked: string | null; updated_at: string;
 };
 export type SentimentHistoryRow = { score: number; label: string; delta: number | null; model: string | null; recorded_at: string; workflow_id: string | null; execution_id: string | null; evidence: Evidence[] };
 export type CompanySentiment = { company: string; name: string; current: Sentiment; delta: number | null; history: SentimentHistoryRow[] };

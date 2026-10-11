@@ -1,0 +1,478 @@
+[
+  {
+    "at": "2026-10-11T02:23:00.203Z",
+    "project": "desktop",
+    "test": "upload: 3 images + PDF + DOCX are stored, retrievable and displayed in chat and Artifacts",
+    "iteration": 10,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "cls": 0.00002475565843621399,
+    "topShifts": [
+      {
+        "v": 0.00002475565843621399,
+        "t": 912,
+        "nodes": [
+          "button[artifacts-filter-document].art-chip {\"y0\":144,\"h0\":32,\"y1\":144,\"h1\":32}",
+          "button[artifacts-filter-upload].art-chip {\"y0\":144,\"h0\":32,\"y1\":144,\"h1\":32}",
+          "button[artifacts-filter-image].art-chip {\"y0\":144,\"h0\":32,\"y1\":144,\"h1\":32}",
+          "button[artifacts-filter-video].art-chip {\"y0\":144,\"h0\":32,\"y1\":144,\"h1\":32}"
+        ]
+      }
+    ],
+    "longTasks": 2,
+    "errors": []
+  },
+  {
+    "at": "2026-10-11T02:23:07.598Z",
+    "project": "desktop",
+    "test": "report: Thinking top → Working before action → answer → Sources, PDF stored and listed in Artifacts",
+    "iteration": 10,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "firstSkeletonMs": 284,
+    "topShifts": [
+      {
+        "v": 0.05690003067665467,
+        "t": 1578,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      },
+      {
+        "v": 0.034501918295610425,
+        "t": 1593,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}",
+          "button[nav-toggle].hidden.size-8 {\"y0\":12,\"h0\":32,\"y1\":12,\"h1\":32}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      },
+      {
+        "v": 0.018388820301783265,
+        "t": 24107,
+        "nodes": [
+          "section[plan-stepper].oiu-plan {\"y0\":274,\"h0\":124,\"y1\":198,\"h1\":124}",
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":533,\"h0\":58,\"y1\":405,\"h1\":60}",
+          "ol[working-list].oiu-work-list {\"y0\":416,\"h0\":58,\"y1\":340,\"h1\":58}",
+          "section[outputs-card].oiu-outputs {\"y0\":0,\"h0\":0,\"y1\":483,\"h1\":35}",
+          "span.oiu-think__kinds {\"y0\":164,\"h0\":17,\"y1\":164,\"h1\":17}"
+        ]
+      },
+      {
+        "v": 0.014550332620670438,
+        "t": 1405,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      },
+      {
+        "v": 0.003238570601851852,
+        "t": 1377,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}"
+        ]
+      },
+      {
+        "v": 0.002812542866941015,
+        "t": 19208,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":521,\"h0\":35,\"y1\":624,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.00231443329903978,
+        "t": 1373,
+        "nodes": [
+          "a[nav-artifacts].flex.min-h-10 {\"y0\":244,\"h0\":40,\"y1\":244,\"h1\":40}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      },
+      {
+        "v": 0.0003413280178326475,
+        "t": 20219,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":636,\"h0\":10,\"y1\":611,\"h1\":35}"
+        ]
+      }
+    ],
+    "streamShifts": [
+      {
+        "v": 0.002812542866941015,
+        "t": 19208,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":521,\"h0\":35,\"y1\":624,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0003413280178326475,
+        "t": 20219,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":636,\"h0\":10,\"y1\":611,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.000014507780349794238,
+        "t": 22638,
+        "nodes": [
+          "? {\"y0\":620,\"h0\":15,\"y1\":620,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.018388820301783265,
+        "t": 24107,
+        "nodes": [
+          "section[plan-stepper].oiu-plan {\"y0\":274,\"h0\":124,\"y1\":198,\"h1\":124}",
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":533,\"h0\":58,\"y1\":405,\"h1\":60}",
+          "ol[working-list].oiu-work-list {\"y0\":416,\"h0\":58,\"y1\":340,\"h1\":58}",
+          "section[outputs-card].oiu-outputs {\"y0\":0,\"h0\":0,\"y1\":483,\"h1\":35}",
+          "span.oiu-think__kinds {\"y0\":164,\"h0\":17,\"y1\":164,\"h1\":17}"
+        ]
+      },
+      {
+        "v": 0.000007818930041152263,
+        "t": 24240,
+        "nodes": [
+          "span.oiu-caret {\"y0\":572,\"h0\":16,\"y1\":648,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000008744855967078189,
+        "t": 24367,
+        "nodes": [
+          "span.oiu-caret {\"y0\":640,\"h0\":16,\"y1\":725,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000004423868312757202,
+        "t": 25084,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":682,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000005967078189300412,
+        "t": 25218,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":697,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000008333333333333334,
+        "t": 26068,
+        "nodes": [
+          "span.oiu-caret {\"y0\":640,\"h0\":16,\"y1\":721,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.0000034979423868312754,
+        "t": 27042,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":673,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000007818930041152263,
+        "t": 27285,
+        "nodes": [
+          "span.oiu-caret {\"y0\":640,\"h0\":16,\"y1\":716,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.0000051440329218107,
+        "t": 27534,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":689,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000005246913580246914,
+        "t": 27934,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":690,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.0000026748971193415633,
+        "t": 28168,
+        "nodes": [
+          "span.oiu-caret {\"y0\":640,\"h0\":16,\"y1\":666,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000006069958847736625,
+        "t": 28539,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":698,\"h1\":16}"
+        ]
+      }
+    ],
+    "marks": [
+      {
+        "a": "send",
+        "t": 2032.8999998569489
+      },
+      {
+        "a": "stream finished",
+        "t": 31760.799999952316
+      }
+    ],
+    "postRunShifts": [],
+    "streamCls": 0.02162293970764746,
+    "cls": 0.13312822520147463,
+    "longTasks": 3,
+    "order": [
+      "thinking-block",
+      "working-row",
+      "plan-stepper",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "domOrder": [
+      "thinking-block",
+      "working-list",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "errors": []
+  },
+  {
+    "at": "2026-10-11T02:23:28.288Z",
+    "project": "mobile-ux",
+    "test": "upload: 3 images + PDF + DOCX are stored, retrievable and displayed in chat and Artifacts",
+    "iteration": 10,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "cls": 0.015071175717134927,
+    "topShifts": [
+      {
+        "v": 0.015071175717134927,
+        "t": 953,
+        "nodes": [
+          "button[artifacts-filter-upload].art-chip {\"y0\":249,\"h0\":32,\"y1\":249,\"h1\":32}",
+          "button[artifacts-filter-video].art-chip {\"y0\":209,\"h0\":32,\"y1\":249,\"h1\":32}",
+          "button[artifacts-filter-document].art-chip {\"y0\":209,\"h0\":32,\"y1\":209,\"h1\":32}",
+          "button[artifacts-filter-image].art-chip {\"y0\":209,\"h0\":32,\"y1\":209,\"h1\":32}"
+        ]
+      }
+    ],
+    "longTasks": 2,
+    "errors": []
+  },
+  {
+    "at": "2026-10-11T02:23:37.649Z",
+    "project": "mobile-ux",
+    "test": "report: Thinking top → Working before action → answer → Sources, PDF stored and listed in Artifacts",
+    "iteration": 10,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "firstSkeletonMs": 227,
+    "topShifts": [
+      {
+        "v": 0.014199709270013173,
+        "t": 1328,
+        "nodes": [
+          "div.openui-agent-welcome-screen {\"y0\":114,\"h0\":396,\"y1\":102,\"h1\":396}",
+          "div.openui-agent-thread-scroll-container {\"y0\":510,\"h0\":278,\"y1\":498,\"h1\":290}",
+          "div.openui-agent-thread-header__actions {\"y0\":73,\"h0\":32,\"y1\":63,\"h1\":32}"
+        ]
+      },
+      {
+        "v": 0.01159003616270973,
+        "t": 1619,
+        "nodes": [
+          "div.openui-agent-composer-slot {\"y0\":788,\"h0\":56,\"y1\":744,\"h1\":100}",
+          "::after. {\"y0\":716,\"h0\":28,\"y1\":672,\"h1\":72}"
+        ]
+      },
+      {
+        "v": 0.00976168549673188,
+        "t": 21780,
+        "nodes": [
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":490,\"h0\":78,\"y1\":438,\"h1\":78}",
+          "section[outputs-card].oiu-outputs {\"y0\":586,\"h0\":35,\"y1\":534,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.00801721918610578,
+        "t": 12934,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":505,\"h0\":35,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.000272429778168643,
+        "t": 14116,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":615,\"h0\":28,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0001228460899178089,
+        "t": 22228,
+        "nodes": [
+          "? {\"y0\":588,\"h0\":15,\"y1\":597,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.0000974583299497385,
+        "t": 19448,
+        "nodes": [
+          "? {\"y0\":617,\"h0\":15,\"y1\":617,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.00008086071741425393,
+        "t": 22013,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      }
+    ],
+    "streamShifts": [
+      {
+        "v": 0.00801721918610578,
+        "t": 12934,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":505,\"h0\":35,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.000272429778168643,
+        "t": 14116,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":615,\"h0\":28,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0000974583299497385,
+        "t": 19448,
+        "nodes": [
+          "? {\"y0\":617,\"h0\":15,\"y1\":617,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.00976168549673188,
+        "t": 21780,
+        "nodes": [
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":490,\"h0\":78,\"y1\":438,\"h1\":78}",
+          "section[outputs-card].oiu-outputs {\"y0\":586,\"h0\":35,\"y1\":534,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.00008086071741425393,
+        "t": 22013,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      },
+      {
+        "v": 0.0001228460899178089,
+        "t": 22228,
+        "nodes": [
+          "? {\"y0\":588,\"h0\":15,\"y1\":597,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.00005045155872855161,
+        "t": 22895,
+        "nodes": [
+          "span.oiu-caret {\"y0\":623,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      },
+      {
+        "v": 0.00007671401395711271,
+        "t": 23112,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      },
+      {
+        "v": 0.00005598049667140658,
+        "t": 24012,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      },
+      {
+        "v": 0.00004008480008569854,
+        "t": 24231,
+        "nodes": [
+          "span.oiu-caret {\"y0\":623,\"h0\":16,\"y1\":681,\"h1\":16}"
+        ]
+      }
+    ],
+    "marks": [
+      {
+        "a": "send",
+        "t": 1634.8999998569489
+      },
+      {
+        "a": "stream finished",
+        "t": 27517.099999904633
+      }
+    ],
+    "postRunShifts": [],
+    "streamCls": 0.018575730467730873,
+    "cls": 0.044365475900453775,
+    "longTasks": 3,
+    "order": [
+      "thinking-block",
+      "working-row",
+      "plan-stepper",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "domOrder": [
+      "thinking-block",
+      "working-list",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "errors": []
+  }
+]

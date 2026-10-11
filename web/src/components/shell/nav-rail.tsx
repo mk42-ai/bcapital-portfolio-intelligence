@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { BrandLogo } from "@/components/brand/logo";
 import { Nav } from "./nav";
+import { ArtifactsToggle } from "@/components/artifacts/artifacts-panel";
 import { cn } from "@/lib/utils";
 
 const KEY = "bcap.nav.rail";
@@ -48,6 +49,7 @@ export function NavRail({ status }: { status?: React.ReactNode }) {
         </button>
       </div>
       <Nav collapsed={collapsed} />
+      {!onChat && <div className={cn("flex shrink-0 items-center lg:mt-2", collapsed ? "lg:justify-center" : "lg:px-1")}><ArtifactsToggle testId="artifacts-toggle-shell" /></div>}
       <div className={cn("flex items-center lg:mt-auto lg:block", collapsed ? "lg:hidden" : "lg:px-2")}>{status}</div>
     </aside>
   );

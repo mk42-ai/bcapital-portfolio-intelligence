@@ -9,7 +9,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { AgentInterface, fetchLLM, agUIAdapter, useThread, useThreadList, type AssistantMessageComponent, type ToolCallTimelineComponent } from "@openuidev/react-ui";
 import type { Message, UserMessage } from "@openuidev/react-headless";
-import { AlertTriangle, ArrowDown, Bot, Brain, Check, CheckCircle2, ChevronDown, Circle, Cpu, ExternalLink, KeyRound, ListChecks, Loader2, MessageSquareMore, Mic, Plus, RotateCcw, Search, ShieldCheck, Sparkles, XCircle } from "lucide-react";
+import { AlertTriangle, ArrowDown, Paperclip, Wrench, Bot, Brain, Check, CheckCircle2, ChevronDown, Circle, Cpu, ExternalLink, KeyRound, ListChecks, Loader2, MessageSquareMore, Mic, Plus, RotateCcw, Search, ShieldCheck, Sparkles, XCircle } from "lucide-react";
 import { responseTheme } from "./response-theme";
 import { localThreadStorage, saveMessages, sessionFor, rememberSession, rememberSources, sourcesFor, sourcesKey, rememberMeta, metaFor, type StoredSource, type StoredMeta } from "./local-storage";
 import { extractCitations, isCiteLabel, isOverflowLabel, publisherOf, hostOf, type Cite } from "./citations";
@@ -27,6 +27,13 @@ import { ContextChipsBar } from "./context-chips-bar";
 import { AppComposer } from "./app-composer";
 import { composerStore } from "./composer-store";
 import { chipsBlock, clearContextChips, getContextChips, PITCHBOOK_PLUGIN_ID } from "./context-chips";
+import { ArtifactCard } from "@/components/artifacts/artifact-card";
+import { ArtifactsToggle } from "@/components/artifacts/artifacts-panel";
+import { ArtifactIcon } from "@/components/artifacts/artifact-icon";
+import { ImageGrid } from "@/components/media/image-grid";
+import { VideoPlayer } from "@/components/media/video-player";
+import { artifactsStore } from "@/lib/artifacts/store";
+import type { Artifact } from "@/lib/artifacts/types";
 
 export type CoCtx = { slug: string; name: string; sector: string; status: string; stage: string | null; sentiment: { score: number; label: string; delta?: number | null; updated_at?: string | null; basis?: string | null }; news_count?: number; latest_news: { title: string; url: string | null; published_at: string | null; source?: string | null }[]; estimated_ticket_size_usd: number | null; estimated_ownership_pct: number | null; b_capital_role: string };
 type Source = StoredSource;
@@ -63,8 +70,13 @@ type StreamState = {
   summaries: StepSummary[]; prompt: Prompt | null; filler: boolean; fillerTick: number; text: string; answerDone: boolean; integrity: { dupes: number; gaps: number; frames: number } | null;
   request: Record<string, unknown> | null; agentLog: { subtype: string; at: number }[]; stepRaw: Record<string, string>;
   attachments: { mediaId: string; name: string; kind?: string; extractedChars?: number; grounded?: boolean }[] | null; voice: { phase: string; text?: string } | null;
+  artifacts: LiveArtifact[]; outputs: StepOutput[]; tools: ToolRow[];
 };
-const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null };
+/** One Working row = one plugin/agent action (TOOL_CALL_START/ARGS/RESULT from the bridge). */
+export type ToolRow = { id: string; name: string; pluginId: string; query: string; stepId: string; status: "running" | "done" | "failed"; sources?: number; durationMs?: number; message?: string; raw?: string };
+export type LiveArtifact = { key: string; name: string; phase: "creating" | "ready" | "failed"; artifact?: Artifact; message?: string; media?: { status?: string; id?: string | null; message?: string | null } };
+export type StepOutput = { stepId: string; title: string; plugins: { pluginId: string; name: string; params: Record<string, unknown> | null }[]; at: number };
+const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null, artifacts: [], outputs: [], tools: [] };
 let streamState: StreamState = IDLE;
 let pending: Partial<StreamState> | null = null; let rafId = 0;
 const liveSources = new Map<string, Source[]>();
@@ -98,7 +110,7 @@ const PHASE_LABEL: Record<string, string> = {
   streaming: `${MODEL_LABEL} is planning…`, planning: `${MODEL_LABEL} is planning…`, researching: `Searching with ${PLUGIN_NAME}…`, answering: "Writing the answer…", "awaiting-input": "Waiting for your input…", done: "Done",
 };
 
-type AgUiFrame = { seq?: number; type?: string; name?: string; value?: Record<string, unknown>; delta?: string; toolCallName?: string; message?: string; code?: string };
+type AgUiFrame = { seq?: number; type?: string; name?: string; value?: Record<string, unknown>; delta?: string; toolCallName?: string; toolCallId?: string; content?: string; isError?: boolean; error?: string; message?: string; code?: string };
 /** Reads the cloned SSE body line-by-line (data: …) and updates the live store + localStorage; never throws into the UI path. */
 async function teeStream(res: Response, threadId: string, onSession: (sid: string) => void) {
   const body = res.body; if (!body) return;
@@ -106,7 +118,7 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
   const t0 = peek().startedAt || Date.now();
   const finalize = () => {
     const st = peek(); const key = sourcesKey(st.text);
-    const meta: StoredMeta = { model: MODEL_LABEL, modelId: MODEL_ID, reasoningMode: REASONING_MODE, pluginId: PLUGIN_ID, pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, firstCitationMs: st.firstCitationMs, totalMs: Date.now() - t0, chunks: st.chunks, metrics: st.metrics, thinking: st.thinking.slice(0, 6000), error: st.error ? { code: st.error.code, message: st.error.message } : null, at: new Date().toISOString(), summaries: st.summaries.map((s) => ({ index: s.index, text: s.text, doneAt: s.doneAt ?? null })), plan: st.plan };
+    const meta: StoredMeta = { model: MODEL_LABEL, modelId: MODEL_ID, reasoningMode: REASONING_MODE, pluginId: PLUGIN_ID, pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, firstCitationMs: st.firstCitationMs, totalMs: Date.now() - t0, chunks: st.chunks, metrics: st.metrics, thinking: st.thinking.slice(0, 6000), error: st.error ? { code: st.error.code, message: st.error.message } : null, at: new Date().toISOString(), summaries: st.summaries.map((s) => ({ index: s.index, text: s.text, doneAt: s.doneAt ?? null })), plan: st.plan, artifacts: st.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!), tools: st.tools, artifactFailures: st.artifacts.filter((a) => a.phase === "failed").map((a) => ({ name: a.name, message: a.message ?? "" })), outputs: st.outputs };
     liveMeta.set(key, meta); rememberMeta(key, meta);
     if (st.sources.length) { liveSources.set(key, st.sources); rememberSources(key, st.sources); }
   };
@@ -165,11 +177,32 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
           case CE.request: setStream({ request: v }); break;
           case CE.agent: setStream({ agentLog: [...st.agentLog.slice(-30), { subtype: String(v.subtype ?? "agent"), at: now - t0 }] }); break;
           case CE.attachments: if (Array.isArray(v.items)) setStream({ attachments: (v.items as StreamState["attachments"]) ?? [] }); break;
+          case CE.artifact: {
+            const key = String(v.key ?? v.name ?? ""); const phase = String(v.phase) as LiveArtifact["phase"];
+            const art = v.artifact && typeof v.artifact === "object" ? (v.artifact as Artifact) : undefined;
+            const entry: LiveArtifact = { key, name: String(v.name ?? art?.name ?? "file"), phase, artifact: art, message: typeof v.message === "string" ? v.message : undefined, media: (v.media as LiveArtifact["media"]) ?? undefined };
+            const rest = st.artifacts.filter((a) => a.key !== key);
+            setStream({ artifacts: [...rest, entry] }, true);
+            if (art && phase === "ready") artifactsStore.add(art);
+            break;
+          }
+          case CE.stepOutput: setStream({ outputs: [...st.outputs.filter((o) => o.stepId !== String(v.stepId)), { stepId: String(v.stepId ?? ""), title: String(v.title ?? ""), plugins: Array.isArray(v.plugins) ? (v.plugins as StepOutput["plugins"]) : [], at: now - t0 }] }); break;
           case CE.voice: if (typeof v.phase === "string") setStream({ voice: { phase: v.phase, ...(typeof v.text === "string" ? { text: v.text } : {}) } }); break;
         }
         break;
       }
-      case "TOOL_CALL_START": if (st.phase === "connecting" || st.phase === "planning") setStream({ phase: "researching", detail: `Searching with ${f.toolCallName || PLUGIN_NAME}…` }); break;
+      case "TOOL_CALL_START": if (f.toolCallId && !st.tools.some((t) => t.id === f.toolCallId)) setStream({ tools: [...st.tools, { id: f.toolCallId, name: f.toolCallName || PLUGIN_NAME, pluginId: PLUGIN_ID, query: "", stepId: "", status: "running" }] }, true); break;
+      case "TOOL_CALL_ARGS": {
+        let a: { plugin?: string; pluginId?: string; query?: string; stepId?: string } = {}; try { a = JSON.parse(f.delta ?? "{}"); } catch { /* partial */ }
+        setStream({ tools: st.tools.map((t) => (t.id === f.toolCallId ? { ...t, name: a.plugin || t.name, pluginId: a.pluginId || t.pluginId, query: a.query || t.query, stepId: String(a.stepId ?? t.stepId ?? "") } : t)) }, true);
+        break;
+      }
+      case "TOOL_CALL_RESULT": {
+        let r: { status?: string; sources?: number; durationMs?: number; message?: string; raw?: string } = {}; try { r = JSON.parse(f.content ?? "{}"); } catch { /* raw */ }
+        const failed = f.isError === true || r.status === "error";
+        setStream({ tools: st.tools.map((t) => (t.id === f.toolCallId ? { ...t, status: failed ? "failed" : "done", sources: r.sources, durationMs: r.durationMs, message: r.message ?? (failed ? f.error : undefined), raw: r.raw } : t)) }, true);
+        break;
+      }
       case "TEXT_MESSAGE_CONTENT": case "TEXT_MESSAGE_CHUNK":
         if (f.delta) { const text = st.text + f.delta; const hasCite = st.firstCitationMs == null && /\]\(https?:\/\/[^\s)]+\)|https?:\/\/\S{8,}/.test(text); setStream({ text, chunks: st.chunks + 1, firstTokenMs: st.firstTokenMs ?? now - t0, ...(hasCite ? { firstCitationMs: now - t0 } : {}), ...(st.phase !== "answering" ? { phase: "answering", detail: PHASE_LABEL.answering, prompt: null } : {}) }, st.firstTokenMs == null); }
         break;
@@ -383,44 +416,191 @@ function PromptCard({ prompt, sessionId, onAnswer }: { prompt: Prompt; sessionId
   );
 }
 
+/* ------------------------------------------------------------------------------------------------------------------
+ * ONE run view per assistant turn (UX doc step 1: "one reducer for the stream, the new run view, the Outputs card, the Agent panel").
+ * Fixed block order, identical live and settled so the live→final swap moves nothing:
+ *   1. Thinking (pinned at the top; streams live, auto-collapses when the answer starts)
+ *   2. Plan checklist (objective sentence + steps)
+ *   3. Working rows — one per plugin/agent action, rendered BEFORE the action resolves (favicon chips, never an empty {} box) → done (N sources · s)
+ *   4. Between-step summary cards (summarize_history / derived from the step boundary)
+ *   5. Outputs card (step_output: which plugin ran with which parameters)
+ *   6. Interactive prompts (awaiting_input / require_creds / awaiting_browser_action / clarification)
+ *   7. Answer (fulfillment) with publisher-first inline citation chips (+N overflow)
+ *   8. Inline media (image grid + lightbox, video player) and artifact cards (file_written / artifact_ready / report PDF)
+ *   9. Sources — numbered, COLLAPSED list under the answer
+ *  10. One "Data gap" sentence when a call failed (honest red state)
+ * ---------------------------------------------------------------------------------------------------------------- */
+type RunData = {
+  live: boolean; answerDone?: boolean; phase: StreamPhase; detail: string; thinking: string; thinkingKinds: string[]; answerStarted: boolean;
+  plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null; tools: ToolRow[]; summaries: StepSummary[]; outputs: StepOutput[];
+  prompt: Prompt | null; sessionId: string | null; text: string; known: Source[]; sources: Source[]; artifacts: LiveArtifact[];
+  error: { code: string; message: string; raw?: string } | null; meta: Partial<StoredMeta> | null; filler: boolean; fillerTick: number; elapsedMs: number;
+};
+const IMG_URL_RE = /!\[([^\]]*)\]\((https?:\/\/[^\s)]+|\/api\/artifacts\/[^\s)]+)\)/g;
+const VIDEO_URL_RE = /(https?:\/\/[^\s)"']+\.(?:mp4|webm|mov)(?:\?[^\s)"']*)?)/gi;
+function mediaFrom(text: string, arts: Artifact[]) {
+  const images: { src: string; alt: string; caption?: string }[] = []; const videos: { src: string; title: string; poster?: string }[] = [];
+  for (const m of text.matchAll(IMG_URL_RE)) images.push({ src: m[2], alt: m[1] || "image", caption: m[1] || undefined });
+  for (const m of text.matchAll(VIDEO_URL_RE)) if (!videos.some((v) => v.src === m[1])) videos.push({ src: m[1], title: m[1].split("?")[0].split("/").pop() ?? "video" });
+  for (const a of arts) { if (a.kind === "image") images.push({ src: a.contentUrl, alt: a.name, caption: a.name }); else if (a.kind === "video") videos.push({ src: a.contentUrl, title: a.name }); }
+  return { images, videos };
+}
+/** Working row for one plugin/agent action. */
+function WorkingRow({ t, live }: { t: ToolRow; live: boolean }) {
+  const name = t.name || catalogueName(t.pluginId);
+  const state = t.status === "failed" ? "failed" : t.status === "running" && live ? "running" : "done";
+  return (
+    <li className={`oiu-work oiu-work--${state}`} data-testid="working-row" data-state={state} data-plugin={t.pluginId}>
+      <span className="oiu-work__icon" aria-hidden>{state === "failed" ? <AlertTriangle className="size-3.5" /> : state === "running" ? <Loader2 className="size-3.5 oiu-spin" /> : <Check className="size-3.5" />}</span>
+      <span className="oiu-work__chips" data-testid="working-chips"><PluginFavicon id={t.pluginId} size={16} /></span>
+      <span className="oiu-work__text">
+        <span className="oiu-work__label">{state === "running" ? LABEL.searching(name) : state === "failed" ? LABEL.failed(name) : t.sources != null ? LABEL.searched(name, t.sources) : `${name} done`}{state === "done" && t.durationMs ? <span className="oiu-work__dur"> · {(t.durationMs / 1000).toFixed(1)} s</span> : null}</span>
+        {t.query ? <span className="oiu-work__query">“{t.query.slice(0, 140)}{t.query.length > 140 ? "…" : ""}”</span> : null}
+        {state === "failed" && t.message ? <span className="oiu-work__err">{t.message}</span> : null}
+        {state === "failed" && t.raw ? <RawFrame raw={t.raw} /> : null}
+      </span>
+    </li>
+  );
+}
+/** Skeleton shown on the FIRST event, before any upstream frame: Thinking + Working placeholders (perceived latency ≈ 0). */
+function WorkingSkeleton({ detail, plugins }: { detail: string; plugins: string[] }) {
+  return (
+    <li className="oiu-work oiu-work--running oiu-work--skeleton" data-testid="working-row" data-state="queued">
+      <span className="oiu-work__icon" aria-hidden><Loader2 className="size-3.5 oiu-spin" /></span>
+      <span className="oiu-work__chips" data-testid="working-chips">{plugins.slice(0, 4).map((id) => <PluginFavicon key={id} id={id} size={16} />)}</span>
+      <span className="oiu-work__text"><span className="oiu-work__label">{detail || "Preparing the research"}</span><span className="oiu-shimmer oiu-shimmer--row" aria-hidden><span /></span></span>
+    </li>
+  );
+}
+function OutputsCard({ outputs }: { outputs: StepOutput[] }) {
+  const [open, setOpen] = useState(false);
+  if (!outputs.length) return null;
+  const calls = outputs.reduce((n, o) => n + o.plugins.length, 0);
+  return (
+    <section className="oiu-outputs" data-testid="outputs-card" data-count={outputs.length}>
+      <button type="button" className="oiu-outputs__head" aria-expanded={open} onClick={() => setOpen((o) => !o)}><Wrench className="size-3.5" aria-hidden /><span>Outputs · {outputs.length} step{outputs.length === 1 ? "" : "s"} · {calls} call{calls === 1 ? "" : "s"}</span><ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden /></button>
+      {open && <ol className="oiu-outputs__list">{outputs.map((o) => <li key={o.stepId} data-testid="output-step"><strong>{o.title}</strong>{o.plugins.map((pl, i) => <span key={i} className="oiu-outputs__call"><PluginFavicon id={pl.pluginId} size={14} /> {pl.name || catalogueName(pl.pluginId)}{pl.params ? <code>{JSON.stringify(pl.params).slice(0, 160)}</code> : null}</span>)}</li>)}</ol>}
+    </section>
+  );
+}
+function CollapsedSources({ sources, live }: { sources: Source[]; live: boolean }) {
+  const [open, setOpen] = useState(false);
+  if (!sources.length) return live ? null : null;
+  return (
+    <section className={`oiu-srcs${open ? " oiu-srcs--open" : ""}`} data-testid="sources-list" data-count={sources.length} aria-label="Sources">
+      <button type="button" className="oiu-srcs__head" aria-expanded={open} data-testid="sources-toggle" onClick={() => setOpen((o) => !o)}>
+        <span className="oiu-srcs__favs" aria-hidden>{sources.slice(0, 5).map((s) => <img key={s.url} src={faviconFor(s.url)} alt="" width={14} height={14} loading="lazy" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.style.visibility = "hidden"; }} />)}</span>
+        <span>Sources ({sources.length})</span><ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden />
+      </button>
+      {open && <SourceList sources={sources} />}
+    </section>
+  );
+}
+function ArtifactRow({ a }: { a: LiveArtifact }) {
+  if (a.phase === "ready" && a.artifact) return <ArtifactCard artifact={a.artifact} compact />;
+  return (
+    <div className={`oiu-artrow oiu-artrow--${a.phase}`} data-testid="artifact-pending" data-state={a.phase}>
+      <ArtifactIcon kind={/\.(png|jpe?g|webp)$/i.test(a.name) ? "image" : /\.(mp4|webm)$/i.test(a.name) ? "video" : "document"} state={a.phase === "failed" ? "failed" : "uploading"} size={28} />
+      <span><strong>{a.name}</strong><span className="oiu-artrow__meta">{a.phase === "failed" ? a.message ?? "Could not save this file" : "Saving to Artifacts and OnDemand media…"}</span></span>
+    </div>
+  );
+}
+function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void }) {
+  const [cites, setCites] = useState<Cite[]>([]);
+  const thinkingShown = useThrottled(r.thinking.length > 4000 ? r.thinking.slice(-4000) : r.thinking, 250);
+  const showSkeleton = r.live && r.tools.length === 0 && !r.answerStarted && r.phase !== "awaiting-input";
+  const readyArts = r.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!);
+  const media = useMemo(() => mediaFrom(r.text, readyArts), [r.text, readyArts.length]); // eslint-disable-line react-hooks/exhaustive-deps
+  const railSources = r.error?.code === "plugin_error" ? [] : cites.length ? cites : r.sources;
+  const failedTools = r.tools.filter((t) => t.status === "failed");
+  const gap = r.error ? r.error.message : failedTools.length ? `${failedTools.map((t) => t.name).join(", ")} failed: ${failedTools[0].message ?? "upstream error"}` : r.artifacts.find((a) => a.phase === "failed") ? `A file could not be saved: ${r.artifacts.find((a) => a.phase === "failed")!.message ?? "storage error"}` : "";
+  return (
+    <div className="oiu-run" data-testid="run-view" data-live={r.live ? "true" : "false"}>
+      {/* 1 — Thinking, pinned at the top */}
+      {(r.thinking || r.live) && (
+        <ThinkingBlock text={thinkingShown} kinds={r.thinkingKinds} live={r.live} collapsed={r.answerStarted || !r.live} elapsedMs={r.elapsedMs} />
+      )}
+      {/* 2 — Plan checklist */}
+      {(r.plan || (r.live && !r.answerStarted)) && <PlanStepper plan={r.plan} reserve={r.live} />}
+      {/* 3 — Working rows (before each action) */}
+      {(r.tools.length > 0 || showSkeleton) && (
+        <ol className="oiu-work-list" aria-label="Working" data-testid="working-list">
+          {r.tools.map((t) => <WorkingRow key={t.id} t={t} live={r.live} />)}
+          {showSkeleton && <WorkingSkeleton detail={r.detail} plugins={(r.meta?.pluginIds as string[] | undefined) ?? [PLUGIN_ID]} />}
+        </ol>
+      )}
+      {/* stall band sits directly under the Working rows so later cards (summaries, outputs) append BELOW it — nothing already painted moves */}
+      {r.live && !r.answerStarted && <WorkingBand on={r.filler} tick={r.fillerTick} phase={r.detail} />}
+      {/* 4 — between-step summaries */}
+      {r.summaries.map((s) => <StepSummaryCard key={s.index} s={s} live={r.live} />)}
+      {/* 5 — outputs rail */}
+      <OutputsCard outputs={r.outputs} />
+      {/* 6 — interactive controls */}
+      {r.live && r.prompt && <PromptCard prompt={r.prompt} sessionId={r.sessionId} onAnswer={onAnswer} />}
+      {/* 7 — answer */}
+      {(r.text || (r.live && r.answerStarted)) && (
+        <div className="oiu-answer" data-testid="answer-block">
+          <CitedMarkdown text={r.text} known={r.error?.code === "plugin_error" ? [] : r.known} streaming={r.live} onCites={setCites} />
+        </div>
+      )}
+      {/* 8 — inline media + artifacts */}
+      {media.images.length > 0 && <div className="oiu-media" data-testid="inline-images"><ImageGrid images={media.images} /></div>}
+      {media.videos.map((v) => <div key={v.src} className="oiu-media" data-testid="inline-video"><VideoPlayer src={v.src} title={v.title} poster={v.poster} /></div>)}
+      {r.artifacts.length > 0 && <div className="oiu-artifacts" data-testid="inline-artifacts">{r.artifacts.map((a) => <ArtifactRow key={a.key} a={a} />)}</div>}
+      {/* 9 — numbered, collapsed Sources under the answer */}
+      {/* Sources mount once the answer has finished streaming (live text growth would otherwise push this row on every token → CLS). */}
+      {(!r.live || r.answerDone) && <CollapsedSources sources={railSources} live={r.live} />}
+      {/* 10 — one Data gap sentence on failure */}
+      {gap && !r.live && <p className="oiu-gap" role="alert" data-testid="data-gap"><AlertTriangle className="size-3.5" aria-hidden /> <strong>Data gap:</strong> {gap}</p>}
+      {!r.live && r.meta && <AnswerBadge meta={r.meta} />}
+    </div>
+  );
+}
+/** Thinking block pinned at the top of the turn: shows the live tail while streaming, collapses once the answer starts. */
+function ThinkingBlock({ text, kinds, live, collapsed, elapsedMs }: { text: string; kinds: string[]; live: boolean; collapsed: boolean; elapsedMs: number }) {
+  const [open, setOpen] = useState<boolean | null>(null);
+  const isOpen = open ?? !collapsed;
+  const lines = text.split("\n").filter(Boolean);
+  return (
+    <section className={`oiu-think${isOpen ? " oiu-think--open" : ""}${live && !collapsed ? " oiu-think--live" : ""}`} data-testid="thinking-block" data-state={live && !collapsed ? "streaming" : "collapsed"} data-chars={text.length}>
+      <button type="button" className="oiu-think__head" aria-expanded={isOpen} onClick={() => setOpen(!isOpen)}>
+        {live && !collapsed ? <Loader2 className="size-3.5 oiu-spin" aria-hidden /> : <Brain className="size-3.5" aria-hidden />}
+        <span>{live && !collapsed ? "Thinking" : `Thought for ${Math.max(1, Math.round(elapsedMs / 1000))} s`}</span>
+        {live && !collapsed && lines.length > 0 && <span className="oiu-think__tail" aria-hidden>{lines[lines.length - 1].slice(-56)}</span>}
+        {kinds.length ? <span className="oiu-think__kinds">{kinds.map((k) => k.replace("_output", "").replace("step", "steps")).join(" · ")}</span> : null}
+        <ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden />
+      </button>
+      {isOpen && <div className="oiu-think__body">{text ? <pre className="oiu-think__pre">{(live && !collapsed ? lines.slice(-4) : lines.slice(-200)).join("\n")}</pre> : <span className="oiu-shimmer" aria-hidden><span /><span /></span>}</div>}
+    </section>
+  );
+}
+
 const AssistantMessage: AssistantMessageComponent = memo(function AssistantMessage({ message, isStreaming }) {
   const content = typeof message.content === "string" ? message.content : "";
-  // Only the run boundary matters here (meta/sources are written at finalize) — not every streamed delta.
   const settled = useStreamSelector((x) => (x.phase === "idle" ? 1 : 0) + (x.answerDone ? 2 : 0));
   const key = sourcesKey(content);
   const meta = useMemo(() => (isStreaming ? null : liveMeta.get(key) ?? metaFor(key)), [key, isStreaming, settled]); // eslint-disable-line react-hooks/exhaustive-deps
   const known = useMemo(() => (isStreaming ? [] : liveSources.get(key) ?? sourcesFor(key) ?? []), [key, isStreaming, settled]); // eslint-disable-line react-hooks/exhaustive-deps
-  const [cites, setCites] = useState<Cite[]>([]);
-  // After a plugin failure the model's prose is not research: only real plugin citations (none) are listed — never URLs mined from a disclaimer.
-  const rail = meta?.error ? known : cites;
+  const processMessage = useThread((s) => s.processMessage);
+  // The live turn is drawn by PluginTimeline (OpenUI routes it there while tools are on the turn); this view is the settled replay.
+  if (isStreaming) return <div className="oiu-assistant" data-testid="assistant-message"><div className="oiu-assistant__avatar" aria-hidden><Bot className="size-4" strokeWidth={2} /></div><div className="oiu-assistant__body"><CitedMarkdown text={content || "…"} known={[]} streaming onCites={undefined} /></div></div>;
+  const r: RunData = {
+    live: false, phase: "idle", detail: "", thinking: meta?.thinking ?? "", thinkingKinds: [], answerStarted: true,
+    plan: meta?.plan ? { objective: meta.plan.objective, steps: meta.plan.steps.map((s) => ({ ...s, state: s.state === "running" ? "done" : s.state })) } : null,
+    tools: (meta?.tools ?? []).map((t) => ({ ...t, status: t.status === "running" ? "done" : t.status })),
+    summaries: (meta?.summaries ?? []).map((s) => ({ index: s.index, stepId: "", state: "done" as const, text: s.text, optimistic: false, startedAt: 0, doneAt: s.doneAt ?? undefined })),
+    outputs: meta?.outputs ?? [], prompt: null, sessionId: null, text: content, known: meta?.error ? [] : known, sources: meta?.error ? [] : known,
+    artifacts: [...(meta?.artifacts ?? []).map((a) => ({ key: a.id, name: a.name, phase: "ready" as const, artifact: a })), ...(meta?.artifactFailures ?? []).map((f, i) => ({ key: `f${i}`, name: f.name, phase: "failed" as const, message: f.message }))],
+    error: meta?.error ?? null, meta, filler: false, fillerTick: 0, elapsedMs: meta?.totalMs ?? 0,
+  };
   return (
     <div className="oiu-assistant" data-testid="assistant-message">
       <div className="oiu-assistant__avatar" aria-hidden><Bot className="size-4" strokeWidth={2} /></div>
-      <div className="oiu-assistant__body">
-        {meta?.plan && <PlanStepper plan={{ objective: meta.plan.objective, steps: meta.plan.steps.map((s) => ({ ...s, state: s.state === "running" ? "done" : s.state })) }} />}
-        {meta?.summaries?.map((s) => <StepSummaryCard key={s.index} s={{ index: s.index, stepId: "", state: "done", text: s.text, optimistic: false, startedAt: 0, doneAt: s.doneAt ?? undefined }} />)}
-        {meta?.thinking && <ThinkingTrace text={meta.thinking} />}
-        {meta?.error && (
-          <div className="oiu-plugin-error" role="alert" data-testid="plugin-error-card">
-            <AlertTriangle className="size-4 shrink-0" aria-hidden />
-            <span><strong>{PLUGIN_NAME} failed</strong> — {meta.error.message}</span>
-          </div>
-        )}
-        {/* Same block order as the live streaming block (badge → sources → text) so the live→final swap at stream end moves nothing. */}
-        {!isStreaming && <AnswerBadge meta={meta} />}
-        {!isStreaming && <SourceList sources={rail} live={meta != null} />}
-        <CitedMarkdown text={content || (isStreaming ? "…" : "")} known={meta?.error ? [] : known} streaming={!!isStreaming} onCites={setCites} />
-      </div>
+      <div className="oiu-assistant__body"><RunView r={r} onAnswer={(t) => { void processMessage({ role: "user", content: t }); }} /></div>
     </div>
   );
 });
 
-/**
- * Plugin activity timeline (replaces OpenUI's default "Working · Running the N plugins tool" card).
- * One card per plugin (favicon + real input): "Searching with X" (Loader2) → "X searched · N sources" (Check) → "X failed" (AlertTriangle, red, upstream message + raw frame).
- * While the turn is live this component also renders the plan stepper, step-summary checkpoints, the thinking trace, the live markdown with inline
- * citation chips and the reserved Sources rail — OpenUI routes the streaming text through the timeline `steps` until the run finishes.
- */
 /** User bubble = OpenUI's default markup + the attachment chips sent with that message (attachmentsStore.sentFor(message.id)). */
 const UserBubble: React.ComponentType<{ message: UserMessage }> = memo(function UserBubble({ message }) {
   useAttachments(); // re-render when the sent map changes (markSent / hydrate)
@@ -436,61 +616,25 @@ const UserBubble: React.ComponentType<{ message: UserMessage }> = memo(function 
     </div>
   );
 });
-type PluginInput = { plugin?: string; pluginId?: string; query?: string; stepId?: string; endpointLabel?: string; reasoningMode?: string };
-const PluginTimeline: ToolCallTimelineComponent = ({ activities, steps, isLast, awaitingResponse }) => {
+const PluginTimeline: ToolCallTimelineComponent = ({ steps, isLast }) => {
   const isRunning = useThread((s) => s.isRunning);
   const processMessage = useThread((s) => s.processMessage);
   const st = useStreamState();
-  const [liveCites, setLiveCites] = useState<Cite[]>([]);
-  const cards = activities.filter((a) => { const i = (a.input ?? {}) as PluginInput; return typeof i.query === "string" && i.query.trim().length > 0; });
-  const liveText = isLast && isRunning ? steps.filter((s): s is Extract<typeof s, { type: "text" }> => s.type === "text").map((s) => s.text).join("\n\n") : "";
   const live = isLast && isRunning;
-  useEffect(() => { if (!live) setLiveCites([]); }, [live]);
-  if (cards.length === 0 && !liveText && !live) { void awaitingResponse; return null; }
-  const railSources = live ? (st.error?.code === "plugin_error" ? [] : liveCites.length ? liveCites : st.sources) : [];
-  const thinkingTail = useThrottled(st.thinking.length > 4000 ? st.thinking.slice(-4000) : st.thinking, 250);
-  return (<>
-    {live && cards.length === 0 && <ol className="oiu-activity-list oiu-activity-list--reserved" aria-label="Plugin activity" data-testid="activity-reserved"><li className="oiu-activity oiu-activity--placeholder" aria-hidden><span className="oiu-shimmer oiu-shimmer--row"><span /><span /></span></li></ol>}
-    {cards.length > 0 && <ol className="oiu-activity-list" aria-label="Plugin activity">
-      {cards.map((a) => {
-        const i = a.input as PluginInput; const pid = i.pluginId ?? PLUGIN_ID; const name = i.plugin || a.toolName || catalogueName(pid);
-        let result: { status?: string; sources?: number; message?: string; raw?: string; durationMs?: number } = {};
-        if (typeof a.result === "string") { try { result = JSON.parse(a.result) as typeof result; } catch { /* raw */ } }
-        const failed = a.isError === true || result.status === "error" || (live && st.error?.code === "plugin_error" && pid === PLUGIN_ID);
-        const running = !failed && live && (a.status === "streaming" || a.status === "executing");
-        const n = result.sources ?? (live ? st.sources.length : undefined);
-        const state = failed ? "failed" : running ? "searching" : "searched";
-        const detail = failed ? (result.message || st.error?.message || "upstream error") : running ? (st.detail || "") : `${n != null ? `${n} source${n === 1 ? "" : "s"}` : "done"}${result.durationMs ? ` · ${(result.durationMs / 1000).toFixed(1)} s` : ""}`;
-        return (
-          <li key={a.id} className={`oiu-activity ${failed ? "oiu-activity--error" : running ? "oiu-activity--running" : "oiu-activity--done"}`} data-testid="plugin-activity" data-plugin={pid} data-state={state}>
-            <span className="oiu-activity__icon" aria-hidden>{failed ? <AlertTriangle className="size-3.5" /> : running ? <Loader2 className="size-3.5 oiu-spin" /> : <Check className="size-3.5" />}</span>
-            <span className="oiu-activity__text">
-              <span className="oiu-activity__name"><PluginFavicon id={pid} size={16} className="oiu-activity__favicon" /><Search className="size-3 oiu-activity__plugin-icon" aria-hidden />{running ? LABEL.searching(name) : failed ? LABEL.failed(name) : n != null ? LABEL.searched(name, n) : `${name} searched`}</span>
-              <span className="oiu-activity__query">“{i.query!.slice(0, 160)}{i.query!.length > 160 ? "…" : ""}”</span>
-              {detail && <span className="oiu-activity__detail">{detail}</span>}
-              {failed && (result.raw || st.error?.raw) && <RawFrame raw={result.raw || st.error?.raw || ""} />}
-            </span>
-          </li>
-        );
-      })}
-    </ol>}
-    {live && <PlanStepper plan={st.plan} reserve />}
-    {live && st.summaries.map((s) => <StepSummaryCard key={s.index} s={s} live />)}
-    {live && (st.thinking ? <ThinkingTrace text={thinkingTail} kinds={st.thinkingKinds} live /> : <div className="oiu-thinking oiu-thinking--reserved" data-testid="thinking-reserved" aria-hidden><span className="oiu-thinking__head"><Brain className="size-3.5" aria-hidden /> {LABEL.thinking}</span></div>)}
-    {live && st.prompt && <PromptCard prompt={st.prompt} sessionId={st.sessionId} onAnswer={(text) => { setStream({ prompt: null }, true); void processMessage({ role: "user", content: text }); }} />}
-    {live && !liveText && <WorkingBand on={st.filler} tick={st.fillerTick} phase={st.detail} />}
-    {(liveText || (live && st.phase === "answering")) && (
-      <div className="oiu-assistant oiu-assistant--streaming" aria-live="polite" aria-busy="true" data-testid="assistant-streaming">
-        <div className="oiu-assistant__avatar" aria-hidden><Bot className="size-4" strokeWidth={2} /></div>
-        <div className="oiu-assistant__body">
-          {/* Rail + live badge sit ABOVE the growing text so streaming never pushes a layout box that is already painted (CLS ≈ 0). */}
-          <AnswerBadge meta={{ pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, totalMs: null, metrics: null }} live />
-          <SourceList sources={railSources} live streamingNow />
-          <div className="oiu-answer-stage"><CitedMarkdown text={liveText} known={st.error?.code === "plugin_error" ? [] : st.sources} streaming onCites={setLiveCites} /></div>
-        </div>
-      </div>
-    )}
-  </>);
+  const liveText = live ? steps.filter((s): s is Extract<typeof s, { type: "text" }> => s.type === "text").map((s) => s.text).join("\n\n") : "";
+  if (!live) return null; // settled turns are drawn by AssistantMessage → RunView from the stored run meta (same order)
+  const r: RunData = {
+    live: true, answerDone: st.answerDone, phase: st.phase, detail: st.detail, thinking: st.thinking, thinkingKinds: st.thinkingKinds, answerStarted: !!(liveText || st.text),
+    plan: st.plan, tools: st.tools, summaries: st.summaries, outputs: st.outputs, prompt: st.prompt, sessionId: st.sessionId,
+    text: liveText || st.text, known: st.error?.code === "plugin_error" ? [] : st.sources, sources: st.sources, artifacts: st.artifacts,
+    error: st.error, meta: { pluginIds: st.pluginIds }, filler: st.filler, fillerTick: st.fillerTick, elapsedMs: st.startedAt ? Date.now() - st.startedAt : 0,
+  };
+  return (
+    <div className="oiu-assistant oiu-assistant--streaming" aria-live="polite" aria-busy="true" data-testid="assistant-streaming">
+      <div className="oiu-assistant__avatar" aria-hidden><Bot className="size-4" strokeWidth={2} /></div>
+      <div className="oiu-assistant__body"><RunView r={r} onAnswer={(text) => { setStream({ prompt: null }, true); void processMessage({ role: "user", content: text }); }} /></div>
+    </div>
+  );
 };
 /** Reserved-height stage slot under the activity cards. While the bridge's stall watchdog reports >600 ms of silence it shows the animated
  *  "Working…" band (shimmer + elapsed ticker); otherwise the slot stays empty but keeps its height, so toggling it never shifts layout. */
@@ -555,16 +699,25 @@ function PendingRow() {
     const tick = setInterval(() => setNow(Date.now()), 500);
     return () => { mo.disconnect(); clearInterval(tick); };
   }, [isRunning]);
-  if (!isRunning || !host || st.firstTokenMs != null) return null;
+  if (!isRunning || !host || st.firstTokenMs != null || st.tools.length > 0) return null;
   const secs = st.startedAt ? Math.max(0, (now - st.startedAt) / 1000) : 0;
   const label = st.detail || PHASE_LABEL.connecting;
+  // FIRST-EVENT SKELETON: the moment the user sends, the turn already shows Thinking (pinned top) + one Working row with the plugin chips,
+  // so perceived latency is the first status frame (~0.3–0.7 s), not the first answer token (35–82 s observed upstream).
   return createPortal(
-    <p className="oiu-activity oiu-activity--pending" role="status" data-phase={st.phase || "connecting"} data-testid="pending-row" data-first-status-ms={st.firstStatusMs ?? ""}>
-      <Loader2 className="size-3.5 oiu-spin" aria-hidden />
-      <span className="oiu-activity__phase">{label}</span>
-      {st.suggested.length > 0 && <span className="oiu-activity__chips" data-testid="suggested-plugins">{st.suggested.slice(0, 6).map((p) => <PluginFavicon key={p.id} id={p.id} size={16} />)}</span>}
-      <span className="oiu-activity__elapsed">{secs.toFixed(1)} s{st.firstStatusMs != null ? ` · first event ${st.firstStatusMs} ms` : ""}</span>
-    </p>, host);
+    <div className="oiu-run oiu-run--skeleton" data-testid="run-skeleton" data-phase={st.phase || "connecting"} data-first-status-ms={st.firstStatusMs ?? ""}>
+      <section className="oiu-think oiu-think--live oiu-think--open" data-testid="thinking-block" data-state="streaming" data-chars={st.thinking.length}>
+        <p className="oiu-think__head"><Loader2 className="size-3.5 oiu-spin" aria-hidden /><span>Thinking</span></p>
+        <div className="oiu-think__body">{st.thinking ? <pre className="oiu-think__pre">{st.thinking.split("\n").filter(Boolean).slice(-6).join("\n")}</pre> : <span className="oiu-shimmer" aria-hidden><span /><span /></span>}</div>
+      </section>
+      <ol className="oiu-work-list" aria-label="Working" data-testid="working-list">
+        <li className="oiu-work oiu-work--running oiu-work--skeleton" data-testid="working-row" data-state="queued">
+          <span className="oiu-work__icon" aria-hidden><Loader2 className="size-3.5 oiu-spin" /></span>
+          <span className="oiu-work__chips" data-testid="working-chips">{(st.suggested.length ? st.suggested.map((p) => p.id) : st.pluginIds).slice(0, 5).map((id) => <PluginFavicon key={id} id={id} size={16} />)}</span>
+          <span className="oiu-work__text"><span className="oiu-work__label">{label}</span><span className="oiu-work__query" data-testid="pending-row" data-first-status-ms={st.firstStatusMs ?? ""}>{secs.toFixed(1)} s{st.firstStatusMs != null ? ` · first event ${st.firstStatusMs} ms` : ""}</span></span>
+        </li>
+      </ol>
+    </div>, host);
 }
 
 /** Visible, retryable error state: typed upstream error from the bridge (CUSTOM ondemand.error / RUN_ERROR) or a failed request. */
@@ -666,7 +819,7 @@ export function ChatShell({ companies, fetchedAt, topBarRight }: { companies: Co
   const prewarm = useRef<{ sessionId: string; pluginIds: string[] } | null>(null);
   const [prewarmState, setPrewarmState] = useState<"idle" | "ready" | "failed">("idle");
   // Attachments upload with the current thread's OnDemand session so the media is bound to the same session the query runs in.
-  useEffect(() => { attachmentsStore.setSessionGetter(() => ({ sessionId: getCurrentSessionId(sessionRef.current, currentThreadId) ?? prewarm.current?.sessionId ?? null, externalUserId: s.externalUserId, apikey: s.apikey || undefined })); }, [s.externalUserId, s.apikey]);
+  useEffect(() => { attachmentsStore.setSessionGetter(() => ({ sessionId: getCurrentSessionId(sessionRef.current, currentThreadId) ?? prewarm.current?.sessionId ?? null, externalUserId: s.externalUserId, apikey: s.apikey || undefined, threadId: currentThreadId })); }, [s.externalUserId, s.apikey]);
   useEffect(() => {
     const ids = getSelectedPluginIds(); const ctl = new AbortController();
     fetch(`${CHAT_API_URL}/prewarm?externalUserId=${encodeURIComponent(s.externalUserId)}&pluginIds=${encodeURIComponent(ids.join(","))}`, { signal: ctl.signal, headers: s.apikey ? { "x-ondemand-key": s.apikey } : {} })
@@ -756,6 +909,7 @@ function ChatTopBar({ topBarRight }: { topBarRight?: ReactNode }) {
             {recent.map((t) => <li key={t.id}><button type="button" className={`oiu-threads__item${t.id === selectedId ? " oiu-threads__item--active" : ""}`} onClick={(e) => { selectThread(t.id); (e.currentTarget.closest("details") as HTMLDetailsElement | null)?.removeAttribute("open"); }}>{t.title || "Untitled thread"}</button></li>)}
           </ul>
         </details>
+        <ArtifactsToggle className="oiu-topbar__btn" showLabel />
         <span className="oiu-topbar__slot" data-testid="topbar-right">{topBarRight}</span>
       </div>
     </div>

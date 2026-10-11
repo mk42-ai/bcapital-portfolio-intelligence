@@ -7,15 +7,18 @@
  */
 import "./attachments.css";
 import { useSyncExternalStore } from "react";
+import { artifactsStore } from "@/lib/artifacts/store";
+import { ImageGrid } from "@/components/media/image-grid";
+import type { Artifact } from "@/lib/artifacts/types";
 import { AlertCircle, Check, FileSpreadsheet, FileText, Image as ImageIcon, Loader2, Music, RotateCcw, X } from "lucide-react";
 
 export type AttachmentKind = "document" | "image" | "audio";
 export type AttachmentStatus = "uploading" | "ready" | "error";
 export type AttachmentItem = {
   id: string; name: string; sizeBytes: number; mime: string; kind: AttachmentKind; status: AttachmentStatus; progress: number;
-  mediaId?: string; extractedChars?: number; error?: string; code?: string; retryable?: boolean; grounded?: "ondemand" | "local"; note?: string;
+  mediaId?: string; artifactId?: string; artifactUrl?: string; previewUrl?: string; extractedChars?: number; error?: string; code?: string; retryable?: boolean; grounded?: "ondemand" | "local"; note?: string;
 };
-export type SentAttachment = { mediaId: string; name: string; kind: AttachmentKind; extractedChars?: number; sizeBytes?: number };
+export type SentAttachment = { mediaId: string; name: string; kind: AttachmentKind; extractedChars?: number; sizeBytes?: number; artifactId?: string; artifactUrl?: string };
 
 export const MAX_BYTES = 25 * 1024 * 1024;
 export const ACCEPT_EXT = ["pdf", "docx", "xlsx", "csv", "txt", "md", "png", "jpg", "jpeg", "webp", "mp3", "wav", "m4a"] as const;
@@ -24,7 +27,7 @@ const KIND_BY_EXT: Record<string, AttachmentKind> = { pdf: "document", docx: "do
 export const DROP_HINT = "Drop a PDF, DOCX, XLSX, CSV, image or audio file — up to 25 MB";
 const SENT_KEY = (tid: string) => `bcap.chat.attachments.v1.${tid}`;
 
-type SessionCtx = { sessionId: string | null; externalUserId: string; apikey?: string };
+type SessionCtx = { sessionId: string | null; externalUserId: string; apikey?: string; threadId?: string | null };
 type State = { items: AttachmentItem[]; sent: Record<string, SentAttachment[]>; live: string; dragging: boolean; version: number };
 let state: State = { items: [], sent: {}, live: "", dragging: false, version: 0 };
 const listeners = new Set<() => void>();
@@ -56,6 +59,7 @@ function upload(id: string) {
   fd.append("file", file, file.name);
   if (ctx.sessionId) fd.append("sessionId", ctx.sessionId);
   fd.append("externalUserId", ctx.externalUserId);
+  if (ctx.threadId) fd.append("threadId", ctx.threadId);
   const xhr = new XMLHttpRequest();
   xhrs.set(id, xhr);
   xhr.open("POST", "/api/media");
@@ -64,10 +68,11 @@ function upload(id: string) {
   xhr.upload.onprogress = (e) => { if (e.lengthComputable) patch(id, { progress: Math.min(0.95, e.loaded / e.total) }); };
   xhr.onload = () => {
     xhrs.delete(id);
-    let j: { ok?: boolean; code?: string; message?: string; media?: { id: string; extractedChars?: number; kind?: AttachmentKind; mime?: string; grounded?: "ondemand" | "local" }; note?: string } = {};
+    let j: { ok?: boolean; code?: string; message?: string; media?: { id: string; extractedChars?: number; kind?: AttachmentKind; mime?: string; grounded?: "ondemand" | "local" }; note?: string; artifact?: Artifact | null; artifactError?: string | null } = {};
     try { j = JSON.parse(xhr.responseText); } catch { /* non-JSON */ }
     if (xhr.status >= 200 && xhr.status < 300 && j.ok && j.media?.id) {
-      patch(id, { status: "ready", progress: 1, mediaId: j.media.id, extractedChars: j.media.extractedChars ?? 0, kind: j.media.kind ?? state.items.find((a) => a.id === id)?.kind, error: undefined, code: undefined, grounded: j.media.grounded ?? "ondemand", note: j.note });
+      if (j.artifact) artifactsStore.add(j.artifact);
+      patch(id, { status: "ready", progress: 1, artifactId: j.artifact?.id, artifactUrl: j.artifact?.contentUrl, previewUrl: j.artifact && j.artifact.kind === "image" ? j.artifact.contentUrl : undefined, mediaId: j.media.id, extractedChars: j.media.extractedChars ?? 0, kind: j.media.kind ?? state.items.find((a) => a.id === id)?.kind, error: undefined, code: undefined, grounded: j.media.grounded ?? "ondemand", note: j.note });
       setLive(`${file.name} attached${j.media.extractedChars ? ` — ${j.media.extractedChars.toLocaleString()} characters extracted` : ""}`);
     } else {
       const code = j.code ?? (xhr.status === 413 ? "too_large" : xhr.status === 400 ? "unsupported_type" : xhr.status === 504 ? "upstream_timeout" : `http_${xhr.status || 0}`);
@@ -113,7 +118,7 @@ export const attachmentsStore = {
   clear() { for (const x of xhrs.values()) x.abort(); xhrs.clear(); files.clear(); state = { ...state, items: [] }; emit(); },
   /** Called by chat-shell after a successful send: move the ready items under the user message id (+ persist per thread) and clear the bar. */
   markSent(messageId: string, threadId: string) {
-    const ready = attachmentsStore.ready().map((a): SentAttachment => ({ mediaId: a.mediaId!, name: a.name, kind: a.kind, extractedChars: a.extractedChars, sizeBytes: a.sizeBytes }));
+    const ready = attachmentsStore.ready().map((a): SentAttachment => ({ mediaId: a.mediaId!, name: a.name, kind: a.kind, extractedChars: a.extractedChars, sizeBytes: a.sizeBytes, artifactId: a.artifactId, artifactUrl: a.artifactUrl }));
     if (!ready.length) return [];
     const sent = { ...state.sent, [messageId]: ready };
     files.clear(); state = { ...state, sent, items: state.items.filter((a) => a.status !== "ready"), live: `${ready.length} attachment${ready.length === 1 ? "" : "s"} sent with your message` }; emit();
@@ -148,7 +153,7 @@ export function AttachmentChip({ a }: { a: AttachmentItem }) {
   const title = a.status === "error" ? a.error : a.status === "ready" ? `${a.name} · ${fmtSize(a.sizeBytes)}${a.extractedChars ? ` · ${a.extractedChars.toLocaleString()} chars extracted` : ""}${a.note ? ` · ${a.note}` : ""}` : `Uploading ${a.name} · ${Math.round(a.progress * 100)}%`;
   return (
     <li className={`oiu-att__chip oiu-att__chip--${a.status}`} data-testid="attachment-chip" data-status={a.status} data-kind={a.kind} data-code={a.code ?? ""} data-grounded={a.grounded ?? ""} title={title}>
-      <span className="oiu-att__chip-icon"><KindIcon kind={a.kind} name={a.name} className="size-4" /></span>
+      <span className="oiu-att__chip-icon">{a.previewUrl ? <img src={a.previewUrl} alt="" width={28} height={28} className="oiu-att__thumb" data-testid="attachment-thumb" /> : <img src={a.status === "error" ? "/icons/artifacts/upload-failed.png" : a.status === "uploading" ? "/icons/artifacts/upload.png" : a.kind === "image" ? "/icons/artifacts/image.png" : "/icons/artifacts/document.png"} alt="" width={24} height={24} />}</span>
       <span className="oiu-att__chip-body">
         <span className="oiu-att__chip-name">{a.name}{a.status === "ready" && a.grounded === "local" && <span className="oiu-att__badge" data-testid="attachment-local-badge" title={a.note ?? "Grounded locally from the uploaded text"}>local</span>}</span>
         <span className="oiu-att__chip-meta">{a.status === "error" ? a.error : a.status === "uploading" ? (a.progress >= 0.95 ? "Processing…" : `${fmtSize(a.sizeBytes)} · ${Math.round(a.progress * 100)}%`) : `${fmtSize(a.sizeBytes)}${a.extractedChars ? ` · ${a.extractedChars.toLocaleString()} chars` : ""}`}</span>
@@ -167,15 +172,17 @@ export function AttachmentChip({ a }: { a: AttachmentItem }) {
 /** Small read-only chips under a sent user message. */
 export function SentChips({ items }: { items: SentAttachment[] }) {
   if (!items.length) return null;
-  return (
+  const images = items.filter((s) => s.kind === "image" && s.artifactUrl);
+  return (<>
+    {images.length > 0 && <div className="oiu-att__sent-images" data-testid="message-images"><ImageGrid images={images.map((s) => ({ src: s.artifactUrl!, alt: s.name, caption: s.name }))} /></div>}
     <ul className="oiu-att__sent" data-testid="message-attachments" aria-label="Attachments sent with this message">
       {items.map((s) => (
         <li key={s.mediaId} className="oiu-att__sent-chip" data-testid="message-attachment" data-kind={s.kind} data-media-id={s.mediaId} title={`${s.name}${s.extractedChars ? ` · ${s.extractedChars.toLocaleString()} chars extracted` : ""} · OnDemand media ${s.mediaId}`}>
-          <KindIcon kind={s.kind} name={s.name} className="size-3.5" /> <span>{s.name}</span>
+          <KindIcon kind={s.kind} name={s.name} className="size-3.5" /> {s.artifactUrl ? <a href={s.artifactUrl} target="_blank" rel="noopener noreferrer" data-testid="message-attachment-link">{s.name}</a> : <span>{s.name}</span>}
         </li>
       ))}
     </ul>
-  );
+  </>);
 }
 
 /** Legacy export kept for API compatibility — the attachment UI now lives inside <AppComposer> (app-composer.tsx); nothing is portalled. */

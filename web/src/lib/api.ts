@@ -50,19 +50,29 @@ export async function getSignal(slug: string): Promise<Sourced<{ data: SignalSco
   const r = await get<{ data: SignalScore; bands: SignalBands } | null>(`/companies/${encodeURIComponent(slug)}/signal`, () => null);
   return { ...r, data: r.data?.data ? { data: r.data.data, bands: r.data.bands } : null };
 }
-/** All news across the portfolio (for News Pulse): N parallel calls would be slow against the sandbox, so use the per-company latest_news
- *  embedded in /companies (always ≥ the news table for workflow-written items) merged with the snapshot news table. */
-export async function getAllNews(): Promise<Sourced<(NewsItem & { company_slug: string; company_name: string; company_logo: string | null; sector: string; sentiment_score: number | null; sentiment_delta: number | null })[]>> {
+/** All news across the portfolio (for News Pulse). The real total is Σ GET /companies/{slug}/news (2,104 items over 137 companies on
+ *  2026-10-11) — NOT the ~182–202 items embedded in `latest_news`. Fetch every company's full list (16 in flight, ISR 120 s); companies whose
+ *  call fails fall back to their embedded latest_news + snapshot rows, and `total` reports the backend's `news_total` when present. */
+type FeedItem = NewsItem & { company_slug: string; company_name: string; company_logo: string | null; sector: string; sentiment_score: number | null; sentiment_delta: number | null };
+export async function getAllNews(): Promise<Sourced<FeedItem[]> & { total: number; perCompany: Record<string, number> }> {
   const cs = await listCompanies();
-  const items = new Map<string, NewsItem & { company_slug: string; company_name: string; company_logo: string | null; sector: string; sentiment_score: number | null; sentiment_delta: number | null }>();
-  for (const c of cs.data) {
-    const fromTable = snap.news[c.slug] ?? [];
-    for (const n of [...(c.latest_news ?? []), ...fromTable]) {
-      const id = n.id ?? `${c.slug}|${n.url ?? n.title}`;
-      if (!items.has(id)) items.set(id, { ...n, id, company_slug: c.slug, company_name: c.name, company_logo: c.logo_url ?? null, sector: c.sector, sentiment_score: c.sentiment?.score ?? null, sentiment_delta: c.sentiment?.delta ?? null });
+  const items = new Map<string, FeedItem>(); const perCompany: Record<string, number> = {};
+  const queue = [...cs.data]; let anyLive = false;
+  const worker = async () => {
+    for (let c = queue.shift(); c; c = queue.shift()) {
+      const r = await get<{ data: NewsItem[] } | null>(`/companies/${encodeURIComponent(c.slug)}/news?limit=1000`, () => null);
+      const list = r.data?.data ?? [...(c.latest_news ?? []), ...(snap.news[c.slug] ?? [])];
+      if (r.data) anyLive = true;
+      perCompany[c.slug] = r.data ? list.length : c.news_count ?? list.length;
+      for (const n of list) {
+        const id = n.id ?? `${c.slug}|${n.url ?? n.title}`;
+        if (!items.has(id)) items.set(id, { ...n, id, company_slug: c.slug, company_name: c.name, company_logo: c.logo_url ?? null, sector: c.sector, sentiment_score: c.sentiment?.score ?? null, sentiment_delta: c.sentiment?.delta ?? null });
+      }
     }
-  }
-  return { data: [...items.values()].sort((a, b) => (b.published_at ?? "").localeCompare(a.published_at ?? "")), source: cs.source, fetched_at: cs.fetched_at };
+  };
+  await Promise.all(Array.from({ length: 16 }, worker));
+  const total = Object.values(perCompany).reduce((a, b) => a + b, 0);
+  return { data: [...items.values()].sort((a, b) => (b.published_at ?? "").localeCompare(a.published_at ?? "")), source: anyLive ? cs.source : "snapshot", fetched_at: cs.fetched_at, total, perCompany };
 }
 /** PitchBook record for one company (backend `/pitchbook/{slug}`, built by the PitchBook team). No snapshot exists: the offline fallback is
  *  `null` (source 'snapshot'), which the panel renders as its honest "offline" state — never a blank card, never a credentials message. */

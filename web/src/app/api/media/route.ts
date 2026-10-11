@@ -1,5 +1,8 @@
 import { NextRequest } from "next/server";
 import { ONDEMAND_BASE_URL, serverApiKey, UPSTREAM_USER_AGENT, DEFAULT_EXTERNAL_USER_ID } from "@/lib/ondemand/config";
+import { saveArtifact } from "@/lib/artifacts/server";
+import { extractDocx, extractPdf } from "@/lib/media/extract";
+import type { Artifact } from "@/lib/artifacts/types";
 import { ALLOWED_EXTENSIONS, ALLOWED_LABEL, MEDIA_MAX_BYTES, MEDIA_PLUGIN_BY_KIND, classify, putBlob, deleteBlob, putText, deleteText, getText } from "@/lib/media/store";
 
 /**
@@ -44,6 +47,12 @@ export async function POST(req: NextRequest) {
   const sessionIdRaw = String(form.get("sessionId") ?? "").trim();
   const sessionId = /^[A-Za-z0-9]{6,64}$/.test(sessionIdRaw) ? sessionIdRaw : "";
   const externalUserId = (String(form.get("externalUserId") ?? "").trim() || DEFAULT_EXTERNAL_USER_ID).slice(0, 64);
+  const threadId = String(form.get("threadId") ?? "").trim().slice(0, 80) || null;
+  /** Every upload is also persisted as an Artifact (backend /artifacts, bytes + OnDemand media id) so it shows in the Artifacts panel/route. */
+  const persistUpload = async (bytesIn: Uint8Array, mediaId: string | null, mediaStatus: "stored" | "local" | "failed", mediaMessage: string | null): Promise<{ artifact: Artifact | null; artifactError: string | null }> => {
+    try { return { artifact: await saveArtifact({ bytes: bytesIn, name, mime: cls.mime, source: "upload", mediaId, mediaStatus, mediaMessage, threadId, sessionId: sessionId || null, originEvent: "upload" }), artifactError: null }; }
+    catch (e) { return { artifact: null, artifactError: String((e as Error)?.message ?? e).slice(0, 300) }; }
+  };
 
   // 2. publish the bytes at a public URL OnDemand can fetch. Optional `publicUrl` (https) = the SAME file already hosted publicly — used when
   //    this server is not reachable from the internet (local dev / tests); the bytes are still validated and the blob still published.
@@ -79,8 +88,9 @@ export async function POST(req: NextRequest) {
     const id = `local-${Buffer.from(crypto.getRandomValues(new Uint8Array(12))).toString("hex")}`;
     const text = Buffer.from(bytes.subarray(0, EXTRACT_MAX_BYTES)).toString("utf8").replace(/\u0000/g, "").trim();
     putText(id, { text, name, kind: cls.kind, mime: cls.mime, sizeBytes: file.size });
+    const persisted = await persistUpload(bytes, null, "local", `OnDemand media create failed upstream (HTTP ${up.status})`);
     return Response.json({
-      ok: true,
+      ok: true, ...persisted,
       media: { id, name, sizeBytes: file.size, mime: cls.mime, url: null, blobUrl: null, extractedTextUrl: null, extractedChars: text.length, kind: cls.kind, grounded: "local" as const, sessionId: sessionId || null, pluginId: MEDIA_PLUGIN_BY_KIND[cls.kind], upstreamMs: Date.now() - t0, upstreamStatus: up.status, upstreamMessage: j.message ?? null },
       note: `OnDemand media create failed upstream (HTTP ${up.status}) — grounded locally from the uploaded text`,
       extractedTextPreview: text.slice(0, 400),
@@ -88,6 +98,23 @@ export async function POST(req: NextRequest) {
   }
   if (!up.ok || typeof data.id !== "string") {
     deleteBlob(token);
+    if (cls.ext === "pdf" || cls.ext === "docx") {
+      // OnDemand media create failed (observed 2026-10-11: HTTP 500 errors.server_error for DOCX/PDF from a non-public origin). Extract the
+      // text locally (lib/media/extract.ts), keep the bytes in Artifacts, and label the chip `local` — never claim OnDemand processed it.
+      let text = ""; try { text = (cls.ext === "pdf" ? extractPdf(bytes) : extractDocx(bytes)).slice(0, EXTRACT_MAX_BYTES); } catch { text = ""; }
+      const reason = `OnDemand rejected the file (HTTP ${up.status}): ${j.message ?? raw.slice(0, 160)}`;
+      const persisted = await persistUpload(bytes, null, "failed", reason);
+      if (persisted.artifact) {
+        const id = `local-${Buffer.from(crypto.getRandomValues(new Uint8Array(12))).toString("hex")}`;
+        putText(id, { text, name, kind: cls.kind, mime: cls.mime, sizeBytes: file.size });
+        return Response.json({ ok: true, ...persisted, media: { id, name, sizeBytes: file.size, mime: cls.mime, url: null, blobUrl: null, extractedTextUrl: null, extractedChars: text.length, kind: cls.kind, grounded: "local" as const, sessionId: sessionId || null, pluginId: MEDIA_PLUGIN_BY_KIND[cls.kind], upstreamMs: Date.now() - t0, upstreamStatus: up.status, upstreamMessage: j.message ?? null }, note: `${reason} — text extracted locally (${text.length} chars), file stored in Artifacts`, extractedTextPreview: text.slice(0, 400) }, { headers: NO_STORE });
+      }
+    }
+    if (cls.kind === "image") {
+      // Images still belong in Artifacts (and render inline) even when the OnDemand image plugin refuses them — honest `failed` media status.
+      const persisted = await persistUpload(bytes, null, "failed", `OnDemand rejected the file (HTTP ${up.status}): ${j.message ?? raw.slice(0, 160)}`);
+      if (persisted.artifact) return Response.json({ ok: true, ...persisted, media: { id: `local-${persisted.artifact.id.replace(/[^A-Za-z0-9]/g, "").slice(-20)}`, name, sizeBytes: file.size, mime: cls.mime, url: null, blobUrl: null, extractedTextUrl: null, extractedChars: 0, kind: cls.kind, grounded: "local" as const, sessionId: sessionId || null, pluginId: MEDIA_PLUGIN_BY_KIND[cls.kind], upstreamMs: Date.now() - t0, upstreamStatus: up.status, upstreamMessage: j.message ?? null }, note: `OnDemand media create failed (HTTP ${up.status}) — stored in Artifacts only` }, { headers: NO_STORE });
+    }
     return fail(up.status === 401 || up.status === 403 ? 401 : 502, "upstream_http", `OnDemand rejected the file (HTTP ${up.status}): ${j.message ?? raw.slice(0, 200) ?? "no message"}`, { upstreamStatus: up.status, upstreamMessage: j.message ?? null });
   }
   const id = data.id;
@@ -108,8 +135,9 @@ export async function POST(req: NextRequest) {
   }
   text = text.replace(/\u0000/g, "").trim();
   putText(id, { text, name, kind: cls.kind, mime: cls.mime, sizeBytes: file.size });
+  const persisted = await persistUpload(bytes, id, "stored", null);
   return Response.json({
-    ok: true,
+    ok: true, ...persisted,
     media: { id, name, sizeBytes: file.size, mime: cls.mime, url, blobUrl, extractedTextUrl, extractedChars: text.length, kind: cls.kind, grounded: "ondemand" as const, sessionId: typeof data.sessionId === "string" ? data.sessionId : sessionId || null, pluginId: MEDIA_PLUGIN_BY_KIND[cls.kind], upstreamMs: Date.now() - t0 },
     extractedTextPreview: text.slice(0, 400),
   }, { headers: NO_STORE });

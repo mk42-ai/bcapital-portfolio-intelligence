@@ -40,8 +40,14 @@ inner.use("*", async (c, next) => {
 
 const err = (c: any, status: number, errorCode: string, message: string) => c.json({ message, errorCode }, status as any);
 
-function toApi(r: typeof schema.companies.$inferSelect) {
+/** Real per-company news counts from news_items (Σ over /companies/{slug}/news = 2,104 on 2026-10-11) — never latest_news.length. */
+function newsCounts(db: any): Map<string, number> {
+  const rows = db.select({ slug: schema.newsItems.companySlug, n: sql<number>`count(*)` }).from(schema.newsItems).groupBy(schema.newsItems.companySlug).all() as { slug: string; n: number }[];
+  return new Map(rows.map((r) => [r.slug, Number(r.n)]));
+}
+function toApi(r: typeof schema.companies.$inferSelect, counts?: Map<string, number>) {
   return {
+    news_count: counts ? counts.get(r.slug) ?? 0 : undefined,
     id: r.id, name: r.name, matrix_name: r.matrixName, slug: r.slug, sector: r.sector, region: r.region, stage: r.stage, status: r.status, website: r.website,
     linkedin_url: r.linkedinUrl, hq: r.hq, employees: r.employees, logo_url: r.logoUrl, brand_tokens: r.brandTokens, b_capital_fund: r.bCapitalFund,
     b_capital_role: r.bCapitalRole, b_capital_round: r.bCapitalRound, estimated_ticket_size_usd: r.estimatedTicketSizeUsd, estimated_ownership_pct: r.estimatedOwnershipPct,
@@ -64,8 +70,9 @@ inner.get("/health", async (c) => {
   const { db } = await getDb();
   const total = db.get<{ n: number }>(sql`select count(*) as n from companies`)!.n;
   const spec = db.get<{ n: number }>(sql`select count(*) as n from companies where in_brand_matrix = 1 or slug = 'b-capital'`)!.n;
+  const newsTotal = db.get<{ n: number }>(sql`select count(*) as n from news_items`)!.n;
   const lastRun = db.select().from(schema.ingestRuns).orderBy(desc(schema.ingestRuns.receivedAt)).limit(1).get();
-  return c.json({ status: "ok", db_record_count: spec, db_record_count_total: total, last_ingest: lastRun ? { id: lastRun.id, source: lastRun.source, received_at: lastRun.receivedAt, status: lastRun.status } : null, model: config.ondemandDefaultModel, earliest_test_utc: config.earliestTestUtc || null, version: config.version, timestamp: nowIso() });
+  return c.json({ status: "ok", db_record_count: spec, db_record_count_total: total, news_total: newsTotal, last_ingest: lastRun ? { id: lastRun.id, source: lastRun.source, received_at: lastRun.receivedAt, status: lastRun.status } : null, model: config.ondemandDefaultModel, earliest_test_utc: config.earliestTestUtc || null, version: config.version, timestamp: nowIso() });
 });
 inner.get("/openapi.json", (c) => c.json(buildOpenApi(serverUrl(c))));
 
@@ -86,7 +93,8 @@ inner.get("/companies", async (c) => {
   const total = db.select({ n: sql<number>`count(*)` }).from(schema.companies).where(where).get()!.n;
   const order = sort === "sentiment" ? desc(sql`json_extract(${schema.companies.sentiment}, '$.score')`) : sort === "updated_at" ? desc(schema.companies.updatedAt) : sort === "ticket" ? desc(schema.companies.estimatedTicketSizeUsd) : asc(schema.companies.name);
   const rows = db.select().from(schema.companies).where(where).orderBy(order).limit(limit).offset((page - 1) * limit).all();
-  return c.json({ data: rows.map(toApi), pagination: { page, limit, total, total_pages: Math.max(1, Math.ceil(total / limit)) }, filters: { sector: sector ?? null, region: region ?? null, status: status ?? null, role: role ?? null, focus: focus === "true" }, timestamp: nowIso() });
+  const counts = newsCounts(db); const newsTotal = [...counts.values()].reduce((a, b) => a + b, 0);
+  return c.json({ data: rows.map((r) => toApi(r, counts)), news_total: newsTotal, pagination: { page, limit, total, total_pages: Math.max(1, Math.ceil(total / limit)) }, filters: { sector: sector ?? null, region: region ?? null, status: status ?? null, role: role ?? null, focus: focus === "true" }, timestamp: nowIso() });
 });
 
 async function findCompany(slugOrName: string) {
@@ -103,14 +111,14 @@ async function findCompany(slugOrName: string) {
 inner.get("/companies/:slug", async (c) => {
   const row = await findCompany(c.req.param("slug"));
   if (!row) return err(c, 404, "not_found", `No company with slug '${c.req.param("slug")}'`);
-  return c.json({ data: toApi(row), timestamp: nowIso() });
+  return c.json({ data: toApi(row, newsCounts((await getDb()).db)), timestamp: nowIso() });
 });
 
 inner.get("/companies/:slug/news", async (c) => {
   const row = await findCompany(c.req.param("slug"));
   if (!row) return err(c, 404, "not_found", `No company with slug '${c.req.param("slug")}'`);
   const { db } = await getDb();
-  const limit = Math.min(100, Math.max(1, parseInt(c.req.query("limit") ?? "20") || 20));
+  const limit = Math.min(1000, Math.max(1, parseInt(c.req.query("limit") ?? "20") || 20)); // max 1000 so Σ over companies with limit=1000 is never truncated
   const kind = c.req.query("kind");
   const conds = [eq(schema.newsItems.companySlug, row.slug)];
   if (kind) conds.push(eq(schema.newsItems.kind, kind));
@@ -448,6 +456,164 @@ inner.post("/pitchbook/run", async (c) => {
   const slugs = db.select({ slug: schema.companies.slug }).from(schema.companies).where(sql`${schema.companies.bCapitalRole} != 'firm'`).orderBy(desc(schema.companies.isFocus), asc(schema.companies.slug)).all().map((r) => r.slug);
   const job = startPitchbookJob(slugs, 2);
   return c.json({ fallback: "local", reason: "PITCHBOOK_WORKFLOW_ID is not set", job_id: job.id, status: "running", total: slugs.length, poll: `/pitchbook/jobs/${job.id}`, next_run_utc: nextMondayUtc(), timestamp: nowIso() }, 202);
+});
+
+// ---------- news count ----------
+inner.get("/news/count", async (c) => {
+  const { db } = await getDb();
+  const rows = db.all<{ slug: string; n: number }>(sql`select c.slug as slug, count(n.id) as n from companies c left join news_items n on n.company_slug = c.slug group by c.slug order by c.slug`);
+  const orphan = db.get<{ n: number }>(sql`select count(*) as n from news_items where company_slug not in (select slug from companies)`)!.n;
+  const by_company: Record<string, number> = {};
+  for (const r of rows) by_company[r.slug] = Number(r.n);
+  const total = db.get<{ n: number }>(sql`select count(*) as n from news_items`)!.n;
+  return c.json({ total, by_company, companies: rows.length, orphan_items: orphan, timestamp: nowIso() });
+});
+
+// ---------- artifacts ----------
+const ARTIFACT_MAX_BYTES = 25 * 1024 * 1024;
+const ARTIFACT_KINDS = ["document", "image", "video", "audio", "file"] as const;
+function kindFromMime(mime: string, name: string): string {
+  const m = mime.toLowerCase();
+  if (m.startsWith("image/")) return "image";
+  if (m.startsWith("video/")) return "video";
+  if (m.startsWith("audio/")) return "audio";
+  if (/^(text\/|application\/(pdf|json|msword|rtf|xml|vnd\.openxmlformats|vnd\.ms-|vnd\.oasis))/.test(m) || /\.(pdf|docx?|xlsx?|pptx?|md|txt|csv|json|html?)$/i.test(name)) return "document";
+  return "file";
+}
+function mimeFromName(name: string): string {
+  const ext = (name.split(".").pop() ?? "").toLowerCase();
+  const map: Record<string, string> = { png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", gif: "image/gif", webp: "image/webp", svg: "image/svg+xml", pdf: "application/pdf", txt: "text/plain", md: "text/markdown", csv: "text/csv", json: "application/json", html: "text/html", mp4: "video/mp4", webm: "video/webm", mp3: "audio/mpeg", wav: "audio/wav", docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document", xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation" };
+  return map[ext] ?? "application/octet-stream";
+}
+function artifactToApi(c: any, r: Omit<typeof schema.artifacts.$inferSelect, "bytes">) {
+  const content_url = `${serverUrl(c)}/artifacts/${r.id}/content`;
+  return {
+    id: r.id, name: r.name, kind: r.kind, mime: r.mime, size_bytes: r.sizeBytes, version: r.version, source: r.source,
+    media_id: r.mediaId ?? null, media_status: r.mediaStatus ?? null, media_message: r.mediaMessage ?? null,
+    thread_id: r.threadId ?? null, session_id: r.sessionId ?? null, origin_event: r.originEvent ?? null,
+    content_url, thumbnail_url: r.kind === "image" ? content_url : null, created_at: r.createdAt, deleted_at: r.deletedAt ?? null,
+  };
+}
+const artifactMeta = {
+  id: schema.artifacts.id, name: schema.artifacts.name, kind: schema.artifacts.kind, mime: schema.artifacts.mime, sizeBytes: schema.artifacts.sizeBytes,
+  version: schema.artifacts.version, source: schema.artifacts.source, mediaId: schema.artifacts.mediaId, mediaStatus: schema.artifacts.mediaStatus,
+  mediaMessage: schema.artifacts.mediaMessage, threadId: schema.artifacts.threadId, sessionId: schema.artifacts.sessionId, originEvent: schema.artifacts.originEvent,
+  createdAt: schema.artifacts.createdAt, deletedAt: schema.artifacts.deletedAt,
+};
+const tooLarge = (c: any, n?: number) => err(c, 413, "payload_too_large", `Artifact exceeds the 25 MB limit${n ? ` (${n} bytes)` : ""}`);
+const optStr = (v: unknown) => (typeof v === "string" && v.trim() ? v.trim() : null);
+
+inner.post("/artifacts", async (c) => {
+  const denied = requireIngestSecret(c); if (denied) return denied;
+  const ct = (c.req.header("content-type") ?? "").toLowerCase();
+  const cl = Number(c.req.header("content-length") ?? 0);
+  // multipart/base64 envelopes add overhead: allow ~37% headroom before rejecting on the header alone.
+  if (cl && cl > ARTIFACT_MAX_BYTES * 1.37 + 64 * 1024) return tooLarge(c, cl);
+  let bytes: Buffer; let name = ""; let mime = ""; const f: Record<string, unknown> = {};
+  try {
+    if (ct.startsWith("multipart/form-data")) {
+      const form = await c.req.formData();
+      const file = form.get("file");
+      if (!file || typeof file === "string") return err(c, 400, "invalid_request", "multipart body must include a 'file' part");
+      for (const [k, v] of form.entries()) if (k !== "file" && typeof v === "string") f[k] = v;
+      bytes = Buffer.from(await (file as File).arrayBuffer());
+      name = optStr(f.name) ?? ((file as File).name || "upload.bin");
+      mime = optStr(f.mime) ?? ((file as File).type || mimeFromName(name));
+    } else if (ct.includes("application/json") || ct === "") {
+      let body: any;
+      try { body = JSON.parse(await c.req.text()); } catch { return err(c, 400, "invalid_request", "Body must be JSON {name, mime, content_base64} | {name, url} or multipart/form-data"); }
+      if (!body || typeof body !== "object") return err(c, 400, "invalid_request", "Body must be a JSON object");
+      Object.assign(f, body);
+      if (typeof body.content_base64 === "string") {
+        const b64 = body.content_base64.replace(/^data:[^,]*,/, "");
+        if (b64.length * 0.75 > ARTIFACT_MAX_BYTES + 4) return tooLarge(c, Math.floor(b64.length * 0.75));
+        bytes = Buffer.from(b64, "base64");
+        name = optStr(body.name) ?? "upload.bin";
+        mime = optStr(body.mime) ?? mimeFromName(name);
+      } else if (typeof body.url === "string") {
+        let u: URL; try { u = new URL(body.url); } catch { return err(c, 400, "invalid_request", "url must be an absolute http(s) URL"); }
+        if (!/^https?:$/.test(u.protocol)) return err(c, 400, "invalid_request", "url must be http(s)");
+        const r = await fetch(u, { signal: AbortSignal.timeout(30_000) });
+        if (!r.ok) return err(c, 502, "upstream_error", `Fetching url failed: HTTP ${r.status}`);
+        const len = Number(r.headers.get("content-length") ?? 0);
+        if (len > ARTIFACT_MAX_BYTES) return tooLarge(c, len);
+        bytes = Buffer.from(await r.arrayBuffer());
+        name = optStr(body.name) ?? (decodeURIComponent(u.pathname.split("/").pop() || "") || "download.bin");
+        mime = optStr(body.mime) ?? (r.headers.get("content-type")?.split(";")[0].trim() || mimeFromName(name));
+      } else return err(c, 400, "invalid_request", "JSON body needs content_base64 or url");
+    } else return err(c, 415, "unsupported_media_type", "Use multipart/form-data or application/json");
+  } catch (e) {
+    return err(c, 400, "invalid_request", `Could not read upload: ${(e as Error).message}`);
+  }
+  if (bytes.length > ARTIFACT_MAX_BYTES) return tooLarge(c, bytes.length);
+  if (!bytes.length) return err(c, 400, "invalid_request", "Artifact is empty");
+  const kindIn = optStr(f.kind);
+  if (kindIn && !(ARTIFACT_KINDS as readonly string[]).includes(kindIn)) return err(c, 400, "invalid_request", "kind must be document|image|video|audio|file");
+  const source = optStr(f.source) ?? "upload";
+  if (!["upload", "generated", "agent"].includes(source)) return err(c, 400, "invalid_request", "source must be upload|generated|agent");
+  const mediaStatus = optStr(f.media_status);
+  if (mediaStatus && !["stored", "local", "failed"].includes(mediaStatus)) return err(c, 400, "invalid_request", "media_status must be stored|local|failed");
+  const threadId = optStr(f.thread_id);
+  const { db } = await getDb();
+  const prev = db.get<{ v: number | null }>(threadId === null
+    ? sql`select max(version) as v from artifacts where name = ${name} and thread_id is null`
+    : sql`select max(version) as v from artifacts where name = ${name} and thread_id = ${threadId}`);
+  const row = {
+    id: `art_${crypto.randomBytes(6).toString("hex")}`, name, kind: kindIn ?? kindFromMime(mime, name), mime, sizeBytes: bytes.length,
+    version: (prev?.v ?? 0) + 1, source, mediaId: optStr(f.media_id), mediaStatus, mediaMessage: optStr(f.media_message),
+    threadId, sessionId: optStr(f.session_id), originEvent: optStr(f.origin_event) ?? (source === "upload" ? "upload" : null),
+    bytes, createdAt: nowIso(), deletedAt: null,
+  };
+  db.insert(schema.artifacts).values(row).run();
+  persist();
+  const { bytes: _b, ...meta } = row;
+  return c.json({ data: artifactToApi(c, meta) }, 201);
+});
+
+inner.get("/artifacts", async (c) => {
+  const { db } = await getDb();
+  const threadId = c.req.query("thread_id"); const kind = c.req.query("kind");
+  const limit = Math.min(500, Math.max(1, parseInt(c.req.query("limit") ?? "100") || 100));
+  const conds = [sql`${schema.artifacts.deletedAt} is null`] as any[];
+  if (threadId) conds.push(eq(schema.artifacts.threadId, threadId));
+  if (kind) conds.push(eq(schema.artifacts.kind, kind));
+  const where = and(...conds);
+  const total = db.select({ n: sql<number>`count(*)` }).from(schema.artifacts).where(where).get()!.n;
+  const rows = db.select(artifactMeta).from(schema.artifacts).where(where).orderBy(desc(schema.artifacts.createdAt), desc(sql`rowid`)).limit(limit).all();
+  return c.json({ data: rows.map((r) => artifactToApi(c, r)), total, timestamp: nowIso() });
+});
+
+inner.get("/artifacts/:id", async (c) => {
+  const { db } = await getDb();
+  const r = db.select(artifactMeta).from(schema.artifacts).where(and(eq(schema.artifacts.id, c.req.param("id")), sql`${schema.artifacts.deletedAt} is null`)).get();
+  if (!r) return err(c, 404, "not_found", `No artifact with id '${c.req.param("id")}'`);
+  return c.json({ data: artifactToApi(c, r) });
+});
+
+inner.get("/artifacts/:id/content", async (c) => {
+  const { db } = await getDb();
+  const r = db.select().from(schema.artifacts).where(and(eq(schema.artifacts.id, c.req.param("id")), sql`${schema.artifacts.deletedAt} is null`)).get();
+  if (!r) return err(c, 404, "not_found", `No artifact with id '${c.req.param("id")}'`);
+  const dl = ["1", "true"].includes(c.req.query("download") ?? "");
+  const safe = r.name.replace(/["\\\r\n]/g, "_");
+  const buf = Buffer.isBuffer(r.bytes) ? r.bytes : Buffer.from(r.bytes as unknown as Uint8Array);
+  return new Response(new Uint8Array(buf), { status: 200, headers: {
+    "content-type": r.mime, "content-length": String(buf.length), "cache-control": "private, max-age=300",
+    "content-disposition": `${dl ? "attachment" : "inline"}; filename="${safe}"; filename*=UTF-8''${encodeURIComponent(r.name)}`,
+    "access-control-allow-origin": "*", "x-request-id": c.get("requestId"),
+  } });
+});
+
+inner.delete("/artifacts/:id", async (c) => {
+  const denied = requireIngestSecret(c); if (denied) return denied;
+  const { db } = await getDb();
+  const r = db.select(artifactMeta).from(schema.artifacts).where(and(eq(schema.artifacts.id, c.req.param("id")), sql`${schema.artifacts.deletedAt} is null`)).get();
+  if (!r) return err(c, 404, "not_found", `No artifact with id '${c.req.param("id")}'`);
+  const deletedAt = nowIso();
+  // Soft-delete and drop the payload so the committed DB does not keep deleted bytes.
+  db.update(schema.artifacts).set({ deletedAt, bytes: Buffer.alloc(0) }).where(eq(schema.artifacts.id, r.id)).run();
+  persist();
+  return c.json({ data: { id: r.id, deleted_at: deletedAt } });
 });
 
 inner.notFound((c) => err(c, 404, "not_found", `Route not found: ${c.req.method} ${new URL(c.req.url).pathname}`));

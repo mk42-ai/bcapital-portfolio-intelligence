@@ -1,5 +1,31 @@
 # Changelog
 
+## 2026-10-11 — Run UX step 1 · Artifacts · media/uploads · 2,104 news · sentiment pass 2
+
+### Added
+- **Run view (one reducer, fixed order, identical live and settled)** in `web/src/components/chat/open-intelligent-ui/chat-shell.tsx`, inside the kept OpenUI `AgentInterface` (`/api/chat` still adapts OnDemand SSE → AG-UI). The order within each turn is: **Thinking** pinned at the top (live ticker, auto-collapses to "Thought for N s" at the first answer token) → **Plan** checklist with its objective → **Working** rows, one per plugin action, drawn *before* the action, with favicon chips (never an empty `{}` box) and resolving to done (N sources · s) or a red failed state → between-step **summary** cards → **Outputs** card (`step_output`) → interactive **prompts** (awaiting_input / require_creds / awaiting_browser_action) → **answer** with publisher-first citation chips (+N overflow) → inline **image grid + lightbox**, **video player**, **artifact cards** → a numbered **Sources** list, collapsed, under the answer → one **Data gap** sentence when something fails.
+- **First-event skeleton**: Thinking and Working placeholders render on send. Measured first skeleton is 201–284 ms, against the 34.9–82 s first-token wait seen upstream.
+- **Artifacts**:
+  - Backend `POST/GET /artifacts`, `GET /artifacts/{id}`, `GET /artifacts/{id}/content`, `DELETE /artifacts/{id}`. Bytes are stored in SQLite, capped at 25 MB, with versioning by name+thread. All of these are in `/openapi.json`.
+  - Web proxies under `/api/artifacts/*`.
+  - Side **Artifacts panel** plus an **`/artifacts`** route. Both show filters, thumbnails, the Step 3 type icons, preview (image/video/PDF/text), version, timestamp, download and delete.
+  - The panel auto-populates from `ondemand_agent.file_written` / `artifact_ready`. Report asks also produce a PDF artifact (`bridge.report`), which is registered with the OnDemand Media API.
+- **Uploads**: every composer upload is persisted as an Artifact. A new local DOCX/PDF text extractor (`web/src/lib/media/extract.ts`) is used only when OnDemand media create fails, and those chips are labelled `local`.
+- **`news_count`** per company, plus **`news_total`** on `/companies` and `/health`, taken from `news_items`. The live sum is **2,104**.
+- **`web/e2e/run-ux.spec.ts`**: upload and report journeys at 1440×900 and 390×844, recorded on video. Each action is logged with an ISO-8601 UTC timestamp, and each run gets a measured smoothness score out of 10. Outputs are in `web/proof/run-ux/` (`score-history.json`, `TEST-LOG.md`, `iter10-live/` videos + screenshots).
+- **`docs/ONDEMAND_SSE_FRAMES.md`**: live docs fetched 2026-10-11T00:42:58Z. Covers the Media, Chat, Services and Flow Builder endpoints, and every SSE frame type.
+- **`scripts/sentiment-pass2.ts`**: deterministic second scoring pass (`rule:news-mean-v1`).
+
+### Fixed
+- **182/197 news assumption**: News Pulse now sums `GET /companies/{slug}/news` for all 137 companies, giving 2,104 items. The chat context and inspector use `news_count`, not `latest_news.length`.
+- **Sentiment deltas** are now non-null for Perplexity AI (+0.69), Apptronik (+0.24), Fervo Energy (−0.25), Flutterwave (+0.04) and WRITER (+0.42), from ingest run `ing-2026-10-11T004631Z-b4adfa`.
+- **Chat CLS**: `.chat-main` lost its viewport height while a run streamed. The page grew from 900 to 2,192 px and the composer jumped twice (CLS 0.41). It is now pinned. Sources now mount after the answer finishes, the live Thinking body has a fixed height, there is a 1-line Thinking ticker at 390 px, and the stall band sits under the Working rows. Desktop report CLS went from 0.63 to 0.02.
+- **`/artifacts` CLS 0.14**: the page now waits for the first backend refresh instead of painting a stale cached list.
+
+### Still blocked (documented, not faked)
+- **Portfolio Plugin** `portfolio_plugin_id = null`. `POST https://api.on-demand.io/plugin/v1` (via `scripts/register-plugin.ts`) returned 400 `{"message":"schema is required","errorCode":"invalid_request"}` at 2026-10-11T01:12:00Z with a JSON-stringified OpenAPI in `action.schema`. MCP `plugin_v1_plugin_create` returned an empty body at 01:12Z, and `suggest_plugins` shows no "Portfolio Plugin". Registering through the console is the remaining path.
+- **OnDemand Media API from a non-public origin**: a local `next start` received HTTP 500 `errors.server_error`, because OnDemand cannot fetch a 127.0.0.1 blob URL. In the deployed sandbox, all 5 fixtures and both report PDFs were `stored` with real media ids (e.g. `6acaf1a1c536376e5904a2b9`).
+
 ## 2026-10-10 — images · PitchBook · companies scroll · upload · voice (30-agent continuation)
 
 ### Added

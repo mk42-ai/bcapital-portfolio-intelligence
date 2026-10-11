@@ -1,13 +1,14 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Newspaper, MessageSquare, Settings, Building2 } from "lucide-react";
+import { LayoutDashboard, Newspaper, MessageSquare, Settings, Building2, Archive } from "lucide-react";
 import { cn } from "@/lib/utils";
 const ITEMS = [
   { href: "/overview", label: "Overview", icon: LayoutDashboard },
   { href: "/companies", label: "Companies", icon: Building2, match: "/compan" },
   { href: "/news", label: "News Pulse", icon: Newspaper },
   { href: "/chat", label: "Chat", icon: MessageSquare },
+  { href: "/artifacts", label: "Artifacts", icon: Archive },
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 /** Primary nav items. `collapsed` (desktop) shows icons only with a title tooltip; labels stay in the accessibility tree. */

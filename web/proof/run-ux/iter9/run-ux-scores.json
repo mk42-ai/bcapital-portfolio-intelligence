@@ -1,0 +1,533 @@
+[
+  {
+    "at": "2026-10-11T02:20:02.394Z",
+    "project": "desktop",
+    "test": "upload: 3 images + PDF + DOCX are stored, retrievable and displayed in chat and Artifacts",
+    "iteration": 9,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "cls": 0,
+    "topShifts": [],
+    "longTasks": 2,
+    "errors": []
+  },
+  {
+    "at": "2026-10-11T02:20:10.645Z",
+    "project": "mobile-ux",
+    "test": "upload: 3 images + PDF + DOCX are stored, retrievable and displayed in chat and Artifacts",
+    "iteration": 9,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "cls": 0,
+    "topShifts": [],
+    "longTasks": 2,
+    "errors": []
+  },
+  {
+    "at": "2026-10-11T02:20:33.368Z",
+    "project": "desktop",
+    "test": "report: Thinking top → Working before action → answer → Sources, PDF stored and listed in Artifacts",
+    "iteration": 9,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "firstSkeletonMs": 314,
+    "topShifts": [
+      {
+        "v": 0.07276645387249228,
+        "t": 1790,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}",
+          "button[nav-toggle].hidden.size-8 {\"y0\":12,\"h0\":32,\"y1\":12,\"h1\":32}"
+        ]
+      },
+      {
+        "v": 0.01963710562414266,
+        "t": 30053,
+        "nodes": [
+          "section[plan-stepper].oiu-plan {\"y0\":274,\"h0\":124,\"y1\":198,\"h1\":124}",
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":533,\"h0\":76,\"y1\":405,\"h1\":78}",
+          "ol[working-list].oiu-work-list {\"y0\":416,\"h0\":58,\"y1\":340,\"h1\":58}",
+          "section[outputs-card].oiu-outputs {\"y0\":0,\"h0\":0,\"y1\":501,\"h1\":35}",
+          "span.oiu-think__kinds {\"y0\":164,\"h0\":17,\"y1\":164,\"h1\":17}"
+        ]
+      },
+      {
+        "v": 0.014880998726048098,
+        "t": 1833,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      },
+      {
+        "v": 0.014580886836634086,
+        "t": 1740,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      },
+      {
+        "v": 0.003268847053433642,
+        "t": 1712,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}"
+        ]
+      },
+      {
+        "v": 0.002812542866941015,
+        "t": 22011,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":521,\"h0\":35,\"y1\":624,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0026990876374421297,
+        "t": 1860,
+        "nodes": [
+          "div[main-column].flex.min-w-0 {\"y0\":0,\"h0\":900,\"y1\":0,\"h1\":900}"
+        ]
+      },
+      {
+        "v": 0.00231443329903978,
+        "t": 1708,
+        "nodes": [
+          "a[nav-artifacts].flex.min-h-10 {\"y0\":244,\"h0\":40,\"y1\":244,\"h1\":40}",
+          "a[nav-overview].flex.min-h-10 {\"y0\":68,\"h0\":40,\"y1\":68,\"h1\":40}",
+          "a[nav-companies].flex.min-h-10 {\"y0\":112,\"h0\":40,\"y1\":112,\"h1\":40}",
+          "a[nav-news].flex.min-h-10 {\"y0\":156,\"h0\":40,\"y1\":156,\"h1\":40}",
+          "a[nav-chat].flex.min-h-10 {\"y0\":200,\"h0\":40,\"y1\":200,\"h1\":40}"
+        ]
+      }
+    ],
+    "streamShifts": [
+      {
+        "v": 0.0000027518566743827158,
+        "t": 20160,
+        "nodes": [
+          "? {\"y0\":490,\"h0\":15,\"y1\":490,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.002812542866941015,
+        "t": 22011,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":521,\"h0\":35,\"y1\":624,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.00009557184499314129,
+        "t": 23186,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":631,\"h0\":28,\"y1\":624,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.000014507780349794238,
+        "t": 28240,
+        "nodes": [
+          "? {\"y0\":633,\"h0\":15,\"y1\":633,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.01963710562414266,
+        "t": 30053,
+        "nodes": [
+          "section[plan-stepper].oiu-plan {\"y0\":274,\"h0\":124,\"y1\":198,\"h1\":124}",
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":533,\"h0\":76,\"y1\":405,\"h1\":78}",
+          "ol[working-list].oiu-work-list {\"y0\":416,\"h0\":58,\"y1\":340,\"h1\":58}",
+          "section[outputs-card].oiu-outputs {\"y0\":0,\"h0\":0,\"y1\":501,\"h1\":35}",
+          "span.oiu-think__kinds {\"y0\":164,\"h0\":17,\"y1\":164,\"h1\":17}"
+        ]
+      },
+      {
+        "v": 0.0000033950617283950617,
+        "t": 30196,
+        "nodes": [
+          "span.oiu-caret {\"y0\":590,\"h0\":16,\"y1\":623,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000007818930041152263,
+        "t": 30312,
+        "nodes": [
+          "span.oiu-caret {\"y0\":623,\"h0\":16,\"y1\":699,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000005967078189300412,
+        "t": 31042,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":697,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000005967078189300412,
+        "t": 31405,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":697,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000005864197530864197,
+        "t": 32372,
+        "nodes": [
+          "span.oiu-caret {\"y0\":640,\"h0\":16,\"y1\":697,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000005967078189300412,
+        "t": 33109,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":697,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.0000026748971193415633,
+        "t": 33225,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":665,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000005246913580246914,
+        "t": 33347,
+        "nodes": [
+          "span.oiu-caret {\"y0\":639,\"h0\":16,\"y1\":690,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.000009156378600823045,
+        "t": 33471,
+        "nodes": [
+          "span.oiu-caret {\"y0\":640,\"h0\":16,\"y1\":729,\"h1\":16}"
+        ]
+      }
+    ],
+    "marks": [
+      {
+        "a": "send",
+        "t": 2170.699999809265
+      },
+      {
+        "a": "stream finished",
+        "t": 37714.799999952316
+      }
+    ],
+    "postRunShifts": [],
+    "streamCls": 0.02261453758626972,
+    "cls": 0.13312524501135978,
+    "longTasks": 5,
+    "order": [
+      "thinking-block",
+      "working-row",
+      "plan-stepper",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "domOrder": [
+      "thinking-block",
+      "working-list",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "errors": []
+  },
+  {
+    "at": "2026-10-11T02:20:43.843Z",
+    "project": "mobile-ux",
+    "test": "report: Thinking top → Working before action → answer → Sources, PDF stored and listed in Artifacts",
+    "iteration": 9,
+    "total": 10,
+    "parts": {
+      "skeleton": 2,
+      "cls": 2,
+      "jank": 2,
+      "order": 2,
+      "errors": 1,
+      "artifact": 1
+    },
+    "firstSkeletonMs": 244,
+    "topShifts": [
+      {
+        "v": 0.014199709270013173,
+        "t": 1395,
+        "nodes": [
+          "div.openui-agent-welcome-screen {\"y0\":114,\"h0\":396,\"y1\":102,\"h1\":396}",
+          "div.openui-agent-thread-scroll-container {\"y0\":510,\"h0\":278,\"y1\":498,\"h1\":290}",
+          "div.openui-agent-thread-header__actions {\"y0\":73,\"h0\":32,\"y1\":63,\"h1\":32}"
+        ]
+      },
+      {
+        "v": 0.01159003616270973,
+        "t": 1475,
+        "nodes": [
+          "div.openui-agent-composer-slot {\"y0\":788,\"h0\":56,\"y1\":744,\"h1\":100}",
+          "::after. {\"y0\":716,\"h0\":28,\"y1\":672,\"h1\":72}"
+        ]
+      },
+      {
+        "v": 0.010833090002470744,
+        "t": 25177,
+        "nodes": [
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":472,\"h0\":96,\"y1\":420,\"h1\":96}",
+          "section[outputs-card].oiu-outputs {\"y0\":586,\"h0\":35,\"y1\":534,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.00801721918610578,
+        "t": 16981,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":505,\"h0\":35,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0020919609377294725,
+        "t": 31658,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":666,\"h0\":102,\"y1\":654,\"h1\":114}",
+          "section[outputs-card].oiu-outputs {\"y0\":623,\"h0\":35,\"y1\":611,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0019832716151237184,
+        "t": 31677,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":654,\"h0\":114,\"y1\":644,\"h1\":125}",
+          "section[outputs-card].oiu-outputs {\"y0\":611,\"h0\":35,\"y1\":601,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0016087879822918485,
+        "t": 31692,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":644,\"h0\":125,\"y1\":635,\"h1\":133}",
+          "section[outputs-card].oiu-outputs {\"y0\":601,\"h0\":35,\"y1\":593,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.001545652667366999,
+        "t": 31643,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":675,\"h0\":93,\"y1\":666,\"h1\":102}",
+          "section[outputs-card].oiu-outputs {\"y0\":632,\"h0\":35,\"y1\":623,\"h1\":35}"
+        ]
+      }
+    ],
+    "streamShifts": [
+      {
+        "v": 0.00801721918610578,
+        "t": 16981,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":505,\"h0\":35,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0005666081520734381,
+        "t": 17961,
+        "nodes": [
+          "section[outputs-card].oiu-outputs {\"y0\":597,\"h0\":35,\"y1\":608,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0000974583299497385,
+        "t": 22361,
+        "nodes": [
+          "? {\"y0\":617,\"h0\":15,\"y1\":617,\"h1\":15}"
+        ]
+      },
+      {
+        "v": 0.010833090002470744,
+        "t": 25177,
+        "nodes": [
+          "section[step-summary].oiu-summary.oiu-summary--done {\"y0\":472,\"h0\":96,\"y1\":420,\"h1\":96}",
+          "section[outputs-card].oiu-outputs {\"y0\":586,\"h0\":35,\"y1\":534,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.00008569853811425204,
+        "t": 25408,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":746,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.0000746406622285421,
+        "t": 25625,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":730,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.00005287046907855066,
+        "t": 26959,
+        "nodes": [
+          "span.oiu-caret {\"y0\":623,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      },
+      {
+        "v": 0.00008984524157139328,
+        "t": 27175,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":752,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.00005287046907855066,
+        "t": 27395,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      },
+      {
+        "v": 0.00007325842774282836,
+        "t": 27625,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":728,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.00006427390358568903,
+        "t": 28293,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":0,\"h1\":0}"
+        ]
+      },
+      {
+        "v": 0.00007394954498568524,
+        "t": 28960,
+        "nodes": [
+          "span.oiu-caret {\"y0\":622,\"h0\":16,\"y1\":729,\"h1\":16}"
+        ]
+      },
+      {
+        "v": 0.0006681254459865957,
+        "t": 31627,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":679,\"h0\":89,\"y1\":675,\"h1\":93}",
+          "section[outputs-card].oiu-outputs {\"y0\":637,\"h0\":35,\"y1\":632,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.001545652667366999,
+        "t": 31643,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":675,\"h0\":93,\"y1\":666,\"h1\":102}",
+          "section[outputs-card].oiu-outputs {\"y0\":632,\"h0\":35,\"y1\":623,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0020919609377294725,
+        "t": 31658,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":666,\"h0\":102,\"y1\":654,\"h1\":114}",
+          "section[outputs-card].oiu-outputs {\"y0\":623,\"h0\":35,\"y1\":611,\"h1\":35}"
+        ]
+      },
+      {
+        "v": 0.0019832716151237184,
+        "t": 31677,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":654,\"h0\":114,\"y1\":644,\"h1\":125}",
+          "section[outputs-card].oiu-outputs {\"y0\":611,\"h0\":35,\"y1\":601,\"h1\":35}"
+        ]
+      }
+    ],
+    "marks": [
+      {
+        "a": "send",
+        "t": 1491.7999999523163
+      },
+      {
+        "a": "stream finished",
+        "t": 31679.799999952316
+      }
+    ],
+    "postRunShifts": [
+      {
+        "v": 0.0016087879822918485,
+        "t": 31692,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":644,\"h0\":125,\"y1\":635,\"h1\":133}",
+          "section[outputs-card].oiu-outputs {\"y0\":601,\"h0\":35,\"y1\":593,\"h1\":35}"
+        ],
+        "afterMark": "stream finished"
+      },
+      {
+        "v": 0.0012293679905593384,
+        "t": 31710,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":635,\"h0\":133,\"y1\":629,\"h1\":139}",
+          "section[outputs-card].oiu-outputs {\"y0\":593,\"h0\":35,\"y1\":587,\"h1\":35}"
+        ],
+        "afterMark": "stream finished"
+      },
+      {
+        "v": 0.0009146929960018869,
+        "t": 31724,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":629,\"h0\":139,\"y1\":625,\"h1\":143}",
+          "section[outputs-card].oiu-outputs {\"y0\":587,\"h0\":35,\"y1\":582,\"h1\":35}"
+        ],
+        "afterMark": "stream finished"
+      },
+      {
+        "v": 0.0006713448104870129,
+        "t": 31743,
+        "nodes": [
+          "div[answer-block].oiu-answer {\"y0\":625,\"h0\":143,\"y1\":622,\"h1\":146}",
+          "section[outputs-card].oiu-outputs {\"y0\":582,\"h0\":35,\"y1\":579,\"h1\":35}"
+        ],
+        "afterMark": "stream finished"
+      }
+    ],
+    "streamCls": 0.026370793593191978,
+    "cls": 0.05658473280525495,
+    "longTasks": 3,
+    "order": [
+      "thinking-block",
+      "working-row",
+      "plan-stepper",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "domOrder": [
+      "thinking-block",
+      "working-list",
+      "answer-block",
+      "inline-artifacts",
+      "sources-list"
+    ],
+    "errors": []
+  }
+]
