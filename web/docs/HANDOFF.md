@@ -709,3 +709,56 @@ Repo base `60120f4` (origin/main), edited in place; no re-scaffold.
 **Contract tests:** `scripts/contract-test.ts` 16/16 against https://sb-mo128rkf6h2c.vercel.run (`docs/contract-test-2026-10-11.txt`); backend `npm test` 12/12; `tests/unit/eventmap.test.ts` 49/49; web `tsc --noEmit` 0 errors; `next build` OK.
 
 **OnDemand endpoints used this pass** (full table: `docs/ONDEMAND_SSE_FRAMES.md`): `POST /chat/v1/sessions`, `POST /chat/v1/sessions/{id}/query` (`responseMode: stream`, `endpointId` DeepSeek Flash v4.1, reasoning medium), `GET /chat/v1/sessions/{id}/messages`, `POST /media/v1/public/file` (`responseMode: sync`, per-kind plugin id), `DELETE /media/v1/public/file/{id}`, `POST /services/v1/public/service/execute/{text_to_speech|speech_to_text}`, `POST /plugin/v1` (blocked), `GET /config/v1/public/docs/*` (docs study).
+
+
+## Asset restore 2026-10-11
+
+Restored the already-generated assets (artifact icon set, upload states, earlier Artifacts/upload UI icons, misc renders, upload E2E fixtures, the six `d624130` glyphs and the OnDemand reference docs) into the repo at `2026-10-11T06:47:23Z` UTC. The `web/public/assets/` tree had been dropped by merge `076c6b6`, so all six glyphs were re-downloaded. Index: `web/public/assets/manifest.json`. No image was regenerated; every file is the original blob (sha256 below).
+
+| path | role | bytes | sha256 |
+|---|---|---:|---|
+| `web/public/assets/artifacts/archive.png` | artifact-icon | 617344 | `36ee8b9ba72c22c72ee08d92e4c163a2d3858aca5574707bf3cb12f29d49c5c1` |
+| `web/public/assets/artifacts/audio.png` | artifact-icon | 624551 | `b8d67ddfe2dea7815d40f807e069a04d9a102ff4574f99a9c2546444d05d8418` |
+| `web/public/assets/artifacts/chart.png` | artifact-icon | 635947 | `391d5edfb342bee7065f2268c99d6cdbb2360bb83a1fb5655dc1bed0b0bdb80c` |
+| `web/public/assets/artifacts/code.png` | artifact-icon | 629359 | `7d39a8e4496f156219aa82c8f31faff02b8ebbf22929412c42dca50db4ebacc1` |
+| `web/public/assets/artifacts/doc.png` | artifact-icon | 662780 | `384288e44db84f02a79f4c8bc1c124dc75391d763c475833b09bad89deac93f2` |
+| `web/public/assets/artifacts/generic.png` | artifact-icon | 644204 | `cf050f5beef6a902d70f7628c0883a15720c287aae6d22727fa460414e5af490` |
+| `web/public/assets/artifacts/image.png` | artifact-icon | 628285 | `860e7a21cd674faba21b4479753b50275740232eb57e211b327f832d95f71087` |
+| `web/public/assets/artifacts/json.png` | artifact-icon | 634319 | `1c137345c0bb2f91c71b6206c407616a4d9dcf38d3b46f01888d0e4ad6689095` |
+| `web/public/assets/artifacts/link.png` | artifact-icon | 623114 | `119b0e4a27f3648327cc68b05e7254ff8060e4ed59a9b522518ba0cf8eb96cab` |
+| `web/public/assets/artifacts/pdf.png` | artifact-icon | 605916 | `df574e80b36fbbbcde37863d597b534a1d4c4823162925b37657648489ab1a03` |
+| `web/public/assets/artifacts/presentation.png` | artifact-icon | 644878 | `b679f2cbc1d99ecbb82b0361ba4d97349db8a474f8788fd3cdac5ff195058047` |
+| `web/public/assets/artifacts/spreadsheet.png` | artifact-icon | 650155 | `4dbbf4efbddc3a1c00bb9e5ca179969c3be31905953d161bd98a06da95e1dab3` |
+| `web/public/assets/artifacts/video.png` | artifact-icon | 612369 | `13d504bd503791fa7ee0b21f1742f89011aefcdc9052581a9eeb68ad45ffd458` |
+| `web/public/assets/upload/failed.png` | upload-state | 636010 | `3ea8fc0e7c66978d8408630dda22c2b3ff8b36dbadce72d482969fb3f0cc058c` |
+| `web/public/assets/upload/idle.png` | upload-state | 615484 | `50f0601c24afbc12b8d33dcc9fed8735f024b801bbb9fa389250e8766f7bd1ed` |
+| `web/public/assets/upload/in-progress.png` | upload-state | 616884 | `d98a5afa16f1e57a30496beab9ee395fc8bb2cdd64da4a03e1d1294866ee908d` |
+| `web/public/assets/upload/success.png` | upload-state | 613390 | `1c3e1a117609af09c4e20385183e3cd2d173beda24a65a1901ce4766c40b297c` |
+| `web/public/assets/artifacts-ui/artifact-document.png` | artifacts-ui | 654718 | `8e47c6eb2e4bfb469639618e912b545944ad784692214918fe5ca403f8c265b9` |
+| `web/public/assets/artifacts-ui/artifact-image.png` | artifacts-ui | 649472 | `3452c9354cddeaa0b640c68719f9037d16d878a8f095fa2dcb50d9f7102cadc2` |
+| `web/public/assets/artifacts-ui/artifact-video.png` | artifacts-ui | 618615 | `f1158173584cc3aca26bc4956f630758d0f258ae8dd754f39986104a3f4273a6` |
+| `web/public/assets/artifacts-ui/artifacts-empty.png` | artifacts-ui | 644973 | `e9423f0c9f2c48c502068dc92ebecc5bbd8c4d6521f2c6c3c3f41dc88f814d6a` |
+| `web/public/assets/artifacts-ui/artifacts-header.png` | artifacts-ui | 632519 | `3d619e184610349b229f8b0caaefb665965cd9a3f594da23a30008b038a420b8` |
+| `web/public/assets/artifacts-ui/upload-attach.png` | artifacts-ui | 628481 | `bb063baf100d2bf503837ec57d221aa14c3fe00222507deb291a6752ac52a508` |
+| `web/public/assets/artifacts-ui/upload-failed-retry.png` | artifacts-ui | 610530 | `11e1da97d7701d1ae6eec9dadc6c5d33f74214d9115f472026c62ace445679ed` |
+| `web/public/assets/misc/bar-chart-original.png` | misc | 1052416 | `71bc83aa837d329828c1cd0446e968d66677b2e140ce3083f29651e5ae6dc2e3` |
+| `web/public/assets/misc/bar-chart-refined.png` | misc | 757990 | `f258943edc695ec9494a350973ca6bfd6b8aec4635a689038a6afa2c392f12d6` |
+| `web/public/assets/misc/geothermal-variation-a.png` | misc | 3581650 | `7bdb14e5323a8f2ba17a99ff081bc423fd13f5640827d9ecbed7cbb0bc9a7344` |
+| `web/public/assets/misc/geothermal-variation-b.png` | misc | 3583090 | `2b629fcb02cc9b08faab5c9954d237652fed2999e9a549af2df436ab7b6fdc0a` |
+| `web/tests/fixtures/upload/OnDemand-Outputs-Panel-Spec.pdf` | fixture | 1011464 | `4cdca0f6b70c5af78357e23e32e0e3f7230bb440e4c59503ca1f791c394843d3` |
+| `web/tests/fixtures/upload/bar-chart.png` | fixture | 757332 | `01a5159409420d7b79e8a0cb96a7c5cfda127ecd3a7b6ea21adc2d9ad36cd16c` |
+| `web/tests/fixtures/upload/blurred-memo.png` | fixture | 1169208 | `16491881ca88ec76c644c3821b4396f22812fc3fe896b8d817b80b9a5e3ce946` |
+| `web/tests/fixtures/upload/compendium.docx` | fixture | 15719340 | `a80619ef76e79b580ab54feb7642dc04b6a8fbfdcf0175b268af65ea98f61a87` |
+| `web/tests/fixtures/upload/geothermal-plant.png` | fixture | 2447171 | `469f907774678f3fd5eba97e20d52349ddc369e560c800d5b7a3aa1d5c5cf7ae` |
+| `web/public/assets/browser-action-card.png` | glyph | 602392 | `60a9183d4b57d89faa8bd0aca7e55fe0fce69de510792dd5ced5cd856642dbae` |
+| `web/public/assets/composer-ask.png` | glyph | 593084 | `da0bd5c0cffb51ca9a0a6278bde8f9811bbe7bede7e998e1ff84d3a84192e45a` |
+| `web/public/assets/credentials-card.png` | glyph | 637234 | `1542c96313f65fb18b7e107eb9c552619f4d6d8cb1c02121ad2088c2c7a61c3b` |
+| `web/public/assets/new-chat-empty.png` | glyph | 594275 | `e68577b946d06f9b3fe8e39792a143ab277848cc02a1ecfbb119a3847f559aa0` |
+| `web/public/assets/pitchbook-synced.png` | glyph | 631761 | `615360749239a49e1c64d4d0f0c051947bdedf88ea40104a923fb589840c9f31` |
+| `web/public/assets/voice-orb-thinking.png` | glyph | 673876 | `3ddbd683a7b525dcc74998c47ef55dc56a82581105cc373e56b6b5c99b754ac3` |
+| `docs/reference/ondemand/OnDemand-Outputs-Panel-Spec.pdf` | reference-doc | 1011464 | `4cdca0f6b70c5af78357e23e32e0e3f7230bb440e4c59503ca1f791c394843d3` |
+| `docs/reference/ondemand/OnDemand-Platform-Architecture.pdf` | reference-doc | 1804655 | `6d59535e4932050b2bf8f196bb4c9681e1dd7ff3e31e9ffba91fa7f4782c095e` |
+| `docs/reference/ondemand/OnDemand-Run-UX-Before-After.html` | reference-doc | 182515 | `d48a41c81a14e28038c5df25be4b4a3509940574c68146c10ef2ade4270be089` |
+| `docs/reference/ondemand/OnDemand-Run-UX-Before-After.pdf` | reference-doc | 4035732 | `08208434f523e8e8e40b1454f0d8e1866c7da9e5e94ef82a804da0d45df8c848` |
+| `docs/reference/ondemand/OnDemand_Agent_Videos_Supporting_Document.pdf` | reference-doc | 162509 | `fff80c527e64778b4c6217b3fc54019a633131114ff36006e38d948557e8a057` |
+| `docs/reference/ondemand/submit-query-v1-sse-reference.pdf` | reference-doc | 4591 | `5836c2a1ca29b86c02f9ed70d7803e04f82291bbe90143205f8d409b6a052002` |

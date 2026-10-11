@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-10-11 — asset restore (icons · upload states · fixtures · reference docs)
+
+### Added
+- `web/public/assets/artifacts/` — 13 file-type icons (doc, pdf, image, video, audio, spreadsheet, presentation, chart, code, json, archive, link, generic).
+- `web/public/assets/upload/` — 4 upload-state icons (idle, in-progress, success, failed).
+- `web/public/assets/artifacts-ui/` — 7 earlier Artifacts/upload UI icons (artifacts-header, artifact-document/-image/-video, upload-attach, upload-failed-retry, artifacts-empty).
+- `web/public/assets/misc/` — bar-chart original/refined, geothermal variation a/b.
+- `web/tests/fixtures/upload/` — upload E2E fixtures: geothermal-plant.png, bar-chart.png, blurred-memo.png, plus `OnDemand-Outputs-Panel-Spec.pdf` (copied from `docs/`) and `compendium.docx` (copied from `web/e2e/fixtures/ux/`; `docs/` holds no DOCX).
+- `docs/reference/ondemand/` — SSE reference, Run UX Before/After (HTML + PDF), Outputs Panel Spec, Agent Videos supporting document, Platform Architecture.
+- `web/public/assets/manifest.json` — array of `{name, path, role, source_blob_id, bytes, sha256, saved_at}` for every restored file.
+
+### Restored
+- The six `d624130` glyphs (`composer-ask`, `credentials-card`, `browser-action-card`, `pitchbook-synced`, `new-chat-empty`, `voice-orb-thinking`) at `web/public/assets/<name>.png` — the whole `web/public/assets/` tree had been dropped by merge `076c6b6`, so they were re-downloaded rather than found.
+
+### Notes
+- Nothing was regenerated: every file is the original blob, verified by magic bytes (PNG `89 50 4E 47`, `%PDF`, `<html`) and sha256 (table appended to `web/docs/HANDOFF.md`, section "Asset restore 2026-10-11").
+
 ## 2026-10-11 — Run UX step 1 · Artifacts · media/uploads · 2,104 news · sentiment pass 2
 
 ### Added

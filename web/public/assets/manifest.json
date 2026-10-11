@@ -1,0 +1,407 @@
+[
+  {
+    "name": "archive.png",
+    "path": "web/public/assets/artifacts/archive.png",
+    "role": "artifact-icon",
+    "source_blob_id": "VyDfJZ2DjF",
+    "bytes": 617344,
+    "sha256": "36ee8b9ba72c22c72ee08d92e4c163a2d3858aca5574707bf3cb12f29d49c5c1",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "audio.png",
+    "path": "web/public/assets/artifacts/audio.png",
+    "role": "artifact-icon",
+    "source_blob_id": "z6GfDiY8rx",
+    "bytes": 624551,
+    "sha256": "b8d67ddfe2dea7815d40f807e069a04d9a102ff4574f99a9c2546444d05d8418",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "chart.png",
+    "path": "web/public/assets/artifacts/chart.png",
+    "role": "artifact-icon",
+    "source_blob_id": "LfUeIZOSst",
+    "bytes": 635947,
+    "sha256": "391d5edfb342bee7065f2268c99d6cdbb2360bb83a1fb5655dc1bed0b0bdb80c",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "code.png",
+    "path": "web/public/assets/artifacts/code.png",
+    "role": "artifact-icon",
+    "source_blob_id": "SbOt4T7cW3",
+    "bytes": 629359,
+    "sha256": "7d39a8e4496f156219aa82c8f31faff02b8ebbf22929412c42dca50db4ebacc1",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "doc.png",
+    "path": "web/public/assets/artifacts/doc.png",
+    "role": "artifact-icon",
+    "source_blob_id": "KhfzYBMwhU",
+    "bytes": 662780,
+    "sha256": "384288e44db84f02a79f4c8bc1c124dc75391d763c475833b09bad89deac93f2",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "generic.png",
+    "path": "web/public/assets/artifacts/generic.png",
+    "role": "artifact-icon",
+    "source_blob_id": "LqNqA1imSU",
+    "bytes": 644204,
+    "sha256": "cf050f5beef6a902d70f7628c0883a15720c287aae6d22727fa460414e5af490",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "image.png",
+    "path": "web/public/assets/artifacts/image.png",
+    "role": "artifact-icon",
+    "source_blob_id": "CWDxH9BM9m",
+    "bytes": 628285,
+    "sha256": "860e7a21cd674faba21b4479753b50275740232eb57e211b327f832d95f71087",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "json.png",
+    "path": "web/public/assets/artifacts/json.png",
+    "role": "artifact-icon",
+    "source_blob_id": "6e5hHhkLPn",
+    "bytes": 634319,
+    "sha256": "1c137345c0bb2f91c71b6206c407616a4d9dcf38d3b46f01888d0e4ad6689095",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "link.png",
+    "path": "web/public/assets/artifacts/link.png",
+    "role": "artifact-icon",
+    "source_blob_id": "sYt5UAa4KF",
+    "bytes": 623114,
+    "sha256": "119b0e4a27f3648327cc68b05e7254ff8060e4ed59a9b522518ba0cf8eb96cab",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "pdf.png",
+    "path": "web/public/assets/artifacts/pdf.png",
+    "role": "artifact-icon",
+    "source_blob_id": "EcxntJE15W",
+    "bytes": 605916,
+    "sha256": "df574e80b36fbbbcde37863d597b534a1d4c4823162925b37657648489ab1a03",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "presentation.png",
+    "path": "web/public/assets/artifacts/presentation.png",
+    "role": "artifact-icon",
+    "source_blob_id": "clLJtzsh5B",
+    "bytes": 644878,
+    "sha256": "b679f2cbc1d99ecbb82b0361ba4d97349db8a474f8788fd3cdac5ff195058047",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "spreadsheet.png",
+    "path": "web/public/assets/artifacts/spreadsheet.png",
+    "role": "artifact-icon",
+    "source_blob_id": "UVTLYeLAX4",
+    "bytes": 650155,
+    "sha256": "4dbbf4efbddc3a1c00bb9e5ca179969c3be31905953d161bd98a06da95e1dab3",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "video.png",
+    "path": "web/public/assets/artifacts/video.png",
+    "role": "artifact-icon",
+    "source_blob_id": "VHiQEdFqzK",
+    "bytes": 612369,
+    "sha256": "13d504bd503791fa7ee0b21f1742f89011aefcdc9052581a9eeb68ad45ffd458",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "failed.png",
+    "path": "web/public/assets/upload/failed.png",
+    "role": "upload-state",
+    "source_blob_id": "rqPjXtIIuV",
+    "bytes": 636010,
+    "sha256": "3ea8fc0e7c66978d8408630dda22c2b3ff8b36dbadce72d482969fb3f0cc058c",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "idle.png",
+    "path": "web/public/assets/upload/idle.png",
+    "role": "upload-state",
+    "source_blob_id": "yLz91YmuLU",
+    "bytes": 615484,
+    "sha256": "50f0601c24afbc12b8d33dcc9fed8735f024b801bbb9fa389250e8766f7bd1ed",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "in-progress.png",
+    "path": "web/public/assets/upload/in-progress.png",
+    "role": "upload-state",
+    "source_blob_id": "3JTyKMKYHT",
+    "bytes": 616884,
+    "sha256": "d98a5afa16f1e57a30496beab9ee395fc8bb2cdd64da4a03e1d1294866ee908d",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "success.png",
+    "path": "web/public/assets/upload/success.png",
+    "role": "upload-state",
+    "source_blob_id": "h62tZPqN5j",
+    "bytes": 613390,
+    "sha256": "1c3e1a117609af09c4e20385183e3cd2d173beda24a65a1901ce4766c40b297c",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "artifact-document.png",
+    "path": "web/public/assets/artifacts-ui/artifact-document.png",
+    "role": "artifacts-ui",
+    "source_blob_id": "zPuYM75C7M",
+    "bytes": 654718,
+    "sha256": "8e47c6eb2e4bfb469639618e912b545944ad784692214918fe5ca403f8c265b9",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "artifact-image.png",
+    "path": "web/public/assets/artifacts-ui/artifact-image.png",
+    "role": "artifacts-ui",
+    "source_blob_id": "eUZXCkGWim",
+    "bytes": 649472,
+    "sha256": "3452c9354cddeaa0b640c68719f9037d16d878a8f095fa2dcb50d9f7102cadc2",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "artifact-video.png",
+    "path": "web/public/assets/artifacts-ui/artifact-video.png",
+    "role": "artifacts-ui",
+    "source_blob_id": "w5t55upZWM",
+    "bytes": 618615,
+    "sha256": "f1158173584cc3aca26bc4956f630758d0f258ae8dd754f39986104a3f4273a6",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "artifacts-empty.png",
+    "path": "web/public/assets/artifacts-ui/artifacts-empty.png",
+    "role": "artifacts-ui",
+    "source_blob_id": "3n7bazJwGb",
+    "bytes": 644973,
+    "sha256": "e9423f0c9f2c48c502068dc92ebecc5bbd8c4d6521f2c6c3c3f41dc88f814d6a",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "artifacts-header.png",
+    "path": "web/public/assets/artifacts-ui/artifacts-header.png",
+    "role": "artifacts-ui",
+    "source_blob_id": "kJYcDaWHx8",
+    "bytes": 632519,
+    "sha256": "3d619e184610349b229f8b0caaefb665965cd9a3f594da23a30008b038a420b8",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "upload-attach.png",
+    "path": "web/public/assets/artifacts-ui/upload-attach.png",
+    "role": "artifacts-ui",
+    "source_blob_id": "OMkvNZ3ont",
+    "bytes": 628481,
+    "sha256": "bb063baf100d2bf503837ec57d221aa14c3fe00222507deb291a6752ac52a508",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "upload-failed-retry.png",
+    "path": "web/public/assets/artifacts-ui/upload-failed-retry.png",
+    "role": "artifacts-ui",
+    "source_blob_id": "VoyziFpAa4",
+    "bytes": 610530,
+    "sha256": "11e1da97d7701d1ae6eec9dadc6c5d33f74214d9115f472026c62ace445679ed",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "bar-chart-original.png",
+    "path": "web/public/assets/misc/bar-chart-original.png",
+    "role": "misc",
+    "source_blob_id": "UozuZpFfE3",
+    "bytes": 1052416,
+    "sha256": "71bc83aa837d329828c1cd0446e968d66677b2e140ce3083f29651e5ae6dc2e3",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "bar-chart-refined.png",
+    "path": "web/public/assets/misc/bar-chart-refined.png",
+    "role": "misc",
+    "source_blob_id": "OemFlwwbiw",
+    "bytes": 757990,
+    "sha256": "f258943edc695ec9494a350973ca6bfd6b8aec4635a689038a6afa2c392f12d6",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "geothermal-variation-a.png",
+    "path": "web/public/assets/misc/geothermal-variation-a.png",
+    "role": "misc",
+    "source_blob_id": "mX9BepYCIF",
+    "bytes": 3581650,
+    "sha256": "7bdb14e5323a8f2ba17a99ff081bc423fd13f5640827d9ecbed7cbb0bc9a7344",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "geothermal-variation-b.png",
+    "path": "web/public/assets/misc/geothermal-variation-b.png",
+    "role": "misc",
+    "source_blob_id": "XAEyMk3IDk",
+    "bytes": 3583090,
+    "sha256": "2b629fcb02cc9b08faab5c9954d237652fed2999e9a549af2df436ab7b6fdc0a",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "OnDemand-Outputs-Panel-Spec.pdf",
+    "path": "web/tests/fixtures/upload/OnDemand-Outputs-Panel-Spec.pdf",
+    "role": "fixture",
+    "source_blob_id": "repo",
+    "bytes": 1011464,
+    "sha256": "4cdca0f6b70c5af78357e23e32e0e3f7230bb440e4c59503ca1f791c394843d3",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "bar-chart.png",
+    "path": "web/tests/fixtures/upload/bar-chart.png",
+    "role": "fixture",
+    "source_blob_id": "Wqig4m88Uw",
+    "bytes": 757332,
+    "sha256": "01a5159409420d7b79e8a0cb96a7c5cfda127ecd3a7b6ea21adc2d9ad36cd16c",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "blurred-memo.png",
+    "path": "web/tests/fixtures/upload/blurred-memo.png",
+    "role": "fixture",
+    "source_blob_id": "XOu41s59Np",
+    "bytes": 1169208,
+    "sha256": "16491881ca88ec76c644c3821b4396f22812fc3fe896b8d817b80b9a5e3ce946",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "compendium.docx",
+    "path": "web/tests/fixtures/upload/compendium.docx",
+    "role": "fixture",
+    "source_blob_id": "repo",
+    "bytes": 15719340,
+    "sha256": "a80619ef76e79b580ab54feb7642dc04b6a8fbfdcf0175b268af65ea98f61a87",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "geothermal-plant.png",
+    "path": "web/tests/fixtures/upload/geothermal-plant.png",
+    "role": "fixture",
+    "source_blob_id": "EW33pVOYmd",
+    "bytes": 2447171,
+    "sha256": "469f907774678f3fd5eba97e20d52349ddc369e560c800d5b7a3aa1d5c5cf7ae",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "browser-action-card.png",
+    "path": "web/public/assets/browser-action-card.png",
+    "role": "glyph",
+    "source_blob_id": "UjDoRhAtZt",
+    "bytes": 602392,
+    "sha256": "60a9183d4b57d89faa8bd0aca7e55fe0fce69de510792dd5ced5cd856642dbae",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "composer-ask.png",
+    "path": "web/public/assets/composer-ask.png",
+    "role": "glyph",
+    "source_blob_id": "AyTcoNYCV2",
+    "bytes": 593084,
+    "sha256": "da0bd5c0cffb51ca9a0a6278bde8f9811bbe7bede7e998e1ff84d3a84192e45a",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "credentials-card.png",
+    "path": "web/public/assets/credentials-card.png",
+    "role": "glyph",
+    "source_blob_id": "XSBib5W4GF",
+    "bytes": 637234,
+    "sha256": "1542c96313f65fb18b7e107eb9c552619f4d6d8cb1c02121ad2088c2c7a61c3b",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "new-chat-empty.png",
+    "path": "web/public/assets/new-chat-empty.png",
+    "role": "glyph",
+    "source_blob_id": "bfMBh6EUi0",
+    "bytes": 594275,
+    "sha256": "e68577b946d06f9b3fe8e39792a143ab277848cc02a1ecfbb119a3847f559aa0",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "pitchbook-synced.png",
+    "path": "web/public/assets/pitchbook-synced.png",
+    "role": "glyph",
+    "source_blob_id": "jJMS56ckYB",
+    "bytes": 631761,
+    "sha256": "615360749239a49e1c64d4d0f0c051947bdedf88ea40104a923fb589840c9f31",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "voice-orb-thinking.png",
+    "path": "web/public/assets/voice-orb-thinking.png",
+    "role": "glyph",
+    "source_blob_id": "J92gHQsBgL",
+    "bytes": 673876,
+    "sha256": "3ddbd683a7b525dcc74998c47ef55dc56a82581105cc373e56b6b5c99b754ac3",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "OnDemand-Outputs-Panel-Spec.pdf",
+    "path": "docs/reference/ondemand/OnDemand-Outputs-Panel-Spec.pdf",
+    "role": "reference-doc",
+    "source_blob_id": "OnDemand-Outputs-Panel-Spec_(1)_58si",
+    "bytes": 1011464,
+    "sha256": "4cdca0f6b70c5af78357e23e32e0e3f7230bb440e4c59503ca1f791c394843d3",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "OnDemand-Platform-Architecture.pdf",
+    "path": "docs/reference/ondemand/OnDemand-Platform-Architecture.pdf",
+    "role": "reference-doc",
+    "source_blob_id": "OnDemand-Platform-Architecture_8n94",
+    "bytes": 1804655,
+    "sha256": "6d59535e4932050b2bf8f196bb4c9681e1dd7ff3e31e9ffba91fa7f4782c095e",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "OnDemand-Run-UX-Before-After.html",
+    "path": "docs/reference/ondemand/OnDemand-Run-UX-Before-After.html",
+    "role": "reference-doc",
+    "source_blob_id": "OnDemand-Run-UX-Before-After_m2in",
+    "bytes": 182515,
+    "sha256": "d48a41c81a14e28038c5df25be4b4a3509940574c68146c10ef2ade4270be089",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "OnDemand-Run-UX-Before-After.pdf",
+    "path": "docs/reference/ondemand/OnDemand-Run-UX-Before-After.pdf",
+    "role": "reference-doc",
+    "source_blob_id": "OnDemand-Run-UX-Before-After_rtao",
+    "bytes": 4035732,
+    "sha256": "08208434f523e8e8e40b1454f0d8e1866c7da9e5e94ef82a804da0d45df8c848",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "OnDemand_Agent_Videos_Supporting_Document.pdf",
+    "path": "docs/reference/ondemand/OnDemand_Agent_Videos_Supporting_Document.pdf",
+    "role": "reference-doc",
+    "source_blob_id": "OnDemand_Agent_Videos_Supporting_Document_p2mk",
+    "bytes": 162509,
+    "sha256": "fff80c527e64778b4c6217b3fc54019a633131114ff36006e38d948557e8a057",
+    "saved_at": "2026-10-11T06:47:23Z"
+  },
+  {
+    "name": "submit-query-v1-sse-reference.pdf",
+    "path": "docs/reference/ondemand/submit-query-v1-sse-reference.pdf",
+    "role": "reference-doc",
+    "source_blob_id": "submit-query-v1-sse-reference_59m1",
+    "bytes": 4591,
+    "sha256": "5836c2a1ca29b86c02f9ed70d7803e04f82291bbe90143205f8d409b6a052002",
+    "saved_at": "2026-10-11T06:47:23Z"
+  }
+]
