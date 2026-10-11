@@ -67,7 +67,10 @@
                     },
                     "news_total": {
                       "type": "integer",
-                      "description": "count(*) of news_items in the DB"
+                      "description": "ONE news count: news_items rows belonging to a listed company (orphans excluded), de-duplicated by (company_slug,url) — same number as /companies.news_total, /news/count.total and /news/summary.total"
+                    },
+                    "news_total_definition": {
+                      "type": "string"
                     },
                     "timestamp": {
                       "type": "string"
@@ -512,6 +515,57 @@
                       }
                     },
                     "computed_at": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/news/summary": {
+      "get": {
+        "operationId": "getNewsSummary",
+        "tags": [
+          "news"
+        ],
+        "summary": "The single news-count source of truth",
+        "description": "total = count of news_items rows belonging to a listed company (orphans excluded), de-duplicated by (company_slug, url). Also returned as news_total by /health and /companies. by_company uses the same rule per slug.",
+        "responses": {
+          "200": {
+            "description": "Summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "integer"
+                    },
+                    "by_company": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "integer"
+                      }
+                    },
+                    "companies": {
+                      "type": "integer"
+                    },
+                    "raw_rows": {
+                      "type": "integer"
+                    },
+                    "dedup_removed": {
+                      "type": "integer"
+                    },
+                    "orphan_items": {
+                      "type": "integer"
+                    },
+                    "definition": {
+                      "type": "string"
+                    },
+                    "timestamp": {
                       "type": "string"
                     }
                   }
@@ -1520,6 +1574,23 @@
                   "media_message": {
                     "type": "string"
                   },
+                  "media_source_url": {
+                    "type": "string",
+                    "description": "Signed or unsigned — the server strips any query string before storing"
+                  },
+                  "media_url_expires_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "media_external_user_id": {
+                    "type": "string"
+                  },
+                  "media_plugins": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
                   "thread_id": {
                     "type": "string"
                   },
@@ -1584,6 +1655,23 @@
                       "media_message": {
                         "type": "string"
                       },
+                      "media_source_url": {
+                        "type": "string",
+                        "description": "Signed or unsigned — the server strips any query string before storing"
+                      },
+                      "media_url_expires_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "media_external_user_id": {
+                        "type": "string"
+                      },
+                      "media_plugins": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
                       "thread_id": {
                         "type": "string"
                       },
@@ -1644,6 +1732,23 @@
                       },
                       "media_message": {
                         "type": "string"
+                      },
+                      "media_source_url": {
+                        "type": "string",
+                        "description": "Signed or unsigned — the server strips any query string before storing"
+                      },
+                      "media_url_expires_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "media_external_user_id": {
+                        "type": "string"
+                      },
+                      "media_plugins": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
                       },
                       "thread_id": {
                         "type": "string"
@@ -1859,14 +1964,14 @@
         }
       }
     },
-    "/artifacts/{id}/open": {
+    "/artifacts/{id}/signed-url": {
       "get": {
-        "operationId": "openArtifact",
+        "operationId": "getArtifactSignedUrl",
         "tags": [
           "artifacts"
         ],
-        "summary": "Re-sign on open: fresh signed OnDemand media url (falls back to /content)",
-        "description": "Looks the artifact's media_id up in the OnDemand Media API and returns a fresh signed `url` plus the unsigned `source_url`; `signed:false` + `resign` reason when the media object is unavailable.",
+        "summary": "Re-sign on open: fresh OnDemand signed media URL (10-min server cache) or the backend content URL as an honest fallback",
+        "description": "Looks the artifact's media_id up via the documented OnDemand fetch-media list (GET /media/v1/public/file, ≤5 pages) and returns the current signed `url` (source \"ondemand\"). Without a media_id, API key, or when OnDemand fails, returns 200 with source \"backend\" pointing at /artifacts/{id}/content and a media_message explaining why. Signed URLs are never persisted.",
         "parameters": [
           {
             "name": "id",
@@ -1876,11 +1981,24 @@
               "type": "string"
             },
             "description": "Artifact id, e.g. art_0123456789ab"
+          },
+          {
+            "name": "download",
+            "in": "query",
+            "required": false,
+            "description": "1 ⇒ backend fallback url carries ?download=1",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "0"
+              ]
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Open descriptor",
+            "description": "Signed url",
             "content": {
               "application/json": {
                 "schema": {
@@ -1894,16 +2012,10 @@
                       "required": [
                         "id",
                         "url",
-                        "signed"
+                        "source"
                       ],
                       "properties": {
                         "id": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "mime": {
                           "type": "string"
                         },
                         "media_id": {
@@ -1912,32 +2024,36 @@
                             "null"
                           ]
                         },
+                        "url": {
+                          "type": "string",
+                          "format": "uri"
+                        },
                         "source_url": {
                           "type": [
                             "string",
                             "null"
+                          ],
+                          "description": "Unsigned source url"
+                        },
+                        "expires_at": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "format": "date-time"
+                        },
+                        "source": {
+                          "type": "string",
+                          "enum": [
+                            "ondemand",
+                            "backend"
                           ]
                         },
-                        "content_url": {
-                          "type": "string"
-                        },
-                        "url": {
-                          "type": "string"
-                        },
-                        "signed": {
-                          "type": "boolean"
-                        },
-                        "resign": {
-                          "type": "string"
-                        },
-                        "extracted_text_url": {
+                        "media_message": {
                           "type": [
                             "string",
                             "null"
                           ]
-                        },
-                        "checked_at": {
-                          "type": "string"
                         }
                       }
                     }
@@ -2828,18 +2944,42 @@
               null
             ]
           },
-          "media_url": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "UNSIGNED OnDemand sourceUrl (never the signed link; re-signed on open via /artifacts/{id}/open)"
-          },
           "media_message": {
             "type": [
               "string",
               "null"
             ]
+          },
+          "media_source_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri",
+            "description": "UNSIGNED OnDemand sourceUrl (query string / SAS token stripped at write time; never a signed url)"
+          },
+          "media_url_expires_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "SAS `se=` of the signed url seen at registration (informational)"
+          },
+          "media_external_user_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "media_plugins": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
           },
           "thread_id": {
             "type": [
