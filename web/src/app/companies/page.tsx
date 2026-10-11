@@ -47,7 +47,10 @@ async function CompaniesBody() {
   return (
     <>
       <PageHeader title="Companies" lede={`${rows.length} portfolio companies. Search, filter by sector, sort by name / Signal Score / sector, or use the A–Z rail. The page itself is the only scroller — arrow keys move between rows.`} source={source} fetchedAt={fetchedAt} />
-      <CompaniesList rows={rows} total={rows.length} />
+      {/* a37: CompaniesList reads useSearchParams() (URL-backed filter state) — a Suspense boundary is required for the static/ISR render. */}
+      <Suspense fallback={<div data-testid="companies-list-loading" className="min-h-[60vh]" aria-busy="true" />}>
+        <CompaniesList rows={rows} total={rows.length} />
+      </Suspense>
     </>
   );
 }
