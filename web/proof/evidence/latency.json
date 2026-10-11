@@ -1,0 +1,38 @@
+[
+  {
+    "at": "2026-10-11T08:46:08.060Z",
+    "project": "evidence-desktop",
+    "test": "T1 document upload → chip ready → grounded answer cites the file → artifact listed with source upload",
+    "question": "What is the title of the attached document? One sentence, cite the file name.",
+    "firstTokenMs": 4670,
+    "totalMs": 6595,
+    "answerChars": 120
+  },
+  {
+    "at": "2026-10-11T08:46:34.396Z",
+    "project": "evidence-desktop",
+    "test": "T2+T3 image upload → thumb in chip → answer → message-images grid → lightbox + side-pane preview",
+    "question": "What kind of chart is attached? One sentence.",
+    "firstTokenMs": 5197,
+    "totalMs": 7341,
+    "answerChars": 257
+  },
+  {
+    "at": "2026-10-11T08:47:23.351Z",
+    "project": "evidence-mobile",
+    "test": "T1 document upload → chip ready → grounded answer cites the file → artifact listed with source upload",
+    "question": "What is the title of the attached document? One sentence, cite the file name.",
+    "firstTokenMs": 4304,
+    "totalMs": 6420,
+    "answerChars": 120
+  },
+  {
+    "at": "2026-10-11T08:47:50.406Z",
+    "project": "evidence-mobile",
+    "test": "T2+T3 image upload → thumb in chip → answer → message-images grid → lightbox + side-pane preview",
+    "question": "What kind of chart is attached? One sentence.",
+    "firstTokenMs": 5344,
+    "totalMs": 7161,
+    "answerChars": 167
+  }
+]
