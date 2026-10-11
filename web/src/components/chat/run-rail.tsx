@@ -34,7 +34,8 @@ export function RunRail() {
       <details className="mt-3" data-testid="dev-disclosure">
         <summary className="cursor-pointer select-none text-[11px] font-medium text-muted hover:text-foreground">Developer: telemetry, raw SSE frame &amp; planner JSON</summary>
         <p className="mt-1 text-[11px] text-muted" data-testid="rail-metrics">
-          {st.metrics?.totalTokens != null ? `${st.metrics.totalTokens.toLocaleString()} tokens` : "tokens —"} · first event {st.firstStatusMs ?? "—"} ms · tools {st.toolsMs != null ? `${(st.toolsMs / 1000).toFixed(1)} s` : "—"} · first token {st.firstTokenMs?.toLocaleString() ?? "—"} ms · answer {st.answerMs != null ? `${(st.answerMs / 1000).toFixed(1)} s` : "—"}
+          {/* a8 — the verbose first-event / first-token / total values live here (the run footer shows only the compact tools-vs-answer bar). */}
+          {st.metrics?.totalTokens != null ? `${st.metrics.totalTokens.toLocaleString()} tokens` : "tokens —"} · first event {st.firstStatusMs != null && Number.isFinite(st.firstStatusMs) ? st.firstStatusMs.toLocaleString() : "—"} ms · first token {st.firstTokenMs != null && Number.isFinite(st.firstTokenMs) ? st.firstTokenMs.toLocaleString() : "—"} ms · tools {st.toolsMs != null && Number.isFinite(st.toolsMs) ? `${(st.toolsMs / 1000).toFixed(1)} s` : "—"} · answer {st.answerMs != null && Number.isFinite(st.answerMs) ? `${(st.answerMs / 1000).toFixed(1)} s` : "—"} · total {st.finishedAt != null && st.startedAt ? `${((st.finishedAt - st.startedAt) / 1000).toFixed(1)} s` : "—"}
           {st.integrity ? ` · ${st.integrity.frames} frames` : ""}
         </p>
         {st.integrity && (st.integrity.dupes > 0 || st.integrity.gaps > 0) && <p className="mt-1 text-[10px] text-muted" data-testid="rail-integrity">stream integrity: {st.integrity.dupes} duplicate frame{st.integrity.dupes === 1 ? "" : "s"} dropped · {st.integrity.gaps} gap{st.integrity.gaps === 1 ? "" : "s"}</p>}
