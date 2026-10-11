@@ -4,7 +4,7 @@
  * Payload shapes come from web/proof/team-a/sse-event-families.json (session 6aca0a89261cbe2340484665) and the submit-query v1 reference.
  * Exits non-zero on any failure.
  */
-import { parseFrame, classifyClientFrame } from "../../src/lib/ondemand/sse-adapter";
+import { parseFrame, classifyClientFrame, isPlannerPayloadFrame } from "../../src/lib/ondemand/sse-adapter";
 import { CLIENT_EVENT, MEDIA_EVENT, VOICE_PHASE, EVENT_TYPE, STATUS_TYPE, CLIENT_EVENT_VALUES_UNIQUE, classifyThinkingDelta, thinkingPhaseOf, pluginLabel, jsonDepth } from "../../src/lib/ondemand/eventMap";
 
 let pass = 0; const failures: string[] = [];
@@ -167,6 +167,48 @@ console.log("unit1: classifyThinkingDelta (prose vs planner payload) + pluginLab
   eq("single schema word in prose stays prose", c("planning_thinking", "Note the plugins schema mentions \"current\" array but the response schema shows \"plugins\".", " but the response schema shows \"plugins\"."), "prose");
   eq("bare 'api_request_parameters' mid-sentence → payload", c("step_thinking", "I need to fill api_request_parameters with the query", " with the query"), "payload");
   eq("title line stays prose", c("planning_thinking", "Title: \"Searching Fervo Energy's business\"", "Title: \"Searching Fervo Energy's business\""), "prose");
+}
+
+{
+  // a42 — regressions replayed from REAL recordings: web/proof/stream-audit/upstream-multistep.sse (session 6acb474320a8b245e6aaad9e, 2026-10-11 08:22Z)
+  // and the bridge-side CUSTOM frame names in web/proof/unit1/stream-after3.ndjson. Additive; frames are verbatim (long fields trimmed).
+  const R = { sessionId: "6acb474320a8b245e6aaad9e", messageId: "6acb474420a8b245e6aaada1", status: "processing" };
+  // 1. heartbeat frame has NO eventType, only {time} → heartbeat (never "unknown", never thinking)
+  const hb = parseFrame("heartbeat", J({ sessionId: R.sessionId, messageId: R.messageId, time: "2026-10-11T08:22:31Z" }));
+  eq("recording: event:heartbeat without eventType → heartbeat with time", hb, { kind: "heartbeat", time: "2026-10-11T08:22:31Z" });
+  // 2. same payload arriving on the default channel (event name omitted by a proxy) still classifies as heartbeat via the time field
+  eq("recording: heartbeat payload on '' channel → heartbeat", parseFrame("", J({ sessionId: R.sessionId, messageId: R.messageId, time: "2026-10-11T08:22:34Z" })).kind, "heartbeat");
+  // 3. plugin_sources with 4 items (eventIndex 174) → sources with pluginId/pluginName/stepTitle and imageUrl carried through
+  const srcFrame = { ...R, eventIndex: 174, eventType: "plugin_sources", stepId: "1", stepTitle: "Searching Fervo Energy news", sources: { agentId: "agent-1722260873", pluginId: "plugin-1722260873", pluginName: "Perplexity", operationId: "perplexity", items: [
+    { title: "2026 Climate Tech Companies to Watch: Fervo Energy and its plan to streamline geothermal power | MIT Technology Review", url: "https://www.technologyreview.com/2026/10/06/1145252/fervo-energy-geothermal-power-streamline-plan/", domain: "technologyreview.com", imageUrl: "https://wp.technologyreview.com/wp-content/uploads/2026/10/New-Fervo-Energy-Power-Plant-and-Drilling-Rig.jpg" },
+    { title: "What's behind Fervo's half-billion-dollar Series E | Latitude Media", url: "https://www.latitudemedia.com/news/whats-behind-fervos-half-billion-dollar-series-e/", domain: "latitudemedia.com" },
+    { title: "no url item is dropped", domain: "example.com" },
+    { title: "Fervo Energy | Crunchbase", url: "https://www.crunchbase.com/organization/fervo-energy" } ] } };
+  const src = parseFrame("message", J(srcFrame));
+  check("recording: plugin_sources (eventIndex 174) → sources, pluginId plugin-1722260873, stepTitle kept", src.kind === "sources" && src.pluginId === "plugin-1722260873" && src.pluginName === "Perplexity" && src.stepId === "1" && src.stepTitle === "Searching Fervo Energy news", src);
+  check("recording: sources items — url-less item dropped, domain → sourceName, imageUrl kept, hostname fallback strips www.", src.kind === "sources" && src.items.length === 3 && src.items[0].sourceName === "technologyreview.com" && src.items[0].imageUrl?.startsWith("https://wp.technologyreview.com/") && src.items[2].sourceName === "crunchbase.com", src.kind === "sources" ? src.items : src);
+  eq("recording: plugin_sources pluginId → pluginLabel Web search (Perplexity)", src.kind === "sources" ? pluginLabel(src.pluginId ?? "") : "", "Web search (Perplexity)");
+  // 4. fulfillment delta (eventIndex 459; note the spaced-out JSON keys exactly as upstream sent them) → answer delta verbatim
+  const ful = parseFrame("message", '{"sessionId": "6acb474320a8b245e6aaad9e", "messageId": "6acb474420a8b245e6aaada1", "answer": "# Fervo Energy vs. Flutterwave", "status": "processing", "eventIndex":459, "eventType": "fulfillment"}');
+  eq("recording: fulfillment (eventIndex 459) → answer delta verbatim", ful, { kind: "answer", delta: "# Fervo Energy vs. Flutterwave" });
+  // 5. metricsLog publicMetrics (eventIndex 683) → metrics with the six numeric fields intact
+  const met = parseFrame("message", J({ ...R, eventIndex: 683, eventType: "metricsLog", publicMetrics: { inputTokens: 10787, outputTokens: 2098, totalTokens: 12885, ragTimeSec: 35.53, fulfillmentTimeSec: 9.67, totalTimeSec: 45.2 } }));
+  check("recording: metricsLog (eventIndex 683) → metrics, totals preserved", met.kind === "metrics" && met.publicMetrics.totalTokens === 12885 && met.publicMetrics.inputTokens + met.publicMetrics.outputTokens === met.publicMetrics.totalTokens && met.publicMetrics.totalTimeSec === 45.2, met);
+  // 6. planning_output / step_output deltas (eventIndex 90 / 150) are planner payload: adapter channel plan/step_output, classifier → payload (this is what the bridge re-emits as CE.planner_payload)
+  const po = parseFrame("thinking", J({ ...R, eventIndex: 90, eventType: "planning_output", output: { delta: "{\n  \"title\": \"I'll pull this month" } }));
+  const so = parseFrame("thinking", J({ ...R, eventIndex: 150, eventType: "step_output", stepId: "1", output: { delta: "{\n  \"title\": \"Searching Fervo Energy" } }));
+  check("recording: planning_output (eventIndex 90) → thinking/plan, classified payload", po.kind === "thinking" && po.channel === "plan" && classifyThinkingDelta("planning_output", po.delta, po.delta) === "payload", po);
+  check("recording: step_output (eventIndex 150) → thinking/step_output with stepId 1, classified payload", so.kind === "thinking" && so.channel === "step_output" && so.stepId === "1" && classifyThinkingDelta("step_output", so.delta, so.delta) === "payload", so);
+  // 7. planning_thinking prose deltas (eventIndex 1-3) stay prose and concatenate to the sentence the user saw
+  const prose = ["The user wants a comparison of", " the latest news about Fervo Energy", " and Flutterwave this month (October"];
+  let acc = ""; let allProse = true;
+  prose.forEach((d, i) => { const u = parseFrame("thinking", J({ ...R, eventIndex: i + 1, eventType: "planning_thinking", thinking: { delta: d } })); if (u.kind !== "thinking" || u.channel !== "planning") allProse = false; acc += u.kind === "thinking" ? u.delta : ""; if (classifyThinkingDelta("planning_thinking", acc, d) !== "prose") allProse = false; });
+  check("recording: planning_thinking deltas 1-3 → thinking/planning, all prose, concatenate verbatim", allProse && acc === "The user wants a comparison of the latest news about Fervo Energy and Flutterwave this month (October", acc);
+  // 8. bridge CUSTOM frames seen in stream-after3.ndjson: planner_payload / heartbeat / step_output / sources / filler are all "known" client events; the planner_payload value shape is validated
+  const names = ["ondemand.planner_payload", "ondemand.heartbeat", "ondemand.step_output", "ondemand.sources", "ondemand.filler", "ondemand.metrics", "ondemand.plan", "ondemand.step", "ondemand.status", "ondemand.session", "ondemand.request", "ondemand.thinking"];
+  eq("recording: every CUSTOM name in stream-after3.ndjson classifies as known", names.map((n) => classifyClientFrame({ type: "CUSTOM", name: n })), names.map(() => "known"));
+  eq("recording: CE.plannerPayload value {phase:planning, stepId, delta} passes isPlannerPayloadFrame", [isPlannerPayloadFrame({ phase: "planning", stepId: "", delta: "{\n  \"title\": \"I'll pull this month" }), isPlannerPayloadFrame({ phase: "step", stepId: "1", delta: "{\"title\":\"Searching" }), isPlannerPayloadFrame({ phase: "fulfillment", delta: "x" }), isPlannerPayloadFrame({ phase: "planning" })], [true, true, false, false]);
+  eq("recording: RUN_STARTED / unknown CUSTOM name", [classifyClientFrame({ type: "RUN_STARTED" }), classifyClientFrame({ type: "CUSTOM", name: "ondemand.not_a_thing" })], ["known", "unknown"]);
 }
 console.log(`\n${pass} passed, ${failures.length} failed`);
 if (failures.length) { console.error("FAILED:", failures.join("; ")); process.exit(1); }
