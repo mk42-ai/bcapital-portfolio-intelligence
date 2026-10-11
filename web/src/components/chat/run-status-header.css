@@ -1,0 +1,47 @@
+/* a1 — RunStatusHeader: fixed 56px, brand green only (no blue), anchored at the top of the run panel. */
+.rsh {
+  box-sizing: border-box;
+  display: flex; align-items: center; gap: 10px;
+  height: 56px; min-height: 56px; max-height: 56px; /* fixed height → zero CLS when the state flips */
+  margin: 0; padding: 0 12px 0 14px;
+  border-left: 3px solid #0AC985;
+  border-radius: 0 10px 10px 0;
+  background: #f6fbf9;
+  color: #1F2937; font-size: 13px; line-height: 18px;
+  min-width: 0; overflow: hidden;
+}
+.rsh--done { background: #f8faf9; border-left-color: #0AC985; }
+.rsh--failed { background: #fff7f5; border-left-color: #c2410c; }
+.rsh__ind { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; flex: none; color: #047857; }
+.rsh--failed .rsh__ind { color: #c2410c; }
+.rsh__dots { display: inline-flex; gap: 3px; align-items: center; }
+.rsh__dots span { width: 6px; height: 6px; border-radius: 999px; background: #0AC985; opacity: 0.45; }
+.rsh--live .rsh__dots span { animation: rsh-pulse 900ms ease-in-out infinite; }
+.rsh--live .rsh__dots span:nth-child(2) { animation-delay: 150ms; }
+.rsh--live .rsh__dots span:nth-child(3) { animation-delay: 300ms; }
+@keyframes rsh-pulse { 0%, 100% { opacity: 0.35; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1.15); } }
+.rsh__main { display: flex; flex-direction: column; min-width: 0; flex: 1; gap: 1px; }
+.rsh__label { font-weight: 700; color: #1F2937; white-space: nowrap; }
+.rsh__progress { font-weight: 500; color: #6b7280; font-variant-numeric: tabular-nums; }
+.rsh__task { color: #6b7280; font-size: 12px; line-height: 16px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.rsh__chip {
+  display: inline-flex; align-items: center; gap: 5px; flex: none;
+  height: 24px; padding: 0 8px; border-radius: 999px;
+  border: 1px solid #c7eedd; background: #ffffff; color: #047857;
+  font: inherit; font-size: 11.5px; line-height: 1; font-weight: 600; cursor: pointer;
+}
+.rsh__chip:hover { background: #e6faf3; }
+.rsh__chip:focus-visible { outline: 2px solid #0AC985; outline-offset: 2px; }
+.rsh__chev { transition: transform 160ms ease; }
+.rsh__chev--open { transform: rotate(180deg); }
+.rsh__elapsed { flex: none; min-width: 56px; text-align: right; font-variant-numeric: tabular-nums; color: #6b7280; font-size: 12px; }
+@media (prefers-reduced-motion: reduce) {
+  .rsh--live .rsh__dots span { animation: none; opacity: 0.9; }
+  .rsh__chev { transition: none; }
+}
+@media (max-width: 640px) {
+  .rsh { padding: 0 8px 0 10px; gap: 8px; }
+  .rsh__chip span { display: none; } /* icon-only chip on phones; aria-label keeps the text */
+  .rsh__chip { padding: 0 6px; }
+}
+/* end a1 */
