@@ -185,7 +185,22 @@ const PAYLOAD_LINE_RE = /(^|\n)\s*(?:plugin\s*:\s*[\w-]+\s*,\s*pluginid\s*:|plug
 const SCHEMA_TOKEN_RE = /\b(pluginId|api_request_parameters|all_parameters_hydrated|operationId|user_query|plan_required|dependencies\b.*\bidentifier)\b/g;
 /** `api_request_parameters` / `all_parameters_hydrated` / "chars each" never occur in genuine reasoning — one hit is enough; `pluginId` alone needs a second token. */
 const STRONG_SCHEMA_TOKEN_RE = /api_request_parameters|all_parameters_hydrated|\bchars each\b/i;
-const schemaTokenCount = (line: string): number => (STRONG_SCHEMA_TOKEN_RE.test(line) ? 2 : 0) + (line.match(SCHEMA_TOKEN_RE) ?? []).length;
+/** a9 — planner reasoning ABOUT its own output format ("Place in current with empty dependencies.", "plugins array", "output schema",
+ *  'Title: 3-4 words starting with a verb ending in "ing"'). Each entry is ONE cue category (counted once per line, however often it repeats),
+ *  so a sentence that merely mentions "the response schema" stays prose; ≥2 distinct categories on a line → payload. */
+const FORMAT_CUE_RES: readonly RegExp[] = [
+  /\b(?:response|output|plugins?|json) schema\b|\bschema (?:only )?(?:allows|requires|shows|says)\b/i,
+  /\b["“]?plugins["”]? array\b/i,
+  /\bcurrent(?:\/remaining)? array\b|\bremaining array\b|\bcurrent\/remaining\b|\bin current\b/i,
+  /\b(?:empty |no )?dependencies\b/i,
+  /\bformat (?:requires|says|is|wants)\b|\bjson output\b|\boutput json\b/i,
+  /\b\d\s*-\s*\d words\b|\baction verb\b|\bverb ending\b|\bending in ["“]?ing\b|\bstarting with (?:an? )?verb\b/i,
+  /\bidentifier\s*[:=]?\s*rest_api\b|\bidentifier field\b/i,
+];
+/** One of these alone is enough: nobody reasons about a task in these words. */
+const STRONG_FORMAT_RE = /\bverb\b.{0,40}\bending in\b|\bending in ["“]?ing["”]?\b|\b\d\s*-\s*\d words\b.{0,40}\bverb\b|\bfollow(?:ing|s)? the (?:response|output|json) schema\b|\bplan_required\b\s*[:=]?\s*(?:true|false)\b|^\s*output (?:the )?json\.?\s*$|\bdependencies\s*[:=]\s*\[\s*\]/i;
+const formatCueCount = (line: string): number => (STRONG_FORMAT_RE.test(line) ? 2 : 0) + FORMAT_CUE_RES.reduce((n, re) => n + (re.test(line) ? 1 : 0), 0);
+const schemaTokenCount = (line: string): number => (STRONG_SCHEMA_TOKEN_RE.test(line) ? 2 : 0) + (line.match(SCHEMA_TOKEN_RE) ?? []).length + formatCueCount(line);
 const PAYLOAD_OPEN_RE = /^\s*(?:```(?:json)?\s*)?[\[{]/;
 /** Net brace/bracket depth of `text` ignoring characters inside JSON strings (so prose inside a payload never closes it early). */
 export function jsonDepth(text: string): number {

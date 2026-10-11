@@ -231,5 +231,29 @@ console.log("a7: parseFrame hardening");
   const hb3 = parseFrame("", J({ ...S, time: "2026-10-11T00:00:02Z" }));
   check("heartbeat: event name / eventType / bare time all → heartbeat", hb1.kind === "heartbeat" && hb2.kind === "heartbeat" && hb2.time === "2026-10-11T00:00:01Z" && hb3.kind === "heartbeat", [hb1, hb2, hb3]);
 }
+console.log("a9: planner format-reasoning lines (mined from proof/stream-audit/upstream-multistep.sse) → payload; task reasoning stays prose");
+{
+  const c = (kind: string, acc: string, delta?: string) => classifyThinkingDelta(kind, acc, delta);
+  const line = (kind: string, l: string) => c(kind, "Reasoning so far.\n" + l, l);
+  // positives — the planner talking about its own response format
+  eq("a9 'Title: … 3-4 words starting with a verb ending in \"ing\"' → payload", line("step_thinking", "Title: \"Searching Fervo news\" — 3-4 words starting with a verb ending in \"ing\"."), "payload");
+  eq("a9 'action verb ending in \"ing\", 3-4 words' → payload", line("step_thinking", "Let me build the title: \"Comparing momentum across fintechs\" - action verb ending in \"ing\", 3-4 words."), "payload");
+  eq("a9 'Place in current with empty dependencies.' → payload", line("step_thinking", "Place in current with empty dependencies."), "payload");
+  eq("a9 'I'll set up a perplexity call in current with empty dependencies.' → payload", line("step_thinking", "I'll set up a perplexity call in current with empty dependencies."), "payload");
+  eq("a9 'Follow the response schema.' → payload", line("planning_thinking", "Follow the response schema."), "payload");
+  eq("a9 'plan_required true' → payload", line("planning_thinking", "plan_required true, no clarification needed."), "payload");
+  eq("a9 'format requires a JSON output with plugins array' → payload", line("step_thinking", "Hmm, but the format requires a JSON output with plugins array."), "payload");
+  eq("a9 'placed in the current array with dependencies: []' → payload", line("step_thinking", "\"If you select any plugins, at least one MUST be placed in the current array with dependencies: [].\""), "payload");
+  eq("a9 'output schema is just a single \"plugins\" array (not current/remaining)' → payload", line("step_thinking", "So the output schema is just a single \"plugins\" array (not current/remaining)."), "payload");
+  eq("a9 bare 'Output JSON.' line → payload", line("planning_thinking", "Output JSON."), "payload");
+  eq("a9 streamed continuation of a format line → payload", c("step_thinking", "x\nPlace in current with empty dependencies.", "dencies."), "payload");
+  // negatives — genuine task reasoning that happens to use ordinary words
+  eq("a9 'Use the perplexity plugin with a query.' stays prose", line("step_thinking", "Use the perplexity plugin with a query."), "prose");
+  eq("a9 'Current date is 2026-10-11, so October 2026 is current month.' stays prose", line("step_thinking", "Current date is 2026-10-11, so October 2026 is current month."), "prose");
+  eq("a9 'rule 8 says no summarizing/analysis steps' stays prose", line("planning_thinking", "Then a synthesis step — but rule 8 says no summarizing/analysis steps... the user explicitly asks for a summary."), "prose");
+  eq("a9 single schema mention stays prose", line("step_thinking", "The rules: use llm_knowledge if none of the plugins are suitable for the questions asked."), "prose");
+  eq("a9 'Fervo's Cape Station has no dependencies on gas pricing' stays prose", line("fulfillment_thinking", "Fervo's Cape Station has no dependencies on gas pricing, which supports the momentum case."), "prose");
+  eq("a9 title with a company name stays prose", line("step_thinking", "Step 1: Gather recent Fervo Energy news (perplexity)"), "prose");
+}
 console.log(`\n${pass} passed, ${failures.length} failed`);
 if (failures.length) { console.error("FAILED:", failures.join("; ")); process.exit(1); }
