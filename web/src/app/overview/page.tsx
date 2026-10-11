@@ -15,6 +15,7 @@ import { PagedTable } from "@/components/overview/paged-table";
 import { HBar } from "@/components/charts/hbar";
 import { SignalBullet, SignalMini } from "@/components/charts/signal-bullet";
 import { EstimateBadge } from "@/components/overview/estimate-badge";
+import { NewsMiniFeed } from "@/components/overview/news-mini-feed";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -94,6 +95,7 @@ async function OverviewBody({ searchParams }: { searchParams: Promise<Record<str
           </CardContent></Card>
       </div>
 
+      <NewsMiniFeed items={news.data.slice(0, 8).map((n) => ({ title: n.title, url: n.url, source: n.source, published_at: n.published_at, company_name: n.company_name, company_slug: n.company_slug }))} total={news.total} />
       <div className="mt-5 grid min-w-0 gap-5 xl:grid-cols-2">
         <Card className="min-w-0"><CardHeader><CardTitle>KPI heatmap</CardTitle><CardDescription>Rows: focus companies + top movers (24). Columns scaled 0–100: sentiment, news volume, funding recency.</CardDescription></CardHeader><CardContent><HeatmapSSR rows={heatRows} /></CardContent></Card>
         <Card className="min-w-0"><CardHeader><CardTitle>Estimated ownership & ticket</CardTitle><CardDescription>Every value is a flagged estimate — hover/focus the badge for <code>estimate_confidence</code> + <code>estimate_rationale</code>.</CardDescription></CardHeader>
