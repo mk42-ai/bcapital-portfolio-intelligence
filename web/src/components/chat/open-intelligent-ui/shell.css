@@ -633,3 +633,11 @@
 /* Run footer timing badge: wraps instead of clipping on narrow viewports. */
 .oiu-badge { flex-wrap: wrap; row-gap: 2px; }
 /* end unit2 */
+
+/* a9 */
+/* One Chevron component (src/components/ui/chevron.tsx) across Thinking / Outputs / Sources / Summary heads: 16px, #6B7280, right-aligned, 150ms rotate. */
+.oiu-chevron { width: 16px; height: 16px; flex: none; margin-left: auto; color: #6B7280; transition: transform 150ms ease; transform: rotate(0deg); }
+.oiu-chevron[data-open="true"] { transform: rotate(180deg); }
+.oiu-chevron[data-open="false"] { transform: rotate(0deg); }
+@media (prefers-reduced-motion: reduce) { .oiu-chevron { transition: none; } }
+/* end a9 */

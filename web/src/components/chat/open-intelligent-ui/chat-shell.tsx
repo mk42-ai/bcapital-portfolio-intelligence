@@ -10,6 +10,7 @@ import remarkGfm from "remark-gfm";
 import { AgentInterface, fetchLLM, agUIAdapter, useThread, useThreadList, type AssistantMessageComponent, type ToolCallTimelineComponent } from "@openuidev/react-ui";
 import type { Message, UserMessage } from "@openuidev/react-headless";
 import { AlertTriangle, ArrowDown, Paperclip, Wrench, Bot, Brain, Check, CheckCircle2, ChevronDown, Circle, Cpu, ExternalLink, KeyRound, ListChecks, Loader2, MessageSquareMore, Mic, Plus, RotateCcw, Search, ShieldCheck, Sparkles, XCircle } from "lucide-react";
+import { Chevron } from "@/components/ui/chevron";
 import { responseTheme } from "./response-theme";
 import { localThreadStorage, saveMessages, sessionFor, rememberSession, rememberSources, sourcesFor, sourcesKey, rememberMeta, metaFor, type StoredSource, type StoredMeta } from "./local-storage";
 import { extractCitations, isCiteLabel, isOverflowLabel, publisherOf, hostOf, type Cite } from "./citations";
@@ -412,7 +413,7 @@ function StepSummaryCard({ s, live }: { s: StepSummary; live?: boolean }) {
         {s.state === "pending" ? <Loader2 className="size-3.5 oiu-spin" aria-hidden /> : <Sparkles className="size-3.5" aria-hidden />}
         <span>{s.state === "pending" ? LABEL.summarising(s.index) : `Step ${s.index} · summary`}</span>
         {s.doneAt && <time className="oiu-summary__time" dateTime={s.doneAt}>{new Date(s.doneAt).toISOString().slice(11, 19)} UTC</time>}
-        <ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden />
+        <Chevron open={open} />
       </button>
       <div className={`oiu-summary__panel${open ? " oiu-summary__panel--open" : ""}`}><div className="oiu-summary__inner">{s.state === "pending" ? <div className="oiu-shimmer" aria-hidden><span /><span /><span /></div> : <p>{s.text || "No summary text was emitted for this step."}</p>}</div></div>
     </section>
@@ -532,7 +533,7 @@ function OutputsCard({ outputs: raw, plannerPayload }: { outputs: StepOutput[]; 
   const head = outputs.length ? `Outputs · ${outputs.length} step${outputs.length === 1 ? "" : "s"} · ${calls} call${calls === 1 ? "" : "s"}` : "Outputs · planner payload";
   return (
     <section className="oiu-outputs" data-testid="outputs-card" data-count={outputs.length} data-has-payload={payload ? "true" : "false"}>
-      <button type="button" className="oiu-outputs__head" aria-expanded={open} onClick={() => setOpen((o) => !o)}><Wrench className="size-3.5" aria-hidden /><span>{head}</span><ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden /></button>
+      <button type="button" className="oiu-outputs__head" aria-expanded={open} onClick={() => setOpen((o) => !o)}><Wrench className="size-3.5" aria-hidden /><span>{head}</span><Chevron open={open} /></button>
       {open && outputs.length > 0 && <ol className="oiu-outputs__list">{outputs.map((o) => <li key={o.stepId} data-testid="output-step"><strong>{o.title}</strong>{o.plugins.map((pl, i) => <span key={i} className="oiu-outputs__call"><PluginFavicon id={pl.pluginId} size={14} /> <span title={pl.pluginId} data-plugin-id={pl.pluginId}>{friendlyPlugin(pl.name || pl.pluginId)}</span><code>{JSON.stringify(pl.params).slice(0, 160)}</code></span>)}</li>)}</ol>}
       {payload && <PlannerPayloadDetails payload={payload} />}
     </section>
@@ -565,7 +566,7 @@ function CollapsedSources({ sources, live }: { sources: Source[]; live: boolean 
     <section className={`oiu-srcs${open ? " oiu-srcs--open" : ""}`} data-testid="sources-list" data-count={sources.length} aria-label="Sources">
       <button type="button" className="oiu-srcs__head" aria-expanded={open} data-testid="sources-toggle" onClick={() => setOpen((o) => !o)}>
         <span className="oiu-srcs__favs" aria-hidden>{sources.slice(0, 5).map((s) => <img key={s.url} src={faviconFor(s.url)} alt="" width={14} height={14} loading="lazy" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.style.visibility = "hidden"; }} />)}</span>
-        <span>Sources ({sources.length})</span><ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden />
+        <span>Sources ({sources.length})</span><Chevron open={open} />
       </button>
       {open && <SourceList sources={sources} />}
     </section>
@@ -674,7 +675,7 @@ function ThinkingBlock({ text, kinds, plan, answerStarted, live, collapsed, elap
         <span className="oiu-think__title">{streaming ? "Thinking" : `Thought for ${secs} s`}</span>
         {phases.length > 0 && <span className="oiu-think__phases" data-testid="thinking-phases">{phases.map((p) => <span key={p} className="oiu-think__phase" data-phase={p}>{p}</span>)}</span>}
         {streaming && lastLine && <span className="oiu-think__tail" aria-hidden>{lastLine.slice(-72)}</span>}
-        <ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden />
+        <Chevron open={isOpen} />
       </button>
       {isOpen && <div className="oiu-think__body" ref={bodyRef}>{text ? <pre className="oiu-think__pre">{text}</pre> : <span className="oiu-shimmer" aria-hidden><span /><span /></span>}</div>}
     </section>
