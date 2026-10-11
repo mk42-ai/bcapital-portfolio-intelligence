@@ -56,3 +56,22 @@ All screenshot paths are relative to `test-results/<dir>/` shown in the Video co
 - RUN1 (retry) 08:33:57Z — both T1 failed in 17 s: the live deployment served **HTTP 400 text/html** for its own `/_next/static` chunks (`layout-04f80e7b…js`, `208-…js`, two css) → "Refused to execute script … MIME type text/html"; by 08:38Z the HTML referenced new chunk hashes (`layout-3f690e7a…js` → 200). Transient deployment flake, not a test bug — recorded, run repeated.
 - RUN2 08:40:27Z → 08:43:15Z — T1, T2+T3 green on both projects; T4 hard assertions green; test failed only on the soft thread-re-open step (test-side locator bug, fixed).
 - RUN3 08:45:55Z → 08:48:09Z — final: 9 passed, 3 skipped (desktop-only tests on mobile), 0 failed.
+
+## 2026-10-11 turn 4 — plan of record (unit 4b: upload-e2e + routes-clean; evidence config picks up all turn-4 specs)
+
+`playwright.evidence.config.ts` `testMatch` now matches `(evidence|upload-e2e|routes-clean|thinking-json-filter|thinking-pinned-working-row|title-ellipsis|context-sync|pdf-inline-render|chip-overlap).spec.ts` so the orchestrator's final run picks up every turn-4 spec (the last six are written by other units). Both projects (evidence-desktop 1440×900, evidence-mobile 390×844), video/trace/screenshot always on, `--workers=1`.
+
+### `e2e/upload-e2e.spec.ts` (two serial describes, `@1440x900` and `@390x844`, each test ≤ 240 s; log → `upload-e2e-log.ndjson`)
+- U1: `/artifacts?skip=1` → read the `.art-chip-n` counters of `artifact-filter-all|document|image|upload` (missing chip ⇒ n/a) → `/chat?skip=1` → paperclip (`attachment-input`) `docs/reference/submit-query-v1-sse-reference.pdf` (4.5 KB) then `tests/fixtures/bar-chart.png` → both chips `data-status=ready` → poll `/api/artifacts?limit=200` (≤ 60 s) for both names with `source: "upload"` (uploads persist at upload time via `/api/media` → saveArtifact) → one short turn "List the two attached files by name in one sentence." (`answer-block` ≤ 120 s, soft) so the files are tied to a thread.
+- U2: `/artifacts?skip=1` → both `artifact-item`s present, each `artifact-source` text `input`, PDF `artifact-card[data-icon=pdf]`, PNG `data-icon` `image|chart` (`iconFor` returns `chart` for image names matching /chart|graph|plot/ — bar-chart.png ⇒ `chart`) → counters ≥ baseline + {all 2, documents 1, images 1, uploads 2} (`>=` so concurrent artifacts from other suites cannot break it) → `artifact-download` on the PDF → download event (fallback: new tab / signed-url / `request.get`) → 200 `application/pdf`, bytes start with `%PDF`.
+
+### `e2e/routes-clean.spec.ts` (both projects; result → `routes-clean.json` `[{route, viewport, status, consoleErrors, pageErrors, settled, ms}]`)
+- `/overview /companies /news /chat /artifacts /settings` + `?skip=1` → `networkidle` (20 s cap, falls back to domcontentloaded) → main document HTTP 200 → 0 console errors, 0 `pageerror`s after the helpers.ts `captureErrors` allow-list (favicon / `net::ERR_ABORTED` / `ERR_BLOCKED_BY_ORB` / 404 resources) plus sourcemap / `_rsc=` aborted-fetch / ResizeObserver noise.
+
+### Unit-4b run against https://sb-4o6djxojbfi1.vercel.run (main @ 04dd11d)
+- RUN1 10:06:49Z → 10:08:45Z — **16 passed, 4 skipped (the other-viewport describe of upload-e2e in each project), 0 failed**; no second run needed.
+- upload-e2e counters: desktop before `{all 0, document 0, image 0, upload 0}` → after `{2, 1, 1, 2}` (Δ +2/+1/+1/+2); mobile before `{2, 1, 1, 2}` → after `{4, 2, 2, 4}` (Δ +2/+1/+1/+2). Cards: PDF `source=input icon=pdf kind=document`, PNG `source=input icon=chart kind=image`. Chip ready: PDF ≈ 2.0–2.3 s, PNG (740 KB) 13.6–17.0 s; artifacts persisted at upload time (76–111 ms after chips ready); first answer token 4.2–4.7 s; download via page download event → 200 application/pdf 4591 B `%PDF-`.
+- routes-clean: 12/12 rows `status=200 console=0 page=0`, all settled at networkidle (1.4–3.7 s).
+- Environment note: Playwright's bundled ffmpeg (`ms-playwright/ffmpeg-1013/ffmpeg-linux`) was missing again → symlinked `/usr/bin/ffmpeg` under both `$XDG_CACHE_HOME/ms-playwright` and `~/.cache/ms-playwright` before RUN1.
+- Committed artefacts: videos + screenshots + traces ≤ 10 MB for the upload-e2e/routes-clean test-results; the two U1 traces (40 MB / 46 MB) and the two /settings routes-clean traces (25 MB each) are NOT committed.
+- Orchestrator: fill in the results of the final combined run below.

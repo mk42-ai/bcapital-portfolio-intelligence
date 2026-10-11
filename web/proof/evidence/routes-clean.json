@@ -1,0 +1,122 @@
+[
+  {
+    "at": "2026-10-11T10:06:54.701Z",
+    "route": "/overview",
+    "viewport": "1440x900",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "settled": "networkidle",
+    "ms": 2254
+  },
+  {
+    "at": "2026-10-11T10:06:57.710Z",
+    "route": "/companies",
+    "viewport": "1440x900",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "settled": "networkidle",
+    "ms": 2342
+  },
+  {
+    "at": "2026-10-11T10:07:00.591Z",
+    "route": "/news",
+    "viewport": "1440x900",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "settled": "networkidle",
+    "ms": 2350
+  },
+  {
+    "at": "2026-10-11T10:07:02.910Z",
+    "route": "/chat",
+    "viewport": "1440x900",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "settled": "networkidle",
+    "ms": 1535
+  },
+  {
+    "at": "2026-10-11T10:07:05.448Z",
+    "route": "/artifacts",
+    "viewport": "1440x900",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "settled": "networkidle",
+    "ms": 1417
+  },
+  {
+    "at": "2026-10-11T10:07:08.866Z",
+    "route": "/settings",
+    "viewport": "1440x900",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "settled": "networkidle",
+    "ms": 3002
+  },
+  {
+    "at": "2026-10-11T10:07:49.425Z",
+    "route": "/overview",
+    "viewport": "390x844",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "settled": "networkidle",
+    "ms": 2014
+  },
+  {
+    "at": "2026-10-11T10:07:52.154Z",
+    "route": "/companies",
+    "viewport": "390x844",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "settled": "networkidle",
+    "ms": 1706
+  },
+  {
+    "at": "2026-10-11T10:07:55.490Z",
+    "route": "/news",
+    "viewport": "390x844",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "settled": "networkidle",
+    "ms": 2384
+  },
+  {
+    "at": "2026-10-11T10:07:58.433Z",
+    "route": "/chat",
+    "viewport": "390x844",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "settled": "networkidle",
+    "ms": 1979
+  },
+  {
+    "at": "2026-10-11T10:08:02.409Z",
+    "route": "/artifacts",
+    "viewport": "390x844",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "settled": "networkidle",
+    "ms": 1701
+  },
+  {
+    "at": "2026-10-11T10:08:07.272Z",
+    "route": "/settings",
+    "viewport": "390x844",
+    "status": 200,
+    "consoleErrors": [],
+    "pageErrors": [],
+    "settled": "networkidle",
+    "ms": 3742
+  }
+]
