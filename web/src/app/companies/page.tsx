@@ -1,3 +1,4 @@
+import "@/components/companies/companies-mobile.css";
 import type { Metadata } from "next";
 import { listCompanies, getSignals } from "@/lib/api";
 import { PageHeader } from "@/components/shell/page-header";
