@@ -1,0 +1,470 @@
+{
+  "target": "web",
+  "cwd": "web",
+  "generated_utc": "2026-10-11T12:06:12.164Z",
+  "prod": {
+    "ok": true,
+    "mode": "npm-audit",
+    "omitDev": true,
+    "exitCode": 1,
+    "counts": {
+      "info": 0,
+      "low": 5,
+      "moderate": 1,
+      "high": 1,
+      "critical": 0,
+      "total": 7
+    },
+    "vulnerabilities": [
+      {
+        "name": "@openuidev/react-ui",
+        "severity": "low",
+        "range": "*",
+        "fixAvailable": false,
+        "direct": true,
+        "via": [
+          "rehype-katex",
+          "remark-math"
+        ]
+      },
+      {
+        "name": "katex",
+        "severity": "low",
+        "range": "0.11.0 - 0.18.1",
+        "fixAvailable": false,
+        "direct": false,
+        "via": [
+          "KaTeX: Existing prototype pollution can bypass trust restrictions (https://github.com/advisories/GHSA-238p-pmpm-9mq7)"
+        ]
+      },
+      {
+        "name": "micromark-extension-math",
+        "severity": "low",
+        "range": "*",
+        "fixAvailable": false,
+        "direct": false,
+        "via": [
+          "katex"
+        ]
+      },
+      {
+        "name": "next",
+        "severity": "moderate",
+        "range": "9.3.4-canary.0 - 16.3.0-preview.10",
+        "fixAvailable": true,
+        "direct": true,
+        "via": [
+          "postcss"
+        ]
+      },
+      {
+        "name": "postcss",
+        "severity": "high",
+        "range": "<=8.5.22",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "PostCSS has XSS via Unescaped </style> in its CSS Stringify Output (https://github.com/advisories/GHSA-qx2v-qp2m-jg93)",
+          "PostCSS: Arbitrary file read and information disclosure via attacker-controlled sourceMappingURL in CSS comments (https://github.com/advisories/GHSA-6g55-p6wh-862q)",
+          "PostCSS: incomplete fix of GHSA-6g55-p6wh-862q — attacker-controlled sourceMappingURL reads arbitrary .map files when `from` is unset (https://github.com/advisories/GHSA-fxqj-rqcc-2cmp)",
+          "PostCSS: Path Traversal in Previous Source Map Auto-Loading (sourceMappingURL) leads to Arbitrary .map File Disclosure (https://github.com/advisories/GHSA-r28c-9q8g-f849)"
+        ]
+      },
+      {
+        "name": "rehype-katex",
+        "severity": "low",
+        "range": ">=2.0.0",
+        "fixAvailable": false,
+        "direct": false,
+        "via": [
+          "katex"
+        ]
+      },
+      {
+        "name": "remark-math",
+        "severity": "low",
+        "range": ">=4.0.0",
+        "fixAvailable": false,
+        "direct": false,
+        "via": [
+          "micromark-extension-math"
+        ]
+      }
+    ],
+    "totalDeps": 577
+  },
+  "full": {
+    "ok": true,
+    "mode": "npm-audit",
+    "omitDev": false,
+    "exitCode": 1,
+    "counts": {
+      "info": 0,
+      "low": 5,
+      "moderate": 20,
+      "high": 9,
+      "critical": 0,
+      "total": 34
+    },
+    "vulnerabilities": [
+      {
+        "name": "@opentelemetry/core",
+        "severity": "moderate",
+        "range": "<2.8.0",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "OpenTelemetry Core: Unbounded memory allocation in W3C Baggage propagation (https://github.com/advisories/GHSA-8988-4f7v-96qf)"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-amqplib",
+        "severity": "moderate",
+        "range": "<=0.46.1",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-connect",
+        "severity": "moderate",
+        "range": "<=0.43.1",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-express",
+        "severity": "moderate",
+        "range": "<=0.47.1",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-fs",
+        "severity": "moderate",
+        "range": "<=0.19.1",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-hapi",
+        "severity": "moderate",
+        "range": "0.24.0 - 0.45.2",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-http",
+        "severity": "moderate",
+        "range": "<=0.16.0 || 0.19.1-alpha.7 - 0.218.0",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-knex",
+        "severity": "moderate",
+        "range": "<0.65.0",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "Multiple @opentelemetry/instrumentation-* packages expose database username via unconditional db.user span attribute (https://github.com/advisories/GHSA-qqmp-wf37-98f9)"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-koa",
+        "severity": "moderate",
+        "range": "<=0.15.0 || 0.20.0 - 0.47.1",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-mongoose",
+        "severity": "moderate",
+        "range": "<=0.66.0",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core",
+          "Multiple @opentelemetry/instrumentation-* packages expose database username via unconditional db.user span attribute (https://github.com/advisories/GHSA-qqmp-wf37-98f9)"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-mysql",
+        "severity": "moderate",
+        "range": "<0.67.0",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "Multiple @opentelemetry/instrumentation-* packages expose database username via unconditional db.user span attribute (https://github.com/advisories/GHSA-qqmp-wf37-98f9)"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-mysql2",
+        "severity": "moderate",
+        "range": "<=0.66.0",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/sql-common",
+          "Multiple @opentelemetry/instrumentation-* packages expose database username via unconditional db.user span attribute (https://github.com/advisories/GHSA-qqmp-wf37-98f9)"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-pg",
+        "severity": "moderate",
+        "range": "<=0.72.0",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core",
+          "@opentelemetry/sql-common",
+          "Multiple @opentelemetry/instrumentation-* packages expose database username via unconditional db.user span attribute (https://github.com/advisories/GHSA-qqmp-wf37-98f9)"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-tedious",
+        "severity": "moderate",
+        "range": "<0.40.0",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "Multiple @opentelemetry/instrumentation-* packages expose database username via unconditional db.user span attribute (https://github.com/advisories/GHSA-qqmp-wf37-98f9)"
+        ]
+      },
+      {
+        "name": "@opentelemetry/instrumentation-undici",
+        "severity": "moderate",
+        "range": "<=0.10.1",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core"
+        ]
+      },
+      {
+        "name": "@opentelemetry/resources",
+        "severity": "moderate",
+        "range": "0.8.0 - 2.7.1",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core"
+        ]
+      },
+      {
+        "name": "@opentelemetry/sdk-trace-base",
+        "severity": "moderate",
+        "range": "<=2.7.1",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core",
+          "@opentelemetry/resources"
+        ]
+      },
+      {
+        "name": "@opentelemetry/sql-common",
+        "severity": "moderate",
+        "range": "<=0.40.1",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core"
+        ]
+      },
+      {
+        "name": "@openuidev/react-ui",
+        "severity": "low",
+        "range": "*",
+        "fixAvailable": false,
+        "direct": true,
+        "via": [
+          "rehype-katex",
+          "remark-math"
+        ]
+      },
+      {
+        "name": "@puppeteer/browsers",
+        "severity": "high",
+        "range": "*",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "extract-zip",
+          "proxy-agent"
+        ]
+      },
+      {
+        "name": "@sentry/node",
+        "severity": "moderate",
+        "range": "8.0.0-alpha.1 - 10.53.1",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@opentelemetry/core",
+          "@opentelemetry/instrumentation-amqplib",
+          "@opentelemetry/instrumentation-connect",
+          "@opentelemetry/instrumentation-express",
+          "@opentelemetry/instrumentation-fs"
+        ]
+      },
+      {
+        "name": "basic-ftp",
+        "severity": "high",
+        "range": "<=6.2.0",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "basic-ftp: Quadratic-time CPU denial of service in Client.list() Unix directory-listing parser (RE_LINE backtracking) (https://github.com/advisories/GHSA-c475-qrg2-pj4r)"
+        ]
+      },
+      {
+        "name": "extract-zip",
+        "severity": "high",
+        "range": "*",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "extract-zip unvalidated symlink path traversal (https://github.com/advisories/GHSA-jmr9-qjv8-65gv)",
+          "extract-zip allows arbitrary file writes through symlink archive entries (https://github.com/advisories/GHSA-7pqw-9j4j-h8q3)"
+        ]
+      },
+      {
+        "name": "get-uri",
+        "severity": "high",
+        "range": ">=5.0.0",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "basic-ftp"
+        ]
+      },
+      {
+        "name": "katex",
+        "severity": "low",
+        "range": "0.11.0 - 0.18.1",
+        "fixAvailable": false,
+        "direct": false,
+        "via": [
+          "KaTeX: Existing prototype pollution can bypass trust restrictions (https://github.com/advisories/GHSA-238p-pmpm-9mq7)"
+        ]
+      },
+      {
+        "name": "lighthouse",
+        "severity": "high",
+        "range": "10.1.1-dev.20230414 - 10.1.1-dev.20230503 || 10.2.0-dev.20230504 - 13.4.0",
+        "fixAvailable": true,
+        "direct": true,
+        "via": [
+          "@sentry/node",
+          "puppeteer-core"
+        ]
+      },
+      {
+        "name": "micromark-extension-math",
+        "severity": "low",
+        "range": "*",
+        "fixAvailable": false,
+        "direct": false,
+        "via": [
+          "katex"
+        ]
+      },
+      {
+        "name": "next",
+        "severity": "moderate",
+        "range": "9.3.4-canary.0 - 16.3.0-preview.10",
+        "fixAvailable": true,
+        "direct": true,
+        "via": [
+          "postcss"
+        ]
+      },
+      {
+        "name": "pac-proxy-agent",
+        "severity": "high",
+        "range": ">=6.0.0",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "get-uri"
+        ]
+      },
+      {
+        "name": "postcss",
+        "severity": "high",
+        "range": "<=8.5.22",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "PostCSS has XSS via Unescaped </style> in its CSS Stringify Output (https://github.com/advisories/GHSA-qx2v-qp2m-jg93)",
+          "PostCSS: Arbitrary file read and information disclosure via attacker-controlled sourceMappingURL in CSS comments (https://github.com/advisories/GHSA-6g55-p6wh-862q)",
+          "PostCSS: incomplete fix of GHSA-6g55-p6wh-862q — attacker-controlled sourceMappingURL reads arbitrary .map files when `from` is unset (https://github.com/advisories/GHSA-fxqj-rqcc-2cmp)",
+          "PostCSS: Path Traversal in Previous Source Map Auto-Loading (sourceMappingURL) leads to Arbitrary .map File Disclosure (https://github.com/advisories/GHSA-r28c-9q8g-f849)"
+        ]
+      },
+      {
+        "name": "proxy-agent",
+        "severity": "high",
+        "range": ">=6.0.0",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "pac-proxy-agent"
+        ]
+      },
+      {
+        "name": "puppeteer-core",
+        "severity": "high",
+        "range": "19.8.4 - 24.43.1",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@puppeteer/browsers"
+        ]
+      },
+      {
+        "name": "rehype-katex",
+        "severity": "low",
+        "range": ">=2.0.0",
+        "fixAvailable": false,
+        "direct": false,
+        "via": [
+          "katex"
+        ]
+      },
+      {
+        "name": "remark-math",
+        "severity": "low",
+        "range": ">=4.0.0",
+        "fixAvailable": false,
+        "direct": false,
+        "via": [
+          "micromark-extension-math"
+        ]
+      }
+    ],
+    "totalDeps": 577
+  },
+  "status": "npm audit ran online"
+}
