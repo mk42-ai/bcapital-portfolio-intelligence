@@ -15,8 +15,8 @@ export type CompanyListRow = {
   slug: string; name: string; logo_url: string | null; sector: string; region: string; score: number; newsCount: number;
   delta?: number | null; stage?: string | null; last_deal?: { round?: string | null; amount_usd?: number | null; date?: string | null } | null;
   signal: number | null; signal_confidence: number | null; signal_percentile: number | null;
-  /** a29 (optional, additive): sentiment delta vs prior run; ISO date of the last deal (null/undefined → sorted last). */
-  delta?: number | null; lastDeal?: string | null;
+  /** a29: ISO date of the last deal (null/undefined → sorted last). */
+  lastDeal?: string | null;
 };
 type SortKey = "name" | "signal" | "sector" | "delta" | "news" | "deal";
 type ViewMode = "grid" | "list";
@@ -165,7 +165,7 @@ export function CompaniesList({ rows, total }: { rows: CompanyListRow[]; total: 
                 style={{ position: "absolute", top: 0, left: 0, width: "100%", transform: `translateY(${it.start - virtualizer.options.scrollMargin}px)` }}
                 className="border-b border-border hover:bg-surface-2">
                 <div role="gridcell">
-                  <CompanyCard row={c} maxNews={maxNews} variant="list"
+                  <CompanyCard row={c} maxNews={maxNews} variant={view}
                     linkProps={{ "data-index": it.index, "data-testid": "company-row-link", tabIndex: focusIdx == null ? (it.index === 0 ? 0 : -1) : (focusIdx === it.index ? 0 : -1), onFocus: () => setFocusIdx(it.index) }} />
                 </div>
               </div>); })}
