@@ -16,6 +16,7 @@ import { RunRail } from "./run-rail";
 import { PitchbookDrawerSection } from "./pitchbook-rail";
 import { SignalMini } from "@/components/charts/signal-bullet";
 import { CompanyLogo } from "@/components/ui/company-logo";
+import { EmptyState } from "@/components/ui/empty-state";
 import { inspectorStore, useInspectorOpen } from "@/components/chat/open-intelligent-ui/composer-store";
 import type { PbSnapshot } from "@/lib/pitchbook-snapshot-types";
 import pbSnapshotJson from "@/data/pitchbook-snapshot.json";
@@ -69,6 +70,7 @@ export function InspectorDrawer({ companies }: { companies: InspectorCompany[] }
           <Section icon={Landmark} title="PitchBook" testId="inspector-pitchbook"><PitchbookDrawerSection companies={companies} entries={PB_ENTRIES} /></Section>
           <Section icon={Building2} title="Company context (1–5)" testId="inspector-context">
             <CompanyPicker compact options={companies} value={s.companies} onChange={(v) => set({ companies: v.slice(0, 5) })} max={5} />
+            {ctx.length === 0 && <EmptyState icon="no-selection" compact className="mt-2 border-dashed" title="No companies selected" body="Pick up to 5 to ground the run." />}
             <ul className="mt-2 space-y-1 text-xs text-muted">{ctx.map((c) => <li key={c.slug} className="flex items-center justify-between gap-2"><span className="inline-flex min-w-0 items-center gap-1.5 truncate"><CompanyLogo name={c.name} src={c.logo_url} size={16} />{c.name}</span><span className="inline-flex shrink-0 items-center gap-1.5 tabular-nums">{c.signal != null && <SignalMini score={c.signal} confidence={c.signal_confidence ?? 0} percentile={c.signal_percentile} name={c.name} />}{c.news} news</span></li>)}</ul>
           </Section>
           <Section icon={Puzzle} title="Model & plugins" testId="inspector-plugins">

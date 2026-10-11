@@ -41,7 +41,7 @@ export function NewsFeed({ items, companies }: { items: Item[]; companies: Co[] 
           <div className="flex items-end lg:col-span-4"><p className="text-xs text-muted" role="status" aria-live="polite">{filtered.length} of {items.length} items{(company || sector || src !== "all" || sent || q) && <> · <button className="underline" onClick={reset}>clear filters</button></>}</p></div>
         </section>
         {groups.length === 0 ? (
-          <EmptyState kind="news" title="No news matches these filters" body="Try a broader filter, or wait for the next 06:00 UTC workflow run to add fresh Perplexity results." action={<Button variant="outline" onClick={reset}>Clear filters</Button>} />
+          <EmptyState icon="no-news" title="No news for these filters" body="The 06:00 UTC workflow adds fresh Perplexity results daily." action={<Button variant="outline" onClick={reset}>Clear filters</Button>} />
         ) : groups.map(([day, list]) => (
           <section key={day} aria-labelledby={`day-${day}`} className="mb-6">
             <h2 id={`day-${day}`} className="sticky top-14 z-10 mb-3 flex items-center gap-2 bg-background/95 py-1 font-display text-lg font-semibold backdrop-blur lg:top-0"><time dateTime={day !== "Undated" ? day : undefined}>{day}</time><Badge tone="muted">{list.length}</Badge></h2>
