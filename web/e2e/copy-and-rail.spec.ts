@@ -68,7 +68,7 @@ test.describe("a49 copy + rail", () => {
   test("overview/news ledes are short; brand line still present on onboarding", async ({ page }) => {
     await primeSettings(page);
     await page.goto("/overview");
-    await expect(page.getByRole("heading", { level: 1, name: "Overview" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Overview", exact: true })).toBeVisible();
     const lede = page.locator("h1 + p").first();
     await expect(lede).toBeVisible();
     const words = ((await lede.textContent()) ?? "").trim().split(/\s+/).length;

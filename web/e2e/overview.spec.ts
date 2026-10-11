@@ -3,7 +3,7 @@ import { test, expect } from "./helpers";
 test.describe("Portfolio Overview", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/overview");
-    await expect(page.getByRole("heading", { level: 1, name: "Portfolio Overview" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Overview", exact: true })).toBeVisible();
   });
 
   test("live badge, treemap tiles and paginated table render", async ({ page }) => {

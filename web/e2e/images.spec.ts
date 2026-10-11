@@ -23,7 +23,7 @@ async function naturalWidths(page: Page, selector: string): Promise<number[]> {
 test.describe("Images render (naturalWidth > 0)", () => {
   test("overview: B Capital logo and (when present) company logos", async ({ page }, testInfo) => {
     await page.goto("/overview?skip=1");
-    await expect(page.getByRole("heading", { level: 1, name: "Portfolio Overview" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Overview", exact: true })).toBeVisible();
     const brand = page.locator('img[data-testid="brand-logo"]').first();
     await expect(brand).toBeAttached();
     await expect.poll(() => naturalWidths(page, 'img[data-testid="brand-logo"]'), { timeout: 20_000 }).toEqual(expect.arrayContaining([expect.any(Number)]));
@@ -135,7 +135,7 @@ test.describe("Image pipeline (proxy + fallback chain)", () => {
 
   test("Companies logos decode on /overview table", async ({ page }, testInfo) => {
     await page.goto("/overview?skip=1");
-    await expect(page.getByRole("heading", { level: 1, name: "Portfolio Overview" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Overview", exact: true })).toBeVisible();
     const table = page.locator('[data-testid="company-table"]');
     await expect(table).toBeVisible({ timeout: 30_000 });
     await table.scrollIntoViewIfNeeded();
