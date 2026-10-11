@@ -1,0 +1,947 @@
+{
+  "bundle": "ondemand-artifact-asset-bundle",
+  "generated_at_utc": "2026-10-11T08:22:20Z",
+  "brand": {
+    "charcoal": "#1F2937",
+    "green": "#0AC985",
+    "red": "#EF4444"
+  },
+  "icon_spec": {
+    "grid": "24px glyph on 512px canvas",
+    "corner_radius": "4px (24px grid) / ~85px (512px canvas)",
+    "stroke": "2px on 24px grid, round caps/joins, charcoal #1F2937; single green #0AC985 accent per glyph",
+    "states": [
+      "idle",
+      "in-progress",
+      "success",
+      "failed"
+    ]
+  },
+  "count": 21,
+  "assets": [
+    {
+      "name": "document",
+      "file": "icons/file-types/document.png",
+      "role": "file-type icon",
+      "accent_element": "fold corner (centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1F2A3B",
+            "share": 0.2855
+          },
+          {
+            "hex": "#1D293A",
+            "share": 0.2048
+          },
+          {
+            "hex": "#6CCDAF",
+            "share": 0.1546
+          },
+          {
+            "hex": "#1C2839",
+            "share": 0.1338
+          },
+          {
+            "hex": "#172334",
+            "share": 0.1282
+          },
+          {
+            "hex": "#59616E",
+            "share": 0.0931
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 662780,
+      "sha256": "384288e44db84f02a79f4c8bc1c124dc75391d763c475833b09bad89deac93f2",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/KhfzYBMwhU.png?se=2026-10-17T23%3A21%3A08Z&sig=68TcgXhwtHa92hJGqCD2sPI8%2BkzXjMd11UJjMRFDX%2BM%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T03%3A28%3A05Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "pdf",
+      "file": "icons/file-types/pdf.png",
+      "role": "file-type icon",
+      "accent_element": "fold corner / PDF tag (top-left of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1A2334",
+            "share": 0.3497
+          },
+          {
+            "hex": "#182233",
+            "share": 0.1855
+          },
+          {
+            "hex": "#CCCFD3",
+            "share": 0.1619
+          },
+          {
+            "hex": "#12C781",
+            "share": 0.1321
+          },
+          {
+            "hex": "#141E2F",
+            "share": 0.1111
+          },
+          {
+            "hex": "#303E4B",
+            "share": 0.0598
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 605916,
+      "sha256": "df574e80b36fbbbcde37863d597b534a1d4c4823162925b37657648489ab1a03",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/EcxntJE15W.png?se=2026-10-17T23%3A21%3A08Z&sig=nZWrkvrkbm6Qj0JJXfSMVj9BzlSmFztbTAUDbfdLzjE%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T03%3A28%3A04Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "image",
+      "file": "icons/file-types/image.png",
+      "role": "file-type icon",
+      "accent_element": "sun/landscape glyph (middle-right of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#162134",
+            "share": 0.3923
+          },
+          {
+            "hex": "#628D87",
+            "share": 0.1689
+          },
+          {
+            "hex": "#101B2E",
+            "share": 0.1586
+          },
+          {
+            "hex": "#152034",
+            "share": 0.1059
+          },
+          {
+            "hex": "#84D8B8",
+            "share": 0.0941
+          },
+          {
+            "hex": "#222C3F",
+            "share": 0.0802
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 628285,
+      "sha256": "860e7a21cd674faba21b4479753b50275740232eb57e211b327f832d95f71087",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/CWDxH9BM9m.png?se=2026-10-17T23%3A21%3A08Z&sig=i0Ika1KIYE44SUdkM5fFyMoCkFgW8VtcTUeJB9sxGJs%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T03%3A28%3A04Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "video",
+      "file": "icons/file-types/video.png",
+      "role": "file-type icon",
+      "accent_element": "play triangle (centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#08C68B",
+            "share": 0.3482
+          },
+          {
+            "hex": "#1F2B3A",
+            "share": 0.2965
+          },
+          {
+            "hex": "#1D2A39",
+            "share": 0.1354
+          },
+          {
+            "hex": "#487874",
+            "share": 0.099
+          },
+          {
+            "hex": "#182534",
+            "share": 0.0943
+          },
+          {
+            "hex": "#1BC992",
+            "share": 0.0266
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 612369,
+      "sha256": "13d504bd503791fa7ee0b21f1742f89011aefcdc9052581a9eeb68ad45ffd458",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/VHiQEdFqzK.png?se=2026-10-17T23%3A21%3A08Z&sig=VCQZZx8EOecmevB6qIQYC6w%2BzsqKqgqGcVCoFDp2bxk%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T03%3A28%3A04Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "audio",
+      "file": "icons/file-types/audio.png",
+      "role": "file-type icon",
+      "accent_element": "waveform bars (centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1E2735",
+            "share": 0.2746
+          },
+          {
+            "hex": "#1F2836",
+            "share": 0.2603
+          },
+          {
+            "hex": "#42917C",
+            "share": 0.1704
+          },
+          {
+            "hex": "#6ECEAE",
+            "share": 0.1275
+          },
+          {
+            "hex": "#192231",
+            "share": 0.0844
+          },
+          {
+            "hex": "#222C3A",
+            "share": 0.0827
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 624551,
+      "sha256": "b8d67ddfe2dea7815d40f807e069a04d9a102ff4574f99a9c2546444d05d8418",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/z6GfDiY8rx.png?se=2026-10-17T23%3A21%3A08Z&sig=hQz9mx59XnkZWGAs3ZTrDecFr3WkIoq37w9qIHbY2Bg%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T02%3A36%3A09Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "spreadsheet",
+      "file": "icons/file-types/spreadsheet.png",
+      "role": "file-type icon",
+      "accent_element": "grid cells (centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1B2536",
+            "share": 0.3132
+          },
+          {
+            "hex": "#1A2435",
+            "share": 0.2113
+          },
+          {
+            "hex": "#172132",
+            "share": 0.1348
+          },
+          {
+            "hex": "#A6DCCB",
+            "share": 0.1341
+          },
+          {
+            "hex": "#202B3B",
+            "share": 0.1135
+          },
+          {
+            "hex": "#578A82",
+            "share": 0.0932
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 650155,
+      "sha256": "4dbbf4efbddc3a1c00bb9e5ca179969c3be31905953d161bd98a06da95e1dab3",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/UVTLYeLAX4.png?se=2026-10-17T23%3A21%3A08Z&sig=Tz9x1t9ZeOw2wxGJVrYt3tZfUYm3B2dnx20djEQL2xQ%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T02%3A36%3A08Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "presentation",
+      "file": "icons/file-types/presentation.png",
+      "role": "file-type icon",
+      "accent_element": "slide chart glyph (centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1D2838",
+            "share": 0.3574
+          },
+          {
+            "hex": "#1D2737",
+            "share": 0.2066
+          },
+          {
+            "hex": "#7DB7A8",
+            "share": 0.1827
+          },
+          {
+            "hex": "#212C3C",
+            "share": 0.1093
+          },
+          {
+            "hex": "#192333",
+            "share": 0.0992
+          },
+          {
+            "hex": "#1C2838",
+            "share": 0.0448
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 644878,
+      "sha256": "b679f2cbc1d99ecbb82b0361ba4d97349db8a474f8788fd3cdac5ff195058047",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/clLJtzsh5B.png?se=2026-10-17T23%3A21%3A08Z&sig=PGZccnOMwG9vyJr%2B%2B%2FxBtPmkfCS5mOXpiNKGRlkKLrU%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T03%3A28%3A05Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "chart",
+      "file": "icons/file-types/chart.png",
+      "role": "file-type icon",
+      "accent_element": "bar glyph (centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1D2837",
+            "share": 0.2725
+          },
+          {
+            "hex": "#56D1A9",
+            "share": 0.2261
+          },
+          {
+            "hex": "#1C2736",
+            "share": 0.2122
+          },
+          {
+            "hex": "#172232",
+            "share": 0.1164
+          },
+          {
+            "hex": "#202C3A",
+            "share": 0.1126
+          },
+          {
+            "hex": "#698887",
+            "share": 0.0603
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 635947,
+      "sha256": "391d5edfb342bee7065f2268c99d6cdbb2360bb83a1fb5655dc1bed0b0bdb80c",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/LfUeIZOSst.png?se=2026-10-17T23%3A21%3A08Z&sig=tL4TLmM5PlWd%2Fjvk%2BnGpc2zHqWJChD0KxMnoeQFXbU4%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T03%3A28%3A04Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "code-web",
+      "file": "icons/file-types/code-web.png",
+      "role": "file-type icon",
+      "accent_element": "angle brackets (centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1A2535",
+            "share": 0.2406
+          },
+          {
+            "hex": "#1C2737",
+            "share": 0.2239
+          },
+          {
+            "hex": "#75CCAD",
+            "share": 0.1918
+          },
+          {
+            "hex": "#1B2637",
+            "share": 0.1482
+          },
+          {
+            "hex": "#141F30",
+            "share": 0.1122
+          },
+          {
+            "hex": "#616975",
+            "share": 0.0832
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 629359,
+      "sha256": "7d39a8e4496f156219aa82c8f31faff02b8ebbf22929412c42dca50db4ebacc1",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/SbOt4T7cW3.png?se=2026-10-17T23%3A21%3A08Z&sig=E2DxTDMGNA6lVlTrWn%2BIaI5EHzEc84z1YcY1ZKPY6c0%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T02%3A36%3A09Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "json",
+      "file": "icons/file-types/json.png",
+      "role": "file-type icon",
+      "accent_element": "curly braces (centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1C2738",
+            "share": 0.287
+          },
+          {
+            "hex": "#1D2839",
+            "share": 0.2463
+          },
+          {
+            "hex": "#65D7B1",
+            "share": 0.2168
+          },
+          {
+            "hex": "#202B3D",
+            "share": 0.1117
+          },
+          {
+            "hex": "#172233",
+            "share": 0.0976
+          },
+          {
+            "hex": "#56807D",
+            "share": 0.0406
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 634319,
+      "sha256": "1c137345c0bb2f91c71b6206c407616a4d9dcf38d3b46f01888d0e4ad6689095",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/6e5hHhkLPn.png?se=2026-10-17T23%3A21%3A08Z&sig=r4H6Gq5xeSRndcdaQvbGTV2ZUlrPAneLSDm2VD%2B4pJM%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T03%3A28%3A04Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "archive",
+      "file": "icons/file-types/archive.png",
+      "role": "file-type icon",
+      "accent_element": "zip strip (centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1E2938",
+            "share": 0.2316
+          },
+          {
+            "hex": "#6AD3B0",
+            "share": 0.2194
+          },
+          {
+            "hex": "#1D2837",
+            "share": 0.1916
+          },
+          {
+            "hex": "#202B3A",
+            "share": 0.1792
+          },
+          {
+            "hex": "#182332",
+            "share": 0.1306
+          },
+          {
+            "hex": "#6B8083",
+            "share": 0.0476
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 617344,
+      "sha256": "36ee8b9ba72c22c72ee08d92e4c163a2d3858aca5574707bf3cb12f29d49c5c1",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/VyDfJZ2DjF.png?se=2026-10-17T23%3A21%3A08Z&sig=vURhC4aPxzee9Dscb3n1Yyd3gQx4a8xlBlT9oB5cTrQ%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T02%3A36%3A10Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "link",
+      "file": "icons/file-types/link.png",
+      "role": "file-type icon",
+      "accent_element": "chain link (centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#202A38",
+            "share": 0.3875
+          },
+          {
+            "hex": "#0CBF81",
+            "share": 0.3193
+          },
+          {
+            "hex": "#51CEA3",
+            "share": 0.1165
+          },
+          {
+            "hex": "#08C080",
+            "share": 0.083
+          },
+          {
+            "hex": "#1D2735",
+            "share": 0.0655
+          },
+          {
+            "hex": "#2D3744",
+            "share": 0.0281
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 623114,
+      "sha256": "119b0e4a27f3648327cc68b05e7254ff8060e4ed59a9b522518ba0cf8eb96cab",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/sYt5UAa4KF.png?se=2026-10-17T23%3A21%3A08Z&sig=p%2FUxHygjSof2NYvukfin4sY9zPCSsqjd37tT3NzI6Cs%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T03%3A28%3A04Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "generic",
+      "file": "icons/file-types/generic.png",
+      "role": "file-type icon",
+      "accent_element": "fold corner (top-centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#232D3C",
+            "share": 0.2782
+          },
+          {
+            "hex": "#212B3A",
+            "share": 0.2204
+          },
+          {
+            "hex": "#A9C0BC",
+            "share": 0.1477
+          },
+          {
+            "hex": "#1C2635",
+            "share": 0.1315
+          },
+          {
+            "hex": "#2E3846",
+            "share": 0.1128
+          },
+          {
+            "hex": "#222C3C",
+            "share": 0.1094
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 644204,
+      "sha256": "cf050f5beef6a902d70f7628c0883a15720c287aae6d22727fa460414e5af490",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/LqNqA1imSU.png?se=2026-10-17T23%3A21%3A08Z&sig=Jj%2Fau3Mt9WCHTQ6ylrSnDnXxfe%2BrehdK2rH6e3C8su4%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T02%3A36%3A09Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "idle",
+      "file": "icons/upload-states/idle.png",
+      "role": "upload-state icon",
+      "accent_element": "upload arrow (bottom-centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#08C384",
+            "share": 0.2708
+          },
+          {
+            "hex": "#1E2837",
+            "share": 0.2327
+          },
+          {
+            "hex": "#202A38",
+            "share": 0.2111
+          },
+          {
+            "hex": "#B9E5D7",
+            "share": 0.1336
+          },
+          {
+            "hex": "#1A2433",
+            "share": 0.1245
+          },
+          {
+            "hex": "#329177",
+            "share": 0.0274
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 615484,
+      "sha256": "50f0601c24afbc12b8d33dcc9fed8735f024b801bbb9fa389250e8766f7bd1ed",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/yLz91YmuLU.png?se=2026-10-17T23%3A21%3A08Z&sig=g9GTBR4GfpBFRbnp9CkIIDeY0oMlAGdXNo0o92eD7Io%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T03%3A28%3A04Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "in-progress",
+      "file": "icons/upload-states/in-progress.png",
+      "role": "upload-state icon",
+      "accent_element": "progress ring (middle-right of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#222D3B",
+            "share": 0.3177
+          },
+          {
+            "hex": "#212C3A",
+            "share": 0.168
+          },
+          {
+            "hex": "#78D6B5",
+            "share": 0.1526
+          },
+          {
+            "hex": "#1B2635",
+            "share": 0.15
+          },
+          {
+            "hex": "#7F8E92",
+            "share": 0.1092
+          },
+          {
+            "hex": "#283341",
+            "share": 0.1026
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 616884,
+      "sha256": "d98a5afa16f1e57a30496beab9ee395fc8bb2cdd64da4a03e1d1294866ee908d",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/3JTyKMKYHT.png?se=2026-10-17T23%3A21%3A08Z&sig=KjTgdADuSyImu8SZrMdTIhneQgYNeTIel3%2FL64GO6ko%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T02%3A36%3A10Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "success",
+      "file": "icons/upload-states/success.png",
+      "role": "upload-state icon",
+      "accent_element": "check mark (bottom-right of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1F2838",
+            "share": 0.3289
+          },
+          {
+            "hex": "#06C387",
+            "share": 0.2558
+          },
+          {
+            "hex": "#1E2738",
+            "share": 0.1621
+          },
+          {
+            "hex": "#1B2334",
+            "share": 0.1071
+          },
+          {
+            "hex": "#41CAA0",
+            "share": 0.0854
+          },
+          {
+            "hex": "#394F58",
+            "share": 0.0606
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 613390,
+      "sha256": "1c3e1a117609af09c4e20385183e3cd2d173beda24a65a1901ce4766c40b297c",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/h62tZPqN5j.png?se=2026-10-17T23%3A21%3A08Z&sig=44%2Fw95BEh9hbrqAjPo5WzVwsdGVuGiirKvBfZYG5wSA%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T02%3A36%3A09Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "failed",
+      "file": "icons/upload-states/failed.png",
+      "role": "upload-state icon",
+      "accent_element": "red cross (no green)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#1C2738",
+            "share": 0.3311
+          },
+          {
+            "hex": "#D83A42",
+            "share": 0.2519
+          },
+          {
+            "hex": "#182333",
+            "share": 0.1556
+          },
+          {
+            "hex": "#DDD3D6",
+            "share": 0.1338
+          },
+          {
+            "hex": "#96747D",
+            "share": 0.0872
+          },
+          {
+            "hex": "#292939",
+            "share": 0.0405
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 636010,
+      "sha256": "3ea8fc0e7c66978d8408630dda22c2b3ff8b36dbadce72d482969fb3f0cc058c",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/rqPjXtIIuV.png?se=2026-10-17T23%3A21%3A08Z&sig=H62sy%2BhALcbzetLymdOBISoxCbTboE8uvPcigjHpxlM%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T03%3A28%3A05Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "bar-chart-refined",
+      "file": "charts/bar-chart-refined.png",
+      "role": "chart",
+      "accent_element": "green bars (centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#02BD85",
+            "share": 0.399
+          },
+          {
+            "hex": "#1E2735",
+            "share": 0.2826
+          },
+          {
+            "hex": "#1D2735",
+            "share": 0.2055
+          },
+          {
+            "hex": "#3AC89F",
+            "share": 0.0623
+          },
+          {
+            "hex": "#1C2533",
+            "share": 0.0407
+          },
+          {
+            "hex": "#1C544F",
+            "share": 0.0099
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1024,
+      "height": 1024,
+      "bytes": 757990,
+      "sha256": "f258943edc695ec9494a350973ca6bfd6b8aec4635a689038a6afa2c392f12d6",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/OemFlwwbiw.png?se=2026-10-17T23%3A21%3A08Z&sig=QO1hwn5zhZJWwGVB6G2DsSP6LQlGimVfMNTXcYiWbRo%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T03%3A28%3A35Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "bar-chart-original",
+      "file": "charts/bar-chart-original.png",
+      "role": "chart",
+      "accent_element": "chart bars (centre of canvas)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#06BD81",
+            "share": 0.3966
+          },
+          {
+            "hex": "#1E2938",
+            "share": 0.3402
+          },
+          {
+            "hex": "#1D2838",
+            "share": 0.1519
+          },
+          {
+            "hex": "#35C698",
+            "share": 0.0902
+          },
+          {
+            "hex": "#1B2535",
+            "share": 0.0207
+          },
+          {
+            "hex": "#1E9D79",
+            "share": 0.0004
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1052416,
+      "sha256": "71bc83aa837d329828c1cd0446e968d66677b2e140ce3083f29651e5ae6dc2e3",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/UozuZpFfE3.png?se=2026-10-17T23%3A21%3A08Z&sig=bd7KuB5SPsQ1kkmdNt54bpWMeOvwTQtueZP2eLJyQHg%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T02%3A36%3A36Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "geothermal-a",
+      "file": "illustrations/geothermal-a.png",
+      "role": "illustration",
+      "accent_element": "n/a (illustration)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#B37346",
+            "share": 0.2195
+          },
+          {
+            "hex": "#7D5033",
+            "share": 0.1996
+          },
+          {
+            "hex": "#533B30",
+            "share": 0.1915
+          },
+          {
+            "hex": "#EFCF9F",
+            "share": 0.1463
+          },
+          {
+            "hex": "#9A5A2D",
+            "share": 0.1417
+          },
+          {
+            "hex": "#CEA17F",
+            "share": 0.1013
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1254,
+      "height": 1254,
+      "bytes": 3581650,
+      "sha256": "7bdb14e5323a8f2ba17a99ff081bc423fd13f5640827d9ecbed7cbb0bc9a7344",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/mX9BepYCIF.png?se=2026-10-17T23%3A21%3A08Z&sig=ls5jorLu3oqY4waFhC9u6RTozykGxVrBbYQmJbRh%2Fa4%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T02%3A37%3A17Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    },
+    {
+      "name": "geothermal-b",
+      "file": "illustrations/geothermal-b.png",
+      "role": "illustration",
+      "accent_element": "n/a (illustration)",
+      "colours": {
+        "charcoal": "#1F2937",
+        "green": "#0AC985",
+        "red": "#EF4444",
+        "measured_non_white": [
+          {
+            "hex": "#B17545",
+            "share": 0.2201
+          },
+          {
+            "hex": "#513F35",
+            "share": 0.2046
+          },
+          {
+            "hex": "#925F36",
+            "share": 0.1828
+          },
+          {
+            "hex": "#7F5029",
+            "share": 0.1461
+          },
+          {
+            "hex": "#EECEA0",
+            "share": 0.1298
+          },
+          {
+            "hex": "#C59F84",
+            "share": 0.1167
+          }
+        ],
+        "non_white_share_note": "shares are fractions of NON-white pixels (white/transparent excluded before 6-colour quantisation)"
+      },
+      "width": 1254,
+      "height": 1254,
+      "bytes": 3583090,
+      "sha256": "2b629fcb02cc9b08faab5c9954d237652fed2999e9a549af2df436ab7b6fdc0a",
+      "source_url": "https://airevdev.blob.core.windows.net/on-demand-dev/6692b763e851d28a036ab30e/agents/XAEyMk3IDk.png?se=2026-10-17T23%3A21%3A08Z&sig=f3xsUvGKlR0k5AR4F7LiNWSzaOagyrGm%2Bp56gi8Fz8w%3D&ske=2026-10-17T23%3A21%3A08Z&skoid=f6fe3b05-8f6e-4558-96bd-b7f53ddd5066&sks=b&skt=2026-10-10T23%3A21%3A08Z&sktid=03628b8d-e6ad-4dd7-bca0-020e6a6cfdda&skv=2025-05-05&sp=r&sr=b&st=2026-10-11T02%3A37%3A17Z&sv=2025-05-05",
+      "downloaded_at_utc": "2026-10-11T08:22:20Z"
+    }
+  ]
+}
