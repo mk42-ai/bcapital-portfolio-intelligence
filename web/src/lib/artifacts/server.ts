@@ -1,5 +1,5 @@
 import "server-only";
-import { fromWire, kindFromMime, unsignedUrl, type Artifact, type ArtifactKind, type ArtifactMediaStatus, type ArtifactSource, type ArtifactWire, type SignedUrlResult, type SignedUrlWire, signedFromWire } from "./types";
+import { fromWire, kindFromMime, unsignedUrl, versionsFromWire, type Artifact, type ArtifactKind, type ArtifactMediaStatus, type ArtifactSource, type ArtifactVersions, type ArtifactVersionsWire, type ArtifactWire, type SignedUrlResult, type SignedUrlWire, signedFromWire } from "./types";
 
 /** Backend base + secret (server-only; the secret never reaches the browser). */
 export const artifactsBackend = (): string => (process.env.PORTFOLIO_API_URL ?? process.env.NEXT_PUBLIC_PORTFOLIO_API_URL ?? "https://sb-4wdkkmzv7w2z.vercel.run").replace(/\/$/, "");
@@ -68,4 +68,15 @@ export async function signedUrlFor(id: string, download = false): Promise<Signed
     if (out.source === "backend") out.url = fallback.url;
     return out;
   } catch (e) { return { ...fallback, mediaMessage: (e as Error).message }; }
+}
+
+/** Version history (server-side): backend GET /artifacts/:id/versions. `null` when the artifact is unknown; throws on transport failure. */
+export async function versionsFor(id: string): Promise<{ status: number; body: ArtifactVersions | { code: string; message: string } }> {
+  const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 15000);
+  try {
+    const r = await fetch(`${artifactsBackend()}/artifacts/${encodeURIComponent(id)}/versions`, { headers: { accept: "application/json" }, cache: "no-store", signal: ctl.signal });
+    const text = await r.text();
+    if (!r.ok) { try { return { status: r.status, body: JSON.parse(text) }; } catch { return { status: r.status, body: { code: "backend_error", message: text.slice(0, 200) } }; } }
+    return { status: 200, body: versionsFromWire(JSON.parse(text) as ArtifactVersionsWire) };
+  } finally { clearTimeout(t); }
 }

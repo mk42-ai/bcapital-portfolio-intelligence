@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useSyncExternalStore } from "react";
-import { fromWire, kindFromMime, type Artifact, type ArtifactKind, type ArtifactWire, type SignedUrlResult } from "./types";
+import { fromWire, kindFromMime, versionsFromWire, type Artifact, type ArtifactKind, type ArtifactVersions, type ArtifactVersionsWire, type ArtifactWire, type SignedUrlResult } from "./types";
 
 /** Client module store for artifacts. Persists the last list in localStorage so the panel paints instantly. */
 const LS_KEY = "bcap.artifacts.v1";
@@ -24,6 +24,10 @@ function hydrate() {
   hydrated = true;
   try { const raw = window.localStorage.getItem(LS_KEY); if (raw) { const arr = JSON.parse(raw) as Artifact[]; if (Array.isArray(arr)) state = { ...state, items: arr }; } } catch { /* ignore */ }
 }
+const SNIPPET_MAX_BYTES = 2 * 1024 * 1024;
+export type ArtifactProbe = { ok: boolean | null; text: string | null };
+const probes = new Map<string, Promise<ArtifactProbe>>();
+const probeValues = new Map<string, ArtifactProbe>();
 const sortNewest = (a: Artifact[]) => [...a].sort((x, y) => Date.parse(y.createdAt) - Date.parse(x.createdAt));
 
 export const artifactsStore = {
@@ -84,6 +88,46 @@ export const artifactsStore = {
       return j.data && typeof j.data.url === "string" && j.data.url ? j.data : fallback;
     } catch { return fallback; }
   },
+  /** GET /api/artifacts/<id>/versions → every row sharing (name, thread_id), newest first. Null on failure (never fabricated). */
+  async versions(id: string): Promise<ArtifactVersions | null> {
+    if (id.startsWith("pending_")) return null;
+    try {
+      const r = await fetch(`/api/artifacts/${encodeURIComponent(id)}/versions`, { cache: "no-store", headers: { accept: "application/json" }, signal: AbortSignal.timeout(15000) });
+      if (!r.ok) return null;
+      return versionsFromWire((await r.json()) as ArtifactVersionsWire);
+    } catch { return null; }
+  },
+  /**
+   * Lazy content probe for the card: ONE request per id (cached), headers only for non-text files, and at most the first ~4 KB of a text-like
+   * document (reader cancelled after the first chunks — never the whole body). `text` is the first 240 chars or null (fetch failed, binary,
+   * > 2 MB, or not text) — the card shows nothing in that case rather than invented content. `ok` = the content url answered 2xx.
+   */
+  inspect(id: string, contentUrl: string, sizeBytes: number, wantText: boolean): Promise<ArtifactProbe> {
+    const hit = probes.get(id); if (hit) return hit;
+    const p = (async (): Promise<ArtifactProbe> => {
+      if (id.startsWith("pending_") || !contentUrl.startsWith("/api/artifacts/")) return { ok: null, text: null };
+      try {
+        const r = await fetch(contentUrl, { headers: { accept: "*/*" }, signal: AbortSignal.timeout(12000) });
+        const ok = r.ok;
+        const ct = (r.headers.get("content-type") ?? "").toLowerCase();
+        const textual = wantText && ok && sizeBytes <= SNIPPET_MAX_BYTES && (!ct || /^text\/|json|csv|markdown|xml/.test(ct));
+        if (!textual || !r.body) { try { await r.body?.cancel(); } catch { /* ignore */ } return { ok, text: null }; }
+        const reader = r.body.getReader(); const chunks: Uint8Array[] = []; let got = 0;
+        while (got < 4096) { const { done, value } = await reader.read(); if (done) break; if (value) { chunks.push(value); got += value.byteLength; } }
+        try { await reader.cancel(); } catch { /* ignore */ }
+        const buf = new Uint8Array(got); let o = 0; for (const c of chunks) { buf.set(c, o); o += c.byteLength; }
+        const head = buf.subarray(0, 4096);
+        if (head.some((b) => b === 0)) return { ok, text: null }; // binary — never show garbage as "content"
+        const text = new TextDecoder("utf-8", { fatal: false }).decode(head).replace(/\uFFFD+$/, "").replace(/\s+/g, " ").trim();
+        return { ok, text: text ? text.slice(0, 240) : null };
+      } catch { return { ok: false, text: null }; }
+    })();
+    probes.set(id, p);
+    void p.then((v) => probeValues.set(id, v));
+    return p;
+  },
+  /** Synchronous cache read (undefined = not probed yet). */
+  inspectCached(id: string): ArtifactProbe | undefined { return probeValues.get(id); },
   /** DELETE /api/artifacts/<id>; optimistic removal, restored on failure. */
   async remove(id: string): Promise<boolean> {
     const prev = state.items;

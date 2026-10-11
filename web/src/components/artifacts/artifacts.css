@@ -41,6 +41,8 @@
 .art-empty { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 16px; text-align: center; color: #4B5563; font-size: 14px; }
 .art-empty img { width: 120px; height: 120px; object-fit: contain; }
 .art-empty p { max-width: 36ch; margin: 0; }
+.art-empty .art-empty-hint { font-size: 13px; color: #6B7280; max-width: 42ch; }
+.art-empty .art-empty-cta { margin-top: 4px; }
 .art-page-layout { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 1024px) { .art-page-layout.has-preview { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); } }
 .art-page-layout .art-browser { padding: 0; }
@@ -83,6 +85,37 @@
 .art-badge-media.is-failed { color: #B91C1C; border-color: #FECACA; background: #FEF2F2; }
 .art-badge-media.is-failed i { background: #EF4444; }
 .art-card-meta .art-badge-media { height: 18px; vertical-align: middle; }
+/* version chip + verified/status chip (green = verified, amber = processing, grey = local, red = failed; brand palette only) */
+.art-badge-version { background: #FFFFFF; color: #1F2937; border-color: #D1D5DB; font-variant-numeric: tabular-nums; }
+.art-badge-status i { width: 7px; height: 7px; border-radius: 50%; background: #9CA3AF; flex: none; }
+.art-badge-status.is-verified { color: #047857; border-color: #A7F3D0; background: #E6FAF3; }
+.art-badge-status.is-verified i { background: #0AC985; }
+.art-badge-status.is-processing { color: #B45309; border-color: #FDE68A; background: #FFFBEB; }
+.art-badge-status.is-processing i { background: transparent; width: 9px; height: 9px; border: 2px solid #FDE68A; border-top-color: #B45309; }
+.art-badge-status.is-failed { color: #B91C1C; border-color: #FECACA; background: #FEF2F2; }
+.art-badge-status.is-failed i { background: #EF4444; }
+.art-badge-status.is-local { color: #4B5563; }
+.art-spin { animation: art-spin 900ms linear infinite; }
+@keyframes art-spin { to { transform: rotate(360deg); } }
+/* preview snippet: two clamped lines under the name; never fabricated (empty → not rendered) */
+.art-card-snippet { margin: 0; font-size: 12px; line-height: 1.45; color: #4B5563; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; }
+.art-card-snippet[data-snippet="text"] { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; }
+.art-card.is-compact .art-card-snippet { display: none; }
+/* version history */
+.art-versions { margin-top: 6px; border-top: 1px dashed #E5E7EB; padding-top: 6px; }
+.art-versions-toggle { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 6px; margin-left: -6px; border: 0; border-radius: 6px; background: transparent; color: #4B5563; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
+.art-versions-toggle svg { width: 13px; height: 13px; }
+.art-versions-toggle:hover:not(:disabled) { background: #F3F4F6; color: #1F2937; }
+.art-versions-toggle.is-open { color: #047857; }
+.art-versions-toggle:disabled { cursor: default; color: #9CA3AF; font-weight: 500; }
+.art-versions-toggle:focus-visible { outline: 2px solid #0AC985; outline-offset: 2px; }
+.art-versions-body { margin-top: 6px; }
+.art-version-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.art-version-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 6px 8px; border: 1px solid #E5E7EB; border-radius: 6px; background: #F9FAFB; font-size: 12px; color: #4B5563; }
+.art-version-row.is-current { border-color: #A7F3D0; background: #FFFFFF; }
+.art-version-meta { flex: 1 1 auto; min-width: 0; white-space: nowrap; }
+.art-version-dl { height: 26px; padding: 0 8px; font-size: 12px; margin-left: auto; }
+@media (max-width: 420px) { .art-version-row { gap: 4px 6px; padding: 6px; } .art-version-meta { flex-basis: 100%; white-space: normal; } .art-version-dl { margin-left: 0; } }
 .art-dot { color: #9CA3AF; }
 .art-kind-icon-wrap { display: inline-flex; align-items: center; justify-content: center; flex: none; }
 .art-kind-icon { object-fit: contain; }
