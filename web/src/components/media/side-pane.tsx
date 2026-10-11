@@ -107,7 +107,7 @@ export function SidePane() {
   return (
     <aside ref={ref} className="mp-pane mp-root" role="complementary" aria-label="Preview" data-testid="side-pane" data-kind={item.kind} tabIndex={-1}>
       <header className="mp-pane-head">
-        <button type="button" className="mp-icon-btn lg:hidden" onClick={closeSidePane} aria-label="Back to chat" data-testid="side-pane-back"><ArrowLeft className="size-5" aria-hidden /></button>
+        <button type="button" className="mp-icon-btn mp-pane-back" onClick={closeSidePane} aria-label="Back to chat" data-testid="side-pane-back"><ArrowLeft className="size-5" aria-hidden /></button>
         <span className="mp-pane-icon"><KindIcon className="size-4" aria-hidden /></span>
         <h2 className="mp-pane-title" title={item.title} data-testid="side-pane-title">{item.title}</h2>
         <div className="mp-pane-actions">

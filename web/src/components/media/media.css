@@ -42,7 +42,7 @@
 .chat-row { display: flex; flex-direction: row; flex: 1 1 auto; min-height: 0; width: 100%; }
 .chat-row > .chat-canvas { flex: 1 1 auto; min-width: 0; }
 .mp-pane { display: flex; flex-direction: column; min-height: 0; background: #FFFFFF; color: #111827; }
-@media (min-width: 1024px) { .mp-pane { flex: 0 0 460px; width: 460px; max-width: 520px; min-width: 420px; height: 100%; border-left: 1px solid #E5E7EB; } }
+@media (min-width: 1024px) { .mp-pane-back { display: none; } .mp-pane { flex: 0 0 460px; width: 460px; max-width: 520px; min-width: 420px; height: 100%; border-left: 1px solid #E5E7EB; } }
 @media (min-width: 1440px) { .mp-pane { flex-basis: 520px; width: 520px; } }
 @media (max-width: 1023.98px) { .mp-pane { position: fixed; inset: 0; z-index: 130; width: auto; height: 100dvh; } }
 .mp-pane-head { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 8px 6px 12px; border-bottom: 1px solid #E5E7EB; background: #FFFFFF; }
