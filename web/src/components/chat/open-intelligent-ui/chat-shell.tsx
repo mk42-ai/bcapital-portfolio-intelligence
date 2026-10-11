@@ -9,7 +9,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { AgentInterface, fetchLLM, agUIAdapter, useThread, useThreadList, type AssistantMessageComponent, type ToolCallTimelineComponent } from "@openuidev/react-ui";
 import type { Message, UserMessage } from "@openuidev/react-headless";
-import { AlertTriangle, ArrowDown, Paperclip, Wrench, Bot, Brain, Check, CheckCircle2, ChevronDown, Circle, Cpu, ExternalLink, KeyRound, ListChecks, Loader2, MessageSquareMore, Mic, Plus, RotateCcw, Search, ShieldCheck, Sparkles, XCircle } from "lucide-react";
+import { AlertTriangle, ArrowDown, Paperclip, Wrench, Bot, Brain, Check, CheckCircle2, ChevronDown, Circle, Cpu, ExternalLink, KeyRound, ListChecks, Loader2, MessageSquareMore, Mic, Plus, RotateCcw, Search, ShieldCheck, Sparkles, X, XCircle } from "lucide-react";
 import { responseTheme } from "./response-theme";
 import { localThreadStorage, saveMessages, sessionFor, rememberSession, rememberSources, sourcesFor, sourcesKey, rememberMeta, metaFor, type StoredSource, type StoredMeta } from "./local-storage";
 import { extractCitations, isCiteLabel, isOverflowLabel, publisherOf, hostOf, type Cite } from "./citations";
@@ -495,20 +495,34 @@ function mediaFrom(text: string, arts: Artifact[]) {
   for (const a of arts) { if (a.kind === "image") images.push({ src: a.contentUrl, alt: a.name, caption: a.name }); else if (a.kind === "video") videos.push({ src: a.contentUrl, title: a.name }); }
   return { images, videos };
 }
-/** Working row for one plugin/agent action. */
+/** Working row for one plugin/agent action — a4: uniform 56px grid [ring][chip][label+query][timing]. */
+function WorkingRing({ state }: { state: "running" | "done" | "failed" | "queued" }) {
+  return (
+    <span className={`oiu-work__ring oiu-work__ring--${state}`} aria-hidden>
+      {state === "done" ? <Check className="oiu-work__ring-ico" strokeWidth={3} /> : state === "failed" ? <X className="oiu-work__ring-ico" strokeWidth={3} /> : null}
+    </span>
+  );
+}
+function useElapsed(on: boolean, startedAt: number | undefined) {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => { if (!on || !startedAt) return; setNow(Date.now()); const id = setInterval(() => setNow(Date.now()), 100); return () => clearInterval(id); }, [on, startedAt]);
+  return on && startedAt ? Math.max(0, now - startedAt) : null;
+}
 function WorkingRow({ t, live }: { t: ToolRow; live: boolean }) {
   const name = friendlyPlugin(t.name || t.pluginId);
   const state = t.status === "failed" ? "failed" : t.status === "running" && live ? "running" : "done";
+  const elapsed = useElapsed(state === "running", t.startedAt);
+  const timing = state === "running" ? (elapsed != null ? `+${(elapsed / 1000).toFixed(1)} s` : "") : state === "failed" ? "failed" : LABEL.done(t.sources, t.durationMs);
+  const second = state === "failed" && t.message ? t.message : t.query;
   return (
     <li className={`oiu-work oiu-work--${state}`} data-testid="working-row" data-state={state} data-plugin={t.pluginId}>
-      <span className="oiu-work__icon" aria-hidden>{state === "failed" ? <AlertTriangle className="size-3.5" /> : state === "running" ? <Loader2 className="size-3.5 oiu-spin" /> : <Check className="size-3.5" />}</span>
-      <span className="oiu-work__chips" data-testid="working-chips" title={t.pluginId} data-plugin-id={t.pluginId}><PluginFavicon id={t.pluginId} size={16} /></span>
+      <WorkingRing state={state} />
+      <span className="oiu-work__chips" data-testid="working-chips" title={t.pluginId} data-plugin-id={t.pluginId}><PluginFavicon id={t.pluginId} size={20} /></span>
       <span className="oiu-work__text">
-        <span className="oiu-work__label">{state === "running" ? LABEL.action(name) : state === "failed" ? LABEL.failed(name) : LABEL.done(t.sources, t.durationMs)}{state !== "failed" ? <span className="oiu-work__via" title={t.pluginId} data-plugin-id={t.pluginId}> · {name}</span> : null}</span>
-        {t.query ? <span className="oiu-work__query">“{t.query.slice(0, 140)}{t.query.length > 140 ? "…" : ""}”</span> : null}
-        {state === "failed" && t.message ? <span className="oiu-work__err">{t.message}</span> : null}
-        {state === "failed" && t.raw ? <RawFrame raw={t.raw} /> : null}
+        <span className="oiu-work__label" title={name}>{state === "failed" ? LABEL.failed(name) : LABEL.action(name)}<span className="oiu-work__via" title={t.pluginId} data-plugin-id={t.pluginId}> · {name}</span></span>
+        {second ? <span className={state === "failed" && t.message ? "oiu-work__query oiu-work__err" : "oiu-work__query"} title={second}>{second}</span> : null}
       </span>
+      <span className="oiu-work__timing" data-testid="working-timing">{timing}</span>
     </li>
   );
 }

@@ -640,3 +640,47 @@
 .oiu-think--live:not(.oiu-think--open) .oiu-think__tail { color: #374151; }
 @media (prefers-reduced-motion: reduce) { .oiu-think .oiu-thinking__chev { transition: none; } }
 /* end a2 */
+/* a4 */
+/* Uniform 56px step rows: [20px status ring] [24px favicon chip] [1fr label + muted query] [auto timing]. Height is reserved
+   even for the skeleton so the list never shifts (CLS 0). Brand green only — no blue. */
+.oiu-work-list { gap: 4px; }
+.oiu-work, .oiu-work--skeleton { display: grid; grid-template-columns: 20px 24px minmax(0, 1fr) auto; column-gap: 10px; align-items: center;
+  box-sizing: border-box; min-height: 56px; height: 56px; padding: 0 12px; border: 1px solid #e5e7eb; border-radius: 10px; background: #fff; font-size: 13px; line-height: 16px; color: #1F2937; overflow: hidden; }
+.oiu-work--failed { border-color: #EF4444; background: #fff5f5; }
+.oiu-work__ring { position: relative; display: inline-grid; place-items: center; width: 16px; height: 16px; margin: 0 auto; border-radius: 999px; box-sizing: border-box; border: 2px solid #d1d5db; background: transparent; flex: none; }
+.oiu-work__ring--queued { border-color: #d1d5db; }
+.oiu-work__ring--running { border-color: rgba(10, 201, 133, 0.28); }
+.oiu-work__ring--running::after { content: ""; position: absolute; inset: -2px; border-radius: 999px; border: 2px solid transparent; border-top-color: #0AC985; animation: oiu-ring-spin 800ms linear infinite; }
+.oiu-work__ring--done { border-color: #0AC985; background: #0AC985; }
+.oiu-work__ring--failed { border-color: #EF4444; background: transparent; }
+.oiu-work__ring-ico { width: 10px; height: 10px; display: block; }
+.oiu-work__ring--done .oiu-work__ring-ico { color: #fff; }
+.oiu-work__ring--failed .oiu-work__ring-ico { color: #EF4444; }
+@keyframes oiu-ring-spin { to { transform: rotate(360deg); } }
+.oiu-work .oiu-work__chips { display: inline-grid; place-items: center; width: 24px; height: 24px; margin: 0; padding: 0; border-radius: 6px; background: #f3f4f6; border: 1px solid #e5e7eb; box-sizing: border-box; overflow: hidden; gap: 0; }
+.oiu-work .oiu-work__chips img, .oiu-work .oiu-work__chips svg { width: 20px; height: 20px; border-radius: 4px; }
+.oiu-work__text { display: flex; flex-direction: column; justify-content: center; gap: 1px; min-width: 0; max-height: 34px; overflow: hidden; }
+.oiu-work__label { display: block; font-size: 13px; font-weight: 600; line-height: 17px; color: #1F2937; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; max-width: 100%; }
+.oiu-work__via { font-weight: 400; color: #6b7280; }
+.oiu-work--failed .oiu-work__label { color: #b91c1c; }
+.oiu-work__query { display: block; font-size: 12px; line-height: 16px; color: #6b7280; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: unset; overflow-wrap: normal; }
+.oiu-work__query.oiu-work__err { color: #b91c1c; }
+.oiu-work__timing { justify-self: end; align-self: center; font-size: 12px; line-height: 16px; font-weight: 500; color: #6b7280; font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; min-width: 44px; }
+.oiu-work--running .oiu-work__timing { color: #047857; }
+.oiu-work--done .oiu-work__timing { color: #4b5563; }
+.oiu-work--failed .oiu-work__timing { color: #b91c1c; }
+.oiu-work--skeleton .oiu-work__label { color: #6b7280; font-weight: 500; }
+.oiu-work--skeleton .oiu-shimmer { display: block; padding: 0; gap: 0; margin: 2px 0 0; width: 55%; }
+.oiu-work--skeleton .oiu-shimmer--row { width: 55%; }
+.oiu-work--skeleton .oiu-shimmer span { height: 8px; margin: 0; }
+@media (max-width: 640px) {
+  .oiu-work, .oiu-work--skeleton { min-height: 64px; height: 64px; padding: 0 10px; column-gap: 8px; font-size: 12.5px; }
+  .oiu-work .oiu-work__chips img, .oiu-work .oiu-work__chips svg { width: 20px; height: 20px; }
+  .oiu-work__text { max-height: 50px; }
+  .oiu-work__label { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 16px; }
+  .oiu-work__query { display: block; white-space: nowrap; -webkit-line-clamp: unset; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .oiu-work__ring--running::after { animation: none; border-color: #0AC985; }
+}
+/* end a4 */
