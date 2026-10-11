@@ -31,6 +31,8 @@ import { useVoiceOrigin } from "@/components/chat/voice/voice-origin";
 import { AttachmentBar, SentChips, attachmentsStore, useAttachments } from "./attachments";
 import { ContextChipsBar } from "./context-chips-bar";
 import { AppComposer } from "./app-composer";
+import { buildContextPayload, contextSummary } from "@/lib/chat/context-payload";
+import { getSettings } from "@/lib/settings";
 import { composerStore } from "./composer-store";
 import { chipsBlock, clearContextChips, getContextChips, PITCHBOOK_PLUGIN_ID } from "./context-chips";
 import { ArtifactCard } from "@/components/artifacts/artifact-card";
@@ -41,7 +43,7 @@ import { VideoPlayer } from "@/components/media/video-player";
 import { artifactsStore } from "@/lib/artifacts/store";
 import type { Artifact } from "@/lib/artifacts/types";
 
-export type CoCtx = { slug: string; name: string; sector: string; status: string; stage: string | null; sentiment: { score: number; label: string; delta?: number | null; updated_at?: string | null; basis?: string | null }; news_count?: number; latest_news: { title: string; url: string | null; published_at: string | null; source?: string | null }[]; estimated_ticket_size_usd: number | null; estimated_ownership_pct: number | null; b_capital_role: string };
+export type CoCtx = { slug: string; name: string; sector: string; status: string; stage: string | null; sentiment: { score: number; label: string; delta?: number | null; updated_at?: string | null; basis?: string | null }; prior_run_at?: string | null; news_count?: number; latest_news: { title: string; url: string | null; published_at: string | null; source?: string | null }[]; estimated_ticket_size_usd: number | null; estimated_ownership_pct: number | null; b_capital_role: string };
 type Source = StoredSource;
 const starters = [
   { displayText: "Latest Fervo news", prompt: "What is the latest news about Fervo Energy? Cite sources.", icon: null },
@@ -70,7 +72,7 @@ export type Prompt =
   | { kind: "awaiting_browser_action"; action: string | null; message: string | null; url: string | null };
 type StreamState = {
   phase: StreamPhase; detail: string; startedAt: number; finishedAt: number | null; sessionId: string | null; version: number;
-  firstStatusMs: number | null; firstTokenMs: number | null; firstCitationMs: number | null; chunks: number; thinking: string; thinkingKinds: string[]; error: StreamError;
+  firstStatusMs: number | null; firstTokenMs: number | null; firstCitationMs: number | null; toolsMs?: number | null; answerMs?: number | null; chunks: number; thinking: string; thinkingKinds: string[]; error: StreamError;
   sources: Source[]; metrics: Record<string, number> | null; lastThreadId: string | null;
   pluginIds: string[]; suggested: { id: string; name: string; logoUrl?: string }[]; plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null;
   summaries: StepSummary[]; prompt: Prompt | null; filler: boolean; fillerTick: number; text: string; answerDone: boolean; integrity: { dupes: number; gaps: number; frames: number } | null;
@@ -79,7 +81,7 @@ type StreamState = {
   artifacts: LiveArtifact[]; outputs: StepOutput[]; tools: ToolRow[]; plannerPayload: PlannerPayload;
 };
 /** One Working row = one plugin/agent action (TOOL_CALL_START/ARGS/RESULT from the bridge). */
-export type ToolRow = { id: string; name: string; pluginId: string; query: string; stepId: string; status: "running" | "done" | "failed"; sources?: number; durationMs?: number; message?: string; raw?: string };
+export type ToolRow = { id: string; name: string; pluginId: string; query: string; stepId: string; status: "running" | "done" | "failed"; sources?: number; durationMs?: number; message?: string; raw?: string; startedAt?: number; finishedAt?: number };
 export type LiveArtifact = { key: string; name: string; phase: "creating" | "ready" | "failed"; artifact?: Artifact; message?: string; media?: { status?: string; id?: string | null; message?: string | null } };
 export type StepOutput = { stepId: string; title: string; plugins: { pluginId: string; name: string; params: Record<string, unknown> | null }[]; at: number };
 const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, finishedAt: null, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null, artifacts: [], outputs: [], tools: [], plannerPayload: EMPTY_PAYLOAD };
@@ -117,6 +119,19 @@ const PHASE_LABEL: Record<string, string> = {
 };
 
 type AgUiFrame = { seq?: number; type?: string; name?: string; value?: Record<string, unknown>; delta?: string; toolCallName?: string; toolCallId?: string; content?: string; isError?: boolean; error?: string; message?: string; code?: string };
+/** unit2 — tools vs answer time. toolsMs: first TOOL_CALL_START → last TOOL_CALL_RESULT (or first status → first token when tools exist but were never stamped); answerMs: first token → now (answer done). */
+export function splitRunTimings(st: Pick<StreamState, "tools" | "firstStatusMs" | "firstTokenMs">, t0: number, doneAt: number): { toolsMs: number | null; answerMs: number | null } {
+  let toolsMs: number | null = null;
+  if (st.tools.length) {
+    const starts = st.tools.map((t) => t.startedAt).filter((n): n is number => typeof n === "number");
+    const ends = st.tools.map((t) => t.finishedAt).filter((n): n is number => typeof n === "number");
+    if (starts.length && ends.length) toolsMs = Math.max(0, Math.max(...ends) - Math.min(...starts));
+    else if (st.firstTokenMs != null) toolsMs = Math.max(0, st.firstTokenMs - (st.firstStatusMs ?? 0));
+    else { const sum = st.tools.reduce((a, t) => a + (t.durationMs ?? 0), 0); toolsMs = sum > 0 ? sum : null; }
+  }
+  const answerMs = st.firstTokenMs != null ? Math.max(0, doneAt - t0 - st.firstTokenMs) : null;
+  return { toolsMs, answerMs };
+}
 /** Reads the cloned SSE body line-by-line (data: …) and updates the live store + localStorage; never throws into the UI path. */
 async function teeStream(res: Response, threadId: string, onSession: (sid: string) => void) {
   const body = res.body; if (!body) return;
@@ -124,10 +139,12 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
   const t0 = peek().startedAt || Date.now();
   const finalize = () => {
     const st = peek(); const key = sourcesKey(st.text);
+    // unit2 — split the run time: toolsMs = first TOOL_CALL_START → last TOOL_CALL_RESULT (fallback: first status → first token when tools exist); answerMs = first token → answer done.
+    const { toolsMs, answerMs } = splitRunTimings(st, t0, Date.now());
     // The live DOM never truncates the reasoning; ONLY the persisted (localStorage) copy is capped at 200,000 chars to stay inside the quota.
-    const meta: StoredMeta & { thinkingKinds?: string[]; plannerPayload?: PlannerPayload } = { model: MODEL_LABEL, modelId: MODEL_ID, reasoningMode: REASONING_MODE, pluginId: PLUGIN_ID, pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, firstCitationMs: st.firstCitationMs, totalMs: Date.now() - t0, chunks: st.chunks, metrics: st.metrics, thinking: st.thinking.slice(0, 200_000), thinkingKinds: st.thinkingKinds, error: st.error ? { code: st.error.code, message: st.error.message } : null, at: new Date().toISOString(), summaries: st.summaries.map((s) => ({ index: s.index, text: s.text, doneAt: s.doneAt ?? null })), plan: st.plan, artifacts: st.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!), tools: st.tools, artifactFailures: st.artifacts.filter((a) => a.phase === "failed").map((a) => ({ name: a.name, message: a.message ?? "" })), outputs: st.outputs, plannerPayload: hasPayload(st.plannerPayload) ? { planning: st.plannerPayload.planning.slice(0, 60_000), steps: Object.fromEntries(Object.entries(st.plannerPayload.steps).map(([k, v]) => [k, v.slice(0, 60_000)])) } : undefined };
+    const meta: StoredMeta & { thinkingKinds?: string[]; plannerPayload?: PlannerPayload } = { model: MODEL_LABEL, modelId: MODEL_ID, reasoningMode: REASONING_MODE, pluginId: PLUGIN_ID, pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, firstCitationMs: st.firstCitationMs, toolsMs, answerMs, totalMs: Date.now() - t0, chunks: st.chunks, metrics: st.metrics, thinking: st.thinking.slice(0, 200_000), thinkingKinds: st.thinkingKinds, error: st.error ? { code: st.error.code, message: st.error.message } : null, at: new Date().toISOString(), summaries: st.summaries.map((s) => ({ index: s.index, text: s.text, doneAt: s.doneAt ?? null })), plan: st.plan, artifacts: st.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!), tools: st.tools, artifactFailures: st.artifacts.filter((a) => a.phase === "failed").map((a) => ({ name: a.name, message: a.message ?? "" })), outputs: st.outputs, plannerPayload: hasPayload(st.plannerPayload) ? { planning: st.plannerPayload.planning.slice(0, 60_000), steps: Object.fromEntries(Object.entries(st.plannerPayload.steps).map(([k, v]) => [k, v.slice(0, 60_000)])) } : undefined };
     liveMeta.set(key, meta); rememberMeta(key, meta);
-    if (st.finishedAt == null) setStream({ finishedAt: Date.now() }, true); // freezes the run-header timer at totalMs
+    if (st.finishedAt == null) setStream({ finishedAt: Date.now(), toolsMs, answerMs }, true); else setStream({ toolsMs, answerMs }, true); // freezes the run-header timer at totalMs
     if (st.sources.length) { liveSources.set(key, st.sources); rememberSources(key, st.sources); }
   };
   const seen = new Set<number>(); let lastSeq = 0; let dupes = 0; let gapsSeen = 0;
@@ -200,7 +217,7 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
         }
         break;
       }
-      case "TOOL_CALL_START": if (f.toolCallId && !st.tools.some((t) => t.id === f.toolCallId)) setStream({ tools: [...st.tools, { id: f.toolCallId, name: f.toolCallName || PLUGIN_NAME, pluginId: PLUGIN_ID, query: "", stepId: "", status: "running" }] }, true); break;
+      case "TOOL_CALL_START": if (f.toolCallId && !st.tools.some((t) => t.id === f.toolCallId)) setStream({ tools: [...st.tools, { id: f.toolCallId, name: f.toolCallName || PLUGIN_NAME, pluginId: PLUGIN_ID, query: "", stepId: "", status: "running", startedAt: now }] }, true); break;
       case "TOOL_CALL_ARGS": {
         let a: { plugin?: string; pluginId?: string; query?: string; stepId?: string } = {}; try { a = JSON.parse(f.delta ?? "{}"); } catch { /* partial */ }
         setStream({ tools: st.tools.map((t) => (t.id === f.toolCallId ? { ...t, name: a.plugin || t.name, pluginId: a.pluginId || t.pluginId, query: a.query || t.query, stepId: String(a.stepId ?? t.stepId ?? "") } : t)) }, true);
@@ -209,7 +226,7 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
       case "TOOL_CALL_RESULT": {
         let r: { status?: string; sources?: number; durationMs?: number; message?: string; raw?: string } = {}; try { r = JSON.parse(f.content ?? "{}"); } catch { /* raw */ }
         const failed = f.isError === true || r.status === "error";
-        setStream({ tools: st.tools.map((t) => (t.id === f.toolCallId ? { ...t, status: failed ? "failed" : "done", sources: r.sources, durationMs: r.durationMs, message: r.message ?? (failed ? f.error : undefined), raw: r.raw } : t)) }, true);
+        setStream({ tools: st.tools.map((t) => (t.id === f.toolCallId ? { ...t, status: failed ? "failed" : "done", sources: r.sources, durationMs: r.durationMs, message: r.message ?? (failed ? f.error : undefined), raw: r.raw, finishedAt: now } : t)) }, true);
         break;
       }
       case "TEXT_MESSAGE_CONTENT": case "TEXT_MESSAGE_CHUNK":
@@ -313,16 +330,20 @@ function SourceList({ sources, compact, live, streamingNow }: { sources: Source[
     </nav>
   );
 }
-/** Run footer (timings): "first event X ms · first token Y ms · total Z s · N tokens". Model/reasoning/plugins live in the RunHeader above the turn. */
+/** Run footer (timings): "first event X ms · tools Y s · first token Z ms · answer W s · total T s · N tokens". Model/reasoning/plugins live in the RunHeader above the turn. */
+const fmtSec = (ms: number) => `${(ms / 1000).toFixed(1)} s`;
 function AnswerBadge({ meta, live }: { meta: Partial<StoredMeta> | null; live?: boolean }) {
   const ftt = meta?.firstTokenMs ?? null; const fe = meta?.firstStatusMs ?? null; const total = meta?.totalMs ?? null;
+  const tools = meta?.toolsMs ?? null; const answer = meta?.answerMs ?? (ftt != null && total != null ? Math.max(0, total - ftt) : null);
   return (
     <div className="oiu-run__footer" data-testid="run-footer" data-footer="true">
-      <p className="oiu-badge" data-testid="answer-badge" data-first-token-ms={ftt ?? ""} data-first-event-ms={fe ?? ""} data-total-ms={total ?? ""} aria-label="Run timings">
+      <p className="oiu-badge" data-testid="answer-badge" data-first-token-ms={ftt ?? ""} data-first-event-ms={fe ?? ""} data-total-ms={total ?? ""} data-tools-ms={tools ?? ""} data-answer-ms={answer ?? ""} aria-label="Run timings">
         <Cpu className="size-3" aria-hidden />
         <span>{fe != null ? `first event ${fe.toLocaleString()} ms` : "first event …"}</span>
-        <span className="oiu-badge__sep">·</span><span>{ftt != null ? `first token ${ftt.toLocaleString()} ms` : live ? "first token …" : "first token n/a"}</span>
-        {total != null && <><span className="oiu-badge__sep">·</span><span>total {(total / 1000).toFixed(1)} s</span></>}
+        {tools != null && <><span className="oiu-badge__sep">·</span><span title="Plugin / tool time: first tool call → last tool result">tools {fmtSec(tools)}</span></>}
+        <span className="oiu-badge__sep">·</span><span title="Time until the first answer token (includes planning and tool time)">{ftt != null ? `first token ${ftt.toLocaleString()} ms` : live ? "first token …" : "first token n/a"}</span>
+        {answer != null && <><span className="oiu-badge__sep">·</span><span title="Answer writing time: first token → answer done">answer {fmtSec(answer)}</span></>}
+        {total != null && <><span className="oiu-badge__sep">·</span><span>total {fmtSec(total)}</span></>}
         {meta?.metrics?.totalTokens != null && <><span className="oiu-badge__sep">·</span><span>{meta.metrics.totalTokens.toLocaleString()} tokens</span></>}
       </p>
     </div>
@@ -712,7 +733,7 @@ const PluginTimeline: ToolCallTimelineComponent = ({ steps, isLast }) => {
     live: true, answerDone: st.answerDone, phase: st.phase, detail: st.detail, thinking: st.thinking, thinkingKinds: st.thinkingKinds, answerStarted: !!(liveText || st.text),
     plan: st.plan, tools: st.tools, summaries: st.summaries, outputs: st.outputs, plannerPayload: st.plannerPayload, prompt: st.prompt, sessionId: st.sessionId,
     text: liveText || st.text, known: st.error?.code === "plugin_error" ? [] : st.sources, sources: st.sources, artifacts: st.artifacts,
-    error: st.error, meta: { pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, metrics: st.metrics }, filler: st.filler, fillerTick: st.fillerTick, elapsedMs: st.startedAt ? Date.now() - st.startedAt : 0,
+    error: st.error, meta: { pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, toolsMs: st.toolsMs ?? null, answerMs: st.answerMs ?? null, metrics: st.metrics }, filler: st.filler, fillerTick: st.fillerTick, elapsedMs: st.startedAt ? Date.now() - st.startedAt : 0,
     startedAt: st.startedAt, totalMs: st.finishedAt != null && st.startedAt ? st.finishedAt - st.startedAt : null,
   };
   return (
@@ -917,11 +938,19 @@ function ChatWelcome({ companies }: { companies: CoCtx[] }) {
       {recent.length > 0 && (
         <section className="oiu-welcome__recent" aria-label="Recent threads" data-testid="welcome-recent">
           <p className="oiu-welcome__label"><MessageSquareMore className="size-3.5" aria-hidden /> Recent threads</p>
-          <ul>{recent.map((t) => <li key={t.id}><button type="button" className="oiu-welcome__thread" data-testid="welcome-thread" data-thread-id={t.id} onClick={() => selectThread(t.id)}>{t.title || "Untitled thread"}</button></li>)}</ul>
+          <ul>{recent.map((t) => <li key={t.id}><button type="button" className="oiu-welcome__thread" data-testid="welcome-thread" data-thread-id={t.id} title={t.title || "Untitled thread"} aria-label={t.title || "Untitled thread"} onClick={() => selectThread(t.id)}><span className="oiu-thread-title" data-testid="thread-title" title={t.title || "Untitled thread"}>{t.title || "Untitled thread"}</span></button></li>)}</ul>
         </section>
       )}
     </div>
   );
+}
+
+/** unit2 — "Context: N companies — A, B, C" under the composer, driven by the live settings store so inspector add/remove updates it instantly. */
+function ContextLine({ companies }: { companies: CoCtx[] }) {
+  const [s] = useSettings();
+  const bySlug = new Map(companies.map((c) => [c.slug, c.name] as const));
+  const names = s.companies.map((slug) => bySlug.get(slug)).filter((n): n is string => !!n);
+  return <p className="oiu-context-line" data-testid="context-line" data-count={names.length} aria-live="polite">{contextSummary(names)}</p>;
 }
 
 export function ChatShell({ companies, fetchedAt, topBarRight }: { companies: CoCtx[]; fetchedAt?: string; topBarRight?: ReactNode }) {
@@ -943,8 +972,11 @@ export function ChatShell({ companies, fetchedAt, topBarRight }: { companies: Co
       .catch(() => setPrewarmState("failed"));
     return () => ctl.abort();
   }, [s.externalUserId, s.apikey]);
-  // Built-in portfolio context (no OnDemand plugin id could be registered — see web/proof/plugin-registration.log): real backend values only, delta/basis verbatim from company.sentiment, capped at 6000 chars by the proxy.
-  const systemContext = ctxCompanies.length ? `Portfolio data below comes from the B Capital portfolio API (live backend, fetched ${fetchedAt ?? new Date().toISOString()}). Use it ONLY for portfolio-internal questions (sentiment scores, deltas, which context companies moved, headline counts). For anything about external facts — recent announcements, funding rounds, valuations, IPOs, products, people, comparisons with earlier events — ALWAYS run the Perplexity web search and answer from fresh sources with citations; never say the feed lacks information when the web can answer it. Sentiment delta is null until a second scoring run exists — do not invent movement; a basis of "seed placeholder" means the score has not been scored by the workflow yet.\n${ctxCompanies.map((c) => `• ${c.name} — sector: ${c.sector}; status: ${c.status}; stage: ${c.stage ?? "n/a"}; sentiment: ${fmtScore(c.sentiment.score)} (${c.sentiment.label}), delta ${c.sentiment.delta == null ? "null (no prior run)" : fmtScore(c.sentiment.delta)}, updated ${c.sentiment.updated_at ?? "n/a"}, basis: ${c.sentiment.basis ?? "n/a"}; est. ticket ${c.estimated_ticket_size_usd ?? "n/a"}; news items: ${c.news_count ?? c.latest_news.length}; latest headlines: ${c.latest_news.length ? c.latest_news.slice(0, 3).map((n) => `"${n.title}" (${n.published_at ?? "undated"}, ${n.source ?? "source n/a"})`).join("; ") : "none"}`).join("\n")}`.slice(0, 6000) : "";
+  // Built-in portfolio context (no OnDemand plugin id could be registered — see web/proof/plugin-registration.log): real backend values only.
+  // unit2 — the payload is built AT SEND TIME from the live settings store (getSettings().companies), never from a memoised closure, so the
+  // companies sent always equal the chips shown in the inspector. `companiesRef` keeps the latest server list without widening the memo deps.
+  const companiesRef = useRef(companies); companiesRef.current = companies;
+  const fetchedAtRef = useRef(fetchedAt); fetchedAtRef.current = fetchedAt;
   const llm = useMemo(() => fetchLLM({
     url: CHAT_API_URL, streamAdapter: agUIAdapter(),
     headers: s.apikey ? { "x-ondemand-key": s.apikey } : {},
@@ -966,7 +998,8 @@ ${txt}`; }
       const pluginIds = [...new Set([...getSelectedPluginIds(), ...(chips.length ? [PITCHBOOK_PLUGIN_ID] : [])])];
       // First turn of a new thread: consume the pre-warmed session when its plugin set matches the explicit selection (same ids, same order).
       if (!sid && prewarm.current && prewarm.current.pluginIds.join(",") === pluginIds.join(",")) { sid = prewarm.current.sessionId; prewarm.current = null; if (tid) { sessionRef.current[tid] = sid; rememberSession(tid, sid); } }
-      body.context = { ...(body.context ?? {}), sessionId: sid ?? undefined, externalUserId: s.externalUserId, pluginIds, systemContext, ...(attachments.length ? { attachments } : {}), sessionContext: ctxCompanies.map((c) => ({ key: `company:${c.slug}`, value: JSON.stringify({ name: c.name, sector: c.sector, status: c.status, sentiment: c.sentiment, news: c.latest_news.slice(0, 3) }).slice(0, 1800) })) };
+      const ctxPayload = buildContextPayload(companiesRef.current, getSettings().companies, { fetchedAt: fetchedAtRef.current }); // live chip state, read now
+      body.context = { ...(body.context ?? {}), sessionId: sid ?? undefined, externalUserId: s.externalUserId, pluginIds, systemContext: ctxPayload.systemContext, contextSlugs: ctxPayload.companies.map((c) => c.slug), ...(attachments.length ? { attachments } : {}), sessionContext: ctxPayload.sessionContext };
       setStream({ ...IDLE, phase: "connecting", detail: PHASE_LABEL.connecting, startedAt: Date.now(), sessionId: sid ?? null, lastThreadId: tid, pluginIds, version: streamState.version }, true);
       let res: Response;
       try { res = await fetch(input, { ...init, body: JSON.stringify(body) }); if (chips.length) clearContextChips(); } catch (e) { setStream({ phase: "idle", detail: "", error: { code: "fetch_failed", message: (e as Error).message } }, true); throw e; }
@@ -977,7 +1010,7 @@ ${txt}`; }
       void teeStream(res.clone(), tid, remember);
       return res;
     },
-  }), [s.apikey, s.externalUserId, systemContext]); // eslint-disable-line react-hooks/exhaustive-deps
+  }), [s.apikey, s.externalUserId]); // eslint-disable-line react-hooks/exhaustive-deps
   const pluginLabel = selectedPlugins.map((id) => catalogueName(id)).join(", ");
   return (
     <div className="chat-shell" data-testid="chat-shell" data-prewarm={prewarmState}>
@@ -988,7 +1021,7 @@ ${txt}`; }
         <AgentInterface.ThreadHeader><ChatTopBar topBarRight={topBarRight} /></AgentInterface.ThreadHeader>
         <AgentInterface.MobileHeader><span hidden data-testid="mobile-header-off" /></AgentInterface.MobileHeader>
         <AgentInterface.Welcome><ChatWelcome companies={ctxCompanies} /></AgentInterface.Welcome>
-        <AgentInterface.Composer><AppComposer /></AgentInterface.Composer>
+        <AgentInterface.Composer><AppComposer footer={<ContextLine companies={companies} />} /></AgentInterface.Composer>
         <Persistence sessionRef={sessionRef} />
         <PendingRow />
         <VoiceDock />
@@ -1014,7 +1047,7 @@ function ChatTopBar({ topBarRight }: { topBarRight?: ReactNode }) {
   return (
     <div className="oiu-topbar" data-testid="chat-topbar">
       <div className="oiu-topbar__left">
-        <h1 className="oiu-topbar__title" data-testid="chat-title">{current?.title || "Analyst chat"}</h1>
+        <h1 className="oiu-topbar__title" data-testid="chat-title" title={current?.title || "Analyst chat"} aria-label={current?.title || "Analyst chat"}><span className="oiu-thread-title" data-testid="thread-title" title={current?.title || "Analyst chat"}>{current?.title || "Analyst chat"}</span></h1>
       </div>
       <div className="oiu-topbar__right">
         <button type="button" className="oiu-topbar__btn" data-testid="new-thread" onClick={() => { composerStore.clear(); switchToNewThread(); }} disabled={isRunning} title="New chat"><Plus className="size-3.5" aria-hidden /><span>New chat</span></button>
@@ -1022,7 +1055,7 @@ function ChatTopBar({ topBarRight }: { topBarRight?: ReactNode }) {
           <summary className="oiu-topbar__btn" aria-label="Threads"><MessageSquareMore className="size-3.5" aria-hidden /><span>Threads{recent.length ? ` (${recent.length})` : ""}</span></summary>
           <ul className="oiu-threads__list" aria-label="Recent threads">
             {recent.length === 0 && <li className="oiu-threads__empty">No threads yet</li>}
-            {recent.map((t) => <li key={t.id}><button type="button" className={`oiu-threads__item${t.id === selectedId ? " oiu-threads__item--active" : ""}`} data-testid="threads-menu-item" data-thread-id={t.id} onClick={(e) => { selectThread(t.id); (e.currentTarget.closest("details") as HTMLDetailsElement | null)?.removeAttribute("open"); }}>{t.title || "Untitled thread"}</button></li>)}
+            {recent.map((t) => <li key={t.id}><button type="button" className={`oiu-threads__item${t.id === selectedId ? " oiu-threads__item--active" : ""}`} data-testid="threads-menu-item" data-thread-id={t.id} title={t.title || "Untitled thread"} aria-label={t.title || "Untitled thread"} onClick={(e) => { selectThread(t.id); (e.currentTarget.closest("details") as HTMLDetailsElement | null)?.removeAttribute("open"); }}><span className="oiu-thread-title" data-testid="thread-title" title={t.title || "Untitled thread"}>{t.title || "Untitled thread"}</span></button></li>)}
           </ul>
         </details>
         <ArtifactsToggle className="oiu-topbar__btn" showLabel />

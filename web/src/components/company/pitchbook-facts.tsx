@@ -111,7 +111,7 @@ function Investors({ company, entry, compact, ask }: { company: string; entry: P
   const total = entry.investors_total ?? list.length;
   return (
     <section aria-label="Investors" data-testid="pb-investors-section">
-      <h3 className={cn("mb-1 font-semibold", compact ? "text-[11px]" : "text-xs")}>Investor matches{total ? <span className="ml-1 font-normal text-muted">· {total.toLocaleString("en-US")} reported</span> : null}</h3>
+      <h3 className={cn("mb-1 font-semibold", compact ? "text-[11px]" : "text-xs")}>Investor matches{total ? <span className="ml-1 font-normal text-muted" data-testid="pb-investors-shown">{shown.length.toLocaleString("en-US")} of {total.toLocaleString("en-US")} shown</span> : null}</h3>
       {entry.investors_brief && !compact && <p className="mb-1.5 whitespace-pre-line text-[11px] text-muted" data-testid="pb-investors-brief">{entry.investors_brief}</p>}
       {list.length ? (
         <>

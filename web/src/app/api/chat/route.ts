@@ -54,10 +54,11 @@ const PROMPT_ADDENDA_FULL = `<run_style>
 Planner: write "objective" as one first-person sentence that starts with "I'll", at most 22 words, in plain words - no plugin names, operation ids, JSON or markdown. Start every step "user_query" with a short action-style label in square brackets (for example "[Gathering news, prices and indicators]", "[Searching the web]", "[Comparing funding momentum]") followed by the instruction unchanged.
 Step executor: keep a fixed key order per plugin call, short parameters first and long text last; never copy the [label] into a parameter.
 Answer: start with the result (the steps are already on screen), cite each external fact inline with a markdown link to the exact page it came from, and if any call failed end with exactly one sentence that starts with "Data gap:" naming what is missing - never claim a success that did not happen.
+Portfolio sentiment: call sentiment_score the "sentiment score" and sentiment_delta_vs_prior_run the "change vs prior run (Δ)"; rank companies by sentiment score, never by the delta, and say "first run" when there is no prior run instead of inventing movement.
 </run_style>
 
 `;
-const PROMPT_ADDENDA_SHORT = `<run_style>objective = one first-person "I'll..." sentence of at most 22 words, no plugin names/ids/JSON; each step user_query starts with a short [action label]; answer starts with the result, cites inline with markdown links, one "Data gap:" sentence on any failed call.</run_style>
+const PROMPT_ADDENDA_SHORT = `<run_style>objective = one first-person "I'll..." sentence of at most 22 words, no plugin names/ids/JSON; each step user_query starts with a short [action label]; answer starts with the result, cites inline with markdown links, one "Data gap:" sentence on any failed call; sentiment_score = "sentiment score", sentiment_delta_vs_prior_run = "change vs prior run (Δ)", say "first run" when there is no prior run.</run_style>
 
 `;
 type Ctx = { sessionId?: string; externalUserId?: string; systemContext?: string; sessionContext?: { key: string; value: string }[]; pluginIds?: string[]; attachments?: { mediaId: string; name?: string; kind?: string; extractedChars?: number }[] };
@@ -213,7 +214,7 @@ export async function POST(req: NextRequest) {
       status("connecting", { endpointId: ENDPOINT_ID, endpointLabel: ENDPOINT_LABEL, reasoningMode: REASONING_MODE, pluginIds, pluginNames: pluginIds.map((id) => PLUGIN_NAMES[id] ?? id), droppedPluginIds, sessionKnown: sessionFromHeaderPath });
 
       let text = "", textStarted = false, buf = "";
-      let firstTokenAt = 0; let firstFrameAt = 0; let stepCounter = 0; let currentStepId = ""; let summaryIndex = 0;
+      let firstTokenAt = 0; let firstFrameAt = 0; let firstToolAt = 0; let lastToolDoneAt = 0; let stepCounter = 0; let currentStepId = ""; let summaryIndex = 0;
       const realSources = new Map<string, Src>();
       const pluginErr: { current: { message: string; raw: string } | null } = { current: null };
       const startText = () => { if (!textStarted) { textStarted = true; send({ type: "TEXT_MESSAGE_START", messageId, role: "assistant" }); } };
@@ -258,7 +259,7 @@ export async function POST(req: NextRequest) {
       const pluginName = (id: string) => PLUGIN_NAMES[id] ?? id;
       const toolStart = (pid: string, name?: string, stepId?: string, input?: string) => {
         if (tools.has(pid)) return;
-        const id = crypto.randomUUID(); tools.set(pid, { id, name: name || pluginName(pid), open: true, stepId, startedAt: Date.now() });
+        const id = crypto.randomUUID(); tools.set(pid, { id, name: name || pluginName(pid), open: true, stepId, startedAt: Date.now() }); if (!firstToolAt) firstToolAt = Date.now();
         markPluginInvoked(pid); // plugin-state `invoked` (plugin-catalogue.ts) — a tool card is open for this id in the current run
         const args = { plugin: name || pluginName(pid), pluginId: pid, query: (input || query).slice(0, 300), stepId: stepId ?? currentStepId ?? "", endpointId: ENDPOINT_ID, endpointLabel: ENDPOINT_LABEL, reasoningMode: REASONING_MODE };
         send({ type: "TOOL_CALL_START", toolCallId: id, toolCallName: name || pluginName(pid), parentMessageId: messageId });
@@ -269,11 +270,13 @@ export async function POST(req: NextRequest) {
       };
       const toolDone = (pid: string, st: "ok" | "error", extra: Record<string, unknown> = {}) => {
         if (!tools.has(pid)) toolStart(pid);
-        const t = tools.get(pid)!; if (!t.open) return; t.open = false;
+        const t = tools.get(pid)!; if (!t.open) return; t.open = false; lastToolDoneAt = Date.now();
         const content = JSON.stringify({ status: st, plugin: t.name, pluginId: pid, durationMs: Date.now() - t.startedAt, sources: realSources.size, ...extra });
         send({ type: "TOOL_CALL_RESULT", messageId: crypto.randomUUID(), toolCallId: t.id, role: "tool", content, ...(st === "error" ? { isError: true, error: String(extra.message ?? "plugin failed") } : {}) });
         lastSentAt = Date.now();
       };
+      /** unit2 — tools vs answer time on `ondemand.metrics` / done: toolsMs = first tool start → last tool result; answerMs = first token → now. */
+      const timingFields = () => ({ firstTokenMs: firstTokenAt ? firstTokenAt - t0 : null, toolsMs: firstToolAt && lastToolDoneAt ? Math.max(0, lastToolDoneAt - firstToolAt) : null, answerMs: firstTokenAt ? Math.max(0, Date.now() - firstTokenAt) : null });
       const allToolsDone = (st: "ok" | "error", extra: Record<string, unknown> = {}) => { for (const pid of tools.keys()) toolDone(pid, st, extra); };
       const refsToIds = (refs: PluginRef[]) => refs.map((r) => (/^plugin-\d+$/.test(r.id) ? r.id : pluginIds.find((id) => pluginName(id).toLowerCase() === r.name.toLowerCase()) ?? r.id));
       const emitSources = (partial: boolean, pid?: string) => custom(CE.sources, { messageId, pluginId: pid ?? PLUGIN_ID, pluginName: pluginName(pid ?? PLUGIN_ID), partial, sources: [...realSources.values()].slice(0, 25) });
@@ -304,7 +307,7 @@ export async function POST(req: NextRequest) {
           case "done": return true;
           case "heartbeat": return false;
           case "error": throw new UpstreamError(`OnDemand error frame: ${u.message}`, 502, u.code);
-          case "metrics": custom(CE.metrics, { publicMetrics: u.publicMetrics, firstTokenMs: firstTokenAt ? firstTokenAt - t0 : null, pluginIds }); return false;
+          case "metrics": custom(CE.metrics, { publicMetrics: u.publicMetrics, ...timingFields(), pluginIds }); return false;
           case "plugins_suggested": custom(CE.plugins, { phase: u.phase, plugins: u.plugins }); if (u.phase === "initialized") status("planning", { statusType: "plugin_suggestion.initialized", statusMessage: "Finding plugins" }); return false;
           case "plan": planStepTotal = Math.max(planStepTotal, u.steps.length); custom(CE.plan, { objective: u.objective ?? null, steps: u.steps }); status("planning", { statusType: "plan_created", statusMessage: u.objective ?? "Execution plan created", steps: u.steps.length }); return false;
           case "step_start": {
@@ -462,7 +465,7 @@ export async function POST(req: NextRequest) {
           // The plugin failed upstream: the model's prose is a disclaimer, not a researched answer. The typed error + red tool card were already
           // streamed; finish the run normally so OpenUI keeps the partial text visible (RUN_ERROR would drop the last debounced delta).
           send({ type: "TEXT_MESSAGE_END", messageId });
-          status("done", { chars: text.length, sources: 0, firstTokenMs: firstTokenAt ? firstTokenAt - t0 : null, pluginError: pluginErr.current.message });
+          status("done", { chars: text.length, sources: 0, ...timingFields(), pluginError: pluginErr.current.message });
           send({ type: "RUN_FINISHED", threadId, runId });
         } else {
           for (const [pid, t] of tools) if (t.open) toolDone(pid, realSources.size || pid !== PLUGIN_ID ? "ok" : "error", realSources.size || pid !== PLUGIN_ID ? {} : { message: "Perplexity returned no sources for this question" });
@@ -480,7 +483,7 @@ export async function POST(req: NextRequest) {
             persistArtifact({ key: `report:${messageId}`, name: `${slugName(title)}-report.pdf`, mime: "application/pdf", bytes, origin: "bridge.report", source: "generated" });
           }
           if (artifactJobs.length) { status("filing", { statusMessage: `Saving ${artifactJobs.length} file${artifactJobs.length === 1 ? "" : "s"} to Artifacts` }); await Promise.allSettled(artifactJobs); }
-          status("done", { chars: text.length, sources: realSources.size, firstTokenMs: firstTokenAt ? firstTokenAt - t0 : null });
+          status("done", { chars: text.length, sources: realSources.size, ...timingFields() });
           send({ type: "RUN_FINISHED", threadId, runId });
         }
       } catch (e) {
@@ -499,7 +502,7 @@ export async function POST(req: NextRequest) {
           audit.error = { code, message };
         }
       } finally {
-        audit.timings = { firstUpstreamFrameMs: firstFrameAt ? firstFrameAt - t0 : null, firstTokenMs: firstTokenAt ? firstTokenAt - t0 : null, totalMs: Date.now() - t0, upstreamFrames: rawCount, answerChars: text.length, sources: realSources.size, pluginError: pluginErr.current?.message ?? null, abortReason: abortReason || null };
+        audit.timings = { firstUpstreamFrameMs: firstFrameAt ? firstFrameAt - t0 : null, ...timingFields(), totalMs: Date.now() - t0, upstreamFrames: rawCount, answerChars: text.length, sources: realSources.size, pluginError: pluginErr.current?.message ?? null, abortReason: abortReason || null };
         audit.firstUpstreamEvents = rawFirst;
         void appendAudit(audit);
         cleanup(); reader?.cancel().catch(() => {}); finish();

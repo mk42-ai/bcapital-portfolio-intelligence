@@ -621,3 +621,15 @@
 .oiu-jump:hover { background: #ffffff; border-color: #0AC985; }
 @media (max-width: 640px) { .oiu-jump { bottom: 8px; font-size: 11.5px; padding: 5px 10px; } .chat-shell .oiu-jump-pad { padding-bottom: 52px !important; } }
 /* end unit1 */
+/* unit2 */
+/* Thread titles: single line, ellipsised, with the full title in title/aria-label (threads menu, welcome recent list, top-bar title). */
+.oiu-thread-title { display: block; min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.oiu-threads__item, .oiu-welcome__thread, .oiu-topbar__title { min-width: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.oiu-threads__list li, .oiu-welcome__recent li { min-width: 0; }
+.oiu-topbar__left { min-width: 0; flex: 1 1 auto; }
+/* Context line under the composer: wraps on 390 px, charcoal/green only. */
+.oiu-context-line { margin: 4px 0 0; font-size: 11px; line-height: 1.4; color: #6b7280; white-space: normal; overflow-wrap: anywhere; }
+.oiu-context-line[data-count="0"] { color: #B45309; }
+/* Run footer timing badge: wraps instead of clipping on narrow viewports. */
+.oiu-badge { flex-wrap: wrap; row-gap: 2px; }
+/* end unit2 */
