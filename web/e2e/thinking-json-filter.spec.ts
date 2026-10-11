@@ -3,7 +3,7 @@ import type { Page } from "@playwright/test";
 
 /**
  * unit1 — planner JSON filter: the Thinking body never carries plan / tool-definition JSON ("pluginId", api_request_parameters,
- * "… 2048 chars each" truncation markers); when the Outputs card exists it carries the collapsed `planner-payload` disclosure instead.
+ * "… 2048 chars each" truncation markers); a6: the collapsed `planner-payload` disclosure lives ONLY inside the dev-disclosure (run rail).
  * Desktop 1440×900 + mobile 390×844. On the pre-unit1 build the first assertion FAILS (that is the before-state; do not weaken it).
  */
 const QUESTION = process.env.U1_QUESTION ?? "In one sentence, what does Fervo Energy do?";
@@ -23,7 +23,7 @@ async function runOneTurn(page: Page) {
 
 function filterChecks() {
   test.skip(!hasKey() && !process.env.BASE_URL, "needs a live BASE_URL");
-  test("Thinking body has no planner JSON; Outputs card carries the planner-payload disclosure", async ({ page }) => {
+  test("Thinking body has no planner JSON; planner-payload lives only in dev-disclosure", async ({ page }) => {
     const run = await runOneTurn(page);
     const think = run.getByTestId("thinking-block");
     await expect(think).toBeVisible();
@@ -31,18 +31,21 @@ function filterChecks() {
     const body = await think.locator(".oiu-think__body, .oiu-think__pre").first().innerText().catch(() => "");
     const header = await think.locator(".oiu-think__head").innerText().catch(() => "");
     expect(body + "\n" + header, "thinking text must not match planner JSON markers").not.toMatch(PAYLOAD_RE);
-    const outputs = run.getByTestId("outputs-card");
-    if (await outputs.count()) {
-      const payload = run.getByTestId("planner-payload");
-      await expect(payload, "planner-payload details exist when outputs-card exists").toHaveCount(1);
-      // collapsed by default; opens via the Outputs head + details summary and shows pretty-printed JSON in a <pre>
-      await outputs.locator("button.oiu-outputs__head").click();
-      await payload.locator("summary").click();
-      await expect(payload.locator("pre").first()).toBeVisible();
-      const n = Number(await payload.getAttribute("data-chars"));
-      expect(n, "planner payload has content").toBeGreaterThan(0);
-    } else {
-      test.info().annotations.push({ type: "note", description: "no outputs-card on this turn (no step payload) — planner-payload assertion not applicable" });
+    // a6: the planner-payload disclosure lives ONLY inside the single developer reveal (run-rail dev-disclosure), never in the run view.
+    await expect(run.getByTestId("planner-payload"), "no planner-payload inside the run view").toHaveCount(0);
+    expect(await run.innerText(), "run view never shows raw planner JSON").not.toMatch(/"plan_required"|"user_query"\s*:/);
+    const dev = page.locator("details[data-testid=dev-disclosure]");
+    if (await dev.count()) {
+      await page.evaluate(() => { const d = document.querySelector<HTMLDetailsElement>("details[data-testid=dev-disclosure]"); if (d) d.open = true; });
+      const payload = dev.getByTestId("planner-payload");
+      if (await payload.count()) {
+        await payload.locator("summary").click();
+        await expect(payload.locator("pre").first()).toBeVisible();
+        const n = Number(await payload.getAttribute("data-chars"));
+        expect(n, "planner payload has content").toBeGreaterThan(0);
+      } else {
+        test.info().annotations.push({ type: "note", description: "no planner payload on this turn — dev-disclosure planner-payload assertion not applicable" });
+      }
     }
   });
 }

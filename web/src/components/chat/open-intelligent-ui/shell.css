@@ -633,3 +633,18 @@
 /* Run footer timing badge: wraps instead of clipping on narrow viewports. */
 .oiu-badge { flex-wrap: wrap; row-gap: 2px; }
 /* end unit2 */
+/* a6 */
+/* Plan card: title "Plan", objective ≤ 2 lines (ellipsis), numbered checklist with status dots. No raw planner JSON here — that is dev-disclosure only. */
+.oiu-plan { height: auto; min-height: 124px; max-height: 220px; }
+.oiu-plan__title { align-items: center; max-height: none; }
+.oiu-plan__objective { margin: 4px 0 0; color: #4b4f55; font-size: 12px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; overflow-wrap: anywhere; }
+.oiu-plan__num { color: #6e7277; font-variant-numeric: tabular-nums; min-width: 1.4em; }
+.oiu-plan__label { overflow-wrap: anywhere; }
+.oiu-plan__dot { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; box-sizing: border-box; border: 2px solid #c3c7cd; color: #ffffff; }
+.oiu-plan__dot--running { border-color: var(--brand-green, #0AC985); background: var(--brand-green, #0AC985); animation: oiu-plan-pulse 1.2s ease-in-out infinite; }
+.oiu-plan__dot--done { border-color: var(--brand-green-ink, #047857); background: var(--brand-green-ink, #047857); }
+.oiu-plan__dot--failed { border-color: #b91c1c; background: #b91c1c; }
+.oiu-plan__step--done .oiu-plan__label { color: #6e7277; }
+@keyframes oiu-plan-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(10, 201, 133, 0.45); } 50% { box-shadow: 0 0 0 4px rgba(10, 201, 133, 0); } }
+@media (prefers-reduced-motion: reduce) { .oiu-plan__dot--running { animation: none; } }
+/* end a6 */
