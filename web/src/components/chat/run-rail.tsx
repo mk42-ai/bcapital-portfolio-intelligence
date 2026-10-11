@@ -1,5 +1,4 @@
 "use client";
-import { CheckCircle2, Circle, ListChecks, Loader2, XCircle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useStreamState } from "@/components/chat/open-intelligent-ui/chat-shell";
 import { MODEL_ID, MODEL_LABEL, REASONING_MODE } from "@/lib/plugins";
@@ -7,7 +6,7 @@ import { PluginChip } from "@/components/ui/plugin-favicon";
 import { pluginName } from "@/lib/plugin-catalogue";
 
 /**
- * "This run" card inside the inspector drawer (model row, plugin chips, plan checklist, agent events). Telemetry and the raw SSE request frame
+ * "This run" card inside the inspector drawer (model row, plugin chips, agent events). Telemetry and the raw SSE request frame
  * live behind ONE reveal (<details data-testid=dev-disclosure>) — the only developer disclosure in the chat UI.
  * Everything here is fed by the same live store the chat shell tees from the SSE body; nothing is fetched client-side.
  */
@@ -24,17 +23,7 @@ export function RunRail() {
           {plugins.map((id) => { const failed = st.error?.code === "plugin_error" && id === "plugin-1722260873"; const done = st.answerDone || st.sources.length > 0; const state = failed ? "failed" : done ? "done" : live && (st.phase === "researching" || st.phase === "answering" || st.phase === "planning") ? "running" : "queued"; return <li key={id}><PluginChip id={id} state={state} input={st.request ? `${pluginName(id)} · ${String((st.request.body as Record<string, unknown> | undefined)?.queryChars ?? "")} chars query` : undefined} raw={failed ? st.error?.raw : undefined} /></li>; })}
         </ul>
       )}
-      {st.plan && (st.plan.objective || st.plan.steps.length > 0) && (
-        <section className="mt-3" data-testid="rail-plan" aria-label="Plan">
-          <p className="flex items-center gap-1.5 text-xs font-semibold"><ListChecks className="size-3.5" aria-hidden /> Plan</p>
-          {st.plan.objective && <p className="mt-1 text-xs text-muted">{st.plan.objective}</p>}
-          <ol className="mt-1 space-y-1 text-xs">{st.plan.steps.map((s, i) => (
-            <li key={s.id} className="flex items-start gap-1.5" data-testid="rail-plan-step" data-state={s.state}>
-              <span className={s.state === "done" ? "text-[var(--brand-green-ink)]" : s.state === "failed" ? "text-danger" : "text-muted"} aria-hidden>{s.state === "done" ? <CheckCircle2 className="size-3.5" /> : s.state === "failed" ? <XCircle className="size-3.5" /> : s.state === "running" ? <Loader2 className="size-3.5 oiu-spin" /> : <Circle className="size-3.5" />}</span>
-              <span className={s.state === "running" ? "font-medium" : ""}>{i + 1}. {s.title}</span>
-            </li>))}</ol>
-        </section>
-      )}
+      {/* Plan checklist intentionally NOT here: it lives only in the run view (data-testid=run-view, plan-stepper). */}
       {st.agentLog.length > 0 && (
         <details className="mt-3 text-xs"><summary className="cursor-pointer font-semibold">Agent events ({st.agentLog.length})</summary>
           <ul className="mt-1 space-y-0.5 text-muted">{st.agentLog.slice(-12).map((a, i) => <li key={i}><code>{a.subtype}</code> · {(a.at / 1000).toFixed(1)} s</li>)}</ul>
