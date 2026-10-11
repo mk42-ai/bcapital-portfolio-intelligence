@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-10-11 — recovery run (lanes A–G): run view v2, artifacts re-sign + side pane, uploads E2E, data reconciliation, redeploy
+
+### Added
+- `docs/reference/event-ui-contract.md` (SSE event → UI block map, prompt addenda, Media API endpoints) and `docs/data-reconciliation-2026-10-11.md`.
+- Run header with live timer (heartbeat-driven), Thinking phases Planning / Step n / Answer, action-style Working rows, footer timings (`chat-shell.tsx`, `eventMap.ts LABEL.action/done`).
+- Planner / step / answer prompt addenda prepended by `/api/chat` (first-person "I'll…" objective ≤ 22 words, `[action label]` step queries, single "Data gap:" sentence).
+- Artifacts: `media_url` / `media_source_url` columns, backend `GET /artifacts/{id}/open` and `/signed-url`, web `/api/artifacts/{id}/open` + `/signed-url`, `SidePane` (documents beside the chat, video playback, image view), thread/date filters and per-type icons on `/artifacts`, "Open" on every card.
+- `web/e2e/upload-artifacts.spec.ts` (6 tests) + `upload-journeys.spec.ts`; recordings and screenshots under `web/proof/run-ux/2026-10-11-recovery/`.
+
+### Changed
+- Thinking is uncapped (the 4,000 / 6,000 / 12,000-char slices are gone); the plan checklist renders once (rail copy removed); in-stream video shows poster + play and never autoplays; `BackendStatus` probes `/health` per request (no 60 s ISR), so the rail badge and the page badge agree.
+- Sentiment pass 2 written for all 137 companies (`ing-2026-10-11T0704*`), News Pulse "Δ vs previous run" now populated; news total served from `/news/summary` (2,100 de-duplicated).
+- Redeployed: backend https://sb-185s3jbbgatn.vercel.run, frontend https://sb-4ngs1cqv9b55.vercel.run (see HANDOFF §2 / §16).
+
+### Still blocked
+- Portfolio Plugin registration: `POST /plugin/v1` answers 400 `schema is required` (string) / 400 `cannot unmarshal object` (object) / 500 (minimal spec); register via the console and set `NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID`.
+- OnDemand Media API returns 500 for files published from a non-public origin (local runs) — artifacts are stored in the backend with `media_status: failed`; on the deployed sandbox the same flow stores with a real media id.
+
 ## 2026-10-11 — asset restore (icons · upload states · fixtures · reference docs)
 
 ### Added
