@@ -1,0 +1,30 @@
+/* a19 — Top movers since last run */
+.tm-card { margin-bottom: 1.5rem; padding: 1rem 1.25rem; }
+.tm-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 1rem; margin-bottom: 0.5rem; }
+.tm-title { font-size: 1rem; font-weight: 600; line-height: 1.5rem; color: #1F2937; }
+.tm-sub { font-size: 0.75rem; line-height: 1rem; font-variant-numeric: tabular-nums; }
+.tm-empty { font-size: 0.875rem; padding: 0.5rem 0; }
+.tm-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.tm-list > li + li { border-top: 1px solid var(--border, #E5E7EB); }
+.tm-row { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto 4.5rem 6rem; align-items: center; column-gap: 0.75rem; row-gap: 0.25rem; padding: 0.5rem 0; font-size: 0.875rem; line-height: 1.25rem; }
+.tm-logo { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--border, #E5E7EB); background: #fff; object-fit: contain; flex: none; }
+.tm-logo--mono { font-size: 0.625rem; font-weight: 700; letter-spacing: 0.02em; color: #44403C; background: #F5F5F4; }
+.tm-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; color: #1F2937; text-underline-offset: 2px; }
+.tm-name:hover { text-decoration: underline; }
+.tm-pill { display: inline-flex; align-items: center; height: 1.25rem; padding: 0 0.5rem; border: 1px solid; border-radius: 9999px; font-size: 0.6875rem; font-weight: 600; white-space: nowrap; }
+.tm-score { text-align: right; font-variant-numeric: tabular-nums; color: #1F2937; }
+.tm-delta { display: inline-flex; align-items: center; justify-content: flex-end; gap: 0.25rem; font-variant-numeric: tabular-nums; font-weight: 600; color: #78716C; }
+.tm-delta--up { color: #047857; }
+.tm-delta--down { color: #EF4444; }
+.tm-delta--flat, .tm-delta--none { color: #78716C; font-weight: 500; }
+.tm-arrow { width: 1rem; height: 1rem; flex: none; }
+@media (max-width: 480px) {
+  /* 390px: two lines — logo + name on the first, pill / score / delta on the second */
+  .tm-row { grid-template-columns: 24px minmax(0, 1fr) auto auto; grid-template-areas: "logo name name name" ". pill score delta"; }
+  .tm-logo { grid-area: logo; }
+  .tm-name { grid-area: name; white-space: normal; }
+  .tm-pill { grid-area: pill; justify-self: start; }
+  .tm-score { grid-area: score; }
+  .tm-delta { grid-area: delta; min-width: 5rem; }
+}
+/* end a19 */
