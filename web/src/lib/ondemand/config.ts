@@ -34,11 +34,21 @@ export const PITCHBOOK_PLUGIN_ID = "plugin-1777018662";
 export const PITCHBOOK_PLUGIN_NAME = "Pitchbook Investor Finder";
 PLUGIN_CATALOGUE_IDS.add(PITCHBOOK_PLUGIN_ID);
 PLUGIN_NAMES[PITCHBOOK_PLUGIN_ID] ??= PITCHBOOK_PLUGIN_NAME;
+/** Portfolio Plugin — registered 2026-10-11T10:13:56Z via the AI tool generator (plugin-1791713636 / agent-1791713636, REST tool over this
+ *  product's own backend; see proof/data-lane/plugin-registration-2026-10-11b.log.txt). Allow-listed so `resolvePluginIds` keeps it, and ordered
+ *  FIRST for portfolio-internal questions so sentiment/news asks route to the portfolio feed rather than to Perplexity. */
+export const PORTFOLIO_PLUGIN_ID: string | null = process.env.NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID || "plugin-1791713636";
+export const PORTFOLIO_QUESTION_RE = /\b(sentiment|portfolio|deltas?|movers?|news count|how many (news|companies)|focus compan|negative|positive|roll-?ups?)\b/i;
+if (PORTFOLIO_PLUGIN_ID) { PLUGIN_CATALOGUE_IDS.add(PORTFOLIO_PLUGIN_ID); PLUGIN_NAMES[PORTFOLIO_PLUGIN_ID] ??= "Portfolio Plugin"; }
 /** Resolve the plugin list for one request: pinned Perplexity first, then every requested id that exists in the catalogue, in request order. */
-export const resolvePluginIds = (requested: unknown): { pluginIds: string[]; dropped: string[] } => {
+export const resolvePluginIds = (requested: unknown, query?: string): { pluginIds: string[]; dropped: string[] } => {
   const req = Array.isArray(requested) ? requested.map(String) : [];
   const ok = req.filter((id) => PLUGIN_CATALOGUE_IDS.has(id) && id !== PLUGIN_ID);
-  return { pluginIds: [PLUGIN_ID, ...new Set(ok)], dropped: req.filter((id) => id !== PLUGIN_ID && !PLUGIN_CATALOGUE_IDS.has(id)) };
+  const base = [PLUGIN_ID, ...new Set(ok)];
+  // Portfolio-internal question → the portfolio plugin leads (and is added if the client did not send it); everything else keeps Perplexity first.
+  const portfolioFirst = !!PORTFOLIO_PLUGIN_ID && !!query && PORTFOLIO_QUESTION_RE.test(query);
+  const pluginIds = portfolioFirst ? [PORTFOLIO_PLUGIN_ID!, ...base.filter((id) => id !== PORTFOLIO_PLUGIN_ID)] : base;
+  return { pluginIds, dropped: req.filter((id) => id !== PLUGIN_ID && !PLUGIN_CATALOGUE_IDS.has(id)) };
 };
 export const DEFAULT_EXTERNAL_USER_ID = process.env.NEXT_PUBLIC_DEFAULT_EXTERNAL_USER_ID || "INV-001";
 /** Cloudflare in front of api.on-demand.io returns 403 error 1010 ("browser_signature_banned") for bare/default user agents. */

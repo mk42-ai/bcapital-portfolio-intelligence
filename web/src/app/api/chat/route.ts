@@ -133,7 +133,7 @@ export async function POST(req: NextRequest) {
     ? `${attachments.map((a) => `Attached document "${a.name}" (OnDemand media ${a.mediaId}):\n${a.text || "(no text could be extracted from this file; it was uploaded to this OnDemand session as media " + a.mediaId + ")"}`).join("\n\n---\n\n")}\n\nAnswer from the attached document when it is relevant and cite it as ${attachments.map((a) => `[attachment: ${a.name}]`).join(" / ")}.\n\n`
     : "";
   // Explicit plugin list: pinned Perplexity + exactly the ids the user toggled on (catalogue allow-list). Nothing is ever substituted.
-  const { pluginIds, dropped: droppedPluginIds } = resolvePluginIds(ctx.pluginIds ?? PLUGIN_IDS);
+  const { pluginIds, dropped: droppedPluginIds } = resolvePluginIds(ctx.pluginIds ?? PLUGIN_IDS, query);
   const externalUserId = typeof ctx.externalUserId === "string" && ctx.externalUserId ? ctx.externalUserId.slice(0, 64) : DEFAULT_EXTERNAL_USER_ID;
   const H: Record<string, string> = { apikey: key, "content-type": "application/json", "user-agent": UPSTREAM_USER_AGENT };
   const runId = crypto.randomUUID(); const messageId = crypto.randomUUID(); const threadId = body.threadId ?? crypto.randomUUID();
