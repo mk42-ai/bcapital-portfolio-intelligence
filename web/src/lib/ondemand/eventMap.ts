@@ -131,6 +131,7 @@ export const CLIENT_EVENT = {
   voice: "ondemand.voice",              // Voice: {phase: "transcript"|"tts_queued"|"tts_playing"|"tts_done"|"barge_in", text?}
   artifact: "ondemand.artifact",        // Artifacts: {phase: "creating"|"ready"|"failed", key, name, kind?, artifact?, message?, origin}
   stepOutput: "ondemand.step_output",   // Outputs rail: {stepId, title, plugins[{pluginId,name,params}], raw}
+  plannerPayload: "ondemand.planner_payload", // unit1: planner/tool-definition JSON text split OUT of ondemand.thinking: {phase: planning|step, stepId, delta}
 } as const satisfies Record<string, `ondemand.${string}`>;
 /** Compile-time uniqueness guard: `_DuplicateClientEvent` is `never` while every CLIENT_EVENT value is distinct; a duplicate makes the line below fail tsc. */
 type _CE = typeof CLIENT_EVENT;
@@ -168,3 +169,75 @@ export const LABEL = {
   /** Done row: "8 sources · 18.2 s" (never an empty box). */
   done: (sources: number | undefined, durationMs: number | undefined) => `${sources != null ? `${sources} source${sources === 1 ? "" : "s"}` : "done"}${durationMs ? ` · ${(durationMs / 1000).toFixed(1)} s` : ""}`,
 } as const;
+
+/* ---------------------------------------------------------------- unit1: thinking classifier + friendly plugin labels ------------------------ */
+export type ThinkingDeltaClass = "prose" | "payload";
+export type ThinkingPhase = "planning" | "step";
+const PAYLOAD_MARKER_RE = /"pluginId"|"api_request_parameters"|"operationId"|"agentId"\s*:|\bchars each\b|"user_query"\s*:|"steps"\s*:\s*\[/;
+const PAYLOAD_OPEN_RE = /^\s*(?:```(?:json)?\s*)?[\[{]/;
+/** Net brace/bracket depth of `text` ignoring characters inside JSON strings (so prose inside a payload never closes it early). */
+export function jsonDepth(text: string): number {
+  let depth = 0, inStr = false, esc = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inStr) { if (esc) esc = false; else if (c === "\\") esc = true; else if (c === '"') inStr = false; continue; }
+    if (c === '"') inStr = true; else if (c === "{" || c === "[") depth++; else if (c === "}" || c === "]") depth = Math.max(0, depth - 1);
+  }
+  return depth;
+}
+/**
+ * classifyThinkingDelta — PURE. Labels one reasoning delta as `prose` (model reasoning, belongs in the Thinking block) or `payload`
+ * (plan / tool-definition JSON, truncation markers like "… 2048 chars each", fenced ```json blocks — belongs in the Outputs disclosure).
+ *   kind            upstream eventType / channel: planning_output + step_output (and the adapter's "plan"/"step_output") are ALWAYS payload.
+ *   accumulatedText everything of this channel received so far INCLUDING `delta` (the caller appends before classifying); used to keep a
+ *                   multi-delta JSON block together: while an opened `{`/`[`/``` block is still unbalanced, every delta inside it is payload.
+ * Heuristics: delta starts with `{` / `[` / ```json; carries "pluginId" / "api_request_parameters" / "operationId" / "chars each"; or sits inside
+ * a still-open balanced-brace JSON block of the accumulated text. Plain sentences (even ones mentioning JSON or a plugin name) stay prose.
+ */
+export function classifyThinkingDelta(kind: string, accumulatedText: string, delta?: string): ThinkingDeltaClass {
+  if (kind === "planning_output" || kind === "step_output" || kind === "plan") return "payload";
+  const d = delta ?? accumulatedText;
+  if (PAYLOAD_MARKER_RE.test(d)) return "payload";
+  if (PAYLOAD_OPEN_RE.test(d)) return "payload";
+  const before = delta != null && accumulatedText.endsWith(delta) ? accumulatedText.slice(0, accumulatedText.length - delta.length) : "";
+  if (before) {
+    // inside an open fence → payload until the closing ``` arrives
+    const fences = (before.match(/```/g) ?? []).length;
+    if (fences % 2 === 1) return "payload";
+    // inside an unbalanced brace block that began at a line start → payload (keeps a streamed JSON object together across deltas)
+    const lastOpen = Math.max(before.lastIndexOf("\n{"), before.lastIndexOf("\n["), before.startsWith("{") || before.startsWith("[") ? 0 : -1);
+    if (lastOpen >= 0 && jsonDepth(before.slice(lastOpen)) > 0) return "payload";
+  }
+  return "prose";
+}
+/** Which Outputs bucket a payload delta belongs to (planning JSON vs per-step tool definitions). */
+export const thinkingPhaseOf = (kind: string): ThinkingPhase => (/^planning|^plan$/.test(kind) ? "planning" : "step");
+
+/** Human-readable plugin label for run-view chips/pills. Keyed by lowercase id OR name; fallback = catalogue name or the raw id. */
+export const PLUGIN_LABEL: Record<string, string> = {
+  executeprompt: "OnDemand Agent", ondemand_agent: "OnDemand Agent", "ondemand terminal agent": "OnDemand Agent", "ondemand agent": "OnDemand Agent", terminal_agent: "OnDemand Agent",
+  perplexity: "Web search (Perplexity)", "plugin-1722260873": "Web search (Perplexity)",
+  linkedin: "LinkedIn", "linkedin search": "LinkedIn", "plugin-1718116202": "LinkedIn",
+  reddit: "Reddit", "reddit posts": "Reddit", "plugin-1748003575": "Reddit",
+  x: "X search", twitter: "X search", "x search agent": "X search", "plugin-1751872652": "X search", "plugin-1785777296": "X search",
+  gpt_search: "GPT search", "gpt search": "GPT search", google: "GPT search", "plugin-1741871229": "GPT search", internet: "GPT search", "plugin-1713924030": "GPT search",
+  pitchbook: "PitchBook", "plugin-1777018662": "PitchBook",
+  media: "Document reader", document: "Document reader", document_reader: "Document reader", media_reader: "Document reader", "document reader": "Document reader", pdf: "Document reader",
+};
+export function pluginLabel(idOrName: string | null | undefined, catalogueName?: (id: string) => string): string {
+  const raw = String(idOrName ?? "").trim();
+  if (!raw) return "Plugin";
+  const k = raw.toLowerCase();
+  if (PLUGIN_LABEL[k]) return PLUGIN_LABEL[k];
+  if (/media|document|docx?|pdf|file.?reader/.test(k)) return "Document reader";
+  if (/perplexity/.test(k)) return "Web search (Perplexity)";
+  if (/pitchbook/.test(k)) return "PitchBook";
+  if (/linkedin/.test(k)) return "LinkedIn";
+  if (/reddit/.test(k)) return "Reddit";
+  if (/^x[\s_-]|twitter/.test(k)) return "X search";
+  if (/gpt.?search|google/.test(k)) return "GPT search";
+  if (/executeprompt|ondemand.?(terminal.?)?agent/.test(k)) return "OnDemand Agent";
+  if (catalogueName) { const n = catalogueName(raw); if (n && n !== raw) { const nk = n.toLowerCase(); return PLUGIN_LABEL[nk] ?? n; } }
+  return raw;
+}
+/* end unit1 */

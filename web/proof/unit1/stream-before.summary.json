@@ -1,0 +1,168 @@
+{
+  "label": "before",
+  "at": "2026-10-11T10:03:10.005Z",
+  "baseUrl": "https://sb-4o6djxojbfi1.vercel.run",
+  "question": "What is the latest news about Fervo Energy? Cite sources.",
+  "threadId": "u1-1791712973047",
+  "httpStatus": 200,
+  "totalMs": 16957,
+  "frames": 260,
+  "firstSeenOrder": [
+    {
+      "kind": "RUN_STARTED",
+      "ms": 134
+    },
+    {
+      "kind": "status",
+      "ms": 134
+    },
+    {
+      "kind": "session",
+      "ms": 447
+    },
+    {
+      "kind": "request",
+      "ms": 447
+    },
+    {
+      "kind": "filler",
+      "ms": 1629
+    },
+    {
+      "kind": "TOOL_CALL_START",
+      "ms": 2097
+    },
+    {
+      "kind": "TOOL_CALL_ARGS",
+      "ms": 2097
+    },
+    {
+      "kind": "TOOL_CALL_END",
+      "ms": 2097
+    },
+    {
+      "kind": "thinking",
+      "ms": 2097
+    },
+    {
+      "kind": "plan",
+      "ms": 2627
+    },
+    {
+      "kind": "step",
+      "ms": 4494
+    },
+    {
+      "kind": "step_output",
+      "ms": 4494
+    },
+    {
+      "kind": "sources",
+      "ms": 9906
+    },
+    {
+      "kind": "TOOL_CALL_RESULT",
+      "ms": 9906
+    },
+    {
+      "kind": "heartbeat",
+      "ms": 10129
+    },
+    {
+      "kind": "TEXT_MESSAGE_START",
+      "ms": 11689
+    },
+    {
+      "kind": "TEXT_MESSAGE_CONTENT",
+      "ms": 11690
+    },
+    {
+      "kind": "metrics",
+      "ms": 14941
+    },
+    {
+      "kind": "TEXT_MESSAGE_END",
+      "ms": 16955
+    },
+    {
+      "kind": "RUN_FINISHED",
+      "ms": 16956
+    },
+    {
+      "kind": "[DONE]",
+      "ms": 16956
+    }
+  ],
+  "expectedOrder": [
+    "status",
+    "thinking",
+    "plan",
+    "TOOL_CALL_START",
+    "TOOL_CALL_RESULT",
+    "TEXT_MESSAGE_CONTENT",
+    "sources",
+    "RUN_FINISHED",
+    "[DONE]"
+  ],
+  "expectedOrderObserved": [
+    "status",
+    "thinking",
+    "plan",
+    "TOOL_CALL_START",
+    "TOOL_CALL_RESULT",
+    "TEXT_MESSAGE_CONTENT",
+    "sources",
+    "RUN_FINISHED",
+    "[DONE]"
+  ],
+  "missingKinds": [],
+  "thinking": {
+    "deltas": 78,
+    "jsonLikeDeltas": 22,
+    "jsonLikeSamples": [
+      "{\"title\": \"I'll search for the",
+      "{\"title\": \"Searching Fervo Energy",
+      " \"name\": \"perplexity\", \"description",
+      "\": \"This endpoint allows query",
+      "ing and returns relevant sources"
+    ],
+    "chars": 2460
+  },
+  "plannerPayload": {
+    "frames": 0,
+    "chars": 0
+  },
+  "tools": [
+    {
+      "toolCallId": "b415874b-80fa-449e-b7f1-e532137ffd61",
+      "tool": "Perplexity",
+      "startIdx": 10,
+      "resultIdx": 97,
+      "startBeforeResult": true,
+      "startBeforeFirstText": true,
+      "hasResult": true
+    }
+  ],
+  "textChars": 3965,
+  "sources": 10,
+  "errors": [],
+  "checks": {
+    "httpOk": true,
+    "doneSeen": true,
+    "runFinished": true,
+    "everyToolStartBeforeItsResult": true,
+    "everyToolStartBeforeFirstText": true,
+    "everyToolStartHasResult": true,
+    "noJsonLookingThinking": false,
+    "statusFirst": true,
+    "thinkingBeforeFirstText": true,
+    "planBeforeFirstText": true,
+    "toolResultBeforeFirstText": true,
+    "sourcesBeforeRunFinished": true,
+    "runFinishedBeforeDone": true,
+    "expectedKindsOrderStrictlyMonotonic_info": false
+  },
+  "ok": false,
+  "note": "BEFORE baseline on main@04dd11d (unit1 not deployed). Live order deviates from the documented strict order: TOOL_CALL_START is opened on the first thinking frame and `sources` precedes TOOL_CALL_RESULT; pairwise invariants hold. NOTE: the ndjson of this baseline run is missing its last 3 frames (RUN_FINISHED, [DONE] \u2014 write-stream flushed after exit; fixed in the script); the summary's firstSeenOrder was computed in-memory and is complete.",
+  "okExcludingJsonBaseline": true
+}
