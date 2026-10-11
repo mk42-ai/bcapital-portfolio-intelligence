@@ -752,3 +752,80 @@
 .chat-shell .oiu-threads__item--active, .chat-shell .oiu-composer__drop, .chat-shell .oiu-payload__label,
 .chat-shell .oiu-plan__step--done .oiu-plan__icon, .chat-shell .oiu-activity--running .oiu-activity__icon { color: var(--brand-green-ink, #047857); }
 /* end a10 */
+/* a11 */
+/* 390×844 run-panel layout pass — CSS only. Charcoal/grey/brand-green only; no blue. */
+@media (max-width: 640px) {
+  .chat-main { height: calc(100dvh - 49px); max-height: calc(100dvh - 49px); }
+  .oiu-run, .oiu-run--skeleton { max-width: 100%; min-width: 0; overflow-x: hidden; }
+  .oiu-run > * { min-width: 0; max-width: 100%; box-sizing: border-box; }
+  /* 0 — run header: ≤2 lines (2 × 20px), 16px chips, timer stays right */
+  .oiu-run__header { flex-wrap: wrap; row-gap: 4px; column-gap: 4px; max-height: 44px; line-height: 20px; overflow: hidden; }
+  .oiu-run__plugins { flex-wrap: wrap; gap: 3px; min-width: 0; }
+  .oiu-run__plugin { height: 16px; min-height: 16px; max-height: 16px; }
+  .oiu-run__plugin > img, .oiu-run__plugin > svg { width: 12px; height: 12px; }
+  .oiu-run__plugin-label { max-width: 8ch; }
+  .oiu-run__timer { height: 16px; line-height: 16px; margin-left: auto; }
+  /* a1 run-status header (attribute selector — independent of a1's class names): fixed 56px, task ellipsised, elapsed right */
+  [data-testid="run-status-header"] { display: flex; align-items: center; gap: 8px; height: 56px; min-height: 56px; max-height: 56px; box-sizing: border-box; min-width: 0; overflow: hidden; }
+  [data-testid="run-status-header"] > * { min-width: 0; }
+  [data-testid="run-status-header"] > :not(:last-child):not(svg) { flex: 1 1 auto; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  [data-testid="run-status-header"] > :first-child { flex: 1 1 auto; }
+  [data-testid="run-status-header"] > svg { flex: none; }
+  [data-testid="run-status-header"] > :last-child, [data-testid="run-status-header"] time, [data-testid="run-status-header"] [data-testid="run-timer"], [data-testid="run-status-header"] [data-elapsed] { flex: none; margin-left: auto; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  /* 1 — Thinking body 160px */
+  .oiu-think__body { max-height: 160px; }
+  .oiu-think--live .oiu-think__body { height: 160px; }
+  .oiu-thinking__pre { max-height: 160px; }
+  .oiu-think__head { min-width: 0; }
+  .oiu-think__phases { flex: 0 1 auto; min-width: 0; overflow: hidden; }
+  /* 2 — plan card: step titles 1-line ellipsis */
+  .oiu-plan__step { min-width: 0; }
+  .oiu-plan__label { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .oiu-plan__plugins { flex: none; max-width: 40%; overflow: hidden; }
+  .oiu-plan__title { white-space: normal; overflow-wrap: anywhere; }
+  /* 3 — step rows: 64px, label 1 line + query 1 line */
+  .oiu-work { height: 64px; min-height: 64px; max-height: 64px; box-sizing: border-box; overflow: hidden; align-items: center; padding: 6px 8px; gap: 6px; }
+  .oiu-work__chips { margin-top: 0; }
+  .oiu-work__chips > * { width: 16px; height: 16px; }
+  .oiu-work__text { gap: 1px; min-width: 0; flex: 1 1 auto; }
+  .oiu-work__label { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; line-height: 18px; }
+  .oiu-work__query, .oiu-work__err { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; line-height: 16px; overflow-wrap: normal; }
+  .oiu-work--failed .oiu-work__query { display: none; } /* keep failed rows at 2 lines: label + error */
+  .oiu-work--skeleton .oiu-shimmer--row { width: 70%; }
+  /* 4 — Outputs card: pre scrolls horizontally, capped at 200px */
+  .oiu-outputs { min-width: 0; }
+  .oiu-outputs__list { padding: 0 8px 8px 20px; }
+  .oiu-outputs__list li { min-width: 0; overflow-wrap: anywhere; }
+  .oiu-outputs pre, .oiu-payload__pre { white-space: pre; overflow-x: auto; overflow-y: auto; max-height: 200px; max-width: 100%; -webkit-overflow-scrolling: touch; }
+  .oiu-payload__body { max-height: 200px; }
+  .oiu-outputs__call code { overflow-wrap: anywhere; word-break: break-word; }
+  /* 5 — sources strip: ≤5 favicons + count (markup already slices 5); don't let the pill overflow */
+  .oiu-srcs__head { max-width: 100%; min-width: 0; }
+  .oiu-srcs__favs { flex: none; }
+  .oiu-srcs__favs img:nth-child(n+6) { display: none; }
+  .oiu-sources__link { min-width: 0; }
+  .oiu-sources__host { max-width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* 6 — prompt cards: buttons full-width */
+  .oiu-prompt__actions { flex-direction: column; gap: 8px; }
+  .oiu-prompt__actions .oiu-prompt__btn { width: 100%; min-height: 40px; box-sizing: border-box; text-align: center; justify-content: center; }
+  .oiu-prompt__chip { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* 7 — footer caption wraps */
+  .oiu-run__footer { white-space: normal; }
+  .oiu-run__footer .oiu-badge { flex-wrap: wrap; row-gap: 2px; white-space: normal; overflow-wrap: anywhere; max-width: 100%; }
+  /* 8 — answer: links/code never widen the column */
+  .oiu-answer, .oiu-answer * { min-width: 0; }
+  .oiu-answer a, .oiu-answer code, .oiu-answer kbd, .oiu-answer p, .oiu-answer li, .oiu-answer td, .oiu-answer th { overflow-wrap: anywhere; word-break: break-word; }
+  .oiu-answer pre { white-space: pre; overflow-x: auto; max-width: 100%; }
+  .oiu-answer table { display: block; max-width: 100%; overflow-x: auto; }
+  .oiu-answer img, .oiu-answer video, .oiu-answer iframe { max-width: 100%; height: auto; }
+  .oiu-cite__pub { max-width: 72px; }
+  .oiu-gap { overflow-wrap: anywhere; min-width: 0; }
+}
+@media (max-width: 360px) {
+  /* narrower than 360px: the label (name + timing) may wrap to 2 lines; query hides; row 72px */
+  .oiu-work { height: 72px; min-height: 72px; max-height: 72px; }
+  .oiu-work__label { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 16px; }
+  .oiu-work__dur { display: block; font-size: 11px; }
+  .oiu-work__query { display: none; }
+}
+/* end a11 */
