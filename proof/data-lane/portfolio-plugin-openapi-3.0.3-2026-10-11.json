@@ -1,0 +1,938 @@
+{
+ "openapi": "3.0.3",
+ "info": {
+  "title": "B Capital Portfolio Intelligence API",
+  "version": "1.0.0-preview-04dd11d",
+  "description": "Read-only portfolio API: 137 B Capital portfolio records with news, OnDemand-scored sentiment, roll-ups, deltas, Signal Scores and search. No authentication."
+ },
+ "servers": [
+  {
+   "url": "https://sb-23wo7xiys7fz.vercel.run"
+  }
+ ],
+ "paths": {
+  "/companies": {
+   "get": {
+    "operationId": "listCompanies",
+    "tags": [
+     "companies"
+    ],
+    "summary": "List portfolio companies with filters and pagination",
+    "parameters": [
+     {
+      "name": "sector",
+      "in": "query",
+      "required": false,
+      "description": "Exact sector, e.g. Technology | Healthcare | Energy & Resilience | Opportunistic",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "region",
+      "in": "query",
+      "required": false,
+      "description": "Exact region, e.g. North America | Asia | Europe | Middle East",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "description": "Substring match on status (private, public, firm, unicorn, renamed\u2026)",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "role",
+      "in": "query",
+      "required": false,
+      "description": "B Capital role",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "lead",
+        "co-lead",
+        "participant",
+        "unknown",
+        "firm"
+       ]
+      }
+     },
+     {
+      "name": "focus",
+      "in": "query",
+      "required": false,
+      "description": "true \u2192 only the 5 focus companies",
+      "schema": {
+       "type": "boolean"
+      }
+     },
+     {
+      "name": "page",
+      "in": "query",
+      "required": false,
+      "description": "1-based page",
+      "schema": {
+       "type": "integer",
+       "default": 1,
+       "minimum": 1
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "description": "Page size (1-200)",
+      "schema": {
+       "type": "integer",
+       "default": 50,
+       "minimum": 1,
+       "maximum": 200
+      }
+     },
+     {
+      "name": "sort",
+      "in": "query",
+      "required": false,
+      "description": "name | sentiment | updated_at | ticket",
+      "schema": {
+       "type": "string",
+       "default": "name"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Paginated companies",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/Company"
+           }
+          },
+          "pagination": {
+           "type": "object",
+           "properties": {
+            "page": {
+             "type": "integer"
+            },
+            "limit": {
+             "type": "integer"
+            },
+            "total": {
+             "type": "integer"
+            },
+            "total_pages": {
+             "type": "integer"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Invalid filter",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{slug}": {
+   "get": {
+    "operationId": "getCompany",
+    "tags": [
+     "companies"
+    ],
+    "summary": "One company by slug (full record incl. brand tokens, estimates, news, sentiment)",
+    "parameters": [
+     {
+      "name": "slug",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "Company slug, e.g. perplexity-ai, apptronik, fervo-energy, flutterwave, writer, b-capital"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Company",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "$ref": "#/components/schemas/Company"
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Unknown slug",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{slug}/news": {
+   "get": {
+    "operationId": "getCompanyNews",
+    "tags": [
+     "companies"
+    ],
+    "summary": "News items for a company, newest first",
+    "parameters": [
+     {
+      "name": "slug",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "Company slug, e.g. perplexity-ai, apptronik, fervo-energy, flutterwave, writer, b-capital"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "description": "Max items (default 20; max 1000 \u2014 use limit=1000 to get every item for a company, e.g. when summing news across the portfolio; or use GET /news/count)",
+      "schema": {
+       "type": "integer",
+       "default": 20,
+       "maximum": 1000
+      }
+     },
+     {
+      "name": "kind",
+      "in": "query",
+      "required": false,
+      "description": "news | status_change | social | funding",
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "News list",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/NewsItem"
+           }
+          },
+          "company": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Unknown slug",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/companies/{slug}/sentiment": {
+   "get": {
+    "operationId": "getCompanySentiment",
+    "tags": [
+     "sentiment"
+    ],
+    "summary": "Current sentiment with history and delta vs previous run",
+    "parameters": [
+     {
+      "name": "slug",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string"
+      },
+      "description": "Company slug, e.g. perplexity-ai, apptronik, fervo-energy, flutterwave, writer, b-capital"
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "description": "History rows",
+      "schema": {
+       "type": "integer",
+       "default": 30,
+       "maximum": 365
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Sentiment",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "company": {
+           "type": "string"
+          },
+          "current": {
+           "$ref": "#/components/schemas/Sentiment"
+          },
+          "delta": {
+           "type": "number",
+           "nullable": true
+          },
+          "history": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "score": {
+              "type": "number"
+             },
+             "label": {
+              "type": "string"
+             },
+             "delta": {
+              "type": "number",
+              "nullable": true
+             },
+             "model": {
+              "type": "string",
+              "nullable": true
+             },
+             "recorded_at": {
+              "type": "string"
+             },
+             "execution_id": {
+              "type": "string",
+              "nullable": true
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Unknown slug",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/sentiment/portfolio": {
+   "get": {
+    "operationId": "getPortfolioSentiment",
+    "tags": [
+     "sentiment"
+    ],
+    "summary": "Portfolio + sector + region roll-ups, deltas vs previous computation, top movers",
+    "responses": {
+     "200": {
+      "description": "Roll-ups",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "portfolio": {
+           "$ref": "#/components/schemas/Rollup"
+          },
+          "sectors": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/Rollup"
+           }
+          },
+          "regions": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/Rollup"
+           }
+          },
+          "top_movers": {
+           "type": "array",
+           "items": {
+            "type": "object"
+           }
+          },
+          "focus": {
+           "type": "array",
+           "items": {
+            "type": "object"
+           }
+          },
+          "computed_at": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/search": {
+   "get": {
+    "operationId": "search",
+    "tags": [
+     "search"
+    ],
+    "summary": "Full-text search over company name/sector/status/HQ and news titles/summaries",
+    "parameters": [
+     {
+      "name": "q",
+      "in": "query",
+      "required": true,
+      "description": "Query text (min 2 chars)",
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "description": "Max hits per type",
+      "schema": {
+       "type": "integer",
+       "default": 20,
+       "maximum": 100
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Hits",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "q": {
+           "type": "string"
+          },
+          "companies": {
+           "type": "array",
+           "items": {
+            "type": "object"
+           }
+          },
+          "news": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/NewsItem"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": "Missing q",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Error"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/signals": {
+   "get": {
+    "operationId": "listSignals",
+    "summary": "Evidence-weighted Signal Scores (0-100) for every portfolio company with factor contributions and momentum",
+    "responses": {
+     "200": {
+      "description": "Signals",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "array",
+           "items": {
+            "type": "object",
+            "properties": {
+             "slug": {
+              "type": "string"
+             },
+             "sector": {
+              "type": "string"
+             },
+             "score": {
+              "type": "number"
+             },
+             "confidence": {
+              "type": "number"
+             },
+             "percentile": {
+              "type": "number"
+             },
+             "label": {
+              "type": "string"
+             },
+             "factors": {
+              "type": "object"
+             },
+             "contributions": {
+              "type": "object"
+             },
+             "momentum": {
+              "type": "object"
+             }
+            }
+           }
+          },
+          "bands": {
+           "type": "object"
+          },
+          "timestamp": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/news/summary": {
+   "get": {
+    "operationId": "getNewsSummary",
+    "tags": [
+     "news"
+    ],
+    "summary": "The single news-count source of truth",
+    "description": "total = count of news_items rows belonging to a listed company (orphans excluded), de-duplicated by (company_slug, url). Also returned as news_total by /health and /companies. by_company uses the same rule per slug.",
+    "responses": {
+     "200": {
+      "description": "Summary",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "total": {
+           "type": "integer"
+          },
+          "by_company": {
+           "type": "object",
+           "additionalProperties": {
+            "type": "integer"
+           }
+          },
+          "companies": {
+           "type": "integer"
+          },
+          "raw_rows": {
+           "type": "integer"
+          },
+          "dedup_removed": {
+           "type": "integer"
+          },
+          "orphan_items": {
+           "type": "integer"
+          },
+          "definition": {
+           "type": "string"
+          },
+          "timestamp": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "Company": {
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "slug",
+     "sector",
+     "region",
+     "status",
+     "b_capital_role",
+     "estimate_confidence",
+     "estimate_rationale"
+    ],
+    "properties": {
+     "id": {
+      "type": "integer"
+     },
+     "name": {
+      "type": "string"
+     },
+     "slug": {
+      "type": "string"
+     },
+     "sector": {
+      "type": "string"
+     },
+     "region": {
+      "type": "string"
+     },
+     "stage": {
+      "type": "string",
+      "nullable": true
+     },
+     "status": {
+      "type": "string",
+      "description": "private | public (\u2026) | firm | free-text status (renames, mergers)"
+     },
+     "website": {
+      "type": "string",
+      "format": "uri",
+      "nullable": true
+     },
+     "linkedin_url": {
+      "type": "string",
+      "nullable": true
+     },
+     "hq": {
+      "type": "string",
+      "nullable": true
+     },
+     "employees": {
+      "type": "integer",
+      "nullable": true
+     },
+     "logo_url": {
+      "type": "string",
+      "nullable": true
+     },
+     "brand_tokens": {
+      "type": "object",
+      "properties": {
+       "primary": {
+        "type": "string",
+        "nullable": true
+       },
+       "secondary": {
+        "type": "string",
+        "nullable": true
+       },
+       "background": {
+        "type": "string",
+        "nullable": true
+       },
+       "text": {
+        "type": "string",
+        "nullable": true
+       },
+       "fonts": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "evidence_tier": {
+        "type": "string",
+        "enum": [
+         "Verified",
+         "Observed",
+         "Third-party",
+         "Missing"
+        ]
+       }
+      }
+     },
+     "b_capital_fund": {
+      "type": "string",
+      "nullable": true
+     },
+     "b_capital_role": {
+      "type": "string",
+      "enum": [
+       "lead",
+       "co-lead",
+       "participant",
+       "unknown",
+       "firm"
+      ]
+     },
+     "b_capital_round": {
+      "type": "string",
+      "nullable": true
+     },
+     "estimated_ticket_size_usd": {
+      "type": "number",
+      "nullable": true
+     },
+     "estimated_ownership_pct": {
+      "type": "number",
+      "nullable": true
+     },
+     "estimate_confidence": {
+      "type": "string",
+      "enum": [
+       "high",
+       "medium",
+       "low"
+      ]
+     },
+     "estimate_rationale": {
+      "type": "string",
+      "description": "Always populated; unknowns are prefixed 'ESTIMATE:'"
+     },
+     "latest_news": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/NewsItem"
+      }
+     },
+     "sentiment": {
+      "$ref": "#/components/schemas/Sentiment"
+     },
+     "sources": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "is_focus": {
+      "type": "boolean"
+     },
+     "in_brand_matrix": {
+      "type": "boolean"
+     },
+     "updated_at": {
+      "type": "string",
+      "format": "date-time"
+     }
+    }
+   },
+   "Error": {
+    "type": "object",
+    "required": [
+     "message",
+     "errorCode"
+    ],
+    "properties": {
+     "message": {
+      "type": "string"
+     },
+     "errorCode": {
+      "type": "string"
+     }
+    }
+   },
+   "Evidence": {
+    "type": "object",
+    "required": [
+     "url",
+     "quote"
+    ],
+    "properties": {
+     "url": {
+      "type": "string"
+     },
+     "quote": {
+      "type": "string"
+     },
+     "source": {
+      "type": "string"
+     }
+    }
+   },
+   "NewsItem": {
+    "type": "object",
+    "required": [
+     "title"
+    ],
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "title": {
+      "type": "string"
+     },
+     "url": {
+      "type": "string",
+      "nullable": true
+     },
+     "source": {
+      "type": "string",
+      "nullable": true
+     },
+     "kind": {
+      "type": "string"
+     },
+     "published_at": {
+      "type": "string",
+      "nullable": true
+     },
+     "summary": {
+      "type": "string",
+      "nullable": true
+     },
+     "image_url": {
+      "type": "string",
+      "nullable": true
+     },
+     "sentiment_score": {
+      "type": "number",
+      "nullable": true
+     }
+    }
+   },
+   "Rollup": {
+    "type": "object",
+    "properties": {
+     "scope": {
+      "type": "string",
+      "enum": [
+       "portfolio",
+       "sector",
+       "region"
+      ]
+     },
+     "key": {
+      "type": "string"
+     },
+     "company_count": {
+      "type": "integer"
+     },
+     "avg_score": {
+      "type": "number"
+     },
+     "label": {
+      "type": "string"
+     },
+     "delta": {
+      "type": "number",
+      "nullable": true
+     },
+     "top_movers": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "slug": {
+         "type": "string"
+        },
+        "name": {
+         "type": "string"
+        },
+        "score": {
+         "type": "number"
+        },
+        "delta": {
+         "type": "number"
+        }
+       }
+      }
+     },
+     "computed_at": {
+      "type": "string",
+      "format": "date-time"
+     }
+    }
+   },
+   "Sentiment": {
+    "type": "object",
+    "required": [
+     "score",
+     "label",
+     "evidence",
+     "updated_at"
+    ],
+    "properties": {
+     "score": {
+      "type": "number",
+      "minimum": -1,
+      "maximum": 1
+     },
+     "label": {
+      "type": "string",
+      "enum": [
+       "very negative",
+       "negative",
+       "neutral",
+       "positive",
+       "very positive"
+      ]
+     },
+     "evidence": {
+      "type": "array",
+      "items": {
+       "$ref": "#/components/schemas/Evidence"
+      }
+     },
+     "updated_at": {
+      "type": "string",
+      "format": "date-time"
+     },
+     "delta": {
+      "type": "number",
+      "description": "score minus the previous recorded score",
+      "nullable": true
+     }
+    }
+   }
+  }
+ }
+}

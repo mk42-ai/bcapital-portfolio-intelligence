@@ -53,6 +53,11 @@ export async function getRuns(): Promise<Sourced<IngestRun[]>> {
   const r = await get<{ data: IngestRun[] }>("/ingest/runs", () => ({ data: snap.runs }));
   return { ...r, data: r.data.data };
 }
+/** Distinct sentiment scoring runs (backend GET /sentiment/runs, additive): one row per ingest_run_id in sentiment_history. */
+export type SentimentRun = { ingest_run_id: string | null; sentiment_rows: number; companies: number; null_delta: number; moved: number; avg_score: number | null; started_at: string; finished_at: string; model: string | null; workflow_name: string | null; source: string | null };
+export async function getSentimentRuns(): Promise<Sourced<{ data: SentimentRun[]; runs: number; companies_with_null_delta_now: number | null }>> {
+  return get("/sentiment/runs", () => ({ data: [], runs: 0, companies_with_null_delta_now: null }));
+}
 /** Evidence-weighted Signal Scores for the whole portfolio. No snapshot exists yet, so the offline fallback is an empty shape
  *  (source 'snapshot') and the UI renders its "history builds daily" / em-dash states instead of simulated numbers. */
 export async function getSignals(): Promise<Sourced<SignalsResponse>> {

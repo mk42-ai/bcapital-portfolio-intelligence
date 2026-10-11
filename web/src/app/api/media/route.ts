@@ -4,7 +4,7 @@ import { saveArtifact } from "@/lib/artifacts/server";
 import { extractDocx, extractPdf } from "@/lib/media/extract";
 import type { Artifact } from "@/lib/artifacts/types";
 import { expiryFromSignedUrl } from "@/lib/artifacts/types";
-import { ALLOWED_EXTENSIONS, ALLOWED_LABEL, MEDIA_MAX_BYTES, MEDIA_PLUGIN_BY_KIND, classify, putBlob, deleteBlob, putText, deleteText, getText } from "@/lib/media/store";
+import { ALLOWED_EXTENSIONS, ALLOWED_LABEL, MEDIA_MAX_BYTES, MEDIA_PLUGIN_BY_KIND, classify, putBlob, deleteBlob, putText, deleteText, getText, allowedExtensions, isVideoUploadEnabled } from "@/lib/media/store";
 
 /**
  * Media relay — `POST /api/media` (multipart: file, sessionId?, externalUserId?).
@@ -42,13 +42,25 @@ export async function POST(req: NextRequest) {
   if (!(file instanceof File)) return fail(400, "bad_request", "missing `file` field");
   const name = (file.name || "upload").replace(/[\r\n"]/g, "").slice(0, 180);
   const cls = classify(name, file.type);
-  if (!cls.ok) return fail(400, "unsupported_type", cls.reason, { allowed: ALLOWED_EXTENSIONS });
+  if (!cls.ok) return fail(400, "unsupported_type", cls.reason, { allowed: allowedExtensions(), videoEnabled: isVideoUploadEnabled() });
   if (file.size > MEDIA_MAX_BYTES) return fail(413, "too_large", `File is ${mb(file.size)} MB — the limit is 25 MB`, { maxBytes: MEDIA_MAX_BYTES });
   if (file.size === 0) return fail(400, "bad_request", `"${name}" is empty`);
   const sessionIdRaw = String(form.get("sessionId") ?? "").trim();
   const sessionId = /^[A-Za-z0-9]{6,64}$/.test(sessionIdRaw) ? sessionIdRaw : "";
   const externalUserId = (String(form.get("externalUserId") ?? "").trim() || DEFAULT_EXTERNAL_USER_ID).slice(0, 64);
   const threadId = String(form.get("threadId") ?? "").trim().slice(0, 80) || null;
+  if (cls.kind === "video") {
+    // MEDIA_ALLOW_VIDEO=1 (classify() already rejected video when the flag is off): there is no OnDemand video file plugin on this account
+    // (web/src/lib/artifacts/media.ts), so skip the media registration entirely and persist as a backend artifact with mediaStatus "local".
+    const videoBytes = new Uint8Array(await file.arrayBuffer());
+    const message = "video stored in the backend only (no OnDemand video plugin)";
+    let artifact: Artifact | null = null; let artifactError: string | null = null;
+    try { artifact = await saveArtifact({ bytes: videoBytes, name, mime: cls.mime, source: "upload", mediaId: null, mediaStatus: "local", mediaMessage: message, mediaSourceUrl: null, mediaUrlExpiresAt: null, mediaExternalUserId: externalUserId, mediaPlugins: [], threadId, sessionId: sessionId || null, originEvent: "upload" }); }
+    catch (e) { artifactError = String((e as Error)?.message ?? e).slice(0, 300); }
+    if (!artifact) return fail(502, "artifact_store_failed", `Video could not be stored in the backend: ${artifactError ?? "unknown error"}`);
+    const id = `local-${artifact.id.replace(/[^A-Za-z0-9]/g, "").slice(-20)}`;
+    return Response.json({ ok: true, artifact, artifactError, media: { id, name, sizeBytes: file.size, mime: cls.mime, url: null, blobUrl: null, extractedTextUrl: null, extractedChars: 0, kind: "video", grounded: "local" as const, sessionId: sessionId || null, pluginId: null, upstreamMs: 0, upstreamStatus: null, upstreamMessage: message }, note: message }, { headers: NO_STORE });
+  }
   /** Every upload is also persisted as an Artifact (backend /artifacts, bytes + OnDemand media id) so it shows in the Artifacts panel/route. */
   const persistUpload = async (bytesIn: Uint8Array, mediaId: string | null, mediaStatus: "stored" | "local" | "failed", mediaMessage: string | null, mediaMeta?: { sourceUrl?: string | null; expiresAt?: string | null }): Promise<{ artifact: Artifact | null; artifactError: string | null }> => {
     // Persistence rule (web/docs/stream-contract.md §5): mediaId + UNSIGNED sourceUrl only — saveArtifact strips any SAS query; the signed url is never stored.
@@ -167,7 +179,7 @@ export async function DELETE(req: NextRequest) {
 /** `GET /api/media?id=<mediaId>` — does the bridge still hold extracted text for this id? (no text is returned; used by tests + the chip tooltip) */
 export async function GET(req: NextRequest) {
   const id = (req.nextUrl.searchParams.get("id") ?? "").trim();
-  if (!id) return Response.json({ ok: true, allowed: ALLOWED_EXTENSIONS, allowedLabel: ALLOWED_LABEL, maxBytes: MEDIA_MAX_BYTES }, { headers: NO_STORE });
+  if (!id) return Response.json({ ok: true, allowed: allowedExtensions(), allowedLabel: ALLOWED_LABEL, videoEnabled: isVideoUploadEnabled(), maxBytes: MEDIA_MAX_BYTES }, { headers: NO_STORE });
   const t = getText(id);
   return Response.json({ ok: true, id, known: !!t, extractedChars: t?.text.length ?? 0, name: t?.name ?? null, kind: t?.kind ?? null }, { headers: NO_STORE });
 }

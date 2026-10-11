@@ -12,6 +12,11 @@ export const EXTRACT_KEEP_CHARS = 40_000;
 export type BlobEntry = { bytes: Uint8Array; mime: string; name: string; at: number };
 export type TextEntry = { text: string; name: string; kind: MediaKind; mime: string; sizeBytes: number; at: number };
 export type MediaKind = "document" | "image" | "audio";
+/** Upload kinds accepted by classify(): the three OnDemand-backed kinds plus "video", which is backend-only (no OnDemand video plugin). */
+export type UploadKind = MediaKind | "video";
+/** Feature flag MEDIA_ALLOW_VIDEO=1 (server env, default OFF). When off, .mp4/.webm are rejected by classify() with the unsupported_type message. */
+export const isVideoUploadEnabled = (): boolean => process.env.MEDIA_ALLOW_VIDEO === "1";
+export const VIDEO_DISABLED_MESSAGE = "video uploads are disabled (set MEDIA_ALLOW_VIDEO=1 to store MP4/WEBM in the backend only — there is no OnDemand video plugin)";
 
 type Store = { blobs: Map<string, BlobEntry>; texts: Map<string, TextEntry>; lastSweep: number };
 const g = globalThis as unknown as { __bcapMediaStore?: Store };
@@ -33,7 +38,7 @@ export const getText = (mediaId: string): TextEntry | null => { sweep(); const e
 export const deleteText = (mediaId: string) => store.texts.delete(mediaId);
 
 /** Allow-list: extension → { mime(s) accepted from the browser, canonical mime, kind }. Browsers report inconsistent mimes for csv/md/m4a, so the extension is authoritative and the mime is checked loosely. */
-export const ALLOWED: Record<string, { mime: string; kind: MediaKind; alt: string[] }> = {
+export const ALLOWED: Record<string, { mime: string; kind: UploadKind; alt: string[] }> = {
   pdf: { mime: "application/pdf", kind: "document", alt: [] },
   docx: { mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document", kind: "document", alt: ["application/zip", "application/octet-stream"] },
   xlsx: { mime: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", kind: "document", alt: ["application/zip", "application/octet-stream"] },
@@ -47,9 +52,17 @@ export const ALLOWED: Record<string, { mime: string; kind: MediaKind; alt: strin
   mp3: { mime: "audio/mpeg", kind: "audio", alt: ["audio/mp3", "audio/mpeg3", "application/octet-stream"] },
   wav: { mime: "audio/wav", kind: "audio", alt: ["audio/x-wav", "audio/wave", "audio/vnd.wave", "application/octet-stream"] },
   m4a: { mime: "audio/mp4", kind: "audio", alt: ["audio/x-m4a", "audio/m4a", "audio/aac", "application/octet-stream"] },
+  // Video — gated by MEDIA_ALLOW_VIDEO (see isVideoUploadEnabled / classify). Stored as a backend artifact only; never registered with OnDemand.
+  mp4: { mime: "video/mp4", kind: "video", alt: ["application/mp4", "video/x-m4v", "application/octet-stream"] },
+  webm: { mime: "video/webm", kind: "video", alt: ["application/octet-stream"] },
 };
-export const ALLOWED_EXTENSIONS = Object.keys(ALLOWED);
+export const VIDEO_EXTENSIONS = Object.keys(ALLOWED).filter((e) => ALLOWED[e].kind === "video");
+/** Extensions accepted right now (video only when the flag is on). */
+export const allowedExtensions = (): string[] => Object.keys(ALLOWED).filter((e) => ALLOWED[e].kind !== "video" || isVideoUploadEnabled());
+export const ALLOWED_EXTENSIONS = Object.keys(ALLOWED).filter((e) => ALLOWED[e].kind !== "video");
 export const ALLOWED_LABEL = "PDF, DOCX, XLSX, CSV, TXT, MD, PNG, JPG, JPEG, WEBP, MP3, WAV or M4A";
+export const ALLOWED_LABEL_WITH_VIDEO = ALLOWED_LABEL.replace(" or M4A", ", M4A, MP4 or WEBM");
+export const allowedLabel = (): string => (isVideoUploadEnabled() ? ALLOWED_LABEL_WITH_VIDEO : ALLOWED_LABEL);
 
 /**
  * OnDemand file-type plugin ids (live `GET /plugin/v1/search`, type "file", all subscribed+active on this account, probed 2026-10-10):
@@ -58,11 +71,14 @@ export const ALLOWED_LABEL = "PDF, DOCX, XLSX, CSV, TXT, MD, PNG, JPG, JPEG, WEB
  */
 export const MEDIA_PLUGIN_BY_KIND: Record<MediaKind, string> = { document: "plugin-1713954536", image: "plugin-1713958591", audio: "plugin-1713958830" };
 
-export function classify(name: string, mime: string): { ok: true; ext: string; mime: string; kind: MediaKind } | { ok: false; reason: string } {
+export function classify(name: string, mime: string): { ok: true; ext: string; mime: string; kind: MediaKind } | { ok: true; ext: string; mime: string; kind: "video" } | { ok: false; reason: string } {
   const ext = (name.toLowerCase().match(/\.([a-z0-9]+)$/)?.[1] ?? "");
   const spec = ALLOWED[ext];
-  if (!spec) return { ok: false, reason: `"${name}" is not a supported file type — attach a ${ALLOWED_LABEL} file` };
+  const label = allowedLabel();
+  if (!spec) return { ok: false, reason: `"${name}" is not a supported file type — attach a ${label} file` };
+  if (spec.kind === "video" && !isVideoUploadEnabled()) return { ok: false, reason: `"${name}" is not a supported file type — ${VIDEO_DISABLED_MESSAGE}; attach a ${ALLOWED_LABEL} file` };
   const m = (mime || "").toLowerCase().split(";")[0].trim();
-  if (m && m !== spec.mime && !spec.alt.includes(m)) return { ok: false, reason: `"${name}" reports type ${m}, which does not match .${ext} — attach a ${ALLOWED_LABEL} file` };
+  if (m && m !== spec.mime && !spec.alt.includes(m)) return { ok: false, reason: `"${name}" reports type ${m}, which does not match .${ext} — attach a ${label} file` };
+  if (spec.kind === "video") return { ok: true, ext, mime: spec.mime, kind: "video" };
   return { ok: true, ext, mime: spec.mime, kind: spec.kind };
 }

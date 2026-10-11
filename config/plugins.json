@@ -5,12 +5,88 @@
   "llm_model_endpoint_id": "predefined-deepseek-flash",
   "llm_model_name": "DeepSeek Flash v4.1 (endpoint_name deepseek-v4.1-flash)",
   "plugins": [
-    { "id": "plugin-1722260873", "name": "Perplexity", "purpose": "latest news with sources and images", "status": "ACTIVE", "used_in": ["bcap-focus-daily", "bcap-portfolio-daily-batch-*"] },
-    { "id": null, "former_id_redacted": true, "name": "LinkedIn Search", "purpose": "company updates / headcount", "status": "removed", "removed_at": "2026-10-10", "used_in": [] },
-    { "id": null, "former_id_redacted": true, "name": "Reddit posts + comments", "purpose": "community sentiment", "status": "removed", "removed_at": "2026-10-10", "used_in": [] },
-    { "id": null, "former_id_redacted": true, "name": "X Search Agent", "purpose": "last 7 days of X posts", "status": "removed", "removed_at": "2026-10-10", "used_in": [] },
-    { "id": null, "former_id_redacted": true, "name": "GPT Search", "purpose": "funding / valuation / exit verification", "status": "removed", "removed_at": "2026-10-10", "used_in": [] },
-    { "id": null, "former_id_redacted": true, "name": "Pitchbook Investor Finder", "purpose": "PitchBook data (investor finder — not a company-lookup tool)", "status": "removed", "removed_at": "2026-10-10", "pitchbook_status": "pending", "used_in": [] }
+    {
+      "id": "plugin-1722260873",
+      "name": "Perplexity",
+      "purpose": "latest news with sources and images",
+      "status": "ACTIVE",
+      "used_in": [
+        "bcap-focus-daily",
+        "bcap-portfolio-daily-batch-*"
+      ]
+    },
+    {
+      "id": null,
+      "former_id_redacted": true,
+      "name": "LinkedIn Search",
+      "purpose": "company updates / headcount",
+      "status": "removed",
+      "removed_at": "2026-10-10",
+      "used_in": []
+    },
+    {
+      "id": null,
+      "former_id_redacted": true,
+      "name": "Reddit posts + comments",
+      "purpose": "community sentiment",
+      "status": "removed",
+      "removed_at": "2026-10-10",
+      "used_in": []
+    },
+    {
+      "id": null,
+      "former_id_redacted": true,
+      "name": "X Search Agent",
+      "purpose": "last 7 days of X posts",
+      "status": "removed",
+      "removed_at": "2026-10-10",
+      "used_in": []
+    },
+    {
+      "id": null,
+      "former_id_redacted": true,
+      "name": "GPT Search",
+      "purpose": "funding / valuation / exit verification",
+      "status": "removed",
+      "removed_at": "2026-10-10",
+      "used_in": []
+    },
+    {
+      "id": null,
+      "former_id_redacted": true,
+      "name": "Pitchbook Investor Finder",
+      "purpose": "PitchBook data (investor finder — not a company-lookup tool)",
+      "status": "removed",
+      "removed_at": "2026-10-10",
+      "pitchbook_status": "pending",
+      "used_in": []
+    }
   ],
-  "portfolio_plugin": { "name": "Portfolio Plugin", "id": null, "portfolio_plugin_id": null, "status": "registration failed 2026-10-11 — POST /plugin/v1 400 'schema is required' for every string encoding of action.schema; object → 'json: cannot unmarshal object into Go struct field PluginAction.action.schema of type string'; MCP plugin_create empty; ai_generated_tool timeout. See proof/data-lane/plugin-registration-2026-10-11.log", "note": "filled in by scripts/register-plugin.ts once OnDemand accepts the schema; until then portfolio data is injected as systemContext by the chat bridge" }
+  "portfolio_plugin": {
+    "name": "B Capital Portfolio Intelligence (Portfolio Plugin)",
+    "id": "plugin-1791713636",
+    "portfolio_plugin_id": "plugin-1791713636",
+    "agent_id": "agent-1791713636",
+    "record_id": "6acb61640eb1ce4aed30f0f4",
+    "status": "ACTIVE",
+    "registered_at": "2026-10-11T10:13:56Z",
+    "registered_via": "ondemandmcp__public_v1_plugin_ai_generated_tool_create (isAutoSave) — POST /plugin/v1 with action.schema string still fails (400 'schema is required' / 500 '')",
+    "plugin_configuration_id": "6acb61640eb1ce4aed30f0f5",
+    "servers": [
+      "https://sb-23wo7xiys7fz.vercel.run"
+    ],
+    "operations": [
+      "GET /companies",
+      "GET /companies/{slug}/sentiment",
+      "GET /news/summary"
+    ],
+    "authentication": "none",
+    "verified": {
+      "suggest_plugins": "first hit 2026-10-11T10:14:05Z",
+      "chat_session": "6acb616f20a8b245e6aaaf0d",
+      "question": "Which B Capital portfolio companies have negative sentiment?",
+      "answer_summary": "Bhanzu -0.625 very negative, Ninja Van -0.54 negative, DailyHunt -0.3 negative (matches live /companies)"
+    },
+    "note": "schema pins the sandbox URL above; re-register when the backend URL changes (scripts/register-plugin.ts documents the working path). Previous failures: proof/data-lane/plugin-registration-2026-10-11.log.txt (23 variants) and -2026-10-11b.log.txt."
+  }
 }
