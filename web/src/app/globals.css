@@ -63,3 +63,8 @@ details > summary:focus-visible, button[aria-expanded]:focus-visible, [role="but
 .bg-primary-soft, .bg-accent-soft, [class*="bg-[#E6FAF3]"], [class*="bg-[#e6faf3]"] { color: #1F2937; }
 .text-\[\#0AC985\], .text-\[\#0ac985\], .text-brand-green { color: var(--brand-green-ink, #047857) !important; }
 /* end a10 */
+/* a33 focus */
+/* Brand-green focus rings everywhere: hard-code the brand hex so no blue UA/tailwind ring can leak (--ring is also #0AC985). */
+:where(html.light, html) :focus-visible { outline: 2px solid #0AC985 !important; outline-offset: 2px; border-radius: 4px; }
+[data-testid="company-row-link"]:focus-visible, [data-testid="primary-nav"] a:focus-visible { outline-width: 3px !important; }
+/* end a33 */

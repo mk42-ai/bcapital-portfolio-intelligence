@@ -125,6 +125,13 @@ export function CompaniesList({ rows, total }: { rows: CompanyListRow[]; total: 
       case "End": e.preventDefault(); jumpTo(last, true); break;
       case "PageDown": e.preventDefault(); window.scrollBy({ top: window.innerHeight - headerH(), behavior: "auto" }); break;
       case "PageUp": e.preventDefault(); window.scrollBy({ top: -(window.innerHeight - headerH()), behavior: "auto" }); break;
+      default: {
+        // a33: first-letter typeahead — jump to the NEXT visible company whose name starts with the typed letter (wraps; "#" for digits/symbols).
+        if (e.key.length !== 1 || e.altKey || e.ctrlKey || e.metaKey || e.key === " ") return;
+        const want = /[a-z]/i.test(e.key) ? e.key.toUpperCase() : "#";
+        const n = visible.length;
+        for (let step = 1; step <= n; step++) { const i = (Math.max(cur, -1) + step) % n; if (letterOf(visible[i]!.name) === want) { e.preventDefault(); jumpTo(i, true); return; } }
+      }
     }
   };
 
