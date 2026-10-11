@@ -37,3 +37,15 @@
   --chart-1: #202327; --chart-2: #6e7277; --chart-3: #9ea2a8; --chart-4: #0AC985; --chart-5: #b91c1c; --chart-6: #c9ccd1;
   --sentiment-neg: #b91c1c; --sentiment-neu: #6e7277; --sentiment-pos: #202327;
 }
+
+/* a21 spacing scale */
+:root {
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --radius-card: 12px;
+  --shadow-card: 0 1px 2px #1F29370d;
+  --shadow-card-hover: 0 8px 24px -12px #1F293733;
+  --motion-fast: 150ms;
+  --motion-ease: cubic-bezier(.2,.8,.2,1);
+}
+/* end a21 */
