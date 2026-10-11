@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-10-11 — brand icon set wired (`9f786f6` → `31a9ada`…)
+
+### Added
+- **Ten flat-line brand icons** (`web/public/brand/icons/icon-{writer-compose,research-search,compare,stock-market,fervo-geothermal,
+  portfolio-listing,agent,autonomous-mobility,news-sentiment,payments-fintech}.png`, 1024², 2px charcoal #1F2937 strokes, one #0AC985 accent;
+  PNG magic + dimensions verified before wiring, sha256 in `web/public/icons/icon-manifest.json`). Registry `web/src/lib/brand-icons.ts`
+  (`brandIconForPlugin / brandIconForOperation / brandIconForCompany / brandIconForStarter / EMPTY_STATE_BRAND_ICON`), component
+  `web/src/components/ui/brand-icon.tsx` (`img[data-testid=brand-icon][data-icon][data-slot]`).
+- Wired into: plugin/tool icon slots via `pluginIconFor()` (B Capital mark → shipped SVG → **brand icon** → favicon chain → monogram; the
+  Portfolio Plugin keeps `/brand/b-capital-mark.png`), the run status row mini icon (running tool / operation / "Writing the answer"), Outputs
+  step rows (`data-operation-id`, bridge now forwards `operationId`), the inspector context list and `/companies` cards (company glyphs),
+  welcome starters, and the no-results / no-news / no-selection / no-plugins empty states.
+- `web/e2e/brand-icons.spec.ts` (1440×900 + 390×844 against the live preview): every icon renders with `naturalWidth > 0`, artifact card
+  arrives before DONE, the live 2,100 data point is present, no `rail-plan` elements, 0 console/page errors. Unit: `test:brand-icons` 62,
+  `test:plugin-icons` 28.
+
 ## 2026-10-11 — turn 4: run-view payload filter, answer-view fixes, pdf.js artifacts, data reconciliation, Portfolio Plugin registered (`c63fddb` → )
 
 ### Added
