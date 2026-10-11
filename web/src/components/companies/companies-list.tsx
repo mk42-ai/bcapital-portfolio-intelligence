@@ -1,22 +1,45 @@
 "use client";
 import Link from "next/link";
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import { Search, Newspaper } from "lucide-react";
+import { Search, Newspaper, LayoutGrid, List } from "lucide-react";
 import { CompanyLogo } from "@/components/ui/company-logo";
 import { SignalMini } from "@/components/charts/signal-bullet";
 import { Input, Select } from "@/components/ui/input";
 import { EmptyState } from "@/components/ui/empty-state";
 import { fmtScore } from "@/lib/format";
 import { CompanyCard } from "@/components/companies/company-card";
+import "./toolbar.css";
 
 export type CompanyListRow = {
   slug: string; name: string; logo_url: string | null; sector: string; region: string; score: number; newsCount: number;
   delta?: number | null; stage?: string | null; last_deal?: { round?: string | null; amount_usd?: number | null; date?: string | null } | null;
   signal: number | null; signal_confidence: number | null; signal_percentile: number | null;
+  /** a29 (optional, additive): sentiment delta vs prior run; ISO date of the last deal (null/undefined → sorted last). */
+  delta?: number | null; lastDeal?: string | null;
 };
-type SortKey = "name" | "signal" | "sector";
+type SortKey = "name" | "signal" | "sector" | "delta" | "news" | "deal";
+type ViewMode = "grid" | "list";
+const SORT_KEYS: readonly SortKey[] = ["name", "signal", "sector", "delta", "news", "deal"];
 const SCROLL_KEY = "bcap.companies.scroll";
+const VIEW_KEY = "bcap.companies.view";
+/** Local fallback matching a18's `sectorColor()` table (fill / ink) — no hard dependency on `@/lib/sector-color`. Never blue. */
+const SECTOR_TINT: Record<string, [string, string]> = {
+  Technology: ["#0AC985", "#047857"], Healthcare: ["#0D9488", "#115E59"], "Energy & Resilience": ["#F59E0B", "#92400E"],
+  Financial: ["#A21CAF", "#701A75"], Consumer: ["#F97316", "#9A3412"], Industrial: ["#65A30D", "#3F6212"], Opportunistic: ["#D97706", "#78350F"],
+};
+const OTHER_TINT: [string, string] = ["#78716C", "#44403C"];
+const sectorTint = (s: string) => SECTOR_TINT[s] ?? OTHER_TINT;
+const byName = (a: CompanyListRow, b: CompanyListRow) => a.name.localeCompare(b.name);
+const dealTime = (r: CompanyListRow) => { const t = r.lastDeal ? Date.parse(r.lastDeal) : NaN; return Number.isFinite(t) ? t : null; };
+const COMPARATORS: Record<SortKey, (a: CompanyListRow, b: CompanyListRow) => number> = {
+  name: byName,
+  sector: (a, b) => a.sector.localeCompare(b.sector) || byName(a, b),
+  signal: (a, b) => ((b.signal ?? -1) - (a.signal ?? -1)) || byName(a, b),
+  delta: (a, b) => (Math.abs(b.delta ?? 0) - Math.abs(a.delta ?? 0)) || byName(a, b),
+  news: (a, b) => (b.newsCount - a.newsCount) || byName(a, b),
+  deal: (a, b) => { const da = dealTime(a), db = dealTime(b); if (da == null && db == null) return byName(a, b); if (da == null) return 1; if (db == null) return -1; return (db - da) || byName(a, b); },
+};
 const DESKTOP_ROW = 64, MOBILE_ROW = 84;
 const letterOf = (s: string) => { const ch = (s.trim()[0] ?? "#").toUpperCase(); return /[A-Z]/.test(ch) ? ch : "#"; };
 const readStore = (): Record<string, number> => { try { return JSON.parse(sessionStorage.getItem(SCROLL_KEY) ?? "{}") as Record<string, number>; } catch { return {}; } };
@@ -31,17 +54,21 @@ export function CompaniesList({ rows, total }: { rows: CompanyListRow[]; total: 
   const [q, setQ] = useState("");
   const [sector, setSector] = useState("");
   const [sort, setSort] = useState<SortKey>("name");
+  const [view, setView] = useState<ViewMode>("list");
+  useEffect(() => { try { const v = localStorage.getItem(VIEW_KEY); if (v === "grid" || v === "list") setView(v); } catch { /* private mode */ } }, []);
+  const pickView = (v: ViewMode) => { setView(v); try { localStorage.setItem(VIEW_KEY, v); } catch { /* quota */ } };
   const [mobile, setMobile] = useState(false);
   const [focusIdx, setFocusIdx] = useState<number | null>(null);
   const [margin, setMargin] = useState(0);
   const listRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const sectors = useMemo(() => [...new Set(rows.map((r) => r.sector))].sort(), [rows]);
+  const sectorCounts = useMemo(() => { const m = new Map<string, number>(); rows.forEach((r) => m.set(r.sector, (m.get(r.sector) ?? 0) + 1)); return m; }, [rows]);
   const sortedNames = useMemo(() => rows.map((r) => r.name).sort((a, b) => a.localeCompare(b)), [rows]);
   const visible = useMemo(() => {
     const needle = q.trim().toLowerCase();
     const hit = rows.filter((r) => (!sector || r.sector === sector) && (!needle || [r.name, r.sector, r.region].some((v) => v.toLowerCase().includes(needle))));
-    return [...hit].sort((a, b) => sort === "name" ? a.name.localeCompare(b.name) : sort === "sector" ? (a.sector.localeCompare(b.sector) || a.name.localeCompare(b.name)) : ((b.signal ?? -1) - (a.signal ?? -1) || a.name.localeCompare(b.name)));
+    return [...hit].sort(COMPARATORS[sort] ?? byName);
   }, [rows, q, sector, sort]);
   const filterKey = `${q.trim().toLowerCase()}|${sector}|${sort}`;
 
@@ -108,14 +135,28 @@ export function CompaniesList({ rows, total }: { rows: CompanyListRow[]; total: 
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <label htmlFor="companies-search" className="sr-only">Search companies</label>
             <div className="relative w-full sm:max-w-xs"><Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted" aria-hidden /><Input id="companies-search" type="search" data-testid="companies-search" placeholder="Search name, sector, region…" className="pl-9" value={q} onChange={(e) => setQ(e.target.value)} /></div>
-            <label htmlFor="companies-sector" className="sr-only">Sector</label>
-            <Select id="companies-sector" data-testid="companies-sector" className="w-auto" value={sector} onChange={(e) => setSector(e.target.value)}><option value="">All sectors</option>{sectors.map((s) => <option key={s} value={s}>{s}</option>)}</Select>
             <label htmlFor="companies-sort" className="sr-only">Sort by</label>
-            <Select id="companies-sort" data-testid="companies-sort" className="w-auto" value={sort} onChange={(e) => setSort(e.target.value as SortKey)}><option value="name">Sort: name</option><option value="signal">Sort: signal</option><option value="sector">Sort: sector</option></Select>
-            <p className="ml-auto text-sm text-muted tabular-nums" role="status" data-testid="companies-count">Showing {visible.length} of {total}</p>
+            <Select id="companies-sort" data-testid="companies-sort" className="w-auto" value={sort} onChange={(e) => { const v = e.target.value as SortKey; setSort(SORT_KEYS.includes(v) ? v : "name"); }}>
+              <option value="name">Sort: name</option><option value="signal">Sort: sentiment</option><option value="sector">Sort: sector</option>
+              <option value="delta">Sort: Δ sentiment</option><option value="news">Sort: news count</option><option value="deal">Sort: last deal</option>
+            </Select>
+            <div className="companies-view ml-auto" role="group" aria-label="View" data-testid="companies-view">
+              <button type="button" className="companies-view__btn" data-testid="companies-view-grid" aria-pressed={view === "grid"} aria-label="Grid view" title="Grid view" onClick={() => pickView("grid")}><LayoutGrid className="size-4" aria-hidden /></button>
+              <button type="button" className="companies-view__btn" data-testid="companies-view-list" aria-pressed={view === "list"} aria-label="List view" title="List view" onClick={() => pickView("list")}><List className="size-4" aria-hidden /></button>
+            </div>
+            <p className="text-sm text-muted tabular-nums" role="status" data-testid="companies-count">Showing {visible.length} of {total}</p>
+          </div>
+          <div className="companies-chips mt-2" role="group" aria-label="Filter by sector" data-testid="companies-sector-chips">
+            <button type="button" className="chip-sector" data-sector="" data-testid="companies-sector-chip-all" aria-pressed={sector === ""} onClick={() => setSector("")}
+              style={{ "--chip-fill": "#1F2937", "--chip-ink": "#1F2937" } as CSSProperties}>All<span className="chip-sector__n">{rows.length}</span></button>
+            {sectors.map((s) => { const [fill, ink] = sectorTint(s); return (
+              <button key={s} type="button" className="chip-sector" data-sector={s} data-testid="companies-sector-chip" aria-pressed={sector === s} onClick={() => setSector(sector === s ? "" : s)}
+                style={{ "--chip-fill": fill, "--chip-ink": ink } as CSSProperties}><span className="chip-sector__dot" aria-hidden />{s}<span className="chip-sector__n">{sectorCounts.get(s) ?? 0}</span></button>); })}
+            <label htmlFor="companies-sector" className="sr-only">Sector</label>
+            <select id="companies-sector" data-testid="companies-sector" className="sr-only" tabIndex={-1} value={sector} onChange={(e) => setSector(e.target.value)}><option value="">All sectors</option>{sectors.map((s) => <option key={s} value={s}>{s}</option>)}</select>
           </div>
         </div>
-        <div data-testid="companies-list" data-total={total} data-visible={visible.length} data-last-visible={lastVisible ? "true" : undefined} role="grid" aria-label="Portfolio companies" aria-rowcount={visible.length} aria-colcount={1}
+        <div data-testid="companies-list" data-view={view} data-total={total} data-visible={visible.length} data-last-visible={lastVisible ? "true" : undefined} role="grid" aria-label="Portfolio companies" aria-rowcount={visible.length} aria-colcount={1}
           className="relative [-webkit-overflow-scrolling:touch] [overscroll-behavior-y:auto]" onKeyDown={onKeyDown}>
           <p className="sr-only" aria-live="polite" aria-atomic="true" data-testid="companies-live">{focusIdx != null ? `Row ${focusIdx + 1} of ${visible.length}` : ""}</p>
           <div ref={listRef} style={{ height: virtualizer.getTotalSize(), position: "relative", width: "100%" }}>

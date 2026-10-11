@@ -1,0 +1,25 @@
+/* a29 — Companies toolbar: grid/list view toggle + coloured sector chips. Light-only; brand green is the only accent (no blue). */
+.companies-view { display: inline-flex; align-items: center; gap: 2px; padding: 2px; border: 1px solid var(--border, #e5e7eb); border-radius: 8px; background: var(--surface-2, #f7f8f9); }
+.companies-view__btn { display: grid; place-items: center; min-width: 32px; min-height: 32px; border-radius: 6px; color: var(--muted, #5c6168); background: transparent; border: 0; cursor: pointer; }
+.companies-view__btn:hover { color: var(--foreground, #1f2937); }
+.companies-view__btn[aria-pressed="true"] { background: #fff; color: #047857; box-shadow: 0 1px 2px rgba(31, 41, 55, 0.12); }
+.companies-view__btn:focus-visible { outline: 3px solid var(--ring, #0ac985); outline-offset: 1px; }
+
+.companies-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.chip-sector { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 4px 10px; border-radius: 999px; font-size: 13px; line-height: 1; font-weight: 500; white-space: nowrap; cursor: pointer;
+  color: var(--chip-ink, #1f2937); background: #fff; border: 1px solid color-mix(in srgb, var(--chip-fill, #78716c) 45%, #fff); transition: background-color 120ms ease, border-color 120ms ease; }
+.chip-sector:hover { background: color-mix(in srgb, var(--chip-fill, #78716c) 10%, #fff); }
+.chip-sector[aria-pressed="true"] { background: color-mix(in srgb, var(--chip-fill, #78716c) 16%, #fff); border-color: var(--chip-fill, #78716c); box-shadow: inset 0 0 0 1px var(--chip-fill, #78716c); }
+.chip-sector:focus-visible { outline: 3px solid var(--ring, #0ac985); outline-offset: 2px; }
+.chip-sector__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--chip-fill, #78716c); flex: none; }
+.chip-sector__n { font-variant-numeric: tabular-nums; font-weight: 400; color: var(--muted, #5c6168); font-size: 12px; }
+.chip-sector[aria-pressed="true"] .chip-sector__n { color: var(--chip-ink, #1f2937); }
+
+/* ≤640px: one horizontally scrollable row, 44px touch targets */
+@media (max-width: 640px) {
+  .companies-chips { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; padding-bottom: 2px; scroll-snap-type: x proximity; }
+  .companies-chips::-webkit-scrollbar { display: none; }
+  .chip-sector { min-height: 44px; padding-inline: 14px; scroll-snap-align: start; }
+  .companies-view__btn { min-width: 44px; min-height: 44px; }
+}
+/* end a29 */
