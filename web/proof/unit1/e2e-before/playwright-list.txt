@@ -1,0 +1,9 @@
+  ✘  1 [desktop] › e2e/thinking-json-filter.spec.ts:26:7 › desktop 1440×900 › Thinking body has no planner JSON; Outputs card carries the planner-payload disclosure (21.9s)
+  ✘  2 [desktop] › e2e/thinking-json-filter.spec.ts:26:7 › mobile 390×844 › Thinking body has no planner JSON; Outputs card carries the planner-payload disclosure (21.5s)
+  ✘  3 [desktop] › e2e/thinking-pinned-working-row.spec.ts:28:7 › desktop 1440×900 › Thinking pinned at top, Working rows before the answer, jump pill clear of Working rows, no planner JSON in Thinking (23.0s)
+  ✘  4 [desktop] › e2e/thinking-pinned-working-row.spec.ts:28:7 › mobile 390×844 › Thinking pinned at top, Working rows before the answer, jump pill clear of Working rows, no planner JSON in Thinking (21.8s)
+    test-results/thinking-json-filter-deskt-de050--planner-payload-disclosure-desktop/test-failed-1.png
+    test-results/thinking-json-filter-mobil-b08e0--planner-payload-disclosure-desktop/test-failed-1.png
+    test-results/thinking-pinned-working-ro-1ccc5-no-planner-JSON-in-Thinking-desktop/test-failed-1.png
+    test-results/thinking-pinned-working-ro-e8f36-no-planner-JSON-in-Thinking-desktop/test-failed-1.png
+  4 failed
