@@ -1,0 +1,98 @@
+{
+  "schema": "gates/v1",
+  "startedAt": "2026-10-11T12:04:51.236Z",
+  "finishedAt": "2026-10-11T12:05:05.362Z",
+  "totalMs": 14126,
+  "node": "v22.23.3",
+  "git": {
+    "head": "7c43344",
+    "branch": "t5/a41"
+  },
+  "flags": {
+    "build": false,
+    "unit": false,
+    "secrets": true
+  },
+  "ok": true,
+  "summary": {
+    "pass": 3,
+    "fail": 0,
+    "skipped": 3
+  },
+  "gates": [
+    {
+      "name": "tsc:root",
+      "status": "pass",
+      "hard": true,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "ms": 5857,
+      "startedAt": "2026-10-11T12:04:51.237Z",
+      "finishedAt": "2026-10-11T12:04:57.097Z",
+      "cwd": ".",
+      "command": "node node_modules/typescript/bin/tsc -p tsconfig.json --noEmit",
+      "outputTail": ""
+    },
+    {
+      "name": "tsc:web",
+      "status": "pass",
+      "hard": true,
+      "exitCode": 0,
+      "signal": null,
+      "error": null,
+      "ms": 6868,
+      "startedAt": "2026-10-11T12:04:57.097Z",
+      "finishedAt": "2026-10-11T12:05:03.965Z",
+      "cwd": "web",
+      "command": "node node_modules/typescript/bin/tsc --noEmit",
+      "outputTail": ""
+    },
+    {
+      "name": "eslint",
+      "status": "skipped",
+      "hard": true,
+      "reason": "eslint is not installed in web/node_modules (no eslint / eslint-config-next package; install forbidden in this pass)",
+      "ms": 0,
+      "startedAt": "2026-10-11T12:05:03.966Z",
+      "finishedAt": "2026-10-11T12:05:03.966Z"
+    },
+    {
+      "name": "next:build",
+      "status": "skipped",
+      "hard": false,
+      "reason": "pass --build to run (≈3 min on 1 CPU; the merge agent runs it once)",
+      "ms": 0,
+      "startedAt": "2026-10-11T12:05:03.966Z",
+      "finishedAt": "2026-10-11T12:05:03.966Z"
+    },
+    {
+      "name": "unit",
+      "status": "skipped",
+      "hard": false,
+      "reason": "--no-unit",
+      "ms": 0,
+      "startedAt": "2026-10-11T12:05:03.966Z",
+      "finishedAt": "2026-10-11T12:05:03.966Z"
+    },
+    {
+      "name": "secrets",
+      "status": "pass",
+      "hard": true,
+      "ms": 1377,
+      "startedAt": "2026-10-11T12:05:03.966Z",
+      "finishedAt": "2026-10-11T12:05:05.343Z",
+      "findings": [],
+      "rules": [
+        "tracked-dotenv",
+        "github-token",
+        "github-pat",
+        "vercel-token",
+        "openai-anthropic-key",
+        "aws-access-key",
+        "ingest-secret-64hex",
+        "sas-sig"
+      ]
+    }
+  ]
+}
