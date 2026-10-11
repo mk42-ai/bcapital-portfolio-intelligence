@@ -63,13 +63,66 @@ function newsSummary(db: any) {
   for (const s of slugs) by_company[s.slug] = counts.get(s.slug) ?? 0;
   return { total, by_company, companies: slugs.length, raw_rows, dedup_removed: raw_rows - orphan_items - total, orphan_items, definition: NEWS_TOTAL_DEFINITION };
 }
-function toApi(r: typeof schema.companies.$inferSelect, counts?: Map<string, number>) {
+/** Per-company sentiment run dates from sentiment_history: latest row → scored_at, the row before it → prior_run_at. */
+export type RunDates = { scored_at: string | null; prior_run_at: string | null; prior_score: number | null; model: string | null; ingest_run_id: string | null };
+export function sentimentRunDates(db: any): Map<string, RunDates> {
+  const rows = db.all(sql`select company_slug as slug,
+      max(case when rn = 1 then recorded_at end) as scored_at, max(case when rn = 2 then recorded_at end) as prior_run_at,
+      max(case when rn = 2 then score end) as prior_score, max(case when rn = 1 then model end) as model, max(case when rn = 1 then ingest_run_id end) as ingest_run_id
+    from (select company_slug, recorded_at, score, model, ingest_run_id, row_number() over (partition by company_slug order by recorded_at desc, id desc) as rn from sentiment_history)
+    where rn <= 2 group by company_slug`) as any[];
+  return new Map(rows.map((r) => [r.slug, { scored_at: r.scored_at ?? null, prior_run_at: r.prior_run_at ?? null, prior_score: r.prior_score ?? null, model: r.model ?? null, ingest_run_id: r.ingest_run_id ?? null }]));
+}
+/** News reconciliation (computed, never estimated): raw rows incl. orphans, de-dup by url / by title, 30d/7d windows, no-url, per company + totals. */
+export const FOCUS_RECON_SLUGS = ["aimotive", "apptronik", "fervo-energy", "flutterwave", "writer", "perplexity-ai"];
+export function newsReconciliation(db: any, asOf = nowIso().slice(0, 10)) {
+  const d30 = new Date(Date.parse(asOf + "T00:00:00Z") - 30 * 864e5).toISOString().slice(0, 10);
+  const d7 = new Date(Date.parse(asOf + "T00:00:00Z") - 7 * 864e5).toISOString().slice(0, 10);
+  const per = db.all(sql`select n.company_slug as slug, count(*) as raw,
+      count(distinct case when nullif(trim(n.url), '') is not null then lower(trim(n.url)) end) + sum(case when nullif(trim(n.url), '') is null then 1 else 0 end) as dedup_url,
+      count(distinct lower(trim(n.title))) as dedup_title,
+      count(distinct ${NEWS_KEY}) as summary_def,
+      sum(case when substr(n.published_at, 1, 10) >= ${d30} then 1 else 0 end) as in_window_30d,
+      sum(case when substr(n.published_at, 1, 10) >= ${d7} then 1 else 0 end) as in_window_7d,
+      sum(case when nullif(trim(n.url), '') is null then 1 else 0 end) as no_url,
+      sum(case when n.published_at is null or n.published_at = '' then 1 else 0 end) as no_date,
+      sum(case when n.sentiment_score is not null then 1 else 0 end) as scored,
+      max(case when c.slug is null then 1 else 0 end) as orphan
+    from news_items n left join companies c on c.slug = n.company_slug group by n.company_slug order by n.company_slug`) as any[];
+  const num = (r: any) => Object.fromEntries(Object.entries(r).map(([k, v]) => [k, k === "slug" ? v : Number(v ?? 0)]));
+  const rows = per.map(num) as any[];
+  const sum = (k: string, list = rows) => list.reduce((a, r) => a + (r[k] ?? 0), 0);
+  const listed = rows.filter((r) => !r.orphan);
+  const keys = ["raw", "dedup_url", "dedup_title", "summary_def", "in_window_30d", "in_window_7d", "no_url", "no_date", "scored"];
+  const totals = (list: any[]) => Object.fromEntries(keys.map((k) => [k, sum(k, list)]));
+  const companies = Number((db.get(sql`select count(*) as n from companies`) as { n: number }).n);
+  const embedded = db.all(sql`select slug, json_array_length(latest_news) as n from companies`) as { slug: string; n: number }[];
+  const embeddedTotal = embedded.reduce((a, r) => a + Number(r.n), 0);
+  const embeddedCap = Math.max(0, ...embedded.map((r) => Number(r.n)));
+  const focus = FOCUS_RECON_SLUGS.map((slug) => rows.find((r) => r.slug === slug) ?? { slug, raw: 0, dedup_url: 0, dedup_title: 0, summary_def: 0, in_window_30d: 0, in_window_7d: 0, no_url: 0, no_date: 0, scored: 0, orphan: 0 });
+  const owner5 = ["aimotive", "apptronik", "fervo-energy", "flutterwave", "writer"];
+  const owner5Sum = owner5.reduce((a, s) => a + (rows.find((r) => r.slug === s)?.summary_def ?? 0), 0);
+  return {
+    as_of: asOf, windows: { d30_from: d30, d7_from: d7 }, companies, companies_with_news: listed.length,
+    totals: { all_rows: totals(rows), listed_companies: totals(listed), orphan_rows: sum("raw", rows.filter((r) => r.orphan)), orphan_slugs: rows.filter((r) => r.orphan).map((r) => r.slug) },
+    news_summary_total: newsTotal(db), news_summary_definition: NEWS_TOTAL_DEFINITION,
+    legacy_latest_news: { embedded_total: embeddedTotal, per_company_cap_observed: embeddedCap, cap_in_code: 25, note: "Σ len(latest_news) as /companies returns it (embedded, capped per company by /ingest merge .slice(0,25))" },
+    owner_figures: {
+      raw_2104: { seen: 2104, now_raw_rows: sum("raw", rows), note: "Σ /companies/{slug}/news?limit=1000 before de-dup = raw news_items rows of listed companies; 2104 was the pre-dedupe count, scripts/dedupe-news.ts removed the exact duplicates (see proof/data-lane/news-dedupe.json)" },
+      embedded_182: { seen: 182, now_embedded_total: embeddedTotal, cap: embeddedCap, note: embeddedTotal === 182 ? "reproduces" : "does NOT reproduce from latest_news (cap 25/company → Σ " + embeddedTotal + "); 182 matches the chat-plugin directory page count, not a news count" },
+      focus_150: { seen: 150, seen_parts: { aimotive: 19, apptronik: 33, "fervo-energy": 37, flutterwave: 38, writer: 23 }, now_parts: Object.fromEntries(owner5.map((s) => [s, rows.find((r) => r.slug === s)?.summary_def ?? 0])), now_sum: owner5Sum, matches: owner5Sum === 150 },
+    },
+    focus, by_company: rows,
+  };
+}
+function toApi(r: typeof schema.companies.$inferSelect, counts?: Map<string, number>, runs?: Map<string, RunDates>) {
+  const rd = runs?.get(r.slug);
   return {
     news_count: counts ? counts.get(r.slug) ?? 0 : undefined,
     id: r.id, name: r.name, matrix_name: r.matrixName, slug: r.slug, sector: r.sector, region: r.region, stage: r.stage, status: r.status, website: r.website,
     linkedin_url: r.linkedinUrl, hq: r.hq, employees: r.employees, logo_url: r.logoUrl, brand_tokens: r.brandTokens, b_capital_fund: r.bCapitalFund,
     b_capital_role: r.bCapitalRole, b_capital_round: r.bCapitalRound, estimated_ticket_size_usd: r.estimatedTicketSizeUsd, estimated_ownership_pct: r.estimatedOwnershipPct,
-    estimate_confidence: r.estimateConfidence, estimate_rationale: r.estimateRationale, latest_news: r.latestNews, sentiment: r.sentiment, sources: r.sources,
+    estimate_confidence: r.estimateConfidence, estimate_rationale: r.estimateRationale, latest_news: r.latestNews, sentiment: rd ? { ...r.sentiment, scored_at: rd.scored_at, prior_run_at: rd.prior_run_at, prior_score: rd.prior_score, model: rd.model, ingest_run_id: rd.ingest_run_id } : r.sentiment, sources: r.sources,
     screenshot_ref: r.screenshotRef, anon_resolution: r.anonResolution, is_focus: r.isFocus, in_brand_matrix: r.inBrandMatrix, last_checked: r.lastChecked, updated_at: r.updatedAt,
   };
 }
@@ -110,8 +163,8 @@ inner.get("/companies", async (c) => {
   const total = db.select({ n: sql<number>`count(*)` }).from(schema.companies).where(where).get()!.n;
   const order = sort === "sentiment" ? desc(sql`json_extract(${schema.companies.sentiment}, '$.score')`) : sort === "updated_at" ? desc(schema.companies.updatedAt) : sort === "ticket" ? desc(schema.companies.estimatedTicketSizeUsd) : asc(schema.companies.name);
   const rows = db.select().from(schema.companies).where(where).orderBy(order).limit(limit).offset((page - 1) * limit).all();
-  const counts = newsCounts(db);
-  return c.json({ data: rows.map((r) => toApi(r, counts)), news_total: newsTotal(db, counts), news_total_definition: NEWS_TOTAL_DEFINITION, pagination: { page, limit, total, total_pages: Math.max(1, Math.ceil(total / limit)) }, filters: { sector: sector ?? null, region: region ?? null, status: status ?? null, role: role ?? null, focus: focus === "true" }, timestamp: nowIso() });
+  const counts = newsCounts(db); const runs = sentimentRunDates(db);
+  return c.json({ data: rows.map((r) => toApi(r, counts, runs)), news_total: newsTotal(db, counts), news_total_definition: NEWS_TOTAL_DEFINITION, pagination: { page, limit, total, total_pages: Math.max(1, Math.ceil(total / limit)) }, filters: { sector: sector ?? null, region: region ?? null, status: status ?? null, role: role ?? null, focus: focus === "true" }, timestamp: nowIso() });
 });
 
 async function findCompany(slugOrName: string) {
@@ -128,7 +181,8 @@ async function findCompany(slugOrName: string) {
 inner.get("/companies/:slug", async (c) => {
   const row = await findCompany(c.req.param("slug"));
   if (!row) return err(c, 404, "not_found", `No company with slug '${c.req.param("slug")}'`);
-  return c.json({ data: toApi(row, newsCounts((await getDb()).db)), timestamp: nowIso() });
+  const { db } = await getDb();
+  return c.json({ data: toApi(row, newsCounts(db), sentimentRunDates(db)), timestamp: nowIso() });
 });
 
 inner.get("/companies/:slug/news", async (c) => {
@@ -483,7 +537,24 @@ inner.get("/news/count", async (c) => {
 });
 inner.get("/news/summary", async (c) => {
   const { db } = await getDb();
-  return c.json({ ...newsSummary(db), timestamp: nowIso() });
+  const rec = newsReconciliation(db);
+  return c.json({ ...newsSummary(db), reconciliation: { raw_rows_all: rec.totals.all_rows.raw, dedup_url: rec.totals.listed_companies.dedup_url, dedup_title: rec.totals.listed_companies.dedup_title, in_window_30d: rec.totals.listed_companies.in_window_30d, in_window_7d: rec.totals.listed_companies.in_window_7d, no_url: rec.totals.listed_companies.no_url, embedded_latest_news_total: rec.legacy_latest_news.embedded_total, detail: "/news/reconciliation" }, timestamp: nowIso() });
+});
+/** Full reconciliation: same SQL as scripts/news-reconciliation.ts (proof/data-lane/news-reconciliation-2026-10-11.json). */
+inner.get("/news/reconciliation", async (c) => {
+  const { db } = await getDb();
+  const asOf = /^\d{4}-\d{2}-\d{2}$/.test(c.req.query("as_of") ?? "") ? c.req.query("as_of")! : undefined;
+  return c.json({ ...newsReconciliation(db, asOf), timestamp: nowIso() });
+});
+/** Distinct sentiment ingest runs (sentiment_history grouped by ingest_run_id) with counts. */
+inner.get("/sentiment/runs", async (c) => {
+  const { db } = await getDb();
+  const rows = db.all(sql`select h.ingest_run_id as ingest_run_id, count(*) as sentiment_rows, count(distinct h.company_slug) as companies, sum(case when h.delta is null then 1 else 0 end) as null_delta,
+      sum(case when h.delta is not null and h.delta != 0 then 1 else 0 end) as moved, round(avg(h.score), 4) as avg_score, min(h.recorded_at) as started_at, max(h.recorded_at) as finished_at,
+      max(h.model) as model, max(r.workflow_name) as workflow_name, max(r.source) as source
+    from sentiment_history h left join ingest_runs r on r.id = h.ingest_run_id group by h.ingest_run_id order by min(h.recorded_at) desc`) as any[];
+  const nullDeltaNow = Number((db.get(sql`select count(*) as n from companies where json_extract(sentiment, '$.delta') is null`) as { n: number }).n);
+  return c.json({ data: rows.map((r) => ({ ...r, sentiment_rows: Number(r.sentiment_rows), companies: Number(r.companies), null_delta: Number(r.null_delta), moved: Number(r.moved), avg_score: r.avg_score === null ? null : Number(r.avg_score) })), runs: rows.length, companies_with_null_delta_now: nullDeltaNow, timestamp: nowIso() });
 });
 
 // ---------- artifacts ----------
