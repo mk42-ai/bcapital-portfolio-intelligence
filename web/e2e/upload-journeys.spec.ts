@@ -63,9 +63,19 @@ async function documentJourney(page: import("@playwright/test").Page, request: i
   // reload → user message still lists the chip; /artifacts still lists it
   log("reload /chat"); await page.reload({ waitUntil: "domcontentloaded" });
   await expect(page.getByTestId("composer-input")).toBeVisible({ timeout: 60_000 });
-  const stillThere = await sentChip.first().waitFor({ timeout: 20_000 }).then(() => true).catch(() => false);
-  log("after reload: user message attachment chip", { present: stillThere });
-  if (!stillThere) gap(ti, `${name} persistence after reload`, "the user message no longer lists the attachment chip after page reload (thread not restored or sent-attachments not hydrated)");
+  // After a reload the app opens on the welcome canvas; the thread is reopened from "Recent threads" (welcome list or Threads menu).
+  let stillThere = await sentChip.first().waitFor({ timeout: 5_000 }).then(() => true).catch(() => false);
+  if (!stillThere) {
+    const recentBtn = page.locator('[data-testid="welcome-recent"] button, [data-testid="threads-menu"] .oiu-threads__item').first();
+    const menu = page.getByTestId("threads-menu");
+    if (!(await page.locator('[data-testid="welcome-recent"] button').count()) && (await menu.count())) await menu.locator("summary").click();
+    const reopened = await recentBtn.waitFor({ timeout: 10_000 }).then(async () => { await recentBtn.click(); return true; }).catch(() => false);
+    log("after reload: reopened most recent thread", { reopened });
+    stillThere = await sentChip.first().waitFor({ timeout: 20_000 }).then(() => true).catch(() => false);
+  }
+  const ls = await page.evaluate(() => { const keys = Object.keys(localStorage); const list = keys.includes("bcap.chat.threads.v2") ? (JSON.parse(localStorage.getItem("bcap.chat.threads.v2") || "[]") as unknown[]).length : -1; return { threads: list, threadList: (localStorage.getItem("bcap.chat.threads.v2") || "").slice(0, 300), sentKeys: keys.filter((k) => k.startsWith("bcap.chat.attachments.v1.")).length, msgKeys: keys.filter((k) => k.startsWith("bcap.chat.thread.v2.")).length }; });
+  log("after reload: user message attachment chip", { present: stillThere, localStorage: ls });
+  if (!stillThere) gap(ti, `${name} persistence after reload`, `after reload the thread is not re-openable (no welcome-recent list, Threads menu shows no items) so the user message with the attachment chip is gone from the UI; localStorage still has threads=${ls.threads} messageKeys=${ls.msgKeys} sentAttachmentKeys=${ls.sentKeys}`);
   await shot(page, `${label}-3-reloaded`, vp);
   await page.goto("/artifacts?skip=1", { waitUntil: "domcontentloaded" });
   const listed = await artifactItem(page, name).waitFor({ timeout: 30_000 }).then(() => true).catch(() => false);
@@ -76,7 +86,7 @@ async function documentJourney(page: import("@playwright/test").Page, request: i
 }
 
 test.describe("Upload journeys — documents (desktop)", () => {
-  test.describe.configure({ mode: "serial" });
+  // NOT serial: the PDF and DOCX journeys are independent, and a reported app gap in one must not hide the other.
   test("PDF: upload → ready → grounded answer cites the file → artifact persisted → survives reload", async ({ page, request }, ti) => {
     await documentJourney(page, request, ti, PDF, "What is the title of the attached document? Answer in one short sentence and cite the file name.", "pdf", PDF === FIX_PDF ? /(submit.?query|sse|event reference)/i : /zephyr/i);
   });

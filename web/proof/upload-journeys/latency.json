@@ -1,0 +1,112 @@
+[
+  {
+    "at": "2026-10-11T07:06:38.421Z",
+    "test": "PDF: upload → ready → grounded answer cites the file → artifact persisted → survives reload",
+    "viewport": "1440x900",
+    "question": "What is the title of the attached document? Answer in one short sentence and cite the file name.",
+    "firstTokenMs": 4039,
+    "totalMs": 6130,
+    "answerChars": 120,
+    "dataGap": true
+  },
+  {
+    "at": "2026-10-11T07:07:39.308Z",
+    "test": "PDF: upload → ready → grounded answer cites the file → artifact persisted → survives reload",
+    "viewport": "1440x900",
+    "question": "What is the title of the attached document? Answer in one short sentence and cite the file name.",
+    "firstTokenMs": 4397,
+    "totalMs": 6492,
+    "answerChars": 120,
+    "dataGap": true
+  },
+  {
+    "at": "2026-10-11T07:11:35.312Z",
+    "test": "PDF: upload → ready → grounded answer cites the file → artifact persisted → survives reload",
+    "viewport": "1440x900",
+    "question": "What is the title of the attached document? Answer in one short sentence and cite the file name.",
+    "firstTokenMs": 3853,
+    "totalMs": 6045,
+    "answerChars": 120,
+    "dataGap": true
+  },
+  {
+    "at": "2026-10-11T07:12:46.100Z",
+    "test": "image: geothermal-plant.png → thumb in chip + under message → grounded description",
+    "viewport": "1440x900",
+    "question": "Describe what the attached image shows in one sentence.",
+    "firstTokenMs": 4812,
+    "totalMs": 7369,
+    "answerChars": 459,
+    "dataGap": true
+  },
+  {
+    "at": "2026-10-11T07:13:07.513Z",
+    "test": "image: bar-chart.png → thumb in chip + under message → grounded description",
+    "viewport": "1440x900",
+    "question": "What kind of chart is the attached image and what does its title say?",
+    "firstTokenMs": 4167,
+    "totalMs": 6653,
+    "answerChars": 504,
+    "dataGap": true
+  },
+  {
+    "at": "2026-10-11T07:13:49.180Z",
+    "test": "image: blurred-memo.png → thumb in chip + under message → honest 'cannot read' answer",
+    "viewport": "1440x900",
+    "question": "Summarise the attached memo.",
+    "firstTokenMs": 21011,
+    "totalMs": 24728,
+    "answerChars": 1364,
+    "dataGap": true
+  },
+  {
+    "at": "2026-10-11T07:14:22.040Z",
+    "test": "mobile image: geothermal-plant.png",
+    "viewport": "390x844",
+    "question": "Describe what the attached image shows in one sentence.",
+    "firstTokenMs": 5691,
+    "totalMs": 8115,
+    "answerChars": 358,
+    "dataGap": true
+  },
+  {
+    "at": "2026-10-11T07:14:46.049Z",
+    "test": "mobile image: bar-chart.png",
+    "viewport": "390x844",
+    "question": "What kind of chart is the attached image and what does its title say?",
+    "firstTokenMs": 5036,
+    "totalMs": 7491,
+    "answerChars": 659,
+    "dataGap": true
+  },
+  {
+    "at": "2026-10-11T07:15:11.578Z",
+    "test": "mobile image: blurred-memo.png",
+    "viewport": "390x844",
+    "question": "Summarise the attached memo.",
+    "firstTokenMs": 5103,
+    "totalMs": 9213,
+    "answerChars": 1557,
+    "dataGap": true
+  },
+  {
+    "at": "2026-10-11T07:15:57.122Z",
+    "test": "DOCX: compendium.docx (15 MB) → ready → answer about the DOCX → artifact persisted → survives reload",
+    "viewport": "1440x900",
+    "question": "In one sentence, what is the attached DOCX about?",
+    "firstTokenMs": 5183,
+    "totalMs": 7473,
+    "answerChars": 471,
+    "dataGap": true
+  },
+  {
+    "at": "2026-10-11T07:17:06.219Z",
+    "test": "PDF: upload → ready → grounded answer cites the file → artifact persisted → survives reload",
+    "viewport": "1440x900",
+    "question": "What is the title of the attached document? Answer in one short sentence and cite the file name.",
+    "firstTokenMs": 5368,
+    "totalMs": 7366,
+    "answerChars": 120,
+    "dataGap": true
+  }
+]
