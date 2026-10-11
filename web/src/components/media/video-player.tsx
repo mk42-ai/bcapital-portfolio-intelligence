@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Maximize2, Minimize2, Video } from "lucide-react";
+import { Maximize2, Minimize2, Play, Video } from "lucide-react";
+import { openSidePane } from "./side-pane-store";
 import "../artifacts/artifacts.css";
 
 /** Native <video> wrapper with title bar + expand (Fullscreen API on the element, modal fallback where unsupported e.g. iOS Safari on non-video). */
-export function VideoPlayer({ src, poster, title, className }: { src: string; poster?: string; title?: string; className?: string }) {
+export function VideoPlayer({ src, poster, title, className, artifactId, inStream = true }: { src: string; poster?: string; title?: string; className?: string; artifactId?: string; /** In the chat stream: poster + play button only (NEVER autoplay); playback happens in the side pane. */ inStream?: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [modal, setModal] = useState(false);
   useEffect(() => {
@@ -33,11 +34,17 @@ export function VideoPlayer({ src, poster, title, className }: { src: string; po
   return (
     <div className={["media-video media-root", className].filter(Boolean).join(" ")} data-testid="video-player">
       {bar(false)}
-      {!modal && <video ref={ref} src={src} poster={poster} controls playsInline preload="metadata" aria-label={title ?? "Video"}>Your browser cannot play this video.</video>}
+      {inStream && !modal && (
+        <button type="button" className="media-video-poster" onClick={() => openSidePane({ kind: "video", src, title: title ?? "Video", poster, artifactId })} aria-label={`Play ${title ?? "video"} in the side pane`} data-testid="video-poster">
+          {poster ? <img src={poster} alt="" /> : <video src={src} preload="metadata" muted playsInline aria-hidden tabIndex={-1} />}
+          <span className="media-video-play" aria-hidden><Play className="size-6" /></span>
+        </button>
+      )}
+      {!inStream && !modal && <video ref={ref} src={src} poster={poster} controls playsInline preload="metadata" aria-label={title ?? "Video"}>Your browser cannot play this video.</video>}
       {modal && typeof document !== "undefined" && createPortal(
         <div className="media-video-modal" role="dialog" aria-modal="true" aria-label={title ?? "Video"} data-testid="video-modal">
           {bar(true)}
-          <video src={src} poster={poster} controls playsInline autoPlay preload="metadata" aria-label={title ?? "Video"} />
+          <video src={src} poster={poster} controls playsInline preload="metadata" aria-label={title ?? "Video"} />
         </div>, document.body)}
     </div>
   );

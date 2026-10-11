@@ -64,7 +64,7 @@ export const artifactsStore = {
     const existing = state.items.find((x) => x.id === id);
     const a: Artifact = {
       id, name: ev.name, kind, mime, sizeBytes: ev.size ?? existing?.sizeBytes ?? 0, version: existing?.version ?? 1, source: "agent",
-      mediaId: ev.mediaId ?? null, mediaStatus: ev.mediaId ? "stored" : null, mediaMessage: null, threadId: ev.threadId ?? null, sessionId: null,
+      mediaId: ev.mediaId ?? null, mediaStatus: ev.mediaId ? "stored" : null, mediaMessage: null, mediaUrl: null, threadId: ev.threadId ?? null, sessionId: null,
       originEvent: "ondemand_agent.artifact_ready", contentUrl, thumbnailUrl: kind === "image" ? contentUrl : null,
       createdAt: existing?.createdAt ?? new Date().toISOString(), pending: !ev.artifactId,
     };

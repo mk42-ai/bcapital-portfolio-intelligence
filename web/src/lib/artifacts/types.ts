@@ -13,6 +13,8 @@ export type Artifact = {
   mediaId: string | null;
   mediaStatus: ArtifactMediaStatus;
   mediaMessage: string | null;
+  /** UNSIGNED OnDemand sourceUrl (never a signed link). The signed link is minted on open via /api/artifacts/<id>/open. */
+  mediaUrl: string | null;
   threadId: string | null;
   sessionId: string | null;
   originEvent: string | null;
@@ -28,10 +30,23 @@ export type Artifact = {
 /** Backend wire shape (snake_case). */
 export type ArtifactWire = {
   id: string; name: string; kind: ArtifactKind; mime: string; size_bytes: number; version: number; source: ArtifactSource;
-  media_id: string | null; media_status: ArtifactMediaStatus; media_message: string | null; thread_id: string | null; session_id: string | null;
+  media_id: string | null; media_status: ArtifactMediaStatus; media_message: string | null; media_url?: string | null; thread_id: string | null; session_id: string | null;
   origin_event: string | null; content_url: string; thumbnail_url: string | null; created_at: string; deleted_at?: string | null;
 };
 export type ArtifactFilter = "all" | "document" | "image" | "video" | "upload";
+/** Result of GET /api/artifacts/<id>/open — a fresh signed url (or the same-origin content url when re-signing is not possible). */
+export type ArtifactOpen = { id: string; url: string; signed: boolean; resign: string; sourceUrl: string | null; contentUrl: string; mediaId: string | null; extractedTextUrl?: string | null; checkedAt: string };
+/** Ask the server to re-sign the artifact's media link (signed OnDemand URLs expire). Always resolves — falls back to contentUrl. */
+export async function openArtifactLink(a: Pick<Artifact, "id" | "contentUrl" | "mediaId">): Promise<ArtifactOpen> {
+  const fallback: ArtifactOpen = { id: a.id, url: a.contentUrl, signed: false, resign: "fallback", sourceUrl: null, contentUrl: a.contentUrl, mediaId: a.mediaId, checkedAt: new Date().toISOString() };
+  if (!a.id || !a.contentUrl.startsWith("/api/artifacts/")) return fallback;
+  try {
+    const r = await fetch(`/api/artifacts/${encodeURIComponent(a.id)}/open`, { cache: "no-store", headers: { accept: "application/json" } });
+    if (!r.ok) return { ...fallback, resign: `http_${r.status}` };
+    const j = (await r.json()) as { data?: Partial<ArtifactOpen> };
+    return { ...fallback, ...(j.data ?? {}), url: typeof j.data?.url === "string" && j.data.url ? j.data.url : a.contentUrl };
+  } catch (e) { return { ...fallback, resign: `error: ${(e as Error).message.slice(0, 80)}` }; }
+}
 export const ARTIFACT_KINDS: readonly ArtifactKind[] = ["document", "image", "video", "audio", "file"];
 
 /** Pure snake_case → camelCase mapping; rewrites content/thumbnail URLs to the same-origin proxy. Safe on client and server. */
@@ -40,7 +55,7 @@ export function fromWire(w: ArtifactWire): Artifact {
   return {
     id: w.id, name: w.name, kind: (ARTIFACT_KINDS as string[]).includes(w.kind) ? w.kind : "file", mime: w.mime || "application/octet-stream",
     sizeBytes: Number(w.size_bytes) || 0, version: Number(w.version) || 1, source: w.source ?? "generated",
-    mediaId: w.media_id ?? null, mediaStatus: w.media_status ?? null, mediaMessage: w.media_message ?? null,
+    mediaId: w.media_id ?? null, mediaStatus: w.media_status ?? null, mediaMessage: w.media_message ?? null, mediaUrl: w.media_url ?? null,
     threadId: w.thread_id ?? null, sessionId: w.session_id ?? null, originEvent: w.origin_event ?? null,
     contentUrl, thumbnailUrl: w.thumbnail_url ? contentUrl : (w.kind === "image" ? contentUrl : null), createdAt: w.created_at,
   };

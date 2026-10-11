@@ -30,6 +30,7 @@ export async function getDb(): Promise<{ db: SQLJsDatabase<typeof schema>; raw: 
   const SQL = await initSqlJs({ locateFile: wasmLocate });
   sqlDb = fs.existsSync(DB_PATH) ? new SQL.Database(fs.readFileSync(DB_PATH)) : new SQL.Database();
   for (const ddl of schema.ARTIFACTS_DDL) sqlDb.run(ddl); // boot-time migration for existing DB files
+  for (const m of schema.ARTIFACTS_COLUMN_MIGRATIONS) { const cols = sqlDb.exec("PRAGMA table_info(artifacts)")[0]?.values.map((r) => String(r[1])) ?? []; if (!cols.includes(m.column)) sqlDb.run(m.ddl); }
   orm = drizzle(sqlDb, { schema });
   return { db: orm, raw: sqlDb };
 }

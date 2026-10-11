@@ -489,7 +489,7 @@ function artifactToApi(c: any, r: Omit<typeof schema.artifacts.$inferSelect, "by
   const content_url = `${serverUrl(c)}/artifacts/${r.id}/content`;
   return {
     id: r.id, name: r.name, kind: r.kind, mime: r.mime, size_bytes: r.sizeBytes, version: r.version, source: r.source,
-    media_id: r.mediaId ?? null, media_status: r.mediaStatus ?? null, media_message: r.mediaMessage ?? null,
+    media_id: r.mediaId ?? null, media_status: r.mediaStatus ?? null, media_message: r.mediaMessage ?? null, media_url: r.mediaUrl ?? null,
     thread_id: r.threadId ?? null, session_id: r.sessionId ?? null, origin_event: r.originEvent ?? null,
     content_url, thumbnail_url: r.kind === "image" ? content_url : null, created_at: r.createdAt, deleted_at: r.deletedAt ?? null,
   };
@@ -497,7 +497,7 @@ function artifactToApi(c: any, r: Omit<typeof schema.artifacts.$inferSelect, "by
 const artifactMeta = {
   id: schema.artifacts.id, name: schema.artifacts.name, kind: schema.artifacts.kind, mime: schema.artifacts.mime, sizeBytes: schema.artifacts.sizeBytes,
   version: schema.artifacts.version, source: schema.artifacts.source, mediaId: schema.artifacts.mediaId, mediaStatus: schema.artifacts.mediaStatus,
-  mediaMessage: schema.artifacts.mediaMessage, threadId: schema.artifacts.threadId, sessionId: schema.artifacts.sessionId, originEvent: schema.artifacts.originEvent,
+  mediaMessage: schema.artifacts.mediaMessage, mediaUrl: schema.artifacts.mediaUrl, threadId: schema.artifacts.threadId, sessionId: schema.artifacts.sessionId, originEvent: schema.artifacts.originEvent,
   createdAt: schema.artifacts.createdAt, deletedAt: schema.artifacts.deletedAt,
 };
 const tooLarge = (c: any, n?: number) => err(c, 413, "payload_too_large", `Artifact exceeds the 25 MB limit${n ? ` (${n} bytes)` : ""}`);
@@ -560,7 +560,7 @@ inner.post("/artifacts", async (c) => {
     : sql`select max(version) as v from artifacts where name = ${name} and thread_id = ${threadId}`);
   const row = {
     id: `art_${crypto.randomBytes(6).toString("hex")}`, name, kind: kindIn ?? kindFromMime(mime, name), mime, sizeBytes: bytes.length,
-    version: (prev?.v ?? 0) + 1, source, mediaId: optStr(f.media_id), mediaStatus, mediaMessage: optStr(f.media_message),
+    version: (prev?.v ?? 0) + 1, source, mediaId: optStr(f.media_id), mediaStatus, mediaMessage: optStr(f.media_message), mediaUrl: optStr(f.media_url),
     threadId, sessionId: optStr(f.session_id), originEvent: optStr(f.origin_event) ?? (source === "upload" ? "upload" : null),
     bytes, createdAt: nowIso(), deletedAt: null,
   };
@@ -588,6 +588,43 @@ inner.get("/artifacts/:id", async (c) => {
   const r = db.select(artifactMeta).from(schema.artifacts).where(and(eq(schema.artifacts.id, c.req.param("id")), sql`${schema.artifacts.deletedAt} is null`)).get();
   if (!r) return err(c, 404, "not_found", `No artifact with id '${c.req.param("id")}'`);
   return c.json({ data: artifactToApi(c, r) });
+});
+
+/**
+ * Re-sign on open (Lane C): signed OnDemand blob links expire (14 / 17 Oct 2026 for the ones issued this week), so the row keeps ONLY the
+ * media id + the UNSIGNED sourceUrl. This endpoint asks the Media API for the object again and returns a fresh signed `url` (plus the
+ * unsigned `source_url`); when the media object is gone or no key is configured it falls back to the backend copy at /content.
+ */
+inner.get("/artifacts/:id/open", async (c) => {
+  const { db } = await getDb();
+  const r = db.select(artifactMeta).from(schema.artifacts).where(and(eq(schema.artifacts.id, c.req.param("id")), sql`${schema.artifacts.deletedAt} is null`)).get();
+  if (!r) return err(c, 404, "not_found", `No artifact with id '${c.req.param("id")}'`);
+  const content_url = `${serverUrl(c)}/artifacts/${r.id}/content`;
+  const base = { id: r.id, name: r.name, mime: r.mime, media_id: r.mediaId ?? null, source_url: r.mediaUrl ?? null, content_url, checked_at: nowIso() };
+  const key = process.env.ONDEMAND_API_KEY ?? ""; const mediaBase = (process.env.ONDEMAND_BASE_URL ?? "https://api.on-demand.io").replace(/\/$/, "");
+  const H = { apikey: key, "user-agent": ONDEMAND_USER_AGENT };
+  if (!r.mediaId || !key) return c.json({ data: { ...base, url: content_url, signed: false, resign: r.mediaId ? "no_api_key" : "no_media_id" } });
+  try {
+    // Fetch-by-id answered 404 for this account (2026-10-11); the documented list endpoint (GET /media/v1/public/file) is scanned instead.
+    let found: any = null;
+    const one = await fetch(`${mediaBase}/media/v1/public/file/${encodeURIComponent(r.mediaId)}`, { headers: H, signal: AbortSignal.timeout(10_000) });
+    if (one.ok) { const j: any = await one.json().catch(() => null); found = j?.data ?? null; }
+    for (let page = 1; !found && page <= 6; page++) {
+      const l = await fetch(`${mediaBase}/media/v1/public/file?limit=50&page=${page}`, { headers: H, signal: AbortSignal.timeout(10_000) });
+      if (!l.ok) break;
+      const j: any = await l.json().catch(() => null); const arr: any[] = Array.isArray(j?.data) ? j.data : [];
+      found = arr.find((m) => m?.id === r.mediaId) ?? null; if (arr.length < 50) break;
+    }
+    if (!found) return c.json({ data: { ...base, url: content_url, signed: false, resign: "media_not_found" } });
+    // A re-signed link carries a SAS signature; when the Media API merely echoes the (ephemeral) sourceUrl there is nothing fresher than our copy.
+    const isSas = (u: unknown): u is string => typeof u === "string" && /^https:\/\//.test(u) && /[?&](sig|sv|se)=/.test(u);
+    const srcUrl = typeof found.sourceUrl === "string" ? found.sourceUrl : null;
+    const signed = isSas(found.url) ? found.url : isSas(found.signedUrl) ? found.signedUrl : null;
+    if (srcUrl && srcUrl !== r.mediaUrl) { db.update(schema.artifacts).set({ mediaUrl: srcUrl }).where(eq(schema.artifacts.id, r.id)).run(); persist(); }
+    return c.json({ data: { ...base, source_url: srcUrl ?? base.source_url, url: signed ?? content_url, signed: !!signed, resign: signed ? "ok" : "media_url_not_signed_using_backend_copy", extracted_text_url: typeof found.extractedTextUrl === "string" ? found.extractedTextUrl : null } });
+  } catch (e) {
+    return c.json({ data: { ...base, url: content_url, signed: false, resign: `error: ${(e as Error).message.slice(0, 120)}` } });
+  }
 });
 
 inner.get("/artifacts/:id/content", async (c) => {

@@ -1,7 +1,9 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
-import { Download, Eye, Trash2 } from "lucide-react";
+import { Download, Eye, PanelRight, Trash2 } from "lucide-react";
+import { openSidePane } from "@/components/media/side-pane-store";
+import { paneItemFor } from "@/components/media/side-pane";
 import { artifactsPanel, artifactsStore } from "@/lib/artifacts/store";
 import { formatBytes, relativeTime, type Artifact } from "@/lib/artifacts/types";
 import { ArtifactIcon } from "./artifact-icon";
@@ -28,7 +30,7 @@ export function ArtifactCard({ artifact: a, compact = false, selected = false, o
   return (
     <article className={`art-card art-root${compact ? " is-compact" : ""}`} data-testid="artifact-card" data-kind={a.kind} data-id={a.id} data-selected={selected ? "true" : "false"} aria-label={`${a.name}, ${meta}`}>
       <div className="art-thumb" aria-hidden={showThumb ? undefined : true}>
-        {showThumb ? <img src={a.thumbnailUrl!} alt="" loading="lazy" onError={() => setThumbErr(true)} /> : <ArtifactIcon kind={a.kind} source={a.source} state={state} size={32} />}
+        {showThumb ? <img src={a.thumbnailUrl!} alt="" loading="lazy" onError={() => setThumbErr(true)} /> : <ArtifactIcon kind={a.kind} source={a.source} state={state} size={32} name={a.name} mime={a.mime} />}
       </div>
       <div className="art-card-main">
         <p className="art-card-name" title={a.name}>{a.name}</p>
@@ -36,6 +38,7 @@ export function ArtifactCard({ artifact: a, compact = false, selected = false, o
         {state !== "ok" && <span className={`art-card-status${state === "failed" ? " is-failed" : ""}`} role="status">{state === "failed" ? (a.mediaMessage || "Saving to media storage failed") : "Saving…"}</span>}
         <div className="art-card-actions">
           <button type="button" className="art-btn" onClick={preview} data-testid="artifact-preview-btn" disabled={!a.contentUrl}><Eye aria-hidden />Preview</button>
+          {a.contentUrl && !a.pending && <button type="button" className="art-btn" onClick={() => openSidePane(paneItemFor(a))} data-testid="artifact-open-pane" title="Open beside the chat (link re-signed on open)"><PanelRight aria-hidden />Open</button>}
           {a.contentUrl && <a className="art-btn" href={downloadHref(a)} download={a.name} data-testid="artifact-download"><Download aria-hidden />Download</a>}
           {!compact && <button type="button" className="art-btn is-danger" data-testid="artifact-delete" onClick={async () => { if (await confirmDeleteArtifact(a)) onDeleted?.(a); }}><Trash2 aria-hidden />Delete</button>}
         </div>

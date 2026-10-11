@@ -21,9 +21,14 @@ export function ArtifactsEmpty() {
 }
 
 /** Filter chips + grouped list (Today / Earlier). Controlled filter + selection so the panel and the /artifacts page share it. */
-export function ArtifactsList({ items, filter, onFilter, selectedId, onPreview, loading, error }: { items: Artifact[]; filter: ArtifactFilter; onFilter: (f: ArtifactFilter) => void; selectedId?: string | null; onPreview: (a: Artifact) => void; loading?: boolean; error?: string | null }) {
+export type DateFilter = "any" | "today" | "7d" | "30d";
+const inDate = (a: Artifact, d: DateFilter) => { if (d === "any") return true; const age = Date.now() - Date.parse(a.createdAt); return d === "today" ? isToday(a.createdAt) : age <= (d === "7d" ? 7 : 30) * 86400_000; };
+export function ArtifactsList({ items, filter, onFilter, selectedId, onPreview, loading, error, extendedFilters = false }: { items: Artifact[]; filter: ArtifactFilter; onFilter: (f: ArtifactFilter) => void; selectedId?: string | null; onPreview: (a: Artifact) => void; loading?: boolean; error?: string | null; /** /artifacts page: also filter by thread and date (UX spec). */ extendedFilters?: boolean }) {
+  const [thread, setThread] = useState<string>("all");
+  const [date, setDate] = useState<DateFilter>("any");
+  const threads = useMemo(() => Array.from(new Set(items.map((a) => a.threadId).filter((t): t is string => !!t))), [items]);
   const counts = useMemo(() => Object.fromEntries(FILTERS.map((f) => [f.id, items.filter((a) => matches(a, f.id)).length])) as Record<ArtifactFilter, number>, [items]);
-  const shown = items.filter((a) => matches(a, filter));
+  const shown = items.filter((a) => matches(a, filter) && (!extendedFilters || ((thread === "all" || (thread === "none" ? !a.threadId : a.threadId === thread)) && inDate(a, date))));
   const today = shown.filter((a) => isToday(a.createdAt)); const earlier = shown.filter((a) => !isToday(a.createdAt));
   const group = (label: string, list: Artifact[]) => list.length > 0 && (
     <div key={label}>
@@ -40,6 +45,23 @@ export function ArtifactsList({ items, filter, onFilter, selectedId, onPreview, 
           </button>
         ))}
       </div>
+      {extendedFilters && (
+        <div className="art-filters art-filters--secondary" role="group" aria-label="Filter by thread and date" data-testid="artifacts-filters-extended">
+          <label className="art-select"><span>Thread</span>
+            <select value={thread} onChange={(e) => setThread(e.target.value)} data-testid="artifacts-filter-thread" aria-label="Thread">
+              <option value="all">All threads</option>
+              {threads.map((t) => <option key={t} value={t}>{t.length > 28 ? `${t.slice(0, 12)}…${t.slice(-10)}` : t}</option>)}
+              <option value="none">No thread</option>
+            </select>
+          </label>
+          <label className="art-select"><span>Date</span>
+            <select value={date} onChange={(e) => setDate(e.target.value as DateFilter)} data-testid="artifacts-filter-date" aria-label="Date">
+              <option value="any">Any time</option><option value="today">Today</option><option value="7d">Last 7 days</option><option value="30d">Last 30 days</option>
+            </select>
+          </label>
+          <span className="art-note" data-testid="artifacts-shown-count">{shown.length} of {items.length}</span>
+        </div>
+      )}
       {error && items.length > 0 && <p className="art-error" role="status">Could not refresh ({error}); showing the last saved list.</p>}
       {shown.length === 0 ? (loading && items.length === 0 ? <p className="art-note" role="status">Loading artifacts…</p> : items.length === 0 ? <ArtifactsEmpty /> : <p className="art-note">No {FILTERS.find((f) => f.id === filter)?.label.toLowerCase()} yet.</p>)
         : <>{group("Today", today)}{group("Earlier", earlier)}</>}
@@ -54,7 +76,7 @@ export function ArtifactsBrowser({ variant = "panel", filter, onFilter, selected
   // live run). The page waits for the first backend refresh (≈100 ms) behind a reserved skeleton; the side panel keeps the instant cached paint.
   const items = variant === "page" && !loaded ? [] : allItems;
   const selected = selectedId ? items.find((a) => a.id === selectedId) ?? null : null;
-  const list = <ArtifactsList items={items} filter={filter} onFilter={onFilter} selectedId={selectedId} onPreview={(a) => onSelect(a.id)} loading={loading || (variant === "page" && !loaded)} error={error} />;
+  const list = <ArtifactsList items={items} filter={filter} onFilter={onFilter} selectedId={selectedId} onPreview={(a) => onSelect(a.id)} loading={loading || (variant === "page" && !loaded)} error={error} extendedFilters={variant === "page"} />;
   if (variant === "panel") {
     if (selected) return (
       <div className="art-browser">

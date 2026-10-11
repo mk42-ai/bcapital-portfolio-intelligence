@@ -49,8 +49,8 @@ export async function POST(req: NextRequest) {
   const externalUserId = (String(form.get("externalUserId") ?? "").trim() || DEFAULT_EXTERNAL_USER_ID).slice(0, 64);
   const threadId = String(form.get("threadId") ?? "").trim().slice(0, 80) || null;
   /** Every upload is also persisted as an Artifact (backend /artifacts, bytes + OnDemand media id) so it shows in the Artifacts panel/route. */
-  const persistUpload = async (bytesIn: Uint8Array, mediaId: string | null, mediaStatus: "stored" | "local" | "failed", mediaMessage: string | null): Promise<{ artifact: Artifact | null; artifactError: string | null }> => {
-    try { return { artifact: await saveArtifact({ bytes: bytesIn, name, mime: cls.mime, source: "upload", mediaId, mediaStatus, mediaMessage, threadId, sessionId: sessionId || null, originEvent: "upload" }), artifactError: null }; }
+  const persistUpload = async (bytesIn: Uint8Array, mediaId: string | null, mediaStatus: "stored" | "local" | "failed", mediaMessage: string | null, mediaUrl: string | null = null): Promise<{ artifact: Artifact | null; artifactError: string | null }> => {
+    try { return { artifact: await saveArtifact({ bytes: bytesIn, name, mime: cls.mime, source: "upload", mediaId, mediaStatus, mediaMessage, mediaUrl, threadId, sessionId: sessionId || null, originEvent: "upload" }), artifactError: null }; }
     catch (e) { return { artifact: null, artifactError: String((e as Error)?.message ?? e).slice(0, 300) }; }
   };
 
@@ -135,7 +135,7 @@ export async function POST(req: NextRequest) {
   }
   text = text.replace(/\u0000/g, "").trim();
   putText(id, { text, name, kind: cls.kind, mime: cls.mime, sizeBytes: file.size });
-  const persisted = await persistUpload(bytes, id, "stored", null);
+  const persisted = await persistUpload(bytes, id, "stored", null, typeof (data as { sourceUrl?: unknown }).sourceUrl === "string" ? String((data as { sourceUrl?: unknown }).sourceUrl) : null);
   return Response.json({
     ok: true, ...persisted,
     media: { id, name, sizeBytes: file.size, mime: cls.mime, url, blobUrl, extractedTextUrl, extractedChars: text.length, kind: cls.kind, grounded: "ondemand" as const, sessionId: typeof data.sessionId === "string" ? data.sessionId : sessionId || null, pluginId: MEDIA_PLUGIN_BY_KIND[cls.kind], upstreamMs: Date.now() - t0 },

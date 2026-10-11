@@ -29,7 +29,7 @@ export function ArtifactPreview({ artifact: a, headerActions }: { artifact: Arti
   let body: React.ReactNode;
   if (!a.contentUrl || a.pending) body = <div className="art-preview-fallback"><ArtifactIcon kind={a.kind} state={a.failed ? "failed" : "uploading"} size={64} /><p>{a.failed ? "This artifact could not be saved." : "Still saving — the preview appears once storage confirms."}</p></div>;
   else if (a.kind === "image" || m.startsWith("image/")) body = <img className="art-preview-img" src={a.contentUrl} alt={a.name} />;
-  else if (a.kind === "video" || m.startsWith("video/")) body = <VideoPlayer src={a.contentUrl} title={a.name} />;
+  else if (a.kind === "video" || m.startsWith("video/")) body = <VideoPlayer src={a.contentUrl} title={a.name} artifactId={a.id} inStream={false} />;
   else if (a.kind === "audio" || m.startsWith("audio/")) body = <audio controls preload="metadata" src={a.contentUrl}>Your browser cannot play this audio.</audio>;
   else if (isPdf(m, a.name)) body = <iframe className="art-preview-frame" src={a.contentUrl} title={`Preview of ${a.name}`} />;
   else if (isHtml(m, a.name)) body = <iframe className="art-preview-frame" src={a.contentUrl} title={`Preview of ${a.name}`} sandbox="" referrerPolicy="no-referrer" />;

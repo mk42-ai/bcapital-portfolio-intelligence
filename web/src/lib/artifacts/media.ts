@@ -8,7 +8,7 @@ import { putBlob, deleteBlob, MEDIA_PLUGIN_BY_KIND, type MediaKind } from "@/lib
  * by URL, so the bytes are published for 2 h at `/api/media/blob/<token>/<name>` (same relay /api/media uses) and that URL is handed over.
  * Returns the OnDemand media id, or an honest failure status (`failed` + upstream message) — the artifact is still stored in the backend.
  */
-export type MediaRegistration = { mediaId: string | null; mediaStatus: "stored" | "failed"; mediaMessage: string | null; upstreamStatus: number | null; ms: number };
+export type MediaRegistration = { mediaId: string | null; mediaStatus: "stored" | "failed"; mediaMessage: string | null; upstreamStatus: number | null; ms: number; /** UNSIGNED sourceUrl echoed by the Media API (persisted; never the signed url). */ mediaUrl?: string | null };
 
 export function originFrom(req: Request): string {
   const h = req.headers;
@@ -35,9 +35,9 @@ export async function registerWithOnDemand(opts: { bytes: Uint8Array; name: stri
   try {
     const r = await fetch(`${ONDEMAND_BASE_URL}/media/v1/public/file`, { method: "POST", headers: { apikey: key, "content-type": "application/json", "user-agent": UPSTREAM_USER_AGENT }, body: JSON.stringify(body), cache: "no-store", signal: AbortSignal.timeout(60_000) });
     const raw = await r.text();
-    let j: { message?: string; data?: { id?: string } } = {};
+    let j: { message?: string; data?: { id?: string; sourceUrl?: string; url?: string } } = {};
     try { j = JSON.parse(raw); } catch { /* non-JSON */ }
-    if (r.ok && typeof j.data?.id === "string") return { mediaId: j.data.id, mediaStatus: "stored", mediaMessage: null, upstreamStatus: r.status, ms: Date.now() - t0 };
+    if (r.ok && typeof j.data?.id === "string") return { mediaId: j.data.id, mediaStatus: "stored", mediaMessage: null, upstreamStatus: r.status, ms: Date.now() - t0, mediaUrl: typeof j.data.sourceUrl === "string" ? j.data.sourceUrl : null };
     deleteBlob(token);
     return { mediaId: null, mediaStatus: "failed", mediaMessage: `OnDemand Media API HTTP ${r.status}: ${(j.message ?? raw).slice(0, 200)}`, upstreamStatus: r.status, ms: Date.now() - t0 };
   } catch (e) {

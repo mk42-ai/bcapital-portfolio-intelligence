@@ -9,7 +9,7 @@ export const toArtifact = (w: ArtifactWire): Artifact => fromWire(w);
 
 export type SaveArtifactInput = {
   bytes?: Uint8Array | ArrayBuffer | Buffer; url?: string; name: string; mime?: string; kind?: ArtifactKind; source?: ArtifactSource;
-  mediaId?: string | null; mediaStatus?: ArtifactMediaStatus; mediaMessage?: string | null; threadId?: string | null; sessionId?: string | null; originEvent?: string | null;
+  mediaId?: string | null; mediaStatus?: ArtifactMediaStatus; mediaMessage?: string | null; mediaUrl?: string | null; threadId?: string | null; sessionId?: string | null; originEvent?: string | null;
 };
 
 /** Persist an artifact via backend POST /artifacts (adds X-Ingest-Secret). Throws on failure. Used by /api/media and /api/chat in-process. */
@@ -20,7 +20,7 @@ export async function saveArtifact(input: SaveArtifactInput): Promise<Artifact> 
   const mime = input.mime || "application/octet-stream";
   const body: Record<string, unknown> = {
     name: input.name, mime, kind: input.kind ?? kindFromMime(mime, input.name), source: input.source ?? "generated",
-    media_id: input.mediaId ?? null, media_status: input.mediaStatus ?? null, media_message: input.mediaMessage ?? null,
+    media_id: input.mediaId ?? null, media_status: input.mediaStatus ?? null, media_message: input.mediaMessage ?? null, media_url: input.mediaUrl ?? null,
     thread_id: input.threadId ?? null, session_id: input.sessionId ?? null, origin_event: input.originEvent ?? null,
   };
   if (input.bytes) {

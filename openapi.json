@@ -1859,6 +1859,106 @@
         }
       }
     },
+    "/artifacts/{id}/open": {
+      "get": {
+        "operationId": "openArtifact",
+        "tags": [
+          "artifacts"
+        ],
+        "summary": "Re-sign on open: fresh signed OnDemand media url (falls back to /content)",
+        "description": "Looks the artifact's media_id up in the OnDemand Media API and returns a fresh signed `url` plus the unsigned `source_url`; `signed:false` + `resign` reason when the media object is unavailable.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Artifact id, e.g. art_0123456789ab"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Open descriptor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "url",
+                        "signed"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "mime": {
+                          "type": "string"
+                        },
+                        "media_id": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "source_url": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "content_url": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "signed": {
+                          "type": "boolean"
+                        },
+                        "resign": {
+                          "type": "string"
+                        },
+                        "extracted_text_url": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "checked_at": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown or deleted artifact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/artifacts/{id}/content": {
       "get": {
         "operationId": "getArtifactContent",
@@ -2727,6 +2827,13 @@
               "failed",
               null
             ]
+          },
+          "media_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "UNSIGNED OnDemand sourceUrl (never the signed link; re-signed on open via /artifacts/{id}/open)"
           },
           "media_message": {
             "type": [
