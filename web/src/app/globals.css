@@ -49,3 +49,17 @@
   .sr-only-focusable:focus { position: static; width: auto; height: auto; clip: auto; }
   .tap { min-width: 24px; min-height: 24px; }
 }
+
+/* a10 */
+/* Reduced motion (app-wide, outside Tailwind layers so it beats component CSS): no spin / shimmer / pulse / count-up; chevrons snap. */
+@media (prefers-reduced-motion: reduce) {
+  .oiu-spin, .animate-spin, .animate-pulse, .skeleton, [class*="shimmer"], [class*="pulse"], [class*="count-up"], [data-count-up], [data-animate] { animation: none !important; }
+  [data-chevron], [aria-expanded] > svg, summary > svg, .oiu-thinking__chev { transition-duration: 0.01ms !important; }
+}
+/* Disclosure toggles: visible 2px brand-green focus ring + pointer cursor on every <details>/<summary> and aria-expanded button. */
+details > summary, button[aria-expanded], [role="button"][aria-expanded] { cursor: pointer; }
+details > summary:focus-visible, button[aria-expanded]:focus-visible, [role="button"][aria-expanded]:focus-visible { outline: 2px solid #0AC985; outline-offset: 2px; }
+/* Text on mint / green-soft surfaces is charcoal (≥4.5:1); brand green as text is always the ink shade. */
+.bg-primary-soft, .bg-accent-soft, [class*="bg-[#E6FAF3]"], [class*="bg-[#e6faf3]"] { color: #1F2937; }
+.text-\[\#0AC985\], .text-\[\#0ac985\], .text-brand-green { color: var(--brand-green-ink, #047857) !important; }
+/* end a10 */

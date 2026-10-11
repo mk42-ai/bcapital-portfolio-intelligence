@@ -633,3 +633,31 @@
 /* Run footer timing badge: wraps instead of clipping on narrow viewports. */
 .oiu-badge { flex-wrap: wrap; row-gap: 2px; }
 /* end unit2 */
+
+/* a10 */
+/* (1) Reduced motion: kill every spinner / shimmer / pulse / blink / count-up and the disclosure chevron + panel transitions. */
+@media (prefers-reduced-motion: reduce) {
+  .chat-shell .oiu-spin, .chat-shell .oiu-shimmer span, .chat-shell .oiu-shimmer--row span, .chat-shell .oiu-working__pulse span,
+  .chat-shell .oiu-filler span, .chat-shell .oiu-caret, .chat-shell .oiu-cite, .chat-shell .oiu-sources__item--in,
+  .chat-shell [class*="oiu-"][class*="count"], .chat-shell .oiu-run__timer, .chat-shell .oiu-run__timer * { animation: none !important; }
+  .chat-shell .oiu-thinking__chev, .chat-shell .oiu-thinking__panel, .chat-shell .oiu-summary__panel, .chat-shell .oiu-slot--working,
+  .chat-shell .oiu-cite__preview, .chat-shell .oiu-prompt__chip, .chat-shell .oiu-composer__row, .chat-shell .oiu-composer__btn,
+  .chat-shell .oiu-welcome__starter, .chat-shell .oiu-think__head, .chat-shell .oiu-outputs__head, .chat-shell .oiu-srcs__head,
+  .chat-shell .oiu-summary__head, .chat-shell .oiu-payload__sum { transition-duration: 0.01ms !important; animation: none !important; }
+}
+/* (2) Keyboard: every run-view disclosure head is a pointer target with a visible 2px brand-green ring. */
+.chat-shell .oiu-think__head, .chat-shell .oiu-outputs__head, .chat-shell .oiu-srcs__head, .chat-shell .oiu-summary__head,
+.chat-shell .oiu-thinking__head, .chat-shell .oiu-payload__sum, .chat-shell details > summary { cursor: pointer; }
+.chat-shell .oiu-think__head:focus-visible, .chat-shell .oiu-outputs__head:focus-visible, .chat-shell .oiu-srcs__head:focus-visible,
+.chat-shell .oiu-summary__head:focus-visible, .chat-shell .oiu-thinking__head:focus-visible, .chat-shell .oiu-payload__sum:focus-visible,
+.chat-shell details > summary:focus-visible { outline: 2px solid #0AC985; outline-offset: 2px; border-radius: 6px; }
+/* (3) Contrast on the mint "Working…" band (#E6FAF3 gradient): bold text #1F2937 (14.1:1), muted #374151 (9.4:1); no grey-on-mint. */
+.chat-shell .oiu-slot--working, .chat-shell .oiu-slot--on, .chat-shell .oiu-working { color: #374151; }
+.chat-shell .oiu-slot--working .oiu-working__label, .chat-shell .oiu-working .oiu-working__label { color: #1F2937; font-weight: 700; }
+.chat-shell .oiu-slot--working .oiu-working__phase, .chat-shell .oiu-slot--working .oiu-working__tick,
+.chat-shell .oiu-working .oiu-working__phase, .chat-shell .oiu-working .oiu-working__tick { color: #374151; }
+/* Green used as TEXT must be the AA ink (#047857, 4.6:1 on white) — #0AC985 (2.3:1) stays for fills/borders/dots/rings only. */
+.chat-shell .oiu-run__timer[data-state="running"], .chat-shell .oiu-prompt--done, .chat-shell .oiu-context-chip,
+.chat-shell .oiu-threads__item--active, .chat-shell .oiu-composer__drop, .chat-shell .oiu-payload__label,
+.chat-shell .oiu-plan__step--done .oiu-plan__icon, .chat-shell .oiu-activity--running .oiu-activity__icon { color: var(--brand-green-ink, #047857); }
+/* end a10 */
