@@ -8,6 +8,17 @@ const BASE = (process.env.PORTFOLIO_API_URL ?? process.env.NEXT_PUBLIC_PORTFOLIO
 type Snap = { fetched_at: string; source: string; companies: Company[]; news: Record<string, NewsItem[]>; sentiment: Record<string, CompanySentiment>; portfolio: PortfolioSentiment; runs: IngestRun[] };
 const snap = snapshot as unknown as Snap;
 export type Sourced<T> = { data: T; source: "live" | "snapshot"; fetched_at: string };
+/** One shared liveness probe (per-request, no-store, 2 s budget, one retry) used by the global badge — see components/shell/backend-status.tsx. */
+export async function backendIsLive(): Promise<boolean> {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 2000);
+      const r = await fetch(`${BASE}/health`, { cache: "no-store", signal: ctl.signal, headers: { accept: "application/json" } });
+      clearTimeout(t); if (r.ok) return true;
+    } catch { /* retry once */ }
+  }
+  return false;
+}
 
 async function get<T>(path: string, fallback: () => T, revalidate = 120): Promise<Sourced<T>> {
   try {
