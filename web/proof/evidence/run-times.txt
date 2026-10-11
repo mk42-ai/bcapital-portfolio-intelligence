@@ -1,0 +1,8 @@
+RUN1 START Sun Oct 11 08:29:44 UTC 2026
+RUN1 END Sun Oct 11 08:29:49 UTC 2026 exit=0
+RUN1 (retry after ffmpeg symlink; previous attempt crashed in 5s on missing Playwright ffmpeg) START Sun Oct 11 08:33:57 UTC 2026
+RUN1 END Sun Oct 11 08:34:35 UTC 2026
+RUN1 result: both T1 failed in 17s — the deployment served HTTP 400 text/html for its own /_next/static chunks (layout-04f80e7b..js, 208-..js, css) at 08:34Z; by 08:38Z the HTML referenced NEW chunk hashes (layout-3f690e7a..js → 200). Environment flake on the live sandbox, not a test bug. RUN2 START Sun Oct 11 08:40:27 UTC 2026
+RUN2 END Sun Oct 11 08:43:15 UTC 2026
+RUN2 result: T1,T2+T3 green on both projects; T4 hard assertions (/artifacts lists both files) green, but the SOFT thread re-open gap failed the test AND the reopen click was a TEST bug (locator .first() picked the hidden threads-menu item before the visible welcome-recent button). Fixed test only. RUN3 (final; run1 = 17 s env crash, so this is the 2nd real run) START Sun Oct 11 08:45:55 UTC 2026
+RUN3 END Sun Oct 11 08:48:09 UTC 2026

@@ -1,0 +1,1558 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/tmp/wt/e2e/web/node_modules/.bin/playwright",
+      "test",
+      "-c",
+      "playwright.evidence.config.ts",
+      "--workers=1"
+    ],
+    "configFile": "/tmp/wt/e2e/web/playwright.evidence.config.ts",
+    "rootDir": "/tmp/wt/e2e/web/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/wt/e2e/web/proof/evidence/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "evidence-desktop",
+        "name": "evidence-desktop",
+        "testDir": "/tmp/wt/e2e/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/evidence\\.spec\\.ts/"
+        ],
+        "timeout": 300000
+      },
+      {
+        "outputDir": "/tmp/wt/e2e/web/proof/evidence/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "evidence-mobile",
+        "name": "evidence-mobile",
+        "testDir": "/tmp/wt/e2e/web/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/evidence\\.spec\\.ts/"
+        ],
+        "timeout": 300000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/wt/e2e/web/proof/evidence/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "evidence-desktop",
+        "testDir": "/tmp/wt/e2e/web/e2e",
+        "snapshotDir": "/tmp/wt/e2e/web/e2e",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 300000,
+        "use": {
+          "baseURL": "https://sb-485hwxjqqz7l.vercel.run",
+          "video": "on",
+          "trace": "on",
+          "screenshot": "on",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox",
+              "--disable-dev-shm-usage"
+            ]
+          },
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1440,
+            "height": 900
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "evidence-desktop"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/wt/e2e/web/proof/evidence/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "evidence-mobile",
+        "testDir": "/tmp/wt/e2e/web/e2e",
+        "snapshotDir": "/tmp/wt/e2e/web/e2e",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 300000,
+        "use": {
+          "baseURL": "https://sb-485hwxjqqz7l.vercel.run",
+          "video": "on",
+          "trace": "on",
+          "screenshot": "on",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox",
+              "--disable-dev-shm-usage"
+            ]
+          },
+          "userAgent": "Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Mobile Safari/537.36",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "screen": {
+            "width": 412,
+            "height": 915
+          },
+          "deviceScaleFactor": 2.625,
+          "isMobile": true,
+          "hasTouch": true,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "evidence-mobile"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "proof/evidence/html-report",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "proof/evidence/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "evidence.spec.ts",
+      "file": "evidence.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Evidence suite",
+          "file": "evidence.spec.ts",
+          "line": 190,
+          "column": 15,
+          "specs": [
+            {
+              "title": "T1 document upload → chip ready → grounded answer cites the file → artifact listed with source upload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 420000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 190,
+                        "column": 15
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "evidence-desktop",
+                  "projectName": "evidence-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12754,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-10-11T08:45:57.720Z] [evidence-desktop] START T1 {\"file\":\"submit-query-v1-sse-reference.pdf\",\"bytes\":4591,\"at\":\"2026-10-11T08:45:57.720Z\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:45:59.324Z] [evidence-desktop] chat open\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:45:59.428Z] [evidence-desktop] attach file {\"name\":\"submit-query-v1-sse-reference.pdf\",\"sizeBytes\":4591}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:45:59.502Z] [evidence-desktop] chip created {\"name\":\"submit-query-v1-sse-reference.pdf\",\"status\":\"uploading\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:45:59.503Z] [evidence-desktop] chip status=uploading observed {\"name\":\"submit-query-v1-sse-reference.pdf\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:00.857Z] [evidence-desktop] chip settled {\"name\":\"submit-query-v1-sse-reference.pdf\",\"status\":\"ready\",\"code\":\"\",\"kind\":\"document\",\"ms\":1420,\"text\":\"submit-query-v1-sse-reference.pdf 4 KB · 4,006 chars\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:01.465Z] [evidence-desktop] send click {\"question\":\"What is the title of the attached document? One sentence, cite the file name.\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:06.135Z] [evidence-desktop] first answer token {\"ms\":4670,\"preview\":\"The attached document is titled \\\"Submit Query v1 — SSE event\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:08.060Z] [evidence-desktop] turn settled {\"firstTokenMs\":4670,\"totalMs\":6595,\"chars\":120,\"preview\":\"The attached document is titled \\\"Submit Query v1 — SSE event reference\\\" [attachment: submit-query-v1-sse-reference.pdf].\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:08.086Z] [evidence-desktop] user bubble shows attachment chip {\"name\":\"submit-query-v1-sse-reference.pdf\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:08.194Z] [evidence-desktop] answer mentions title/file {\"mentions\":true,\"firstTokenMs\":4670}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:08.319Z] [evidence-desktop] artifact lookup {\"found\":true,\"id\":\"art_b1eba872ef40\",\"source\":\"upload\",\"originEvent\":\"upload\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:08.320Z] [evidence-desktop] END T1\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T08:45:57.036Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 190,
+                            "column": 15
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "t1-0-chat",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T1-ce857-t-listed-with-source-upload-evidence-desktop/attachments/t1-0-chat-9c94603196b797fbb3602089d390f605e42934c4.png"
+                        },
+                        {
+                          "name": "t1-1-chip-ready",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T1-ce857-t-listed-with-source-upload-evidence-desktop/attachments/t1-1-chip-ready-ae44b51b07dfc2623f87e826d038d2ef016b24c4.png"
+                        },
+                        {
+                          "name": "t1-2-answer",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T1-ce857-t-listed-with-source-upload-evidence-desktop/attachments/t1-2-answer-d892e0a3154fa8222c9976de3cff2869f2117100.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T1-ce857-t-listed-with-source-upload-evidence-desktop/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T1-ce857-t-listed-with-source-upload-evidence-desktop/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T1-ce857-t-listed-with-source-upload-evidence-desktop/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "72c23c329750e5cf3a24-0f82e52c6369a92b9fc4",
+              "file": "evidence.spec.ts",
+              "line": 191,
+              "column": 3
+            },
+            {
+              "title": "T2+T3 image upload → thumb in chip → answer → message-images grid → lightbox + side-pane preview",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 420000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 190,
+                        "column": 15
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "evidence-desktop",
+                  "projectName": "evidence-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 25193,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-10-11T08:46:12.230Z] [evidence-desktop] START T2 {\"file\":\"bar-chart.png\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:13.744Z] [evidence-desktop] attach file {\"name\":\"bar-chart.png\",\"sizeBytes\":757990}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:13.850Z] [evidence-desktop] chip created {\"name\":\"bar-chart.png\",\"status\":\"uploading\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:13.850Z] [evidence-desktop] chip status=uploading observed {\"name\":\"bar-chart.png\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:26.904Z] [evidence-desktop] chip settled {\"name\":\"bar-chart.png\",\"status\":\"ready\",\"code\":\"\",\"kind\":\"image\",\"ms\":13111,\"text\":\"bar-chart.png 740 KB · 2,024 chars\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:26.918Z] [evidence-desktop] composer chip thumbnail {\"visible\":true}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:27.055Z] [evidence-desktop] send click {\"question\":\"What kind of chart is attached? One sentence.\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:32.252Z] [evidence-desktop] first answer token {\"ms\":5197,\"preview\":\"The attached image is a digitally rendered, minimalist verti\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:34.396Z] [evidence-desktop] turn settled {\"firstTokenMs\":5197,\"totalMs\":7341,\"chars\":257,\"preview\":\"The attached image is a digitally rendered, minimalist vertical bar chart with five rounded-rectangle bars of varying heights, alternating dark navy/charcoal and teal-green, on a white background with faint horizontal grid lines [attachment\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:34.423Z] [evidence-desktop] message-images grid visible\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:34.513Z] [evidence-desktop] answer mentions bar/chart {\"ok\":true,\"firstTokenMs\":5197}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:34.514Z] [evidence-desktop] START T3 (image preview)\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:34.600Z] [evidence-desktop] lightbox visible\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:34.830Z] [evidence-desktop] lightbox closed with Escape\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:35.031Z] [evidence-desktop] side pane (image) visible\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:35.273Z] [evidence-desktop] side pane closed\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:35.273Z] [evidence-desktop] END T2+T3\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T08:46:12.032Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 190,
+                            "column": 15
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "t2-1-chip-thumb",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-desktop/attachments/t2-1-chip-thumb-4f87236d7d6fd2585e8e8ecd19a504902b8c3aff.png"
+                        },
+                        {
+                          "name": "t2-2-answer",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-desktop/attachments/t2-2-answer-cfe25df777a233b9c39cda6c5f3e8087af2c33e8.png"
+                        },
+                        {
+                          "name": "t3-1-lightbox",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-desktop/attachments/t3-1-lightbox-ba900810a3fa788fc861b4e5dd60bb382d1bd829.png"
+                        },
+                        {
+                          "name": "t3-2-side-pane",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-desktop/attachments/t3-2-side-pane-2451bf3050fdbfcb70909521695f9c4299e498d7.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-desktop/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-desktop/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-desktop/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "72c23c329750e5cf3a24-17682235a3eab6d8db43",
+              "file": "evidence.spec.ts",
+              "line": 218,
+              "column": 3
+            },
+            {
+              "title": "T4 reload persistence → /artifacts lists both files (hard) → thread re-open on /chat (soft)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 190,
+                        "column": 15
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "evidence-desktop",
+                  "projectName": "evidence-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10106,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-10-11T08:46:39.422Z] [evidence-desktop] START T4\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:40.728Z] [evidence-desktop] reload /chat\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:41.807Z] [evidence-desktop] /artifacts after reload {\"items\":6,\"pdf\":true,\"image\":true}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:47.931Z] [evidence-desktop] reopen most recent thread {\"reopened\":true,\"label\":\"What kind of chart is attached? One sentence.\",\"welcomeButtons\":0,\"menuPresent\":1}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:47.966Z] [evidence-desktop] thread re-open after reload {\"userMessageWithChipVisible\":true,\"localStorage\":{\"threads\":2,\"msgKeys\":2,\"attKeys\":2}}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:48.058Z] [evidence-desktop] END T4\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T08:46:39.249Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 190,
+                            "column": 15
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "t4-0-after-reload",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T4-16cb3-hread-re-open-on-chat-soft--evidence-desktop/attachments/t4-0-after-reload-672d3875381eff29a90787bf3a085ed195c75700.png"
+                        },
+                        {
+                          "name": "t4-1-artifacts",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T4-16cb3-hread-re-open-on-chat-soft--evidence-desktop/attachments/t4-1-artifacts-eb4ab39b44ef99c0323cb261fba8f613429f03c1.png"
+                        },
+                        {
+                          "name": "t4-2-chat-reopened",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T4-16cb3-hread-re-open-on-chat-soft--evidence-desktop/attachments/t4-2-chat-reopened-ec34b8509721209e4ca407798fd250fb8afcb01c.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T4-16cb3-hread-re-open-on-chat-soft--evidence-desktop/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T4-16cb3-hread-re-open-on-chat-soft--evidence-desktop/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T4-16cb3-hread-re-open-on-chat-soft--evidence-desktop/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "72c23c329750e5cf3a24-641b2d0278780bcf507d",
+              "file": "evidence.spec.ts",
+              "line": 271,
+              "column": 3
+            },
+            {
+              "title": "T5 download → PDF bytes (download event | new tab | request.get fallback), 200 application/pdf starting with %PDF",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 190,
+                        "column": 15
+                      }
+                    },
+                    {
+                      "type": "download-path",
+                      "description": "page download event → 200 application/pdf 4591 B"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "evidence-desktop",
+                  "projectName": "evidence-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1516,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-10-11T08:46:50.819Z] [evidence-desktop] START T5\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:51.379Z] [evidence-desktop] artifact-download clicked\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:51.743Z] [evidence-desktop] signed-url response {\"status\":200,\"url\":\"/api/artifacts/art_b1eba872ef40/content?download=1\",\"source\":\"backend\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:51.781Z] [evidence-desktop] download event {\"url\":\"https://sb-485hwxjqqz7l.vercel.run/api/artifacts/art_b1eba872ef40/content?download=1\",\"suggested\":\"submit-query-v1-sse-reference.pdf\",\"bytes\":4591,\"head\":\"%PDF-\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:51.880Z] [evidence-desktop] download verification {\"path\":\"page download event\",\"url\":\"https://sb-485hwxjqqz7l.vercel.run/api/artifacts/art_b1eba872ef40/content?download=1\",\"status\":200,\"contentType\":\"application/pdf\",\"bytes\":4591,\"head\":\"%PDF-\",\"disposition\":\"attachment; filename=\\\"submit-query-v1-sse-reference.pdf\\\"; filename*=UTF-8''submit-query-v1-sse-reference.pdf\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:51.941Z] [evidence-desktop] END T5\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T08:46:50.645Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 190,
+                            "column": 15
+                          }
+                        },
+                        {
+                          "type": "download-path",
+                          "description": "page download event → 200 application/pdf 4591 B"
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "t5-1-after-download",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T5-ef8d7-ation-pdf-starting-with-PDF-evidence-desktop/attachments/t5-1-after-download-a9c6cef2e3b7599940cb8a868abd0c28a2b77dcf.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T5-ef8d7-ation-pdf-starting-with-PDF-evidence-desktop/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T5-ef8d7-ation-pdf-starting-with-PDF-evidence-desktop/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T5-ef8d7-ation-pdf-starting-with-PDF-evidence-desktop/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "72c23c329750e5cf3a24-fab789e940607b07f01e",
+              "file": "evidence.spec.ts",
+              "line": 298,
+              "column": 3
+            },
+            {
+              "title": "T6 video preview → relay allow-list, backend ingest auth, no inline autoplay video, poster/play or icon fallback",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 190,
+                        "column": 15
+                      }
+                    },
+                    {
+                      "type": "app-finding",
+                      "description": "video upload: video upload not allowed by relay (unsupported_type; allowed: pdf, docx, xlsx, csv, txt, md, png, jpg, jpeg, webp, mp3, wav, m4a)"
+                    },
+                    {
+                      "type": "app-finding",
+                      "description": "backend ingest: POST https://sb-22j0v0grzslt.vercel.run/artifacts without X-Ingest-Secret → 401 (expected 401/403 — the suite does not hold the secret)"
+                    },
+                    {
+                      "type": "app-gap",
+                      "description": "no video artifact reachable — the relay allow-list rejects mp4 and the backend ingest needs X-Ingest-Secret; fallback icon verified for kind video via iconFor (/icons/artifacts/video.png + /assets/artifacts/video-256.webp both 200). side-pane[data-kind=video] + <video controls> could NOT be exercised end-to-end."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "evidence-desktop",
+                  "projectName": "evidence-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2743,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-10-11T08:46:52.462Z] [evidence-desktop] START T6 {\"mp4Bytes\":29716}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:52.547Z] [evidence-desktop] POST /api/media sample-video.mp4 {\"status\":400,\"body\":\"{\\\"ok\\\":false,\\\"code\\\":\\\"unsupported_type\\\",\\\"message\\\":\\\"\\\\\\\"sample-video.mp4\\\\\\\" is not a supported file type — attach a PDF, DOCX, XLSX, CSV, TXT, MD, PNG, JPG, JPEG, WEBP, MP3, WAV or M4A file\\\",\\\"allowed\\\":[\\\"pdf\\\",\\\"docx\\\",\\\"xlsx\\\",\\\"csv\\\",\\\"txt\\\",\\\"md\\\",\\\"png\\\",\\\"jpg\\\",\\\"jpeg\\\",\\\"webp\\\",\\\"mp3\\\",\\\"wav\\\",\\\"m4a\\\"]}\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:52.548Z] FINDING video upload: video upload not allowed by relay (unsupported_type; allowed: pdf, docx, xlsx, csv, txt, md, png, jpg, jpeg, webp, mp3, wav, m4a)\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:52.620Z] [evidence-desktop] POST backend /artifacts (no X-Ingest-Secret) {\"status\":401,\"body\":\"{\\\"message\\\":\\\"Missing or invalid X-Ingest-Secret\\\",\\\"errorCode\\\":\\\"unauthenticated\\\"}\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:52.620Z] FINDING backend ingest: POST https://sb-22j0v0grzslt.vercel.run/artifacts without X-Ingest-Secret → 401 (expected 401/403 — the suite does not hold the secret)\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:53.084Z] [evidence-desktop] /artifacts inline video check {\"autoplay\":0,\"inlineControls\":0}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:53.089Z] [evidence-desktop] video artifacts on /artifacts {\"count\":0,\"uploaded\":null}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:53.157Z] [evidence-desktop] video icon fallback {\"png\":200,\"webp\":200}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:54.434Z] [evidence-desktop] /chat inline video check {\"autoplay\":0,\"inlineControls\":0}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:54.435Z] [evidence-desktop] END T6\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T08:46:52.295Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 190,
+                            "column": 15
+                          }
+                        },
+                        {
+                          "type": "app-finding",
+                          "description": "video upload: video upload not allowed by relay (unsupported_type; allowed: pdf, docx, xlsx, csv, txt, md, png, jpg, jpeg, webp, mp3, wav, m4a)"
+                        },
+                        {
+                          "type": "app-finding",
+                          "description": "backend ingest: POST https://sb-22j0v0grzslt.vercel.run/artifacts without X-Ingest-Secret → 401 (expected 401/403 — the suite does not hold the secret)"
+                        },
+                        {
+                          "type": "app-gap",
+                          "description": "no video artifact reachable — the relay allow-list rejects mp4 and the backend ingest needs X-Ingest-Secret; fallback icon verified for kind video via iconFor (/icons/artifacts/video.png + /assets/artifacts/video-256.webp both 200). side-pane[data-kind=video] + <video controls> could NOT be exercised end-to-end."
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "t6-0-artifacts",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T6-e29aa-oster-play-or-icon-fallback-evidence-desktop/attachments/t6-0-artifacts-e8fc5c1cdf7ae8787d834277219dee8b60f6301b.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T6-e29aa-oster-play-or-icon-fallback-evidence-desktop/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T6-e29aa-oster-play-or-icon-fallback-evidence-desktop/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T6-e29aa-oster-play-or-icon-fallback-evidence-desktop/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "72c23c329750e5cf3a24-81c96fdbd6e6088e67c1",
+              "file": "evidence.spec.ts",
+              "line": 345,
+              "column": 3
+            },
+            {
+              "title": "T7 upload failure + retry → .exe error chip (red) → remove → 503 mock error + retry → unroute → retry → ready",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 190,
+                        "column": 15
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "evidence-desktop",
+                  "projectName": "evidence-desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 15539,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-10-11T08:46:55.721Z] [evidence-desktop] START T7\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:57.139Z] [evidence-desktop] .exe error chip {\"text\":\"tool.exe \\\"tool.exe\\\" is not a supported type — use PDF, DOCX, XLSX, CSV, TXT, MD, PNG, JPG, WEBP, MP3, WAV or M4A\",\"code\":\"unsupported_type\",\"red\":{\"red\":true,\"exact\":false,\"cls\":\"oiu-att__chip oiu-att__chip--error\"}}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:57.278Z] [evidence-desktop] .exe chip removed\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:57.301Z] [evidence-desktop] relay POST intercepted → 503 {\"call\":1}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:57.365Z] [evidence-desktop] retryable error chip {\"text\":\"bar-chart.png Upload service unavailable — retry Retry\",\"red\":{\"red\":true,\"exact\":false,\"cls\":\"oiu-att__chip oiu-att__chip--error\"}}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:57.462Z] [evidence-desktop] unrouted /api/media\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:46:57.497Z] [evidence-desktop] retry clicked\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:09.719Z] [evidence-desktop] chip ready after retry {\"code\":\"\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:09.826Z] [evidence-desktop] END T7\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:11.109Z] evidence written under /tmp/wt/e2e/web/proof/evidence\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T08:46:55.551Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 190,
+                            "column": 15
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "t7-1-exe-error",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T7-3dfc9-y-→-unroute-→-retry-→-ready-evidence-desktop/attachments/t7-1-exe-error-12a9392145a12a963930add30817bcd7d1dd0c95.png"
+                        },
+                        {
+                          "name": "t7-2-503-error-retry",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T7-3dfc9-y-→-unroute-→-retry-→-ready-evidence-desktop/attachments/t7-2-503-error-retry-0b0b47ef667efb1144f0d6064f9d19a4df4b6359.png"
+                        },
+                        {
+                          "name": "t7-3-retry-ready",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T7-3dfc9-y-→-unroute-→-retry-→-ready-evidence-desktop/attachments/t7-3-retry-ready-bd213857b0087c3d48898e8f761554c613747bf8.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T7-3dfc9-y-→-unroute-→-retry-→-ready-evidence-desktop/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T7-3dfc9-y-→-unroute-→-retry-→-ready-evidence-desktop/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T7-3dfc9-y-→-unroute-→-retry-→-ready-evidence-desktop/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "72c23c329750e5cf3a24-11053d42f57adab4e8e3",
+              "file": "evidence.spec.ts",
+              "line": 410,
+              "column": 3
+            },
+            {
+              "title": "T1 document upload → chip ready → grounded answer cites the file → artifact listed with source upload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 420000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 190,
+                        "column": 15
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "evidence-mobile",
+                  "projectName": "evidence-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12056,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-10-11T08:47:13.659Z] [evidence-mobile] START T1 {\"file\":\"submit-query-v1-sse-reference.pdf\",\"bytes\":4591,\"at\":\"2026-10-11T08:47:13.659Z\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:15.001Z] [evidence-mobile] chat open\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:15.334Z] [evidence-mobile] mobile overflow check {\"where\":\"/chat\",\"ok\":true}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:15.346Z] [evidence-mobile] attach file {\"name\":\"submit-query-v1-sse-reference.pdf\",\"sizeBytes\":4591}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:15.436Z] [evidence-mobile] chip created {\"name\":\"submit-query-v1-sse-reference.pdf\",\"status\":\"uploading\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:15.436Z] [evidence-mobile] chip status=uploading observed {\"name\":\"submit-query-v1-sse-reference.pdf\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:16.326Z] [evidence-mobile] chip settled {\"name\":\"submit-query-v1-sse-reference.pdf\",\"status\":\"ready\",\"code\":\"\",\"kind\":\"document\",\"ms\":970,\"text\":\"submit-query-v1-sse-reference.pdf 4 KB · 4,006 chars\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:16.930Z] [evidence-mobile] send click {\"question\":\"What is the title of the attached document? One sentence, cite the file name.\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:21.234Z] [evidence-mobile] first answer token {\"ms\":4304,\"preview\":\"The attached document is titled\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:23.350Z] [evidence-mobile] turn settled {\"firstTokenMs\":4304,\"totalMs\":6420,\"chars\":120,\"preview\":\"The attached document is titled \\\"Submit Query v1 — SSE event reference\\\" [attachment: submit-query-v1-sse-reference.pdf].\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:23.367Z] [evidence-mobile] user bubble shows attachment chip {\"name\":\"submit-query-v1-sse-reference.pdf\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:23.500Z] [evidence-mobile] answer mentions title/file {\"mentions\":true,\"firstTokenMs\":4304}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:23.630Z] [evidence-mobile] artifact lookup {\"found\":true,\"id\":\"art_778fc277169f\",\"source\":\"upload\",\"originEvent\":\"upload\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:23.631Z] [evidence-mobile] END T1\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T08:47:12.948Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 190,
+                            "column": 15
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "t1-0-chat",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T1-ce857-t-listed-with-source-upload-evidence-mobile/attachments/t1-0-chat-d7bce5b0267b2cbc86f6c38ec322c564a943bf63.png"
+                        },
+                        {
+                          "name": "t1-1-chip-ready",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T1-ce857-t-listed-with-source-upload-evidence-mobile/attachments/t1-1-chip-ready-7e6c4a2a36feb2bd0db801fd2922db00738ddb77.png"
+                        },
+                        {
+                          "name": "t1-2-answer",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T1-ce857-t-listed-with-source-upload-evidence-mobile/attachments/t1-2-answer-346b809fc7f4814f5403b4124841e004c53e6c7d.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T1-ce857-t-listed-with-source-upload-evidence-mobile/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T1-ce857-t-listed-with-source-upload-evidence-mobile/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T1-ce857-t-listed-with-source-upload-evidence-mobile/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "72c23c329750e5cf3a24-549c5de3bd9479e73466",
+              "file": "evidence.spec.ts",
+              "line": 191,
+              "column": 3
+            },
+            {
+              "title": "T2+T3 image upload → thumb in chip → answer → message-images grid → lightbox + side-pane preview",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 420000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 190,
+                        "column": 15
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "evidence-mobile",
+                  "projectName": "evidence-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 26284,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-10-11T08:47:27.568Z] [evidence-mobile] START T2 {\"file\":\"bar-chart.png\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:28.921Z] [evidence-mobile] attach file {\"name\":\"bar-chart.png\",\"sizeBytes\":757990}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:29.073Z] [evidence-mobile] chip created {\"name\":\"bar-chart.png\",\"status\":\"uploading\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:29.073Z] [evidence-mobile] chip status=uploading observed {\"name\":\"bar-chart.png\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:43.055Z] [evidence-mobile] chip settled {\"name\":\"bar-chart.png\",\"status\":\"ready\",\"code\":\"\",\"kind\":\"image\",\"ms\":14118,\"text\":\"bar-chart.png 740 KB · 1,874 chars\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:43.087Z] [evidence-mobile] composer chip thumbnail {\"visible\":true}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:43.244Z] [evidence-mobile] send click {\"question\":\"What kind of chart is attached? One sentence.\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:48.588Z] [evidence-mobile] first answer token {\"ms\":5344,\"preview\":\"It’s a minimalist digital bar chart with five alternating da\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:50.405Z] [evidence-mobile] turn settled {\"firstTokenMs\":5344,\"totalMs\":7161,\"chars\":167,\"preview\":\"It’s a minimalist digital bar chart with five alternating dark and teal vertical bars over pale gray grid lines against a white background [attachment: bar-chart.png].\"}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:50.433Z] [evidence-mobile] message-images grid visible\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:50.608Z] [evidence-mobile] answer mentions bar/chart {\"ok\":true,\"firstTokenMs\":5344}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:50.609Z] [evidence-mobile] START T3 (image preview)\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:50.685Z] [evidence-mobile] lightbox visible\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:51.045Z] [evidence-mobile] lightbox closed with Escape\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:51.213Z] [evidence-mobile] side pane (image) visible\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:51.534Z] [evidence-mobile] mobile overflow check {\"where\":\"/chat with side pane\",\"ok\":true}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:51.573Z] [evidence-mobile] side pane closed\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:51.573Z] [evidence-mobile] END T2+T3\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T08:47:27.367Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 190,
+                            "column": 15
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "t2-1-chip-thumb",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-mobile/attachments/t2-1-chip-thumb-07d46ee9dc5ef8b7efabe9dc6d8f6ef515388ab4.png"
+                        },
+                        {
+                          "name": "t2-2-answer",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-mobile/attachments/t2-2-answer-da08487b5cb9b6e53de6cd28d654ab006f94f675.png"
+                        },
+                        {
+                          "name": "t3-1-lightbox",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-mobile/attachments/t3-1-lightbox-8e51e69dc04065dbd79d5b3d8d0c15dd7ed30957.png"
+                        },
+                        {
+                          "name": "t3-2-side-pane",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-mobile/attachments/t3-2-side-pane-229e8d8c9ba3514aafbb7883a9f11aa488830020.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-mobile/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-mobile/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T2-04c7e--lightbox-side-pane-preview-evidence-mobile/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "72c23c329750e5cf3a24-13b229d5518a1fff89a7",
+              "file": "evidence.spec.ts",
+              "line": 218,
+              "column": 3
+            },
+            {
+              "title": "T4 reload persistence → /artifacts lists both files (hard) → thread re-open on /chat (soft)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 190,
+                        "column": 15
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "evidence-mobile",
+                  "projectName": "evidence-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 10284,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-10-11T08:47:56.004Z] [evidence-mobile] START T4\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:57.307Z] [evidence-mobile] reload /chat\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:58.408Z] [evidence-mobile] /artifacts after reload {\"items\":9,\"pdf\":true,\"image\":true}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:47:58.571Z] [evidence-mobile] mobile overflow check {\"where\":\"/artifacts\",\"ok\":true}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:48:04.586Z] [evidence-mobile] reopen most recent thread {\"reopened\":true,\"label\":\"What kind of chart is attached? One sentence.\",\"welcomeButtons\":0,\"menuPresent\":1}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:48:04.606Z] [evidence-mobile] thread re-open after reload {\"userMessageWithChipVisible\":true,\"localStorage\":{\"threads\":2,\"msgKeys\":2,\"attKeys\":2}}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:48:04.796Z] [evidence-mobile] mobile overflow check {\"where\":\"/chat\",\"ok\":true}\n"
+                        },
+                        {
+                          "text": "[2026-10-11T08:48:04.797Z] [evidence-mobile] END T4\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T08:47:55.834Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 190,
+                            "column": 15
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "t4-0-after-reload",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T4-16cb3-hread-re-open-on-chat-soft--evidence-mobile/attachments/t4-0-after-reload-ae6c6c3842dd066f0ae1b163fbc665f4a029450a.png"
+                        },
+                        {
+                          "name": "t4-1-artifacts",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T4-16cb3-hread-re-open-on-chat-soft--evidence-mobile/attachments/t4-1-artifacts-d13b39a2722224bee5c6195800aaccf4b99df7fc.png"
+                        },
+                        {
+                          "name": "t4-2-chat-reopened",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T4-16cb3-hread-re-open-on-chat-soft--evidence-mobile/attachments/t4-2-chat-reopened-93c8aecb871b238d673a3f09cf0273f25f53c3cb.png"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T4-16cb3-hread-re-open-on-chat-soft--evidence-mobile/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T4-16cb3-hread-re-open-on-chat-soft--evidence-mobile/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T4-16cb3-hread-re-open-on-chat-soft--evidence-mobile/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "72c23c329750e5cf3a24-28927c0c53a0d6a8f02b",
+              "file": "evidence.spec.ts",
+              "line": 271,
+              "column": 3
+            },
+            {
+              "title": "T5 download → PDF bytes (download event | new tab | request.get fallback), 200 application/pdf starting with %PDF",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 190,
+                        "column": 15
+                      }
+                    },
+                    {
+                      "type": "skip",
+                      "description": "T5 runs on the desktop project only (T8 = mobile re-runs T1–T4)",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 299,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "evidence-mobile",
+                  "projectName": "evidence-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 366,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T08:48:07.506Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 190,
+                            "column": 15
+                          }
+                        },
+                        {
+                          "type": "skip",
+                          "description": "T5 runs on the desktop project only (T8 = mobile re-runs T1–T4)",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 299,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T5-ef8d7-ation-pdf-starting-with-PDF-evidence-mobile/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T5-ef8d7-ation-pdf-starting-with-PDF-evidence-mobile/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T5-ef8d7-ation-pdf-starting-with-PDF-evidence-mobile/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "72c23c329750e5cf3a24-adb523daadd156481c8e",
+              "file": "evidence.spec.ts",
+              "line": 298,
+              "column": 3
+            },
+            {
+              "title": "T6 video preview → relay allow-list, backend ingest auth, no inline autoplay video, poster/play or icon fallback",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 190,
+                        "column": 15
+                      }
+                    },
+                    {
+                      "type": "skip",
+                      "description": "T6 runs on the desktop project only",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 346,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "evidence-mobile",
+                  "projectName": "evidence-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 333,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T08:48:07.899Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 190,
+                            "column": 15
+                          }
+                        },
+                        {
+                          "type": "skip",
+                          "description": "T6 runs on the desktop project only",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 346,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T6-e29aa-oster-play-or-icon-fallback-evidence-mobile/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T6-e29aa-oster-play-or-icon-fallback-evidence-mobile/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T6-e29aa-oster-play-or-icon-fallback-evidence-mobile/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "72c23c329750e5cf3a24-df6b4a03643366e3e848",
+              "file": "evidence.spec.ts",
+              "line": 345,
+              "column": 3
+            },
+            {
+              "title": "T7 upload failure + retry → .exe error chip (red) → remove → 503 mock error + retry → unroute → retry → ready",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 300000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 190,
+                        "column": 15
+                      }
+                    },
+                    {
+                      "type": "skip",
+                      "description": "T7 runs on the desktop project only",
+                      "location": {
+                        "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                        "line": 411,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "evidence-mobile",
+                  "projectName": "evidence-mobile",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 335,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "[2026-10-11T08:48:08.612Z] evidence written under /tmp/wt/e2e/web/proof/evidence\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-11T08:48:08.255Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 190,
+                            "column": 15
+                          }
+                        },
+                        {
+                          "type": "skip",
+                          "description": "T7 runs on the desktop project only",
+                          "location": {
+                            "file": "/tmp/wt/e2e/web/e2e/evidence.spec.ts",
+                            "line": 411,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T7-3dfc9-y-→-unroute-→-retry-→-ready-evidence-mobile/test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T7-3dfc9-y-→-unroute-→-retry-→-ready-evidence-mobile/video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/tmp/wt/e2e/web/proof/evidence/test-results/evidence-Evidence-suite-T7-3dfc9-y-→-unroute-→-retry-→-ready-evidence-mobile/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "72c23c329750e5cf3a24-5b601453ada48180f9d3",
+              "file": "evidence.spec.ts",
+              "line": 410,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-11T08:45:56.322Z",
+    "duration": 132427.968,
+    "expected": 9,
+    "skipped": 3,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
