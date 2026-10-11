@@ -5,6 +5,7 @@ import Link from "next/link";
 import { listCompanies, getPortfolio, getRuns, getAllNews, getSignals } from "@/lib/api";
 import { PageHeader } from "@/components/shell/page-header";
 import { KpiTiles } from "@/components/overview/kpi-tiles";
+import { TopMovers } from "@/components/overview/top-movers";
 import { Filters } from "@/components/overview/filters";
 import { StatusChips } from "@/components/overview/status-chips";
 import { HeatmapSSR } from "@/components/charts/heatmap-ssr";
@@ -65,6 +66,7 @@ async function OverviewBody({ searchParams }: { searchParams: Promise<Record<str
         { label: "Portfolio Signal Score", value: sig.data.portfolio.n ? `${Math.round(sig.data.portfolio.mean)} / 100` : "—", sub: sig.data.portfolio.n ? `p25–p75 ${Math.round(sig.data.portfolio.p25)}–${Math.round(sig.data.portfolio.p75)} · ${sig.data.portfolio.n} scored` : `sentiment ${fmtScore(pf.data.portfolio?.avg_score ?? 0)} · signals offline` },
         { label: "Last workflow run", value: lastRun ? lastRun.receivedAt.slice(11, 16) + " UTC" : "—", sub: lastRun ? `${lastRun.workflowName ?? lastRun.source} · ${lastRun.receivedAt.slice(0, 10)}` : "no runs yet" },
       ]} />
+      <TopMovers movers={[...all].sort((a, b) => Math.abs(b.sentiment.delta ?? 0) - Math.abs(a.sentiment.delta ?? 0)).slice(0, 6).map((c) => ({ slug: c.slug, name: c.name, sector: c.sector, score: c.sentiment.score, delta: c.sentiment.delta ?? null, prior_run_at: c.sentiment.prior_run_at ?? null, logo_url: c.logo_url }))} lastRunAt={lastRun?.receivedAt ?? null} />
       <Suspense fallback={<Skeleton className="mb-6 h-24 w-full" />}>
         <Filters sectors={uniq(all.map((c) => c.sector))} regions={uniq(all.map((c) => c.region))} stages={uniq(all.map(stageOf))} statuses={["private", "public", "unicorn", "renamed", "merged"]} />
       </Suspense>
