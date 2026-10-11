@@ -10,7 +10,7 @@ import { Building2, Landmark, ListChecks, Puzzle, SlidersHorizontal, X } from "l
 import { useSettings } from "@/lib/settings";
 import { MODEL_LABEL, REASONING_MODE } from "@/lib/plugins";
 import { cn } from "@/lib/utils";
-import { CompanyPicker } from "./company-picker";
+import { CompanyPicker, ContextCounter } from "./company-picker";
 import { PluginPanel } from "./plugin-panel";
 import { RunRail } from "./run-rail";
 import { PitchbookDrawerSection } from "./pitchbook-rail";
@@ -67,8 +67,8 @@ export function InspectorDrawer({ companies }: { companies: InspectorCompany[] }
         <div className="min-h-0 flex-1 space-y-3 overflow-y-auto p-3" data-testid="inspector-body">
           <RunRail />
           <Section icon={Landmark} title="PitchBook" testId="inspector-pitchbook"><PitchbookDrawerSection companies={companies} entries={PB_ENTRIES} /></Section>
-          <Section icon={Building2} title="Company context (1–5)" testId="inspector-context">
-            <CompanyPicker compact options={companies} value={s.companies} onChange={(v) => set({ companies: v.slice(0, 5) })} max={5} />
+          <Section icon={Building2} title={<span className="flex flex-1 items-baseline justify-between gap-2">Company context <ContextCounter count={s.companies.length} max={5} /></span>} testId="inspector-context">
+            <CompanyPicker compact counterInTitle options={companies} value={s.companies} onChange={(v) => set({ companies: v.slice(0, 5) })} max={5} />
             <ul className="mt-2 space-y-1 text-xs text-muted">{ctx.map((c) => <li key={c.slug} className="flex items-center justify-between gap-2"><span className="inline-flex min-w-0 items-center gap-1.5 truncate"><CompanyLogo name={c.name} src={c.logo_url} size={16} />{c.name}</span><span className="inline-flex shrink-0 items-center gap-1.5 tabular-nums">{c.signal != null && <SignalMini score={c.signal} confidence={c.signal_confidence ?? 0} percentile={c.signal_percentile} name={c.name} />}{c.news} news</span></li>)}</ul>
           </Section>
           <Section icon={Puzzle} title="Model & plugins" testId="inspector-plugins">
