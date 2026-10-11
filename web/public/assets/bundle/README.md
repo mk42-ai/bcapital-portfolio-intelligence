@@ -83,6 +83,22 @@ Resolution order: explicit artifact `kind` → MIME → extension → `generic`.
 | geothermal-a | `illustrations/geothermal-a.png` | illustration | 1254×1254 | 3,581,650 | `7bdb14e5323a8f2ba17a99ff081bc423fd13f5640827d9ecbed7cbb0bc9a7344` |
 | geothermal-b | `illustrations/geothermal-b.png` | illustration | 1254×1254 | 3,583,090 | `2b629fcb02cc9b08faab5c9954d237652fed2999e9a549af2df436ab7b6fdc0a` |
 
+## Empty-state icons
+
+Added 2026-10-11 (commit 04dd11d → bundled by UNIT 3). 1024 px PNG, charcoal strokes + one green accent, same spec as the file-type set.
+Served from `web/public/icons/<name>.png`; mirrored here under `icons/empty-state/`.
+
+| name | file | role | size | bytes | sha256 |
+|---|---|---|---|---|---|
+| preview-unavailable | `icons/empty-state/preview-unavailable.png` | empty-state icon | 1024×1024 | 631,686 | `044dfb33dfd4ec7bff57252a5d792689ed89898026914e5c4bc255eaf57d1aab` |
+| empty-artifacts | `icons/empty-state/empty-artifacts.png` | empty-state icon | 1024×1024 | 609,551 | `f74131b605b1ec1dc4f74c3f94f69437995d2557feebbf14bc328f7893949b20` |
+| open-externally | `icons/empty-state/open-externally.png` | empty-state icon | 1024×1024 | 630,107 | `59c1ebbbdad879904a92c2da9bf6767d681661b6e6e043092d653077afdd0db1` |
+| version-history | `icons/empty-state/version-history.png` | empty-state icon | 1024×1024 | 650,746 | `b2a81ec21702dc43ed7f8d0aff44c35cb753adce109c3adb611e7481bff5a3d4` |
+
+Where the UI uses them: `preview-unavailable` → pdf.js / office fallback in the side pane and the Artifacts preview
+(`PreviewUnavailable` in `web/src/components/artifacts/pdf-pages.tsx`); `empty-artifacts` → `ArtifactsEmpty` (`artifacts-empty`);
+`open-externally` → the "Tab" action on the fallback; `version-history` (24 px) → the `vN · history` toggle (`artifact-versions-toggle`).
+
 ## How the app consumes them
 
 * Icons live in the Next.js app at `web/public/icons/artifacts/<name>.png` (file-type icons by name; upload states as

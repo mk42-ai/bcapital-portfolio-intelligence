@@ -11,6 +11,7 @@ async function firstPdfCard(page: Page): Promise<Locator | null> {
   await page.goto("/artifacts?skip=1", { waitUntil: "domcontentloaded" });
   await expect(page.getByTestId("artifacts-list").or(page.getByTestId("artifacts-empty")).first()).toBeVisible({ timeout: 30_000 });
   const cards = page.getByTestId("artifact-card");
+  await expect.poll(() => cards.count(), { timeout: 20_000 }).toBeGreaterThan(0).catch(() => undefined);
   const n = await cards.count();
   for (let i = 0; i < n; i++) {
     const c = cards.nth(i);

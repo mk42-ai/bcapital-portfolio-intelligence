@@ -41,6 +41,8 @@ for (const vp of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
     await page.goto("/artifacts?skip=1", { waitUntil: "domcontentloaded" });
     await expect(page.getByTestId("artifacts-list").or(page.getByTestId("artifacts-empty")).first()).toBeVisible({ timeout: 30_000 });
     const cards = page.getByTestId("artifact-card");
+    // the page waits for the first backend refresh before painting cards — give it up to 20 s before deciding the backend is empty
+    await expect.poll(() => cards.count(), { timeout: 20_000 }).toBeGreaterThan(0).catch(() => undefined);
     const n = await cards.count();
     test.skip(n === 0, "no artifacts in this backend — nothing to measure");
     await page.waitForTimeout(800); // relative-time / status chips settle
