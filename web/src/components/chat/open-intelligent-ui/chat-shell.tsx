@@ -9,7 +9,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { AgentInterface, fetchLLM, agUIAdapter, useThread, useThreadList, type AssistantMessageComponent, type ToolCallTimelineComponent } from "@openuidev/react-ui";
 import type { Message, UserMessage } from "@openuidev/react-headless";
-import { AlertTriangle, ArrowDown, Paperclip, Wrench, Bot, Brain, Check, CheckCircle2, ChevronDown, Circle, Cpu, ExternalLink, KeyRound, ListChecks, Loader2, MessageSquareMore, Mic, Plus, RotateCcw, Search, ShieldCheck, Sparkles, X, XCircle } from "lucide-react";
+import { AlertTriangle, ArrowDown, Paperclip, Wrench, Bot, Brain, Check, ChevronDown, Cpu, ExternalLink, KeyRound, ListChecks, Loader2, MessageSquareMore, Mic, Plus, RotateCcw, Search, ShieldCheck, Sparkles, X } from "lucide-react";
 import { responseTheme } from "./response-theme";
 import { localThreadStorage, saveMessages, sessionFor, rememberSession, rememberSources, sourcesFor, sourcesKey, rememberMeta, metaFor, type StoredSource, type StoredMeta } from "./local-storage";
 import { extractCitations, isCiteLabel, isOverflowLabel, publisherOf, hostOf, type Cite } from "./citations";
@@ -19,11 +19,12 @@ import { CLIENT_EVENT as CE, LABEL } from "@/lib/ondemand/eventMap";
 import { getSelectedPluginIds, usePluginSelection } from "@/lib/plugin-selection";
 import { pluginName as catalogueName, PLUGIN_CATALOGUE } from "@/lib/plugin-catalogue";
 import { pluginLabel as rawPluginLabel } from "@/lib/ondemand/eventMap";
+import { friendlyStepTitle, sanitizeObjective } from "@/lib/ondemand/plan";
 /** unit1: friendly plugin label (falls back to the catalogue name, then the raw id). */
 const friendlyPlugin = (idOrName: string | null | undefined) => rawPluginLabel(idOrName, catalogueName);
 export type PlannerPayload = { planning: string; steps: Record<string, string> };
 const EMPTY_PAYLOAD: PlannerPayload = { planning: "", steps: {} };
-const hasPayload = (p: PlannerPayload | null | undefined): p is PlannerPayload => !!p && (p.planning.trim().length > 0 || Object.values(p.steps).some((t) => t.trim().length > 0));
+export const hasPayload = (p: PlannerPayload | null | undefined): p is PlannerPayload => !!p && (p.planning.trim().length > 0 || Object.values(p.steps).some((t) => t.trim().length > 0));
 import { PluginFavicon, preloadPluginFavicons } from "@/components/ui/plugin-favicon";
 import { RunStatusHeader } from "@/components/chat/run-status-header";
 import { fmtScore } from "@/lib/format";
@@ -384,21 +385,26 @@ function ThinkingTrace({ text, kinds, live }: { text: string; kinds?: string[]; 
     </div>
   );
 }
-/** Plan stepper (plan_created / step start / done / failed). */
+/** Plan stepper (plan_created / step start / done / failed). a6: card title "Plan", objective ≤ 2 lines, numbered checklist with status dots;
+ *  JSON-looking objectives are dropped and operationId titles made friendly client-side too (sanitizePlan guards the bridge; this is the backstop). */
 function PlanStepper({ plan, reserve }: { plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null; reserve?: boolean }) {
-  if (!plan || (!plan.objective && !plan.steps.length)) {
+  const objective = plan ? sanitizeObjective(plan.objective) : "";
+  const steps = plan ? plan.steps.map((s, i) => ({ ...s, title: friendlyStepTitle(s.title) || `Step ${i + 1}` })) : [];
+  if (!plan || (!objective && !steps.length)) {
     // Reserved slot while the planner is still streaming its JSON: same box (border + min-height) the real stepper will occupy, so the
     // plan arriving does not push the plugin cards / thinking trace / working band down (the 0.10 CLS spike at plan_created on mobile).
-    return reserve ? <section className="oiu-plan oiu-plan--reserved" data-testid="plan-stepper" data-state="pending" aria-label="Execution plan"><p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />Planning…</p><div className="oiu-shimmer oiu-shimmer--plan" aria-hidden><span /><span /></div></section> : null;
+    return reserve ? <section className="oiu-plan oiu-plan--reserved" data-testid="plan-stepper" data-state="pending" aria-label="Plan"><p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />Plan</p><div className="oiu-shimmer oiu-shimmer--plan" aria-hidden><span /><span /></div></section> : null;
   }
   return (
-    <section className="oiu-plan" data-testid="plan-stepper" data-state={plan.provisional ? "provisional" : "ready"} aria-label="Execution plan">
-      <p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />{plan.objective || "Execution plan"}{plan.provisional && <span className="oiu-plan__prov" title="Steps are still streaming in">drafting…</span>}</p>
-      {plan.steps.length > 0 && <ol className="oiu-plan__steps">{plan.steps.map((s, i) => (
+    <section className="oiu-plan" data-testid="plan-stepper" data-state={plan.provisional ? "provisional" : "ready"} aria-label="Plan">
+      <p className="oiu-plan__title"><ListChecks className="size-3.5" aria-hidden />Plan{plan.provisional && <span className="oiu-plan__prov" title="Steps are still streaming in">drafting…</span>}</p>
+      {objective && <p className="oiu-plan__objective" data-testid="plan-objective">{objective}</p>}
+      {steps.length > 0 && <ol className="oiu-plan__steps">{steps.map((s, i) => (
         <li key={s.id} className={`oiu-plan__step oiu-plan__step--${s.state}`} data-testid="plan-step" data-state={s.state}>
-          <span className="oiu-plan__icon" aria-hidden>{s.state === "done" ? <CheckCircle2 className="size-3.5" /> : s.state === "failed" ? <XCircle className="size-3.5" /> : s.state === "running" ? <Loader2 className="size-3.5 oiu-spin" /> : <Circle className="size-3.5" />}</span>
-          <span className="oiu-plan__label">{i + 1}. {s.title}</span>
-          {s.plugins?.length ? <span className="oiu-plan__plugins">{s.plugins.map((p) => <span key={p} className="oiu-plan__plugin">{p}</span>)}</span> : null}
+          <span className={`oiu-plan__dot oiu-plan__dot--${s.state}`} aria-hidden>{s.state === "done" ? <Check className="size-2.5" strokeWidth={3} /> : s.state === "failed" ? <X className="size-2.5" strokeWidth={3} /> : null}</span>
+          <span className="oiu-plan__num" aria-hidden>{i + 1}.</span>
+          <span className="oiu-plan__label">{s.title}</span>
+          {s.plugins?.length ? <span className="oiu-plan__plugins">{s.plugins.map((p) => <span key={p} className="oiu-plan__plugin">{friendlyPlugin(p)}</span>)}</span> : null}
         </li>))}</ol>}
     </section>
   );
@@ -536,13 +542,12 @@ const outputStats = (raw: StepOutput[], plannerPayload?: PlannerPayload | null) 
 function OutputsCard({ outputs: raw, plannerPayload }: { outputs: StepOutput[]; plannerPayload?: PlannerPayload | null }) {
   // Skip plugin entries with null/empty params and hide the card when no step has a real call — never an empty `{}` box.
   const { outputs, payload, calls } = outputStats(raw, plannerPayload);
-  if (!outputs.length && !payload) return null; // unit1: renders when EITHER outputs or planner payload exist
-  const head = outputs.length ? `Outputs · ${outputs.length} step${outputs.length === 1 ? "" : "s"} · ${calls} call${calls === 1 ? "" : "s"}` : "Outputs · planner payload";
+  if (!outputs.length) return null; // a6: planner payload lives only behind the developer reveal (run-rail dev-disclosure)
+  const head = `Outputs · ${outputs.length} step${outputs.length === 1 ? "" : "s"} · ${calls} call${calls === 1 ? "" : "s"}`;
   return (
-    <section className="oiu-outputs" data-testid="outputs-card" data-count={outputs.length} data-has-payload={payload ? "true" : "false"}>
+    <section className="oiu-outputs" data-testid="outputs-card" data-count={outputs.length} data-has-payload="false">
       <p className="oiu-outputs__head" aria-label={head}><Wrench className="size-3.5" aria-hidden /><span>{head}</span></p>
       {outputs.length > 0 && <ol className="oiu-outputs__list">{outputs.map((o) => <li key={o.stepId} data-testid="output-step"><strong>{o.title}</strong>{o.plugins.map((pl, i) => <span key={i} className="oiu-outputs__call"><PluginFavicon id={pl.pluginId} size={14} /> <span title={pl.pluginId} data-plugin-id={pl.pluginId}>{friendlyPlugin(pl.name || pl.pluginId)}</span><code>{JSON.stringify(pl.params).slice(0, 160)}</code></span>)}</li>)}</ol>}
-      {payload && <PlannerPayloadDetails payload={payload} />}
     </section>
   );
 }
@@ -553,7 +558,7 @@ function prettyPayload(text: string): string {
   const i = t.indexOf("{"); if (i >= 0) { let depth = 0, inStr = false, esc = false; for (let k = i; k < t.length; k++) { const c = t[k]; if (inStr) { if (esc) esc = false; else if (c === "\\") esc = true; else if (c === '"') inStr = false; continue; } if (c === '"') inStr = true; else if (c === "{") depth++; else if (c === "}") { depth--; if (depth === 0) { try { return `${JSON.stringify(JSON.parse(t.slice(i, k + 1)), null, 2)}${t.slice(k + 1).trim() ? `\n${t.slice(k + 1).trim()}` : ""}`; } catch { break; } } } } }
   return t;
 }
-function PlannerPayloadDetails({ payload }: { payload: PlannerPayload }) {
+export function PlannerPayloadDetails({ payload }: { payload: PlannerPayload }) {
   const steps = Object.entries(payload.steps).filter(([, v]) => v.trim()).sort(([a], [b]) => Number(a) - Number(b));
   const total = payload.planning.length + steps.reduce((n, [, v]) => n + v.length, 0);
   return (

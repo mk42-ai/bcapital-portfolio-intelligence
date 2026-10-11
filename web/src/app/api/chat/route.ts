@@ -12,6 +12,7 @@ import { saveArtifact } from "@/lib/artifacts/server";
 import { registerWithOnDemand, originFrom } from "@/lib/artifacts/media";
 import { makeTextPdf } from "@/lib/artifacts/pdf";
 import { reportFileName } from "@/lib/artifacts/naming";
+import { sanitizeObjective, sanitizePlan } from "@/lib/ondemand/plan";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
@@ -297,9 +298,9 @@ export async function POST(req: NextRequest) {
       let thinkingBuf = ""; let planBuf = ""; let planEmitted = false; let objectiveSent = false; let stepBuf = ""; const stepEmittedFor = new Set<number>();
       let planStepTotal = 0; let earlyPlanSteps = 0; const derivedSummary = new Map<number, { title: string; hosts: string[]; n: number; closed: boolean }>();
       const tryParseJson = (t: string): unknown => { const i = t.indexOf("{"); if (i < 0) return null; let depth = 0, inStr = false, esc = false; for (let k = i; k < t.length; k++) { const c = t[k]; if (inStr) { if (esc) esc = false; else if (c === "\\") esc = true; else if (c === '"') inStr = false; continue; } if (c === '"') inStr = true; else if (c === "{") depth++; else if (c === "}") { depth--; if (depth === 0) { try { return JSON.parse(t.slice(i, k + 1)); } catch { return null; } } } } return null; };
-      // Objective -> one plain sentence (strip markdown/JSON noise, clamp near 22 words so the opening line never wraps into a paragraph).
-      const objectiveLine = (t: string) => { const w = t.replace(/[*_`#>]+/g, " ").replace(/\s+/g, " ").trim().split(" "); return (w.length > 26 ? `${w.slice(0, 24).join(" ")}...` : w.join(" ")).slice(0, 400); };
-      const planFromJson = (j: unknown): { objective?: string; steps: { id: string; title: string; query?: string; plugins?: string[] }[] } => { const r = (j && typeof j === "object" ? j : {}) as Record<string, unknown>; const steps = Array.isArray(r.steps) ? r.steps : []; return { objective: typeof r.objective === "string" ? objectiveLine(r.objective) : typeof r.title === "string" ? objectiveLine(r.title) : undefined, steps: steps.map((x, i) => { const o = (x && typeof x === "object" ? x : {}) as Record<string, unknown>; const uq = typeof o.user_query === "string" ? o.user_query : ""; const lm = /^\s*\[([^\]]{3,80})\]\s*([\s\S]*)$/.exec(uq); return { id: String(o.id ?? o.step_id ?? i + 1), title: String(lm ? lm[1] : (o.title ?? o.user_query ?? `Step ${i + 1}`)).slice(0, 160), query: uq ? (lm ? lm[2] : uq).slice(0, 600) : undefined, plugins: Array.isArray(o.plugins) ? o.plugins.map((p) => (typeof p === "string" ? p : String((p as Record<string, unknown>).name ?? (p as Record<string, unknown>).pluginId ?? ""))).filter(Boolean) : undefined }; }) }; };
+      // a6: the plan frame carries ONLY { objective, steps:[{id,title,query?,plugins?}] } — sanitizePlan() strips JSON-looking objectives to "" and
+      // rewrites operationId titles (listPortfolioCompanies → "List portfolio companies"); the raw planner text stays in ondemand.planner_payload.
+      const planFromJson = (j: unknown): { objective: string; steps: { id: string; title: string; query?: string; plugins?: string[] }[] } => sanitizePlan(j);
 
       /** Translate one typed UI event into AG-UI frames. Returns true on the terminal [DONE]. */
       const dispatch = (u: UiEvent, raw: string): boolean => {
@@ -309,7 +310,7 @@ export async function POST(req: NextRequest) {
           case "error": throw new UpstreamError(`OnDemand error frame: ${u.message}`, 502, u.code);
           case "metrics": custom(CE.metrics, { publicMetrics: u.publicMetrics, ...timingFields(), pluginIds }); return false;
           case "plugins_suggested": custom(CE.plugins, { phase: u.phase, plugins: u.plugins }); if (u.phase === "initialized") status("planning", { statusType: "plugin_suggestion.initialized", statusMessage: "Finding plugins" }); return false;
-          case "plan": planStepTotal = Math.max(planStepTotal, u.steps.length); custom(CE.plan, { objective: u.objective ?? null, steps: u.steps }); status("planning", { statusType: "plan_created", statusMessage: u.objective ?? "Execution plan created", steps: u.steps.length }); return false;
+          case "plan": { const plan = sanitizePlan({ objective: u.objective ?? "", steps: u.steps }); planStepTotal = Math.max(planStepTotal, plan.steps.length); custom(CE.plan, { objective: plan.objective, steps: plan.steps }); status("planning", { statusType: "plan_created", statusMessage: plan.objective || "Execution plan created", steps: plan.steps.length }); return false; }
           case "step_start": {
             stepCounter += 1; currentStepId = u.stepId || String(stepCounter);
             custom(CE.step, { phase: "start", stepId: currentStepId, index: stepCounter, label: u.label, query: u.query ?? null });
@@ -347,12 +348,12 @@ export async function POST(req: NextRequest) {
             if (u.channel === "plan" && u.delta && !planEmitted) {
               planBuf += u.delta;
               const parsed = tryParseJson(planBuf);
-              if (parsed) { const plan = planFromJson(parsed); if (plan.objective || plan.steps.length) { planEmitted = true; planStepTotal = Math.max(planStepTotal, plan.steps.length); custom(CE.plan, { objective: plan.objective ?? null, steps: plan.steps, source: "planning_output" }); status("planning", { statusType: "plan_created", statusMessage: plan.objective ?? "Execution plan created", steps: plan.steps.length }); } }
+              if (parsed) { const plan = planFromJson(parsed); if (plan.objective || plan.steps.length) { planEmitted = true; planStepTotal = Math.max(planStepTotal, plan.steps.length); custom(CE.plan, { objective: plan.objective, steps: plan.steps, source: "planning_output" }); status("planning", { statusType: "plan_created", statusMessage: plan.objective || "Execution plan created", steps: plan.steps.length }); } }
               else {
-                const m = /"objective"\s*:\s*"((?:[^"\\]|\\.){12,})/.exec(planBuf); if (m && !objectiveSent) { objectiveSent = true; status("planning", { statusType: "planning", statusMessage: m[1].replace(/\\"/g, "\"").slice(0, 200) }); }
+                const m = /"objective"\s*:\s*"((?:[^"\\]|\\.){12,})/.exec(planBuf); const earlyObjective = m ? sanitizeObjective(m[1].replace(/\\"/g, "\"")) : ""; if (earlyObjective && !objectiveSent) { objectiveSent = true; status("planning", { statusType: "planning", statusMessage: earlyObjective.slice(0, 200) }); }
                 // Early plan: the first complete step title is enough to paint the Plan card (state "provisional"); the full plan replaces it when the JSON closes.
                 const titles = [...planBuf.matchAll(/"title"\s*:\s*"((?:[^"\\]|\\.){4,160})"/g)].map((x) => x[1].replace(/\\"/g, "\"")).slice(1); // index 0 is the plan title itself
-                if (titles.length > earlyPlanSteps) { earlyPlanSteps = titles.length; custom(CE.plan, { objective: m ? m[1].replace(/\\"/g, "\"").slice(0, 400) : null, steps: titles.map((t, i) => ({ id: String(i + 1), title: t })), provisional: true, source: "planning_output:early" }); }
+                if (titles.length > earlyPlanSteps) { earlyPlanSteps = titles.length; const early = sanitizePlan({ objective: earlyObjective, steps: titles.map((t, i) => ({ id: String(i + 1), title: t })) }); custom(CE.plan, { objective: early.objective, steps: early.steps, provisional: true, source: "planning_output:early" }); }
               }
             }
             if (u.channel === "step_output" && u.delta) {

@@ -1,6 +1,6 @@
 "use client";
 import { Card } from "@/components/ui/card";
-import { useStreamState } from "@/components/chat/open-intelligent-ui/chat-shell";
+import { useStreamState, hasPayload, PlannerPayloadDetails } from "@/components/chat/open-intelligent-ui/chat-shell";
 import { MODEL_ID, MODEL_LABEL, REASONING_MODE } from "@/lib/plugins";
 import { PluginChip } from "@/components/ui/plugin-favicon";
 import { pluginName } from "@/lib/plugin-catalogue";
@@ -8,6 +8,7 @@ import { pluginName } from "@/lib/plugin-catalogue";
 /**
  * "This run" card inside the inspector drawer (model row, plugin chips, agent events). Telemetry and the raw SSE request frame
  * live behind ONE reveal (<details data-testid=dev-disclosure>) — the only developer disclosure in the chat UI.
+ * a6: the raw planner JSON (<details data-testid=planner-payload>) is rendered ONLY inside that reveal, never in the run view.
  * Everything here is fed by the same live store the chat shell tees from the SSE body; nothing is fetched client-side.
  */
 export function RunRail() {
@@ -31,7 +32,7 @@ export function RunRail() {
       )}
       {/* ONE reveal for everything developer-facing: telemetry (first event / first token / tokens / stream integrity) + the raw SSE request frame. */}
       <details className="mt-3" data-testid="dev-disclosure">
-        <summary className="cursor-pointer select-none text-[11px] font-medium text-muted hover:text-foreground">Telemetry &amp; raw SSE frame</summary>
+        <summary className="cursor-pointer select-none text-[11px] font-medium text-muted hover:text-foreground">Developer: telemetry, raw SSE frame &amp; planner JSON</summary>
         <p className="mt-1 text-[11px] text-muted" data-testid="rail-metrics">
           {st.metrics?.totalTokens != null ? `${st.metrics.totalTokens.toLocaleString()} tokens` : "tokens —"} · first event {st.firstStatusMs ?? "—"} ms · tools {st.toolsMs != null ? `${(st.toolsMs / 1000).toFixed(1)} s` : "—"} · first token {st.firstTokenMs?.toLocaleString() ?? "—"} ms · answer {st.answerMs != null ? `${(st.answerMs / 1000).toFixed(1)} s` : "—"}
           {st.integrity ? ` · ${st.integrity.frames} frames` : ""}
@@ -39,6 +40,8 @@ export function RunRail() {
         {st.integrity && (st.integrity.dupes > 0 || st.integrity.gaps > 0) && <p className="mt-1 text-[10px] text-muted" data-testid="rail-integrity">stream integrity: {st.integrity.dupes} duplicate frame{st.integrity.dupes === 1 ? "" : "s"} dropped · {st.integrity.gaps} gap{st.integrity.gaps === 1 ? "" : "s"}</p>}
         <p className="mt-1 font-mono text-[10px] text-muted" data-testid="dev-ids">model {MODEL_ID} · plugins {plugins.join(", ") || "—"}{st.attachments ? ` · attachments ${st.attachments.length}` : ""}{st.voice ? ` · voice ${st.voice.phase}` : ""}</p>
         <pre className="mt-1 max-h-48 overflow-auto rounded-md border border-border bg-surface-2 p-2 text-[10.5px] leading-snug" data-testid="request-body">{st.request ? JSON.stringify(st.request.body, null, 2) : "No run yet — the raw SSE request frame appears here after the first message."}</pre>
+        {/* a6: raw planner / tool-definition JSON — developer-only, so it lives here and nowhere else (the Plan card shows the checklist only). */}
+        {hasPayload(st.plannerPayload) && <div className="mt-2 text-[11px]"><PlannerPayloadDetails payload={st.plannerPayload} /></div>}
       </details>
     </Card>
   );
