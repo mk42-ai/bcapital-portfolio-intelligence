@@ -475,18 +475,19 @@
 .oiu-think { border: 1px solid #e5e7eb; border-radius: 10px; background: #fafafa; font-size: 12.5px; color: #374151; overflow: hidden; }
 .oiu-think--live { border-color: #a7f3d0; background: #f0fdf9; }
 .oiu-think__head { display: flex; align-items: center; gap: 6px; width: 100%; margin: 0; padding: 7px 10px; border: 0; background: transparent; color: #1f2937; font: inherit; font-weight: 600; text-align: left; cursor: pointer; min-height: 32px; }
-.oiu-think__kinds { margin-left: 6px; font-weight: 400; color: #6b7280; font-size: 11.5px; }
 .oiu-think__head .oiu-thinking__chev { margin-left: auto; }
 .oiu-think--open .oiu-thinking__chev { transform: rotate(180deg); }
-.oiu-think__body { padding: 0 10px 8px; }
-.oiu-think__pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; color: #4b5563; max-height: 220px; overflow: auto; }
-.oiu-think--live .oiu-think__pre { max-height: 120px; mask-image: linear-gradient(to bottom, transparent 0, #000 24px); -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 24px); }
+/* Fixed-height scroll box: the FULL reasoning is in the DOM, the box never grows — streaming moves scrollTop, not layout. */
+.oiu-think__body { margin: 0 10px 8px; max-height: 240px; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.oiu-think--live .oiu-think__body { height: 240px; box-sizing: border-box; }
+.oiu-think__pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; color: #4b5563; }
 .oiu-work-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
 .oiu-work { display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border: 1px solid #e5e7eb; border-radius: 10px; background: #fff; font-size: 13px; color: #1f2937; min-height: 40px; }
 .oiu-work__icon { display: inline-grid; place-items: center; width: 20px; height: 20px; flex: none; color: #6b7280; margin-top: 1px; }
 .oiu-work--done .oiu-work__icon { color: #047857; }
-.oiu-work--failed { border-color: #fecaca; background: #fff5f5; }
-.oiu-work--failed .oiu-work__icon, .oiu-work__err { color: #b91c1c; }
+.oiu-work--failed { border-color: #EF4444; background: #fff5f5; }
+.oiu-work--failed .oiu-work__icon { color: #EF4444; } .oiu-work__err { color: #b91c1c; }
+.oiu-work--failed .oiu-work__label { color: #b91c1c; }
 .oiu-work__chips { display: inline-flex; gap: 3px; flex: none; margin-top: 2px; }
 .oiu-work__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
 .oiu-work__label { font-weight: 600; }
@@ -513,26 +514,54 @@
 .oiu-srcs__favs img { width: 14px; height: 14px; border-radius: 3px; margin-right: -3px; border: 1px solid #fff; background: #fff; }
 .oiu-srcs--open .oiu-thinking__chev { transform: rotate(180deg); }
 .oiu-srcs .oiu-sources { margin-top: 6px; border: 0; padding: 0; }
-.oiu-gap { display: flex; align-items: flex-start; gap: 6px; margin: 0; padding: 8px 10px; border: 1px solid #fecaca; background: #fff5f5; color: #991b1b; border-radius: 10px; font-size: 13px; }
+/* Data gap: exactly ONE red sentence per failed call — red token #EF4444 (border/icon/label), body text #b91c1c for AA on #fff5f5. */
+.oiu-gap { display: flex; align-items: flex-start; gap: 6px; margin: 0; padding: 8px 10px; border: 1px solid #EF4444; background: #fff5f5; color: #b91c1c; border-radius: 10px; font-size: 13px; }
+.oiu-gap > svg, .oiu-gap > strong { color: #EF4444; flex: none; margin-top: 2px; }
 .oiu-run .oiu-badge { margin-top: 2px; }
 .oiu-run--skeleton { margin: 4px 0 0 40px; max-width: 760px; }
 .oiu-activity-list--reserved, .oiu-activity--pending { display: none; }
 @media (max-width: 640px) {
   .oiu-run--skeleton { margin-left: 0; }
   .oiu-work { padding: 7px 8px; font-size: 12.5px; }
-  .oiu-think__kinds { display: none; }
   .oiu-media, .oiu-artifacts { max-width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .oiu-think--live .oiu-spin, .oiu-work .oiu-spin { animation: none; } }
 
-/* CLS: the live Thinking tail is a fixed 4-line ticker (76 px) so streaming reasoning never pushes Plan/Working down; collapses to its header after. */
-.oiu-think--live .oiu-think__body { height: 76px; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
-.oiu-think--live .oiu-think__pre { max-height: none; }
-/* 390 px pass: a 2-line live Thinking ticker (the auto-collapse at the first answer token then moves the turn by ~40 px instead of ~128 px). */
-.oiu-think__tail { display: none; }
-/* 390 px: the live reasoning is a ONE-LINE ticker inside the header (no body), so the auto-collapse at the first answer token moves nothing. */
+
+/* ===================================================================================================================
+ * 2026-10-11 — Lane B: run header + live timer, Thinking phase chips, footer timings. Charcoal #1F2937 / grey #6b7280 — no blue hues.
+ * =================================================================================================================== */
+.oiu-run__header { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; min-height: 20px; margin: 0; font-size: 12px; line-height: 16px; color: #6b7280; }
+.oiu-run__header > svg { color: #6b7280; flex: none; }
+.oiu-run__model { font-weight: 600; color: #1F2937; }
+.oiu-run__reason { color: #4b5563; }
+.oiu-run__plugins { display: inline-flex; align-items: center; gap: 2px; }
+.oiu-run__plugin { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 4px; border: 1px solid #e5e7eb; background: #fff; }
+.oiu-run__timer { display: inline-flex; align-items: center; gap: 4px; margin-left: auto; padding: 0 6px; min-width: 6ch; height: 18px; border-radius: 9px; background: #f3f4f6; color: #1F2937; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.oiu-run__timer[data-state="running"] { background: #e6faf3; color: #047857; }
+.oiu-run__timer > svg { color: inherit; }
+.oiu-run--skeleton .oiu-run__header { margin-bottom: 2px; }
+/* Thinking header: title + phase chips (Planning · Step n · Answer) + one-line live tail */
+.oiu-think__head { flex-wrap: nowrap; min-width: 0; }
+.oiu-think__title { flex: none; }
+.oiu-think__phases { display: inline-flex; align-items: center; gap: 4px; flex: none; margin-left: 2px; }
+.oiu-think__phase { display: inline-block; padding: 0 6px; height: 16px; line-height: 16px; border-radius: 8px; border: 1px solid #e5e7eb; background: #fff; color: #4b5563; font-size: 10.5px; font-weight: 500; white-space: nowrap; }
+.oiu-think--live .oiu-think__phase:last-child { border-color: #a7f3d0; color: #047857; }
+.oiu-think__tail { flex: 1 1 0; width: 0; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: 400; color: #4b5563; font-size: 11.5px; line-height: 17px; height: 17px; contain: strict; }
+.oiu-think__head .oiu-thinking__chev { margin-left: auto; flex: none; }
+/* Footer timings (replaces the provenance badge): one muted line under the turn */
+.oiu-run__footer { margin-top: 2px; border-top: 1px solid #f3f4f6; padding-top: 6px; }
+.oiu-run__footer .oiu-badge { margin: 0; color: #6b7280; font-variant-numeric: tabular-nums; }
+.oiu-run__footer .oiu-badge > svg { color: #9ca3af; }
 @media (max-width: 640px) {
-  .oiu-think--live .oiu-think__body { display: none; }
-  .oiu-think--live .oiu-think__tail { display: block; flex: 1 1 0; width: 0; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: clip; font-weight: 400; color: #4b5563; font-size: 11.5px; line-height: 17px; height: 17px; contain: strict; }
-  .oiu-think--live .oiu-think__kinds { display: none; }
+  /* header wraps to two lines max; chips shrink; thinking body 160 px */
+  .oiu-run__header { font-size: 11px; gap: 4px; max-height: 40px; overflow: hidden; }
+  .oiu-run__plugin { width: 16px; height: 16px; }
+  .oiu-run__timer { height: 16px; padding: 0 5px; }
+  .oiu-think__body, .oiu-think--live .oiu-think__body { max-height: 160px; height: 160px; }
+  .oiu-think__phase { padding: 0 4px; font-size: 10px; }
+  .oiu-think__phases { gap: 3px; }
+  .oiu-think__tail { display: none; }
+  .oiu-run__footer .oiu-badge { font-size: 10.5px; min-height: 0; }
 }
+@media (prefers-reduced-motion: reduce) { .oiu-run__timer .oiu-spin { animation: none; } }

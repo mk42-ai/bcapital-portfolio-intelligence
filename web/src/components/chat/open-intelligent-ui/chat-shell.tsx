@@ -63,7 +63,7 @@ export type Prompt =
   | { kind: "require_creds"; pluginId: string | null; service: string | null; fields: { key: string; label?: string; type?: string }[] }
   | { kind: "awaiting_browser_action"; action: string | null; message: string | null; url: string | null };
 type StreamState = {
-  phase: StreamPhase; detail: string; startedAt: number; sessionId: string | null; version: number;
+  phase: StreamPhase; detail: string; startedAt: number; finishedAt: number | null; sessionId: string | null; version: number;
   firstStatusMs: number | null; firstTokenMs: number | null; firstCitationMs: number | null; chunks: number; thinking: string; thinkingKinds: string[]; error: StreamError;
   sources: Source[]; metrics: Record<string, number> | null; lastThreadId: string | null;
   pluginIds: string[]; suggested: { id: string; name: string; logoUrl?: string }[]; plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null;
@@ -76,7 +76,7 @@ type StreamState = {
 export type ToolRow = { id: string; name: string; pluginId: string; query: string; stepId: string; status: "running" | "done" | "failed"; sources?: number; durationMs?: number; message?: string; raw?: string };
 export type LiveArtifact = { key: string; name: string; phase: "creating" | "ready" | "failed"; artifact?: Artifact; message?: string; media?: { status?: string; id?: string | null; message?: string | null } };
 export type StepOutput = { stepId: string; title: string; plugins: { pluginId: string; name: string; params: Record<string, unknown> | null }[]; at: number };
-const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null, artifacts: [], outputs: [], tools: [] };
+const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, finishedAt: null, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null, artifacts: [], outputs: [], tools: [] };
 let streamState: StreamState = IDLE;
 let pending: Partial<StreamState> | null = null; let rafId = 0;
 const liveSources = new Map<string, Source[]>();
@@ -118,8 +118,10 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
   const t0 = peek().startedAt || Date.now();
   const finalize = () => {
     const st = peek(); const key = sourcesKey(st.text);
-    const meta: StoredMeta = { model: MODEL_LABEL, modelId: MODEL_ID, reasoningMode: REASONING_MODE, pluginId: PLUGIN_ID, pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, firstCitationMs: st.firstCitationMs, totalMs: Date.now() - t0, chunks: st.chunks, metrics: st.metrics, thinking: st.thinking.slice(0, 6000), error: st.error ? { code: st.error.code, message: st.error.message } : null, at: new Date().toISOString(), summaries: st.summaries.map((s) => ({ index: s.index, text: s.text, doneAt: s.doneAt ?? null })), plan: st.plan, artifacts: st.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!), tools: st.tools, artifactFailures: st.artifacts.filter((a) => a.phase === "failed").map((a) => ({ name: a.name, message: a.message ?? "" })), outputs: st.outputs };
+    // The live DOM never truncates the reasoning; ONLY the persisted (localStorage) copy is capped at 200,000 chars to stay inside the quota.
+    const meta: StoredMeta & { thinkingKinds?: string[] } = { model: MODEL_LABEL, modelId: MODEL_ID, reasoningMode: REASONING_MODE, pluginId: PLUGIN_ID, pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, firstCitationMs: st.firstCitationMs, totalMs: Date.now() - t0, chunks: st.chunks, metrics: st.metrics, thinking: st.thinking.slice(0, 200_000), thinkingKinds: st.thinkingKinds, error: st.error ? { code: st.error.code, message: st.error.message } : null, at: new Date().toISOString(), summaries: st.summaries.map((s) => ({ index: s.index, text: s.text, doneAt: s.doneAt ?? null })), plan: st.plan, artifacts: st.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!), tools: st.tools, artifactFailures: st.artifacts.filter((a) => a.phase === "failed").map((a) => ({ name: a.name, message: a.message ?? "" })), outputs: st.outputs };
     liveMeta.set(key, meta); rememberMeta(key, meta);
+    if (st.finishedAt == null) setStream({ finishedAt: Date.now() }, true); // freezes the run-header timer at totalMs
     if (st.sources.length) { liveSources.set(key, st.sources); rememberSources(key, st.sources); }
   };
   const seen = new Set<number>(); let lastSeq = 0; let dupes = 0; let gapsSeen = 0;
@@ -146,7 +148,7 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
             else setStream(extra);
             break;
           }
-          case CE.thinking: if (typeof v.delta === "string") { const kind = String(v.kind ?? "thinking"); setStream({ thinking: (st.thinking + v.delta).slice(-12000), thinkingKinds: st.thinkingKinds.includes(kind) ? st.thinkingKinds : [...st.thinkingKinds, kind], ...(st.phase === "connecting" ? { phase: "planning", detail: PHASE_LABEL.planning } : {}) }); } break;
+          case CE.thinking: if (typeof v.delta === "string") { const kind = String(v.kind ?? "thinking"); setStream({ thinking: st.thinking + v.delta, thinkingKinds: st.thinkingKinds.includes(kind) ? st.thinkingKinds : [...st.thinkingKinds, kind], ...(st.phase === "connecting" ? { phase: "planning", detail: PHASE_LABEL.planning } : {}) }); } break;
           case CE.sources: if (Array.isArray(v.sources)) { const items = (v.sources as Partial<Source>[]).filter((x): x is Source => typeof x.url === "string" && !!x.url).map((x) => ({ url: x.url, title: x.title || x.sourceName || x.url, sourceName: x.sourceName || x.title || x.url, ...(typeof x.imageUrl === "string" && /^https?:\/\//.test(x.imageUrl) ? { imageUrl: x.imageUrl } : {}) })); setStream({ sources: items, firstCitationMs: st.firstCitationMs ?? (items.length ? now - t0 : null) }); } break;
           case CE.metrics: if (v.publicMetrics && typeof v.publicMetrics === "object") setStream({ metrics: v.publicMetrics as Record<string, number> }); break;
           case CE.error: setStream({ error: { code: String(v.code ?? "error"), message: String(v.message ?? "Upstream error"), raw: typeof v.raw === "string" ? v.raw : undefined } }, true); break;
@@ -304,19 +306,37 @@ function SourceList({ sources, compact, live, streamingNow }: { sources: Source[
     </nav>
   );
 }
-/** Per-answer provenance badge: model · reasoning mode · plugins · first-event / first-token / total ms · tokens. */
+/** Run footer (timings): "first event X ms · first token Y ms · total Z s · N tokens". Model/reasoning/plugins live in the RunHeader above the turn. */
 function AnswerBadge({ meta, live }: { meta: Partial<StoredMeta> | null; live?: boolean }) {
   const ftt = meta?.firstTokenMs ?? null; const fe = meta?.firstStatusMs ?? null; const total = meta?.totalMs ?? null;
-  const plugins = meta?.pluginIds?.length ? meta.pluginIds : [PLUGIN_ID];
   return (
-    <p className="oiu-badge" data-testid="answer-badge" data-first-token-ms={ftt ?? ""} data-first-event-ms={fe ?? ""} data-total-ms={total ?? ""} aria-label="Answer provenance">
-      <Cpu className="size-3" aria-hidden /><span>{MODEL_LABEL}</span><span className="oiu-badge__sep">·</span><span>{REASONING_MODE}</span>
-      <span className="oiu-badge__sep">·</span><span className="oiu-badge__plugins">{plugins.map((id) => <span key={id} className="oiu-badge__plugin" title={catalogueName(id)}><PluginFavicon id={id} size={16} /><code>{id}</code></span>)}</span>
-      <span className="oiu-badge__sep">·</span><span>{fe != null ? `first event ${fe} ms` : "first event …"}</span>
-      <span className="oiu-badge__sep">·</span><span>{ftt != null ? `first token ${ftt.toLocaleString()} ms` : live ? "first token …" : "first token n/a"}</span>
-      {total != null && <><span className="oiu-badge__sep">·</span><span>total {(total / 1000).toFixed(1)} s</span></>}
-      {meta?.metrics?.totalTokens != null && <><span className="oiu-badge__sep">·</span><span>{meta.metrics.totalTokens.toLocaleString()} tokens</span></>}
-    </p>
+    <div className="oiu-run__footer" data-testid="run-footer" data-footer="true">
+      <p className="oiu-badge" data-testid="answer-badge" data-first-token-ms={ftt ?? ""} data-first-event-ms={fe ?? ""} data-total-ms={total ?? ""} aria-label="Run timings">
+        <Cpu className="size-3" aria-hidden />
+        <span>{fe != null ? `first event ${fe.toLocaleString()} ms` : "first event …"}</span>
+        <span className="oiu-badge__sep">·</span><span>{ftt != null ? `first token ${ftt.toLocaleString()} ms` : live ? "first token …" : "first token n/a"}</span>
+        {total != null && <><span className="oiu-badge__sep">·</span><span>total {(total / 1000).toFixed(1)} s</span></>}
+        {meta?.metrics?.totalTokens != null && <><span className="oiu-badge__sep">·</span><span>{meta.metrics.totalTokens.toLocaleString()} tokens</span></>}
+      </p>
+    </div>
+  );
+}
+/** Compact run header above every assistant turn: model · reasoning level · plugin favicons · live timer (ticks from startedAt, freezes at totalMs). */
+const fmtElapsed = (ms: number) => (ms < 60_000 ? `${(ms / 1000).toFixed(1)} s` : `${Math.floor(ms / 60_000)}m ${Math.floor((ms % 60_000) / 1000)} s`);
+function RunHeader({ live, startedAt, totalMs, pluginIds }: { live: boolean; startedAt: number; totalMs: number | null; pluginIds: string[] }) {
+  const [now, setNow] = useState(() => Date.now());
+  // Interval-driven (not frame-driven): the timer keeps ticking on heartbeat-only stretches until [DONE]/RUN_FINISHED.
+  useEffect(() => { if (!live || totalMs != null) return; const id = setInterval(() => setNow(Date.now()), 250); return () => clearInterval(id); }, [live, totalMs]);
+  const ms = totalMs != null ? totalMs : live && startedAt ? Math.max(0, now - startedAt) : 0;
+  const plugins = pluginIds.length ? pluginIds : [PLUGIN_ID];
+  return (
+    <div className="oiu-run__header" data-testid="run-header" data-live={live ? "true" : "false"} aria-label="Run">
+      <Cpu className="size-3" aria-hidden /><span className="oiu-run__model">{MODEL_LABEL}</span>
+      <span className="oiu-badge__sep">·</span><span className="oiu-run__reason">{REASONING_MODE}</span>
+      <span className="oiu-badge__sep">·</span>
+      <span className="oiu-run__plugins" aria-label="Plugins">{plugins.slice(0, 6).map((id) => <span key={id} className="oiu-run__plugin" title={catalogueName(id)}><PluginFavicon id={id} size={14} /></span>)}</span>
+      {(live || totalMs != null) && <span className="oiu-run__timer" data-testid="run-timer" data-state={live && totalMs == null ? "running" : "frozen"} data-ms={Math.round(ms)}>{live && totalMs == null ? <Loader2 className="size-3 oiu-spin" aria-hidden /> : null}{fmtElapsed(ms)}</span>}
+    </div>
   );
 }
 /** Collapsible reasoning trace — virtualised: only the last ~40 lines are in the DOM while collapsed/streaming; full text on demand. */
@@ -435,6 +455,7 @@ type RunData = {
   plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null; tools: ToolRow[]; summaries: StepSummary[]; outputs: StepOutput[];
   prompt: Prompt | null; sessionId: string | null; text: string; known: Source[]; sources: Source[]; artifacts: LiveArtifact[];
   error: { code: string; message: string; raw?: string } | null; meta: Partial<StoredMeta> | null; filler: boolean; fillerTick: number; elapsedMs: number;
+  startedAt: number; totalMs: number | null;
 };
 const IMG_URL_RE = /!\[([^\]]*)\]\((https?:\/\/[^\s)]+|\/api\/artifacts\/[^\s)]+)\)/g;
 const VIDEO_URL_RE = /(https?:\/\/[^\s)"']+\.(?:mp4|webm|mov)(?:\?[^\s)"']*)?)/gi;
@@ -467,19 +488,22 @@ function WorkingSkeleton({ detail, plugins }: { detail: string; plugins: string[
   return (
     <li className="oiu-work oiu-work--running oiu-work--skeleton" data-testid="working-row" data-state="queued">
       <span className="oiu-work__icon" aria-hidden><Loader2 className="size-3.5 oiu-spin" /></span>
-      <span className="oiu-work__chips" data-testid="working-chips">{plugins.slice(0, 4).map((id) => <PluginFavicon key={id} id={id} size={16} />)}</span>
-      <span className="oiu-work__text"><span className="oiu-work__label">{detail || "Preparing the research"}</span><span className="oiu-shimmer oiu-shimmer--row" aria-hidden><span /></span></span>
+      <span className="oiu-work__chips" data-testid="working-chips">{(plugins.length ? plugins : [PLUGIN_ID]).slice(0, 4).map((id) => <PluginFavicon key={id} id={id} size={16} />)}</span>
+      <span className="oiu-work__text"><span className="oiu-work__label">{detail || LABEL.searching(catalogueName(plugins[0] ?? PLUGIN_ID))}</span><span className="oiu-shimmer oiu-shimmer--row" aria-hidden><span /></span></span>
     </li>
   );
 }
-function OutputsCard({ outputs }: { outputs: StepOutput[] }) {
+const hasParams = (p: Record<string, unknown> | null | undefined): p is Record<string, unknown> => !!p && typeof p === "object" && Object.keys(p).length > 0;
+function OutputsCard({ outputs: raw }: { outputs: StepOutput[] }) {
   const [open, setOpen] = useState(false);
+  // Skip plugin entries with null/empty params and hide the card when no step has a real call — never an empty `{}` box.
+  const outputs = raw.map((o) => ({ ...o, plugins: o.plugins.filter((pl) => hasParams(pl.params)) })).filter((o) => o.plugins.length > 0);
   if (!outputs.length) return null;
   const calls = outputs.reduce((n, o) => n + o.plugins.length, 0);
   return (
     <section className="oiu-outputs" data-testid="outputs-card" data-count={outputs.length}>
       <button type="button" className="oiu-outputs__head" aria-expanded={open} onClick={() => setOpen((o) => !o)}><Wrench className="size-3.5" aria-hidden /><span>Outputs · {outputs.length} step{outputs.length === 1 ? "" : "s"} · {calls} call{calls === 1 ? "" : "s"}</span><ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden /></button>
-      {open && <ol className="oiu-outputs__list">{outputs.map((o) => <li key={o.stepId} data-testid="output-step"><strong>{o.title}</strong>{o.plugins.map((pl, i) => <span key={i} className="oiu-outputs__call"><PluginFavicon id={pl.pluginId} size={14} /> {pl.name || catalogueName(pl.pluginId)}{pl.params ? <code>{JSON.stringify(pl.params).slice(0, 160)}</code> : null}</span>)}</li>)}</ol>}
+      {open && <ol className="oiu-outputs__list">{outputs.map((o) => <li key={o.stepId} data-testid="output-step"><strong>{o.title}</strong>{o.plugins.map((pl, i) => <span key={i} className="oiu-outputs__call"><PluginFavicon id={pl.pluginId} size={14} /> {pl.name || catalogueName(pl.pluginId)}<code>{JSON.stringify(pl.params).slice(0, 160)}</code></span>)}</li>)}</ol>}
     </section>
   );
 }
@@ -507,7 +531,7 @@ function ArtifactRow({ a }: { a: LiveArtifact }) {
 }
 function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void }) {
   const [cites, setCites] = useState<Cite[]>([]);
-  const thinkingShown = useThrottled(r.thinking.length > 4000 ? r.thinking.slice(-4000) : r.thinking, 250);
+  const thinkingShown = useThrottled(r.thinking, 250); // full body — no character cap (throttled re-render only)
   const showSkeleton = r.live && r.tools.length === 0 && !r.answerStarted && r.phase !== "awaiting-input";
   const readyArts = r.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!);
   const media = useMemo(() => mediaFrom(r.text, readyArts), [r.text, readyArts.length]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -516,9 +540,11 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
   const gap = r.error ? r.error.message : failedTools.length ? `${failedTools.map((t) => t.name).join(", ")} failed: ${failedTools[0].message ?? "upstream error"}` : r.artifacts.find((a) => a.phase === "failed") ? `A file could not be saved: ${r.artifacts.find((a) => a.phase === "failed")!.message ?? "storage error"}` : "";
   return (
     <div className="oiu-run" data-testid="run-view" data-live={r.live ? "true" : "false"}>
-      {/* 1 — Thinking, pinned at the top */}
+      {/* 0 — Run header: model · reasoning · plugin chips · live timer */}
+      <RunHeader live={r.live} startedAt={r.startedAt} totalMs={r.totalMs} pluginIds={(r.meta?.pluginIds as string[] | undefined) ?? [PLUGIN_ID]} />
+      {/* 1 — Thinking, pinned at the top (ONE per turn, never moves) */}
       {(r.thinking || r.live) && (
-        <ThinkingBlock text={thinkingShown} kinds={r.thinkingKinds} live={r.live} collapsed={r.answerStarted || !r.live} elapsedMs={r.elapsedMs} />
+        <ThinkingBlock text={thinkingShown} kinds={r.thinkingKinds} plan={r.plan} answerStarted={r.answerStarted} live={r.live} collapsed={r.answerStarted || !r.live} elapsedMs={r.meta?.firstTokenMs ?? r.elapsedMs} />
       )}
       {/* 2 — Plan checklist */}
       {(r.plan || (r.live && !r.answerStarted)) && <PlanStepper plan={r.plan} reserve={r.live} />}
@@ -551,26 +577,46 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
       {/* Sources mount once the answer has finished streaming (live text growth would otherwise push this row on every token → CLS). */}
       {(!r.live || r.answerDone) && <CollapsedSources sources={railSources} live={r.live} />}
       {/* 10 — one Data gap sentence on failure */}
-      {gap && !r.live && <p className="oiu-gap" role="alert" data-testid="data-gap"><AlertTriangle className="size-3.5" aria-hidden /> <strong>Data gap:</strong> {gap}</p>}
-      {!r.live && r.meta && <AnswerBadge meta={r.meta} />}
+      {/* shown live too — the moment a tool fails or an error frame arrives, never a green check on a failed call */}
+      {gap && <p className="oiu-gap" role="alert" data-testid="data-gap"><AlertTriangle className="size-3.5" aria-hidden /> <strong>Data gap:</strong> {gap}</p>}
+      {/* 11 — footer timings: settled turns, and live once the answer is done */}
+      {((!r.live && r.meta) || (r.live && r.answerDone)) && <AnswerBadge meta={{ ...(r.meta ?? {}), totalMs: r.totalMs ?? r.meta?.totalMs ?? null }} live={r.live} />}
     </div>
   );
 }
-/** Thinking block pinned at the top of the turn: shows the live tail while streaming, collapses once the answer starts. */
-function ThinkingBlock({ text, kinds, live, collapsed, elapsedMs }: { text: string; kinds: string[]; live: boolean; collapsed: boolean; elapsedMs: number }) {
+/** Phase chips for the Thinking block: planning_* → Planning, step_* → Step 1…n (n = plan steps started so far), fulfillment_* → Answer. */
+function thinkingPhases(kinds: string[], plan: RunData["plan"], answerStarted: boolean): string[] {
+  const out: string[] = [];
+  if (kinds.some((k) => k.startsWith("planning"))) out.push("Planning");
+  const started = plan?.steps.filter((st) => st.state !== "pending").length ?? 0;
+  const n = Math.max(started, kinds.some((k) => k.startsWith("step")) ? 1 : 0);
+  for (let i = 1; i <= n; i++) out.push(`Step ${i}`);
+  if (kinds.some((k) => k.startsWith("fulfillment")) || answerStarted) out.push("Answer");
+  return out;
+}
+/** Thinking block pinned at the top of the turn: streams the FULL text in a fixed-height scrollable body (auto-follows the tail), collapses to a
+ *  one-line summary ("Thought for N s · Planning · Step 1 · Answer") on the first answer token, re-expandable by click. Never truncates. */
+function ThinkingBlock({ text, kinds, plan, answerStarted, live, collapsed, elapsedMs }: { text: string; kinds: string[]; plan: RunData["plan"]; answerStarted: boolean; live: boolean; collapsed: boolean; elapsedMs: number }) {
   const [open, setOpen] = useState<boolean | null>(null);
+  const bodyRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => { if (collapsed) setOpen(null); }, [collapsed]); // first answer token → collapse even if the user had expanded it while streaming
+  const streaming = live && !collapsed;
   const isOpen = open ?? !collapsed;
-  const lines = text.split("\n").filter(Boolean);
+  // Follow the tail while streaming (scrollTop, not layout — the body height is fixed so nothing below it moves).
+  useEffect(() => { const el = bodyRef.current; if (el && streaming && isOpen) el.scrollTop = el.scrollHeight; }, [text, streaming, isOpen]);
+  const phases = thinkingPhases(kinds, plan, answerStarted);
+  const secs = Math.max(1, Math.round(elapsedMs / 1000));
+  const lastLine = streaming ? text.trimEnd().split("\n").filter(Boolean).pop() ?? "" : "";
   return (
-    <section className={`oiu-think${isOpen ? " oiu-think--open" : ""}${live && !collapsed ? " oiu-think--live" : ""}`} data-testid="thinking-block" data-state={live && !collapsed ? "streaming" : "collapsed"} data-chars={text.length}>
+    <section className={`oiu-think${isOpen ? " oiu-think--open" : ""}${streaming ? " oiu-think--live" : ""}`} data-testid="thinking-block" data-state={streaming ? "streaming" : isOpen ? "expanded" : "collapsed"} data-chars={text.length} data-phases={phases.join(",")}>
       <button type="button" className="oiu-think__head" aria-expanded={isOpen} onClick={() => setOpen(!isOpen)}>
-        {live && !collapsed ? <Loader2 className="size-3.5 oiu-spin" aria-hidden /> : <Brain className="size-3.5" aria-hidden />}
-        <span>{live && !collapsed ? "Thinking" : `Thought for ${Math.max(1, Math.round(elapsedMs / 1000))} s`}</span>
-        {live && !collapsed && lines.length > 0 && <span className="oiu-think__tail" aria-hidden>{lines[lines.length - 1].slice(-56)}</span>}
-        {kinds.length ? <span className="oiu-think__kinds">{kinds.map((k) => k.replace("_output", "").replace("step", "steps")).join(" · ")}</span> : null}
+        {streaming ? <Loader2 className="size-3.5 oiu-spin" aria-hidden /> : <Brain className="size-3.5" aria-hidden />}
+        <span className="oiu-think__title">{streaming ? "Thinking" : `Thought for ${secs} s`}</span>
+        {phases.length > 0 && <span className="oiu-think__phases" data-testid="thinking-phases">{phases.map((p) => <span key={p} className="oiu-think__phase" data-phase={p}>{p}</span>)}</span>}
+        {streaming && lastLine && <span className="oiu-think__tail" aria-hidden>{lastLine.slice(-72)}</span>}
         <ChevronDown className="size-3.5 oiu-thinking__chev" aria-hidden />
       </button>
-      {isOpen && <div className="oiu-think__body">{text ? <pre className="oiu-think__pre">{(live && !collapsed ? lines.slice(-4) : lines.slice(-200)).join("\n")}</pre> : <span className="oiu-shimmer" aria-hidden><span /><span /></span>}</div>}
+      {isOpen && <div className="oiu-think__body" ref={bodyRef}>{text ? <pre className="oiu-think__pre">{text}</pre> : <span className="oiu-shimmer" aria-hidden><span /><span /></span>}</div>}
     </section>
   );
 }
@@ -585,13 +631,13 @@ const AssistantMessage: AssistantMessageComponent = memo(function AssistantMessa
   // The live turn is drawn by PluginTimeline (OpenUI routes it there while tools are on the turn); this view is the settled replay.
   if (isStreaming) return <div className="oiu-assistant" data-testid="assistant-message"><div className="oiu-assistant__avatar" aria-hidden><Bot className="size-4" strokeWidth={2} /></div><div className="oiu-assistant__body"><CitedMarkdown text={content || "…"} known={[]} streaming onCites={undefined} /></div></div>;
   const r: RunData = {
-    live: false, phase: "idle", detail: "", thinking: meta?.thinking ?? "", thinkingKinds: [], answerStarted: true,
+    live: false, phase: "idle", detail: "", thinking: meta?.thinking ?? "", thinkingKinds: (meta as { thinkingKinds?: string[] } | null)?.thinkingKinds ?? [], answerStarted: true,
     plan: meta?.plan ? { objective: meta.plan.objective, steps: meta.plan.steps.map((s) => ({ ...s, state: s.state === "running" ? "done" : s.state })) } : null,
     tools: (meta?.tools ?? []).map((t) => ({ ...t, status: t.status === "running" ? "done" : t.status })),
     summaries: (meta?.summaries ?? []).map((s) => ({ index: s.index, stepId: "", state: "done" as const, text: s.text, optimistic: false, startedAt: 0, doneAt: s.doneAt ?? undefined })),
     outputs: meta?.outputs ?? [], prompt: null, sessionId: null, text: content, known: meta?.error ? [] : known, sources: meta?.error ? [] : known,
     artifacts: [...(meta?.artifacts ?? []).map((a) => ({ key: a.id, name: a.name, phase: "ready" as const, artifact: a })), ...(meta?.artifactFailures ?? []).map((f, i) => ({ key: `f${i}`, name: f.name, phase: "failed" as const, message: f.message }))],
-    error: meta?.error ?? null, meta, filler: false, fillerTick: 0, elapsedMs: meta?.totalMs ?? 0,
+    error: meta?.error ?? null, meta, filler: false, fillerTick: 0, elapsedMs: meta?.totalMs ?? 0, startedAt: 0, totalMs: meta?.totalMs ?? null,
   };
   return (
     <div className="oiu-assistant" data-testid="assistant-message">
@@ -627,10 +673,12 @@ const PluginTimeline: ToolCallTimelineComponent = ({ steps, isLast }) => {
     live: true, answerDone: st.answerDone, phase: st.phase, detail: st.detail, thinking: st.thinking, thinkingKinds: st.thinkingKinds, answerStarted: !!(liveText || st.text),
     plan: st.plan, tools: st.tools, summaries: st.summaries, outputs: st.outputs, prompt: st.prompt, sessionId: st.sessionId,
     text: liveText || st.text, known: st.error?.code === "plugin_error" ? [] : st.sources, sources: st.sources, artifacts: st.artifacts,
-    error: st.error, meta: { pluginIds: st.pluginIds }, filler: st.filler, fillerTick: st.fillerTick, elapsedMs: st.startedAt ? Date.now() - st.startedAt : 0,
+    error: st.error, meta: { pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, metrics: st.metrics }, filler: st.filler, fillerTick: st.fillerTick, elapsedMs: st.startedAt ? Date.now() - st.startedAt : 0,
+    startedAt: st.startedAt, totalMs: st.finishedAt != null && st.startedAt ? st.finishedAt - st.startedAt : null,
   };
   return (
     <div className="oiu-assistant oiu-assistant--streaming" aria-live="polite" aria-busy="true" data-testid="assistant-streaming">
+      <LiveRunMarker />
       <div className="oiu-assistant__avatar" aria-hidden><Bot className="size-4" strokeWidth={2} /></div>
       <div className="oiu-assistant__body"><RunView r={r} onAnswer={(text) => { setStream({ prompt: null }, true); void processMessage({ role: "user", content: text }); }} /></div>
     </div>
@@ -684,11 +732,16 @@ function ScrollAnchor() {
   return createPortal(<button type="button" className="oiu-jump" data-testid="jump-to-latest" onClick={() => { const node = el.current; if (node) { node.scrollTo({ top: node.scrollHeight, behavior: "smooth" }); atBottom.current = true; setAway(false); } }}><ArrowDown className="size-3.5" aria-hidden /> Jump to latest</button>, host);
 }
 
+/** Tiny store: is a live RunView mounted? The PendingRow skeleton hides the moment it is, so only ONE [data-testid=thinking-block] exists per turn. */
+let liveRunViews = 0; const liveListeners = new Set<() => void>();
+const useLiveRunMounted = () => useSyncExternalStore((l) => { liveListeners.add(l); return () => { liveListeners.delete(l); }; }, () => liveRunViews > 0, () => false);
+function LiveRunMarker() { useEffect(() => { liveRunViews++; liveListeners.forEach((l) => l()); return () => { liveRunViews--; liveListeners.forEach((l) => l()); }; }, []); return null; }
 /**
- * Live-phase row, shown IMMEDIATELY after send (isRunning) until the first answer token, with an elapsed counter. Portaled into OpenUI's bottom loader slot.
+ * Live-phase row, shown IMMEDIATELY after send (isRunning) until the live RunView mounts (or the first tool row / answer token), with the run
+ * header + elapsed timer. Portaled into OpenUI's bottom loader slot.
  */
 function PendingRow() {
-  const isRunning = useThread((s) => s.isRunning); const st = useStreamState();
+  const isRunning = useThread((s) => s.isRunning); const st = useStreamState(); const mounted = useLiveRunMounted();
   const [host, setHost] = useState<HTMLElement | null>(null); const [now, setNow] = useState(() => Date.now());
   useEffect(() => {
     if (!isRunning) { setHost(null); return; }
@@ -699,21 +752,24 @@ function PendingRow() {
     const tick = setInterval(() => setNow(Date.now()), 500);
     return () => { mo.disconnect(); clearInterval(tick); };
   }, [isRunning]);
-  if (!isRunning || !host || st.firstTokenMs != null || st.tools.length > 0) return null;
+  if (!isRunning || !host || mounted || st.firstTokenMs != null || st.tools.length > 0) return null;
   const secs = st.startedAt ? Math.max(0, (now - st.startedAt) / 1000) : 0;
+  const skelPlugins = (st.suggested.length ? st.suggested.map((p) => p.id) : st.pluginIds.length ? st.pluginIds : [PLUGIN_ID]).slice(0, 5);
+  const phases = thinkingPhases(st.thinkingKinds, st.plan, false);
   const label = st.detail || PHASE_LABEL.connecting;
   // FIRST-EVENT SKELETON: the moment the user sends, the turn already shows Thinking (pinned top) + one Working row with the plugin chips,
   // so perceived latency is the first status frame (~0.3–0.7 s), not the first answer token (35–82 s observed upstream).
   return createPortal(
     <div className="oiu-run oiu-run--skeleton" data-testid="run-skeleton" data-phase={st.phase || "connecting"} data-first-status-ms={st.firstStatusMs ?? ""}>
-      <section className="oiu-think oiu-think--live oiu-think--open" data-testid="thinking-block" data-state="streaming" data-chars={st.thinking.length}>
-        <p className="oiu-think__head"><Loader2 className="size-3.5 oiu-spin" aria-hidden /><span>Thinking</span></p>
-        <div className="oiu-think__body">{st.thinking ? <pre className="oiu-think__pre">{st.thinking.split("\n").filter(Boolean).slice(-6).join("\n")}</pre> : <span className="oiu-shimmer" aria-hidden><span /><span /></span>}</div>
+      <RunHeader live startedAt={st.startedAt} totalMs={null} pluginIds={st.pluginIds} />
+      <section className="oiu-think oiu-think--live oiu-think--open" data-testid="thinking-block" data-state="streaming" data-chars={st.thinking.length} data-phases={phases.join(",")}>
+        <p className="oiu-think__head"><Loader2 className="size-3.5 oiu-spin" aria-hidden /><span className="oiu-think__title">Thinking</span>{phases.length > 0 && <span className="oiu-think__phases">{phases.map((p) => <span key={p} className="oiu-think__phase" data-phase={p}>{p}</span>)}</span>}</p>
+        <div className="oiu-think__body" ref={(el) => { if (el) el.scrollTop = el.scrollHeight; }}>{st.thinking ? <pre className="oiu-think__pre">{st.thinking}</pre> : <span className="oiu-shimmer" aria-hidden><span /><span /></span>}</div>
       </section>
       <ol className="oiu-work-list" aria-label="Working" data-testid="working-list">
         <li className="oiu-work oiu-work--running oiu-work--skeleton" data-testid="working-row" data-state="queued">
           <span className="oiu-work__icon" aria-hidden><Loader2 className="size-3.5 oiu-spin" /></span>
-          <span className="oiu-work__chips" data-testid="working-chips">{(st.suggested.length ? st.suggested.map((p) => p.id) : st.pluginIds).slice(0, 5).map((id) => <PluginFavicon key={id} id={id} size={16} />)}</span>
+          <span className="oiu-work__chips" data-testid="working-chips">{skelPlugins.map((id) => <PluginFavicon key={id} id={id} size={16} />)}</span>
           <span className="oiu-work__text"><span className="oiu-work__label">{label}</span><span className="oiu-work__query" data-testid="pending-row" data-first-status-ms={st.firstStatusMs ?? ""}>{secs.toFixed(1)} s{st.firstStatusMs != null ? ` · first event ${st.firstStatusMs} ms` : ""}</span></span>
         </li>
       </ol>
