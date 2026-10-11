@@ -1,0 +1,312 @@
+{
+ "data": {
+  "openapi": "3.0.0",
+  "info": {
+   "title": "Media API",
+   "version": "1.0.0",
+   "description": "API for creating, fetching and deleting media files"
+  },
+  "servers": [
+   {
+    "url": "https://api.on-demand.io"
+   }
+  ],
+  "paths": {
+   "/media/v1/public/file": {
+    "post": {
+     "description": "used to create new media from URLs of document, audio, video, youtube, image",
+     "summary": "Create Media URL",
+     "operationId": "createMediaURL",
+     "requestBody": {
+      "required": true,
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "createdBy": {
+           "type": "string",
+           "example": "Peeyush Mishra",
+           "description": "Name of the creator who creates media"
+          },
+          "updatedBy": {
+           "type": "string",
+           "example": "Peeyush Mishra",
+           "description": "Name of the creator who updates media"
+          },
+          "sessionId": {
+           "type": "string",
+           "example": "6633e8d91433b0186f85c9d8",
+           "description": "Id of the session in which the user uploads their media file"
+          },
+          "externalUserId": {
+           "type": "string",
+           "example": "867ee8d97393b0156f85c4s9",
+           "description": "external User ID of the user who uploads their media file"
+          },
+          "url": {
+           "type": "string",
+           "format": "uri",
+           "example": "https://res.cloudinary.com/dbbqfdikp/image/upload/v1712401452/hrhjyqyo0injma4ppupb.pdf",
+           "description": "url which contains the media data"
+          },
+          "name": {
+           "type": "string",
+           "example": "TESTING_DOC_01",
+           "description": "name of the media uploaded by user"
+          },
+          "plugins": {
+           "type": "array",
+           "items": {
+            "type": "string",
+            "example": "plugin-1713954536"
+           },
+           "description": "Plugin Ids required for processing of media that is uploaded by user"
+          },
+          "sizeBytes": {
+           "type": "integer",
+           "example": 7834093,
+           "description": "size in bytes of the media uploaded by user"
+          },
+          "responseMode": {
+           "type": "string",
+           "enum": [
+            "sync",
+            "webhook"
+           ],
+           "example": "sync",
+           "description": "Mode in which the user decides to recieve the responses from media"
+          },
+          "pluginInputs": {
+           "type": "array",
+           "description": "Inputs passed for plugins for specific functionalities like uploading media in a knowledge plugin",
+           "items": {
+            "type": "object",
+            "additionalProperties": {
+             "description": "This will hold the pluginId of global knowlede ingest plugin:- plugin-1716472791",
+             "type": "object",
+             "properties": {
+              "postProcess": {
+               "type": "object",
+               "description": "postProcess keyword describes that this knowledge ingestion will happen during postprocessing of plugin",
+               "properties": {
+                "chatPluginId": {
+                 "type": "string",
+                 "description": "PluginId of the knowledge plugin in which the media file is uploaded",
+                 "example": "plugin-998877"
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         },
+         "required": [
+          "url",
+          "plugins",
+          "responseMode"
+         ]
+        }
+       }
+      }
+     },
+     "responses": {
+      "200": {
+       "description": "Media created successfully",
+       "content": {
+        "application/json": {
+         "schema": {
+          "type": "object",
+          "properties": {
+           "message": {
+            "type": "string",
+            "example": "Media Created",
+            "description": "successful media creation response message"
+           },
+           "data": {
+            "type": "object",
+            "properties": {
+             "id": {
+              "type": "string",
+              "example": "668003840c07ddab21bdacea",
+              "description": "Id of media created"
+             },
+             "companyId": {
+              "type": "string",
+              "example": "662cd783b00c6f8f6eb110d5",
+              "description": "Company Id of the user that created the media"
+             },
+             "sessionId": {
+              "type": "string",
+              "example": "6633e8d91433b0186f85c9d8",
+              "description": "Id of the session in which the user uploads their media file"
+             },
+             "externalUserId": {
+              "type": "string",
+              "example": "662cd783b00c6f8f6eb110d5",
+              "description": "External User ID of the user that owns the media file"
+             },
+             "url": {
+              "type": "string",
+              "format": "uri",
+              "example": "https://res.cloudinary.com/shisheo/image/upload/v1719665541/1d6ed49b-b2eb-4fba-b019-9e8a23076556.pdf.pdf",
+              "description": "url which contains the media data"
+             },
+             "sourceUrl": {
+              "type": "string",
+              "format": "uri",
+              "example": "https://res.cloudinary.com/dbbqfdikp/image/upload/v1712401452/hrhjyqyo0injma4ppupb.pdf",
+              "description": "original url of source which contains the media data"
+             },
+             "extractedTextUrl": {
+              "type": "string",
+              "format": "uri",
+              "example": "https://res.cloudinary.com/shisheo/raw/upload/v1719665543/mdzd6smbv8ladba948k3.txt",
+              "description": "url which contains the extracted text"
+             },
+             "name": {
+              "type": "string",
+              "example": "TESTING_DOC_01",
+              "description": "name of the media uploaded by user"
+             },
+             "sizeBytes": {
+              "type": "integer",
+              "example": 7834093,
+              "description": "size in bytes of the media uploaded by user"
+             },
+             "source": {
+              "type": "string",
+              "example": "document",
+              "description": "source of media file"
+             },
+             "mimeType": {
+              "type": "string",
+              "example": "application/pdf",
+              "description": "mime type of the media uploaded by user"
+             },
+             "extension": {
+              "type": "string",
+              "example": "pdf",
+              "description": "extension of media uploaded by user"
+             },
+             "plugins": {
+              "type": "array",
+              "description": "Plugin Ids required for processing of media that is uploaded by user",
+              "items": {
+               "type": "string",
+               "example": "plugin-1713954536"
+              }
+             },
+             "context": {
+              "type": "string",
+              "example": "The conversation takes place between two individuals, John and Yumi. They are discussing the hot weather and the start of summer. John mentions that he is from London, where it rains a lot, and Yumi reveals that she is from Hokkaido, Japan, where it is colder even in the summer. They talk about their respective hometowns' weather and how they spend their summers. Yumi mentions taking her dog to the beach, while John talks about picnics in the park. They also discuss their interests, with Yumi expressing a desire to visit museums in London, and John mentioning the popularity of football games in his hometown.",
+              "description": "context or transcript of the media content"
+             },
+             "extractedText": {
+              "type": "string",
+              "nullable": true,
+              "example": null,
+              "description": "extracted text from the media, if applicable"
+             },
+             "actionStatus": {
+              "type": "string",
+              "example": "completed",
+              "description": "status of any actions performed on the media"
+             },
+             "failedReason": {
+              "type": "string",
+              "nullable": true,
+              "example": null,
+              "description": "reason for failure, if any"
+             },
+             "isDeleted": {
+              "type": "boolean",
+              "example": false,
+              "description": "indicates if the media is deleted"
+             },
+             "responseMode": {
+              "type": "string",
+              "example": "sync",
+              "description": "mode in which the response was received"
+             },
+             "createdBy": {
+              "type": "string",
+              "example": "Peeyush Mishra",
+              "description": "Name of the user who created the media"
+             },
+             "updatedBy": {
+              "type": "string",
+              "example": "Peeyush Mishra",
+              "description": "Name of the user who last updated the media"
+             },
+             "pluginInputs": {
+              "type": "array",
+              "description": "Inputs passed for plugins for specific functionalities",
+              "items": {
+               "type": "object",
+               "additionalProperties": {
+                "type": "object",
+                "properties": {
+                 "postProcess": {
+                  "type": "object",
+                  "properties": {
+                   "chatPluginId": {
+                    "type": "string",
+                    "example": "plugin-998877",
+                    "description": "Id of the chat plugin used for post-processing"
+                   }
+                  }
+                 }
+                }
+               }
+              }
+             },
+             "transcriptionHours": {
+              "type": "integer",
+              "example": 0.008055555555555555,
+              "description": "Length of audio content of media in hours"
+             },
+             "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2024-06-29T12:52:21.398Z",
+              "description": "timestamp of when the media was created"
+             },
+             "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2024-06-29T12:52:28.258Z",
+              "description": "timestamp of when the media was last updated"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "security": [
+      {
+       "apikey": []
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "securitySchemes": {
+    "apikey": {
+     "type": "apiKey",
+     "in": "header",
+     "name": "apikey"
+    }
+   }
+  },
+  "x-readme": {
+   "explorer-enabled": true,
+   "proxy-enabled": true
+  }
+ }
+}

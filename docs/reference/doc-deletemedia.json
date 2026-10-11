@@ -1,0 +1,73 @@
+{
+ "data": {
+  "openapi": "3.0.0",
+  "info": {
+   "title": "Media API",
+   "version": "1.0.0",
+   "description": "API for creating, fetching and deleting media files"
+  },
+  "servers": [
+   {
+    "url": "https://api.on-demand.io"
+   }
+  ],
+  "paths": {
+   "/media/v1/public/file/{fileId}": {
+    "delete": {
+     "summary": "Delete Media",
+     "description": "Deletes a media file by its ID",
+     "operationId": "deleteMedia",
+     "parameters": [
+      {
+       "name": "fileId",
+       "in": "path",
+       "required": true,
+       "schema": {
+        "type": "string",
+        "example": "662929e2d55e95c7b27b8c58"
+       },
+       "description": "ID of the media file to be deleted"
+      }
+     ],
+     "responses": {
+      "200": {
+       "description": "Media Deleted!",
+       "content": {
+        "application/json": {
+         "schema": {
+          "type": "object",
+          "properties": {
+           "message": {
+            "type": "string",
+            "example": "Media Deleted!",
+            "description": "Response message indicating the result of the delete operation"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "security": [
+      {
+       "apikey": []
+      }
+     ]
+    }
+   }
+  },
+  "components": {
+   "securitySchemes": {
+    "apikey": {
+     "type": "apiKey",
+     "in": "header",
+     "name": "apikey"
+    }
+   }
+  },
+  "x-readme": {
+   "explorer-enabled": true,
+   "proxy-enabled": true
+  }
+ }
+}
