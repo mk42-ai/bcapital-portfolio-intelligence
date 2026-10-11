@@ -77,3 +77,6 @@
   .mp-thumb img, .mp-video-play { transition: none; }
   .mp-grid .mp-thumb:hover img { transform: none; }
 }
+
+/* /artifacts: the pane is not inside a flex row there, so dock it to the right edge as an overlay (desktop); mobile keeps the full-screen sheet rule above. */
+@media (min-width: 1024px) { .art-page-pane .mp-pane { position: fixed; top: 0; right: 0; bottom: 0; z-index: 90; height: 100dvh; box-shadow: -12px 0 32px #1F29371f; } }
