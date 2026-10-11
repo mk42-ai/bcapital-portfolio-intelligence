@@ -1,0 +1,793 @@
+{
+  "label": "baseline",
+  "baseUrl": "https://sb-7dj6w8wasj6f.vercel.run",
+  "at": "2026-10-11T07:14:36.470Z",
+  "rule": "no computed colour (color/background/border/outline/fill/stroke) with HSL hue 190–260° and saturation >0.15; transparent ignored; [data-hue-audit-ignore] skipped",
+  "total_hits": 1236,
+  "by_route": {
+    "/overview @1440x900": {
+      "hits": 5,
+      "elements": 2023,
+      "byProp": {
+        "color": 2,
+        "outlineColor": 2,
+        "backgroundColor": 1
+      }
+    },
+    "/company/1au @1440x900": {
+      "hits": 6,
+      "elements": 831,
+      "byProp": {
+        "color": 2,
+        "outlineColor": 2,
+        "backgroundColor": 2
+      }
+    },
+    "/news @1440x900": {
+      "hits": 5,
+      "elements": 3186,
+      "byProp": {
+        "color": 2,
+        "outlineColor": 2,
+        "backgroundColor": 1
+      }
+    },
+    "/chat?skip=1 @1440x900": {
+      "hits": 1,
+      "elements": 1075,
+      "byProp": {
+        "backgroundColor": 1
+      }
+    },
+    "/artifacts @1440x900": {
+      "hits": 596,
+      "elements": 492,
+      "byProp": {
+        "color": 235,
+        "outlineColor": 235,
+        "backgroundColor": 17,
+        "borderTopColor": 1,
+        "borderRightColor": 1,
+        "borderBottomColor": 1,
+        "borderLeftColor": 1,
+        "stroke": 105
+      }
+    },
+    "/settings @1440x900": {
+      "hits": 5,
+      "elements": 723,
+      "byProp": {
+        "color": 2,
+        "outlineColor": 2,
+        "backgroundColor": 1
+      }
+    },
+    "/overview @390x844": {
+      "hits": 5,
+      "elements": 2023,
+      "byProp": {
+        "color": 2,
+        "outlineColor": 2,
+        "backgroundColor": 1
+      }
+    },
+    "/company/1au @390x844": {
+      "hits": 6,
+      "elements": 831,
+      "byProp": {
+        "color": 2,
+        "outlineColor": 2,
+        "backgroundColor": 2
+      }
+    },
+    "/news @390x844": {
+      "hits": 5,
+      "elements": 3186,
+      "byProp": {
+        "color": 2,
+        "outlineColor": 2,
+        "backgroundColor": 1
+      }
+    },
+    "/chat?skip=1 @390x844": {
+      "hits": 1,
+      "elements": 1076,
+      "byProp": {
+        "backgroundColor": 1
+      }
+    },
+    "/artifacts @390x844": {
+      "hits": 596,
+      "elements": 492,
+      "byProp": {
+        "color": 235,
+        "outlineColor": 235,
+        "backgroundColor": 17,
+        "borderTopColor": 1,
+        "borderRightColor": 1,
+        "borderBottomColor": 1,
+        "borderLeftColor": 1,
+        "stroke": 105
+      }
+    },
+    "/settings @390x844": {
+      "hits": 5,
+      "elements": 723,
+      "byProp": {
+        "color": 2,
+        "outlineColor": 2,
+        "backgroundColor": 1
+      }
+    }
+  },
+  "by_prop": {
+    "color": 486,
+    "outlineColor": 486,
+    "backgroundColor": 46,
+    "borderTopColor": 2,
+    "borderRightColor": 2,
+    "borderBottomColor": 2,
+    "borderLeftColor": 2,
+    "stroke": 210
+  },
+  "samples": [
+    {
+      "route": "/overview",
+      "viewport": "1440x900",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/overview",
+      "viewport": "1440x900",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/overview",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/overview",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/overview",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-shell-count\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/company/1au",
+      "viewport": "1440x900",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/company/1au",
+      "viewport": "1440x900",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/company/1au",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/company/1au",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/company/1au",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-shell-count\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/company/1au",
+      "viewport": "1440x900",
+      "selector": "div.flex.flex-wrap > div.min-w-0.flex-1 > p.flex.items-center > span.inline-block.size-2.5",
+      "prop": "backgroundColor",
+      "value": "rgb(0, 13, 94)"
+    },
+    {
+      "route": "/news",
+      "viewport": "1440x900",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/news",
+      "viewport": "1440x900",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/news",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/news",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/news",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-shell-count\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/chat?skip=1",
+      "viewport": "1440x900",
+      "selector": "div.oiu-topbar[data-testid=\"chat-topbar\"] > div.oiu-topbar__right > button.art-toggle.art-root[data-testid=\"artifacts-toggle\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-count\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-shell-count\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-all\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-all\"]",
+      "prop": "borderTopColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-all\"]",
+      "prop": "borderRightColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-all\"]",
+      "prop": "borderBottomColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-all\"]",
+      "prop": "borderLeftColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-document\"]",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-document\"]",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-document\"] > span.art-chip-n",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-document\"] > span.art-chip-n",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-image\"]",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-image\"]",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-image\"] > span.art-chip-n",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-image\"] > span.art-chip-n",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-video\"]",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-video\"]",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-video\"] > span.art-chip-n",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-video\"] > span.art-chip-n",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-upload\"]",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-upload\"]",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "1440x900",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-upload\"] > span.art-chip-n",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/settings",
+      "viewport": "1440x900",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/settings",
+      "viewport": "1440x900",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/settings",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/settings",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/settings",
+      "viewport": "1440x900",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-shell-count\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/overview",
+      "viewport": "390x844",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/overview",
+      "viewport": "390x844",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/overview",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/overview",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/overview",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-shell-count\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/company/1au",
+      "viewport": "390x844",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/company/1au",
+      "viewport": "390x844",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/company/1au",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/company/1au",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/company/1au",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-shell-count\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/company/1au",
+      "viewport": "390x844",
+      "selector": "div.flex.flex-wrap > div.min-w-0.flex-1 > p.flex.items-center > span.inline-block.size-2.5",
+      "prop": "backgroundColor",
+      "value": "rgb(0, 13, 94)"
+    },
+    {
+      "route": "/news",
+      "viewport": "390x844",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/news",
+      "viewport": "390x844",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/news",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/news",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/news",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-shell-count\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/chat?skip=1",
+      "viewport": "390x844",
+      "selector": "div.oiu-topbar[data-testid=\"chat-topbar\"] > div.oiu-topbar__right > button.art-toggle.art-root[data-testid=\"artifacts-toggle\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-count\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-shell-count\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-all\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-all\"]",
+      "prop": "borderTopColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-all\"]",
+      "prop": "borderRightColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-all\"]",
+      "prop": "borderBottomColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-all\"]",
+      "prop": "borderLeftColor",
+      "value": "rgb(31, 41, 55)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-document\"]",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-document\"]",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-document\"] > span.art-chip-n",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-document\"] > span.art-chip-n",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-image\"]",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-image\"]",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-image\"] > span.art-chip-n",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-image\"] > span.art-chip-n",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-video\"]",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-video\"]",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-video\"] > span.art-chip-n",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-video\"] > span.art-chip-n",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-upload\"]",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-page-layout > div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-upload\"]",
+      "prop": "outlineColor",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/artifacts",
+      "viewport": "390x844",
+      "selector": "div.art-browser.art-root[data-testid=\"artifacts-list\"] > div.art-filters > button.art-chip[data-testid=\"artifacts-filter-upload\"] > span.art-chip-n",
+      "prop": "color",
+      "value": "rgb(55, 65, 81)"
+    },
+    {
+      "route": "/settings",
+      "viewport": "390x844",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/settings",
+      "viewport": "390x844",
+      "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/settings",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "color",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/settings",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+      "prop": "outlineColor",
+      "value": "rgb(17, 24, 39)"
+    },
+    {
+      "route": "/settings",
+      "viewport": "390x844",
+      "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-shell-count\"]",
+      "prop": "backgroundColor",
+      "value": "rgb(31, 41, 55)"
+    }
+  ]
+}

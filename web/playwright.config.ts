@@ -22,7 +22,7 @@ export default defineConfig({
   projects: [
     {
       name: "desktop",
-      testIgnore: /mobile\.spec\.ts/,
+      testIgnore: /mobile\.spec\.ts|qa-final\.spec\.ts/,
       use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } },
     },
     {
@@ -34,6 +34,18 @@ export default defineConfig({
       // Run-UX e2e at 390 px (uploads, stream order, artifacts) — same spec as desktop, mobile viewport + touch.
       name: "mobile-ux",
       testMatch: /run-ux\.spec\.ts/,
+      use: { ...devices["Pixel 7"], viewport: { width: 390, height: 844 }, defaultBrowserType: "chromium" },
+    },
+    {
+      // Lane G QA-final state capture, desktop 1440×900 (run with --workers=1; writes web/proof/qa-final/<QA_LABEL>/).
+      name: "qa-final",
+      testMatch: /qa-final\.spec\.ts/,
+      use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } },
+    },
+    {
+      // Lane G QA-final state capture, mobile 390×844 (Pixel 7, touch).
+      name: "qa-final-mobile",
+      testMatch: /qa-final\.spec\.ts/,
       use: { ...devices["Pixel 7"], viewport: { width: 390, height: 844 }, defaultBrowserType: "chromium" },
     },
   ],

@@ -1,0 +1,113 @@
+{
+  "1440x900": {
+    "/overview": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/company/1au": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/news": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/chat": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/artifacts": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/settings": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    }
+  },
+  "totals": {
+    "1440x900": 0,
+    "1440x900:chat-flow": 0,
+    "390x844": 0
+  },
+  "1440x900:chat-flow": {
+    "console": 0,
+    "pageerror": 2,
+    "real": 2,
+    "samples": [
+      "pageerror: Cannot read properties of null (reading 'setItem')",
+      "pageerror: Cannot read properties of null (reading 'setItem')"
+    ]
+  },
+  "390x844": {
+    "/overview": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/company/1au": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/news": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/chat": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/artifacts": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/settings": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    }
+  },
+  "390x844:chat-flow": {
+    "console": 0,
+    "pageerror": 2,
+    "real": 2,
+    "samples": [
+      "pageerror: Cannot read properties of null (reading 'setItem')",
+      "pageerror: Cannot read properties of null (reading 'setItem')"
+    ]
+  }
+}

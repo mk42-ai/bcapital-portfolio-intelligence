@@ -1,0 +1,186 @@
+{
+  "label": "baseline",
+  "baseUrl": "https://sb-7dj6w8wasj6f.vercel.run",
+  "apiUrl": "https://sb-51xmkpgnapk5.vercel.run",
+  "startedUtc": "2026-10-11T07:06:46.524Z",
+  "finishedUtc": "2026-10-11T07:07:35.543Z",
+  "report": {
+    "name": "report",
+    "question": "Write a short portfolio report on Fervo Energy with cited sources.",
+    "threadId": "qa-1791702406525",
+    "sessionId": "6acb3586261cbe2340485ef2",
+    "httpStatus": 200,
+    "headersMs": 99,
+    "firstEventMs": 101,
+    "firstTokenMs": 20636,
+    "runFinishedMs": 27225,
+    "runErrorMs": null,
+    "doneMs": 27225,
+    "totalMs": 27226,
+    "doneSeen": true,
+    "frames": 421,
+    "counts": {
+      "RUN_STARTED": 1,
+      "CUSTOM": 279,
+      "TOOL_CALL_START": 1,
+      "TOOL_CALL_ARGS": 1,
+      "TOOL_CALL_END": 1,
+      "TOOL_CALL_RESULT": 1,
+      "TEXT_MESSAGE_START": 1,
+      "TEXT_MESSAGE_CONTENT": 133,
+      "TEXT_MESSAGE_END": 1,
+      "RUN_FINISHED": 1
+    },
+    "customCounts": {
+      "ondemand.status": 11,
+      "ondemand.session": 1,
+      "ondemand.request": 1,
+      "ondemand.filler": 51,
+      "ondemand.thinking": 197,
+      "ondemand.plan": 3,
+      "ondemand.step": 4,
+      "ondemand.step_output": 2,
+      "ondemand.heartbeat": 2,
+      "ondemand.sources": 2,
+      "ondemand.summary": 2,
+      "ondemand.metrics": 1,
+      "ondemand.artifact": 2
+    },
+    "heartbeats": 2,
+    "fillerCount": 51,
+    "textChars": 4322,
+    "sourcesCount": 9,
+    "error": null,
+    "agentSubtypes": [],
+    "artifact": {
+      "phases": [
+        {
+          "ms": 26463,
+          "phase": "creating",
+          "name": "write-a-short-portfolio-report-on-report.pdf",
+          "id": null,
+          "mediaStatus": null,
+          "message": null
+        },
+        {
+          "ms": 27225,
+          "phase": "ready",
+          "name": "write-a-short-portfolio-report-on-report.pdf",
+          "id": "art_a7ee91036c87",
+          "mediaStatus": "stored",
+          "message": null
+        }
+      ],
+      "creatingMs": 26463,
+      "readyMs": 27225,
+      "failedMs": null,
+      "readyBeforeDone": false,
+      "chain": "file_written/agent→creating@26463 → ready@27225 → [DONE]@27225",
+      "artifactId": "art_a7ee91036c87",
+      "artifactName": "write-a-short-portfolio-report-on-report.pdf",
+      "mediaStatus": "stored"
+    },
+    "endMs": 27225
+  },
+  "news": {
+    "name": "news",
+    "question": "What is the latest news about Fervo Energy? Cite sources.",
+    "threadId": "qa-1791702434182",
+    "sessionId": "6acb35a2261cbe2340485ef9",
+    "httpStatus": 200,
+    "headersMs": 18,
+    "firstEventMs": 18,
+    "firstTokenMs": 15029,
+    "runFinishedMs": 21361,
+    "runErrorMs": null,
+    "doneMs": 21361,
+    "totalMs": 21361,
+    "doneSeen": true,
+    "frames": 322,
+    "counts": {
+      "RUN_STARTED": 1,
+      "CUSTOM": 135,
+      "TOOL_CALL_START": 1,
+      "TOOL_CALL_ARGS": 1,
+      "TOOL_CALL_END": 1,
+      "TOOL_CALL_RESULT": 1,
+      "TEXT_MESSAGE_START": 1,
+      "TEXT_MESSAGE_CONTENT": 178,
+      "TEXT_MESSAGE_END": 1,
+      "RUN_FINISHED": 1
+    },
+    "customCounts": {
+      "ondemand.status": 10,
+      "ondemand.session": 1,
+      "ondemand.request": 1,
+      "ondemand.filler": 43,
+      "ondemand.thinking": 70,
+      "ondemand.plan": 2,
+      "ondemand.step": 2,
+      "ondemand.step_output": 1,
+      "ondemand.heartbeat": 2,
+      "ondemand.sources": 2,
+      "ondemand.metrics": 1
+    },
+    "heartbeats": 2,
+    "fillerCount": 43,
+    "textChars": 5815,
+    "sourcesCount": 10,
+    "error": null,
+    "agentSubtypes": [],
+    "artifact": {
+      "phases": [],
+      "creatingMs": null,
+      "readyMs": null,
+      "failedMs": null,
+      "readyBeforeDone": false,
+      "chain": "file_written/agent→creating@n/a → ready@n/a → [DONE]@21361",
+      "artifactId": null,
+      "artifactName": null,
+      "mediaStatus": null
+    },
+    "endMs": 21361
+  },
+  "artifacts": {
+    "listStatus": 200,
+    "listed": true,
+    "total": 3,
+    "artifact": {
+      "id": "art_a7ee91036c87",
+      "name": "write-a-short-portfolio-report-on-report.pdf",
+      "mime": "application/pdf",
+      "sizeBytes": 13028,
+      "mediaStatus": "stored",
+      "mediaId": "6acb35a1c536376e5904a2f5",
+      "contentUrl": "/api/artifacts/art_a7ee91036c87/content",
+      "originEvent": "bridge.report"
+    },
+    "contentStatus": 200,
+    "pdfMagic": true,
+    "contentBytes": 13028,
+    "signedUrl": {
+      "status": 404,
+      "source": null,
+      "url": null,
+      "urlStatus": null,
+      "note": "n/a (not in baseline build — Lane C adds /signed-url)"
+    },
+    "backendListStatus": 200,
+    "reportPdfNames": [
+      "write-a-short-portfolio-report-on-report.pdf"
+    ]
+  },
+  "checks": {
+    "reportFirstEventUnder400ms": true,
+    "reportDoneSeen": true,
+    "newsDoneSeen": true,
+    "artifactReadyBeforeDone": false,
+    "reportPdfListed": true,
+    "reportPdfContentOk": true,
+    "signedUrl": "n/a (not in baseline build — Lane C adds /signed-url)",
+    "firstTokenMs": {
+      "report": 20636,
+      "news": 15029
+    }
+  }
+}

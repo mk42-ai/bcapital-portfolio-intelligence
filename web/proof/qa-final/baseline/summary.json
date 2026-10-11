@@ -1,0 +1,821 @@
+{
+  "label": "baseline",
+  "generatedUtc": "2026-10-11T07:15:31.499Z",
+  "baseUrl": "https://sb-7dj6w8wasj6f.vercel.run",
+  "apiUrl": "https://sb-51xmkpgnapk5.vercel.run",
+  "sse": {
+    "report": {
+      "firstEventMs": 101,
+      "firstTokenMs": 20636,
+      "totalMs": 27226,
+      "doneSeen": true,
+      "heartbeats": 2,
+      "frames": 421,
+      "counts": {
+        "RUN_STARTED": 1,
+        "CUSTOM": 279,
+        "TOOL_CALL_START": 1,
+        "TOOL_CALL_ARGS": 1,
+        "TOOL_CALL_END": 1,
+        "TOOL_CALL_RESULT": 1,
+        "TEXT_MESSAGE_START": 1,
+        "TEXT_MESSAGE_CONTENT": 133,
+        "TEXT_MESSAGE_END": 1,
+        "RUN_FINISHED": 1
+      },
+      "custom": {
+        "ondemand.status": 11,
+        "ondemand.session": 1,
+        "ondemand.request": 1,
+        "ondemand.filler": 51,
+        "ondemand.thinking": 197,
+        "ondemand.plan": 3,
+        "ondemand.step": 4,
+        "ondemand.step_output": 2,
+        "ondemand.heartbeat": 2,
+        "ondemand.sources": 2,
+        "ondemand.summary": 2,
+        "ondemand.metrics": 1,
+        "ondemand.artifact": 2
+      },
+      "error": null,
+      "artifact": {
+        "chain": "file_written/agent→creating@26463 → ready@27225 → [DONE]@27225",
+        "readyBeforeDone": false,
+        "name": "write-a-short-portfolio-report-on-report.pdf",
+        "mediaStatus": "stored"
+      }
+    },
+    "news": {
+      "firstEventMs": 18,
+      "firstTokenMs": 15029,
+      "totalMs": 21361,
+      "doneSeen": true,
+      "heartbeats": 2,
+      "frames": 322,
+      "counts": {
+        "RUN_STARTED": 1,
+        "CUSTOM": 135,
+        "TOOL_CALL_START": 1,
+        "TOOL_CALL_ARGS": 1,
+        "TOOL_CALL_END": 1,
+        "TOOL_CALL_RESULT": 1,
+        "TEXT_MESSAGE_START": 1,
+        "TEXT_MESSAGE_CONTENT": 178,
+        "TEXT_MESSAGE_END": 1,
+        "RUN_FINISHED": 1
+      },
+      "custom": {
+        "ondemand.status": 10,
+        "ondemand.session": 1,
+        "ondemand.request": 1,
+        "ondemand.filler": 43,
+        "ondemand.thinking": 70,
+        "ondemand.plan": 2,
+        "ondemand.step": 2,
+        "ondemand.step_output": 1,
+        "ondemand.heartbeat": 2,
+        "ondemand.sources": 2,
+        "ondemand.metrics": 1
+      },
+      "error": null,
+      "artifact": {
+        "chain": "file_written/agent→creating@n/a → ready@n/a → [DONE]@21361",
+        "readyBeforeDone": false,
+        "name": null,
+        "mediaStatus": null
+      }
+    },
+    "artifacts": {
+      "listStatus": 200,
+      "listed": true,
+      "total": 3,
+      "artifact": {
+        "id": "art_a7ee91036c87",
+        "name": "write-a-short-portfolio-report-on-report.pdf",
+        "mime": "application/pdf",
+        "sizeBytes": 13028,
+        "mediaStatus": "stored",
+        "mediaId": "6acb35a1c536376e5904a2f5",
+        "contentUrl": "/api/artifacts/art_a7ee91036c87/content",
+        "originEvent": "bridge.report"
+      },
+      "contentStatus": 200,
+      "pdfMagic": true,
+      "contentBytes": 13028,
+      "signedUrl": {
+        "status": 404,
+        "source": null,
+        "url": null,
+        "urlStatus": null,
+        "note": "n/a (not in baseline build — Lane C adds /signed-url)"
+      },
+      "backendListStatus": 200,
+      "reportPdfNames": [
+        "write-a-short-portfolio-report-on-report.pdf"
+      ]
+    },
+    "checks": {
+      "reportFirstEventUnder400ms": true,
+      "reportDoneSeen": true,
+      "newsDoneSeen": true,
+      "artifactReadyBeforeDone": false,
+      "reportPdfListed": true,
+      "reportPdfContentOk": true,
+      "signedUrl": "n/a (not in baseline build — Lane C adds /signed-url)",
+      "firstTokenMs": {
+        "report": 20636,
+        "news": 15029
+      }
+    }
+  },
+  "consoleErrors": {
+    "1440x900": {
+      "/overview": {
+        "status": 200,
+        "console": 0,
+        "pageerror": 0,
+        "real": 0,
+        "samples": []
+      },
+      "/company/1au": {
+        "status": 200,
+        "console": 0,
+        "pageerror": 0,
+        "real": 0,
+        "samples": []
+      },
+      "/news": {
+        "status": 200,
+        "console": 0,
+        "pageerror": 0,
+        "real": 0,
+        "samples": []
+      },
+      "/chat": {
+        "status": 200,
+        "console": 0,
+        "pageerror": 0,
+        "real": 0,
+        "samples": []
+      },
+      "/artifacts": {
+        "status": 200,
+        "console": 0,
+        "pageerror": 0,
+        "real": 0,
+        "samples": []
+      },
+      "/settings": {
+        "status": 200,
+        "console": 0,
+        "pageerror": 0,
+        "real": 0,
+        "samples": []
+      }
+    },
+    "totals": {
+      "1440x900": 0,
+      "1440x900:chat-flow": 0,
+      "390x844": 0
+    },
+    "1440x900:chat-flow": {
+      "console": 0,
+      "pageerror": 2,
+      "real": 2,
+      "samples": [
+        "pageerror: Cannot read properties of null (reading 'setItem')",
+        "pageerror: Cannot read properties of null (reading 'setItem')"
+      ]
+    },
+    "390x844": {
+      "/overview": {
+        "status": 200,
+        "console": 0,
+        "pageerror": 0,
+        "real": 0,
+        "samples": []
+      },
+      "/company/1au": {
+        "status": 200,
+        "console": 0,
+        "pageerror": 0,
+        "real": 0,
+        "samples": []
+      },
+      "/news": {
+        "status": 200,
+        "console": 0,
+        "pageerror": 0,
+        "real": 0,
+        "samples": []
+      },
+      "/chat": {
+        "status": 200,
+        "console": 0,
+        "pageerror": 0,
+        "real": 0,
+        "samples": []
+      },
+      "/artifacts": {
+        "status": 200,
+        "console": 0,
+        "pageerror": 0,
+        "real": 0,
+        "samples": []
+      },
+      "/settings": {
+        "status": 200,
+        "console": 0,
+        "pageerror": 0,
+        "real": 0,
+        "samples": []
+      }
+    },
+    "390x844:chat-flow": {
+      "console": 0,
+      "pageerror": 2,
+      "real": 2,
+      "samples": [
+        "pageerror: Cannot read properties of null (reading 'setItem')",
+        "pageerror: Cannot read properties of null (reading 'setItem')"
+      ]
+    }
+  },
+  "brand": {
+    "total_hits": 1236,
+    "by_route": {
+      "/overview @1440x900": 5,
+      "/company/1au @1440x900": 6,
+      "/news @1440x900": 5,
+      "/chat?skip=1 @1440x900": 1,
+      "/artifacts @1440x900": 596,
+      "/settings @1440x900": 5,
+      "/overview @390x844": 5,
+      "/company/1au @390x844": 6,
+      "/news @390x844": 5,
+      "/chat?skip=1 @390x844": 1,
+      "/artifacts @390x844": 596,
+      "/settings @390x844": 5
+    },
+    "by_prop": {
+      "color": 486,
+      "outlineColor": 486,
+      "backgroundColor": 46,
+      "borderTopColor": 2,
+      "borderRightColor": 2,
+      "borderBottomColor": 2,
+      "borderLeftColor": 2,
+      "stroke": 210
+    },
+    "samples": [
+      {
+        "route": "/overview",
+        "viewport": "1440x900",
+        "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+        "prop": "color",
+        "value": "rgb(17, 24, 39)"
+      },
+      {
+        "route": "/overview",
+        "viewport": "1440x900",
+        "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+        "prop": "outlineColor",
+        "value": "rgb(17, 24, 39)"
+      },
+      {
+        "route": "/overview",
+        "viewport": "1440x900",
+        "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+        "prop": "color",
+        "value": "rgb(17, 24, 39)"
+      },
+      {
+        "route": "/overview",
+        "viewport": "1440x900",
+        "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+        "prop": "outlineColor",
+        "value": "rgb(17, 24, 39)"
+      },
+      {
+        "route": "/overview",
+        "viewport": "1440x900",
+        "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-shell-count\"]",
+        "prop": "backgroundColor",
+        "value": "rgb(31, 41, 55)"
+      },
+      {
+        "route": "/company/1au",
+        "viewport": "1440x900",
+        "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+        "prop": "color",
+        "value": "rgb(17, 24, 39)"
+      },
+      {
+        "route": "/company/1au",
+        "viewport": "1440x900",
+        "selector": "div.flex.min-h-dvh[data-testid=\"app-shell\"] > aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"]",
+        "prop": "outlineColor",
+        "value": "rgb(17, 24, 39)"
+      },
+      {
+        "route": "/company/1au",
+        "viewport": "1440x900",
+        "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+        "prop": "color",
+        "value": "rgb(17, 24, 39)"
+      },
+      {
+        "route": "/company/1au",
+        "viewport": "1440x900",
+        "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > img",
+        "prop": "outlineColor",
+        "value": "rgb(17, 24, 39)"
+      },
+      {
+        "route": "/company/1au",
+        "viewport": "1440x900",
+        "selector": "aside.sticky.top-0[data-testid=\"nav-rail\"] > div.flex.shrink-0 > button.art-toggle.art-root[data-testid=\"artifacts-toggle-shell\"] > span.art-toggle-badge[data-testid=\"artifacts-toggle-shell-count\"]",
+        "prop": "backgroundColor",
+        "value": "rgb(31, 41, 55)"
+      }
+    ]
+  },
+  "smoothness": {
+    "formula": "run-ux score(): skeleton(≤1000ms:2, ≤2500ms:1) + cls(≤0.05:2, ≤0.1:1) + jank(longTasks ≤8:2, ≤20:1) + order(thinking→working→answer→sources:2) + errors(0:1) + artifact(card present:1) = /10",
+    "overall": 7.25,
+    "1440x900": {
+      "overall": 6,
+      "turn1": {
+        "score": {
+          "total": 5,
+          "parts": {
+            "skeleton": 0,
+            "cls": 0,
+            "jank": 2,
+            "order": 2,
+            "errors": 0,
+            "artifact": 1
+          }
+        },
+        "firstSkeletonMs": 2822,
+        "firstTokenMs": 26222,
+        "totalMs": 34393,
+        "streamCls": 0.1318,
+        "longTasks": 3,
+        "orderOk": true,
+        "artifactOk": true
+      },
+      "turn2": {
+        "score": {
+          "total": 7,
+          "parts": {
+            "skeleton": 2,
+            "cls": 0,
+            "jank": 2,
+            "order": 2,
+            "errors": 0,
+            "artifact": 1
+          }
+        },
+        "firstSkeletonMs": 186,
+        "firstTokenMs": 387,
+        "totalMs": 23183,
+        "streamCls": 0.146,
+        "longTasks": 3,
+        "orderOk": true
+      },
+      "errors": [
+        "pageerror: Cannot read properties of null (reading 'setItem')",
+        "pageerror: Cannot read properties of null (reading 'setItem')"
+      ]
+    },
+    "390x844": {
+      "overall": 8.5,
+      "turn1": {
+        "score": {
+          "total": 8,
+          "parts": {
+            "skeleton": 1,
+            "cls": 2,
+            "jank": 2,
+            "order": 2,
+            "errors": 0,
+            "artifact": 1
+          }
+        },
+        "firstSkeletonMs": 2032,
+        "firstTokenMs": 26867,
+        "totalMs": 35556,
+        "streamCls": 0.0344,
+        "longTasks": 4,
+        "orderOk": true,
+        "artifactOk": true
+      },
+      "turn2": {
+        "score": {
+          "total": 9,
+          "parts": {
+            "skeleton": 2,
+            "cls": 2,
+            "jank": 2,
+            "order": 2,
+            "errors": 0,
+            "artifact": 1
+          }
+        },
+        "firstSkeletonMs": 224,
+        "firstTokenMs": 479,
+        "totalMs": 2040,
+        "streamCls": 0.0344,
+        "longTasks": 4,
+        "orderOk": true
+      },
+      "errors": [
+        "pageerror: Cannot read properties of null (reading 'setItem')",
+        "pageerror: Cannot read properties of null (reading 'setItem')"
+      ]
+    }
+  },
+  "screenshots": {
+    "count": 52,
+    "files": [
+      "answer-streaming-1440x900.png",
+      "answer-streaming-390x844.png",
+      "artifact-pending-1440x900.png",
+      "artifact-pending-390x844.png",
+      "artifacts-card-1440x900.png",
+      "artifacts-card-390x844.png",
+      "artifacts-filled-1440x900.png",
+      "artifacts-filled-390x844.png",
+      "artifacts-panel-1440x900.png",
+      "artifacts-panel-390x844.png",
+      "doc-preview-1440x900.png",
+      "doc-preview-390x844.png",
+      "done-row-1440x900.png",
+      "done-row-390x844.png",
+      "lightbox-1440x900.png",
+      "lightbox-390x844.png",
+      "plan-stepper-1440x900.png",
+      "plan-stepper-390x844.png",
+      "route-artifacts-1440x900.png",
+      "route-artifacts-390x844.png",
+      "route-chat-1440x900.png",
+      "route-chat-390x844.png",
+      "route-company_1au-1440x900.png",
+      "route-company_1au-390x844.png",
+      "route-news-1440x900.png",
+      "route-news-390x844.png",
+      "route-overview-1440x900.png",
+      "route-overview-390x844.png",
+      "route-settings-1440x900.png",
+      "route-settings-390x844.png",
+      "run-skeleton-1440x900.png",
+      "run-skeleton-390x844.png",
+      "sources-expanded-1440x900.png",
+      "sources-expanded-390x844.png",
+      "sources-strip-1440x900.png",
+      "sources-strip-390x844.png",
+      "thinking-collapsed-1440x900.png",
+      "thinking-collapsed-390x844.png",
+      "thinking-streaming-1440x900.png",
+      "thinking-streaming-390x844.png",
+      "thread-settled-1440x900.png",
+      "thread-settled-390x844.png",
+      "upload-failed-1440x900.png",
+      "upload-failed-390x844.png",
+      "upload-idle-1440x900.png",
+      "upload-idle-390x844.png",
+      "upload-progress-1440x900.png",
+      "upload-progress-390x844.png",
+      "upload-success-1440x900.png",
+      "upload-success-390x844.png",
+      "working-row-1440x900.png",
+      "working-row-390x844.png"
+    ],
+    "captured": [
+      {
+        "state": "route-overview",
+        "viewport": "1440x900",
+        "file": "route-overview-1440x900.png"
+      },
+      {
+        "state": "route-company_1au",
+        "viewport": "1440x900",
+        "file": "route-company_1au-1440x900.png"
+      },
+      {
+        "state": "route-news",
+        "viewport": "1440x900",
+        "file": "route-news-1440x900.png"
+      },
+      {
+        "state": "route-chat",
+        "viewport": "1440x900",
+        "file": "route-chat-1440x900.png"
+      },
+      {
+        "state": "route-artifacts",
+        "viewport": "1440x900",
+        "file": "route-artifacts-1440x900.png"
+      },
+      {
+        "state": "route-settings",
+        "viewport": "1440x900",
+        "file": "route-settings-1440x900.png"
+      },
+      {
+        "state": "upload-idle",
+        "viewport": "1440x900",
+        "file": "upload-idle-1440x900.png"
+      },
+      {
+        "state": "upload-progress",
+        "viewport": "1440x900",
+        "file": "upload-progress-1440x900.png"
+      },
+      {
+        "state": "upload-success",
+        "viewport": "1440x900",
+        "file": "upload-success-1440x900.png"
+      },
+      {
+        "state": "upload-failed",
+        "viewport": "1440x900",
+        "file": "upload-failed-1440x900.png"
+      },
+      {
+        "state": "run-skeleton",
+        "viewport": "1440x900",
+        "file": "run-skeleton-1440x900.png"
+      },
+      {
+        "state": "thinking-streaming",
+        "viewport": "1440x900",
+        "file": "thinking-streaming-1440x900.png"
+      },
+      {
+        "state": "working-row",
+        "viewport": "1440x900",
+        "file": "working-row-1440x900.png"
+      },
+      {
+        "state": "plan-stepper",
+        "viewport": "1440x900",
+        "file": "plan-stepper-1440x900.png"
+      },
+      {
+        "state": "answer-streaming",
+        "viewport": "1440x900",
+        "file": "answer-streaming-1440x900.png"
+      },
+      {
+        "state": "artifact-pending",
+        "viewport": "1440x900",
+        "file": "artifact-pending-1440x900.png"
+      },
+      {
+        "state": "collapsed",
+        "viewport": "1440x900",
+        "file": "thinking-collapsed-1440x900.png"
+      },
+      {
+        "state": "done",
+        "viewport": "1440x900",
+        "file": "done-row-1440x900.png"
+      },
+      {
+        "state": "sources-strip",
+        "viewport": "1440x900",
+        "file": "sources-strip-1440x900.png"
+      },
+      {
+        "state": "sources-expanded",
+        "viewport": "1440x900",
+        "file": "sources-expanded-1440x900.png"
+      },
+      {
+        "state": "artifacts-card",
+        "viewport": "1440x900",
+        "file": "artifacts-card-1440x900.png"
+      },
+      {
+        "state": "doc-preview",
+        "viewport": "1440x900",
+        "file": "doc-preview-1440x900.png"
+      },
+      {
+        "state": "lightbox",
+        "viewport": "1440x900",
+        "file": "lightbox-1440x900.png"
+      },
+      {
+        "state": "thread-settled",
+        "viewport": "1440x900",
+        "file": "thread-settled-1440x900.png"
+      },
+      {
+        "state": "artifacts-panel",
+        "viewport": "1440x900",
+        "file": "artifacts-panel-1440x900.png"
+      },
+      {
+        "state": "artifacts-filled",
+        "viewport": "1440x900",
+        "file": "artifacts-filled-1440x900.png"
+      },
+      {
+        "state": "route-overview",
+        "viewport": "390x844",
+        "file": "route-overview-390x844.png"
+      },
+      {
+        "state": "route-company_1au",
+        "viewport": "390x844",
+        "file": "route-company_1au-390x844.png"
+      },
+      {
+        "state": "route-news",
+        "viewport": "390x844",
+        "file": "route-news-390x844.png"
+      },
+      {
+        "state": "route-chat",
+        "viewport": "390x844",
+        "file": "route-chat-390x844.png"
+      },
+      {
+        "state": "route-artifacts",
+        "viewport": "390x844",
+        "file": "route-artifacts-390x844.png"
+      },
+      {
+        "state": "route-settings",
+        "viewport": "390x844",
+        "file": "route-settings-390x844.png"
+      },
+      {
+        "state": "upload-idle",
+        "viewport": "390x844",
+        "file": "upload-idle-390x844.png"
+      },
+      {
+        "state": "upload-progress",
+        "viewport": "390x844",
+        "file": "upload-progress-390x844.png"
+      },
+      {
+        "state": "upload-success",
+        "viewport": "390x844",
+        "file": "upload-success-390x844.png"
+      },
+      {
+        "state": "upload-failed",
+        "viewport": "390x844",
+        "file": "upload-failed-390x844.png"
+      },
+      {
+        "state": "run-skeleton",
+        "viewport": "390x844",
+        "file": "run-skeleton-390x844.png"
+      },
+      {
+        "state": "thinking-streaming",
+        "viewport": "390x844",
+        "file": "thinking-streaming-390x844.png"
+      },
+      {
+        "state": "working-row",
+        "viewport": "390x844",
+        "file": "working-row-390x844.png"
+      },
+      {
+        "state": "plan-stepper",
+        "viewport": "390x844",
+        "file": "plan-stepper-390x844.png"
+      },
+      {
+        "state": "answer-streaming",
+        "viewport": "390x844",
+        "file": "answer-streaming-390x844.png"
+      },
+      {
+        "state": "artifact-pending",
+        "viewport": "390x844",
+        "file": "artifact-pending-390x844.png"
+      },
+      {
+        "state": "collapsed",
+        "viewport": "390x844",
+        "file": "thinking-collapsed-390x844.png"
+      },
+      {
+        "state": "done",
+        "viewport": "390x844",
+        "file": "done-row-390x844.png"
+      },
+      {
+        "state": "sources-strip",
+        "viewport": "390x844",
+        "file": "sources-strip-390x844.png"
+      },
+      {
+        "state": "sources-expanded",
+        "viewport": "390x844",
+        "file": "sources-expanded-390x844.png"
+      },
+      {
+        "state": "artifacts-card",
+        "viewport": "390x844",
+        "file": "artifacts-card-390x844.png"
+      },
+      {
+        "state": "doc-preview",
+        "viewport": "390x844",
+        "file": "doc-preview-390x844.png"
+      },
+      {
+        "state": "lightbox",
+        "viewport": "390x844",
+        "file": "lightbox-390x844.png"
+      },
+      {
+        "state": "thread-settled",
+        "viewport": "390x844",
+        "file": "thread-settled-390x844.png"
+      },
+      {
+        "state": "artifacts-panel",
+        "viewport": "390x844",
+        "file": "artifacts-panel-390x844.png"
+      },
+      {
+        "state": "artifacts-filled",
+        "viewport": "390x844",
+        "file": "artifacts-filled-390x844.png"
+      }
+    ],
+    "notAvailable": [
+      {
+        "state": "run-header",
+        "viewport": "1440x900",
+        "reason": "n/a (not in baseline build — Lane B adds run-header)"
+      },
+      {
+        "state": "run-timer",
+        "viewport": "1440x900",
+        "reason": "n/a (not in baseline build — Lane B adds run-timer)"
+      },
+      {
+        "state": "run-footer",
+        "viewport": "1440x900",
+        "reason": "n/a (not in baseline build — Lane B adds run-footer)"
+      },
+      {
+        "state": "video-side-pane",
+        "viewport": "1440x900",
+        "reason": "n/a — no video artifact in this thread (honest: none produced by the report run)"
+      },
+      {
+        "state": "data-gap",
+        "viewport": "1440x900",
+        "reason": "data-gap not reproducible — bridge resolvePluginIds() silently drops unknown ids (plugin-0000000000 injected=true); no failed call in this run"
+      },
+      {
+        "state": "artifacts-empty",
+        "viewport": "1440x900",
+        "reason": "n/a — list never empty (7 artifacts; /artifacts has no thread filter in this build)"
+      },
+      {
+        "state": "run-header",
+        "viewport": "390x844",
+        "reason": "n/a (not in baseline build — Lane B adds run-header)"
+      },
+      {
+        "state": "run-timer",
+        "viewport": "390x844",
+        "reason": "n/a (not in baseline build — Lane B adds run-timer)"
+      },
+      {
+        "state": "run-footer",
+        "viewport": "390x844",
+        "reason": "n/a (not in baseline build — Lane B adds run-footer)"
+      },
+      {
+        "state": "video-side-pane",
+        "viewport": "390x844",
+        "reason": "n/a — no video artifact in this thread (honest: none produced by the report run)"
+      },
+      {
+        "state": "data-gap",
+        "viewport": "390x844",
+        "reason": "data-gap not reproducible — bridge resolvePluginIds() silently drops unknown ids (plugin-0000000000 injected=true); no failed call in this run"
+      },
+      {
+        "state": "artifacts-empty",
+        "viewport": "390x844",
+        "reason": "n/a — list never empty (12 artifacts; /artifacts has no thread filter in this build)"
+      }
+    ]
+  }
+}
