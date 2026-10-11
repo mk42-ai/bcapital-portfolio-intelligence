@@ -63,7 +63,7 @@ export type Prompt =
   | { kind: "require_creds"; pluginId: string | null; service: string | null; fields: { key: string; label?: string; type?: string }[] }
   | { kind: "awaiting_browser_action"; action: string | null; message: string | null; url: string | null };
 type StreamState = {
-  phase: StreamPhase; detail: string; startedAt: number; sessionId: string | null; version: number;
+  phase: StreamPhase; detail: string; startedAt: number; finishedAt: number | null; sessionId: string | null; version: number;
   firstStatusMs: number | null; firstTokenMs: number | null; firstCitationMs: number | null; chunks: number; thinking: string; thinkingKinds: string[]; error: StreamError;
   sources: Source[]; metrics: Record<string, number> | null; lastThreadId: string | null;
   pluginIds: string[]; suggested: { id: string; name: string; logoUrl?: string }[]; plan: { objective: string | null; steps: PlanStep[]; provisional?: boolean } | null;
@@ -76,7 +76,7 @@ type StreamState = {
 export type ToolRow = { id: string; name: string; pluginId: string; query: string; stepId: string; status: "running" | "done" | "failed"; sources?: number; durationMs?: number; message?: string; raw?: string };
 export type LiveArtifact = { key: string; name: string; phase: "creating" | "ready" | "failed"; artifact?: Artifact; message?: string; media?: { status?: string; id?: string | null; message?: string | null } };
 export type StepOutput = { stepId: string; title: string; plugins: { pluginId: string; name: string; params: Record<string, unknown> | null }[]; at: number };
-const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null, artifacts: [], outputs: [], tools: [] };
+const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, finishedAt: null, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null, artifacts: [], outputs: [], tools: [] };
 let streamState: StreamState = IDLE;
 let pending: Partial<StreamState> | null = null; let rafId = 0;
 const liveSources = new Map<string, Source[]>();
@@ -121,6 +121,7 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
     // The live DOM never truncates the reasoning; ONLY the persisted (localStorage) copy is capped at 200,000 chars to stay inside the quota.
     const meta: StoredMeta & { thinkingKinds?: string[] } = { model: MODEL_LABEL, modelId: MODEL_ID, reasoningMode: REASONING_MODE, pluginId: PLUGIN_ID, pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, firstCitationMs: st.firstCitationMs, totalMs: Date.now() - t0, chunks: st.chunks, metrics: st.metrics, thinking: st.thinking.slice(0, 200_000), thinkingKinds: st.thinkingKinds, error: st.error ? { code: st.error.code, message: st.error.message } : null, at: new Date().toISOString(), summaries: st.summaries.map((s) => ({ index: s.index, text: s.text, doneAt: s.doneAt ?? null })), plan: st.plan, artifacts: st.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!), tools: st.tools, artifactFailures: st.artifacts.filter((a) => a.phase === "failed").map((a) => ({ name: a.name, message: a.message ?? "" })), outputs: st.outputs };
     liveMeta.set(key, meta); rememberMeta(key, meta);
+    if (st.finishedAt == null) setStream({ finishedAt: Date.now() }, true); // freezes the run-header timer at totalMs
     if (st.sources.length) { liveSources.set(key, st.sources); rememberSources(key, st.sources); }
   };
   const seen = new Set<number>(); let lastSeq = 0; let dupes = 0; let gapsSeen = 0;
@@ -334,7 +335,7 @@ function RunHeader({ live, startedAt, totalMs, pluginIds }: { live: boolean; sta
       <span className="oiu-badge__sep">·</span><span className="oiu-run__reason">{REASONING_MODE}</span>
       <span className="oiu-badge__sep">·</span>
       <span className="oiu-run__plugins" aria-label="Plugins">{plugins.slice(0, 6).map((id) => <span key={id} className="oiu-run__plugin" title={catalogueName(id)}><PluginFavicon id={id} size={14} /></span>)}</span>
-      <span className="oiu-run__timer" data-testid="run-timer" data-state={live && totalMs == null ? "running" : "frozen"} data-ms={Math.round(ms)}>{live && totalMs == null ? <Loader2 className="size-3 oiu-spin" aria-hidden /> : null}{fmtElapsed(ms)}</span>
+      {(live || totalMs != null) && <span className="oiu-run__timer" data-testid="run-timer" data-state={live && totalMs == null ? "running" : "frozen"} data-ms={Math.round(ms)}>{live && totalMs == null ? <Loader2 className="size-3 oiu-spin" aria-hidden /> : null}{fmtElapsed(ms)}</span>}
     </div>
   );
 }
@@ -673,7 +674,7 @@ const PluginTimeline: ToolCallTimelineComponent = ({ steps, isLast }) => {
     plan: st.plan, tools: st.tools, summaries: st.summaries, outputs: st.outputs, prompt: st.prompt, sessionId: st.sessionId,
     text: liveText || st.text, known: st.error?.code === "plugin_error" ? [] : st.sources, sources: st.sources, artifacts: st.artifacts,
     error: st.error, meta: { pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, metrics: st.metrics }, filler: st.filler, fillerTick: st.fillerTick, elapsedMs: st.startedAt ? Date.now() - st.startedAt : 0,
-    startedAt: st.startedAt, totalMs: st.answerDone && st.startedAt ? Date.now() - st.startedAt : null,
+    startedAt: st.startedAt, totalMs: st.finishedAt != null && st.startedAt ? st.finishedAt - st.startedAt : null,
   };
   return (
     <div className="oiu-assistant oiu-assistant--streaming" aria-live="polite" aria-busy="true" data-testid="assistant-streaming">
