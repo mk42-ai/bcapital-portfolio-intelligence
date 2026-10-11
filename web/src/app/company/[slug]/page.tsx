@@ -13,6 +13,7 @@ import { EstimateBadge } from "@/components/overview/estimate-badge";
 import { StatusChips } from "@/components/overview/status-chips";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { resolveDataSource, DATA_SOURCE_CLASS } from "@/lib/data-source";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Button } from "@/components/ui/button";
 import { LogoImg } from "@/components/ui/logo-img";
@@ -58,7 +59,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       </header>
-      <p className="mb-5 text-xs text-muted">Data source: <Badge tone={c.source === "live" ? "primary" : "muted"}>{c.source === "live" ? "live backend" : "cached snapshot"}</Badge> · Last updated by daily workflow <time dateTime={lastScored?.recorded_at ?? company.updated_at}>{lastScored?.recorded_at ?? company.updated_at}</time>{wf ? <> (workflow <code>{wf.id}</code> · {wf.name}, {workflows.schedule_human}, model {workflows.model})</> : <> (seed data — first scoring run lands at the next {workflows.schedule_human} cycle)</>} · source {c.source}</p>
+      <p className="mb-5 text-xs text-muted">Data source: {(() => { const r = resolveDataSource([{ name: "company", source: c.source }, { name: "news", source: news.source }, { name: "sentiment", source: sent.source }, { name: "signal", source: sig.source }]); return <span data-testid="data-source-badge" data-source={r.source} title={r.detail} className={`chip ${DATA_SOURCE_CLASS[r.source]}`}>{r.label}</span>; })()} · Last updated by daily workflow <time dateTime={lastScored?.recorded_at ?? company.updated_at}>{lastScored?.recorded_at ?? company.updated_at}</time>{wf ? <> (workflow <code>{wf.id}</code> · {wf.name}, {workflows.schedule_human}, model {workflows.model})</> : <> (seed data — first scoring run lands at the next {workflows.schedule_human} cycle)</>}</p>
       {statusChips(company).length > 0 && <div className="mb-5"><StatusChips items={statusChips(company).map((chip) => ({ chip, name: company.name, slug: null }))} /></div>}
 
       <div className="grid gap-5 lg:grid-cols-3">
@@ -82,7 +83,7 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
         <Card><CardHeader><CardTitle>Funding timeline</CardTitle><CardDescription>PitchBook-style: round · date · amount · post-money · lead · B Capital participation</CardDescription></CardHeader><CardContent><FundingTimeline company={company} /></CardContent></Card>
       </div>
 
-      <Card className="mt-5"><CardHeader><CardTitle>News ({news.data.length})</CardTitle><CardDescription>Perplexity results written back by the workflow, newest first, with source citations</CardDescription></CardHeader>
+      <Card className="mt-5"><CardHeader><CardTitle>News ({(company.news_count ?? news.data.length).toLocaleString("en-US")})</CardTitle><CardDescription>Perplexity results written back by the workflow, newest first, with source citations</CardDescription></CardHeader>
         <CardContent>{news.data.length ? <div className="grid min-w-0 gap-3 md:grid-cols-2">{news.data.map((n, i) => <NewsCard key={n.id} n={n} companyName={company.name} companySlug={company.slug} companyLogo={company.logo_url} eager={i < 6} />)}</div> : <EmptyState kind="news" title="No news yet for this company" body="The daily workflow (06:00 UTC) adds Perplexity news with sources and images as it finds them." action={<Button asChild variant="outline"><Link href="/news">Open News Pulse</Link></Button>} />}</CardContent></Card>
 
       {company.sources?.length > 0 && <details className="mt-5 text-xs text-muted"><summary className="cursor-pointer">Brand-matrix sources ({company.sources.length})</summary><ul className="mt-2 space-y-1">{company.sources.map((s, i) => <li key={i} className="break-all">{s}</li>)}</ul></details>}

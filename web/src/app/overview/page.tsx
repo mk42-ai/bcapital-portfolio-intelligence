@@ -34,7 +34,7 @@ async function OverviewBody({ searchParams }: { searchParams: Promise<Record<str
   const sigBy = new Map(sig.data.data.map((x) => [x.slug, x]));
   const sectorSig = (s: string) => { const xs = sig.data.data.filter((x) => x.sector === s); const agg = sig.data.sectors[s]; return agg ? { ...agg, confidence: xs.length ? xs.reduce((a, x) => a + x.confidence, 0) / xs.length : 0 } : null; };
   const all = cs.data.filter((c) => c.b_capital_role !== "firm");
-  const newsCount = new Map<string, number>(); for (const n of news.data) newsCount.set(n.company_slug, (newsCount.get(n.company_slug) ?? 0) + 1);
+  const newsCount = new Map<string, number>(Object.entries(news.perCompany)); // backend's per-company count (one definition), never a client re-sum
   const lastRun = runs.data.find((r) => r.workflowName && r.workflowName !== "smoke") ?? runs.data[0];
   const uniq = (xs: (string | null)[]) => [...new Set(xs.filter((x): x is string => !!x))].sort();
   const stageOf = (c: typeof all[number]) => c.stage ? (c.stage.match(/Series [A-Z]|Seed|IPO|Public|Growth|Late-stage/i)?.[0] ?? "Other") : "Unknown";
@@ -55,9 +55,10 @@ async function OverviewBody({ searchParams }: { searchParams: Promise<Record<str
   return (
     <>
       
-      <PageHeader title="Portfolio Overview" lede={`${all.length} portfolio companies + the firm record (136 spec records). Sentiment scored daily at 06:00 UTC by ${workflows.model} across ${workflows.workflows.length} Flow Builder workflows.`} source={cs.source} fetchedAt={cs.fetched_at} />
+      <PageHeader title="Portfolio Overview" lede={`${all.length} portfolio companies + the firm record (136 spec records). Sentiment scored daily at 06:00 UTC by ${workflows.model} across ${workflows.workflows.length} Flow Builder workflows.`} sources={[{ name: "companies", source: cs.source }, { name: "portfolio sentiment", source: pf.source }, { name: "ingest runs", source: runs.source }, { name: "news", source: news.source }, { name: "signals", source: sig.source }]} fetchedAt={cs.fetched_at} />
       <KpiTiles tiles={[
         { label: "Companies", value: String(all.length), sub: `${all.filter((c) => c.in_brand_matrix).length} in brand matrix` },
+        { label: "News items", value: news.total.toLocaleString("en-US"), sub: `across ${Object.keys(news.perCompany).length} companies · backend /news/summary` },
         { label: "Sectors", value: String(uniq(all.map((c) => c.sector)).length), sub: SECTORS.join(" · ") },
         { label: "Public / IPO", value: String(counts.public), sub: "Fervo (FRVO), Meesho" },
         { label: "Unicorn / renamed", value: `${counts.unicorn} / ${counts.renamed}`, sub: "Code Metal · Judi Rx" },

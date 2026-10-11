@@ -21,9 +21,10 @@ async function get<T>(path: string, fallback: () => T, revalidate = 120): Promis
   }
 }
 export const backendBaseUrl = BASE;
-export async function listCompanies(): Promise<Sourced<Company[]>> {
-  const r = await get<{ data: Company[] }>("/companies?limit=200", () => ({ data: snap.companies }));
-  return { ...r, data: r.data.data };
+/** `news_total` is the backend's single news count (same definition as /news/summary); null when served from the snapshot. */
+export async function listCompanies(): Promise<Sourced<Company[]> & { news_total: number | null }> {
+  const r = await get<{ data: Company[]; news_total?: number }>("/companies?limit=200", () => ({ data: snap.companies }));
+  return { ...r, data: r.data.data, news_total: r.source === "live" ? r.data.news_total ?? null : null };
 }
 export async function getCompany(slug: string): Promise<Sourced<Company | null>> {
   const r = await get<{ data: Company } | null>(`/companies/${encodeURIComponent(slug)}`, () => { const c = snap.companies.find((x) => x.slug === slug || x.name.toLowerCase() === slug.toLowerCase()); return c ? { data: c } : null; });
@@ -50,29 +51,42 @@ export async function getSignal(slug: string): Promise<Sourced<{ data: SignalSco
   const r = await get<{ data: SignalScore; bands: SignalBands } | null>(`/companies/${encodeURIComponent(slug)}/signal`, () => null);
   return { ...r, data: r.data?.data ? { data: r.data.data, bands: r.data.bands } : null };
 }
-/** All news across the portfolio (for News Pulse). The real total is Σ GET /companies/{slug}/news (2,104 items over 137 companies on
- *  2026-10-11) — NOT the ~182–202 items embedded in `latest_news`. Fetch every company's full list (16 in flight, ISR 120 s); companies whose
- *  call fails fall back to their embedded latest_news + snapshot rows, and `total` reports the backend's `news_total` when present. */
+/** The ONE news total — the backend's `GET /news/summary` (count of news_items belonging to a listed company, de-duplicated by
+ *  (company_slug,url); orphans excluded). Never a client-side re-sum. Offline fallback: the snapshot's row count (source 'snapshot'). */
+export type NewsSummary = { total: number; by_company: Record<string, number>; companies: number; raw_rows: number; dedup_removed: number; orphan_items: number; definition: string };
+export async function getNewsSummary(): Promise<Sourced<NewsSummary>> {
+  return get<NewsSummary>("/news/summary", () => {
+    const by_company: Record<string, number> = {}; let total = 0;
+    for (const c of snap.companies) { const n = (snap.news[c.slug] ?? []).length; by_company[c.slug] = n; total += n; }
+    return { total, by_company, companies: snap.companies.length, raw_rows: total, dedup_removed: 0, orphan_items: 0, definition: "snapshot rows (offline fallback)" };
+  });
+}
+/** All news across the portfolio (for News Pulse). Items come from GET /companies/{slug}/news?limit=1000 per company (16 in flight, ISR 120 s);
+ *  companies whose call fails fall back to their embedded latest_news + snapshot rows. `total` and `perCompany` are ALWAYS the backend's
+ *  numbers from GET /news/summary (one definition — see src/app.ts newsTotal()), never a re-sum of the fetched lists. `source` is 'live'
+ *  only when the summary AND every company list came from the backend; `liveCompanies`/`failedCompanies` expose the split for the badge. */
 type FeedItem = NewsItem & { company_slug: string; company_name: string; company_logo: string | null; sector: string; sentiment_score: number | null; sentiment_delta: number | null };
-export async function getAllNews(): Promise<Sourced<FeedItem[]> & { total: number; perCompany: Record<string, number> }> {
-  const cs = await listCompanies();
-  const items = new Map<string, FeedItem>(); const perCompany: Record<string, number> = {};
-  const queue = [...cs.data]; let anyLive = false;
+export async function getAllNews(): Promise<Sourced<FeedItem[]> & { total: number; perCompany: Record<string, number>; definition: string; liveCompanies: number; failedCompanies: string[]; summarySource: "live" | "snapshot" }> {
+  const [cs, summary] = await Promise.all([listCompanies(), getNewsSummary()]);
+  const items = new Map<string, FeedItem>();
+  const queue = [...cs.data]; let liveCompanies = 0; const failedCompanies: string[] = [];
   const worker = async () => {
     for (let c = queue.shift(); c; c = queue.shift()) {
       const r = await get<{ data: NewsItem[] } | null>(`/companies/${encodeURIComponent(c.slug)}/news?limit=1000`, () => null);
       const list = r.data?.data ?? [...(c.latest_news ?? []), ...(snap.news[c.slug] ?? [])];
-      if (r.data) anyLive = true;
-      perCompany[c.slug] = r.data ? list.length : c.news_count ?? list.length;
+      if (r.data) liveCompanies++; else failedCompanies.push(c.slug);
+      const seen = new Set<string>();
       for (const n of list) {
-        const id = n.id ?? `${c.slug}|${n.url ?? n.title}`;
+        const key = `${c.slug}|${(n.url ?? n.title ?? n.id ?? "").trim().toLowerCase()}`; // same (company_slug,url) rule as the backend
+        if (seen.has(key)) continue; seen.add(key);
+        const id = n.id ?? key;
         if (!items.has(id)) items.set(id, { ...n, id, company_slug: c.slug, company_name: c.name, company_logo: c.logo_url ?? null, sector: c.sector, sentiment_score: c.sentiment?.score ?? null, sentiment_delta: c.sentiment?.delta ?? null });
       }
     }
   };
   await Promise.all(Array.from({ length: 16 }, worker));
-  const total = Object.values(perCompany).reduce((a, b) => a + b, 0);
-  return { data: [...items.values()].sort((a, b) => (b.published_at ?? "").localeCompare(a.published_at ?? "")), source: anyLive ? cs.source : "snapshot", fetched_at: cs.fetched_at, total, perCompany };
+  const allLive = cs.source === "live" && summary.source === "live" && failedCompanies.length === 0;
+  return { data: [...items.values()].sort((a, b) => (b.published_at ?? "").localeCompare(a.published_at ?? "")), source: allLive ? "live" : "snapshot", fetched_at: summary.fetched_at, total: summary.data.total, perCompany: summary.data.by_company, definition: summary.data.definition, liveCompanies, failedCompanies, summarySource: summary.source };
 }
 /** PitchBook record for one company (backend `/pitchbook/{slug}`, built by the PitchBook team). No snapshot exists: the offline fallback is
  *  `null` (source 'snapshot'), which the panel renders as its honest "offline" state — never a blank card, never a credentials message. */
