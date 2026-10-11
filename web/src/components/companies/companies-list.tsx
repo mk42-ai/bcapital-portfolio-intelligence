@@ -8,6 +8,7 @@ import { SignalMini } from "@/components/charts/signal-bullet";
 import { Input, Select } from "@/components/ui/input";
 import { EmptyState } from "@/components/ui/empty-state";
 import { fmtScore } from "@/lib/format";
+import { CompanyCard } from "@/components/companies/company-card";
 
 export type CompanyListRow = {
   slug: string; name: string; logo_url: string | null; sector: string; region: string; score: number; newsCount: number;
@@ -54,6 +55,7 @@ export function CompaniesList({ rows, total }: { rows: CompanyListRow[]; total: 
   useEffect(() => { virtualizer.measure(); }, [mobile, virtualizer]);
   const items = virtualizer.getVirtualItems();
   const lastVisible = visible.length > 0 && items.some((it) => it.index === visible.length - 1);
+  const maxNews = useMemo(() => visible.reduce((m, r) => Math.max(m, r.newsCount), 0), [visible]);
 
   // --- scroll restoration per filter key (sessionStorage) ---
   const restored = useRef<string | null>(null);
@@ -120,16 +122,9 @@ export function CompaniesList({ rows, total }: { rows: CompanyListRow[]; total: 
               <div key={it.key} data-index={it.index} ref={virtualizer.measureElement} data-testid="company-row" role="row" aria-rowindex={it.index + 1} data-last={isLast ? "true" : undefined}
                 style={{ position: "absolute", top: 0, left: 0, width: "100%", transform: `translateY(${it.start - virtualizer.options.scrollMargin}px)` }}
                 className="border-b border-border hover:bg-surface-2">
-                <div role="gridcell" className="flex min-h-[84px] items-center gap-3 px-1 py-2 lg:min-h-16">
-                  <CompanyLogo name={c.name} src={c.logo_url} slug={c.slug} size={28} />
-                  <div className="min-w-0 flex-1">
-                    <Link href={`/company/${c.slug}`} data-index={it.index} data-testid="company-row-link" tabIndex={focusIdx == null ? (it.index === 0 ? 0 : -1) : (focusIdx === it.index ? 0 : -1)} onFocus={() => setFocusIdx(it.index)}
-                      className="block truncate font-medium underline-offset-2 hover:underline focus-visible:outline-3 focus-visible:outline-ring rounded"><span data-testid="company-row-name">{c.name}</span></Link>
-                    <p className="truncate text-xs text-muted">{c.sector} · {c.region}</p>
-                    <p className="mt-1 flex items-center gap-2 text-xs tabular-nums lg:hidden">{c.signal != null ? <><SignalMini score={c.signal} confidence={c.signal_confidence ?? 0} percentile={c.signal_percentile} name={c.name} /><span>{Math.round(c.signal)}</span></> : <span className="text-muted">signal —</span>}<span className="inline-flex items-center gap-1 text-muted"><Newspaper className="size-3.5" aria-hidden />{c.newsCount}</span></p>
-                  </div>
-                  <div className="hidden w-32 items-center justify-end gap-2 text-sm tabular-nums lg:flex">{c.signal != null ? <><SignalMini score={c.signal} confidence={c.signal_confidence ?? 0} percentile={c.signal_percentile} name={c.name} /><span>{Math.round(c.signal)}</span></> : <span className="text-muted" title={`Sentiment ${fmtScore(c.score)} · Signal Score not yet computed`}>—</span>}</div>
-                  <div className="hidden w-16 items-center justify-end gap-1 text-sm tabular-nums text-muted lg:flex" title={`${c.newsCount} news items`}><Newspaper className="size-4" aria-hidden /><span>{c.newsCount}</span><span className="sr-only">news items</span></div>
+                <div role="gridcell">
+                  <CompanyCard row={c} maxNews={maxNews} variant="list"
+                    linkProps={{ "data-index": it.index, "data-testid": "company-row-link", tabIndex: focusIdx == null ? (it.index === 0 ? 0 : -1) : (focusIdx === it.index ? 0 : -1), onFocus: () => setFocusIdx(it.index) }} />
                 </div>
               </div>); })}
           </div>
