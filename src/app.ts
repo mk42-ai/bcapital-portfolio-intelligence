@@ -490,6 +490,8 @@ function artifactToApi(c: any, r: Omit<typeof schema.artifacts.$inferSelect, "by
   return {
     id: r.id, name: r.name, kind: r.kind, mime: r.mime, size_bytes: r.sizeBytes, version: r.version, source: r.source,
     media_id: r.mediaId ?? null, media_status: r.mediaStatus ?? null, media_message: r.mediaMessage ?? null,
+    media_source_url: r.mediaSourceUrl ?? null, media_url_expires_at: r.mediaUrlExpiresAt ?? null, media_external_user_id: r.mediaExternalUserId ?? null,
+    media_plugins: parsePlugins(r.mediaPlugins),
     thread_id: r.threadId ?? null, session_id: r.sessionId ?? null, origin_event: r.originEvent ?? null,
     content_url, thumbnail_url: r.kind === "image" ? content_url : null, created_at: r.createdAt, deleted_at: r.deletedAt ?? null,
   };
@@ -497,9 +499,31 @@ function artifactToApi(c: any, r: Omit<typeof schema.artifacts.$inferSelect, "by
 const artifactMeta = {
   id: schema.artifacts.id, name: schema.artifacts.name, kind: schema.artifacts.kind, mime: schema.artifacts.mime, sizeBytes: schema.artifacts.sizeBytes,
   version: schema.artifacts.version, source: schema.artifacts.source, mediaId: schema.artifacts.mediaId, mediaStatus: schema.artifacts.mediaStatus,
-  mediaMessage: schema.artifacts.mediaMessage, threadId: schema.artifacts.threadId, sessionId: schema.artifacts.sessionId, originEvent: schema.artifacts.originEvent,
+  mediaMessage: schema.artifacts.mediaMessage, mediaSourceUrl: schema.artifacts.mediaSourceUrl, mediaUrlExpiresAt: schema.artifacts.mediaUrlExpiresAt,
+  mediaExternalUserId: schema.artifacts.mediaExternalUserId, mediaPlugins: schema.artifacts.mediaPlugins, threadId: schema.artifacts.threadId, sessionId: schema.artifacts.sessionId, originEvent: schema.artifacts.originEvent,
   createdAt: schema.artifacts.createdAt, deletedAt: schema.artifacts.deletedAt,
 };
+/** Defensive: a stored media URL must never carry a SAS signature (`se=`/`sig=`) — strip the whole query string (and fragment). */
+export function unsignedUrl(u: unknown): string | null {
+  if (typeof u !== "string" || !u.trim()) return null;
+  const v = u.trim();
+  if (!/^https?:\/\//i.test(v)) return null;
+  return v.replace(/[?#].*$/, "") || null;
+}
+/** `se=` (SAS expiry) from a signed URL → ISO string, or null. */
+export function expiryFromSignedUrl(u: unknown): string | null {
+  if (typeof u !== "string") return null;
+  try { const se = new URL(u).searchParams.get("se"); if (!se) return null; const t = Date.parse(se); return Number.isNaN(t) ? null : new Date(t).toISOString().replace(/\.\d{3}Z$/, "Z"); } catch { return null; }
+}
+function parsePlugins(v: string | null | undefined): string[] | null {
+  if (!v) return null;
+  try { const j = JSON.parse(v); return Array.isArray(j) ? j.map(String) : null; } catch { return null; }
+}
+function pluginsIn(v: unknown): string | null {
+  if (Array.isArray(v)) { const a = v.filter((x) => typeof x === "string" && x.trim()).map((x) => String(x).trim()).slice(0, 20); return a.length ? JSON.stringify(a) : null; }
+  if (typeof v === "string" && v.trim()) { try { const j = JSON.parse(v); if (Array.isArray(j)) return pluginsIn(j); } catch { /* csv */ } return pluginsIn(v.split(",")); }
+  return null;
+}
 const tooLarge = (c: any, n?: number) => err(c, 413, "payload_too_large", `Artifact exceeds the 25 MB limit${n ? ` (${n} bytes)` : ""}`);
 const optStr = (v: unknown) => (typeof v === "string" && v.trim() ? v.trim() : null);
 
@@ -561,6 +585,9 @@ inner.post("/artifacts", async (c) => {
   const row = {
     id: `art_${crypto.randomBytes(6).toString("hex")}`, name, kind: kindIn ?? kindFromMime(mime, name), mime, sizeBytes: bytes.length,
     version: (prev?.v ?? 0) + 1, source, mediaId: optStr(f.media_id), mediaStatus, mediaMessage: optStr(f.media_message),
+    // NEVER persist a signed URL: the query string (SAS `se=`/`sig=`) is stripped server-side whatever the caller sent.
+    mediaSourceUrl: unsignedUrl(f.media_source_url), mediaUrlExpiresAt: optStr(f.media_url_expires_at) ?? expiryFromSignedUrl(f.media_source_url),
+    mediaExternalUserId: optStr(f.media_external_user_id)?.slice(0, 64) ?? null, mediaPlugins: pluginsIn(f.media_plugins),
     threadId, sessionId: optStr(f.session_id), originEvent: optStr(f.origin_event) ?? (source === "upload" ? "upload" : null),
     bytes, createdAt: nowIso(), deletedAt: null,
   };
@@ -602,6 +629,49 @@ inner.get("/artifacts/:id/content", async (c) => {
     "content-disposition": `${dl ? "attachment" : "inline"}; filename="${safe}"; filename*=UTF-8''${encodeURIComponent(r.name)}`,
     "access-control-allow-origin": "*", "x-request-id": c.get("requestId"),
   } });
+});
+
+// ---------- re-sign on open: fresh OnDemand signed URL (10-min memory cache per media_id), honest backend fallback ----------
+type SignedEntry = { url: string; sourceUrl: string | null; expiresAt: string | null; name: string | null; cachedAt: number };
+const signedCache = new Map<string, SignedEntry>();
+const SIGNED_TTL_MS = 10 * 60_000;
+type OdMedia = { id?: string; _id?: string; url?: string; sourceUrl?: string; name?: string; mimeType?: string };
+/** Documented fetch-media = list only (no GET-by-id): page through `GET /media/v1/public/file` until the id matches (≤ 5 pages × 50). */
+async function fetchOnDemandMedia(mediaId: string, externalUserId: string): Promise<SignedEntry | null> {
+  const hit = signedCache.get(mediaId);
+  if (hit && Date.now() - hit.cachedAt < SIGNED_TTL_MS && (!hit.expiresAt || Date.parse(hit.expiresAt) > Date.now() + 60_000)) return hit;
+  if (!config.ondemandApiKey) return null;
+  for (let page = 1; page <= 5; page++) {
+    const u = `${config.ondemandBaseUrl}/media/v1/public/file?limit=50&page=${page}&sort=-createdAt&externalUserId=${encodeURIComponent(externalUserId)}`;
+    const r = await fetch(u, { headers: { apikey: config.ondemandApiKey, accept: "application/json", "user-agent": ONDEMAND_USER_AGENT }, signal: AbortSignal.timeout(15_000) });
+    if (!r.ok) throw new Error(`OnDemand fetch media HTTP ${r.status}`);
+    const j: any = await r.json().catch(() => ({}));
+    const list: OdMedia[] = Array.isArray(j?.data) ? j.data : Array.isArray(j?.data?.items) ? j.data.items : Array.isArray(j?.data?.files) ? j.data.files : [];
+    const m = list.find((x) => String(x.id ?? x._id ?? "") === mediaId);
+    if (m && typeof m.url === "string") {
+      const e: SignedEntry = { url: m.url, sourceUrl: unsignedUrl(m.sourceUrl ?? m.url), expiresAt: expiryFromSignedUrl(m.url), name: m.name ?? null, cachedAt: Date.now() };
+      signedCache.set(mediaId, e);
+      return e;
+    }
+    if (list.length < 50) break;
+  }
+  return null;
+}
+inner.get("/artifacts/:id/signed-url", async (c) => {
+  const { db } = await getDb();
+  const r = db.select(artifactMeta).from(schema.artifacts).where(and(eq(schema.artifacts.id, c.req.param("id")), sql`${schema.artifacts.deletedAt} is null`)).get();
+  if (!r) return err(c, 404, "not_found", `No artifact with id '${c.req.param("id")}'`);
+  const fallbackUrl = `${serverUrl(c)}/artifacts/${r.id}/content${["1", "true"].includes(c.req.query("download") ?? "") ? "?download=1" : ""}`;
+  const fallback = (media_message: string | null) => c.json({ data: { id: r.id, media_id: r.mediaId ?? null, url: fallbackUrl, source: "backend", source_url: r.mediaSourceUrl ?? null, expires_at: null, media_message } }, 200, { "cache-control": "no-store" });
+  if (!r.mediaId) return fallback(r.mediaMessage ?? "No OnDemand media id for this artifact — served from the portfolio backend");
+  if (!config.ondemandApiKey) return fallback("ONDEMAND_API_KEY is not configured on the server — served from the portfolio backend");
+  try {
+    const m = await fetchOnDemandMedia(r.mediaId, r.mediaExternalUserId ?? "INV-001");
+    if (!m) return fallback(`OnDemand media ${r.mediaId} not found in the account's media list — served from the portfolio backend`);
+    return c.json({ data: { id: r.id, media_id: r.mediaId, url: m.url, source_url: m.sourceUrl ?? r.mediaSourceUrl ?? null, expires_at: m.expiresAt, source: "ondemand", media_message: null } }, 200, { "cache-control": "no-store" });
+  } catch (e) {
+    return fallback(`OnDemand media lookup failed: ${String((e as Error)?.message ?? e).slice(0, 160)} — served from the portfolio backend`);
+  }
 });
 
 inner.delete("/artifacts/:id", async (c) => {

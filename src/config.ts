@@ -5,6 +5,8 @@ export const config = {
   publicBaseUrl: process.env.PUBLIC_BASE_URL ?? "", // absolute URL advertised in /openapi.json servers[]
   ingestSecret: process.env.INGEST_SECRET ?? "", // X-Ingest-Secret shared secret (generated at build, stored in env only)
   ondemandDefaultModel: process.env.ONDEMAND_DEFAULT_MODEL ?? "predefined-deepseek-flash", // DeepSeek Flash v4.1 (endpoint_name deepseek-v4.1-flash)
+  ondemandApiKey: process.env.ONDEMAND_API_KEY ?? "", // header `apikey` for api.on-demand.io (media re-sign, workflow relay)
+  ondemandBaseUrl: (process.env.ONDEMAND_BASE_URL ?? "https://api.on-demand.io").replace(/\/$/, ""),
   ondemandReasoningMode: process.env.ONDEMAND_REASONING_MODE ?? "medium",
   earliestTestUtc: process.env.EARLIEST_TEST_UTC ?? "",
   version: process.env.APP_VERSION ?? "1.0.0",

@@ -13,6 +13,12 @@ export type Artifact = {
   mediaId: string | null;
   mediaStatus: ArtifactMediaStatus;
   mediaMessage: string | null;
+  /** UNSIGNED OnDemand sourceUrl (query string stripped). Open/Download re-sign via /api/artifacts/<id>/signed-url. */
+  mediaSourceUrl: string | null;
+  /** SAS `se=` seen at registration (informational; may be in the past — never used to build a URL). */
+  mediaUrlExpiresAt: string | null;
+  mediaExternalUserId: string | null;
+  mediaPlugins: string[] | null;
   threadId: string | null;
   sessionId: string | null;
   originEvent: string | null;
@@ -28,10 +34,32 @@ export type Artifact = {
 /** Backend wire shape (snake_case). */
 export type ArtifactWire = {
   id: string; name: string; kind: ArtifactKind; mime: string; size_bytes: number; version: number; source: ArtifactSource;
-  media_id: string | null; media_status: ArtifactMediaStatus; media_message: string | null; thread_id: string | null; session_id: string | null;
+  media_id: string | null; media_status: ArtifactMediaStatus; media_message: string | null;
+  media_source_url?: string | null; media_url_expires_at?: string | null; media_external_user_id?: string | null; media_plugins?: string[] | string | null;
+  thread_id: string | null; session_id: string | null;
   origin_event: string | null; content_url: string; thumbnail_url: string | null; created_at: string; deleted_at?: string | null;
 };
-export type ArtifactFilter = "all" | "document" | "image" | "video" | "upload";
+export type ArtifactFilter = "all" | "document" | "image" | "video" | "audio" | "upload" | "generated";
+export type ArtifactDateFilter = "today" | "7d" | "30d" | "all";
+/** Response of GET /api/artifacts/<id>/signed-url (backend /artifacts/:id/signed-url). */
+export type SignedUrlResult = { id: string; mediaId: string | null; url: string; sourceUrl: string | null; expiresAt: string | null; source: "ondemand" | "backend"; mediaMessage: string | null };
+export type SignedUrlWire = { id: string; media_id: string | null; url: string; source_url?: string | null; expires_at?: string | null; source: "ondemand" | "backend"; media_message?: string | null };
+export const signedFromWire = (w: SignedUrlWire): SignedUrlResult => ({ id: w.id, mediaId: w.media_id ?? null, url: w.url, sourceUrl: w.source_url ?? null, expiresAt: w.expires_at ?? null, source: w.source === "ondemand" ? "ondemand" : "backend", mediaMessage: w.media_message ?? null });
+/** Strip the query string + fragment (SAS `se=`/`sig=`) — the only form of a media URL that may be persisted. */
+export function unsignedUrl(u: string | null | undefined): string | null {
+  if (!u || !/^https?:\/\//i.test(u.trim())) return null;
+  return u.trim().replace(/[?#].*$/, "") || null;
+}
+/** `se=` (SAS expiry) of a signed URL → ISO string, or null. */
+export function expiryFromSignedUrl(u: string | null | undefined): string | null {
+  if (!u) return null;
+  try { const se = new URL(u).searchParams.get("se"); if (!se) return null; const t = Date.parse(se); return Number.isNaN(t) ? null : new Date(t).toISOString(); } catch { return null; }
+}
+function pluginsFromWire(v: string[] | string | null | undefined): string[] | null {
+  if (Array.isArray(v)) return v.map(String);
+  if (typeof v === "string" && v.trim()) { try { const j = JSON.parse(v); return Array.isArray(j) ? j.map(String) : null; } catch { return null; } }
+  return null;
+}
 export const ARTIFACT_KINDS: readonly ArtifactKind[] = ["document", "image", "video", "audio", "file"];
 
 /** Pure snake_case → camelCase mapping; rewrites content/thumbnail URLs to the same-origin proxy. Safe on client and server. */
@@ -41,6 +69,7 @@ export function fromWire(w: ArtifactWire): Artifact {
     id: w.id, name: w.name, kind: (ARTIFACT_KINDS as string[]).includes(w.kind) ? w.kind : "file", mime: w.mime || "application/octet-stream",
     sizeBytes: Number(w.size_bytes) || 0, version: Number(w.version) || 1, source: w.source ?? "generated",
     mediaId: w.media_id ?? null, mediaStatus: w.media_status ?? null, mediaMessage: w.media_message ?? null,
+    mediaSourceUrl: unsignedUrl(w.media_source_url), mediaUrlExpiresAt: w.media_url_expires_at ?? null, mediaExternalUserId: w.media_external_user_id ?? null, mediaPlugins: pluginsFromWire(w.media_plugins),
     threadId: w.thread_id ?? null, sessionId: w.session_id ?? null, originEvent: w.origin_event ?? null,
     contentUrl, thumbnailUrl: w.thumbnail_url ? contentUrl : (w.kind === "image" ? contentUrl : null), createdAt: w.created_at,
   };
