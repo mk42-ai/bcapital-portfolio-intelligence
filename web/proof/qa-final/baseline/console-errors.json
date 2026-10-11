@@ -50,12 +50,9 @@
   },
   "1440x900:chat-flow": {
     "console": 0,
-    "pageerror": 2,
-    "real": 2,
-    "samples": [
-      "pageerror: Cannot read properties of null (reading 'setItem')",
-      "pageerror: Cannot read properties of null (reading 'setItem')"
-    ]
+    "pageerror": 0,
+    "real": 0,
+    "samples": []
   },
   "390x844": {
     "/overview": {
@@ -103,11 +100,8 @@
   },
   "390x844:chat-flow": {
     "console": 0,
-    "pageerror": 2,
-    "real": 2,
-    "samples": [
-      "pageerror: Cannot read properties of null (reading 'setItem')",
-      "pageerror: Cannot read properties of null (reading 'setItem')"
-    ]
+    "pageerror": 0,
+    "real": 0,
+    "samples": []
   }
 }

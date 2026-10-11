@@ -99,9 +99,9 @@ test.describe(`qa-final [${LABEL}]`, () => {
 
     // settled states
     const think = run().getByTestId("thinking-block");
-    if (await think.count()) { const s = await think.first().getAttribute("data-state"); await rec("thinking-collapsed", { state: s }); if (s !== "collapsed") log("thinking not collapsed after answer", { state: s }); } else miss("thinking-collapsed", "no thinking-block in this run");
+    if (await think.count()) { const s = await think.first().getAttribute("data-state"); await rec("thinking-collapsed", { dataState: s }); if (s !== "collapsed") log("thinking not collapsed after answer", { state: s }); } else miss("thinking-collapsed", "no thinking-block in this run");
     const work = run().getByTestId("working-row");
-    if (await work.count()) { const s = await work.first().getAttribute("data-state"); await rec("done-row", { state: s }); } else miss("done-row", "no working-row in this run");
+    if (await work.count()) { const s = await work.first().getAttribute("data-state"); await rec("done-row", { dataState: s }); } else miss("done-row", "no working-row in this run");
     const dom1 = await domOrder(page); log("dom order t1", { dom1 });
     // sources
     const srcList = run().getByTestId("sources-list");
@@ -151,14 +151,16 @@ test.describe(`qa-final [${LABEL}]`, () => {
     });
     const q2 = "What is the latest news about Fervo Energy? Cite sources.";
     const live2: Record<string, boolean> = {};
-    const tick2 = async () => { if (!live2.gap && (await run().getByTestId("data-gap").count())) { live2.gap = true; await rec("data-gap"); } };
+    const tick2 = async () => { if (!live2.gap && (await run().getByTestId("data-gap").count())) { live2.gap = true; await rec("data-gap", { text: (await run().getByTestId("data-gap").first().textContent().catch(() => ""))?.slice(0, 200) }); } };
+    const gap1 = await run().getByTestId("data-gap").count();
+    if (gap1 && !live.gap1) { live.gap1 = true; await rec("data-gap", { turn: 1, text: (await run().getByTestId("data-gap").first().textContent().catch(() => ""))?.slice(0, 200) }); }
     await page.getByTestId("composer-input").fill(q2);
     await mark(page, "send:t2"); await resetFirstSeen(page); const t2 = Date.now(); log("send turn 2", { q: q2, injectedPlugin: UNKNOWN_PLUGIN });
     await page.getByTestId("composer-send").click();
     const r2 = await waitForTurn(page, { t0: t2, timeoutMs: 240_000, onTick: tick2 });
     await mark(page, "finish:t2"); await page.unroute("**/api/chat"); log("turn 2 settled", { ...r2, injected });
     await tick2();
-    if (!live2.gap) miss("data-gap", `data-gap not reproducible — bridge resolvePluginIds() silently drops unknown ids (${UNKNOWN_PLUGIN} injected=${injected}); no failed call in this run`);
+    if (!live2.gap && !live.gap1) miss("data-gap", `data-gap not reproducible — bridge resolvePluginIds() silently drops unknown ids (${UNKNOWN_PLUGIN} injected=${injected}); no failed call in this run`);
     const dom2 = await domOrder(page); const ux2 = await uxWindow(page, "t2");
     const s2 = score({ firstSkeletonMs: r2.firstSkeletonMs, cls: ux2.streamCls, longTasks: ux2.longTasks, errors: errs.real().length, orderOk: orderOk(dom2), artifactOk: true /* n/a for a news turn → credited, as run-ux does for non-report turns */ });
     smooth.turn2 = { question: q2, firstSkeletonMs: r2.firstSkeletonMs, firstTokenMs: r2.firstAnswerMs, totalMs: r2.totalMs, seen: r2.seen, ...ux2, domOrder: dom2, orderOk: orderOk(dom2), artifactNA: true, errors: errs.real().length, score: s2 };

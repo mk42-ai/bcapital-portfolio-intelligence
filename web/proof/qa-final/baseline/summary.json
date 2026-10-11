@@ -1,25 +1,25 @@
 {
   "label": "baseline",
-  "generatedUtc": "2026-10-11T07:15:31.499Z",
+  "generatedUtc": "2026-10-11T07:20:20.529Z",
   "baseUrl": "https://sb-7dj6w8wasj6f.vercel.run",
   "apiUrl": "https://sb-51xmkpgnapk5.vercel.run",
   "sse": {
     "report": {
-      "firstEventMs": 101,
-      "firstTokenMs": 20636,
-      "totalMs": 27226,
+      "firstEventMs": 184,
+      "firstTokenMs": 23502,
+      "totalMs": 31278,
       "doneSeen": true,
-      "heartbeats": 2,
-      "frames": 421,
+      "heartbeats": 3,
+      "frames": 564,
       "counts": {
         "RUN_STARTED": 1,
-        "CUSTOM": 279,
+        "CUSTOM": 392,
         "TOOL_CALL_START": 1,
         "TOOL_CALL_ARGS": 1,
         "TOOL_CALL_END": 1,
         "TOOL_CALL_RESULT": 1,
         "TEXT_MESSAGE_START": 1,
-        "TEXT_MESSAGE_CONTENT": 133,
+        "TEXT_MESSAGE_CONTENT": 163,
         "TEXT_MESSAGE_END": 1,
         "RUN_FINISHED": 1
       },
@@ -27,12 +27,12 @@
         "ondemand.status": 11,
         "ondemand.session": 1,
         "ondemand.request": 1,
-        "ondemand.filler": 51,
-        "ondemand.thinking": 197,
+        "ondemand.filler": 45,
+        "ondemand.thinking": 315,
         "ondemand.plan": 3,
         "ondemand.step": 4,
         "ondemand.step_output": 2,
-        "ondemand.heartbeat": 2,
+        "ondemand.heartbeat": 3,
         "ondemand.sources": 2,
         "ondemand.summary": 2,
         "ondemand.metrics": 1,
@@ -40,48 +40,51 @@
       },
       "error": null,
       "artifact": {
-        "chain": "file_written/agent→creating@26463 → ready@27225 → [DONE]@27225",
-        "readyBeforeDone": false,
+        "chain": "file_written/agent→creating@30430 → ready@31276 → [DONE]@31276",
+        "readyBeforeDone": true,
+        "readyBeforeRunFinished": true,
         "name": "write-a-short-portfolio-report-on-report.pdf",
         "mediaStatus": "stored"
       }
     },
     "news": {
-      "firstEventMs": 18,
-      "firstTokenMs": 15029,
-      "totalMs": 21361,
+      "firstEventMs": 46,
+      "firstTokenMs": 28707,
+      "totalMs": 35137,
       "doneSeen": true,
-      "heartbeats": 2,
-      "frames": 322,
+      "heartbeats": 3,
+      "frames": 481,
       "counts": {
         "RUN_STARTED": 1,
-        "CUSTOM": 135,
+        "CUSTOM": 313,
         "TOOL_CALL_START": 1,
         "TOOL_CALL_ARGS": 1,
         "TOOL_CALL_END": 1,
         "TOOL_CALL_RESULT": 1,
         "TEXT_MESSAGE_START": 1,
-        "TEXT_MESSAGE_CONTENT": 178,
+        "TEXT_MESSAGE_CONTENT": 159,
         "TEXT_MESSAGE_END": 1,
         "RUN_FINISHED": 1
       },
       "custom": {
-        "ondemand.status": 10,
+        "ondemand.status": 11,
         "ondemand.session": 1,
         "ondemand.request": 1,
-        "ondemand.filler": 43,
-        "ondemand.thinking": 70,
-        "ondemand.plan": 2,
-        "ondemand.step": 2,
-        "ondemand.step_output": 1,
-        "ondemand.heartbeat": 2,
-        "ondemand.sources": 2,
+        "ondemand.filler": 72,
+        "ondemand.thinking": 210,
+        "ondemand.plan": 3,
+        "ondemand.step": 4,
+        "ondemand.step_output": 2,
+        "ondemand.heartbeat": 3,
+        "ondemand.sources": 3,
+        "ondemand.summary": 2,
         "ondemand.metrics": 1
       },
       "error": null,
       "artifact": {
-        "chain": "file_written/agent→creating@n/a → ready@n/a → [DONE]@21361",
+        "chain": "file_written/agent→creating@n/a → ready@n/a → [DONE]@35136",
         "readyBeforeDone": false,
+        "readyBeforeRunFinished": false,
         "name": null,
         "mediaStatus": null
       }
@@ -89,20 +92,20 @@
     "artifacts": {
       "listStatus": 200,
       "listed": true,
-      "total": 3,
+      "total": 20,
       "artifact": {
-        "id": "art_a7ee91036c87",
+        "id": "art_47481e3aecf7",
         "name": "write-a-short-portfolio-report-on-report.pdf",
         "mime": "application/pdf",
-        "sizeBytes": 13028,
+        "sizeBytes": 14968,
         "mediaStatus": "stored",
-        "mediaId": "6acb35a1c536376e5904a2f5",
-        "contentUrl": "/api/artifacts/art_a7ee91036c87/content",
+        "mediaId": "6acb37bfcf3ee6ce347391d5",
+        "contentUrl": "/api/artifacts/art_47481e3aecf7/content",
         "originEvent": "bridge.report"
       },
       "contentStatus": 200,
       "pdfMagic": true,
-      "contentBytes": 13028,
+      "contentBytes": 14968,
       "signedUrl": {
         "status": 404,
         "source": null,
@@ -112,6 +115,11 @@
       },
       "backendListStatus": 200,
       "reportPdfNames": [
+        "write-a-short-portfolio-report-on-report.pdf",
+        "summarise-the-attached-memo-report.pdf",
+        "summarise-the-attached-memo-report.pdf",
+        "write-a-short-portfolio-report-on-report.pdf",
+        "write-a-short-portfolio-report-on-report.pdf",
         "write-a-short-portfolio-report-on-report.pdf"
       ]
     },
@@ -119,13 +127,13 @@
       "reportFirstEventUnder400ms": true,
       "reportDoneSeen": true,
       "newsDoneSeen": true,
-      "artifactReadyBeforeDone": false,
+      "artifactReadyBeforeDone": true,
       "reportPdfListed": true,
       "reportPdfContentOk": true,
       "signedUrl": "n/a (not in baseline build — Lane C adds /signed-url)",
       "firstTokenMs": {
-        "report": 20636,
-        "news": 15029
+        "report": 23502,
+        "news": 28707
       }
     }
   },
@@ -181,12 +189,9 @@
     },
     "1440x900:chat-flow": {
       "console": 0,
-      "pageerror": 2,
-      "real": 2,
-      "samples": [
-        "pageerror: Cannot read properties of null (reading 'setItem')",
-        "pageerror: Cannot read properties of null (reading 'setItem')"
-      ]
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
     },
     "390x844": {
       "/overview": {
@@ -234,39 +239,36 @@
     },
     "390x844:chat-flow": {
       "console": 0,
-      "pageerror": 2,
-      "real": 2,
-      "samples": [
-        "pageerror: Cannot read properties of null (reading 'setItem')",
-        "pageerror: Cannot read properties of null (reading 'setItem')"
-      ]
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
     }
   },
   "brand": {
-    "total_hits": 1236,
+    "total_hits": 1996,
     "by_route": {
       "/overview @1440x900": 5,
       "/company/1au @1440x900": 6,
       "/news @1440x900": 5,
       "/chat?skip=1 @1440x900": 1,
-      "/artifacts @1440x900": 596,
+      "/artifacts @1440x900": 976,
       "/settings @1440x900": 5,
       "/overview @390x844": 5,
       "/company/1au @390x844": 6,
       "/news @390x844": 5,
       "/chat?skip=1 @390x844": 1,
-      "/artifacts @390x844": 596,
+      "/artifacts @390x844": 976,
       "/settings @390x844": 5
     },
     "by_prop": {
-      "color": 486,
-      "outlineColor": 486,
-      "backgroundColor": 46,
+      "color": 786,
+      "outlineColor": 786,
+      "backgroundColor": 66,
       "borderTopColor": 2,
       "borderRightColor": 2,
       "borderBottomColor": 2,
       "borderLeftColor": 2,
-      "stroke": 210
+      "stroke": 350
     },
     "samples": [
       {
@@ -343,72 +345,69 @@
   },
   "smoothness": {
     "formula": "run-ux score(): skeleton(≤1000ms:2, ≤2500ms:1) + cls(≤0.05:2, ≤0.1:1) + jank(longTasks ≤8:2, ≤20:1) + order(thinking→working→answer→sources:2) + errors(0:1) + artifact(card present:1) = /10",
-    "overall": 7.25,
+    "overall": 8.75,
     "1440x900": {
-      "overall": 6,
+      "overall": 8,
       "turn1": {
         "score": {
-          "total": 5,
+          "total": 8,
           "parts": {
-            "skeleton": 0,
+            "skeleton": 2,
             "cls": 0,
             "jank": 2,
             "order": 2,
-            "errors": 0,
+            "errors": 1,
             "artifact": 1
           }
         },
-        "firstSkeletonMs": 2822,
-        "firstTokenMs": 26222,
-        "totalMs": 34393,
-        "streamCls": 0.1318,
+        "firstSkeletonMs": 155,
+        "firstTokenMs": 20444,
+        "totalMs": 29321,
+        "streamCls": 0.1365,
         "longTasks": 3,
         "orderOk": true,
         "artifactOk": true
       },
       "turn2": {
         "score": {
-          "total": 7,
+          "total": 8,
           "parts": {
             "skeleton": 2,
             "cls": 0,
             "jank": 2,
             "order": 2,
-            "errors": 0,
+            "errors": 1,
             "artifact": 1
           }
         },
-        "firstSkeletonMs": 186,
-        "firstTokenMs": 387,
-        "totalMs": 23183,
-        "streamCls": 0.146,
+        "firstSkeletonMs": 98,
+        "firstTokenMs": 499,
+        "totalMs": 2086,
+        "streamCls": 0.1365,
         "longTasks": 3,
         "orderOk": true
       },
-      "errors": [
-        "pageerror: Cannot read properties of null (reading 'setItem')",
-        "pageerror: Cannot read properties of null (reading 'setItem')"
-      ]
+      "errors": []
     },
     "390x844": {
-      "overall": 8.5,
+      "overall": 9.5,
       "turn1": {
         "score": {
-          "total": 8,
+          "total": 10,
           "parts": {
-            "skeleton": 1,
+            "skeleton": 2,
             "cls": 2,
             "jank": 2,
             "order": 2,
-            "errors": 0,
+            "errors": 1,
             "artifact": 1
           }
         },
-        "firstSkeletonMs": 2032,
-        "firstTokenMs": 26867,
-        "totalMs": 35556,
-        "streamCls": 0.0344,
-        "longTasks": 4,
+        "firstSkeletonMs": 164,
+        "firstTokenMs": 16612,
+        "totalMs": 23096,
+        "streamCls": 0.0387,
+        "longTasks": 2,
         "orderOk": true,
         "artifactOk": true
       },
@@ -417,28 +416,25 @@
           "total": 9,
           "parts": {
             "skeleton": 2,
-            "cls": 2,
+            "cls": 1,
             "jank": 2,
             "order": 2,
-            "errors": 0,
+            "errors": 1,
             "artifact": 1
           }
         },
-        "firstSkeletonMs": 224,
-        "firstTokenMs": 479,
-        "totalMs": 2040,
-        "streamCls": 0.0344,
-        "longTasks": 4,
+        "firstSkeletonMs": 74,
+        "firstTokenMs": 35086,
+        "totalMs": 42602,
+        "streamCls": 0.0984,
+        "longTasks": 2,
         "orderOk": true
       },
-      "errors": [
-        "pageerror: Cannot read properties of null (reading 'setItem')",
-        "pageerror: Cannot read properties of null (reading 'setItem')"
-      ]
+      "errors": []
     }
   },
   "screenshots": {
-    "count": 52,
+    "count": 53,
     "files": [
       "answer-streaming-1440x900.png",
       "answer-streaming-390x844.png",
@@ -450,6 +446,7 @@
       "artifacts-filled-390x844.png",
       "artifacts-panel-1440x900.png",
       "artifacts-panel-390x844.png",
+      "data-gap-390x844.png",
       "doc-preview-1440x900.png",
       "doc-preview-390x844.png",
       "done-row-1440x900.png",
@@ -710,19 +707,9 @@
         "file": "thinking-collapsed-390x844.png"
       },
       {
-        "state": "done",
+        "state": "failed",
         "viewport": "390x844",
         "file": "done-row-390x844.png"
-      },
-      {
-        "state": "sources-strip",
-        "viewport": "390x844",
-        "file": "sources-strip-390x844.png"
-      },
-      {
-        "state": "sources-expanded",
-        "viewport": "390x844",
-        "file": "sources-expanded-390x844.png"
       },
       {
         "state": "artifacts-card",
@@ -738,6 +725,11 @@
         "state": "lightbox",
         "viewport": "390x844",
         "file": "lightbox-390x844.png"
+      },
+      {
+        "state": "data-gap",
+        "viewport": "390x844",
+        "file": "data-gap-390x844.png"
       },
       {
         "state": "thread-settled",
@@ -784,7 +776,7 @@
       {
         "state": "artifacts-empty",
         "viewport": "1440x900",
-        "reason": "n/a — list never empty (7 artifacts; /artifacts has no thread filter in this build)"
+        "reason": "n/a — list never empty (23 artifacts; /artifacts has no thread filter in this build)"
       },
       {
         "state": "run-header",
@@ -802,19 +794,24 @@
         "reason": "n/a (not in baseline build — Lane B adds run-footer)"
       },
       {
+        "state": "sources-strip",
+        "viewport": "390x844",
+        "reason": "no sources-list in this run"
+      },
+      {
+        "state": "sources-expanded",
+        "viewport": "390x844",
+        "reason": "no sources-list in this run"
+      },
+      {
         "state": "video-side-pane",
         "viewport": "390x844",
         "reason": "n/a — no video artifact in this thread (honest: none produced by the report run)"
       },
       {
-        "state": "data-gap",
-        "viewport": "390x844",
-        "reason": "data-gap not reproducible — bridge resolvePluginIds() silently drops unknown ids (plugin-0000000000 injected=true); no failed call in this run"
-      },
-      {
         "state": "artifacts-empty",
         "viewport": "390x844",
-        "reason": "n/a — list never empty (12 artifacts; /artifacts has no thread filter in this build)"
+        "reason": "n/a — list never empty (25 artifacts; /artifacts has no thread filter in this build)"
       }
     ]
   }
