@@ -29,7 +29,9 @@ export const revalidate = 120;
 const SECTOR_ICON = { Technology: Cpu, Healthcare: HeartPulse, "Energy & Resilience": Zap } as const;
 
 export default function OverviewPage({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
-  return <Suspense fallback={<OverviewSkeleton />}><OverviewBody searchParams={searchParams} /></Suspense>;
+  // a26: the fallback is kept at least one viewport tall so the shell footer stays below the fold while the body streams in
+  // (measured before: the ONLY layout shift on /overview was the footer jumping when the skeleton was replaced, CLS 0.0685).
+  return <Suspense fallback={<div className="min-h-screen"><OverviewSkeleton /></div>}><OverviewBody searchParams={searchParams} /></Suspense>;
 }
 async function OverviewBody({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
   const sp = await searchParams;

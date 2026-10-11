@@ -1,0 +1,82 @@
+{
+  "label": "after-devserver",
+  "base": "http://127.0.0.1:3126",
+  "path": "/overview?skip=1",
+  "at": "2026-10-11T12:02:36.667Z",
+  "viewport": "1440x900",
+  "cpu_throttle": 4,
+  "runs": 2,
+  "budget": {
+    "lcp_ms": 2500,
+    "tbt_ms": 200,
+    "cls": 0.1
+  },
+  "median": {
+    "lcp_ms": 3796,
+    "fcp_ms": 1096,
+    "ttfb_ms": 790,
+    "tbt_ms": 1672,
+    "cls": 0,
+    "transfer_bytes": 3116478,
+    "cdp_encoded_bytes": 3124469,
+    "load_ms": 3344
+  },
+  "lcp_selector": [
+    "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm",
+    "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm"
+  ],
+  "verdict": {
+    "lcp": false,
+    "tbt": false,
+    "cls": true,
+    "pass": false
+  },
+  "per_run": [
+    {
+      "lcp_ms": 3796,
+      "lcp_selector": "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm",
+      "lcp_url": null,
+      "cls": 0,
+      "shifts": [],
+      "tbt_ms": 1672,
+      "longtasks": 6,
+      "fcp_ms": 1180,
+      "ttfb_ms": 1013,
+      "load_ms": 3344,
+      "transfer_bytes": 3116478,
+      "transfer_by_type": {
+        "link": 114454,
+        "script": 2832688,
+        "other": 685,
+        "fetch": 356
+      },
+      "requests": 13,
+      "cdp_encoded_bytes": 3124469,
+      "wall_ms": 6183,
+      "run": 1
+    },
+    {
+      "lcp_ms": 4596,
+      "lcp_selector": "main#main>header.mb-6.flex>div.max-w-3xl>p.mt-2.text-sm",
+      "lcp_url": null,
+      "cls": 0,
+      "shifts": [],
+      "tbt_ms": 2312,
+      "longtasks": 11,
+      "fcp_ms": 1096,
+      "ttfb_ms": 790,
+      "load_ms": 3822,
+      "transfer_bytes": 3116483,
+      "transfer_by_type": {
+        "link": 114454,
+        "script": 2832688,
+        "other": 685,
+        "fetch": 356
+      },
+      "requests": 13,
+      "cdp_encoded_bytes": 3124474,
+      "wall_ms": 6740,
+      "run": 2
+    }
+  ]
+}
