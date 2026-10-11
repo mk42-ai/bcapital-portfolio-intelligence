@@ -1,0 +1,79 @@
+{
+  "target": "root",
+  "cwd": ".",
+  "generated_utc": "2026-10-11T12:06:13.695Z",
+  "prod": {
+    "ok": true,
+    "mode": "npm-audit",
+    "omitDev": true,
+    "exitCode": 0,
+    "counts": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "vulnerabilities": [],
+    "totalDeps": 97
+  },
+  "full": {
+    "ok": true,
+    "mode": "npm-audit",
+    "omitDev": false,
+    "exitCode": 1,
+    "counts": {
+      "info": 0,
+      "low": 0,
+      "moderate": 4,
+      "high": 0,
+      "critical": 0,
+      "total": 4
+    },
+    "vulnerabilities": [
+      {
+        "name": "@esbuild-kit/core-utils",
+        "severity": "moderate",
+        "range": "*",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "esbuild"
+        ]
+      },
+      {
+        "name": "@esbuild-kit/esm-loader",
+        "severity": "moderate",
+        "range": "*",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "@esbuild-kit/core-utils"
+        ]
+      },
+      {
+        "name": "drizzle-kit",
+        "severity": "moderate",
+        "range": "0.19.0 - 1.0.0-beta.1-fd8bfcc",
+        "fixAvailable": true,
+        "direct": true,
+        "via": [
+          "@esbuild-kit/esm-loader"
+        ]
+      },
+      {
+        "name": "esbuild",
+        "severity": "moderate",
+        "range": "<=0.24.2",
+        "fixAvailable": true,
+        "direct": false,
+        "via": [
+          "esbuild enables any website to send any requests to the development server and read the response (https://github.com/advisories/GHSA-67mh-4wv8-2f99)"
+        ]
+      }
+    ],
+    "totalDeps": 97
+  },
+  "status": "npm audit ran online"
+}
