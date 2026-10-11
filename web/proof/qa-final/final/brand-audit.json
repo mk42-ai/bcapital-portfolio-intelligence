@@ -1,0 +1,71 @@
+{
+  "label": "final",
+  "baseUrl": "https://sb-485hwxjqqz7l.vercel.run",
+  "at": "2026-10-11T08:01:04.141Z",
+  "rule": "no computed colour (color/background/border/outline/fill/stroke) with HSL hue 190–260° and saturation >0.15; transparent ignored; [data-hue-audit-ignore] skipped",
+  "total_hits": 0,
+  "by_route": {
+    "/overview @1440x900": {
+      "hits": 0,
+      "elements": 2004,
+      "byProp": {}
+    },
+    "/company/1au @1440x900": {
+      "hits": 0,
+      "elements": 920,
+      "byProp": {}
+    },
+    "/news @1440x900": {
+      "hits": 0,
+      "elements": 3195,
+      "byProp": {}
+    },
+    "/chat?skip=1 @1440x900": {
+      "hits": 0,
+      "elements": 1071,
+      "byProp": {}
+    },
+    "/artifacts @1440x900": {
+      "hits": 0,
+      "elements": 368,
+      "byProp": {}
+    },
+    "/settings @1440x900": {
+      "hits": 0,
+      "elements": 716,
+      "byProp": {}
+    },
+    "/overview @390x844": {
+      "hits": 0,
+      "elements": 2004,
+      "byProp": {}
+    },
+    "/company/1au @390x844": {
+      "hits": 0,
+      "elements": 920,
+      "byProp": {}
+    },
+    "/news @390x844": {
+      "hits": 0,
+      "elements": 3186,
+      "byProp": {}
+    },
+    "/chat?skip=1 @390x844": {
+      "hits": 0,
+      "elements": 1072,
+      "byProp": {}
+    },
+    "/artifacts @390x844": {
+      "hits": 0,
+      "elements": 368,
+      "byProp": {}
+    },
+    "/settings @390x844": {
+      "hits": 0,
+      "elements": 716,
+      "byProp": {}
+    }
+  },
+  "by_prop": {},
+  "samples": []
+}

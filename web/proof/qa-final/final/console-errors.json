@@ -1,0 +1,96 @@
+{
+  "1440x900": {
+    "/overview": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/company/1au": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/news": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/chat": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/artifacts": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/settings": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    }
+  },
+  "totals": {
+    "1440x900": 0,
+    "390x844": 1
+  },
+  "390x844": {
+    "/overview": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 1,
+      "real": 1,
+      "samples": [
+        "pageerror: Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      ]
+    },
+    "/company/1au": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/news": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/chat": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/artifacts": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    },
+    "/settings": {
+      "status": 200,
+      "console": 0,
+      "pageerror": 0,
+      "real": 0,
+      "samples": []
+    }
+  }
+}
