@@ -1,0 +1,244 @@
+{
+  "1440x900": {
+    "viewport": "1440x900",
+    "formula": "run-ux score(): skeleton(≤1000ms:2, ≤2500ms:1) + cls(≤0.05:2, ≤0.1:1) + jank(longTasks ≤8:2, ≤20:1) + order(thinking→working→answer→sources:2) + errors(0:1) + artifact(card present:1) = /10",
+    "turn1": {
+      "question": "Write a short portfolio report on Fervo Energy with cited sources. Mention the attached chart in one sentence.",
+      "firstSkeletonMs": 155,
+      "firstTokenMs": 20444,
+      "totalMs": 29321,
+      "seen": {
+        "thinking-block": 2701,
+        "plan-stepper": 2712,
+        "working-row": 2726,
+        "working-chips": 2738,
+        "step-summary": 16602,
+        "answer-block": 20496,
+        "inline-artifacts": 26658,
+        "artifact-pending": 26672,
+        "answer-badge": 27719,
+        "sources-list": 27730
+      },
+      "streamCls": 0.1365,
+      "pageCls": 0.1365,
+      "longTasks": 3,
+      "longMs": 613,
+      "domOrder": [
+        "thinking-block",
+        "working-list",
+        "working-row",
+        "answer-block",
+        "inline-artifacts",
+        "sources-list"
+      ],
+      "orderOk": true,
+      "artifactOk": true,
+      "errors": 0,
+      "score": {
+        "total": 8,
+        "parts": {
+          "skeleton": 2,
+          "cls": 0,
+          "jank": 2,
+          "order": 2,
+          "errors": 1,
+          "artifact": 1
+        }
+      }
+    },
+    "turn2": {
+      "question": "What is the latest news about Fervo Energy? Cite sources.",
+      "firstSkeletonMs": 98,
+      "firstTokenMs": 499,
+      "totalMs": 2086,
+      "seen": {
+        "thinking-block": 243,
+        "plan-stepper": 259,
+        "working-row": 275,
+        "working-chips": 293,
+        "step-summary": 309,
+        "answer-block": 324,
+        "answer-badge": 340,
+        "sources-list": 360,
+        "inline-artifacts": 379
+      },
+      "streamCls": 0.1365,
+      "pageCls": 0.1365,
+      "longTasks": 3,
+      "longMs": 613,
+      "domOrder": [
+        "thinking-block",
+        "working-list",
+        "working-row",
+        "answer-block",
+        "inline-artifacts",
+        "sources-list"
+      ],
+      "orderOk": true,
+      "artifactNA": true,
+      "errors": 0,
+      "score": {
+        "total": 8,
+        "parts": {
+          "skeleton": 2,
+          "cls": 0,
+          "jank": 2,
+          "order": 2,
+          "errors": 1,
+          "artifact": 1
+        }
+      }
+    },
+    "overall": 8,
+    "errors": [],
+    "states": {
+      "upload-idle": "upload-idle-1440x900.png",
+      "upload-progress": "upload-progress-1440x900.png",
+      "upload-success": "upload-success-1440x900.png",
+      "upload-failed": "upload-failed-1440x900.png",
+      "run-skeleton": "run-skeleton-1440x900.png",
+      "thinking-streaming": "thinking-streaming-1440x900.png",
+      "working-row": "working-row-1440x900.png",
+      "plan-stepper": "plan-stepper-1440x900.png",
+      "answer-streaming": "answer-streaming-1440x900.png",
+      "artifact-pending": "artifact-pending-1440x900.png",
+      "run-header": null,
+      "run-timer": null,
+      "run-footer": null,
+      "thinking-collapsed": "thinking-collapsed-1440x900.png",
+      "done-row": "done-row-1440x900.png",
+      "sources-strip": "sources-strip-1440x900.png",
+      "sources-expanded": "sources-expanded-1440x900.png",
+      "artifacts-card": "artifacts-card-1440x900.png",
+      "doc-preview": "doc-preview-1440x900.png",
+      "lightbox": "lightbox-1440x900.png",
+      "video-side-pane": null,
+      "data-gap": null,
+      "thread-settled": "thread-settled-1440x900.png",
+      "artifacts-panel": "artifacts-panel-1440x900.png",
+      "artifacts-filled": "artifacts-filled-1440x900.png",
+      "artifacts-empty": null
+    }
+  },
+  "formula": "run-ux score(): skeleton(≤1000ms:2, ≤2500ms:1) + cls(≤0.05:2, ≤0.1:1) + jank(longTasks ≤8:2, ≤20:1) + order(thinking→working→answer→sources:2) + errors(0:1) + artifact(card present:1) = /10",
+  "overall": 8.75,
+  "390x844": {
+    "viewport": "390x844",
+    "formula": "run-ux score(): skeleton(≤1000ms:2, ≤2500ms:1) + cls(≤0.05:2, ≤0.1:1) + jank(longTasks ≤8:2, ≤20:1) + order(thinking→working→answer→sources:2) + errors(0:1) + artifact(card present:1) = /10",
+    "turn1": {
+      "question": "Write a short portfolio report on Fervo Energy with cited sources. Mention the attached chart in one sentence.",
+      "firstSkeletonMs": 164,
+      "firstTokenMs": 16612,
+      "totalMs": 23096,
+      "seen": {
+        "thinking-block": 2806,
+        "plan-stepper": 2816,
+        "working-row": 2831,
+        "working-chips": 2844,
+        "answer-block": 16728,
+        "inline-artifacts": 20722,
+        "artifact-pending": 20731,
+        "answer-badge": 21499,
+        "data-gap": 21515
+      },
+      "streamCls": 0.0387,
+      "pageCls": 0.0387,
+      "longTasks": 2,
+      "longMs": 501,
+      "domOrder": [
+        "thinking-block",
+        "working-list",
+        "working-row",
+        "answer-block",
+        "inline-artifacts"
+      ],
+      "orderOk": true,
+      "artifactOk": true,
+      "errors": 0,
+      "score": {
+        "total": 10,
+        "parts": {
+          "skeleton": 2,
+          "cls": 2,
+          "jank": 2,
+          "order": 2,
+          "errors": 1,
+          "artifact": 1
+        }
+      }
+    },
+    "turn2": {
+      "question": "What is the latest news about Fervo Energy? Cite sources.",
+      "firstSkeletonMs": 74,
+      "firstTokenMs": 35086,
+      "totalMs": 42602,
+      "seen": {
+        "thinking-block": 156,
+        "plan-stepper": 167,
+        "working-row": 179,
+        "working-chips": 192,
+        "answer-block": 217,
+        "answer-badge": 237,
+        "inline-artifacts": 268,
+        "data-gap": 298,
+        "step-summary": 21002,
+        "sources-list": 40940
+      },
+      "streamCls": 0.0984,
+      "pageCls": 0.0984,
+      "longTasks": 2,
+      "longMs": 501,
+      "domOrder": [
+        "thinking-block",
+        "working-list",
+        "working-row",
+        "answer-block",
+        "sources-list"
+      ],
+      "orderOk": true,
+      "artifactNA": true,
+      "errors": 0,
+      "score": {
+        "total": 9,
+        "parts": {
+          "skeleton": 2,
+          "cls": 1,
+          "jank": 2,
+          "order": 2,
+          "errors": 1,
+          "artifact": 1
+        }
+      }
+    },
+    "overall": 9.5,
+    "errors": [],
+    "states": {
+      "upload-idle": "upload-idle-390x844.png",
+      "upload-progress": "upload-progress-390x844.png",
+      "upload-success": "upload-success-390x844.png",
+      "upload-failed": "upload-failed-390x844.png",
+      "run-skeleton": "run-skeleton-390x844.png",
+      "thinking-streaming": "thinking-streaming-390x844.png",
+      "working-row": "working-row-390x844.png",
+      "plan-stepper": "plan-stepper-390x844.png",
+      "answer-streaming": "answer-streaming-390x844.png",
+      "artifact-pending": "artifact-pending-390x844.png",
+      "run-header": null,
+      "run-timer": null,
+      "run-footer": null,
+      "thinking-collapsed": "thinking-collapsed-390x844.png",
+      "done-row": "done-row-390x844.png",
+      "sources-strip": null,
+      "sources-expanded": null,
+      "artifacts-card": "artifacts-card-390x844.png",
+      "doc-preview": "doc-preview-390x844.png",
+      "lightbox": "lightbox-390x844.png",
+      "video-side-pane": null,
+      "data-gap": "data-gap-390x844.png",
+      "thread-settled": "thread-settled-390x844.png",
+      "artifacts-panel": "artifacts-panel-390x844.png",
+      "artifacts-filled": "artifacts-filled-390x844.png",
+      "artifacts-empty": null
+    }
+  }
+}
