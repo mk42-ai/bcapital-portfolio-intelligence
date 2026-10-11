@@ -12,7 +12,7 @@ import { CompanyCard } from "@/components/companies/company-card";
 
 export type CompanyListRow = {
   slug: string; name: string; logo_url: string | null; sector: string; region: string; score: number; newsCount: number;
-  delta?: number | null; stage?: string | null; last_deal?: string | null;
+  delta?: number | null; stage?: string | null; last_deal?: { round?: string | null; amount_usd?: number | null; date?: string | null } | null;
   signal: number | null; signal_confidence: number | null; signal_percentile: number | null;
 };
 type SortKey = "name" | "signal" | "sector";
