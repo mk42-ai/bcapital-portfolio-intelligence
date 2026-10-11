@@ -826,3 +826,26 @@ Deployment: same sandbox `sbx_tgkU2TfsATcmyo4SiAWP4azShxfe` updated in place (AP
 08:39Z). Still open: Portfolio Plugin id (upstream rejects every schema encoding — `proof/data-lane/plugin-registration-2026-10-11.log.txt`),
 no durable OnDemand serverless endpoint (sandboxes expire), video uploads are not in the relay allow-list (no mp4 in `ALLOWED`), so the video
 side pane is exercised only with poster/play rendering, not with a stored video artifact.
+
+## 18. Turn-4 pass (2026-10-11, `c63fddb` → see CHANGELOG "turn 4")
+
+| Unit | Scope | Status | Commits |
+|---|---|---|---|
+| 1 run view | planner payload out of Thinking (`ondemand.planner_payload` → Outputs "Planner payload"), friendly plugin labels, jump pill pad | green | `76df3aa`, `109a563`, `5830205` |
+| 2 answer view | title ellipsis + tooltip, context payload at send time (`context-payload.ts`, 24 tests), score vs Δ naming, "5 of 724 shown", tools/answer time | green | `59620d2`, `096ba80`, `c2bd269` |
+| 3 artifacts | pdf.js inline pages (side pane + preview) with icon fallback, chip overlap fix, H1-derived filenames (`naming.ts`, 14 tests), icon wiring, nav badge merged | green | `b5175de`, `6b41318`, `0a1ea60` |
+| 4a data | `/news/reconciliation`, `/sentiment/runs`, `prior_run_at`/`scored_at`, sentiment pass 2 (0 null deltas), **Portfolio Plugin `plugin-1791713636` registered**, `MEDIA_ALLOW_VIDEO` flag | green | `80ca2ce`, `307130a`, `5b733af`, `9fcfae0`, `a1814e5`, `3368b84` |
+| 4b tests | `upload-e2e`, `routes-clean`, evidence config covering all turn-4 specs | green | `e8c71a9` |
+
+Deployment: fresh sandbox `sbx_8lxXN2IOAyDJKeolgpOQXxSH7GkC` — frontend **https://sb-4o6djxojbfi1.vercel.run**, backend **https://sb-23wo7xiys7fz.vercel.run**
+(API port 4000, Next port 3000; the previous pair sb-485hwxjqqz7l / sb-22j0v0grzslt expired with HTTP 410 at 09:56Z). `web/.env` on the sandbox sets
+`NEXT_PUBLIC_PORTFOLIO_PLUGIN_ID=plugin-1791713636`; the Portfolio Plugin's schema pins `servers[0]` to this backend — re-run `scripts/register-plugin.ts`
+when the backend URL changes.
+
+Evidence: `web/proof/evidence/` (HTML report `html-report/index.html`, `results.json`, videos/traces/screenshots per test under `test-results/`),
+`web/proof/unit1/stream-{before,after}.summary.json` (JSON-looking thinking deltas 22 → 0; planner_payload frames 0 → 41), `web/proof/inputs/2026-10-11/`
+(the four owner screenshots this pass answers), `proof/data-lane/news-reconciliation-2026-10-11.md`, `proof/data-lane/sentiment-pass-2026-10-11.md`,
+`proof/data-lane/plugin-registration-2026-10-11b.log.txt`.
+
+Still open: the documented `POST /plugin/v1` path still answers HTTP 500 (empty body) — the plugin exists only via the AI tool generator; stored video
+end-to-end needs `MEDIA_ALLOW_VIDEO=1` on the relay (default off) and the backend `INGEST_SECRET` for direct `POST /artifacts`; sandboxes expire (2 h).

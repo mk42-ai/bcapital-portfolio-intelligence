@@ -1,0 +1,164 @@
+{
+  "label": "after",
+  "at": "2026-10-11T10:31:41.592Z",
+  "baseUrl": "https://sb-4o6djxojbfi1.vercel.run",
+  "question": "What is the latest news about Fervo Energy? Cite sources.",
+  "threadId": "u1-1791714676207",
+  "httpStatus": 200,
+  "totalMs": 25385,
+  "frames": 292,
+  "firstSeenOrder": [
+    {
+      "kind": "RUN_STARTED",
+      "ms": 124
+    },
+    {
+      "kind": "status",
+      "ms": 124
+    },
+    {
+      "kind": "session",
+      "ms": 597
+    },
+    {
+      "kind": "request",
+      "ms": 597
+    },
+    {
+      "kind": "filler",
+      "ms": 1920
+    },
+    {
+      "kind": "TOOL_CALL_START",
+      "ms": 2350
+    },
+    {
+      "kind": "TOOL_CALL_ARGS",
+      "ms": 2350
+    },
+    {
+      "kind": "TOOL_CALL_END",
+      "ms": 2350
+    },
+    {
+      "kind": "thinking",
+      "ms": 2350
+    },
+    {
+      "kind": "planner_payload",
+      "ms": 2825
+    },
+    {
+      "kind": "plan",
+      "ms": 3064
+    },
+    {
+      "kind": "step",
+      "ms": 5421
+    },
+    {
+      "kind": "step_output",
+      "ms": 5421
+    },
+    {
+      "kind": "heartbeat",
+      "ms": 10114
+    },
+    {
+      "kind": "sources",
+      "ms": 15867
+    },
+    {
+      "kind": "TOOL_CALL_RESULT",
+      "ms": 15867
+    },
+    {
+      "kind": "TEXT_MESSAGE_START",
+      "ms": 19851
+    },
+    {
+      "kind": "TEXT_MESSAGE_CONTENT",
+      "ms": 19851
+    },
+    {
+      "kind": "metrics",
+      "ms": 23367
+    },
+    {
+      "kind": "TEXT_MESSAGE_END",
+      "ms": 25382
+    },
+    {
+      "kind": "RUN_FINISHED",
+      "ms": 25382
+    },
+    {
+      "kind": "[DONE]",
+      "ms": 25382
+    }
+  ],
+  "expectedOrder": [
+    "status",
+    "thinking",
+    "plan",
+    "TOOL_CALL_START",
+    "TOOL_CALL_RESULT",
+    "TEXT_MESSAGE_CONTENT",
+    "sources",
+    "RUN_FINISHED",
+    "[DONE]"
+  ],
+  "expectedOrderObserved": [
+    "status",
+    "thinking",
+    "plan",
+    "TOOL_CALL_START",
+    "TOOL_CALL_RESULT",
+    "TEXT_MESSAGE_CONTENT",
+    "sources",
+    "RUN_FINISHED",
+    "[DONE]"
+  ],
+  "missingKinds": [],
+  "thinking": {
+    "deltas": 39,
+    "jsonLikeDeltas": 0,
+    "jsonLikeSamples": [],
+    "chars": 1205
+  },
+  "plannerPayload": {
+    "frames": 41,
+    "chars": 1288
+  },
+  "tools": [
+    {
+      "toolCallId": "4195aed6-6c38-4378-8793-a34ea750b82c",
+      "tool": "Perplexity",
+      "startIdx": 10,
+      "resultIdx": 124,
+      "startBeforeResult": true,
+      "startBeforeFirstText": true,
+      "hasResult": true
+    }
+  ],
+  "textChars": 4004,
+  "sources": 10,
+  "errors": [],
+  "checks": {
+    "httpOk": true,
+    "doneSeen": true,
+    "runFinished": true,
+    "statusFirst": true,
+    "thinkingBeforeFirstText": true,
+    "planBeforeFirstText": true,
+    "toolResultBeforeFirstText": true,
+    "sourcesBeforeRunFinished": true,
+    "runFinishedBeforeDone": true,
+    "expectedKindsOrderStrictlyMonotonic_info": false,
+    "everyToolStartBeforeItsResult": true,
+    "everyToolStartBeforeFirstText": true,
+    "everyToolStartHasResult": true,
+    "noJsonLookingThinking": true
+  },
+  "ok": true
+}

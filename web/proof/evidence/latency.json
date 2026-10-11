@@ -34,5 +34,41 @@
     "firstTokenMs": 5344,
     "totalMs": 7161,
     "answerChars": 167
+  },
+  {
+    "at": "2026-10-11T10:32:50.042Z",
+    "project": "evidence-desktop",
+    "test": "T1 document upload → chip ready → grounded answer cites the file → artifact listed with source upload",
+    "question": "What is the title of the attached document? One sentence, cite the file name.",
+    "firstTokenMs": 7172,
+    "totalMs": 9318,
+    "answerChars": 120
+  },
+  {
+    "at": "2026-10-11T10:33:12.837Z",
+    "project": "evidence-desktop",
+    "test": "T2+T3 image upload → thumb in chip → answer → message-images grid → lightbox + side-pane preview",
+    "question": "What kind of chart is attached? One sentence.",
+    "firstTokenMs": 4002,
+    "totalMs": 6451,
+    "answerChars": 247
+  },
+  {
+    "at": "2026-10-11T10:36:49.519Z",
+    "project": "evidence-mobile",
+    "test": "T1 document upload → chip ready → grounded answer cites the file → artifact listed with source upload",
+    "question": "What is the title of the attached document? One sentence, cite the file name.",
+    "firstTokenMs": 4671,
+    "totalMs": 6441,
+    "answerChars": 120
+  },
+  {
+    "at": "2026-10-11T10:37:12.267Z",
+    "project": "evidence-mobile",
+    "test": "T2+T3 image upload → thumb in chip → answer → message-images grid → lightbox + side-pane preview",
+    "question": "What kind of chart is attached? One sentence.",
+    "firstTokenMs": 4948,
+    "totalMs": 7387,
+    "answerChars": 218
   }
 ]
