@@ -442,13 +442,18 @@ function StepSummaryCard({ s, live }: { s: StepSummary; live?: boolean }) {
   useEffect(() => { if (!live && s.state === "done") setOpen(false); }, [live, s.state]);
   return (
     <section className={`oiu-summary oiu-summary--${s.state}`} data-testid="step-summary" data-index={s.index} data-state={s.state} aria-live="polite">
+      {/* a3: the card title is STABLE ("Step N · summary") in both states; the optimistic/pending "Summarising step N…" is a muted line INSIDE the
+          card body — never a Working-looking band of its own. The only "Working…" surface is the anchored run-status header. */}
       <button type="button" className="oiu-summary__head" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
         {s.state === "pending" ? <Loader2 className="size-3.5 oiu-spin" aria-hidden /> : <Sparkles className="size-3.5" aria-hidden />}
-        <span>{s.state === "pending" ? LABEL.summarising(s.index) : `Step ${s.index} · summary`}</span>
+        <span>{`Step ${s.index} · summary`}</span>
         {s.doneAt && <time className="oiu-summary__time" dateTime={s.doneAt}>{new Date(s.doneAt).toISOString().slice(11, 19)} UTC</time>}
         <Chevron open={open} />
       </button>
-      <div className={`oiu-summary__panel${open ? " oiu-summary__panel--open" : ""}`}><div className="oiu-summary__inner">{s.state === "pending" ? <div className="oiu-shimmer" aria-hidden><span /><span /><span /></div> : <p>{s.text || "No summary text was emitted for this step."}</p>}</div></div>
+      <div className={`oiu-summary__panel${open ? " oiu-summary__panel--open" : ""}`}><div className="oiu-summary__inner">{s.state === "pending" ? (<>
+        <p data-testid="step-summary-pending" data-optimistic={s.optimistic ? "true" : "false"} style={{ color: "#6e7277", fontWeight: 400 }}>{LABEL.summarising(s.index)}…</p>
+        <div className="oiu-shimmer" aria-hidden><span /><span /><span /></div>
+      </>) : <p>{s.text || "No summary text was emitted for this step."}</p>}</div></div>
     </section>
   );
 }
