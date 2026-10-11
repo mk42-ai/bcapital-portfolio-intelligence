@@ -44,6 +44,25 @@ export type ArtifactDateFilter = "today" | "7d" | "30d" | "all";
 /** Response of GET /api/artifacts/<id>/signed-url (backend /artifacts/:id/signed-url). */
 export type SignedUrlResult = { id: string; mediaId: string | null; url: string; sourceUrl: string | null; expiresAt: string | null; source: "ondemand" | "backend"; mediaMessage: string | null };
 export type SignedUrlWire = { id: string; media_id: string | null; url: string; source_url?: string | null; expires_at?: string | null; source: "ondemand" | "backend"; media_message?: string | null };
+/** One row of GET /api/artifacts/<id>/versions (backend /artifacts/:id/versions). */
+export type ArtifactVersionRow = { id: string; version: number; sizeBytes: number; createdAt: string; mediaStatus: ArtifactMediaStatus; mediaId: string | null; source: ArtifactSource; contentUrl: string };
+export type ArtifactVersions = { name: string; threadId: string | null; latestVersion: number; versions: ArtifactVersionRow[] };
+export type ArtifactVersionsWire = { data: { id: string; version: number; size_bytes: number; created_at: string; media_status?: ArtifactMediaStatus; media_id?: string | null; source: ArtifactSource; content_url?: string }[]; name: string; thread_id: string | null; latest_version: number };
+export const versionsFromWire = (w: ArtifactVersionsWire): ArtifactVersions => ({
+  name: w.name, threadId: w.thread_id ?? null, latestVersion: Number(w.latest_version) || 1,
+  versions: (w.data ?? []).map((v) => ({ id: v.id, version: Number(v.version) || 1, sizeBytes: Number(v.size_bytes) || 0, createdAt: v.created_at, mediaStatus: v.media_status ?? null, mediaId: v.media_id ?? null, source: v.source ?? "generated", contentUrl: `/api/artifacts/${encodeURIComponent(v.id)}/content` })),
+});
+/** Verified/status chip state. "verified" = bytes are in the backend AND (OnDemand media stored with an id, OR an agent/generated output whose content url answers). */
+export type ArtifactStatus = "verified" | "processing" | "local" | "failed";
+export function artifactStatus(a: Pick<Artifact, "pending" | "failed" | "mediaStatus" | "mediaId" | "source" | "contentUrl" | "sizeBytes">, contentOk?: boolean | null): ArtifactStatus {
+  if (a.failed || a.mediaStatus === "failed") return "failed";
+  if (a.pending) return "processing";
+  const hasBytes = a.sizeBytes > 0 && a.contentUrl.startsWith("/api/artifacts/");
+  if (!hasBytes) return "local";
+  if (a.mediaStatus === "stored" && !!a.mediaId) return "verified";
+  if ((a.source === "generated" || a.source === "agent") && contentOk !== false) return "verified";
+  return "local";
+}
 export const signedFromWire = (w: SignedUrlWire): SignedUrlResult => ({ id: w.id, mediaId: w.media_id ?? null, url: w.url, sourceUrl: w.source_url ?? null, expiresAt: w.expires_at ?? null, source: w.source === "ondemand" ? "ondemand" : "backend", mediaMessage: w.media_message ?? null });
 /** Strip the query string + fragment (SAS `se=`/`sig=`) — the only form of a media URL that may be persisted. */
 export function unsignedUrl(u: string | null | undefined): string | null {

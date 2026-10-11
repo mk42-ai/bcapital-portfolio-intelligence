@@ -49,5 +49,15 @@ await t("artifacts: signed url never persisted; /signed-url falls back honestly"
   const spec: any = await (await get("/openapi.json")).json(); expect(!!spec.paths["/artifacts/{id}/signed-url"] && !!spec.components.schemas.Artifact.properties.media_source_url, "openapi");
   expect((await get("/artifacts/art_nope/signed-url")).status === 404, "404 unknown");
 });
+await t("artifacts: /versions lists every row sharing (name, thread_id), newest first", async () => {
+  const H = { "X-Ingest-Secret": "test-secret", "content-type": "application/json" };
+  const body = JSON.stringify({ name: "versions.txt", mime: "text/plain", content_base64: "aGk=", thread_id: "thr_versions" });
+  const a: any = await (await get("/artifacts", { method: "POST", headers: H, body })).json(); const b: any = await (await get("/artifacts", { method: "POST", headers: H, body })).json();
+  expect(a.data.version === 1 && b.data.version === 2, `versions ${a.data.version}/${b.data.version}`);
+  const v: any = await (await get(`/artifacts/${a.data.id}/versions`)).json();
+  expect(v.data.length === 2 && v.latest_version === 2 && v.data[0].id === b.data.id && v.data[0].version === 2 && v.data[1].id === a.data.id && v.name === "versions.txt" && v.thread_id === "thr_versions" && /\/content$/.test(v.data[0].content_url), JSON.stringify(v).slice(0, 300));
+  const spec: any = await (await get("/openapi.json")).json(); expect(!!spec.paths["/artifacts/{id}/versions"] && !!spec.components.schemas.ArtifactVersion, "openapi versions");
+  expect((await get("/artifacts/art_nope/versions")).status === 404, "404 unknown");
+});
 console.log(failed ? `\n${failed} test(s) FAILED` : "\nall tests passed");
 process.exit(failed ? 1 : 0);

@@ -1,9 +1,9 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useState } from "react";
-import { Download, ExternalLink, Eye, Trash2, PanelRight } from "lucide-react";
-import { artifactsPanel, artifactsStore } from "@/lib/artifacts/store";
-import { formatBytes, relativeTime, type Artifact } from "@/lib/artifacts/types";
+import { useEffect, useRef, useState } from "react";
+import { Download, ExternalLink, Eye, History, Trash2, PanelRight } from "lucide-react";
+import { artifactsPanel, artifactsStore, type ArtifactProbe } from "@/lib/artifacts/store";
+import { artifactStatus, formatBytes, relativeTime, type Artifact, type ArtifactStatus, type ArtifactVersions } from "@/lib/artifacts/types";
 import { ArtifactIcon, iconFor, kindBadge } from "./artifact-icon";
 import { openArtifactInPane } from "@/components/media/side-pane-store";
 import "./artifacts.css";
@@ -56,22 +56,114 @@ export function MediaBadge({ a }: { a: Artifact }) {
 }
 export const sourceLabel = (a: Artifact) => (a.source === "upload" ? "input" : a.source === "agent" ? "agent" : "generated");
 
-/** Artifact card. `compact` = one-row inline variant for the chat run view (file_written / artifact_ready). Default Preview opens the global panel. */
-export function ArtifactCard({ artifact: a, compact = false, selected = false, onPreview, onDeleted }: { artifact: Artifact; compact?: boolean; selected?: boolean; onPreview?: (a: Artifact) => void; onDeleted?: (a: Artifact) => void }) {
+const STATUS_LABEL: Record<ArtifactStatus, string> = { verified: "Verified", processing: "Processing", local: "Stored locally", failed: "Failed" };
+/**
+ * Verified / status chip (matches the "verified deliverables" card pattern): green dot "Verified" only when the bytes are in the backend AND
+ * (OnDemand media stored with an id, OR an agent/generated output whose content url answers); amber spinner while pending; grey for local
+ * uploads; red when saving / media failed. `contentOk` comes from the card's lazy content probe (null = not probed yet ⇒ optimistic verified
+ * for generated outputs, flips to "local" only if the probe fails).
+ */
+export function StatusChip({ a, contentOk }: { a: Artifact; contentOk?: boolean | null }) {
+  const st = artifactStatus(a, contentOk);
+  const title = st === "failed" ? (a.mediaMessage || "Saving failed") : st === "processing" ? "Still saving — storage has not confirmed yet" : st === "verified" ? (a.mediaId ? `Verified · OnDemand media ${a.mediaId}` : "Verified · bytes stored in the portfolio backend") : (a.mediaMessage ?? "Stored in the portfolio backend only (no OnDemand media)");
+  return <span className={`art-badge art-badge-status is-${st}`} data-testid="artifact-status" data-status={st} title={title} role={st === "processing" ? "status" : undefined}><i aria-hidden className={st === "processing" ? "art-spin" : undefined} />{STATUS_LABEL[st]}</span>;
+}
+
+const TEXT_RE = /^(text\/|application\/(json|xml|x-yaml|yaml|csv|x-ndjson))/;
+const isTextLike = (a: Artifact) => a.kind === "document" && (TEXT_RE.test(a.mime.toLowerCase()) || /\.(md|txt|csv|json|log|ya?ml|html?|xml)$/i.test(a.name));
+const isPdf = (a: Artifact) => a.mime.toLowerCase().includes("pdf") || /\.pdf$/i.test(a.name);
+
+/**
+ * Preview snippet: one–two honest lines under the name. Text/markdown/csv/json → first 240 chars of /content (lazy, once the card scrolls into
+ * view; one fetch per id, cached in the store, never for files > 2 MB); PDF → "PDF · N KB · page preview on open" (no pdf.js); video / audio
+ * → placeholder text; images keep the thumbnail. Nothing is rendered when the fetch fails — never fabricated content.
+ */
+export function ArtifactSnippet({ a, probe }: { a: Artifact; probe: ArtifactProbe | undefined }) {
+  let text: string | null = null; let kind: string = "none";
+  if (a.pending) return null;
+  if (isPdf(a)) { text = `PDF${a.sizeBytes ? ` · ${formatBytes(a.sizeBytes)}` : ""} · page preview on open`; kind = "pdf"; }
+  else if (a.kind === "video") { text = "Video · opens in the side pane"; kind = "video"; }
+  else if (a.kind === "audio") { text = `Audio clip${a.sizeBytes ? ` · ${formatBytes(a.sizeBytes)}` : ""}`; kind = "audio"; }
+  else if (isTextLike(a)) { text = probe?.text ?? null; kind = "text"; }
+  if (!text) return null;
+  return <p className="art-card-snippet" data-testid="artifact-snippet" data-snippet={kind} title={kind === "text" ? "First lines of the file" : undefined}>{text}</p>;
+}
+
+/** Version history list under the card: vN · size · time · status · Download (that version's bytes). */
+export function VersionHistory({ a, now, alwaysShow = false }: { a: Artifact; now: number | null; alwaysShow?: boolean }) {
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState<ArtifactVersions | null | undefined>(undefined);
+  const [loading, setLoading] = useState(false);
+  const listId = `art-versions-${a.id}`;
+  if (a.pending || (!alwaysShow && a.version <= 1)) return null;
+  const toggle = async () => {
+    const next = !open; setOpen(next);
+    if (next && data === undefined && !loading) { setLoading(true); try { setData(await artifactsStore.versions(a.id)); } finally { setLoading(false); } }
+  };
+  // v1 = nothing earlier to show: the toggle stays visible on the /artifacts page as disabled muted text (no fetch — honest, no empty list).
+  const noEarlier = a.version <= 1;
+  return (
+    <div className="art-versions">
+      <button type="button" className={`art-versions-toggle${open ? " is-open" : ""}`} onClick={toggle} aria-expanded={open} aria-controls={listId} data-testid="artifact-versions-toggle" data-version={a.version} disabled={noEarlier} title={noEarlier ? "This is the only version" : `Show all ${a.version} versions`}>
+        <History aria-hidden /><span>v{a.version} · {noEarlier ? "no earlier versions" : "history"}</span>
+      </button>
+      {open && (
+        <div id={listId} className="art-versions-body">
+          {loading && data === undefined && <p className="art-note" role="status">Loading versions…</p>}
+          {data === null && <p className="art-error" role="status">Could not load the version history.</p>}
+          {data && data.versions.length <= 1 && <p className="art-note">No earlier versions — this is the only copy.</p>}
+          {data && data.versions.length > 0 && (
+            <ul className="art-version-list" role="list" aria-label={`Versions of ${data.name}`}>
+              {data.versions.map((v) => {
+                const vs = artifactStatus({ pending: false, failed: false, mediaStatus: v.mediaStatus, mediaId: v.mediaId, source: v.source, contentUrl: v.contentUrl, sizeBytes: v.sizeBytes });
+                return (
+                  <li key={v.id} className={`art-version-row${v.id === a.id ? " is-current" : ""}`} data-testid="artifact-version-row" data-id={v.id} data-version={v.version} data-status={vs}>
+                    <span className="art-badge art-badge-version">v{v.version}</span>
+                    <span className="art-version-meta">{v.sizeBytes ? formatBytes(v.sizeBytes) : "—"}<span className="art-dot" aria-hidden> · </span>{now ? relativeTime(v.createdAt, now) : ""}{v.id === a.id && <><span className="art-dot" aria-hidden> · </span>current</>}</span>
+                    <span className={`art-badge art-badge-status is-${vs}`} data-status={vs}><i aria-hidden />{STATUS_LABEL[vs]}</span>
+                    <a className="art-btn art-version-dl" href={`${v.contentUrl}?download=1`} download={data.name} data-testid="artifact-version-download" title={`Download v${v.version}`}><Download aria-hidden />Download</a>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Artifact card. `compact` = one-row inline variant for the chat run view (file_written / artifact_ready). Default Preview opens the global panel. `showHistory` forces the history toggle (the /artifacts page). */
+export function ArtifactCard({ artifact: a, compact = false, selected = false, showHistory = false, onPreview, onDeleted }: { artifact: Artifact; compact?: boolean; selected?: boolean; showHistory?: boolean; onPreview?: (a: Artifact) => void; onDeleted?: (a: Artifact) => void }) {
   const [now, setNow] = useState<number | null>(null);
   const [thumbErr, setThumbErr] = useState(false);
   const [busy, setBusy] = useState<"open" | "download" | null>(null);
+  const [probe, setProbe] = useState<ArtifactProbe | undefined>(() => artifactsStore.inspectCached(a.id));
+  const rootRef = useRef<HTMLElement>(null);
   useEffect(() => { setNow(Date.now()); const t = setInterval(() => setNow(Date.now()), 60000); return () => clearInterval(t); }, []);
+  // Lazy content probe (snippet + "content url answers" for the verified chip): fires once the card is visible, once per id (store-cached).
+  const wantProbe = !a.pending && !a.failed && a.contentUrl.startsWith("/api/artifacts/") && (isTextLike(a) || a.source !== "upload") && a.kind !== "image";
+  useEffect(() => {
+    if (!wantProbe || probe !== undefined) return;
+    const el = rootRef.current; let live = true;
+    const run = () => { void artifactsStore.inspect(a.id, a.contentUrl, a.sizeBytes, isTextLike(a)).then((r) => { if (live) setProbe(r); }); };
+    if (!el || typeof IntersectionObserver === "undefined") { run(); return () => { live = false; }; }
+    const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); run(); } }, { rootMargin: "120px" });
+    io.observe(el);
+    return () => { live = false; io.disconnect(); };
+  }, [a.id, a.contentUrl, a.sizeBytes, wantProbe, probe]); // eslint-disable-line react-hooks/exhaustive-deps
   const state = a.failed ? "failed" : a.pending ? "uploading" : "ok";
   const icon = iconFor(a.kind, a.mime, a.name, state, a.source);
   const preview = () => (onPreview ? onPreview(a) : artifactsPanel.open(a.id));
   const badge = kindBadge(a.kind, a.mime, a.name);
-  const metaBits = [a.sizeBytes ? formatBytes(a.sizeBytes) : null, `v${a.version}`, now ? relativeTime(a.createdAt, now) : null].filter(Boolean) as string[];
+  const metaBits = [a.sizeBytes ? formatBytes(a.sizeBytes) : null, now ? relativeTime(a.createdAt, now) : null].filter(Boolean) as string[];
   const showThumb = a.kind === "image" && a.thumbnailUrl && !thumbErr && !a.pending && !compact;
   const act = async (mode: "open" | "download") => { if (busy) return; setBusy(mode); try { await openArtifact(a, mode); } finally { setBusy(null); } };
   const canOpen = !!a.contentUrl && !a.pending;
+  const contentOk = probe === undefined ? null : probe.ok;
+  const status = artifactStatus(a, contentOk);
   return (
-    <article className={`art-card art-root${compact ? " is-compact" : ""}`} data-testid="artifact-card" data-kind={a.kind} data-icon={icon} data-id={a.id} data-selected={selected ? "true" : "false"} aria-label={`${a.name}, ${badge}, ${metaBits.join(", ")}`}>
+    <article ref={rootRef} className={`art-card art-root${compact ? " is-compact" : ""}`} data-testid="artifact-card" data-kind={a.kind} data-icon={icon} data-id={a.id} data-status={status} data-selected={selected ? "true" : "false"} aria-label={`${a.name}, ${badge}, v${a.version}, ${STATUS_LABEL[status]}, ${metaBits.join(", ")}`}>
       <div className="art-thumb" aria-hidden={showThumb ? undefined : true}>
         {showThumb ? <img src={a.thumbnailUrl!} alt="" loading="lazy" decoding="async" onError={() => setThumbErr(true)} /> : <ArtifactIcon name={icon} size={compact ? 28 : 36} />}
       </div>
@@ -79,8 +171,11 @@ export function ArtifactCard({ artifact: a, compact = false, selected = false, o
         <div className="art-card-row">
           <p className="art-card-name" title={a.name}>{a.name}</p>
           <span className="art-badge art-badge-kind" data-testid="artifact-kind">{badge}</span>
+          <span className="art-badge art-badge-version" data-testid="artifact-version" data-version={a.version} title={`Version ${a.version}`}>v{a.version}</span>
+          <StatusChip a={a} contentOk={contentOk} />
           {!compact && <span className={`art-badge art-badge-source is-${sourceLabel(a)}`} data-testid="artifact-source">{sourceLabel(a)}</span>}
         </div>
+        {!compact && <ArtifactSnippet a={a} probe={probe} />}
         <p className="art-card-meta">
           {metaBits.map((b, i) => <span key={i}>{i > 0 && <span className="art-dot" aria-hidden> · </span>}{b}</span>)}
           {compact && <><span className="art-dot" aria-hidden> · </span><MediaBadge a={a} /></>}
@@ -96,6 +191,7 @@ export function ArtifactCard({ artifact: a, compact = false, selected = false, o
           <button type="button" className="art-btn" onClick={() => act("download")} data-testid="artifact-download" disabled={!canOpen || busy === "download"} title="Download (fresh signed url)"><Download aria-hidden />{busy === "download" ? "…" : "Download"}</button>
           {!compact && <button type="button" className="art-btn is-danger" data-testid="artifact-delete" onClick={async () => { if (await confirmDeleteArtifact(a)) onDeleted?.(a); }}><Trash2 aria-hidden />Delete</button>}
         </div>
+        {!compact && <VersionHistory a={a} now={now} alwaysShow={showHistory} />}
       </div>
     </article>
   );

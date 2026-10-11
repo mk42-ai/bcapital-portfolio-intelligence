@@ -2,7 +2,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { ArrowLeft, X } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, MessageSquare, X } from "lucide-react";
 import { useArtifacts, useArtifactsPanel } from "@/lib/artifacts/store";
 import type { Artifact, ArtifactDateFilter, ArtifactFilter } from "@/lib/artifacts/types";
 import { ArtifactCard } from "./artifact-card";
@@ -17,6 +18,7 @@ export const DATE_FILTERS: { id: ArtifactDateFilter; label: string; days: number
   { id: "today", label: "Today", days: 1 }, { id: "7d", label: "7 days", days: 7 }, { id: "30d", label: "30 days", days: 30 }, { id: "all", label: "All time", days: null },
 ];
 export const EMPTY_TEXT = "No artifacts yet — reports and uploads from Chat appear here";
+export const EMPTY_HINT = "Inputs you attach and files the agent writes are versioned here";
 export const matchesType = (a: Artifact, f: ArtifactFilter) => f === "all" || (f === "upload" ? a.source === "upload" : f === "generated" ? a.source !== "upload" : a.kind === f);
 const isToday = (iso: string) => { const d = new Date(iso); const n = new Date(); return d.getFullYear() === n.getFullYear() && d.getMonth() === n.getMonth() && d.getDate() === n.getDate(); };
 export const matchesDate = (a: Artifact, f: ArtifactDateFilter, now = Date.now()) => {
@@ -37,6 +39,8 @@ export function ArtifactsEmpty() {
     <div className="art-empty" data-testid="artifacts-empty">
       <picture><source type="image/webp" srcSet="/assets/artifacts-ui/artifacts-empty-256.webp 1x, /assets/artifacts-ui/artifacts-empty-512.webp 2x" /><img src="/icons/artifacts/artifacts-empty.png" alt="" width={120} height={120} loading="lazy" decoding="async" /></picture>
       <p>{EMPTY_TEXT}</p>
+      <p className="art-empty-hint">{EMPTY_HINT}</p>
+      <Link href="/chat" className="art-btn is-primary art-empty-cta" data-testid="artifacts-empty-cta"><MessageSquare aria-hidden />Go to Chat</Link>
     </div>
   );
 }
@@ -45,7 +49,7 @@ export type ArtifactsFilters = { type: ArtifactFilter; thread: string; date: Art
 export const DEFAULT_FILTERS: ArtifactsFilters = { type: "all", thread: "all", date: "all" };
 
 /** Filter chips (type) + thread/date selects + grouped list (Today / Earlier). Controlled so the panel and /artifacts page share it. */
-export function ArtifactsList({ items, filters, onFilters, selectedId, onPreview, loading, error, showThread = true }: { items: Artifact[]; filters: ArtifactsFilters; onFilters: (f: ArtifactsFilters) => void; selectedId?: string | null; onPreview: (a: Artifact) => void; loading?: boolean; error?: string | null; showThread?: boolean }) {
+export function ArtifactsList({ items, filters, onFilters, selectedId, onPreview, loading, error, showThread = true, showHistory = false }: { items: Artifact[]; filters: ArtifactsFilters; onFilters: (f: ArtifactsFilters) => void; selectedId?: string | null; onPreview: (a: Artifact) => void; loading?: boolean; error?: string | null; showThread?: boolean; showHistory?: boolean }) {
   const [titles, setTitles] = useState<Record<string, string>>({});
   useEffect(() => { setTitles(threadTitles()); }, [items.length]);
   const byDate = useMemo(() => items.filter((a) => matchesDate(a, filters.date) && (filters.thread === "all" || a.threadId === filters.thread)), [items, filters.date, filters.thread]);
@@ -56,7 +60,7 @@ export function ArtifactsList({ items, filters, onFilters, selectedId, onPreview
   const group = (label: string, list: Artifact[]) => list.length > 0 && (
     <div key={label}>
       <h3 className="art-group-label">{label}</h3>
-      <ul className="art-list" role="list">{list.map((a) => <li key={a.id} data-testid="artifact-item" data-id={a.id}><ArtifactCard artifact={a} selected={a.id === selectedId} onPreview={onPreview} /></li>)}</ul>
+      <ul className="art-list" role="list">{list.map((a) => <li key={a.id} data-testid="artifact-item" data-id={a.id}><ArtifactCard artifact={a} selected={a.id === selectedId} onPreview={onPreview} showHistory={showHistory} /></li>)}</ul>
     </div>
   );
   const set = (p: Partial<ArtifactsFilters>) => onFilters({ ...filters, ...p });
@@ -100,7 +104,7 @@ export function ArtifactsBrowser({ variant = "panel", filters, onFilters, select
   // live run). The page waits for the first backend refresh (≈100 ms) behind a reserved skeleton; the side panel keeps the instant cached paint.
   const items = variant === "page" && !loaded ? [] : allItems;
   const selected = selectedId ? items.find((a) => a.id === selectedId) ?? null : null;
-  const list = <ArtifactsList items={items} filters={filters} onFilters={onFilters} selectedId={selectedId} onPreview={(a) => onSelect(a.id)} loading={loading || (variant === "page" && !loaded)} error={error} showThread={variant === "page"} />;
+  const list = <ArtifactsList items={items} filters={filters} onFilters={onFilters} selectedId={selectedId} onPreview={(a) => onSelect(a.id)} loading={loading || (variant === "page" && !loaded)} error={error} showThread={variant === "page"} showHistory={variant === "page"} />;
   if (variant === "panel") {
     if (selected) return (
       <div className="art-browser">

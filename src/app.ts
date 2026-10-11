@@ -674,6 +674,17 @@ async function fetchOnDemandMedia(mediaId: string, externalUserId: string): Prom
   }
   return null;
 }
+/** Version history: every non-deleted row sharing (name, thread_id) with :id, newest version first. */
+inner.get("/artifacts/:id/versions", async (c) => {
+  const { db } = await getDb();
+  const r = db.select(artifactMeta).from(schema.artifacts).where(and(eq(schema.artifacts.id, c.req.param("id")), sql`${schema.artifacts.deletedAt} is null`)).get();
+  if (!r) return err(c, 404, "not_found", `No artifact with id '${c.req.param("id")}'`);
+  const conds = [sql`${schema.artifacts.deletedAt} is null`, eq(schema.artifacts.name, r.name), r.threadId ? eq(schema.artifacts.threadId, r.threadId) : sql`${schema.artifacts.threadId} is null`];
+  const rows = db.select(artifactMeta).from(schema.artifacts).where(and(...conds)).orderBy(desc(schema.artifacts.version), desc(schema.artifacts.createdAt)).all();
+  const data = rows.map((v) => ({ id: v.id, version: v.version, size_bytes: v.sizeBytes, created_at: v.createdAt, media_status: v.mediaStatus ?? null, media_id: v.mediaId ?? null, source: v.source, content_url: `${serverUrl(c)}/artifacts/${v.id}/content` }));
+  return c.json({ data, name: r.name, thread_id: r.threadId ?? null, latest_version: data.reduce((m, v) => Math.max(m, v.version), 0) || r.version }, 200, { "cache-control": "no-store" });
+});
+
 inner.get("/artifacts/:id/signed-url", async (c) => {
   const { db } = await getDb();
   const r = db.select(artifactMeta).from(schema.artifacts).where(and(eq(schema.artifacts.id, c.req.param("id")), sql`${schema.artifacts.deletedAt} is null`)).get();
