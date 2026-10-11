@@ -4,6 +4,25 @@ import { usePathname } from "next/navigation";
 import { LayoutDashboard, Newspaper, MessageSquare, Settings, Building2, Archive } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useArtifacts } from "@/lib/artifacts/store";
+import type { KeyboardEvent } from "react";
+
+/** a33: arrow-key roving between nav items (ArrowDown/Right → next, ArrowUp/Left → prev, Home/End; wraps). Tab order is untouched. */
+function onNavKeyDown(e: KeyboardEvent<HTMLElement>) {
+  const links = Array.from(e.currentTarget.querySelectorAll<HTMLAnchorElement>("a[data-testid^='nav-']"));
+  const cur = links.indexOf(document.activeElement as HTMLAnchorElement);
+  if (cur < 0 || links.length === 0) return;
+  const last = links.length - 1;
+  let next: number | null = null;
+  switch (e.key) {
+    case "ArrowDown": case "ArrowRight": next = cur === last ? 0 : cur + 1; break;
+    case "ArrowUp": case "ArrowLeft": next = cur === 0 ? last : cur - 1; break;
+    case "Home": next = 0; break;
+    case "End": next = last; break;
+  }
+  if (next == null) return;
+  e.preventDefault();
+  links[next]?.focus();
+}
 const ITEMS = [
   { href: "/overview", label: "Overview", icon: LayoutDashboard },
   { href: "/companies", label: "Companies", icon: Building2, match: "/compan" },
@@ -18,7 +37,7 @@ export function Nav({ collapsed = false }: { collapsed?: boolean }) {
   const { items: artifacts } = useArtifacts();
   const artifactCount = artifacts.length;
   return (
-    <nav aria-label="Primary" className={cn("flex items-center gap-1 overflow-x-auto lg:mt-3 lg:flex-col lg:items-stretch lg:gap-1", collapsed && "lg:items-center")} data-testid="primary-nav">
+    <nav aria-label="Primary" className={cn("flex items-center gap-1 overflow-x-auto lg:mt-3 lg:flex-col lg:items-stretch lg:gap-1", collapsed && "lg:items-center")} data-testid="primary-nav" onKeyDown={onNavKeyDown}>
       {ITEMS.map(({ href, label, icon: Icon, match }) => {
         const active = path === href || path.startsWith(match ?? href);
         return (

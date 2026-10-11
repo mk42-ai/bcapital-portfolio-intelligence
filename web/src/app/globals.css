@@ -49,3 +49,9 @@
   .sr-only-focusable:focus { position: static; width: auto; height: auto; clip: auto; }
   .tap { min-width: 24px; min-height: 24px; }
 }
+
+/* a33 focus */
+/* Brand-green focus rings everywhere: hard-code the brand hex so no blue UA/tailwind ring can leak (--ring is also #0AC985). */
+:where(html.light, html) :focus-visible { outline: 2px solid #0AC985 !important; outline-offset: 2px; border-radius: 4px; }
+[data-testid="company-row-link"]:focus-visible, [data-testid="primary-nav"] a:focus-visible { outline-width: 3px !important; }
+/* end a33 */
