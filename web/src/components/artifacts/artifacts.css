@@ -154,3 +154,22 @@
 }
 /* CLS: the /artifacts list loads client-side; reserve the viewport so the page footer does not jump when cards arrive. */
 .art-page-layout { min-height: calc(100dvh - 220px); }
+
+/* ---------- media: side pane (Lane C) ---------- */
+.media-pane { position: fixed; top: 0; right: 0; bottom: 0; z-index: 90; width: min(560px, 46vw); display: flex; flex-direction: column; background: #FFFFFF; border-left: 1px solid #E5E7EB; box-shadow: -12px 0 32px #1118271a; animation: art-fade 160ms ease-out; outline: none; }
+.media-pane-bar { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid #E5E7EB; font-size: 13px; font-weight: 600; color: #111827; }
+.media-pane-title { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.media-pane-status { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 500; color: #4B5563; white-space: nowrap; }
+.media-pane-body { flex: 1 1 auto; min-height: 0; display: flex; align-items: stretch; justify-content: center; background: #F9FAFB; }
+.media-pane-frame { width: 100%; height: 100%; border: 0; background: #FFFFFF; }
+.media-pane-img { max-width: 100%; max-height: 100%; margin: auto; object-fit: contain; }
+.media-pane-body video { width: 100%; height: 100%; max-height: 100%; background: #0B0F17; object-fit: contain; }
+@media (max-width: 1023px) { .media-pane { top: auto; left: 0; width: 100%; height: 72dvh; border-left: 0; border-top: 1px solid #E5E7EB; border-radius: 12px 12px 0 0; } .media-pane-status { display: none; } }
+.media-video-poster { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; margin: 0; padding: 0; border: 0; background: #0B0F17; cursor: pointer; overflow: hidden; }
+.media-video-poster img, .media-video-poster video { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .92; pointer-events: none; }
+.media-video-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.media-video-play svg { width: 56px; height: 56px; padding: 14px; border-radius: 28px; background: #0AC985; color: #FFFFFF; box-shadow: 0 6px 20px #0B0F1766; }
+.media-video-poster:hover .media-video-play svg, .media-video-poster:focus-visible .media-video-play svg { background: #047857; }
+.art-filters--secondary { margin-top: 8px; align-items: center; }
+.art-select { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #4B5563; }
+.art-select select { height: 32px; padding: 0 8px; border: 1px solid #E5E7EB; border-radius: 8px; background: #FFFFFF; color: #111827; font: inherit; font-size: 12.5px; max-width: 220px; }
