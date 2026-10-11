@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import { ArtifactsPageClient } from "@/components/artifacts/artifacts-page-client";
-import { SidePane } from "@/components/media/side-pane";
 import "@/components/artifacts/artifacts.css";
 export const metadata: Metadata = { title: "Artifacts" };
 export const dynamic = "force-dynamic";
@@ -18,8 +17,6 @@ export default function ArtifactsPage() {
         </div>
       </header>
       <ArtifactsPageClient />
-      {/* Open → side pane (same component as /chat); on this page it docks to the right edge as an overlay (see .art-page-pane in media.css). */}
-      <div className="art-page-pane"><SidePane /></div>
     </div>
   );
 }

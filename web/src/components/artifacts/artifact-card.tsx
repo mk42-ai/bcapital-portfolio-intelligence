@@ -26,11 +26,17 @@ export async function openArtifact(a: Artifact, mode: "open" | "download"): Prom
   // "Open" = side-by-side preview next to the chat (documents/images/videos never navigate the app away; the pane has "Open in new tab" +
   // Download, both re-signed). Only "Download" leaves the page — through an <a download>, never window.location (a blocked popup must not
   // replace the chat with a PDF viewer; found by the QA harness at 1440×900).
-  if (mode === "open") {
-    openArtifactInPane({ id: a.id, name: a.name, mime: a.mime, kind: a.kind, contentUrl: a.contentUrl, size: a.sizeBytes });
-    return a.contentUrl;
-  }
   if (a.pending || !a.contentUrl.startsWith("/api/artifacts/")) { if (typeof window !== "undefined") window.open(fallback, "_blank", "noopener"); return fallback; }
+  if (mode === "open") {
+    // New tab: open synchronously (popup-blocker safe), then redirect to the fresh signed url. If the popup was blocked, fall back to the
+    // side pane instead of navigating the app away.
+    const win = typeof window !== "undefined" ? window.open("about:blank", "_blank", "noopener") : null;
+    const res = await artifactsStore.signedUrl(a.id, false);
+    const url = res.url || fallback;
+    if (win && !win.closed) win.location.replace(url);
+    else openArtifactInPane({ id: a.id, name: a.name, mime: a.mime, kind: a.kind, contentUrl: a.contentUrl, size: a.sizeBytes });
+    return url;
+  }
   const res = await artifactsStore.signedUrl(a.id, true);
   const url = res.url || fallback;
   if (typeof window !== "undefined") {

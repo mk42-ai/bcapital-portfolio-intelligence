@@ -5,5 +5,6 @@ import { SidePane } from "./side-pane";
 export function SidePaneOutsideChat() {
   const path = usePathname();
   if (path?.startsWith("/chat")) return null;
-  return <SidePane />;
+  // Outside /chat there is no flex row: .art-page-pane docks the pane to the right edge as an overlay (media.css); <1024px it is the full-screen sheet.
+  return <div className="art-page-pane"><SidePane /></div>;
 }
