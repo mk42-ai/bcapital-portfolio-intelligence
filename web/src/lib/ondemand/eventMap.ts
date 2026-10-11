@@ -134,6 +134,7 @@ export const CLIENT_EVENT = {
   voice: "ondemand.voice",              // Voice: {phase: "transcript"|"tts_queued"|"tts_playing"|"tts_done"|"barge_in", text?}
   artifact: "ondemand.artifact",        // Artifacts: {phase: "creating"|"ready"|"failed", key, name, kind?, artifact?, message?, origin}
   stepOutput: "ondemand.step_output",   // Outputs rail: {stepId, title, plugins[{pluginId,name,params}], raw}
+  raw: "ondemand.raw", // raw OnDemand frame {event, data} — feeds the /chat-od-style status view (components/od-chat/raw-reducer.ts)
   plannerPayload: "ondemand.planner_payload", // unit1: planner/tool-definition JSON text split OUT of ondemand.thinking: {phase: planning|step, stepId, delta}
 } as const satisfies Record<string, `ondemand.${string}`>;
 /** Compile-time uniqueness guard: `_DuplicateClientEvent` is `never` while every CLIENT_EVENT value is distinct; a duplicate makes the line below fail tsc. */

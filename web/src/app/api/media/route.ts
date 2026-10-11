@@ -176,12 +176,14 @@ export async function DELETE(req: NextRequest) {
   }
 }
 
-/** `GET /api/media?id=<mediaId>` — does the bridge still hold extracted text for this id? (no text is returned; used by tests + the chip tooltip) */
+/** `GET /api/media?id=<mediaId>` — does the bridge still hold extracted text for this id? Add `&text=1` to also get the text (≤12 000 chars) —
+ *  the browser chat transport (lib/ondemand/browser-chat.ts) grounds the query with it. */
 export async function GET(req: NextRequest) {
   const id = (req.nextUrl.searchParams.get("id") ?? "").trim();
   if (!id) return Response.json({ ok: true, allowed: allowedExtensions(), allowedLabel: ALLOWED_LABEL, videoEnabled: isVideoUploadEnabled(), maxBytes: MEDIA_MAX_BYTES }, { headers: NO_STORE });
   const t = getText(id);
-  return Response.json({ ok: true, id, known: !!t, extractedChars: t?.text.length ?? 0, name: t?.name ?? null, kind: t?.kind ?? null }, { headers: NO_STORE });
+  const withText = req.nextUrl.searchParams.get("text") === "1";
+  return Response.json({ ok: true, id, known: !!t, extractedChars: t?.text.length ?? 0, name: t?.name ?? null, kind: t?.kind ?? null, ...(withText ? { text: t?.text.slice(0, 12_000) ?? null } : {}) }, { headers: NO_STORE });
 }
 
 const mb = (n: number) => (n / (1024 * 1024)).toFixed(n >= 10 * 1024 * 1024 ? 0 : 1);

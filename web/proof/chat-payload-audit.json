@@ -1,1696 +1,5 @@
 [
   {
-    "at": "2026-10-10T13:45:28.686Z",
-    "threadId": "up-1791639897864",
-    "runId": "a5054503-66cd-481f-98d9-d895f54e7f8a",
-    "endpointId": "predefined-deepseek-flash",
-    "endpointLabel": "DeepSeek Flash v4.1",
-    "reasoningMode": "medium",
-    "responseMode": "stream",
-    "pluginIds": [
-      "plugin-1722260873"
-    ],
-    "requestedPluginIds": [
-      "plugin-1722260873"
-    ],
-    "droppedPluginIds": [],
-    "sessionCreate": {
-      "url": "https://api.on-demand.io/chat/v1/sessions",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
-      },
-      "body": {
-        "externalUserId": "INV-001",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "contextMetadata": []
-      },
-      "response": {
-        "status": 201,
-        "id": "6aca417af7979c7d562af64f",
-        "message": "Chat session created successfully",
-        "elapsedMs": 1985
-      }
-    },
-    "sessionId": "6aca417af7979c7d562af64f",
-    "sessionCreated": true,
-    "query": {
-      "url": "https://api.on-demand.io/chat/v1/sessions/6aca417af7979c7d562af64f/query",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
-        "accept": "text/event-stream"
-      },
-      "body": {
-        "query": "<systemContext+attachments 547 chars> According to the attached document, how many MWh did the Zephyr-7 pilot plant produce and on what date? Answer in one sentence.",
-        "endpointId": "predefined-deepseek-flash",
-        "responseMode": "stream",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "reasoningMode": "medium"
-      },
-      "attachments": [
-        {
-          "mediaId": "local-51ae4344b01ebb546d2a94eb",
-          "name": "zephyr-7.md",
-          "chars": 357
-        }
-      ]
-    },
-    "queryResponse": {
-      "status": 200,
-      "contentType": "text/event-stream; charset=utf-8",
-      "elapsedMs": 6216
-    },
-    "timings": {
-      "firstUpstreamFrameMs": 6218,
-      "firstTokenMs": 6236,
-      "totalMs": 7699,
-      "upstreamFrames": 28,
-      "answerChars": 117,
-      "sources": 0,
-      "pluginError": null,
-      "abortReason": null
-    },
-    "firstUpstreamEvents": [
-      {
-        "ms": 6218,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user asks a simple question\"}}"
-      },
-      {
-        "ms": 6222,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" answerable from the attached document\"}}"
-      },
-      {
-        "ms": 6223,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\". No plugin needed. plan_required\"}}"
-      },
-      {
-        "ms": 6224,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":4,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"{\\\"title\\\": \\\"I'll answer the Zeph\"}}"
-      },
-      {
-        "ms": 6225,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":5,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"yr-7 output question directly from\"}}"
-      },
-      {
-        "ms": 6225,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":6,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" the attached document.\\\", \\\"objective\"}}"
-      },
-      {
-        "ms": 6226,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":7,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"\\\": \\\"\\\", \\\"plan_required\\\": false,\"}}"
-      },
-      {
-        "ms": 6227,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":8,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" \\\"plan_skip_reason\\\": \\\"The question\"}}"
-      },
-      {
-        "ms": 6228,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":9,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" is answered directly from the\"}}"
-      },
-      {
-        "ms": 6229,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6aca417af7979c7d562af64f\",\"messageId\":\"6aca417bf7979c7d562af650\",\"eventIndex\":10,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" attached document (41.7 MWh on\"}}"
-      }
-    ]
-  },
-  {
-    "at": "2026-10-11T01:15:30.384Z",
-    "threadId": "2dff668f-d6d9-4ec1-95a5-a4a48d1212d3",
-    "runId": "54281a17-3dce-447f-925d-8c8d452bd0c0",
-    "endpointId": "predefined-deepseek-flash",
-    "endpointLabel": "DeepSeek Flash v4.1",
-    "reasoningMode": "medium",
-    "responseMode": "stream",
-    "pluginIds": [
-      "plugin-1722260873"
-    ],
-    "requestedPluginIds": [
-      "plugin-1722260873"
-    ],
-    "droppedPluginIds": [],
-    "sessionCreate": {
-      "url": "https://api.on-demand.io/chat/v1/sessions",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
-      },
-      "body": {
-        "externalUserId": "INV-001",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "contextMetadata": [
-          {
-            "key": "company:apptronik",
-            "valueChars": 907
-          },
-          {
-            "key": "company:fervo-energy",
-            "valueChars": 1022
-          },
-          {
-            "key": "company:flutterwave",
-            "valueChars": 1042
-          },
-          {
-            "key": "company:perplexity-ai",
-            "valueChars": 761
-          },
-          {
-            "key": "company:writer",
-            "valueChars": 710
-          }
-        ]
-      },
-      "response": {
-        "status": 201,
-        "id": "6acae33295268adc215e1af9",
-        "message": "Chat session created successfully",
-        "elapsedMs": 347
-      }
-    },
-    "sessionId": "6acae33295268adc215e1af9",
-    "sessionCreated": true,
-    "query": {
-      "url": "https://api.on-demand.io/chat/v1/sessions/6acae33295268adc215e1af9/query",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
-        "accept": "text/event-stream"
-      },
-      "body": {
-        "query": "<systemContext+attachments 3688 chars> Write a short portfolio report on Fervo Energy's latest news as a PDF.",
-        "endpointId": "predefined-deepseek-flash",
-        "responseMode": "stream",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "reasoningMode": "medium"
-      },
-      "attachments": []
-    },
-    "queryResponse": {
-      "status": 200,
-      "contentType": "text/event-stream; charset=utf-8",
-      "elapsedMs": 1004
-    },
-    "timings": {
-      "firstUpstreamFrameMs": 2464,
-      "firstTokenMs": 21982,
-      "totalMs": 27746,
-      "upstreamFrames": 369,
-      "answerChars": 3631,
-      "sources": 7,
-      "pluginError": null,
-      "abortReason": null
-    },
-    "firstUpstreamEvents": [
-      {
-        "ms": 2464,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae33295268adc215e1af9\",\"messageId\":\"6acae333261cbe2340485c15\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants a short portfolio\"}}"
-      },
-      {
-        "ms": 2633,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae33295268adc215e1af9\",\"messageId\":\"6acae333261cbe2340485c15\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" report on Fervo Energy's latest\"}}"
-      },
-      {
-        "ms": 2635,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae33295268adc215e1af9\",\"messageId\":\"6acae333261cbe2340485c15\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news as a PDF.\\n\\nKey considerations\"}}"
-      },
-      {
-        "ms": 2636,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae33295268adc215e1af9\",\"messageId\":\"6acae333261cbe2340485c15\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\":\\n- External facts (recent announcements\"}}"
-      },
-      {
-        "ms": 2641,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae33295268adc215e1af9\",\"messageId\":\"6acae333261cbe2340485c15\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\", news) → use Perplexity web search\"}}"
-      },
-      {
-        "ms": 2642,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae33295268adc215e1af9\",\"messageId\":\"6acae333261cbe2340485c15\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\".\\n- The portfolio data gives internal\"}}"
-      },
-      {
-        "ms": 2856,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae33295268adc215e1af9\",\"messageId\":\"6acae333261cbe2340485c15\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" sentiment scores, deltas, headline\"}}"
-      },
-      {
-        "ms": 2857,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae33295268adc215e1af9\",\"messageId\":\"6acae333261cbe2340485c15\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" counts — use for portfolio-in\"}}"
-      },
-      {
-        "ms": 2860,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae33295268adc215e1af9\",\"messageId\":\"6acae333261cbe2340485c15\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ternal.\\n- Generate a PDF.\\n\\nAvailable\"}}"
-      },
-      {
-        "ms": 2862,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae33295268adc215e1af9\",\"messageId\":\"6acae333261cbe2340485c15\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" plugins list isn't literally listed\"}}"
-      }
-    ]
-  },
-  {
-    "at": "2026-10-11T01:25:16.077Z",
-    "threadId": "60b47a32-d32c-489b-906b-1c30814728b8",
-    "runId": "a011174d-0d22-4cf5-b7f7-66b0872ff6fc",
-    "endpointId": "predefined-deepseek-flash",
-    "endpointLabel": "DeepSeek Flash v4.1",
-    "reasoningMode": "medium",
-    "responseMode": "stream",
-    "pluginIds": [
-      "plugin-1722260873"
-    ],
-    "requestedPluginIds": [
-      "plugin-1722260873"
-    ],
-    "droppedPluginIds": [],
-    "sessionId": "6acae57a95268adc215e1b04",
-    "sessionCreated": false,
-    "query": {
-      "url": "https://api.on-demand.io/chat/v1/sessions/6acae57a95268adc215e1b04/query",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
-        "accept": "text/event-stream"
-      },
-      "body": {
-        "query": "<systemContext+attachments 16814 chars> Summarise the attached memo, chart and UX document in two sentences.",
-        "endpointId": "predefined-deepseek-flash",
-        "responseMode": "stream",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "reasoningMode": "medium"
-      },
-      "attachments": [
-        {
-          "mediaId": "local-artc420251fae9a",
-          "name": "geothermal.jpg",
-          "chars": 0
-        },
-        {
-          "mediaId": "local-art68511e337099",
-          "name": "bar-chart.jpg",
-          "chars": 0
-        },
-        {
-          "mediaId": "local-art436f307bdd7c",
-          "name": "memo.jpg",
-          "chars": 0
-        },
-        {
-          "mediaId": "local-0f756825369eb32f7a1a7cd8",
-          "name": "run-ux-before-after.pdf",
-          "chars": 0
-        },
-        {
-          "mediaId": "local-92118a1f3eab0e4ad55fa1f8",
-          "name": "compendium.docx",
-          "chars": 12000
-        }
-      ]
-    },
-    "timings": {
-      "firstUpstreamFrameMs": null,
-      "firstTokenMs": null,
-      "totalMs": 596,
-      "upstreamFrames": 0,
-      "answerChars": 0,
-      "sources": 0,
-      "pluginError": null,
-      "abortReason": "client"
-    },
-    "firstUpstreamEvents": []
-  },
-  {
-    "at": "2026-10-11T01:25:26.547Z",
-    "threadId": "efebeaf7-7732-49c4-b222-eca8e5644f50",
-    "runId": "33a26963-bc7f-4ef2-bd4d-1836806e5863",
-    "endpointId": "predefined-deepseek-flash",
-    "endpointLabel": "DeepSeek Flash v4.1",
-    "reasoningMode": "medium",
-    "responseMode": "stream",
-    "pluginIds": [
-      "plugin-1722260873"
-    ],
-    "requestedPluginIds": [
-      "plugin-1722260873"
-    ],
-    "droppedPluginIds": [],
-    "sessionCreate": {
-      "url": "https://api.on-demand.io/chat/v1/sessions",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
-      },
-      "body": {
-        "externalUserId": "INV-001",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "contextMetadata": [
-          {
-            "key": "company:apptronik",
-            "valueChars": 907
-          },
-          {
-            "key": "company:fervo-energy",
-            "valueChars": 1022
-          },
-          {
-            "key": "company:flutterwave",
-            "valueChars": 1042
-          },
-          {
-            "key": "company:perplexity-ai",
-            "valueChars": 761
-          },
-          {
-            "key": "company:writer",
-            "valueChars": 710
-          }
-        ]
-      },
-      "response": {
-        "status": 201,
-        "id": "6acae58695268adc215e1b07",
-        "message": "Chat session created successfully",
-        "elapsedMs": 157
-      }
-    },
-    "sessionId": "6acae58695268adc215e1b07",
-    "sessionCreated": true,
-    "query": {
-      "url": "https://api.on-demand.io/chat/v1/sessions/6acae58695268adc215e1b07/query",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
-        "accept": "text/event-stream"
-      },
-      "body": {
-        "query": "<systemContext+attachments 3688 chars> Write a short portfolio report on Fervo Energy's latest news as a PDF.",
-        "endpointId": "predefined-deepseek-flash",
-        "responseMode": "stream",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "reasoningMode": "medium"
-      },
-      "attachments": []
-    },
-    "queryResponse": {
-      "status": 200,
-      "contentType": "text/event-stream; charset=utf-8",
-      "elapsedMs": 588
-    },
-    "timings": {
-      "firstUpstreamFrameMs": 1438,
-      "firstTokenMs": 21155,
-      "totalMs": 27849,
-      "upstreamFrames": 392,
-      "answerChars": 4326,
-      "sources": 10,
-      "pluginError": null,
-      "abortReason": null
-    },
-    "firstUpstreamEvents": [
-      {
-        "ms": 1438,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae58695268adc215e1b07\",\"messageId\":\"6acae587261cbe2340485c1e\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants a short portfolio\"}}"
-      },
-      {
-        "ms": 1441,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae58695268adc215e1b07\",\"messageId\":\"6acae587261cbe2340485c1e\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" report on Fervo Energy's latest\"}}"
-      },
-      {
-        "ms": 1463,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae58695268adc215e1b07\",\"messageId\":\"6acae587261cbe2340485c1e\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news as a PDF. Portfolio data\"}}"
-      },
-      {
-        "ms": 1490,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae58695268adc215e1b07\",\"messageId\":\"6acae587261cbe2340485c1e\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" is provided. For external facts\"}}"
-      },
-      {
-        "ms": 1527,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae58695268adc215e1b07\",\"messageId\":\"6acae587261cbe2340485c1e\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\", use Perplexity web search. So\"}}"
-      },
-      {
-        "ms": 1558,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae58695268adc215e1b07\",\"messageId\":\"6acae587261cbe2340485c1e\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" the plan: gather latest Fervo\"}}"
-      },
-      {
-        "ms": 1572,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae58695268adc215e1b07\",\"messageId\":\"6acae587261cbe2340485c1e\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news via Perplexity web search\"}}"
-      },
-      {
-        "ms": 1614,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae58695268adc215e1b07\",\"messageId\":\"6acae587261cbe2340485c1e\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" (external facts, citations), then\"}}"
-      },
-      {
-        "ms": 1644,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae58695268adc215e1b07\",\"messageId\":\"6acae587261cbe2340485c1e\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" generate PDF report from the portfolio\"}}"
-      },
-      {
-        "ms": 1668,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae58695268adc215e1b07\",\"messageId\":\"6acae587261cbe2340485c1e\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" data + search results using execute\"}}"
-      }
-    ]
-  },
-  {
-    "at": "2026-10-11T01:33:01.961Z",
-    "threadId": "23d77598-8515-4cee-9e87-aba8cd3d41ee",
-    "runId": "62de4617-d2db-47ff-81fc-406eaa637429",
-    "endpointId": "predefined-deepseek-flash",
-    "endpointLabel": "DeepSeek Flash v4.1",
-    "reasoningMode": "medium",
-    "responseMode": "stream",
-    "pluginIds": [
-      "plugin-1722260873"
-    ],
-    "requestedPluginIds": [
-      "plugin-1722260873"
-    ],
-    "droppedPluginIds": [],
-    "sessionCreate": {
-      "url": "https://api.on-demand.io/chat/v1/sessions",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
-      },
-      "body": {
-        "externalUserId": "INV-001",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "contextMetadata": [
-          {
-            "key": "company:apptronik",
-            "valueChars": 907
-          },
-          {
-            "key": "company:fervo-energy",
-            "valueChars": 1022
-          },
-          {
-            "key": "company:flutterwave",
-            "valueChars": 1042
-          },
-          {
-            "key": "company:perplexity-ai",
-            "valueChars": 761
-          },
-          {
-            "key": "company:writer",
-            "valueChars": 710
-          }
-        ]
-      },
-      "response": {
-        "status": 201,
-        "id": "6acae74e261cbe2340485c2c",
-        "message": "Chat session created successfully",
-        "elapsedMs": 235
-      }
-    },
-    "sessionId": "6acae74e261cbe2340485c2c",
-    "sessionCreated": true,
-    "query": {
-      "url": "https://api.on-demand.io/chat/v1/sessions/6acae74e261cbe2340485c2c/query",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
-        "accept": "text/event-stream"
-      },
-      "body": {
-        "query": "<systemContext+attachments 3688 chars> Write a short portfolio report on Fervo Energy's latest news as a PDF.",
-        "endpointId": "predefined-deepseek-flash",
-        "responseMode": "stream",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "reasoningMode": "medium"
-      },
-      "attachments": []
-    },
-    "queryResponse": {
-      "status": 200,
-      "contentType": "text/event-stream; charset=utf-8",
-      "elapsedMs": 789
-    },
-    "timings": {
-      "firstUpstreamFrameMs": 2246,
-      "firstTokenMs": 21489,
-      "totalMs": 30126,
-      "upstreamFrames": 405,
-      "answerChars": 5470,
-      "sources": 7,
-      "pluginError": null,
-      "abortReason": null
-    },
-    "firstUpstreamEvents": [
-      {
-        "ms": 2246,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae74e261cbe2340485c2c\",\"messageId\":\"6acae74e261cbe2340485c2e\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants a short portfolio\"}}"
-      },
-      {
-        "ms": 2250,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae74e261cbe2340485c2c\",\"messageId\":\"6acae74e261cbe2340485c2e\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" report on Fervo Energy's latest\"}}"
-      },
-      {
-        "ms": 2265,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae74e261cbe2340485c2c\",\"messageId\":\"6acae74e261cbe2340485c2e\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news as a PDF. The instructions\"}}"
-      },
-      {
-        "ms": 2330,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae74e261cbe2340485c2c\",\"messageId\":\"6acae74e261cbe2340485c2e\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" say for external facts, always\"}}"
-      },
-      {
-        "ms": 2336,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae74e261cbe2340485c2c\",\"messageId\":\"6acae74e261cbe2340485c2e\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" run Perplexity web search. So\"}}"
-      },
-      {
-        "ms": 2394,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae74e261cbe2340485c2c\",\"messageId\":\"6acae74e261cbe2340485c2e\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" plan: gather Fervo news via perplex\"}}"
-      },
-      {
-        "ms": 2415,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae74e261cbe2340485c2c\",\"messageId\":\"6acae74e261cbe2340485c2e\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ity, then generate PDF.\\n\\nAvailable\"}}"
-      },
-      {
-        "ms": 2453,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae74e261cbe2340485c2c\",\"messageId\":\"6acae74e261cbe2340485c2e\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" plugins: perplexity (manually\"}}"
-      },
-      {
-        "ms": 2472,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae74e261cbe2340485c2c\",\"messageId\":\"6acae74e261cbe2340485c2e\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" selected), and presumably a file\"}}"
-      },
-      {
-        "ms": 2481,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae74e261cbe2340485c2c\",\"messageId\":\"6acae74e261cbe2340485c2e\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"-generation plugin and execute\"}}"
-      }
-    ]
-  },
-  {
-    "at": "2026-10-11T01:34:07.401Z",
-    "threadId": "31402041-ff5e-40c8-91f4-6bbca42d70bd",
-    "runId": "632d2a34-7438-4d0d-bf09-4e8f9bea14bf",
-    "endpointId": "predefined-deepseek-flash",
-    "endpointLabel": "DeepSeek Flash v4.1",
-    "reasoningMode": "medium",
-    "responseMode": "stream",
-    "pluginIds": [
-      "plugin-1722260873"
-    ],
-    "requestedPluginIds": [
-      "plugin-1722260873"
-    ],
-    "droppedPluginIds": [],
-    "sessionCreate": {
-      "url": "https://api.on-demand.io/chat/v1/sessions",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
-      },
-      "body": {
-        "externalUserId": "INV-001",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "contextMetadata": [
-          {
-            "key": "company:apptronik",
-            "valueChars": 907
-          },
-          {
-            "key": "company:fervo-energy",
-            "valueChars": 1022
-          },
-          {
-            "key": "company:flutterwave",
-            "valueChars": 1042
-          },
-          {
-            "key": "company:perplexity-ai",
-            "valueChars": 761
-          },
-          {
-            "key": "company:writer",
-            "valueChars": 710
-          }
-        ]
-      },
-      "response": {
-        "status": 201,
-        "id": "6acae78ff7979c7d562b020e",
-        "message": "Chat session created successfully",
-        "elapsedMs": 162
-      }
-    },
-    "sessionId": "6acae78ff7979c7d562b020e",
-    "sessionCreated": true,
-    "query": {
-      "url": "https://api.on-demand.io/chat/v1/sessions/6acae78ff7979c7d562b020e/query",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
-        "accept": "text/event-stream"
-      },
-      "body": {
-        "query": "<systemContext+attachments 3688 chars> Write a short portfolio report on Fervo Energy's latest news as a PDF.",
-        "endpointId": "predefined-deepseek-flash",
-        "responseMode": "stream",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "reasoningMode": "medium"
-      },
-      "attachments": []
-    },
-    "queryResponse": {
-      "status": 200,
-      "contentType": "text/event-stream; charset=utf-8",
-      "elapsedMs": 695
-    },
-    "timings": {
-      "firstUpstreamFrameMs": 2034,
-      "firstTokenMs": 26825,
-      "totalMs": 35085,
-      "upstreamFrames": 518,
-      "answerChars": 5023,
-      "sources": 9,
-      "pluginError": null,
-      "abortReason": null
-    },
-    "firstUpstreamEvents": [
-      {
-        "ms": 2034,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae78ff7979c7d562b020e\",\"messageId\":\"6acae790f7979c7d562b020f\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants a short portfolio\"}}"
-      },
-      {
-        "ms": 2040,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae78ff7979c7d562b020e\",\"messageId\":\"6acae790f7979c7d562b020f\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" report on Fervo Energy's latest\"}}"
-      },
-      {
-        "ms": 2049,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae78ff7979c7d562b020e\",\"messageId\":\"6acae790f7979c7d562b020f\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news as a PDF. Per instructions\"}}"
-      },
-      {
-        "ms": 2097,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae78ff7979c7d562b020e\",\"messageId\":\"6acae790f7979c7d562b020f\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\", external facts (recent announcements\"}}"
-      },
-      {
-        "ms": 2131,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae78ff7979c7d562b020e\",\"messageId\":\"6acae790f7979c7d562b020f\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\", funding rounds, short reports\"}}"
-      },
-      {
-        "ms": 2156,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae78ff7979c7d562b020e\",\"messageId\":\"6acae790f7979c7d562b020f\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\", podcasts) — should use Perplex\"}}"
-      },
-      {
-        "ms": 2183,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae78ff7979c7d562b020e\",\"messageId\":\"6acae790f7979c7d562b020f\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ity web search with citations.\"}}"
-      },
-      {
-        "ms": 2225,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae78ff7979c7d562b020e\",\"messageId\":\"6acae790f7979c7d562b020f\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" Then generate PDF.\\n\\nSteps:\\n1.\"}}"
-      },
-      {
-        "ms": 2263,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae78ff7979c7d562b020e\",\"messageId\":\"6acae790f7979c7d562b020f\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" Gather Fervo Energy latest news\"}}"
-      },
-      {
-        "ms": 2314,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae78ff7979c7d562b020e\",\"messageId\":\"6acae790f7979c7d562b020f\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" via web search — plugin: perplex\"}}"
-      }
-    ]
-  },
-  {
-    "at": "2026-10-11T01:35:16.307Z",
-    "threadId": "09ceeaa9-18d4-4e23-9bcb-1ba2d8df99e5",
-    "runId": "c1ef79d5-6fec-4019-8b8b-e33448e19cd8",
-    "endpointId": "predefined-deepseek-flash",
-    "endpointLabel": "DeepSeek Flash v4.1",
-    "reasoningMode": "medium",
-    "responseMode": "stream",
-    "pluginIds": [
-      "plugin-1722260873"
-    ],
-    "requestedPluginIds": [
-      "plugin-1722260873"
-    ],
-    "droppedPluginIds": [],
-    "sessionCreate": {
-      "url": "https://api.on-demand.io/chat/v1/sessions",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
-      },
-      "body": {
-        "externalUserId": "INV-001",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "contextMetadata": [
-          {
-            "key": "company:apptronik",
-            "valueChars": 907
-          },
-          {
-            "key": "company:fervo-energy",
-            "valueChars": 1022
-          },
-          {
-            "key": "company:flutterwave",
-            "valueChars": 1042
-          },
-          {
-            "key": "company:perplexity-ai",
-            "valueChars": 761
-          },
-          {
-            "key": "company:writer",
-            "valueChars": 710
-          }
-        ]
-      },
-      "response": {
-        "status": 201,
-        "id": "6acae7d495268adc215e1b13",
-        "message": "Chat session created successfully",
-        "elapsedMs": 282
-      }
-    },
-    "sessionId": "6acae7d495268adc215e1b13",
-    "sessionCreated": true,
-    "query": {
-      "url": "https://api.on-demand.io/chat/v1/sessions/6acae7d495268adc215e1b13/query",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
-        "accept": "text/event-stream"
-      },
-      "body": {
-        "query": "<systemContext+attachments 3688 chars> Write a short portfolio report on Fervo Energy's latest news as a PDF.",
-        "endpointId": "predefined-deepseek-flash",
-        "responseMode": "stream",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "reasoningMode": "medium"
-      },
-      "attachments": []
-    },
-    "queryResponse": {
-      "status": 200,
-      "contentType": "text/event-stream; charset=utf-8",
-      "elapsedMs": 792
-    },
-    "timings": {
-      "firstUpstreamFrameMs": 2335,
-      "firstTokenMs": 26542,
-      "totalMs": 33325,
-      "upstreamFrames": 457,
-      "answerChars": 3712,
-      "sources": 10,
-      "pluginError": null,
-      "abortReason": null
-    },
-    "firstUpstreamEvents": [
-      {
-        "ms": 2335,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae7d495268adc215e1b13\",\"messageId\":\"6acae7d595268adc215e1b14\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"Let me analyze this request. The\"}}"
-      },
-      {
-        "ms": 2347,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae7d495268adc215e1b13\",\"messageId\":\"6acae7d595268adc215e1b14\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" user wants a short portfolio report\"}}"
-      },
-      {
-        "ms": 2361,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae7d495268adc215e1b13\",\"messageId\":\"6acae7d595268adc215e1b14\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" on Fervo Energy's latest news\"}}"
-      },
-      {
-        "ms": 2389,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae7d495268adc215e1b13\",\"messageId\":\"6acae7d595268adc215e1b14\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" as a PDF.\\n\\nKey point: The question\"}}"
-      },
-      {
-        "ms": 2418,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae7d495268adc215e1b13\",\"messageId\":\"6acae7d595268adc215e1b14\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" mentions \\\"latest news\\\" which involves\"}}"
-      },
-      {
-        "ms": 2443,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae7d495268adc215e1b13\",\"messageId\":\"6acae7d595268adc215e1b14\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" external facts and recent announcements\"}}"
-      },
-      {
-        "ms": 2467,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae7d495268adc215e1b13\",\"messageId\":\"6acae7d595268adc215e1b14\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" — so I should use Perplexity web\"}}"
-      },
-      {
-        "ms": 2484,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae7d495268adc215e1b13\",\"messageId\":\"6acae7d595268adc215e1b14\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" search. Also, there's portfolio\"}}"
-      },
-      {
-        "ms": 2513,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae7d495268adc215e1b13\",\"messageId\":\"6acae7d595268adc215e1b14\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" data provided.\\n\\nLet me think about\"}}"
-      },
-      {
-        "ms": 2553,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae7d495268adc215e1b13\",\"messageId\":\"6acae7d595268adc215e1b14\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" what's needed:\\n1. Get latest news\"}}"
-      }
-    ]
-  },
-  {
-    "at": "2026-10-11T01:36:21.280Z",
-    "threadId": "464a73b7-5bb3-4f1b-a93e-a69404920282",
-    "runId": "12149e20-32e8-457e-bbfe-3873b048690e",
-    "endpointId": "predefined-deepseek-flash",
-    "endpointLabel": "DeepSeek Flash v4.1",
-    "reasoningMode": "medium",
-    "responseMode": "stream",
-    "pluginIds": [
-      "plugin-1722260873"
-    ],
-    "requestedPluginIds": [
-      "plugin-1722260873"
-    ],
-    "droppedPluginIds": [],
-    "sessionCreate": {
-      "url": "https://api.on-demand.io/chat/v1/sessions",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
-      },
-      "body": {
-        "externalUserId": "INV-001",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "contextMetadata": [
-          {
-            "key": "company:apptronik",
-            "valueChars": 907
-          },
-          {
-            "key": "company:fervo-energy",
-            "valueChars": 1022
-          },
-          {
-            "key": "company:flutterwave",
-            "valueChars": 1042
-          },
-          {
-            "key": "company:perplexity-ai",
-            "valueChars": 761
-          },
-          {
-            "key": "company:writer",
-            "valueChars": 710
-          }
-        ]
-      },
-      "response": {
-        "status": 201,
-        "id": "6acae81595268adc215e1b17",
-        "message": "Chat session created successfully",
-        "elapsedMs": 314
-      }
-    },
-    "sessionId": "6acae81595268adc215e1b17",
-    "sessionCreated": true,
-    "query": {
-      "url": "https://api.on-demand.io/chat/v1/sessions/6acae81595268adc215e1b17/query",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
-        "accept": "text/event-stream"
-      },
-      "body": {
-        "query": "<systemContext+attachments 3688 chars> Write a short portfolio report on Fervo Energy's latest news as a PDF.",
-        "endpointId": "predefined-deepseek-flash",
-        "responseMode": "stream",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "reasoningMode": "medium"
-      },
-      "attachments": []
-    },
-    "queryResponse": {
-      "status": 200,
-      "contentType": "text/event-stream; charset=utf-8",
-      "elapsedMs": 901
-    },
-    "timings": {
-      "firstUpstreamFrameMs": 2197,
-      "firstTokenMs": 23936,
-      "totalMs": 30316,
-      "upstreamFrames": 422,
-      "answerChars": 3472,
-      "sources": 10,
-      "pluginError": null,
-      "abortReason": null
-    },
-    "firstUpstreamEvents": [
-      {
-        "ms": 2197,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae81595268adc215e1b17\",\"messageId\":\"6acae816261cbe2340485c3e\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants a short portfolio\"}}"
-      },
-      {
-        "ms": 2228,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae81595268adc215e1b17\",\"messageId\":\"6acae816261cbe2340485c3e\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" report on Fervo Energy's latest\"}}"
-      },
-      {
-        "ms": 2250,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae81595268adc215e1b17\",\"messageId\":\"6acae816261cbe2340485c3e\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news as a PDF. Need to use Per\"}}"
-      },
-      {
-        "ms": 2278,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae81595268adc215e1b17\",\"messageId\":\"6acae816261cbe2340485c3e\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"plexity for external facts, and\"}}"
-      },
-      {
-        "ms": 2306,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae81595268adc215e1b17\",\"messageId\":\"6acae816261cbe2340485c3e\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" generate a PDF. Available plugins\"}}"
-      },
-      {
-        "ms": 2376,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae81595268adc215e1b17\",\"messageId\":\"6acae816261cbe2340485c3e\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\": perplexity, executePrompt/On\"}}"
-      },
-      {
-        "ms": 2399,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae81595268adc215e1b17\",\"messageId\":\"6acae816261cbe2340485c3e\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"Demand Agent (mentioned in rules\"}}"
-      },
-      {
-        "ms": 2429,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae81595268adc215e1b17\",\"messageId\":\"6acae816261cbe2340485c3e\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"), searchFileDirectory... The available\"}}"
-      },
-      {
-        "ms": 2481,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae81595268adc215e1b17\",\"messageId\":\"6acae816261cbe2340485c3e\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" plugins list is empty in the prompt\"}}"
-      },
-      {
-        "ms": 2495,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae81595268adc215e1b17\",\"messageId\":\"6acae816261cbe2340485c3e\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" except preference context mentions\"}}"
-      }
-    ]
-  },
-  {
-    "at": "2026-10-11T01:37:14.470Z",
-    "threadId": "af07db5d-91db-4921-861a-3419d43172cc",
-    "runId": "c2b23e9c-d2ac-4c0e-903a-b04fd9108fe0",
-    "endpointId": "predefined-deepseek-flash",
-    "endpointLabel": "DeepSeek Flash v4.1",
-    "reasoningMode": "medium",
-    "responseMode": "stream",
-    "pluginIds": [
-      "plugin-1722260873"
-    ],
-    "requestedPluginIds": [
-      "plugin-1722260873"
-    ],
-    "droppedPluginIds": [],
-    "sessionCreate": {
-      "url": "https://api.on-demand.io/chat/v1/sessions",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
-      },
-      "body": {
-        "externalUserId": "INV-001",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "contextMetadata": [
-          {
-            "key": "company:apptronik",
-            "valueChars": 907
-          },
-          {
-            "key": "company:fervo-energy",
-            "valueChars": 1022
-          },
-          {
-            "key": "company:flutterwave",
-            "valueChars": 1042
-          },
-          {
-            "key": "company:perplexity-ai",
-            "valueChars": 761
-          },
-          {
-            "key": "company:writer",
-            "valueChars": 710
-          }
-        ]
-      },
-      "response": {
-        "status": 201,
-        "id": "6acae84a95268adc215e1b1d",
-        "message": "Chat session created successfully",
-        "elapsedMs": 138
-      }
-    },
-    "sessionId": "6acae84a95268adc215e1b1d",
-    "sessionCreated": true,
-    "query": {
-      "url": "https://api.on-demand.io/chat/v1/sessions/6acae84a95268adc215e1b1d/query",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
-        "accept": "text/event-stream"
-      },
-      "body": {
-        "query": "<systemContext+attachments 3688 chars> Write a short portfolio report on Fervo Energy's latest news as a PDF.",
-        "endpointId": "predefined-deepseek-flash",
-        "responseMode": "stream",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "reasoningMode": "medium"
-      },
-      "attachments": []
-    },
-    "queryResponse": {
-      "status": 200,
-      "contentType": "text/event-stream; charset=utf-8",
-      "elapsedMs": 605
-    },
-    "timings": {
-      "firstUpstreamFrameMs": 1750,
-      "firstTokenMs": 24671,
-      "totalMs": 32234,
-      "upstreamFrames": 483,
-      "answerChars": 5192,
-      "sources": 6,
-      "pluginError": null,
-      "abortReason": null
-    },
-    "firstUpstreamEvents": [
-      {
-        "ms": 1750,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae84a95268adc215e1b1d\",\"messageId\":\"6acae84b95268adc215e1b1e\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants a short portfolio\"}}"
-      },
-      {
-        "ms": 1776,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae84a95268adc215e1b1d\",\"messageId\":\"6acae84b95268adc215e1b1e\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" report on Fervo Energy's latest\"}}"
-      },
-      {
-        "ms": 1789,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae84a95268adc215e1b1d\",\"messageId\":\"6acae84b95268adc215e1b1e\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news as a PDF. The portfolio data\"}}"
-      },
-      {
-        "ms": 1829,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae84a95268adc215e1b1d\",\"messageId\":\"6acae84b95268adc215e1b1e\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" is provided in-context. But the\"}}"
-      },
-      {
-        "ms": 1843,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae84a95268adc215e1b1d\",\"messageId\":\"6acae84b95268adc215e1b1e\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" instructions say external facts\"}}"
-      },
-      {
-        "ms": 1875,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae84a95268adc215e1b1d\",\"messageId\":\"6acae84b95268adc215e1b1e\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" should use Perplexity web search\"}}"
-      },
-      {
-        "ms": 1910,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae84a95268adc215e1b1d\",\"messageId\":\"6acae84b95268adc215e1b1e\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\". The task: write a short portfolio\"}}"
-      },
-      {
-        "ms": 1933,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae84a95268adc215e1b1d\",\"messageId\":\"6acae84b95268adc215e1b1e\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" report on Fervo Energy's latest\"}}"
-      },
-      {
-        "ms": 1949,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae84a95268adc215e1b1d\",\"messageId\":\"6acae84b95268adc215e1b1e\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news as a PDF.\\n\\nSo plan: \\nStep\"}}"
-      },
-      {
-        "ms": 1978,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae84a95268adc215e1b1d\",\"messageId\":\"6acae84b95268adc215e1b1e\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" 1: Use Perplexity to gather fresh\"}}"
-      }
-    ]
-  },
-  {
-    "at": "2026-10-11T01:40:30.557Z",
-    "threadId": "97a8e318-a59a-40e1-b17e-08704e907dbb",
-    "runId": "0ede1ade-e20c-49e1-aff6-fa12dd19acf2",
-    "endpointId": "predefined-deepseek-flash",
-    "endpointLabel": "DeepSeek Flash v4.1",
-    "reasoningMode": "medium",
-    "responseMode": "stream",
-    "pluginIds": [
-      "plugin-1722260873"
-    ],
-    "requestedPluginIds": [
-      "plugin-1722260873"
-    ],
-    "droppedPluginIds": [],
-    "sessionCreate": {
-      "url": "https://api.on-demand.io/chat/v1/sessions",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
-      },
-      "body": {
-        "externalUserId": "INV-001",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "contextMetadata": [
-          {
-            "key": "company:apptronik",
-            "valueChars": 907
-          },
-          {
-            "key": "company:fervo-energy",
-            "valueChars": 1022
-          },
-          {
-            "key": "company:flutterwave",
-            "valueChars": 1042
-          },
-          {
-            "key": "company:perplexity-ai",
-            "valueChars": 761
-          },
-          {
-            "key": "company:writer",
-            "valueChars": 710
-          }
-        ]
-      },
-      "response": {
-        "status": 201,
-        "id": "6acae90e95268adc215e1b22",
-        "message": "Chat session created successfully",
-        "elapsedMs": 173
-      }
-    },
-    "sessionId": "6acae90e95268adc215e1b22",
-    "sessionCreated": true,
-    "query": {
-      "url": "https://api.on-demand.io/chat/v1/sessions/6acae90e95268adc215e1b22/query",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
-        "accept": "text/event-stream"
-      },
-      "body": {
-        "query": "<systemContext+attachments 3688 chars> Write a short portfolio report on Fervo Energy's latest news as a PDF.",
-        "endpointId": "predefined-deepseek-flash",
-        "responseMode": "stream",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "reasoningMode": "medium"
-      },
-      "attachments": []
-    },
-    "queryResponse": {
-      "status": 200,
-      "contentType": "text/event-stream; charset=utf-8",
-      "elapsedMs": 683
-    },
-    "timings": {
-      "firstUpstreamFrameMs": 2378,
-      "firstTokenMs": 25446,
-      "totalMs": 32171,
-      "upstreamFrames": 491,
-      "answerChars": 4007,
-      "sources": 8,
-      "pluginError": null,
-      "abortReason": null
-    },
-    "firstUpstreamEvents": [
-      {
-        "ms": 2378,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae90e95268adc215e1b22\",\"messageId\":\"6acae90ff7979c7d562b0233\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants a short portfolio\"}}"
-      },
-      {
-        "ms": 2403,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae90e95268adc215e1b22\",\"messageId\":\"6acae90ff7979c7d562b0233\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" report on Fervo Energy's latest\"}}"
-      },
-      {
-        "ms": 2418,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae90e95268adc215e1b22\",\"messageId\":\"6acae90ff7979c7d562b0233\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news as a PDF. The instruction\"}}"
-      },
-      {
-        "ms": 2471,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae90e95268adc215e1b22\",\"messageId\":\"6acae90ff7979c7d562b0233\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" says for external facts, always\"}}"
-      },
-      {
-        "ms": 2484,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae90e95268adc215e1b22\",\"messageId\":\"6acae90ff7979c7d562b0233\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" run Perplexity web search and\"}}"
-      },
-      {
-        "ms": 2512,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae90e95268adc215e1b22\",\"messageId\":\"6acae90ff7979c7d562b0233\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" answer from fresh sources with\"}}"
-      },
-      {
-        "ms": 2530,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae90e95268adc215e1b22\",\"messageId\":\"6acae90ff7979c7d562b0233\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" citations. The manually selected\"}}"
-      },
-      {
-        "ms": 2536,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae90e95268adc215e1b22\",\"messageId\":\"6acae90ff7979c7d562b0233\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" plugin is perplexity.\\n\\nAvailable\"}}"
-      },
-      {
-        "ms": 2567,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae90e95268adc215e1b22\",\"messageId\":\"6acae90ff7979c7d562b0233\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" plugins: perplexity is listed\"}}"
-      },
-      {
-        "ms": 2579,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae90e95268adc215e1b22\",\"messageId\":\"6acae90ff7979c7d562b0233\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" as manually selected. But what\"}}"
-      }
-    ]
-  },
-  {
-    "at": "2026-10-11T01:41:28.951Z",
-    "threadId": "a55c845c-a3ec-4418-b23f-99d739880ffe",
-    "runId": "b2f2203f-6678-4c5a-b18b-6fb3415a1787",
-    "endpointId": "predefined-deepseek-flash",
-    "endpointLabel": "DeepSeek Flash v4.1",
-    "reasoningMode": "medium",
-    "responseMode": "stream",
-    "pluginIds": [
-      "plugin-1722260873"
-    ],
-    "requestedPluginIds": [
-      "plugin-1722260873"
-    ],
-    "droppedPluginIds": [],
-    "sessionCreate": {
-      "url": "https://api.on-demand.io/chat/v1/sessions",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
-      },
-      "body": {
-        "externalUserId": "INV-001",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "contextMetadata": [
-          {
-            "key": "company:apptronik",
-            "valueChars": 907
-          },
-          {
-            "key": "company:fervo-energy",
-            "valueChars": 1022
-          },
-          {
-            "key": "company:flutterwave",
-            "valueChars": 1042
-          },
-          {
-            "key": "company:perplexity-ai",
-            "valueChars": 761
-          },
-          {
-            "key": "company:writer",
-            "valueChars": 710
-          }
-        ]
-      },
-      "response": {
-        "status": 201,
-        "id": "6acae949f7979c7d562b023c",
-        "message": "Chat session created successfully",
-        "elapsedMs": 178
-      }
-    },
-    "sessionId": "6acae949f7979c7d562b023c",
-    "sessionCreated": true,
-    "query": {
-      "url": "https://api.on-demand.io/chat/v1/sessions/6acae949f7979c7d562b023c/query",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
-        "accept": "text/event-stream"
-      },
-      "body": {
-        "query": "<systemContext+attachments 3688 chars> Write a short portfolio report on Fervo Energy's latest news as a PDF.",
-        "endpointId": "predefined-deepseek-flash",
-        "responseMode": "stream",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "reasoningMode": "medium"
-      },
-      "attachments": []
-    },
-    "queryResponse": {
-      "status": 200,
-      "contentType": "text/event-stream; charset=utf-8",
-      "elapsedMs": 662
-    },
-    "timings": {
-      "firstUpstreamFrameMs": 1832,
-      "firstTokenMs": 23860,
-      "totalMs": 33082,
-      "upstreamFrames": 477,
-      "answerChars": 5755,
-      "sources": 10,
-      "pluginError": null,
-      "abortReason": null
-    },
-    "firstUpstreamEvents": [
-      {
-        "ms": 1832,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae949f7979c7d562b023c\",\"messageId\":\"6acae949f7979c7d562b023e\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants a short portfolio\"}}"
-      },
-      {
-        "ms": 1857,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae949f7979c7d562b023c\",\"messageId\":\"6acae949f7979c7d562b023e\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" report on Fervo Energy's latest\"}}"
-      },
-      {
-        "ms": 1871,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae949f7979c7d562b023c\",\"messageId\":\"6acae949f7979c7d562b023e\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news as a PDF. This involves external\"}}"
-      },
-      {
-        "ms": 1926,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae949f7979c7d562b023c\",\"messageId\":\"6acae949f7979c7d562b023e\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" facts (latest news), so Perplex\"}}"
-      },
-      {
-        "ms": 1939,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae949f7979c7d562b023c\",\"messageId\":\"6acae949f7979c7d562b023e\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ity web search is needed. Also\"}}"
-      },
-      {
-        "ms": 1979,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae949f7979c7d562b023c\",\"messageId\":\"6acae949f7979c7d562b023e\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" generating a PDF.\\n\\nAvailable plugins\"}}"
-      },
-      {
-        "ms": 2035,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae949f7979c7d562b023c\",\"messageId\":\"6acae949f7979c7d562b023e\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\": the prompt lists \\\"Available plugins\"}}"
-      },
-      {
-        "ms": 2075,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae949f7979c7d562b023c\",\"messageId\":\"6acae949f7979c7d562b023e\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\":\\\" but it's empty in the text...\"}}"
-      },
-      {
-        "ms": 2101,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae949f7979c7d562b023c\",\"messageId\":\"6acae949f7979c7d562b023e\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" Actually the plugin list isn't\"}}"
-      },
-      {
-        "ms": 2176,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acae949f7979c7d562b023c\",\"messageId\":\"6acae949f7979c7d562b023e\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" shown explicitly. But from preferences\"}}"
-      }
-    ]
-  },
-  {
-    "at": "2026-10-11T01:44:46.057Z",
-    "threadId": "8e52dba6-2154-47cf-8f2d-6023d107549e",
-    "runId": "d12921a0-61b5-44d0-afa5-339e249f503d",
-    "endpointId": "predefined-deepseek-flash",
-    "endpointLabel": "DeepSeek Flash v4.1",
-    "reasoningMode": "medium",
-    "responseMode": "stream",
-    "pluginIds": [
-      "plugin-1722260873"
-    ],
-    "requestedPluginIds": [
-      "plugin-1722260873"
-    ],
-    "droppedPluginIds": [],
-    "sessionCreate": {
-      "url": "https://api.on-demand.io/chat/v1/sessions",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
-      },
-      "body": {
-        "externalUserId": "INV-001",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "contextMetadata": [
-          {
-            "key": "company:apptronik",
-            "valueChars": 907
-          },
-          {
-            "key": "company:fervo-energy",
-            "valueChars": 1022
-          },
-          {
-            "key": "company:flutterwave",
-            "valueChars": 1042
-          },
-          {
-            "key": "company:perplexity-ai",
-            "valueChars": 761
-          },
-          {
-            "key": "company:writer",
-            "valueChars": 710
-          }
-        ]
-      },
-      "response": {
-        "status": 201,
-        "id": "6acaea0ef7979c7d562b0248",
-        "message": "Chat session created successfully",
-        "elapsedMs": 470
-      }
-    },
-    "sessionId": "6acaea0ef7979c7d562b0248",
-    "sessionCreated": true,
-    "query": {
-      "url": "https://api.on-demand.io/chat/v1/sessions/6acaea0ef7979c7d562b0248/query",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
-        "accept": "text/event-stream"
-      },
-      "body": {
-        "query": "<systemContext+attachments 3688 chars> Write a short portfolio report on Fervo Energy's latest news as a PDF.",
-        "endpointId": "predefined-deepseek-flash",
-        "responseMode": "stream",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "reasoningMode": "medium"
-      },
-      "attachments": []
-    },
-    "queryResponse": {
-      "status": 200,
-      "contentType": "text/event-stream; charset=utf-8",
-      "elapsedMs": 1082
-    },
-    "timings": {
-      "firstUpstreamFrameMs": 2331,
-      "firstTokenMs": 28260,
-      "totalMs": 37267,
-      "upstreamFrames": 451,
-      "answerChars": 6252,
-      "sources": 10,
-      "pluginError": null,
-      "abortReason": null
-    },
-    "firstUpstreamEvents": [
-      {
-        "ms": 2331,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea0ef7979c7d562b0248\",\"messageId\":\"6acaea0f261cbe2340485c46\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants a short portfolio\"}}"
-      },
-      {
-        "ms": 2341,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea0ef7979c7d562b0248\",\"messageId\":\"6acaea0f261cbe2340485c46\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" report on Fervo Energy's latest\"}}"
-      },
-      {
-        "ms": 2343,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea0ef7979c7d562b0248\",\"messageId\":\"6acaea0f261cbe2340485c46\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news as a PDF. This involves:\"}}"
-      },
-      {
-        "ms": 2355,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea0ef7979c7d562b0248\",\"messageId\":\"6acaea0f261cbe2340485c46\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" portfolio-internal data (sent\"}}"
-      },
-      {
-        "ms": 2382,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea0ef7979c7d562b0248\",\"messageId\":\"6acaea0f261cbe2340485c46\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"iment, etc.) plus external facts\"}}"
-      },
-      {
-        "ms": 2419,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea0ef7979c7d562b0248\",\"messageId\":\"6acaea0f261cbe2340485c46\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" from Perplexity web search. Then\"}}"
-      },
-      {
-        "ms": 2452,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea0ef7979c7d562b0248\",\"messageId\":\"6acaea0f261cbe2340485c46\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" generate PDF.\\n\\nPlugins available\"}}"
-      },
-      {
-        "ms": 2478,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea0ef7979c7d562b0248\",\"messageId\":\"6acaea0f261cbe2340485c46\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\": perplexity (manually selected\"}}"
-      },
-      {
-        "ms": 2546,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea0ef7979c7d562b0248\",\"messageId\":\"6acaea0f261cbe2340485c46\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"), executePrompt/OnDemand Agent\"}}"
-      },
-      {
-        "ms": 2628,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea0ef7979c7d562b0248\",\"messageId\":\"6acaea0f261cbe2340485c46\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\", searchFileDirectory, SendGrid\"}}"
-      }
-    ]
-  },
-  {
-    "at": "2026-10-11T01:45:36.654Z",
-    "threadId": "777d20f7-2e57-4d84-81d3-b5771ead2f43",
-    "runId": "a4424386-4b05-421f-8f3b-ec5c96b009de",
-    "endpointId": "predefined-deepseek-flash",
-    "endpointLabel": "DeepSeek Flash v4.1",
-    "reasoningMode": "medium",
-    "responseMode": "stream",
-    "pluginIds": [
-      "plugin-1722260873"
-    ],
-    "requestedPluginIds": [
-      "plugin-1722260873"
-    ],
-    "droppedPluginIds": [],
-    "sessionCreate": {
-      "url": "https://api.on-demand.io/chat/v1/sessions",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
-      },
-      "body": {
-        "externalUserId": "INV-001",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "contextMetadata": [
-          {
-            "key": "company:apptronik",
-            "valueChars": 907
-          },
-          {
-            "key": "company:fervo-energy",
-            "valueChars": 1022
-          },
-          {
-            "key": "company:flutterwave",
-            "valueChars": 1042
-          },
-          {
-            "key": "company:perplexity-ai",
-            "valueChars": 761
-          },
-          {
-            "key": "company:writer",
-            "valueChars": 710
-          }
-        ]
-      },
-      "response": {
-        "status": 201,
-        "id": "6acaea4095268adc215e1b31",
-        "message": "Chat session created successfully",
-        "elapsedMs": 276
-      }
-    },
-    "sessionId": "6acaea4095268adc215e1b31",
-    "sessionCreated": true,
-    "query": {
-      "url": "https://api.on-demand.io/chat/v1/sessions/6acaea4095268adc215e1b31/query",
-      "headers": {
-        "apikey": "<redacted>",
-        "content-type": "application/json",
-        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
-        "accept": "text/event-stream"
-      },
-      "body": {
-        "query": "<systemContext+attachments 3688 chars> Write a short portfolio report on Fervo Energy's latest news as a PDF.",
-        "endpointId": "predefined-deepseek-flash",
-        "responseMode": "stream",
-        "pluginIds": [
-          "plugin-1722260873"
-        ],
-        "reasoningMode": "medium"
-      },
-      "attachments": []
-    },
-    "queryResponse": {
-      "status": 200,
-      "contentType": "text/event-stream; charset=utf-8",
-      "elapsedMs": 756
-    },
-    "timings": {
-      "firstUpstreamFrameMs": 1775,
-      "firstTokenMs": 23154,
-      "totalMs": 30096,
-      "upstreamFrames": 436,
-      "answerChars": 4328,
-      "sources": 10,
-      "pluginError": null,
-      "abortReason": null
-    },
-    "firstUpstreamEvents": [
-      {
-        "ms": 1775,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea4095268adc215e1b31\",\"messageId\":\"6acaea4195268adc215e1b33\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user wants a short portfolio\"}}"
-      },
-      {
-        "ms": 1797,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea4095268adc215e1b31\",\"messageId\":\"6acaea4195268adc215e1b33\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" report on Fervo Energy's latest\"}}"
-      },
-      {
-        "ms": 1825,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea4095268adc215e1b31\",\"messageId\":\"6acaea4195268adc215e1b33\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news as a PDF. I need to gather\"}}"
-      },
-      {
-        "ms": 1864,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea4095268adc215e1b31\",\"messageId\":\"6acaea4195268adc215e1b33\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" fresh external news via Perplex\"}}"
-      },
-      {
-        "ms": 1892,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea4095268adc215e1b31\",\"messageId\":\"6acaea4195268adc215e1b33\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ity, then generate a PDF.\\n\\nSteps\"}}"
-      },
-      {
-        "ms": 1939,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea4095268adc215e1b31\",\"messageId\":\"6acaea4195268adc215e1b33\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\":\\n1. Search Fervo Energy latest\"}}"
-      },
-      {
-        "ms": 1950,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea4095268adc215e1b31\",\"messageId\":\"6acaea4195268adc215e1b33\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news using perplexity (manual\"}}"
-      },
-      {
-        "ms": 1975,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea4095268adc215e1b31\",\"messageId\":\"6acaea4195268adc215e1b33\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" plugin) — external facts.\\n2. Generate\"}}"
-      },
-      {
-        "ms": 2000,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea4095268adc215e1b31\",\"messageId\":\"6acaea4195268adc215e1b33\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" the PDF report — which plugin\"}}"
-      },
-      {
-        "ms": 2029,
-        "raw": "event:thinking\ndata:{\"sessionId\":\"6acaea4095268adc215e1b31\",\"messageId\":\"6acaea4195268adc215e1b33\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"? Available plugins list is not\"}}"
-      }
-    ]
-  },
-  {
     "at": "2026-10-11T01:50:32.303Z",
     "threadId": "65801f4d-b08d-4431-b47a-7b25494a6c8b",
     "runId": "be0ea919-ebbd-4e61-a9a9-54b77a422194",
@@ -4519,5 +2828,1215 @@
       "abortReason": null
     },
     "firstUpstreamEvents": []
+  },
+  {
+    "at": "2026-10-11T18:41:15.014Z",
+    "threadId": "b678fecf-a930-49b2-ad65-e72014b3c15a",
+    "runId": "8eba43aa-da7f-4e48-88c7-f58a30331da3",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "droppedPluginIds": [],
+    "error": {
+      "code": "no_key",
+      "message": "No OnDemand key configured: set ONDEMAND_API_KEY on the server (or send x-ondemand-key)."
+    },
+    "timings": {
+      "firstUpstreamFrameMs": null,
+      "firstTokenMs": null,
+      "toolsMs": null,
+      "answerMs": null,
+      "totalMs": 1,
+      "upstreamFrames": 0,
+      "answerChars": 0,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": []
+  },
+  {
+    "at": "2026-10-11T18:41:59.820Z",
+    "threadId": "b678fecf-a930-49b2-ad65-e72014b3c15a",
+    "runId": "a82cfff5-aad8-4dc4-87de-a2df7b8f73c0",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "droppedPluginIds": [],
+    "error": {
+      "code": "no_key",
+      "message": "No OnDemand key configured: set ONDEMAND_API_KEY on the server (or send x-ondemand-key)."
+    },
+    "timings": {
+      "firstUpstreamFrameMs": null,
+      "firstTokenMs": null,
+      "toolsMs": null,
+      "answerMs": null,
+      "totalMs": 5,
+      "upstreamFrames": 0,
+      "answerChars": 0,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": []
+  },
+  {
+    "at": "2026-10-11T18:42:02.478Z",
+    "threadId": "b678fecf-a930-49b2-ad65-e72014b3c15a",
+    "runId": "a324f7e2-f6f9-498c-9b6c-32097e851945",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "droppedPluginIds": [],
+    "error": {
+      "code": "no_key",
+      "message": "No OnDemand key configured: set ONDEMAND_API_KEY on the server (or send x-ondemand-key)."
+    },
+    "timings": {
+      "firstUpstreamFrameMs": null,
+      "firstTokenMs": null,
+      "toolsMs": null,
+      "answerMs": null,
+      "totalMs": 1,
+      "upstreamFrames": 0,
+      "answerChars": 0,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": []
+  },
+  {
+    "at": "2026-10-11T18:42:09.541Z",
+    "threadId": "5072e0de-f769-44ec-9c2a-161611a60102",
+    "runId": "5cf11fd0-d595-46de-89ef-6f7f1dcfac4e",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "droppedPluginIds": [],
+    "error": {
+      "code": "no_key",
+      "message": "No OnDemand key configured: set ONDEMAND_API_KEY on the server (or send x-ondemand-key)."
+    },
+    "timings": {
+      "firstUpstreamFrameMs": null,
+      "firstTokenMs": null,
+      "toolsMs": null,
+      "answerMs": null,
+      "totalMs": 1,
+      "upstreamFrames": 0,
+      "answerChars": 0,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": []
+  },
+  {
+    "at": "2026-10-11T18:44:48.616Z",
+    "threadId": "5072e0de-f769-44ec-9c2a-161611a60102",
+    "runId": "8f15408c-7a9b-4018-99d4-c37a3bad0298",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "droppedPluginIds": [],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873",
+          "plugin-1791713636"
+        ],
+        "contextMetadata": [
+          {
+            "key": "company:perplexity-ai",
+            "valueChars": 581
+          },
+          {
+            "key": "company:apptronik",
+            "valueChars": 677
+          },
+          {
+            "key": "company:fervo-energy",
+            "valueChars": 732
+          },
+          {
+            "key": "company:flutterwave",
+            "valueChars": 744
+          },
+          {
+            "key": "company:writer",
+            "valueChars": 597
+          }
+        ]
+      },
+      "response": {
+        "status": 201,
+        "id": "6acbd92121ae4e9e6997bccd",
+        "message": "Chat session created successfully",
+        "elapsedMs": 1190
+      }
+    },
+    "sessionId": "6acbd92121ae4e9e6997bccd",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6acbd92121ae4e9e6997bccd/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext+attachments 435 chars> hi",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873",
+          "plugin-1791713636"
+        ],
+        "reasoningMode": "medium"
+      },
+      "attachments": []
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 3224
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 4140,
+      "firstTokenMs": 7723,
+      "toolsMs": 3582,
+      "answerMs": 3445,
+      "totalMs": 11168,
+      "upstreamFrames": 108,
+      "answerChars": 1446,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 4140,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd92321ae4e9e6997bcce\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"This is a greeting. No plugin needed\"}}"
+      },
+      {
+        "ms": 4174,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd92321ae4e9e6997bcce\",\"eventIndex\":2,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"{\\\"title\\\": \\\"I'm here and ready to\"}}"
+      },
+      {
+        "ms": 4232,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd92321ae4e9e6997bcce\",\"eventIndex\":3,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" help\\\\nJust greeting you back\\\",\"}}"
+      },
+      {
+        "ms": 4274,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd92321ae4e9e6997bcce\",\"eventIndex\":4,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" \\\"objective\\\": \\\"\\\", \\\"plan_required\"}}"
+      },
+      {
+        "ms": 4290,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd92321ae4e9e6997bcce\",\"eventIndex\":5,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"\\\": false, \\\"plan_skip_reason\\\": \\\"\"}}"
+      },
+      {
+        "ms": 4322,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd92321ae4e9e6997bcce\",\"eventIndex\":6,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"This is a simple greeting with\"}}"
+      },
+      {
+        "ms": 4364,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd92321ae4e9e6997bcce\",\"eventIndex\":7,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" no actionable task, so no plugin\"}}"
+      },
+      {
+        "ms": 4390,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd92321ae4e9e6997bcce\",\"eventIndex\":8,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" or agent execution is needed.\\\",\"}}"
+      },
+      {
+        "ms": 4407,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd92321ae4e9e6997bcce\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\".\"}}"
+      },
+      {
+        "ms": 4410,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd92321ae4e9e6997bcce\",\"eventIndex\":10,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" \\\"steps\\\": []}\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-11T18:45:08.830Z",
+    "threadId": "5072e0de-f769-44ec-9c2a-161611a60102",
+    "runId": "157bf785-809e-4b32-8384-584d2557fb1a",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "droppedPluginIds": [],
+    "sessionId": "6acbd92121ae4e9e6997bccd",
+    "sessionCreated": false,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6acbd92121ae4e9e6997bccd/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext+attachments 435 chars> hi",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873",
+          "plugin-1791713636"
+        ],
+        "reasoningMode": "medium"
+      },
+      "attachments": []
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 1643
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 2876,
+      "firstTokenMs": 4615,
+      "toolsMs": 1739,
+      "answerMs": 3202,
+      "totalMs": 7817,
+      "upstreamFrames": 73,
+      "answerChars": 1218,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 2876,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd93621ae4e9e6997bcd3\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user just said \\\"hi\\\". This is\"}}"
+      },
+      {
+        "ms": 2878,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd93621ae4e9e6997bcd3\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" a greeting. Per the rules, plan\"}}"
+      },
+      {
+        "ms": 2878,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd93621ae4e9e6997bcd3\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"_required should be false for greetings\"}}"
+      },
+      {
+        "ms": 2909,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd93621ae4e9e6997bcd3\",\"eventIndex\":4,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"{\\\"title\\\": \\\"I'm here and ready to\"}}"
+      },
+      {
+        "ms": 2951,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd93621ae4e9e6997bcd3\",\"eventIndex\":5,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" help whenever you are\\\", \\\"objective\"}}"
+      },
+      {
+        "ms": 2983,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd93621ae4e9e6997bcd3\",\"eventIndex\":6,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"\\\": \\\"\\\", \\\"plan_required\\\": false,\"}}"
+      },
+      {
+        "ms": 3010,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd93621ae4e9e6997bcd3\",\"eventIndex\":7,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" \\\"plan_skip_reason\\\": \\\"This is a\"}}"
+      },
+      {
+        "ms": 3025,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd93621ae4e9e6997bcd3\",\"eventIndex\":8,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" simple greeting with no actionable\"}}"
+      },
+      {
+        "ms": 3085,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd93621ae4e9e6997bcd3\",\"eventIndex\":9,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" task, so no plugin or agent execution\"}}"
+      },
+      {
+        "ms": 3089,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbd92121ae4e9e6997bccd\",\"messageId\":\"6acbd93621ae4e9e6997bcd3\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\". Output the skip schema.\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-11T19:07:49.397Z",
+    "transport": "/api/chat",
+    "threadId": "ea68a131-711a-4a66-8c98-ca99f8d684c7",
+    "runId": "a12fc8d4-7371-49d6-9cbf-859604066d9e",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "droppedPluginIds": [],
+    "sessionId": "6acbdccb20a8b245e6aab822",
+    "sessionCreated": false,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6acbdccb20a8b245e6aab822/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext+attachments 5448 chars> hii",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873",
+          "plugin-1791713636"
+        ],
+        "reasoningMode": "medium"
+      },
+      "attachments": []
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 1590
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 2612,
+      "firstTokenMs": 4558,
+      "toolsMs": 1944,
+      "answerMs": 2781,
+      "totalMs": 7339,
+      "upstreamFrames": 52,
+      "answerChars": 596,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 2612,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde8620a8b245e6aab832\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user just said \\\"hii\\\" — a greeting\"}}"
+      },
+      {
+        "ms": 2616,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde8620a8b245e6aab832\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\". No plugin needed. Output plan\"}}"
+      },
+      {
+        "ms": 2618,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde8620a8b245e6aab832\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"_required false.\\n\\nBut wait — there\"}}"
+      },
+      {
+        "ms": 2630,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde8620a8b245e6aab832\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"'s a big portfolio data context\"}}"
+      },
+      {
+        "ms": 2643,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde8620a8b245e6aab832\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\". However, the query is just \\\"\"}}"
+      },
+      {
+        "ms": 2710,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde8620a8b245e6aab832\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"hii\\\". No actionable task. So plan\"}}"
+      },
+      {
+        "ms": 2711,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde8620a8b245e6aab832\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"_required false.\\n\\nTitle in first\"}}"
+      },
+      {
+        "ms": 2745,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde8620a8b245e6aab832\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" person, two or three short lines\"}}"
+      },
+      {
+        "ms": 2785,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde8620a8b245e6aab832\",\"eventIndex\":9,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"{\\\"title\\\": \\\"I'm just saying hi back\"}}"
+      },
+      {
+        "ms": 2842,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde8620a8b245e6aab832\",\"eventIndex\":10,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\".\\\\nNo task or research needed here\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-11T19:08:00.739Z",
+    "transport": "/api/chat",
+    "threadId": "ea68a131-711a-4a66-8c98-ca99f8d684c7",
+    "runId": "46b2a350-b9e7-4caf-ab64-51526d3d3fab",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "droppedPluginIds": [],
+    "sessionId": "6acbdccb20a8b245e6aab822",
+    "sessionCreated": false,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6acbdccb20a8b245e6aab822/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext+attachments 435 chars> hig",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873",
+          "plugin-1791713636"
+        ],
+        "reasoningMode": "medium"
+      },
+      "attachments": []
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 1707
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 2627,
+      "firstTokenMs": 6189,
+      "toolsMs": 3561,
+      "answerMs": 2789,
+      "totalMs": 8978,
+      "upstreamFrames": 100,
+      "answerChars": 607,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 2627,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde9221ae4e9e6997bd25\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user said \\\"hig\\\" — likely a\"}}"
+      },
+      {
+        "ms": 2629,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde9221ae4e9e6997bd25\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" typo for \\\"hi\\\" or \\\"hii\\\". This is\"}}"
+      },
+      {
+        "ms": 2630,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde9221ae4e9e6997bd25\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" a greeting. No plugin execution\"}}"
+      },
+      {
+        "ms": 2663,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde9221ae4e9e6997bd25\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" needed. Output plan_required:\"}}"
+      },
+      {
+        "ms": 2708,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde9221ae4e9e6997bd25\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" false.\\n\\nBut the run_style says\"}}"
+      },
+      {
+        "ms": 2773,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde9221ae4e9e6997bd25\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" objective = one first-person \\\"\"}}"
+      },
+      {
+        "ms": 2787,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde9221ae4e9e6997bd25\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"I'll...\\\" sentence... but when plan\"}}"
+      },
+      {
+        "ms": 2818,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde9221ae4e9e6997bd25\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"_required is false, objective may\"}}"
+      },
+      {
+        "ms": 2844,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde9221ae4e9e6997bd25\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" be left empty. The schema says\"}}"
+      },
+      {
+        "ms": 2896,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbdccb20a8b245e6aab822\",\"messageId\":\"6acbde9221ae4e9e6997bd25\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\": when plan_required false, output\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-11T19:17:57.092Z",
+    "transport": "/api/chat",
+    "threadId": "933d6354-ab95-435d-80f5-d5ec43e92992",
+    "runId": "7d14b3ef-1ed3-4fb6-acc6-3ab2e06bb170",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "droppedPluginIds": [],
+    "sessionId": "6acbe0e321ae4e9e6997bd4f",
+    "sessionCreated": false,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6acbe0e321ae4e9e6997bd4f/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext+attachments 5448 chars> hi",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873",
+          "plugin-1791713636"
+        ],
+        "reasoningMode": "medium"
+      },
+      "attachments": []
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 905
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 1940,
+      "firstTokenMs": 3660,
+      "toolsMs": 1719,
+      "answerMs": 3207,
+      "totalMs": 6867,
+      "upstreamFrames": 47,
+      "answerChars": 757,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 1940,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e321ae4e9e6997bd4f\",\"messageId\":\"6acbe0e593f7b118ad028510\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user just said \\\"hi\\\". This is\"}}"
+      },
+      {
+        "ms": 1969,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e321ae4e9e6997bd4f\",\"messageId\":\"6acbe0e593f7b118ad028510\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" a greeting. Plan not required\"}}"
+      },
+      {
+        "ms": 2118,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e321ae4e9e6997bd4f\",\"messageId\":\"6acbe0e593f7b118ad028510\",\"eventIndex\":3,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"{\\\"title\\\": \\\"I'm here and ready to\"}}"
+      },
+      {
+        "ms": 2162,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e321ae4e9e6997bd4f\",\"messageId\":\"6acbe0e593f7b118ad028510\",\"eventIndex\":4,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" help with anything portfolio or\"}}"
+      },
+      {
+        "ms": 2188,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e321ae4e9e6997bd4f\",\"messageId\":\"6acbe0e593f7b118ad028510\",\"eventIndex\":5,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" research related.\\\", \\\"objective\"}}"
+      },
+      {
+        "ms": 2219,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e321ae4e9e6997bd4f\",\"messageId\":\"6acbe0e593f7b118ad028510\",\"eventIndex\":6,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"\\\": \\\"\\\", \\\"plan_required\\\": false,\"}}"
+      },
+      {
+        "ms": 2258,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e321ae4e9e6997bd4f\",\"messageId\":\"6acbe0e593f7b118ad028510\",\"eventIndex\":7,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" \\\"plan_skip_reason\\\": \\\"The user\"}}"
+      },
+      {
+        "ms": 2288,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e321ae4e9e6997bd4f\",\"messageId\":\"6acbe0e593f7b118ad028510\",\"eventIndex\":8,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" only sent a greeting with no actionable\"}}"
+      },
+      {
+        "ms": 2318,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e321ae4e9e6997bd4f\",\"messageId\":\"6acbe0e593f7b118ad028510\",\"eventIndex\":9,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" task, so no plugin or agent execution\"}}"
+      },
+      {
+        "ms": 2379,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e321ae4e9e6997bd4f\",\"messageId\":\"6acbe0e593f7b118ad028510\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\".\\n\\nOutput the skip schema.\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-11T19:17:54.321Z",
+    "transport": "/api/chat",
+    "threadId": "8f45fafd-cfa0-4053-8c64-f92b12089e4b",
+    "runId": "39a8b1b1-a4c3-4a0c-83e9-2f94b915751d",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "droppedPluginIds": [],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873",
+          "plugin-1791713636"
+        ],
+        "contextMetadata": [
+          {
+            "key": "company:perplexity-ai",
+            "valueChars": 581
+          },
+          {
+            "key": "company:apptronik",
+            "valueChars": 677
+          },
+          {
+            "key": "company:fervo-energy",
+            "valueChars": 732
+          },
+          {
+            "key": "company:flutterwave",
+            "valueChars": 744
+          },
+          {
+            "key": "company:writer",
+            "valueChars": 597
+          }
+        ]
+      },
+      "response": {
+        "status": 201,
+        "id": "6acbe0e221ae4e9e6997bd4d",
+        "message": "Chat session created successfully",
+        "elapsedMs": 412
+      }
+    },
+    "sessionId": "6acbe0e221ae4e9e6997bd4d",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6acbe0e221ae4e9e6997bd4d/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext+attachments 5448 chars> hi",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873",
+          "plugin-1791713636"
+        ],
+        "reasoningMode": "medium"
+      },
+      "attachments": []
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 1487
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 3220,
+      "firstTokenMs": 6033,
+      "toolsMs": 2813,
+      "answerMs": 4430,
+      "totalMs": 10463,
+      "upstreamFrames": 109,
+      "answerChars": 1804,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 3220,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e221ae4e9e6997bd4d\",\"messageId\":\"6acbe0e321ae4e9e6997bd54\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user just said \\\"hi\\\". This is\"}}"
+      },
+      {
+        "ms": 3263,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e221ae4e9e6997bd4d\",\"messageId\":\"6acbe0e321ae4e9e6997bd54\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" a greeting - no plugin execution\"}}"
+      },
+      {
+        "ms": 3298,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e221ae4e9e6997bd4d\",\"messageId\":\"6acbe0e321ae4e9e6997bd54\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" needed. Respond with plan_required\"}}"
+      },
+      {
+        "ms": 3359,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e221ae4e9e6997bd4d\",\"messageId\":\"6acbe0e321ae4e9e6997bd54\",\"eventIndex\":4,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"{\\\"title\\\": \\\"I'm here to help with\"}}"
+      },
+      {
+        "ms": 3399,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e221ae4e9e6997bd4d\",\"messageId\":\"6acbe0e321ae4e9e6997bd54\",\"eventIndex\":5,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" your B Capital portfolio questions\"}}"
+      },
+      {
+        "ms": 3474,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e221ae4e9e6997bd4d\",\"messageId\":\"6acbe0e321ae4e9e6997bd54\",\"eventIndex\":6,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"\\\\nJust say the word and I'll dig\"}}"
+      },
+      {
+        "ms": 3543,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e221ae4e9e6997bd4d\",\"messageId\":\"6acbe0e321ae4e9e6997bd54\",\"eventIndex\":7,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" into sentiment, headlines or live\"}}"
+      },
+      {
+        "ms": 3659,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e221ae4e9e6997bd4d\",\"messageId\":\"6acbe0e321ae4e9e6997bd54\",\"eventIndex\":8,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" news\\\", \\\"objective\\\": \\\"\\\", \\\"plan\"}}"
+      },
+      {
+        "ms": 3659,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e221ae4e9e6997bd4d\",\"messageId\":\"6acbe0e321ae4e9e6997bd54\",\"eventIndex\":9,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"_required\\\": false, \\\"plan_skip_re\"}}"
+      },
+      {
+        "ms": 3659,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe0e221ae4e9e6997bd4d\",\"messageId\":\"6acbe0e321ae4e9e6997bd54\",\"eventIndex\":10,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"ason\\\": \\\"This is a simple greeting\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-11T19:20:09.434Z",
+    "transport": "/api/chat",
+    "threadId": "ff449bc8-6729-49b4-bdec-f58e417596c6",
+    "runId": "83965ca1-822d-4552-9b39-bcd39afb6b1e",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "droppedPluginIds": [],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873",
+          "plugin-1791713636"
+        ],
+        "contextMetadata": [
+          {
+            "key": "company:perplexity-ai",
+            "valueChars": 581
+          },
+          {
+            "key": "company:apptronik",
+            "valueChars": 677
+          },
+          {
+            "key": "company:fervo-energy",
+            "valueChars": 732
+          },
+          {
+            "key": "company:flutterwave",
+            "valueChars": 744
+          },
+          {
+            "key": "company:writer",
+            "valueChars": 597
+          }
+        ]
+      },
+      "response": {
+        "status": 201,
+        "id": "6acbe16993f7b118ad028518",
+        "message": "Chat session created successfully",
+        "elapsedMs": 673
+      }
+    },
+    "sessionId": "6acbe16993f7b118ad028518",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6acbe16993f7b118ad028518/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext+attachments 5448 chars> What is the latest news about Fervo Energy? Cite sources.",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873",
+          "plugin-1791713636"
+        ],
+        "reasoningMode": "medium"
+      },
+      "attachments": []
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 2093
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 3491,
+      "firstTokenMs": 23609,
+      "toolsMs": 20117,
+      "answerMs": 5417,
+      "totalMs": 29026,
+      "upstreamFrames": 317,
+      "answerChars": 3116,
+      "sources": 5,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 3491,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe16b93f7b118ad028519\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user asks: \\\"What is the latest\"}}"
+      },
+      {
+        "ms": 3494,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe16b93f7b118ad028519\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news about Fervo Energy? Cite\"}}"
+      },
+      {
+        "ms": 3499,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe16b93f7b118ad028519\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" sources.\\\" This requires Perplex\"}}"
+      },
+      {
+        "ms": 3515,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe16b93f7b118ad028519\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ity web search. Portfolio data\"}}"
+      },
+      {
+        "ms": 3578,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe16b93f7b118ad028519\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" provides some context (Fervo Energy\"}}"
+      },
+      {
+        "ms": 3611,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe16b93f7b118ad028519\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" is a portfolio company, sentiment\"}}"
+      },
+      {
+        "ms": 3677,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe16b93f7b118ad028519\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" score +0.35, latest headlines\"}}"
+      },
+      {
+        "ms": 3769,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe16b93f7b118ad028519\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"). So plan: one step, use perplex\"}}"
+      },
+      {
+        "ms": 3789,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe16b93f7b118ad028519\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ity to get latest news about F\"}}"
+      },
+      {
+        "ms": 3803,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe16b93f7b118ad028519\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"ervo Energy with sources. Option\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-11T19:21:19.754Z",
+    "transport": "/api/chat",
+    "threadId": "ff449bc8-6729-49b4-bdec-f58e417596c6",
+    "runId": "dd7c53a6-d577-49a1-9380-cc89457aeab3",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "droppedPluginIds": [],
+    "sessionId": "6acbe16993f7b118ad028518",
+    "sessionCreated": false,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6acbe16993f7b118ad028518/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext+attachments 435 chars> hello",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873",
+          "plugin-1791713636"
+        ],
+        "reasoningMode": "medium"
+      },
+      "attachments": []
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 1496
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 2854,
+      "firstTokenMs": 4494,
+      "toolsMs": 1639,
+      "answerMs": 2353,
+      "totalMs": 6847,
+      "upstreamFrames": 34,
+      "answerChars": 280,
+      "sources": 0,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 2854,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe1b193f7b118ad028523\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"This is a greeting. No plugin needed\"}}"
+      },
+      {
+        "ms": 2884,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe1b193f7b118ad028523\",\"eventIndex\":2,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"{\\\"title\\\": \\\"I'm just saying hello\"}}"
+      },
+      {
+        "ms": 2943,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe1b193f7b118ad028523\",\"eventIndex\":3,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" back\\\\nand checking whether you\"}}"
+      },
+      {
+        "ms": 3058,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe1b193f7b118ad028523\",\"eventIndex\":4,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" have a task for me.\\\", \\\"objective\"}}"
+      },
+      {
+        "ms": 3058,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe1b193f7b118ad028523\",\"eventIndex\":5,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\"\\\": \\\"\\\", \\\"plan_required\\\": false,\"}}"
+      },
+      {
+        "ms": 3098,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe1b193f7b118ad028523\",\"eventIndex\":6,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" \\\"plan_skip_reason\\\": \\\"This is a\"}}"
+      },
+      {
+        "ms": 3101,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe1b193f7b118ad028523\",\"eventIndex\":7,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" simple greeting with no actionable\"}}"
+      },
+      {
+        "ms": 3147,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe1b193f7b118ad028523\",\"eventIndex\":8,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" request, so no plugin or agent\"}}"
+      },
+      {
+        "ms": 3164,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe1b193f7b118ad028523\",\"eventIndex\":9,\"eventType\":\"planning_output\",\"status\":\"processing\",\"output\":{\"delta\":\" execution is needed.\\\", \\\"steps\"}}"
+      },
+      {
+        "ms": 3168,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe16993f7b118ad028518\",\"messageId\":\"6acbe1b193f7b118ad028523\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\". plan_required: false.\"}}"
+      }
+    ]
+  },
+  {
+    "at": "2026-10-11T19:21:36.498Z",
+    "transport": "/api/chat",
+    "threadId": "a87514a3-3345-42cf-a7f8-34821c753e17",
+    "runId": "35d188a6-ebce-454b-93bf-e3e90f247705",
+    "endpointId": "predefined-deepseek-flash",
+    "endpointLabel": "DeepSeek Flash v4.1",
+    "reasoningMode": "medium",
+    "responseMode": "stream",
+    "pluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "requestedPluginIds": [
+      "plugin-1722260873",
+      "plugin-1791713636"
+    ],
+    "droppedPluginIds": [],
+    "sessionCreate": {
+      "url": "https://api.on-demand.io/chat/v1/sessions",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0"
+      },
+      "body": {
+        "externalUserId": "INV-001",
+        "pluginIds": [
+          "plugin-1722260873",
+          "plugin-1791713636"
+        ],
+        "contextMetadata": [
+          {
+            "key": "company:perplexity-ai",
+            "valueChars": 581
+          },
+          {
+            "key": "company:apptronik",
+            "valueChars": 677
+          },
+          {
+            "key": "company:fervo-energy",
+            "valueChars": 732
+          },
+          {
+            "key": "company:flutterwave",
+            "valueChars": 744
+          },
+          {
+            "key": "company:writer",
+            "valueChars": 597
+          }
+        ]
+      },
+      "response": {
+        "status": 201,
+        "id": "6acbe1c121ae4e9e6997bd67",
+        "message": "Chat session created successfully",
+        "elapsedMs": 1110
+      }
+    },
+    "sessionId": "6acbe1c121ae4e9e6997bd67",
+    "sessionCreated": true,
+    "query": {
+      "url": "https://api.on-demand.io/chat/v1/sessions/6acbe1c121ae4e9e6997bd67/query",
+      "headers": {
+        "apikey": "<redacted>",
+        "content-type": "application/json",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 bcap-portfolio-intelligence/1.0",
+        "accept": "text/event-stream"
+      },
+      "body": {
+        "query": "<systemContext+attachments 5448 chars> What is the latest news about Fervo Energy? Cite sources.",
+        "endpointId": "predefined-deepseek-flash",
+        "responseMode": "stream",
+        "pluginIds": [
+          "plugin-1722260873",
+          "plugin-1791713636"
+        ],
+        "reasoningMode": "medium"
+      },
+      "attachments": []
+    },
+    "queryResponse": {
+      "status": 200,
+      "contentType": "text/event-stream; charset=utf-8",
+      "elapsedMs": 2502
+    },
+    "timings": {
+      "firstUpstreamFrameMs": 3936,
+      "firstTokenMs": 24384,
+      "toolsMs": 20448,
+      "answerMs": 6883,
+      "totalMs": 31267,
+      "upstreamFrames": 359,
+      "answerChars": 4152,
+      "sources": 10,
+      "pluginError": null,
+      "abortReason": null
+    },
+    "firstUpstreamEvents": [
+      {
+        "ms": 3936,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe1c121ae4e9e6997bd67\",\"messageId\":\"6acbe1c220a8b245e6aab86a\",\"eventIndex\":1,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"The user asks: \\\"What is the latest\"}}"
+      },
+      {
+        "ms": 3937,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe1c121ae4e9e6997bd67\",\"messageId\":\"6acbe1c220a8b245e6aab86a\",\"eventIndex\":2,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" news about Fervo Energy? Cite\"}}"
+      },
+      {
+        "ms": 3937,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe1c121ae4e9e6997bd67\",\"messageId\":\"6acbe1c220a8b245e6aab86a\",\"eventIndex\":3,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" sources.\\\" This is an external\"}}"
+      },
+      {
+        "ms": 3968,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe1c121ae4e9e6997bd67\",\"messageId\":\"6acbe1c220a8b245e6aab86a\",\"eventIndex\":4,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" facts question — must use Per\"}}"
+      },
+      {
+        "ms": 4001,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe1c121ae4e9e6997bd67\",\"messageId\":\"6acbe1c220a8b245e6aab86a\",\"eventIndex\":5,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\"plexity web search. Maybe also\"}}"
+      },
+      {
+        "ms": 4048,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe1c121ae4e9e6997bd67\",\"messageId\":\"6acbe1c220a8b245e6aab86a\",\"eventIndex\":6,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" getPortfolioCompanySentiment?\"}}"
+      },
+      {
+        "ms": 4081,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe1c121ae4e9e6997bd67\",\"messageId\":\"6acbe1c220a8b245e6aab86a\",\"eventIndex\":7,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" The request is about latest news\"}}"
+      },
+      {
+        "ms": 4160,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe1c121ae4e9e6997bd67\",\"messageId\":\"6acbe1c220a8b245e6aab86a\",\"eventIndex\":8,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\". Perplexity is the key plugin\"}}"
+      },
+      {
+        "ms": 4193,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe1c121ae4e9e6997bd67\",\"messageId\":\"6acbe1c220a8b245e6aab86a\",\"eventIndex\":9,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\". Portfolio sentiment could add\"}}"
+      },
+      {
+        "ms": 4238,
+        "raw": "event:thinking\ndata:{\"sessionId\":\"6acbe1c121ae4e9e6997bd67\",\"messageId\":\"6acbe1c220a8b245e6aab86a\",\"eventIndex\":10,\"eventType\":\"planning_thinking\",\"status\":\"processing\",\"thinking\":{\"delta\":\" complementary evidence. But rule\"}}"
+      }
+    ]
   }
 ]

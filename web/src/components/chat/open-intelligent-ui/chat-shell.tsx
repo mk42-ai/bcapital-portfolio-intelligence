@@ -21,6 +21,8 @@ import { getSelectedPluginIds, usePluginSelection } from "@/lib/plugin-selection
 import { pluginName as catalogueName, PLUGIN_CATALOGUE } from "@/lib/plugin-catalogue";
 import { pluginLabel as rawPluginLabel } from "@/lib/ondemand/eventMap";
 import { friendlyStepTitle, sanitizeObjective } from "@/lib/ondemand/plan";
+import { browserCanReachOnDemand, browserChat } from "@/lib/ondemand/browser-chat";
+import { CHAT_TRANSPORT, PUBLIC_ONDEMAND_API_KEY } from "@/lib/ondemand/config-public";
 /** unit1: friendly plugin label (falls back to the catalogue name, then the raw id). */
 const friendlyPlugin = (idOrName: string | null | undefined) => rawPluginLabel(idOrName, catalogueName);
 export type PlannerPayload = { planning: string; steps: Record<string, string> };
@@ -30,6 +32,12 @@ import { PluginFavicon, preloadPluginFavicons } from "@/components/ui/plugin-fav
 import { BrandIcon } from "@/components/ui/brand-icon";
 import { brandIconForOperation, brandIconForPlugin, brandIconForStarter } from "@/lib/brand-icons";
 import { RunStatusHeader } from "@/components/chat/run-status-header";
+import ThinkingProcess from "@/components/od-chat/thinking-process";
+import StatusLogBlock from "@/components/od-chat/status-log-block";
+import StatusAccordion, { oneLineTail } from "@/components/od-chat/status-accordion";
+import FulfilmentThinking from "@/components/od-chat/fulfilment-thinking";
+import { createOdRun, compactOdMessage } from "@/components/od-chat/raw-reducer";
+import type { BotMessageType } from "@/components/od-chat/types";
 import { BRAND_MARK_SRC } from "@/lib/plugin-icons";
 import { fmtScore } from "@/lib/format";
 import { VoiceDock } from "@/components/chat/voice/voice-dock";
@@ -58,8 +66,11 @@ const starters = [
   { displayText: "LP update draft", prompt: "Draft a one-paragraph LP update on the portfolio's sentiment this week.", icon: null },
 ];
 
-/** Chat endpoint — overridable for local mock-SSE verification (NEXT_PUBLIC_CHAT_API_URL=http://127.0.0.1:3404/api/chat). */
+/** Proxy chat endpoint — overridable for local mock-SSE verification (NEXT_PUBLIC_CHAT_API_URL=http://127.0.0.1:3404/api/chat). */
 const CHAT_API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || "/api/chat";
+/** Key for the browser transport (the query runs client-side, straight to OnDemand): the Settings key, else the public build key. Empty → proxy
+ *  through CHAT_API_URL (also forced by NEXT_PUBLIC_CHAT_TRANSPORT=proxy or a mock NEXT_PUBLIC_CHAT_API_URL). */
+const directChatKey = (settingsKey: string) => (CHAT_TRANSPORT === "direct" && !process.env.NEXT_PUBLIC_CHAT_API_URL ? settingsKey || PUBLIC_ONDEMAND_API_KEY : "");
 /** Google favicon service for source chips (favicons only — never AI-generated assets). */
 export const faviconFor = (url: string) => `/api/favicon?host=${encodeURIComponent(hostOf(url))}`;
 
@@ -85,12 +96,14 @@ type StreamState = {
   request: Record<string, unknown> | null; agentLog: { subtype: string; at: number }[]; stepRaw: Record<string, string>;
   attachments: { mediaId: string; name: string; kind?: string; extractedChars?: number; grounded?: boolean }[] | null; voice: { phase: string; text?: string } | null;
   artifacts: LiveArtifact[]; outputs: StepOutput[]; tools: ToolRow[]; plannerPayload: PlannerPayload;
+  /** /chat-od-style bot message built from the raw OnDemand frames (ondemand.raw) — drives the status view in RunView. */
+  od: BotMessageType | null;
 };
 /** One Working row = one plugin/agent action (TOOL_CALL_START/ARGS/RESULT from the bridge). */
 export type ToolRow = { id: string; name: string; pluginId: string; query: string; stepId: string; status: "running" | "done" | "failed"; sources?: number; durationMs?: number; message?: string; raw?: string; startedAt?: number; finishedAt?: number };
 export type LiveArtifact = { key: string; name: string; phase: "creating" | "ready" | "failed"; artifact?: Artifact; message?: string; media?: { status?: string; id?: string | null; message?: string | null } };
 export type StepOutput = { stepId: string; title: string; plugins: { pluginId: string; name: string; operationId?: string | null; params: Record<string, unknown> | null }[]; at: number };
-const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, finishedAt: null, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null, artifacts: [], outputs: [], tools: [], plannerPayload: EMPTY_PAYLOAD };
+const IDLE: StreamState = { phase: "idle", detail: "", startedAt: 0, finishedAt: null, sessionId: null, version: 0, firstStatusMs: null, firstTokenMs: null, firstCitationMs: null, chunks: 0, thinking: "", thinkingKinds: [], error: null, sources: [], metrics: null, lastThreadId: null, pluginIds: [PLUGIN_ID], suggested: [], plan: null, summaries: [], prompt: null, filler: false, fillerTick: 0, text: "", answerDone: false, integrity: null, request: null, agentLog: [], stepRaw: {}, attachments: null, voice: null, artifacts: [], outputs: [], tools: [], plannerPayload: EMPTY_PAYLOAD, od: null };
 let streamState: StreamState = IDLE;
 let pending: Partial<StreamState> | null = null; let rafId = 0;
 const liveSources = new Map<string, Source[]>();
@@ -149,12 +162,13 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
   const body = res.body; if (!body) return;
   const reader = body.getReader(); const dec = new TextDecoder(); let buf = "";
   const t0 = peek().startedAt || Date.now();
+  const odRun = createOdRun(); setStream({ od: null }, true);
   const finalize = () => {
     const st = peek(); const key = sourcesKey(st.text);
     // unit2 — split the run time: toolsMs = first TOOL_CALL_START → last TOOL_CALL_RESULT (fallback: first status → first token when tools exist); answerMs = first token → answer done.
     const { toolsMs, answerMs } = splitRunTimings(st, t0, Date.now());
     // The live DOM never truncates the reasoning; ONLY the persisted (localStorage) copy is capped at 200,000 chars to stay inside the quota.
-    const meta: StoredMeta & { thinkingKinds?: string[]; plannerPayload?: PlannerPayload } = { model: MODEL_LABEL, modelId: MODEL_ID, reasoningMode: REASONING_MODE, pluginId: PLUGIN_ID, pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, firstCitationMs: st.firstCitationMs, toolsMs, answerMs, totalMs: Date.now() - t0, chunks: st.chunks, metrics: st.metrics, thinking: st.thinking.slice(0, 200_000), thinkingKinds: st.thinkingKinds, error: st.error ? { code: st.error.code, message: st.error.message } : null, at: new Date().toISOString(), summaries: st.summaries.map((s) => ({ index: s.index, text: s.text, doneAt: s.doneAt ?? null })), plan: st.plan, artifacts: st.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!), tools: st.tools, artifactFailures: st.artifacts.filter((a) => a.phase === "failed").map((a) => ({ name: a.name, message: a.message ?? "" })), outputs: st.outputs, plannerPayload: hasPayload(st.plannerPayload) ? { planning: st.plannerPayload.planning.slice(0, 60_000), steps: Object.fromEntries(Object.entries(st.plannerPayload.steps).map(([k, v]) => [k, v.slice(0, 60_000)])) } : undefined };
+    const meta: StoredMeta & { thinkingKinds?: string[]; plannerPayload?: PlannerPayload; od?: BotMessageType | null } = { model: MODEL_LABEL, modelId: MODEL_ID, reasoningMode: REASONING_MODE, pluginId: PLUGIN_ID, pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, firstCitationMs: st.firstCitationMs, toolsMs, answerMs, totalMs: Date.now() - t0, chunks: st.chunks, metrics: st.metrics, thinking: st.thinking.slice(0, 200_000), thinkingKinds: st.thinkingKinds, error: st.error ? { code: st.error.code, message: st.error.message } : null, at: new Date().toISOString(), summaries: st.summaries.map((s) => ({ index: s.index, text: s.text, doneAt: s.doneAt ?? null })), plan: st.plan, artifacts: st.artifacts.filter((a) => a.phase === "ready" && a.artifact).map((a) => a.artifact!), tools: st.tools, artifactFailures: st.artifacts.filter((a) => a.phase === "failed").map((a) => ({ name: a.name, message: a.message ?? "" })), outputs: st.outputs, od: compactOdMessage(odRun.get()), plannerPayload: hasPayload(st.plannerPayload) ? { planning: st.plannerPayload.planning.slice(0, 60_000), steps: Object.fromEntries(Object.entries(st.plannerPayload.steps).map(([k, v]) => [k, v.slice(0, 60_000)])) } : undefined };
     liveMeta.set(key, meta); rememberMeta(key, meta);
     if (st.finishedAt == null) setStream({ finishedAt: Date.now(), toolsMs, answerMs }, true); else setStream({ toolsMs, answerMs }, true); // freezes the run-header timer at totalMs
     if (st.sources.length) { liveSources.set(key, st.sources); rememberSources(key, st.sources); }
@@ -172,6 +186,7 @@ async function teeStream(res: Response, threadId: string, onSession: (sid: strin
       case "CUSTOM": {
         const v = f.value ?? {};
         switch (f.name) {
+          case CE.raw: if (typeof v.data === "string") { odRun.apply(String(v.event ?? "message"), v.data); setStream({ od: odRun.get() }); } break;
           case CE.session: if (typeof v.sessionId === "string" && v.sessionId) { onSession(v.sessionId); setStream({ sessionId: v.sessionId }); } break;
           case CE.status: {
             if (typeof v.phase !== "string") break;
@@ -389,6 +404,8 @@ type RunHeaderProps = {
   logsOpen?: boolean; onToggleLogs?: () => void;
   outputs?: { label: string; open: boolean; onToggle: () => void } | null;
 };
+/** Agent name shown on every assistant turn (brand, not the model). */
+const AGENT_NAME = "B Capital";
 function RunHeader({ live, startedAt, totalMs, tokens, logsOpen, onToggleLogs, outputs }: RunHeaderProps) {
   const [now, setNow] = useState(() => Date.now());
   // Interval-driven (not frame-driven): the timer keeps ticking on heartbeat-only stretches until [DONE]/RUN_FINISHED.
@@ -396,8 +413,7 @@ function RunHeader({ live, startedAt, totalMs, tokens, logsOpen, onToggleLogs, o
   const ms = totalMs != null ? totalMs : live && startedAt ? Math.max(0, now - startedAt) : 0;
   return (
     <div className="oiu-run__header" data-testid="run-header" data-live={live ? "true" : "false"} aria-label="Run">
-      <span className="oiu-run__model">{MODEL_LABEL}</span>
-      <span className="oiu-badge__sep">·</span><span className="oiu-run__reason">{REASONING_MODE}</span>
+      <span className="oiu-run__model">{AGENT_NAME}</span>
       {(live || totalMs != null) && <span className="oiu-run__timer" data-testid="run-timer" data-state={live && totalMs == null ? "running" : "frozen"} data-ms={Math.round(ms)} title="Task time">{fmtElapsed(ms)}</span>}
       {tokens != null && <span className="oiu-run__tokens">{tokens.toLocaleString()} tokens</span>}
       {onToggleLogs && <button type="button" className="oiu-run__btn" data-testid="run-logs-toggle" aria-expanded={!!logsOpen} aria-label={logsOpen ? "Hide status logs" : "Show status logs"} onClick={onToggleLogs}><ChevronDown className={`size-4 oiu-run__logs-chev${logsOpen ? " oiu-run__logs-chev--open" : ""}`} aria-hidden /></button>}
@@ -609,6 +625,7 @@ type RunData = {
   prompt: Prompt | null; sessionId: string | null; text: string; known: Source[]; sources: Source[]; artifacts: LiveArtifact[];
   error: { code: string; message: string; raw?: string } | null; meta: Partial<StoredMeta> | null; filler: boolean; fillerTick: number; elapsedMs: number;
   startedAt: number; totalMs: number | null;
+  od?: BotMessageType | null;
 };
 const IMG_URL_RE = /!\[([^\]]*)\]\((https?:\/\/[^\s)]+|\/api\/artifacts\/[^\s)]+)\)/g;
 const VIDEO_URL_RE = /(https?:\/\/[^\s)"']+\.(?:mp4|webm|mov)(?:\?[^\s)"']*)?)/gi;
@@ -723,6 +740,24 @@ function ArtifactRow({ a }: { a: LiveArtifact }) {
     </div>
   );
 }
+/** /chat-od status view for one turn (components/od-chat): planning Thinking (closed, one-line live preview, hidden once the plan arrives),
+ *  then the plan title + one row per stepId (title, agents, that step's thinking). Scoped under `.od-chat` for its design tokens. */
+function OdStatusView({ od, live, logsOpen }: { od: BotMessageType; live: boolean; logsOpen: boolean }) {
+  const noScroll = useRef<HTMLDivElement>(null); // the OpenUI thread owns scrolling; ThinkingProcess's scroll helpers become no-ops
+  const hasThinking = !!od.thinking?.trim() || !!od.planningAnswer?.trim();
+  const hasLogs = !!od.statusLogs?.length;
+  return (
+    <div className="od-chat od-status" data-testid="od-status">
+      {hasThinking && <div className="ml-2 mt-1 w-full max-w-[840px]"><ThinkingProcess message={od} chatContainerRef={noScroll} isStreaming={live} /></div>}
+      {logsOpen && hasLogs && <div className="ml-2 w-full max-w-[840px]"><StatusLogBlock message={od} isStreaming={live} /></div>}
+    </div>
+  );
+}
+/** /chat-od "Writing the answer": only while fulfillment thinking streams and no answer token has arrived yet. */
+function OdFulfilment({ od, live }: { od: BotMessageType; live: boolean }) {
+  if (od.message?.trim() || !od.fulfillmentThinking?.trim()) return null;
+  return <div className="od-chat mb-2 w-full max-w-[840px] pb-4"><FulfilmentThinking message={od} isStreaming={live} /></div>;
+}
 function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void }) {
   const [cites, setCites] = useState<Cite[]>([]);
   const [outputsOpen, setOutputsOpen] = useState(false); // a1: Outputs body closed by default — summary chip sits in RunStatusHeader
@@ -731,7 +766,9 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
   const media = useMemo(() => mediaFrom(r.text, readyArts), [r.text, readyArts.length]); // eslint-disable-line react-hooks/exhaustive-deps
   const railSources = r.error?.code === "plugin_error" ? [] : cites.length ? cites : r.sources;
   const failedTools = r.tools.filter((t) => t.status === "failed");
-  const gap = r.error ? r.error.message : failedTools.length ? `${failedTools.map((t) => t.name).join(", ")} failed: ${failedTools[0].message ?? "upstream error"}` : r.artifacts.find((a) => a.phase === "failed") ? `A file could not be saved: ${r.artifacts.find((a) => a.phase === "failed")!.message ?? "storage error"}` : "";
+  // A failed plugin call gets no special message (the step chip already carries its red dot); only non-plugin errors and failed saves do.
+  // No special message for failed calls (plugin or upstream) — the step chip shows the red dot; errors that stop the run use the error banner.
+  const gap = r.artifacts.find((a) => a.phase === "failed") ? `A file could not be saved: ${r.artifacts.find((a) => a.phase === "failed")!.message ?? "storage error"}` : "";
   // a1 — status state machine: thinking (no tool yet) → working (a tool is running / tools done but answer not started) → done | failed.
   const runningTool = r.live ? r.tools.find((t) => t.status === "running") : undefined;
   const runningStep = r.plan?.steps.find((st) => st.state === "running");
@@ -759,11 +796,13 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
   const planSteps = r.plan?.steps ?? [];
   const { byStep, rest: restTools } = assignTools(planSteps, r.tools);
   const restSummaries = r.summaries.filter((x) => !planSteps.some((s, i) => summaryFor([x], s, i)));
-  const hasLogs = planSteps.length > 0 || r.tools.length > 0 || r.summaries.length > 0;
+  const hasLogs = planSteps.length > 0 || r.tools.length > 0 || r.summaries.length > 0 || !!r.od?.statusLogs?.length;
   const tokens = typeof r.meta?.metrics?.totalTokens === "number" && Number.isFinite(r.meta.metrics.totalTokens) ? r.meta.metrics.totalTokens : null;
   const outputsLabel = oStats.calls > 0 ? `${oStats.outputs.length} step${oStats.outputs.length === 1 ? "" : "s"} · ${oStats.calls} call${oStats.calls === 1 ? "" : "s"}` : "payload";
   // OD FulfilmentThinking: "Writing the answer" while the model drafts (fulfillment reasoning) and before the first answer token.
   const writing = r.live && !r.answerStarted && !r.error && r.thinkingKinds.some((k) => k.startsWith("fulfillment"));
+  // Raw-frame status view: used whenever the run carried OnDemand status/thinking frames (older saved turns fall back to the legacy blocks).
+  const odView = r.od && (r.od.statusLogs?.length || r.od.thinking?.trim() || r.od.planningAnswer?.trim() || r.od.fulfillmentThinking?.trim()) ? r.od : null;
   return (
     <div className="oiu-run" data-testid="run-view" data-live={r.live ? "true" : "false"}>
       {/* 0 — Run header (OD header row): model · reasoning · task time · tokens · logs chevron · outputs */}
@@ -773,26 +812,31 @@ function RunView({ r, onAnswer }: { r: RunData; onAnswer: (text: string) => void
       {/* 0b — a1 status state machine, kept as a screen-reader live region (OD has no visible status band; the step rows show progress) */}
       <RunStatusHeader state={statusState} task={statusTask} icon={statusIcon} elapsedMs={statusElapsed} live={r.live && !r.answerDone} startedAt={r.startedAt}
         stepsDone={stepsDone} stepsTotal={stepsTotal} outputSteps={oStats.outputs.length} calls={oStats.calls} hasOutputs={oStats.has} outputsOpen={outputsOpen} />
-      {/* 1 — Thinking, pinned at the top (ONE per turn, never moves) */}
-      {(r.thinking || r.live) && (
+      {/* 1–4 — /chat-od status view (planning Thinking → plan title → one row per step: title, agents, step thinking), built from raw frames */}
+      {odView && <OdStatusView od={odView} live={r.live} logsOpen={logsOpen} />}
+      {!odView && (<>
+        {/* 1 — Thinking, pinned at the top (ONE per turn, never moves) */}
+        {(r.thinking || r.live) && (
         <ThinkingBlock text={thinkingShown} kinds={r.thinkingKinds} plan={r.plan} answerStarted={r.answerStarted} live={r.live} collapsed={r.answerStarted || !r.live} elapsedMs={r.meta?.firstTokenMs ?? r.elapsedMs} portfolioToolStarted={r.tools.some((t) => t.pluginId === PORTFOLIO_PLUGIN)} />
       )}
-      {/* 2 — Plan title + step log (OD StatusLogBlock); each step carries its own tool-call chips and summary */}
-      {logsOpen && r.plan && <PlanStepper plan={r.plan} stepTools={byStep} summaries={r.summaries} live={r.live} answerStarted={r.answerStarted} />}
-      {/* 3 — tool calls not tied to a plan step (or runs without a plan): standalone OD rows */}
-      {logsOpen && restTools.length > 0 && (
+        {/* 2 — Plan title + step log (OD StatusLogBlock); each step carries its own tool-call chips and summary */}
+        {logsOpen && r.plan && <PlanStepper plan={r.plan} stepTools={byStep} summaries={r.summaries} live={r.live} answerStarted={r.answerStarted} />}
+        {/* 3 — tool calls not tied to a plan step (or runs without a plan): standalone OD rows */}
+        {logsOpen && restTools.length > 0 && (
         <ol className="oiu-work-list" aria-label="Working" data-testid="working-list">
           {restTools.map((t) => <WorkingRow key={t.id} t={t} live={r.live} />)}
         </ol>
       )}
-      {/* 4 — between-step summaries that match no plan step */}
-      {logsOpen && restSummaries.map((s) => <StepSummaryCard key={s.index} s={s} live={r.live} />)}
+        {/* 4 — between-step summaries that match no plan step */}
+        {logsOpen && restSummaries.map((s) => <StepSummaryCard key={s.index} s={s} live={r.live} />)}
+      </>)}
       {/* 5 — outputs body, only when the header button is open (default closed → no interleaved row) */}
       {outputsOpen && <OutputsCard outputs={r.outputs} plannerPayload={r.plannerPayload} />}
       {/* 6 — interactive controls */}
       {r.live && r.prompt && <PromptCard prompt={r.prompt} sessionId={r.sessionId} onAnswer={onAnswer} />}
-      {/* 6b — OD "Writing the answer" */}
-      {writing && <div data-testid="writing-answer"><OdAccordion status="loading" title="Writing the answer" collapsible={false} open /></div>}
+      {/* 6b — OD "Writing the answer" (legacy runs without the raw-frame status view) */}
+      {!odView && writing && <div data-testid="writing-answer"><OdAccordion status="loading" title="Writing the answer" collapsible={false} open /></div>}
+      {odView && <OdFulfilment od={odView} live={r.live} />}
       {/* 7 — answer */}
       {(r.text || (r.live && r.answerStarted)) && (
         <div className="oiu-answer" data-testid="answer-block">
@@ -891,6 +935,7 @@ const AssistantMessage: AssistantMessageComponent = memo(function AssistantMessa
     outputs: meta?.outputs ?? [], plannerPayload: (meta as { plannerPayload?: PlannerPayload } | null)?.plannerPayload ?? null, prompt: null, sessionId: null, text: content, known: meta?.error ? [] : known, sources: meta?.error ? [] : known,
     artifacts: [...(meta?.artifacts ?? []).map((a) => ({ key: a.id, name: a.name, phase: "ready" as const, artifact: a })), ...(meta?.artifactFailures ?? []).map((f, i) => ({ key: `f${i}`, name: f.name, phase: "failed" as const, message: f.message }))],
     error: meta?.error ?? null, meta, filler: false, fillerTick: 0, elapsedMs: meta?.totalMs ?? 0, startedAt: 0, totalMs: meta?.totalMs ?? null,
+    od: (meta as { od?: BotMessageType | null } | null)?.od ?? null,
   };
   return (
     <div className="oiu-assistant" data-testid="assistant-message">
@@ -927,7 +972,7 @@ const PluginTimeline: ToolCallTimelineComponent = ({ steps, isLast }) => {
     plan: st.plan, tools: st.tools, summaries: st.summaries, outputs: st.outputs, plannerPayload: st.plannerPayload, prompt: st.prompt, sessionId: st.sessionId,
     text: liveText || st.text, known: st.error?.code === "plugin_error" ? [] : st.sources, sources: st.sources, artifacts: st.artifacts,
     error: st.error, meta: { pluginIds: st.pluginIds, firstTokenMs: st.firstTokenMs, firstStatusMs: st.firstStatusMs, toolsMs: st.toolsMs ?? null, answerMs: st.answerMs ?? null, metrics: st.metrics }, filler: st.filler, fillerTick: st.fillerTick, elapsedMs: st.startedAt ? Date.now() - st.startedAt : 0,
-    startedAt: st.startedAt, totalMs: st.finishedAt != null && st.startedAt ? st.finishedAt - st.startedAt : null,
+    startedAt: st.startedAt, totalMs: st.finishedAt != null && st.startedAt ? st.finishedAt - st.startedAt : null, od: st.od,
   };
   return (
     <div className="oiu-assistant oiu-assistant--streaming" aria-live="polite" aria-busy="true" data-testid="assistant-streaming">
@@ -993,28 +1038,16 @@ function PendingRow() {
     return () => { mo.disconnect(); clearInterval(tick); };
   }, [isRunning]);
   if (!isRunning || !host || mounted || st.firstTokenMs != null || st.tools.length > 0) return null;
-  const secs = st.startedAt ? Math.max(0, (now - st.startedAt) / 1000) : 0;
-  const skelPlugins = (st.suggested.length ? st.suggested.map((p) => p.id) : st.pluginIds.length ? st.pluginIds : [PLUGIN_ID]).slice(0, 5);
-  const phases = thinkingPhases(st.thinkingKinds, st.plan, false);
-  const label = st.detail || PHASE_LABEL.connecting;
   // FIRST-EVENT SKELETON: the moment the user sends, the turn already shows Thinking (pinned top) + one Working row with the plugin chips,
   // so perceived latency is the first status frame (~0.3–0.7 s), not the first answer token (35–82 s observed upstream).
   return createPortal(
     <div className="oiu-run oiu-run--skeleton" data-testid="run-skeleton" data-phase={st.phase || "connecting"} data-first-status-ms={st.firstStatusMs ?? ""}>
       <span className="oiu-assistant__avatar oiu-run__skel-avatar" aria-hidden><StatusSpinner /></span>
       <RunHeader live startedAt={st.startedAt} totalMs={null} />
-      {/* OnDemand-playground look: a one-line "Thinking" head; the reasoning rail only mounts once reasoning text exists (no empty box). */}
-      <section className={`oiu-think oiu-think--live${st.thinking ? " oiu-think--open" : ""}`} data-testid="thinking-block" data-state="streaming" data-chars={st.thinking.length} data-phases={phases.join(",")}>
-        <p className="oiu-think__head"><StatusSpinner /><span className="oiu-think__title oiu-shimmer-text">Thinking</span>{phases.length > 0 && <span className="oiu-think__phases">{phases.map((p) => <span key={p} className="oiu-think__phase" data-phase={p}>{p}</span>)}</span>}</p>
-        {st.thinking && <div className="oiu-think__body" ref={(el) => { if (el) el.scrollTop = el.scrollHeight; }}><pre className="oiu-think__pre">{st.thinking}</pre></div>}
-      </section>
-      <ol className="oiu-work-list" aria-label="Working" data-testid="working-list">
-        <li className="oiu-work oiu-work--running oiu-work--skeleton" data-testid="working-row" data-state="queued">
-          <span className="oiu-work__icon" aria-hidden><StatusSpinner /></span>
-          <span className="oiu-work__chips" data-testid="working-chips">{skelPlugins.map((id) => <PluginFavicon key={id} id={id} size={16} />)}</span>
-          <span className="oiu-work__text"><span className="oiu-work__label oiu-shimmer-text">{label}</span><span className="oiu-work__query" data-testid="pending-row" data-first-status-ms={st.firstStatusMs ?? ""}>{secs.toFixed(1)} s{st.firstStatusMs != null ? ` · first event ${st.firstStatusMs} ms` : ""}</span></span>
-        </li>
-      </ol>
+      {/* /chat-od look from the first frame: a closed "Thinking" row with the newest thinking streaming inline (no status-message row). */}
+      <div className="od-chat od-status ml-2 mt-1 w-full max-w-[840px]" data-testid="run-skeleton-thinking">
+        <StatusAccordion title="Thinking" status="loading" isOpen={false} preview={oneLineTail(st.od?.thinking || st.thinking) || undefined} />
+      </div>
     </div>, host);
 }
 
@@ -1027,7 +1060,8 @@ function ErrorBanner() {
   // Rendered INSIDE the thread list (portal) as the last message row: as a direct child of OpenUI's flex container it became a full-height
   // sibling panel that covered the composer after a failed run and intercepted the next click (found by the step-5 recorder).
   const [host, setHost] = useState<HTMLElement | null>(null);
-  const show = !isRunning && !!(threadError || st.error);
+  // A failed plugin call is not surfaced as a banner (no special message) — only thread/transport and non-plugin upstream errors are.
+  const show = !isRunning && !!(threadError || (st.error && st.error.code !== "plugin_error"));
   useEffect(() => {
     if (!show) { setHost(null); return; }
     const find = () => document.querySelector<HTMLElement>(".chat-shell .openui-agent-thread-messages");
@@ -1139,6 +1173,7 @@ export function ChatShell({ companies, fetchedAt, topBarRight }: { companies: Co
   const [storage] = useState(() => localThreadStorage());
   const ctxCompanies = companies.filter((c) => s.companies.includes(c.slug));
   useEffect(() => { preloadPluginFavicons(PLUGIN_CATALOGUE.map((p) => p.id)); }, []);
+  useEffect(() => { if (directChatKey(s.apikey)) void browserCanReachOnDemand(); }, [s.apikey]); // CORS probe off the first turn's critical path
   // Pre-warm: create the OnDemand session for the first turn on page load (TTFT work) — the first /api/chat call reuses it via context.sessionId.
   const prewarm = useRef<{ sessionId: string; pluginIds: string[] } | null>(null);
   const [prewarmState, setPrewarmState] = useState<"idle" | "ready" | "failed">("idle");
@@ -1181,7 +1216,9 @@ ${txt}`; }
       body.context = { ...(body.context ?? {}), sessionId: sid ?? undefined, externalUserId: s.externalUserId, pluginIds, systemContext: ctxPayload.systemContext, contextSlugs: ctxPayload.companies.map((c) => c.slug), ...(attachments.length ? { attachments } : {}), sessionContext: ctxPayload.sessionContext };
       setStream({ ...IDLE, phase: "connecting", detail: PHASE_LABEL.connecting, startedAt: Date.now(), sessionId: sid ?? null, lastThreadId: tid, pluginIds, version: streamState.version }, true);
       let res: Response;
-      try { res = await fetch(input, { ...init, body: JSON.stringify(body) }); if (chips.length) clearContextChips(); } catch (e) { setStream({ phase: "idle", detail: "", error: { code: "fetch_failed", message: (e as Error).message } }, true); throw e; }
+      const directKey = directChatKey(s.apikey);
+      const direct = !!directKey && (await browserCanReachOnDemand());
+      try { res = direct ? await browserChat(body, directKey, init?.signal) : await fetch(input, { ...init, body: JSON.stringify(body) }); if (chips.length) clearContextChips(); } catch (e) { setStream({ phase: "idle", detail: "", error: { code: "fetch_failed", message: (e as Error).message } }, true); throw e; }
       const remember = (got: string) => { if (tid) { sessionRef.current[tid] = got; rememberSession(tid, got); } };
       const got = res.headers.get("x-ondemand-session"); if (got) remember(got);
       if (!res.ok || !res.body) { setStream({ phase: "idle", detail: "", error: { code: `http_${res.status}`, message: `Chat endpoint answered HTTP ${res.status}` } }, true); return res; }

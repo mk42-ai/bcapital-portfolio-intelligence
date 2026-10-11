@@ -36,7 +36,7 @@ export const PINNED_PLUGIN_ID = "plugin-1722260873";
 
 /** Plugin ids visible in the reference screenshot — always eligible for the merged list when subscribed. */
 export const REFERENCE_PLUGIN_IDS: readonly string[] = [
-  "plugin-1722260873", "plugin-1713924030", "plugin-1741871229", "plugin-1751872652", "plugin-1785777296",
+  "plugin-1722260873", "plugin-1713924030", "plugin-1741871229", "plugin-1751872652", /* plugin-1785777296 (X) disabled for now — see DISABLED_PLUGIN_IDS */
   "plugin-1716372717", "plugin-1716164040", "plugin-1785987361", "plugin-1784356219", "plugin-1748003575", "plugin-1718116202",
 ];
 

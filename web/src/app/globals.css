@@ -68,3 +68,70 @@ details > summary:focus-visible, button[aria-expanded]:focus-visible, [role="but
 :where(html.light, html) :focus-visible { outline: 2px solid #0AC985 !important; outline-offset: 2px; border-radius: 4px; }
 [data-testid="company-row-link"]:focus-visible, [data-testid="primary-nav"] a:focus-visible { outline-width: 3px !important; }
 /* end a33 */
+
+/* ---- od-chat (ported OnDemand streaming chat, /chat-od) ------------------------------------------------------------------
+ * Design tokens from the port spec §9, scoped to `.od-chat` so the app-wide --primary (#047857) is untouched outside it.
+ * TODO(od-chat tokens): --one…--eight and --scrollbar-thumb are PLACEHOLDERS derived from #3bb795 — replace with the values from
+ * the source app's src/index.css. This app ships light only. */
+/* Light only for now: `dark:` is bound to a `.dark` class this app never sets, so the ported dark: classes stay inert (Tailwind's
+ * default would follow the OS dark setting). No dark tokens are defined. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-card: var(--card);
+  --color-border1: var(--border-subtle);
+  --color-thinkingBg: var(--thinking-bg);
+  --color-bgColor: var(--bg-color);
+  --color-gray: #9F9F9F;
+  /* TODO(od-chat tokens): sidebarBg / header are used by the §8.9 code card but not listed in §9 — placeholders */
+  --color-sidebarBg: var(--sidebar-bg);
+  --color-header: var(--header-bg);
+  --color-primary-800: var(--eight);
+  --color-primary-700: var(--seven);
+  --color-primary-600: var(--six);
+  --color-primary-500: var(--five);
+  --color-primary-400: var(--four);
+  --color-primary-300: var(--three);
+  --color-primary-200: var(--two);
+  --color-primary-100: var(--one);
+  --color-primary-50: var(--primary);
+  --animate-text-shimmer: text-shimmer 1.6s linear infinite;
+  @keyframes text-shimmer {
+    0% { background-position: 100% 0; }
+    100% { background-position: 0% 0; }
+  }
+}
+
+.od-chat {
+  --bg-color: #ffffff; /* light only: matches the white chat canvas (fade shadows blend in) */
+  --card: #ffffff;
+  --thinking-bg: #232323;
+  --border-subtle: #e3e7ec;
+  --primary: #3bb795;
+  --primary-rgb: 59, 183, 149;
+  /* TODO(od-chat tokens): placeholder primary scale (100 lightest → 800 darkest) */
+  --one: #e7f6f1;
+  --two: #c3eadd;
+  --three: #8ed8bf;
+  --four: #5cc6a5;
+  --five: #3bb795;
+  --six: #2f9478;
+  --seven: #24705c;
+  --eight: #184c3f;
+  /* TODO(od-chat tokens): placeholder */
+  --scrollbar-thumb: #c9ced5;
+  --sidebar-bg: #f0f2f4;
+  --header-bg: #e8ebee;
+}
+
+.yScrollbar { overflow: auto; }
+.yScrollbar::-webkit-scrollbar { width: 4px; height: 4px; transition: all 1s linear; }
+.yScrollbar::-webkit-scrollbar-track { background: transparent; }
+.yScrollbar::-webkit-scrollbar-thumb { background-color: var(--scrollbar-thumb); border-radius: 5px; }
+.yScrollbar::-webkit-scrollbar-corner { background: transparent; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinAnimation { animation: spin 1.5s linear infinite; }
+/* Composer textareas: the row/container already draws the green focus border — drop the global focus outline (no double border). */
+.oiu-composer__input:focus-visible, .od-chat textarea:focus-visible { outline: none !important; }
+/* ---- end od-chat ---- */
