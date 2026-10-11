@@ -215,7 +215,7 @@ export async function POST(req: NextRequest) {
             if (!bytes && job.url) { const r = await fetch(job.url, { signal: AbortSignal.timeout(30_000), cache: "no-store" }); if (!r.ok) throw new Error(`fetch ${job.url.slice(0, 80)} → HTTP ${r.status}`); bytes = new Uint8Array(await r.arrayBuffer()); }
             if (!bytes) throw new Error("no file bytes or URL in the event");
             const media = await registerWithOnDemand({ bytes, name: job.name, mime: job.mime, origin, sessionId: sessionId || null, externalUserId, key });
-            const art = await saveArtifact({ bytes, name: job.name, mime: job.mime, source: job.source, mediaId: media.mediaId, mediaStatus: media.mediaStatus, mediaMessage: media.mediaMessage, threadId, sessionId: sessionId || null, originEvent: job.origin });
+            const art = await saveArtifact({ bytes, name: job.name, mime: job.mime, source: job.source, mediaId: media.mediaId, mediaStatus: media.mediaStatus, mediaMessage: media.mediaMessage, mediaSourceUrl: media.sourceUrl ?? null, mediaUrlExpiresAt: media.expiresAt ?? null, mediaExternalUserId: media.externalUserId ?? null, mediaPlugins: media.plugins ?? null, threadId, sessionId: sessionId || null, originEvent: job.origin });
             custom(CE.artifact, { phase: "ready", key: job.key, name: job.name, artifact: art, media: { status: media.mediaStatus, id: media.mediaId, message: media.mediaMessage, ms: media.ms } });
           } catch (e) {
             custom(CE.artifact, { phase: "failed", key: job.key, name: job.name, message: String((e as Error)?.message ?? e).slice(0, 300) });

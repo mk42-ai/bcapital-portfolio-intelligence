@@ -3,6 +3,7 @@ import { ONDEMAND_BASE_URL, serverApiKey, UPSTREAM_USER_AGENT, DEFAULT_EXTERNAL_
 import { saveArtifact } from "@/lib/artifacts/server";
 import { extractDocx, extractPdf } from "@/lib/media/extract";
 import type { Artifact } from "@/lib/artifacts/types";
+import { expiryFromSignedUrl } from "@/lib/artifacts/types";
 import { ALLOWED_EXTENSIONS, ALLOWED_LABEL, MEDIA_MAX_BYTES, MEDIA_PLUGIN_BY_KIND, classify, putBlob, deleteBlob, putText, deleteText, getText } from "@/lib/media/store";
 
 /**
@@ -49,8 +50,9 @@ export async function POST(req: NextRequest) {
   const externalUserId = (String(form.get("externalUserId") ?? "").trim() || DEFAULT_EXTERNAL_USER_ID).slice(0, 64);
   const threadId = String(form.get("threadId") ?? "").trim().slice(0, 80) || null;
   /** Every upload is also persisted as an Artifact (backend /artifacts, bytes + OnDemand media id) so it shows in the Artifacts panel/route. */
-  const persistUpload = async (bytesIn: Uint8Array, mediaId: string | null, mediaStatus: "stored" | "local" | "failed", mediaMessage: string | null): Promise<{ artifact: Artifact | null; artifactError: string | null }> => {
-    try { return { artifact: await saveArtifact({ bytes: bytesIn, name, mime: cls.mime, source: "upload", mediaId, mediaStatus, mediaMessage, threadId, sessionId: sessionId || null, originEvent: "upload" }), artifactError: null }; }
+  const persistUpload = async (bytesIn: Uint8Array, mediaId: string | null, mediaStatus: "stored" | "local" | "failed", mediaMessage: string | null, mediaMeta?: { sourceUrl?: string | null; expiresAt?: string | null }): Promise<{ artifact: Artifact | null; artifactError: string | null }> => {
+    // Persistence rule (web/docs/stream-contract.md §5): mediaId + UNSIGNED sourceUrl only — saveArtifact strips any SAS query; the signed url is never stored.
+    try { return { artifact: await saveArtifact({ bytes: bytesIn, name, mime: cls.mime, source: "upload", mediaId, mediaStatus, mediaMessage, mediaSourceUrl: mediaMeta?.sourceUrl ?? null, mediaUrlExpiresAt: mediaMeta?.expiresAt ?? null, mediaExternalUserId: externalUserId, mediaPlugins: [MEDIA_PLUGIN_BY_KIND[cls.kind]], threadId, sessionId: sessionId || null, originEvent: "upload" }), artifactError: null }; }
     catch (e) { return { artifact: null, artifactError: String((e as Error)?.message ?? e).slice(0, 300) }; }
   };
 
@@ -135,7 +137,7 @@ export async function POST(req: NextRequest) {
   }
   text = text.replace(/\u0000/g, "").trim();
   putText(id, { text, name, kind: cls.kind, mime: cls.mime, sizeBytes: file.size });
-  const persisted = await persistUpload(bytes, id, "stored", null);
+  const persisted = await persistUpload(bytes, id, "stored", null, { sourceUrl: typeof data.sourceUrl === "string" ? data.sourceUrl : typeof data.url === "string" ? data.url : null, expiresAt: expiryFromSignedUrl(typeof data.url === "string" ? data.url : null) });
   return Response.json({
     ok: true, ...persisted,
     media: { id, name, sizeBytes: file.size, mime: cls.mime, url, blobUrl, extractedTextUrl, extractedChars: text.length, kind: cls.kind, grounded: "ondemand" as const, sessionId: typeof data.sessionId === "string" ? data.sessionId : sessionId || null, pluginId: MEDIA_PLUGIN_BY_KIND[cls.kind], upstreamMs: Date.now() - t0 },
