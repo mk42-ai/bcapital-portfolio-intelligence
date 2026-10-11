@@ -1,0 +1,8 @@
+{
+  "$comment": "Pass-3 performance budget evaluated by scripts/lighthouse-routes.mjs. Scores are 0-100; timings in ms; CLS unitless.",
+  "performance": 90,
+  "accessibility": 90,
+  "lcp_ms": 2500,
+  "tbt_ms": 200,
+  "cls": 0.1
+}
